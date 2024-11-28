@@ -5,6 +5,7 @@ import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import org.apache.log4j.Logger;
@@ -17,7 +18,8 @@ import java.util.UUID;
  * AI: server side bot with monte carlo logic (experimental, the latest version)
  * <p>
  * Simple implementation for random play, outdate and do not support,
- * see <a href="https://github.com/magefree/mage/issues/7075">more details here</a>
+ * see <a href="https://github.com/magefree/mage/issues/7075">more details
+ * here</a>
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -32,7 +34,7 @@ public class MCTSPlayer extends ComputerPlayer {
     }
 
     public MCTSPlayer(UUID id) {
-        super(id);
+        super("Computer - MCTS " + id.toString().substring(0, 3), RangeOfInfluence.ALL);
     }
 
     public MCTSPlayer(final MCTSPlayer player) {
@@ -79,7 +81,7 @@ public class MCTSPlayer extends ComputerPlayer {
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         int start = 0;
         if (!(ability instanceof SpellAbility)) {
-            //only use x=0 on spell abilities
+            // only use x=0 on spell abilities
             if (numAvailable == 0)
                 return;
             else
@@ -95,7 +97,7 @@ public class MCTSPlayer extends ComputerPlayer {
     public List<List<UUID>> getAttacks(Game game) {
         List<List<UUID>> engagements = new ArrayList<>();
         List<Permanent> attackersList = super.getAvailableAttackers(game);
-        //use binary digits to calculate powerset of attackers
+        // use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
         StringBuilder binary = new StringBuilder();
         for (int i = powerElements - 1; i >= 0; i--) {
@@ -122,7 +124,7 @@ public class MCTSPlayer extends ComputerPlayer {
             return engagements;
         }
 
-        //add a node with no blockers
+        // add a node with no blockers
         List<List<UUID>> engagement = new ArrayList<>();
         for (int i = 0; i < numGroups; i++) {
             engagement.add(new ArrayList<UUID>());
@@ -143,22 +145,23 @@ public class MCTSPlayer extends ComputerPlayer {
         return newEngagement;
     }
 
-    protected void addBlocker(Game game, List<List<UUID>> engagement, List<Permanent> blockers, List<List<List<UUID>>> engagements) {
+    protected void addBlocker(Game game, List<List<UUID>> engagement, List<Permanent> blockers,
+            List<List<List<UUID>>> engagements) {
         if (blockers.isEmpty())
             return;
         int numGroups = game.getCombat().getGroups().size();
-        //try to block each attacker with each potential blocker
+        // try to block each attacker with each potential blocker
         Permanent blocker = blockers.get(0);
-//        if (logger.isDebugEnabled())
-//            logger.debug("simulating -- block:" + blocker);
+        // if (logger.isDebugEnabled())
+        // logger.debug("simulating -- block:" + blocker);
         List<Permanent> remaining = remove(blockers, blocker);
         for (int i = 0; i < numGroups; i++) {
             if (game.getCombat().getGroups().get(i).canBlock(blocker, game)) {
                 List<List<UUID>> newEngagement = copyEngagement(engagement);
                 newEngagement.get(i).add(blocker.getId());
                 engagements.add(newEngagement);
-//                    logger.debug("simulating -- found redundant block combination");
-                addBlocker(game, newEngagement, remaining, engagements);  // and recurse minus the used blocker
+                // logger.debug("simulating -- found redundant block combination");
+                addBlocker(game, newEngagement, remaining, engagements); // and recurse minus the used blocker
             }
         }
         addBlocker(game, engagement, remaining, engagements);

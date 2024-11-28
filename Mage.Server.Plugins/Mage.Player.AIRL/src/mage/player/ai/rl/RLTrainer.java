@@ -40,10 +40,7 @@ public class RLTrainer {
     private static final String MODEL_PATH = "models/rl_model.zip";
 
     public RLTrainer() {
-        UUID rlPlayerId = UUID.randomUUID();
-        UUID mctsPlayerId = UUID.randomUUID();
-        this.rlPlayer = new ComputerPlayerRL(rlPlayerId);
-        this.mctsPlayer = new MCTSPlayer(mctsPlayerId);
+        // No initialization needed here since players are created per episode in runEpisode()
     }
 
     public void train() {
@@ -67,7 +64,14 @@ public class RLTrainer {
     }
 
     private void runEpisode() {
-        // First create game and set options
+        // Create players for this episode
+        UUID rlPlayerId = UUID.randomUUID();
+        UUID mctsPlayerId = UUID.randomUUID();
+        ComputerPlayerRL rlPlayer = new ComputerPlayerRL(rlPlayerId);
+        MCTSPlayer mctsPlayer = new MCTSPlayer(mctsPlayerId);
+        mctsPlayer.setTestMode(true);  // Enable test mode for AI simulation
+
+        // Create game and set options
         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, 
                                     RangeOfInfluence.ONE, 
                                     new LondonMulligan(0), 
@@ -79,16 +83,54 @@ public class RLTrainer {
         game.setGameOptions(options);
         
         // Generate decks
-        Deck rlDeck = generateDeck(this.rlPlayer.getId(), 60);
-        Deck mctsDeck = generateDeck(this.mctsPlayer.getId(), 60);
+        Deck rlDeck = generateDeck(rlPlayer.getId(), 60);
+        Deck mctsDeck = generateDeck(mctsPlayer.getId(), 60);
         
         // Load cards
-        game.loadCards(rlDeck.getCards(), this.rlPlayer.getId());
-        game.loadCards(mctsDeck.getCards(), this.mctsPlayer.getId());
+        game.loadCards(rlDeck.getCards(), rlPlayer.getId());
+        game.loadCards(mctsDeck.getCards(), mctsPlayer.getId());
         
-        // Add players with their decks
-        game.addPlayer(this.rlPlayer, rlDeck);
-        game.addPlayer(this.mctsPlayer, mctsDeck);
+        // Add MCTS player first
+        if (mctsPlayer == null) {
+            logger.error("mctsPlayer is null before addPlayer");
+            return;
+        }
+        if (mctsDeck == null) {
+            logger.error("mctsDeck is null before addPlayer");
+            return;
+        }
+        if (mctsDeck.getCards() == null) {
+            logger.error("mctsDeck cards is null before addPlayer");
+            return;
+        }
+        if (game == null) {
+            logger.error("game is null before addPlayer");
+            return;
+        }
+
+        System.out.println("DEBUG: mctsPlayer ID: " + mctsPlayer.getId());
+        System.out.println("DEBUG: mctsDeck cards count: " + mctsDeck.getCards().size());
+
+        game.addPlayer(mctsPlayer, mctsDeck);
+
+        // Then add RL player
+        if (rlPlayer == null) {
+            System.out.println("DEBUG: rlPlayer is null before addPlayer");
+            return;
+        }
+        if (rlDeck == null) {
+            System.out.println("DEBUG: rlDeck is null before addPlayer");
+            return;
+        }
+        if (rlDeck.getCards() == null) {
+            System.out.println("DEBUG: rlDeck cards is null before addPlayer");
+            return;
+        }
+
+        System.out.println("DEBUG: rlPlayer ID: " + rlPlayer.getId());
+        System.out.println("DEBUG: rlDeck cards count: " + rlDeck.getCards().size());
+
+        game.addPlayer(rlPlayer, rlDeck);
         
         // Create simulation game for AI
         Game aiGame = game.createSimulationForAI();
@@ -96,30 +138,30 @@ public class RLTrainer {
         // Copy and restore player states
         for (Player copyPlayer : aiGame.getState().getPlayers().values()) {
             Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
-            if (copyPlayer.getId().equals(this.rlPlayer.getId())) {
-                this.rlPlayer.restore(origPlayer);
-                this.rlPlayer.init(aiGame);
+            if (copyPlayer.getId().equals(rlPlayer.getId())) {
+                rlPlayer.restore(origPlayer);
+                rlPlayer.init(aiGame);
             } else {
-                this.mctsPlayer.restore(origPlayer);
-                this.mctsPlayer.init(aiGame);
+                mctsPlayer.restore(origPlayer);
+                mctsPlayer.init(aiGame);
             }
         }
         
         aiGame.resume();
-        aiGame.start(this.rlPlayer.getId());
+        aiGame.start(rlPlayer.getId());
 
         while (!gameIsOver(aiGame)) {
             RLState currentState = new RLState(aiGame);
-            RLAction action = this.rlPlayer.model.getAction(currentState);
+            RLAction action = rlPlayer.model.getAction(currentState);
             
             // Execute action and get reward
-            boolean actionSuccess = action.execute(aiGame, this.rlPlayer.getId());
-            double reward = calculateReward(aiGame, this.rlPlayer);
+            boolean actionSuccess = action.execute(aiGame, rlPlayer.getId());
+            double reward = calculateReward(aiGame, rlPlayer);
             
             RLState nextState = new RLState(aiGame);
             
             // Update the model
-            this.rlPlayer.model.update(currentState, action, reward, nextState);
+            rlPlayer.model.update(currentState, action, reward, nextState);
         }
     }
 

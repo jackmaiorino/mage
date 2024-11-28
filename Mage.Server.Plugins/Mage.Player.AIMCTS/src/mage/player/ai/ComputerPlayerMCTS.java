@@ -64,7 +64,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
     public boolean priority(Game game) {
         if (game.getTurnStepType() == PhaseStep.UPKEEP) {
             if (!lastPhase.equals(game.getTurn().getValue(game.getTurnNum()))) {
-                logList(game.getTurn().getValue(game.getTurnNum()) + name + " hand: ", new ArrayList(hand.getCards(game)));
+                logList(game.getTurn().getValue(game.getTurnNum()) + name + " hand: ",
+                        new ArrayList(hand.getCards(game)));
                 lastPhase = game.getTurn().getValue(game.getTurnNum());
                 if (MCTSNode.USE_ACTION_CACHE) {
                     int count = MCTSNode.cleanupCache(game.getTurnNum());
@@ -117,7 +118,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         StringBuilder sb = new StringBuilder();
-        sb.append(game.getTurn().getValue(game.getTurnNum())).append(" player ").append(name).append(" attacking with: ");
+        sb.append(game.getTurn().getValue(game.getTurnNum())).append(" player ").append(name)
+                .append(" attacking with: ");
         getNextAction(game, NextAction.SELECT_ATTACKERS);
         Combat combat = root.getCombat();
         UUID opponentId = game.getCombat().getDefenders().iterator().next();
@@ -142,7 +144,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                 CombatGroup simulatedGroup = simulatedCombat.getGroups().get(i);
                 sb.append(game.getPermanent(currentGroup.getAttackers().get(0)).getName()).append(" with: ");
                 for (UUID blockerId : simulatedGroup.getBlockers()) {
-                    // blockers can be added automaticly by requirement effects, so we must add only missing blockers
+                    // blockers can be added automaticly by requirement effects, so we must add only
+                    // missing blockers
                     if (!currentGroup.getBlockers().contains(blockerId)) {
                         this.declareBlocker(this.getId(), blockerId, currentGroup.getAttackers().get(0), game);
                         sb.append(game.getPermanent(blockerId).getName()).append(',');
@@ -166,14 +169,17 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
             if (USE_MULTIPLE_THREADS) {
                 if (this.threadPoolSimulations == null) {
                     // same params as Executors.newFixedThreadPool
-                    // no needs errors check in afterExecute here cause that pool used for FutureTask with result check already
+                    // no needs errors check in afterExecute here cause that pool used for
+                    // FutureTask with result check already
                     this.threadPoolSimulations = new ThreadPoolExecutor(
                             poolSize,
                             poolSize,
                             0L,
                             TimeUnit.MILLISECONDS,
                             new LinkedBlockingQueue<>(),
-                            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MCTS) // TODO: add player/game to thread name?
+                            new XmageThreadFactory(ThreadUtils.THREAD_PREFIX_AI_SIMULATION_MCTS) // TODO: add
+                                                                                                 // player/game to
+                                                                                                 // thread name?
                     );
                 }
 
@@ -187,7 +193,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                 }
 
                 try {
-                    List<Future<Boolean>> runningTasks = threadPoolSimulations.invokeAll(tasks, thinkTime, TimeUnit.SECONDS);
+                    List<Future<Boolean>> runningTasks = threadPoolSimulations.invokeAll(tasks, thinkTime,
+                            TimeUnit.SECONDS);
                     for (Future<Boolean> runningTask : runningTasks) {
                         runningTask.get();
                     }
@@ -210,8 +217,10 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                 tasks.clear();
                 totalThinkTime += thinkTime;
                 totalSimulations += simCount;
-                logger.info("Player: " + name + " Simulated " + simCount + " games in " + thinkTime + " seconds - nodes in tree: " + root.size());
-                logger.info("Total: Simulated " + totalSimulations + " games in " + totalThinkTime + " seconds - Average: " + totalSimulations / totalThinkTime);
+                logger.info("Player: " + name + " Simulated " + simCount + " games in " + thinkTime
+                        + " seconds - nodes in tree: " + root.size());
+                logger.info("Total: Simulated " + totalSimulations + " games in " + totalThinkTime
+                        + " seconds - Average: " + totalSimulations / totalThinkTime);
                 MCTSNode.logHitMiss();
             } else {
                 long startTime = System.nanoTime();
@@ -246,18 +255,19 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
                 }
                 logger.info("Simulated " + simCount + " games - nodes in tree: " + root.size());
             }
-//            displayMemory();
+            // displayMemory();
         }
 
     }
 
-    //try to ensure that there are at least THINK_MIN_RATIO simulations per node at all times
+    // try to ensure that there are at least THINK_MIN_RATIO simulations per node at
+    // all times
     private int calculateThinkTime(Game game, NextAction action) {
         int thinkTime;
         int nodeSizeRatio = 0;
         if (root.getNumChildren() > 0)
             nodeSizeRatio = root.getVisits() / root.getNumChildren();
-//        logger.info("Ratio: " + nodeSizeRatio);
+        // logger.info("Ratio: " + nodeSizeRatio);
         PhaseStep curStep = game.getTurnStepType();
         if (action == NextAction.SELECT_ATTACKERS || action == NextAction.SELECT_BLOCKERS) {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
@@ -267,7 +277,9 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
             } else {
                 thinkTime = maxThinkTime / 2;
             }
-        } else if (game.isActivePlayer(playerId) && (curStep == PhaseStep.PRECOMBAT_MAIN || curStep == PhaseStep.POSTCOMBAT_MAIN) && game.getStack().isEmpty()) {
+        } else if (game.isActivePlayer(playerId)
+                && (curStep == PhaseStep.PRECOMBAT_MAIN || curStep == PhaseStep.POSTCOMBAT_MAIN)
+                && game.getStack().isEmpty()) {
             if (nodeSizeRatio < THINK_MIN_RATIO) {
                 thinkTime = maxThinkTime;
             } else if (nodeSizeRatio >= THINK_MAX_RATIO) {
@@ -329,7 +341,8 @@ public class ComputerPlayerMCTS extends ComputerPlayer {
         long heapUsedSize = heapSize - heapFreeSize;
         long mb = 1024 * 1024;
 
-        logger.info("Max heap size: " + heapMaxSize / mb + " Heap size: " + heapSize / mb + " Used: " + heapUsedSize / mb);
+        logger.info(
+                "Max heap size: " + heapMaxSize / mb + " Heap size: " + heapSize / mb + " Used: " + heapUsedSize / mb);
     }
 
     protected void logLife(Game game) {

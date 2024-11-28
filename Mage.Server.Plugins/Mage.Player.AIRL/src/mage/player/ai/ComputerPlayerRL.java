@@ -11,6 +11,9 @@ import org.apache.log4j.Logger;
 
 import java.util.UUID;
 
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+
 public class ComputerPlayerRL extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayerRL.class);
@@ -18,8 +21,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
     public RLModel model;
     
     public ComputerPlayerRL(UUID id) {
-        super(id);
+        super("Computer - RL " + id.toString().substring(0, 3), RangeOfInfluence.ALL);
         this.model = new RLModel();
+        this.hand = new CardsImpl();  // Initialize hand
     }
 
     @Override

@@ -47,11 +47,13 @@ import java.util.stream.Collectors;
 
 /**
  * @author BetaSteward_at_googlemail.com
- * <p>
- * since at any time the game state may be copied and restored you cannot rely
- * on any object maintaining it's instance it then becomes necessary to only
- * refer to objects by their ids since these will always remain constant
- * throughout its lifetime
+ *         <p>
+ *         since at any time the game state may be copied and restored you
+ *         cannot rely
+ *         on any object maintaining it's instance it then becomes necessary to
+ *         only
+ *         refer to objects by their ids since these will always remain constant
+ *         throughout its lifetime
  */
 public class GameState implements Serializable, Copyable<GameState> {
 
@@ -59,7 +61,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     private static final ThreadLocalStringBuilder threadLocalBuilder = new ThreadLocalStringBuilder(1024);
 
     // save copied cards between game cycles (lki workaround)
-    // warning, do not use another keys with same starting text cause copy code search and clean all related values
+    // warning, do not use another keys with same starting text cause copy code
+    // search and clean all related values
     public static final String COPIED_CARD_KEY = "CopiedCard";
 
     private final Players players; // full players by ID (static list, table added order)
@@ -96,19 +99,25 @@ public class GameState implements Serializable, Copyable<GameState> {
     private ContinuousEffects effects;
     private TriggeredAbilities triggers; // all normal triggers
     private DelayedTriggeredAbilities delayed; // all delayed triggers
-    private List<TriggeredAbility> triggered = new ArrayList<>(); // raised triggers, waiting to resolve (can contains both normal and delayed)
+    private List<TriggeredAbility> triggered = new ArrayList<>(); // raised triggers, waiting to resolve (can contains
+                                                                  // both normal and delayed)
     private Combat combat;
     private Map<String, Object> values = new HashMap<>();
     private Map<UUID, Zone> zones = new HashMap<>();
     private List<GameEvent> simultaneousEvents = new ArrayList<>();
     private Map<UUID, CardState> cardState = new HashMap<>();
-    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>(); // Permanent reference -> map of (tag -> values) describing how the permanent's spell was cast
+    private Map<MageObjectReference, Map<String, Object>> permanentCostsTags = new HashMap<>(); // Permanent reference
+                                                                                                // -> map of (tag ->
+                                                                                                // values) describing
+                                                                                                // how the permanent's
+                                                                                                // spell was cast
     private Map<UUID, MageObjectAttribute> mageObjectAttribute = new HashMap<>();
     private Map<UUID, Integer> zoneChangeCounter = new HashMap<>();
     private Map<UUID, Card> copiedCards = new HashMap<>();
     private int permanentOrderNumber;
     private final Map<UUID, FilterCreaturePermanent> usePowerInsteadOfToughnessForDamageLethalityFilters = new HashMap<>();
-    private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command zone
+    private Set<MageObjectReference> commandersToStay = new HashSet<>(); // commanders that do not go back to command
+                                                                         // zone
     private boolean manaBurn = false;
     private boolean hasDayNight = false;
     private boolean isDaytime = true;
@@ -182,8 +191,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards.putAll(state.copiedCards);
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
-        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
-                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach(
+                (uuid, filter) -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
         this.commandersToStay.addAll(state.commandersToStay);
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
@@ -236,7 +245,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public void restore(GameState state) {
-        // no needs in copy here cause GameState already copied on save and it will be used only one time here
+        // no needs in copy here cause GameState already copied on save and it will be
+        // used only one time here
         this.activePlayerId = state.activePlayerId;
         this.playerList.setCurrent(state.activePlayerId);
         this.playerByOrderId = state.playerByOrderId;
@@ -276,8 +286,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         this.copiedCards = state.copiedCards;
         this.permanentOrderNumber = state.permanentOrderNumber;
         this.applyEffectsCounter = state.applyEffectsCounter;
-        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach((uuid, filter)
-                -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
+        state.usePowerInsteadOfToughnessForDamageLethalityFilters.forEach(
+                (uuid, filter) -> this.usePowerInsteadOfToughnessForDamageLethalityFilters.put(uuid, filter.copy()));
         this.commandersToStay = state.commandersToStay;
         this.hasDayNight = state.hasDayNight;
         this.isDaytime = state.isDaytime;
@@ -295,7 +305,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     * AI related: monitor changes in game state (if it changed then AI must
+     * re-calculate current actions chain)
      */
     public String getValue(boolean useHidden) {
         StringBuilder sb = threadLocalBuilder.get();
@@ -336,7 +347,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     * AI related: monitor changes in game state (if it changed then AI must
+     * re-calculate current actions chain)
      */
     public String getValue(boolean useHidden, Game game) {
         StringBuilder sb = threadLocalBuilder.get();
@@ -392,7 +404,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * AI related: monitor changes in game state (if it changed then AI must re-calculate current actions chain)
+     * AI related: monitor changes in game state (if it changed then AI must
+     * re-calculate current actions chain)
      */
     public String getValue(Game game, UUID playerId) {
         StringBuilder sb = threadLocalBuilder.get();
@@ -748,7 +761,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         return newPlayerList;
     }
 
-    // TODO: check usage of getPlayersInRange in cards and replace with correct call of excludeLeavedPlayers
+    // TODO: check usage of getPlayersInRange in cards and replace with correct call
+    // of excludeLeavedPlayers
     public PlayerList getPlayersInRange(UUID playerId, Game game) {
         return getPlayersInRange(playerId, game, false);
     }
@@ -758,10 +772,13 @@ public class GameState implements Serializable, Copyable<GameState> {
      * also setting the playerId to the first/current player of the list. Also
      * returning the other players in turn order.
      * <p>
-     * Continuous effects, triggers and other must include leaved players, see rule 800.4k (effects must work until
-     * end of turn even after player leaves). But one short effects and dialogs must use actual players list.
+     * Continuous effects, triggers and other must include leaved players, see rule
+     * 800.4k (effects must work until
+     * end of turn even after player leaves). But one short effects and dialogs must
+     * use actual players list.
      *
-     * @param excludeLeavedPlayers - true for dialogs and one short effects, false for triggers and continuous effects
+     * @param excludeLeavedPlayers - true for dialogs and one short effects, false
+     *                             for triggers and continuous effects
      */
     public PlayerList getPlayersInRange(UUID playerId, Game game, boolean excludeLeavedPlayers) {
         PlayerList newPlayerList = new PlayerList();
@@ -807,7 +824,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void handleSimultaneousEvent(Game game) {
         if (!simultaneousEvents.isEmpty() && !getTurn().isEndTurnRequested()) {
-            // it can happen, that the events add new simultaneous events, so copy the list before
+            // it can happen, that the events add new simultaneous events, so copy the list
+            // before
             List<GameEvent> eventsToHandle = new ArrayList<>();
             List<GameEvent> eventGroups = createEventGroups(simultaneousEvents, game);
             eventsToHandle.addAll(simultaneousEvents);
@@ -823,8 +841,10 @@ public class GameState implements Serializable, Copyable<GameState> {
         return !simultaneousEvents.isEmpty();
     }
 
-    // There might be no damage dealt, but we want to fire that damage (in a batch) could have been dealt.
-    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it doesn't contain sub events.
+    // There might be no damage dealt, but we want to fire that damage (in a batch)
+    // could have been dealt.
+    // Of note, DamagedBatchCouldHaveFiredEvent is not a batch event in the sense it
+    // doesn't contain sub events.
     public void addBatchDamageCouldHaveBeenFired(boolean combat, Game game) {
         for (GameEvent event : simultaneousEvents) {
             if (event instanceof DamagedBatchCouldHaveFiredEvent
@@ -928,7 +948,8 @@ public class GameState implements Serializable, Copyable<GameState> {
 
     public void addSimultaneousMilledCardToBatch(MilledCardEvent milledEvent, Game game) {
         // Combine multiple mill cards events in the single event (batch)
-        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and GameEvent.MILLED_CARDS_BATCH_FOR_ALL
+        // see GameEvent.MILLED_CARDS_BATCH_FOR_ONE_PLAYER and
+        // GameEvent.MILLED_CARDS_BATCH_FOR_ALL
 
         // existing batch
         boolean isBatchUsed = false;
@@ -953,7 +974,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
     }
 
-    public void addSimultaneousSacrificedPermanentToBatch(SacrificedPermanentEvent sacrificedPermanentEvent, Game game) {
+    public void addSimultaneousSacrificedPermanentToBatch(SacrificedPermanentEvent sacrificedPermanentEvent,
+            Game game) {
         // Combine multiple sacrificed permanent events in the single event (batch)
 
         // existing batch
@@ -1117,7 +1139,7 @@ public class GameState implements Serializable, Copyable<GameState> {
         for (Map.Entry<ZoneChangeData, List<GameEvent>> entry : eventsByKey.entrySet()) {
             Set<Card> movedCards = new LinkedHashSet<>();
             Set<PermanentToken> movedTokens = new LinkedHashSet<>();
-            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext(); ) {
+            for (Iterator<GameEvent> it = entry.getValue().iterator(); it.hasNext();) {
                 GameEvent event = it.next();
                 ZoneChangeEvent castEvent = (ZoneChangeEvent) event;
                 UUID targetId = castEvent.getTargetId();
@@ -1195,7 +1217,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      *
      * @param ability
      * @param sourceId   - if source object can be moved between zones then you
-     *                   must set it here (each game cycle clear all source related triggers)
+     *                   must set it here (each game cycle clear all source related
+     *                   triggers)
      * @param attachedTo
      */
     public void addAbility(Ability ability, UUID sourceId, MageObject attachedTo) {
@@ -1213,7 +1236,8 @@ public class GameState implements Serializable, Copyable<GameState> {
         }
 
         for (Watcher watcher : ability.getWatchers()) {
-            // TODO: Check that watcher for commanderAbility (where attachedTo = null) also work correctly
+            // TODO: Check that watcher for commanderAbility (where attachedTo = null) also
+            // work correctly
             UUID controllerId = ability.getControllerId();
             if (attachedTo instanceof Card) {
                 controllerId = ((Card) attachedTo).getOwnerId();
@@ -1233,10 +1257,13 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Add fake/helper emblems for hidden source of inherent triggers like Rad counters,
-     * additional card hints like storm counter, etc. See GameImpl.initGameDefaultHelperEmblems
+     * Add fake/helper emblems for hidden source of inherent triggers like Rad
+     * counters,
+     * additional card hints like storm counter, etc. See
+     * GameImpl.initGameDefaultHelperEmblems
      * <p>
-     * It allows game and GUI find and show full card object in stack's triggers, logs and hints popup.
+     * It allows game and GUI find and show full card object in stack's triggers,
+     * logs and hints popup.
      */
     public void addHelperEmblem(Emblem emblem, UUID controllerId) {
         helperEmblems.add(emblem);
@@ -1273,13 +1300,15 @@ public class GameState implements Serializable, Copyable<GameState> {
     /**
      * Add object to command zone.
      * <p>
-     * Warning, all object data must be initialized before adding, including image info
+     * Warning, all object data must be initialized before adding, including image
+     * info
      */
     public void addCommandObject(CommandObject commandObject) {
         getCommand().add(commandObject);
         setZone(commandObject.getId(), Zone.COMMAND);
 
-        // must add only command object specific abilities, all other abilities adds from card parts (on loadCards)
+        // must add only command object specific abilities, all other abilities adds
+        // from card parts (on loadCards)
         for (Ability ability : commandObject.getInitAbilities()) {
             addAbility(ability, commandObject);
         }
@@ -1303,7 +1332,9 @@ public class GameState implements Serializable, Copyable<GameState> {
     public void addDelayedTriggeredAbility(DelayedTriggeredAbility ability) {
         this.delayed.add(ability);
 
-        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent ConcurrentModificationException, not clear to me why this is happening now
+        List<Watcher> watcherList = new ArrayList<>(ability.getWatchers()); // Workaround to prevent
+                                                                            // ConcurrentModificationException, not
+                                                                            // clear to me why this is happening now
         for (Watcher watcher : watcherList) {
             Watcher newWatcher = watcher.copy();
             newWatcher.setControllerId(ability.getControllerId());
@@ -1426,7 +1457,8 @@ public class GameState implements Serializable, Copyable<GameState> {
      * @param attachedTo
      * @param ability
      * @param copyAbility copies non MageSingleton abilities before adding to
-     *                    state (allows to have multiple instances in one object, e.g. false param
+     *                    state (allows to have multiple instances in one object,
+     *                    e.g. false param
      *                    will simulate keyword/singleton)
      */
     public void addOtherAbility(Card attachedTo, Ability ability, boolean copyAbility) {
@@ -1434,10 +1466,11 @@ public class GameState implements Serializable, Copyable<GameState> {
 
         Ability newAbility;
         if (ability instanceof MageSingleton || !copyAbility) {
-            // Avoid adding another instance of an ability where multiple copies are redundant
+            // Avoid adding another instance of an ability where multiple copies are
+            // redundant
             if (attachedTo.getAbilities().contains(ability)
                     || (getAllOtherAbilities(attachedTo.getId()) != null
-                    && getAllOtherAbilities(attachedTo.getId()).contains(ability))) {
+                            && getAllOtherAbilities(attachedTo.getId()).contains(ability))) {
                 return;
             }
             newAbility = ability;
@@ -1521,7 +1554,8 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public MageObjectAttribute getCreateMageObjectAttribute(MageObject mageObject, Game game) {
-        MageObjectAttribute mageObjectAtt = mageObjectAttribute.computeIfAbsent(mageObject.getId(), k -> new MageObjectAttribute(mageObject, game));
+        MageObjectAttribute mageObjectAtt = mageObjectAttribute.computeIfAbsent(mageObject.getId(),
+                k -> new MageObjectAttribute(mageObject, game));
         return mageObjectAtt;
     }
 
@@ -1539,13 +1573,32 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     /**
-     * Removes the cost tags if the corresponding permanent is no longer on the battlefield.
-     * Only use if the stack is empty and nothing can refer to them anymore (such as at EOT, the current behavior)
+     * Removes the cost tags if the corresponding permanent is no longer on the
+     * battlefield.
+     * Only use if the stack is empty and nothing can refer to them anymore (such as
+     * at EOT, the current behavior)
      */
     public void cleanupPermanentCostsTags(Game game) {
-        getPermanentCostsTags().entrySet().removeIf(entry ->
-                !(entry.getKey().getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId()) - 1)
-        ); // The stored MOR is the stack-moment MOR so need to subtract one from the permanent's ZCC for the check
+        getPermanentCostsTags().entrySet().removeIf(entry -> !(entry.getKey()
+                .getZoneChangeCounter() == game.getState().getZoneChangeCounter(entry.getKey().getSourceId()) - 1)); // The
+                                                                                                                     // stored
+                                                                                                                     // MOR
+                                                                                                                     // is
+                                                                                                                     // the
+                                                                                                                     // stack-moment
+                                                                                                                     // MOR
+                                                                                                                     // so
+                                                                                                                     // need
+                                                                                                                     // to
+                                                                                                                     // subtract
+                                                                                                                     // one
+                                                                                                                     // from
+                                                                                                                     // the
+                                                                                                                     // permanent's
+                                                                                                                     // ZCC
+                                                                                                                     // for
+                                                                                                                     // the
+                                                                                                                     // check
     }
 
     /**
@@ -1598,14 +1651,18 @@ public class GameState implements Serializable, Copyable<GameState> {
     public Card copyCard(Card mainCardToCopy, UUID newController, Game game) {
         // runtime check
         if (!mainCardToCopy.getId().equals(mainCardToCopy.getMainCard().getId())) {
-            // copyCard allows for main card only, if you catch it then check your targeting code
+            // copyCard allows for main card only, if you catch it then check your targeting
+            // code
             throw new IllegalArgumentException("Wrong code usage. You can copy only main card.");
         }
 
         // must copy all card's parts
-        // zcc and zone must be new cause zcc copy logic need card usage info here, but it haven't:
-        // * reason 1: copied land must be played (+1 zcc), but copied spell must be put on stack and cast (+2 zcc)
-        // * reason 2: copied card or spell can be used later as blueprint for real copies (see Epic ability)
+        // zcc and zone must be new cause zcc copy logic need card usage info here, but
+        // it haven't:
+        // * reason 1: copied land must be played (+1 zcc), but copied spell must be put
+        // on stack and cast (+2 zcc)
+        // * reason 2: copied card or spell can be used later as blueprint for real
+        // copies (see Epic ability)
         List<Card> copiedParts = new ArrayList<>();
 
         // main part (prepare must be called after other parts)
@@ -1649,10 +1706,14 @@ public class GameState implements Serializable, Copyable<GameState> {
             ((AdventureCard) copiedCard).setParts(rightCopied);
         }
 
-        // main part prepare (must be called after other parts cause it change ids for all)
+        // main part prepare (must be called after other parts cause it change ids for
+        // all)
         prepareCardForCopy(mainCardToCopy, copiedCard, newController);
 
-        // 707.12. An effect that instructs a player to cast a copy of an object (and not just copy a spell) follows the rules for casting spells, except that the copy is created in the same zone the object is in and then cast while another spell or ability is resolving.
+        // 707.12. An effect that instructs a player to cast a copy of an object (and
+        // not just copy a spell) follows the rules for casting spells, except that the
+        // copy is created in the same zone the object is in and then cast while another
+        // spell or ability is resolving.
         Zone copyToZone = game.getState().getZone(mainCardToCopy.getId());
         if (copyToZone == Zone.BATTLEFIELD) {
             throw new UnsupportedOperationException("Cards cannot be copied while on the Battlefield");
@@ -1664,8 +1725,11 @@ public class GameState implements Serializable, Copyable<GameState> {
             addCard(card, copyToZone);
         });
 
-        // copied cards removes from game after battlefield/stack leaves, so remember it here as workaround to fix freeze, see https://github.com/magefree/mage/issues/5437
-        // TODO: remove that workaround after LKI will be rewritten to support cross-steps/turns data transition and support copied cards
+        // copied cards removes from game after battlefield/stack leaves, so remember it
+        // here as workaround to fix freeze, see
+        // https://github.com/magefree/mage/issues/5437
+        // TODO: remove that workaround after LKI will be rewritten to support
+        // cross-steps/turns data transition and support copied cards
         copiedParts.forEach(card -> {
             this.setValue(COPIED_CARD_KEY + card.getId(), card.copy());
         });
@@ -1692,11 +1756,12 @@ public class GameState implements Serializable, Copyable<GameState> {
     }
 
     public List<FilterCreaturePermanent> getActivePowerInsteadOfToughnessForDamageLethalityFilters() {
-        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? Collections.emptyList() : getBattlefield().getAllActivePermanents().stream()
-                .map(Card::getId)
-                .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
-                .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
-                .collect(Collectors.toList());
+        return usePowerInsteadOfToughnessForDamageLethalityFilters.isEmpty() ? Collections.emptyList()
+                : getBattlefield().getAllActivePermanents().stream()
+                        .map(Card::getId)
+                        .filter(usePowerInsteadOfToughnessForDamageLethalityFilters::containsKey)
+                        .map(usePowerInsteadOfToughnessForDamageLethalityFilters::get)
+                        .collect(Collectors.toList());
     }
 
     boolean checkCommanderShouldStay(Card card, Game game) {
