@@ -13,7 +13,7 @@ public class RLModel {
     private double explorationRate;
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
-    private static final int STATE_SIZE = 100; // Adjust based on your state representation
+    private static final int STATE_SIZE = 45;  // 5 player state + 40 battlefield state
     private static final int ACTION_SIZE = 10; // Adjust based on number of possible actions
 
     public RLModel() {

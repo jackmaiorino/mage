@@ -20,6 +20,7 @@ import mage.constants.CardType;
 import mage.constants.Rarity;
 import mage.game.GameOptions;
 import mage.players.Player;
+import mage.util.ThreadUtils;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -36,23 +37,64 @@ public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
     private ComputerPlayerRL rlPlayer;
     private MCTSPlayer mctsPlayer;
-    private static final int NUM_EPISODES = 1000;
+    private static final int NUM_EPISODES = 1;
     private static final String MODEL_PATH = "models/rl_model.zip";
+    private static final int MAX_TURNS = 1000;
 
     public RLTrainer() {
-        // No initialization needed here since players are created per episode in runEpisode()
+        // Configure logger for multi-threaded environment
+        org.apache.log4j.PatternLayout layout = new org.apache.log4j.PatternLayout();
+        layout.setConversionPattern("[%t] %d{yyyy-MM-dd HH:mm:ss} %-5p %c{1}:%L - %m%n");
+        
+        org.apache.log4j.ConsoleAppender appender = new org.apache.log4j.ConsoleAppender();
+        appender.setLayout(layout);
+        appender.setTarget("System.err");
+        appender.activateOptions();
+        
+        logger.addAppender(appender);
+        logger.setLevel(org.apache.log4j.Level.DEBUG);
     }
 
     public void train() {
-        for (int episode = 0; episode < NUM_EPISODES; episode++) {
-            runEpisode();
+        logger.debug("Starting RL training for " + NUM_EPISODES + " episodes");
+        
+        Thread gameThread = new Thread(() -> {
+            try {
+                logger.debug("Game thread started");
+                for (int episode = 0; episode < NUM_EPISODES; episode++) {
+                    logger.debug("Episode " + (episode + 1) + "/" + NUM_EPISODES);
+                    
+                    // Create new game instance for each episode
+                    Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, 
+                        RangeOfInfluence.ONE, 
+                        new LondonMulligan(0), 
+                        20, 7, 60);
+                    
+                    GameOptions options = new GameOptions();
+                    options.testMode = true; // Enable test mode
+                    options.skipInitShuffling = true;
+                    game.setGameOptions(options);
+                    
+                    runEpisode(episode, game);
+                    
+                    // Ensure game is properly ended
+                    if (!gameIsOver(game)) {
+                        game.end();
+                    }
+                }
+            } catch (Exception e) {
+                logger.error("Training error: " + e.getMessage(), e);
+            }
+        }, "GAME");
+        
+        gameThread.start();
+        try {
+            gameThread.join();
+        } catch (InterruptedException e) {
+            logger.error("Training interrupted", e);
         }
         
-        try {
-            rlPlayer.model.getNetwork().saveModel(MODEL_PATH);
-        } catch (IOException e) {
-            logger.error("Failed to save model", e);
-        }
+        logger.debug("Training completed");
     }
 
     public void loadTrainedModel() {
@@ -63,110 +105,114 @@ public class RLTrainer {
         }
     }
 
-    private void runEpisode() {
+    private void runEpisode(int episode, Game game) {
         // Create players for this episode
         UUID rlPlayerId = UUID.randomUUID();
         UUID mctsPlayerId = UUID.randomUUID();
         ComputerPlayerRL rlPlayer = new ComputerPlayerRL(rlPlayerId);
         MCTSPlayer mctsPlayer = new MCTSPlayer(mctsPlayerId);
-        mctsPlayer.setTestMode(true);  // Enable test mode for AI simulation
-
-        // Create game and set options
-        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, 
-                                    RangeOfInfluence.ONE, 
-                                    new LondonMulligan(0), 
-                                    20,
-                                    7,
-                                    60);
+        mctsPlayer.setTestMode(true);
+        
+        // Set game options
         GameOptions options = new GameOptions();
+        options.testMode = true;
         options.skipInitShuffling = true;
         game.setGameOptions(options);
         
-        // Generate decks
+        // Generate and load decks
         Deck rlDeck = generateDeck(rlPlayer.getId(), 60);
         Deck mctsDeck = generateDeck(mctsPlayer.getId(), 60);
         
-        // Load cards
-        game.loadCards(rlDeck.getCards(), rlPlayer.getId());
-        game.loadCards(mctsDeck.getCards(), mctsPlayer.getId());
-        
-        // Add MCTS player first
-        if (mctsPlayer == null) {
-            logger.error("mctsPlayer is null before addPlayer");
-            return;
-        }
-        if (mctsDeck == null) {
-            logger.error("mctsDeck is null before addPlayer");
-            return;
-        }
-        if (mctsDeck.getCards() == null) {
-            logger.error("mctsDeck cards is null before addPlayer");
-            return;
-        }
-        if (game == null) {
-            logger.error("game is null before addPlayer");
-            return;
-        }
-
-        System.out.println("DEBUG: mctsPlayer ID: " + mctsPlayer.getId());
-        System.out.println("DEBUG: mctsDeck cards count: " + mctsDeck.getCards().size());
-
+        // Add players and their decks
         game.addPlayer(mctsPlayer, mctsDeck);
-
-        // Then add RL player
-        if (rlPlayer == null) {
-            System.out.println("DEBUG: rlPlayer is null before addPlayer");
-            return;
-        }
-        if (rlDeck == null) {
-            System.out.println("DEBUG: rlDeck is null before addPlayer");
-            return;
-        }
-        if (rlDeck.getCards() == null) {
-            System.out.println("DEBUG: rlDeck cards is null before addPlayer");
-            return;
-        }
-
-        System.out.println("DEBUG: rlPlayer ID: " + rlPlayer.getId());
-        System.out.println("DEBUG: rlDeck cards count: " + rlDeck.getCards().size());
-
         game.addPlayer(rlPlayer, rlDeck);
         
-        // Create simulation game for AI
-        Game aiGame = game.createSimulationForAI();
+        // Start the game and wait for initialization
+        Thread gameThread = new Thread(() -> {
+            Thread.currentThread().setName(ThreadUtils.THREAD_PREFIX_GAME + game.getId());
+            game.start(rlPlayer.getId());
+        }, "GAME-" + episode);
         
-        // Copy and restore player states
-        for (Player copyPlayer : aiGame.getState().getPlayers().values()) {
-            Player origPlayer = game.getState().getPlayers().get(copyPlayer.getId());
-            if (copyPlayer.getId().equals(rlPlayer.getId())) {
-                rlPlayer.restore(origPlayer);
-                rlPlayer.init(aiGame);
-            } else {
-                mctsPlayer.restore(origPlayer);
-                mctsPlayer.init(aiGame);
+        gameThread.start();
+        
+        // Wait for game to properly initialize
+        try {
+            int attempts = 0;
+            while (game.getActivePlayerId() == null && attempts < 10) {
+                logger.debug("Waiting for active player to be loaded...");
+                Thread.sleep(1000);
+                attempts++;
+            }
+            if (game.getActivePlayerId() == null) {
+                logger.error("Game failed to initialize after " + attempts + " seconds");
+                return;
+            }
+        } catch (InterruptedException e) {
+            logger.error("Game initialization interrupted", e);
+            return;
+        }
+        
+        // Monitor game state
+        while (!gameIsOver(game)) {
+            try {
+                if (game.getActivePlayerId() != null) {
+                    Player activePlayer = game.getPlayer(game.getActivePlayerId());
+                    logger.info(String.format("Turn %d Phase %s - %s (Life: %d)", 
+                        game.getTurnNum(),
+                        game.getPhase().getType(),
+                        activePlayer.getName(),
+                        activePlayer.getLife()));
+
+                    if (activePlayer.getId().equals(rlPlayer.getId())) {
+                        RLState currentState = new RLState(game);
+                        RLAction action = rlPlayer.model.getAction(currentState);
+                        logger.info(String.format("RL Player action: %s [Cards in hand: %d, Lands on battlefield: %d]",
+                            action.getType(),
+                            activePlayer.getHand().size(),
+                            game.getBattlefield().getAllActivePermanents(activePlayer.getId())
+                                .stream()
+                                .filter(permanent -> permanent.isLand())
+                                .count()));
+                        
+                        boolean actionSuccess = action.execute(game, rlPlayer.getId());
+                        if (actionSuccess) {
+                            // Ensure game processes the action and advances state
+                            game.processAction();
+                            
+                            RLState nextState = new RLState(game);
+                            double reward = calculateReward(game, rlPlayer);
+                            rlPlayer.model.update(currentState, action, reward, nextState);
+                            logger.info(String.format("Action completed - Reward: %.2f", reward));
+                        } else {
+                            logger.info("Action failed to execute");
+                        }
+                    } else {
+                        logger.info(String.format("MCTS Player thinking... [Cards: %d, Life: %d]",
+                            mctsPlayer.getHand().size(),
+                            mctsPlayer.getLife()));
+                    }
+                }
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                logger.error("Game monitoring interrupted", e);
+                break;
             }
         }
         
-        aiGame.resume();
-        aiGame.start(rlPlayer.getId());
-
-        while (!gameIsOver(aiGame)) {
-            RLState currentState = new RLState(aiGame);
-            RLAction action = rlPlayer.model.getAction(currentState);
-            
-            // Execute action and get reward
-            boolean actionSuccess = action.execute(aiGame, rlPlayer.getId());
-            double reward = calculateReward(aiGame, rlPlayer);
-            
-            RLState nextState = new RLState(aiGame);
-            
-            // Update the model
-            rlPlayer.model.update(currentState, action, reward, nextState);
+        // Cleanup
+        try {
+            gameThread.join(5000);
+            if (gameThread.isAlive()) {
+                game.end();
+            }
+        } catch (InterruptedException e) {
+            logger.error("Error waiting for game thread to finish", e);
         }
     }
 
     private boolean gameIsOver(Game game) {
-        return game.checkIfGameIsOver() || 
+        return game.hasEnded() || 
+               game.checkIfGameIsOver() || 
                game.getState().getPlayerList(game.getActivePlayerId()).isEmpty();
     }
 

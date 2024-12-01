@@ -3,6 +3,8 @@ package org.mage.test.player;
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
 import mage.player.ai.rl.RLTrainer;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
 
@@ -13,13 +15,16 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class TestComputerPlayerRL extends CardTestPlayerBase {
 
-    @Test
+    @Test(timeout = 300000) // 5 minute timeout
     public void test_RLPlayer_BasicTraining() {
+        System.err.println("Starting RL Player Basic Training Test");
+        System.err.flush();
+        
         RLTrainer trainer = new RLTrainer();
         trainer.train();
-
-        // Add assertions to verify training results
-        // TODO: Add specific test scenarios and assertions
+        
+        System.err.println("Test Complete");
+        System.err.flush();
     }
 
     @Test
