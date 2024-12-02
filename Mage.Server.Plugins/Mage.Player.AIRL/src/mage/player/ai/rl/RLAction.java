@@ -42,6 +42,11 @@ public class RLAction {
         this.targetId = targetId;
     }
 
+    public RLAction(ActionType type, Ability ability) {
+        this.type = type;
+        this.ability = ability;
+    }
+
     public boolean execute(Game game, UUID playerId) {
         Player player = game.getPlayer(playerId);
         if (player == null) return false;

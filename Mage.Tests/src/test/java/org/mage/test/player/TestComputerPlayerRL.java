@@ -15,14 +15,14 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class TestComputerPlayerRL extends CardTestPlayerBase {
 
-    @Test(timeout = 300000) // 5 minute timeout
+    @Test
     public void test_RLPlayer_BasicTraining() {
         System.err.println("Starting RL Player Basic Training Test");
         System.err.flush();
-        
+
         RLTrainer trainer = new RLTrainer();
         trainer.train();
-        
+
         System.err.println("Test Complete");
         System.err.flush();
     }

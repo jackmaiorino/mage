@@ -7,8 +7,11 @@ import mage.util.RandomUtil;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.UUID;
+import mage.player.ai.ComputerPlayerRL;
 
 public class RLModel {
+    private final UUID playerId;
     private NeuralNetwork network;
     private double explorationRate;
     private static final double LEARNING_RATE = 0.001;
@@ -16,14 +19,25 @@ public class RLModel {
     private static final int STATE_SIZE = 45;  // 5 player state + 40 battlefield state
     private static final int ACTION_SIZE = 10; // Adjust based on number of possible actions
 
-    public RLModel() {
+    public RLModel(UUID playerId) {
+        this.playerId = playerId;
         this.network = new NeuralNetwork(STATE_SIZE, ACTION_SIZE);
         this.explorationRate = 0.1;
     }
 
     public RLAction getAction(RLState state) {
+        if (state == null || state.getGame() == null) {
+            return new RLAction(RLAction.ActionType.PASS);
+        }
+
         Game game = state.getGame();
-        List<RLAction> actions = getPlayableActions(game);
+        Player player = game.getPlayer(playerId);
+        if (player == null) {
+            System.err.println("Player not found for this game");
+            throw new IllegalStateException("Player not found for ID: " + playerId);
+        }
+
+        List<RLAction> actions = ComputerPlayerRL.getPlayableActions(game, (ComputerPlayerRL)player);
         
         if (actions.isEmpty()) {
             return new RLAction(RLAction.ActionType.PASS);
@@ -48,13 +62,6 @@ public class RLModel {
         }
 
         return actions.get(bestActionIndex);
-    }
-
-    private List<RLAction> getPlayableActions(Game game) {
-        List<RLAction> actions = new ArrayList<>();
-        // Add implementation to get all valid actions
-        // This will depend on the game state and available options
-        return actions;
     }
 
     private List<Float> predictQValues(RLState state, List<RLAction> actions) {
