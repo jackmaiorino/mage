@@ -19,38 +19,27 @@ import java.util.List;
 
 public class NeuralNetwork {
     private MultiLayerNetwork network;
-    private final int inputSize;
-    private final int outputSize;
-
+    
     public NeuralNetwork(int inputSize, int outputSize) {
-        this.inputSize = inputSize;
-        this.outputSize = outputSize;
-        
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-                .seed(123)
-                .updater(new Adam())
-                .list()
-                .layer(0, new DenseLayer.Builder()
-                        .nIn(inputSize)
-                        .nOut(64)
-                        .activation(Activation.RELU)
-                        .build())
-                .layer(1, new OutputLayer.Builder(LossFunctions.LossFunction.MSE)
-                        .nIn(64)
-                        .nOut(outputSize)
-                        .activation(Activation.IDENTITY)
-                        .build())
-                .build();
-
+            .list()
+            .layer(0, new DenseLayer.Builder().nIn(inputSize).nOut(64).activation(Activation.RELU).build())
+            .layer(1, new DenseLayer.Builder().nIn(64).nOut(32).activation(Activation.RELU).build())
+            .layer(2, new OutputLayer.Builder().nIn(32).nOut(outputSize).activation(Activation.IDENTITY).build())
+            .build();
+        
         network = new MultiLayerNetwork(conf);
         network.init();
-        network.setListeners(new ScoreIterationListener(100));
     }
-
-    public List<Float> predict(List<Float> input) {
-        INDArray inputArray = Nd4j.create(convertToArray(input));
-        INDArray output = network.output(inputArray);
-        return convertToList(output);
+    
+    public float predict(float[] state, float[] action) {
+        float[] combined = new float[state.length + action.length];
+        System.arraycopy(state, 0, combined, 0, state.length);
+        System.arraycopy(action, 0, combined, state.length, action.length);
+        
+        INDArray input = Nd4j.create(combined);
+        INDArray output = network.output(input);
+        return output.getFloat(0);
     }
 
     public void train(float[][] inputs, float[][] targets, double learningRate) {

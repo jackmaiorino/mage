@@ -50,4 +50,11 @@ public class RLState {
     public List<Float> getStateVector() {
         return stateVector;
     }
+
+    public float[] toFeatureVector() {
+        // Convert game state to feature vector
+        float[] features = new float[RLModel.STATE_SIZE];
+        // TODO: Implement state feature extraction
+        return features;
+    }
 } 

@@ -4,6 +4,7 @@ import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 import mage.util.RandomUtil;
+import mage.abilities.ActivatedAbility;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import java.util.List;
 import java.util.ArrayList;
@@ -16,8 +17,8 @@ public class RLModel {
     private double explorationRate;
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
-    private static final int STATE_SIZE = 45;  // 5 player state + 40 battlefield state
-    private static final int ACTION_SIZE = 10; // Adjust based on number of possible actions
+    public static final int STATE_SIZE = 45;  // 5 player state + 40 battlefield state
+    public static final int ACTION_SIZE = 10; // Adjust based on number of possible actions
 
     public RLModel(UUID playerId) {
         this.playerId = playerId;
@@ -65,25 +66,37 @@ public class RLModel {
     }
 
     private List<Float> predictQValues(RLState state, List<RLAction> actions) {
-        return network.predict(state.getStateVector());
+        List<Float> qValues = new ArrayList<>();
+        float[] stateVector = convertToArray(state.getStateVector());
+        
+        for (RLAction action : actions) {
+            float[] actionVector = action.toFeatureVector();
+            qValues.add(network.predict(stateVector, actionVector));
+        }
+        return qValues;
     }
 
     public void update(RLState state, RLAction action, double reward, RLState nextState) {
-        float[][] currentState = new float[][] { convertToArray(state.getStateVector()) };
-        float[][] nextStateArray = new float[][] { convertToArray(nextState.getStateVector()) };
+        float[] currentStateVector = convertToArray(state.getStateVector());
+        float[] actionVector = action.toFeatureVector();
+        float currentQ = network.predict(currentStateVector, actionVector);
         
-        List<Float> nextQValues = network.predict(nextState.getStateVector());
-        double maxNextQ = nextQValues.stream()
-                .max(Float::compareTo)
-                .orElse(0.0f);
-
-        double targetQ = reward + DISCOUNT_FACTOR * maxNextQ;
+        // Get max Q value for next state
+        List<RLAction> nextActions = getPossibleActions(nextState);
+        float maxNextQ = 0.0f;
+        float[] nextStateVector = convertToArray(nextState.getStateVector());
         
-        float[][] targets = new float[1][ACTION_SIZE];
-        // Set target Q-value for the taken action
-        targets[0][getActionIndex(action)] = (float) targetQ;
+        for (RLAction nextAction : nextActions) {
+            float q = network.predict(nextStateVector, nextAction.toFeatureVector());
+            maxNextQ = Math.max(maxNextQ, q);
+        }
         
-        network.train(currentState, targets, LEARNING_RATE);
+        float targetQ = (float)(reward + DISCOUNT_FACTOR * maxNextQ);
+        
+        // Train network with updated Q value
+        float[][] inputs = new float[][] { currentStateVector };
+        float[][] targets = new float[][] { new float[] { targetQ } };
+        network.train(inputs, targets, LEARNING_RATE);
     }
 
     private float[] convertToArray(List<Float> list) {
@@ -101,5 +114,34 @@ public class RLModel {
 
     public NeuralNetwork getNetwork() {
         return network;
+    }
+
+    public List<Float> evaluateAbilities(RLState state, List<ActivatedAbility> abilities) {
+        List<Float> scores = new ArrayList<>();
+        float[] stateVector = state.toFeatureVector();
+        
+        for (ActivatedAbility ability : abilities) {
+            RLAction action = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY, ability);
+            float[] actionVector = action.toFeatureVector();
+            scores.add(network.predict(stateVector, actionVector));
+        }
+        return scores;
+    }
+
+    public float getActionThreshold() {
+        return 0.2f; // Threshold can be tuned based on training
+    }
+
+    private float predictQValue(RLState state, RLAction action) {
+        // Use neural network to predict Q-value for this state-action pair
+        return network.predict(state.toFeatureVector(), action.toFeatureVector());
+    }
+
+    private List<RLAction> getPossibleActions(RLState state) {
+        if (state == null || state.getGame() == null) {
+            return new ArrayList<>();
+        }
+        return ComputerPlayerRL.getPlayableActions(state.getGame(), 
+               (ComputerPlayerRL)state.getGame().getPlayer(playerId));
     }
 } 

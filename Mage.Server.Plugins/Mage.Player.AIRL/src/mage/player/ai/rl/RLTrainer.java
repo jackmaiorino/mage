@@ -6,6 +6,7 @@ import mage.game.Game;
 import mage.game.TwoPlayerDuel;
 import mage.game.mulligan.LondonMulligan;
 import mage.player.ai.ComputerPlayerRL;
+import mage.player.ai.ComputerPlayer6;
 import mage.player.ai.MCTSPlayer;
 import mage.cards.decks.Deck;
 import mage.game.GameOptions;
@@ -33,130 +34,36 @@ public class RLTrainer {
     }
     
     public void train() {
-        logger.debug("Starting RL training for " + NUM_EPISODES + " episodes");
-        
-        try {
-            for (int episode = 0; episode < NUM_EPISODES; episode++) {
-                logger.debug("Episode " + (episode + 1) + "/" + NUM_EPISODES);
-                
-                // Create game instance
-                Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, 
-                    RangeOfInfluence.ONE, 
-                    new LondonMulligan(0), 
-                    20, 7, 60);
-                
-                // Create players
-                UUID rlPlayerId = UUID.randomUUID();
-                UUID mctsPlayerId = UUID.randomUUID();
-                ComputerPlayerRL rlPlayer = new ComputerPlayerRL(rlPlayerId);
-                MCTSPlayer mctsPlayer = new MCTSPlayer(mctsPlayerId);
-                
-                // Generate decks
-                Deck rlDeck = generateDeck(rlPlayerId, 60);
-                Deck mctsDeck = generateDeck(mctsPlayerId, 60);
-                
-                // Add players and decks
-                game.addPlayer(mctsPlayer, mctsDeck);
-                game.addPlayer(rlPlayer, rlDeck);
-                
-                // Set game options
-                GameOptions options = new GameOptions();
-                options.testMode = true;
-                game.setGameOptions(options);
-                
-                // Start game in separate thread
-                game.start(rlPlayer.getId());
-                // Thread gameThread = new Thread(() -> {
-                //     ThreadUtils.ensureRunInGameThread();
-                //     game.start(rlPlayer.getId());
-                // }, "GAME-" + episode);
-                // gameThread.start();
-                
-                // Wait for game initialization with timeout
-                int maxWaitTime = 30; // 30 seconds timeout
-                int waitTime = 0;
-                boolean playersInitialized = false;
-                
-                while (!playersInitialized && waitTime < maxWaitTime) {
-                    Player checkPlayer = game.getPlayer(rlPlayerId);
-                    if (checkPlayer != null && game.getState().getPlayers().containsKey(rlPlayerId)) {
-                        playersInitialized = true;
-                    } else {
-                        try {
-                            Thread.sleep(1000);
-                            waitTime++;
-                        } catch (InterruptedException e) {
-                            logger.error("Wait interrupted", e);
-                            break;
-                        }
-                    }
-                }
-                
-                if (!playersInitialized) {
-                    logger.error("Game initialization failed - timeout after " + maxWaitTime + " seconds");
-                    continue;
-                }
-                
-                // Monitor and train
-                monitorGameAndTrain(game, rlPlayer);
-            }
-        } catch (Exception e) {
-            logger.error("Training error: " + e.getMessage(), e);
+        for (int episode = 0; episode < NUM_EPISODES; episode++) {
+            Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 20, 60, 7);
+            
+            // Create RL player
+            ComputerPlayerRL rlPlayer = new ComputerPlayerRL(UUID.randomUUID());
+            game.addPlayer(rlPlayer, generateDeck(rlPlayer.getId(), 60));
+            
+            // Create ComputerPlayer6 opponent (since ComputerPlayer7 extends it)
+            ComputerPlayer6 opponent = new ComputerPlayer6("Computer6", RangeOfInfluence.ALL, 5);
+            game.addPlayer(opponent, generateDeck(opponent.getId(), 60));
+            
+
+            GameOptions options = new GameOptions();
+            options.testMode = true;
+            game.setGameOptions(options);
+            
+            game.start(rlPlayer.getId());
+            
+            // Log final game state
+            logGameResult(game, rlPlayer);
         }
     }
     
-    private void monitorGameAndTrain(Game game, ComputerPlayerRL rlPlayer) {
-        try {
-            while (!game.hasEnded()) {  // Changed from isGameOver() to hasEnded()
-                if (game.getActivePlayerId() != null) {
-                    Player activePlayer = game.getPlayer(game.getActivePlayerId());
-                    if (activePlayer instanceof ComputerPlayerRL) {
-                        synchronized(game) {
-                            RLState currentState = new RLState(game);
-                            RLAction action = rlPlayer.model.getAction(currentState);
-                            
-                            if (action != null && action.execute(game, rlPlayer.getId())) {
-                                RLState nextState = new RLState(game);
-                                double reward = evaluateGameState(game, rlPlayer);
-                                rlPlayer.model.update(currentState, action, reward, nextState);
-                                
-                                logState(game, action, reward);
-                            }
-                        }
-                    }
-                }
-                Thread.sleep(100);
-            }
-        } catch (InterruptedException e) {
-            logger.error("Game monitoring interrupted", e);
-        }
-    }
-    
-    private double evaluateGameState(Game game, ComputerPlayerRL player) {
-        // Simple reward based on life totals
-        UUID opponentId = game.getOpponents(player.getId()).iterator().next();
-        return game.getPlayer(player.getId()).getLife() - game.getPlayer(opponentId).getLife();
-    }
-    
-    private void logState(Game game, RLAction action, double reward) {
-        logger.info("=================== Turn " + game.getTurnNum() + " ===================");
-        logger.info("Active Player: " + game.getPlayer(game.getActivePlayerId()).getName());
-        logger.info("Action: " + action);
+    private void logGameResult(Game game, ComputerPlayerRL rlPlayer) {
+        logger.info("Game finished - Winner: " + game.getWinner());
+        logger.info("Final life totals:");
+        logger.info("[" + rlPlayer.getName() + "]: " + rlPlayer.getLife());
         
-        // Log RL player state
-        Player rlPlayer = game.getPlayer(game.getActivePlayerId());
-        logger.info("[" + rlPlayer.getName() + "]" 
-                + " Life: " + rlPlayer.getLife()
-                + " Hand: " + rlPlayer.getHand().size()
-                + " Reward: " + String.format("%.2f", reward));
-        
-        // Log opponent state
         UUID opponentId = game.getOpponents(rlPlayer.getId()).iterator().next();
         Player opponent = game.getPlayer(opponentId);
-        logger.info("[" + opponent.getName() + "]"
-                + " Life: " + opponent.getLife()
-                + " Hand: " + opponent.getHand().size());
-        
-        logger.info(""); // Empty line for readability
+        logger.info("[" + opponent.getName() + "]: " + opponent.getLife());
     }
 } 
