@@ -2,6 +2,7 @@ package org.mage.test.player;
 
 import mage.constants.PhaseStep;
 import mage.constants.Zone;
+import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.rl.RLTrainer;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;

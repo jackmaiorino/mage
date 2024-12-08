@@ -51,7 +51,8 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 return false;
             case PRECOMBAT_MAIN:
                 // 09.03.2020:
-                // in old version it passes opponent's pre-combat step (game.isActivePlayer(playerId) -> pass(game))
+                // in old version it passes opponent's pre-combat step
+                // (game.isActivePlayer(playerId) -> pass(game))
                 // why?!
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
                 if (actions.isEmpty()) {
@@ -111,13 +112,15 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
 
     protected void calculateActions(Game game) {
         if (!getNextAction(game)) {
-            //logger.info("--- calculating possible actions for " + this.getName() + " on " + game.toString());
+            // logger.info("--- calculating possible actions for " + this.getName() + " on "
+            // + game.toString());
             Date startTime = new Date();
             currentScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
             Game sim = createSimulation(game);
             SimulationNode2.resetCount();
             root = new SimulationNode2(null, sim, maxDepth, playerId);
-            addActionsTimed(); // TODO: root can be null again after addActionsTimed O_o need to research (it's a CPU AI problem?)
+            addActionsTimed(); // TODO: root can be null again after addActionsTimed O_o need to research (it's
+                               // a CPU AI problem?)
             if (root != null && root.children != null && !root.children.isEmpty()) {
                 logger.trace("After add actions timed: root.children.size = " + root.children.size());
                 root = root.children.get(0);
@@ -149,10 +152,10 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
             this.setLastThinkTime((endTime.getTime() - startTime.getTime()));
 
             /*
-            logger.warn("Last think time: " + this.getLastThinkTime()
-                    + "; actions: " + actions.size()
-                    + "; hand: " + this.getHand().size()
-                    + "; permanents: " + game.getBattlefield().getAllPermanents().size());
+             * logger.warn("Last think time: " + this.getLastThinkTime()
+             * + "; actions: " + actions.size()
+             * + "; hand: " + this.getHand().size()
+             * + "; permanents: " + game.getBattlefield().getAllPermanents().size());
              */
         } else {
             logger.debug("Next Action exists!");

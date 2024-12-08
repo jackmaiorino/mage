@@ -2,57 +2,59 @@ package mage.player.ai;
 
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.common.PassAbility;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
-import mage.game.combat.Combat;
 import mage.player.ai.rl.RLState;
 import mage.player.ai.rl.RLModel;
 import mage.player.ai.rl.RLAction;
-import mage.players.Player;
 import org.apache.log4j.Logger;
 
 import java.util.UUID;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.LinkedList;
+
+import mage.target.Target;
+import mage.game.events.GameEvent;
+import mage.players.Player;
 
 public class ComputerPlayerRL extends ComputerPlayer6 {
     private static final Logger logger = Logger.getLogger(ComputerPlayerRL.class);
     public RLModel model;
+    protected LinkedList<Ability> actions = new LinkedList<>();
     protected RLState currentState;
-    
-    public ComputerPlayerRL(UUID id) {
-        super("Computer - RL " + id.toString().substring(0, 3), RangeOfInfluence.ALL);
-        this.model = new RLModel(id);
+
+    public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
+        super(name, range, skill);
+        logger.info("ComputerPlayerRL initialized for " + name);
     }
 
     @Override
     public boolean priority(Game game) {
+        logger.info("priority called for " + getName());
         game.resumeTimer(getTurnControlledBy());
         boolean result = priorityPlay(game);
         game.pauseTimer(getTurnControlledBy());
         return result;
     }
 
-    @Override
-    public void selectAttackers(Game game, UUID attackingPlayerId) {
-        currentState = new RLState(game);
-        RLAction action = model.getAction(currentState);
-        if (action != null && action.getType() == RLAction.ActionType.ATTACK) {
-            declareAttacker(action.getTargetId(), game.getCombat().getDefenders().iterator().next(), game, false);
-        }
-    }
-
-    @Override
-    public boolean chooseMulligan(Game game) {
-        currentState = new RLState(game);
-        RLAction action = model.getAction(currentState);
-        return action != null && action.getType() == RLAction.ActionType.MULLIGAN;
-    }
+    //    @Override
+//    public void selectAttackers(Game game, UUID attackingPlayerId) {
+//        currentState = new RLState(game);
+//        RLAction action = model.getAction(currentState);
+//        if (action != null && action.getType() == RLAction.ActionType.ATTACK) {
+//            declareAttacker(action.getTargetId(), game.getCombat().getDefenders().iterator().next(), game, false);
+//        }
+//    }
+//
+//    @Override
+//    public boolean chooseMulligan(Game game) {
+//        currentState = new RLState(game);
+//        RLAction action = model.getAction(currentState);
+//        return action != null && action.getType() == RLAction.ActionType.MULLIGAN;
+//    }
 
     protected boolean priorityPlay(Game game) {
+        logger.info("priorityPlay called for " + getName() + " during " + game.getTurnStepType());
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         switch (game.getTurnStepType()) {
@@ -97,107 +99,64 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         return false;
     }
 
-    protected List<ActivatedAbility> getPlayableAbilities(Game game) {
-        List<ActivatedAbility> playables = getPlayable(game, true);
-        
-        // Create state and get model prediction for filtering abilities
-        currentState = new RLState(game);
-        List<Float> abilityScores = model.evaluateAbilities(currentState, playables);
-        
-        // Filter out low-scoring abilities (optional)
-        List<ActivatedAbility> filteredPlayables = new ArrayList<>();
-        for (int i = 0; i < playables.size(); i++) {
-            if (abilityScores.get(i) > model.getActionThreshold()) {
-                filteredPlayables.add(playables.get(i));
-            }
-        }
-        
-        // Always include pass ability as an option
-        filteredPlayables.add(new PassAbility());
-        
-        return filteredPlayables;
-    }
-
-    public static List<RLAction> getPlayableActions(Game game, ComputerPlayerRL player) {
-        List<RLAction> actions = new ArrayList<>();
-        
-        // Always add PASS as a possible action
-        actions.add(new RLAction(RLAction.ActionType.PASS));
-
-        // Get all activated abilities that can be used
-        for (Ability ability : player.getPlayable(game, true)) {
-            if (ability instanceof ActivatedAbility && !(ability instanceof PassAbility)) {
-                actions.add(new RLAction(RLAction.ActionType.ACTIVATE_ABILITY, ability));
-            }
-        }
-
-        return actions;
-    }
-
     protected void act(Game game) {
-        RLAction action = model.getAction(new RLState(game));
-        if (action != null) {
-            logger.info(String.format("===> SELECTED ACTION for %s: %s", getName(), action));
-            action.execute(game, playerId);
-        } else {
+        logger.info("act called for " + getName());
+        if (actions == null || actions.isEmpty()) {
             pass(game);
-        }
-    }
-
-    protected void calculateActions(Game game) {
-        // Check if there are already actions calculated
-        if (!getNextAction(game)) {
-            // Log the start of action calculation
-            Date startTime = new Date();
-            
-            // Evaluate the current game state
-            currentScore = GameStateEvaluator2.evaluate(playerId, game).getTotalScore();
-            
-            // Create a simulation of the current game state
-            Game sim = createSimulation(game);
-            
-            // Reset the simulation node count
-            SimulationNode2.resetCount();
-            
-            // Initialize the root of the decision tree
-            root = new SimulationNode2(null, sim, maxDepth, playerId);
-            
-            // Add actions to the decision tree
-            addActionsTimed();
-            
-            // Check if the root has children (possible actions)
-            if (root != null && root.children != null && !root.children.isEmpty()) {
-                root = root.children.get(0);
-
-                // Prevent repeating the same action with no cost
-                boolean doThis = true;
-                if (root.abilities.size() == 1) {
-                    for (Ability ability : root.abilities) {
-                        if (ability.getManaCosts().manaValue() == 0 && ability.getCosts().isEmpty()) {
-                            if (actionCache.contains(ability.getRule() + '_' + ability.getSourceId())) {
-                                doThis = false; // Don't do it again
+        } else {
+            boolean usedStack = false;
+            while (actions.peek() != null) {
+                Ability ability = actions.poll();
+                logger.info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
+                if (!ability.getTargets().isEmpty()) {
+                    for (Target target : ability.getTargets()) {
+                        for (UUID id : target.getTargets()) {
+                            target.updateTarget(id, game);
+                            if (!target.isNotTarget()) {
+                                game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, ability, ability.getControllerId()));
                             }
                         }
                     }
                 }
-
-                // If valid, set actions and combat
-                if (doThis) {
-                    actions = new LinkedList<>(root.abilities);
-                    combat = root.combat;
-                    for (Ability ability : actions) {
-                        actionCache.add(ability.getRule() + '_' + ability.getSourceId());
-                    }
+                this.activateAbility((ActivatedAbility) ability, game);
+                if (ability.isUsesStack()) {
+                    usedStack = true;
                 }
-            } else {
-                logger.info('[' + game.getPlayer(playerId).getName() + "][pre] Action: skip");
             }
-            
-            // Log the end of action calculation
-            Date endTime = new Date();
-            this.setLastThinkTime((endTime.getTime() - startTime.getTime()));
+            if (usedStack) {
+                pass(game);
+            }
+        }
+    }
+
+    protected void calculateActions(Game game) {
+        logger.info("calculateActions called for " + getName());
+        // Get all playable actions
+        boolean isSimulatedPlayer = true;
+        List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
+        RLAction bestAction = null;
+        float bestScore = Float.NEGATIVE_INFINITY;
+
+        // Evaluate each action using the model
+        for (ActivatedAbility ability : playables) {
+            RLState state = new RLState(game);
+            RLAction action = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY, ability);
+            float score = model.predictQValue(state, action);
+
+            // Select the action with the highest score
+            if (score > bestScore) {
+                bestScore = score;
+                bestAction = action;
+            }
+        }
+
+        // Add the best action to the actions list
+        if (bestAction != null) {
+            actions.clear();
+            actions.add(bestAction.getAbility());
+            logger.info(String.format("===> SELECTED ACTION for %s: %s", getName(), bestAction));
         } else {
-            logger.debug("Next Action exists!");
+            logger.info("No valid actions found.");
         }
     }
 }

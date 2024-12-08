@@ -35,21 +35,20 @@ public class RLTrainer {
     
     public void train() {
         for (int episode = 0; episode < NUM_EPISODES; episode++) {
-            Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 20, 60, 7);
+            Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 60, 7);
             
             // Create RL player
-            ComputerPlayerRL rlPlayer = new ComputerPlayerRL(UUID.randomUUID());
+            ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL", RangeOfInfluence.ALL , 5);
             game.addPlayer(rlPlayer, generateDeck(rlPlayer.getId(), 60));
             
             // Create ComputerPlayer6 opponent (since ComputerPlayer7 extends it)
             ComputerPlayer6 opponent = new ComputerPlayer6("Computer6", RangeOfInfluence.ALL, 5);
             game.addPlayer(opponent, generateDeck(opponent.getId(), 60));
             
-
             GameOptions options = new GameOptions();
-            options.testMode = true;
             game.setGameOptions(options);
-            
+
+            // Start the game
             game.start(rlPlayer.getId());
             
             // Log final game state
