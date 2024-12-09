@@ -52,9 +52,10 @@ public class RLState {
     }
 
     public float[] toFeatureVector() {
-        // Convert game state to feature vector
         float[] features = new float[RLModel.STATE_SIZE];
-        // TODO: Implement state feature extraction
+        for (int i = 0; i < Math.min(stateVector.size(), RLModel.STATE_SIZE); i++) {
+            features[i] = stateVector.get(i);
+        }
         return features;
     }
 } 

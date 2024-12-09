@@ -24,7 +24,8 @@ import java.util.*;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * AI: helper class to simulate games with computer bot (each player replaced by simulated)
+ * AI: helper class to simulate games with computer bot (each player replaced by
+ * simulated)
  *
  * @author BetaSteward_at_googlemail.com
  */
@@ -32,11 +33,14 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
 
-    private static final boolean AI_SIMULATE_ALL_BAD_AND_GOOD_TARGETS = false; // TODO: enable and do performance test (it's increase calculations by x2, but is it useful?)
+    private static final boolean AI_SIMULATE_ALL_BAD_AND_GOOD_TARGETS = false; // TODO: enable and do performance test
+                                                                               // (it's increase calculations by x2, but
+                                                                               // is it useful?)
 
     // warning, simulated player do not restore own data by game rollback
     private final boolean isSimulatedPlayer;
-    private transient ConcurrentLinkedQueue<Ability> allActions; // all possible abilities to play (copies with already selected targets)
+    private transient ConcurrentLinkedQueue<Ability> allActions; // all possible abilities to play (copies with already
+                                                                 // selected targets)
     private final Player originalPlayer; // copy of the original player, source of choices/results in tests
 
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer) {
@@ -58,8 +62,10 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     public void restore(Player player) {
         // simulated player can be created from any player type
         if (!originalPlayer.getClass().equals(player.getClass())) {
-            throw new IllegalArgumentException("Wrong code usage: simulated player must use same player class all the time. Need "
-                    + originalPlayer.getClass().getSimpleName() + ", but try to restore " + player.getClass().getSimpleName());
+            throw new IllegalArgumentException(
+                    "Wrong code usage: simulated player must use same player class all the time. Need "
+                            + originalPlayer.getClass().getSimpleName() + ", but try to restore "
+                            + player.getClass().getSimpleName());
         }
 
         super.restore(player.getRealPlayer());
@@ -71,7 +77,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     }
 
     /**
-     * Find all playable abilities with all possible targets (targets already selected in ability)
+     * Find all playable abilities with all possible targets (targets already
+     * selected in ability)
      */
     public List<Ability> simulatePriority(Game game) {
         allActions = new ConcurrentLinkedQueue<>();
@@ -153,7 +160,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                             }
                         }
                         // find real X value after replace events
-                        newAbility.addManaCostsToPay(new ManaCostsImpl<>(new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
+                        newAbility.addManaCostsToPay(new ManaCostsImpl<>(
+                                new StringBuilder("{").append(xAnnounceValue).append('}').toString()));
                         newAbility.getManaCostsToPay().setX(xAnnounceValue, xAnnounceValue * xInstancesCount);
                         if (varCost != null) {
                             varCost.setPaid();
@@ -232,10 +240,10 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
     public List<Combat> addAttackers(Game game) {
         Map<Integer, Combat> engagements = new HashMap<>();
-        //useful only for two player games - will only attack first opponent
+        // useful only for two player games - will only attack first opponent
         UUID defenderId = game.getOpponents(playerId).iterator().next();
         List<Permanent> attackersList = super.getAvailableAttackers(defenderId, game);
-        //use binary digits to calculate powerset of attackers
+        // use binary digits to calculate powerset of attackers
         int powerElements = (int) Math.pow(2, attackersList.size());
         StringBuilder binary = new StringBuilder();
         for (int i = powerElements - 1; i >= 0; i--) {
@@ -247,7 +255,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             }
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
-                    setStoredBookmark(sim.bookmarkState()); // makes it possible to UNDO a declared attacker with costs from e.g. Propaganda
+                    setStoredBookmark(sim.bookmarkState()); // makes it possible to UNDO a declared attacker with costs
+                                                            // from e.g. Propaganda
                     if (!sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, playerId, sim)) {
                         sim.undo(playerId);
                     }
@@ -276,7 +285,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             return Collections.emptyList();
         }
 
-        //add a node with no blockers
+        // add a node with no blockers
         Game sim = game.createSimulationForAI();
         engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat());
         sim.fireEvent(GameEvent.getEvent(GameEvent.EventType.DECLARED_BLOCKERS, playerId, playerId));
@@ -292,7 +301,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             return;
         }
         int numGroups = game.getCombat().getGroups().size();
-        //try to block each attacker with each potential blocker
+        // try to block each attacker with each potential blocker
         Permanent blocker = blockers.get(0);
         logger.debug("simulating -- block:" + blocker);
         List<Permanent> remaining = remove(blockers, blocker);
@@ -303,7 +312,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
                 if (engagements.put(sim.getCombat().getValue().hashCode(), sim.getCombat()) != null) {
                     logger.debug("simulating -- found redundant block combination");
                 }
-                addBlocker(sim, remaining, engagements);  // and recurse minus the used blocker
+                addBlocker(sim, remaining, engagements); // and recurse minus the used blocker
             }
         }
         addBlocker(game, remaining, engagements);
@@ -317,7 +326,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             logger.debug("simulating -- triggered ability:" + ability);
             game.getStack().push(new StackAbility(ability, playerId));
             if (ability.activate(game, false) && ability.isUsesStack()) {
-                game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));
+                game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability,
+                        ability.getControllerId()));
             }
             game.applyEffects();
             game.getPlayers().resetPassed();
@@ -339,7 +349,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         Game sim = game.createSimulationForAI();
         sim.getStack().push(new StackAbility(ability, playerId));
         if (ability.activate(sim, false) && ability.isUsesStack()) {
-            game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability, ability.getControllerId()));
+            game.fireEvent(new GameEvent(GameEvent.EventType.TRIGGERED_ABILITY, ability.getId(), ability,
+                    ability.getControllerId()));
         }
         sim.applyEffects();
         SimulationNode2 newNode = new SimulationNode2(parent, sim, depth, playerId);
@@ -354,10 +365,13 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
     @Override
     public boolean priority(Game game) {
-        // simulated player do nothing - it must pass until stack resolve to see final game score after action apply
+        // simulated player do nothing - it must pass until stack resolve to see final
+        // game score after action apply
 
-        // it's a workaround for Karn Liberated restart ability (see CommandersGameRestartTest)
-        // reason: restarted game is broken (miss clear code of some game/player data?) and ai can't simulate it
+        // it's a workaround for Karn Liberated restart ability (see
+        // CommandersGameRestartTest)
+        // reason: restarted game is broken (miss clear code of some game/player data?)
+        // and ai can't simulate it
         // so game is freezes on non empty stack (last part of karn's restart ability)
         if (game.getStack().isEmpty()) {
             game.pause();
@@ -368,13 +382,15 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
 
     @Override
     public boolean flipCoinResult(Game game) {
-        // same random results set up support in AI tests, see TestComputerPlayer for docs
+        // same random results set up support in AI tests, see TestComputerPlayer for
+        // docs
         return originalPlayer.flipCoinResult(game);
     }
 
     @Override
     public int rollDieResult(int sides, Game game) {
-        // same random results set up support in AI tests, see TestComputerPlayer for docs
+        // same random results set up support in AI tests, see TestComputerPlayer for
+        // docs
         return originalPlayer.rollDieResult(sides, game);
     }
 }

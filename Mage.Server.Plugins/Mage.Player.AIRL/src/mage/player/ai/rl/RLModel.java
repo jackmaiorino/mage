@@ -22,7 +22,7 @@ public class RLModel {
 
     public RLModel(UUID playerId) {
         this.playerId = playerId;
-        this.network = new NeuralNetwork(STATE_SIZE, ACTION_SIZE);
+        this.network = new NeuralNetwork(STATE_SIZE + ACTION_SIZE, 1);
         this.explorationRate = 0.1;
     }
 

@@ -16,6 +16,8 @@ import java.util.LinkedList;
 import mage.target.Target;
 import mage.game.events.GameEvent;
 import mage.players.Player;
+import mage.filter.StaticFilters;
+import mage.game.permanent.Permanent;
 
 public class ComputerPlayerRL extends ComputerPlayer6 {
     private static final Logger logger = Logger.getLogger(ComputerPlayerRL.class);
@@ -25,6 +27,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
         super(name, range, skill);
+        this.model = new RLModel(playerId);
         logger.info("ComputerPlayerRL initialized for " + name);
     }
 
@@ -37,16 +40,30 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         return result;
     }
 
+    @Override
+    public void selectAttackers(Game game, UUID attackingPlayerId) {
+        logger.info("selectAttackers called for " + getName());
+        
+        currentState = new RLState(game);
+        List<Permanent> possibleAttackers = game.getBattlefield().getAllActivePermanents(
+            StaticFilters.FILTER_PERMANENT_CREATURE,
+            playerId,
+            game
+        );
+        
+        for (Permanent creature : possibleAttackers) {
+            if (creature.canAttack(null, game)) {
+                RLAction action = new RLAction(RLAction.ActionType.ATTACK, creature.getId());
+                float score = model.predictQValue(currentState, action);
+                if (score > model.getActionThreshold()) {
+                    // Declare the creature as an attacker
+                    this.declareAttacker(creature.getId(), game.getCombat().getDefenders().iterator().next(), game, false);
+                }
+            }
+        }
+    }
+
     //    @Override
-//    public void selectAttackers(Game game, UUID attackingPlayerId) {
-//        currentState = new RLState(game);
-//        RLAction action = model.getAction(currentState);
-//        if (action != null && action.getType() == RLAction.ActionType.ATTACK) {
-//            declareAttacker(action.getTargetId(), game.getCombat().getDefenders().iterator().next(), game, false);
-//        }
-//    }
-//
-//    @Override
 //    public boolean chooseMulligan(Game game) {
 //        currentState = new RLState(game);
 //        RLAction action = model.getAction(currentState);
@@ -154,7 +171,6 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         if (bestAction != null) {
             actions.clear();
             actions.add(bestAction.getAbility());
-            logger.info(String.format("===> SELECTED ACTION for %s: %s", getName(), bestAction));
         } else {
             logger.info("No valid actions found.");
         }
