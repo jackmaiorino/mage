@@ -16,6 +16,7 @@ public class RLAction {
     private final ActionType type;
     private final Ability ability;
     private final UUID targetId;
+    private float cost;
 
     public RLAction(ActionType type) {
         this(type, null, null);
@@ -29,10 +30,11 @@ public class RLAction {
         this(type, null, targetId);
     }
 
-    private RLAction(ActionType type, Ability ability, UUID targetId) {
+    private RLAction(ActionType type, Ability ability, UUID targetId, float cost) {
         this.type = type;
         this.ability = ability;
         this.targetId = targetId;
+        this.cost = cost;
     }
 
     public Ability getAbility() {
@@ -55,9 +57,44 @@ public class RLAction {
     }
 
     public float[] toFeatureVector() {
-        // Convert action to feature vector
-        float[] features = new float[RLModel.ACTION_SIZE];
-        // TODO: Implement action feature extraction
-        return features;
+        float[] featureVector = new float[RLModel.ACTION_SIZE];
+
+        // Encode action type
+        featureVector[0] = type.ordinal();
+
+        // Type-specific features
+        switch (type) {
+            case ACTIVATE_ABILITY:
+                if (ability != null) {
+                    featureVector[1] = ability.getManaCosts().manaValue(); // Example: mana cost
+                    featureVector[2] = ability.getEffects().size(); // Example: number of effects
+                }
+                break;
+            case ATTACK:
+                if (targetId != null) {
+                    // Example: encode target's power and toughness
+                    Permanent target = game.getPermanent(targetId);
+                    if (target != null) {
+                        featureVector[1] = target.getPower().getValue();
+                        featureVector[2] = target.getToughness().getValue();
+                    }
+                }
+                break;
+            case BLOCK:
+                // Add block-specific features
+                break;
+            case MULLIGAN:
+                // Add mulligan-specific features
+                break;
+            default:
+                break;
+        }
+
+        // Ensure the vector is fully populated
+        for (int i = 3; i < featureVector.length; i++) {
+            featureVector[i] = 0.0f; // Zero padding
+        }
+
+        return featureVector;
     }
 } 

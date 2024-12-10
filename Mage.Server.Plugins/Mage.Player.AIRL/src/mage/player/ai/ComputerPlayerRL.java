@@ -4,6 +4,7 @@ import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
+import mage.player.ai.rl.Experience;
 import mage.player.ai.rl.RLState;
 import mage.player.ai.rl.RLModel;
 import mage.player.ai.rl.RLAction;
@@ -12,6 +13,7 @@ import org.apache.log4j.Logger;
 import java.util.UUID;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 import mage.target.Target;
 import mage.game.events.GameEvent;
@@ -24,10 +26,12 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     public RLModel model;
     protected LinkedList<Ability> actions = new LinkedList<>();
     protected RLState currentState;
+    private List<Experience> experienceBuffer;
 
-    public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
+    public ComputerPlayerRL(String name, RangeOfInfluence range, int skill, RLModel model) {
         super(name, range, skill);
-        this.model = new RLModel(playerId);
+        this.model = model;
+        this.experienceBuffer = new ArrayList<>();
         logger.info("ComputerPlayerRL initialized for " + name);
     }
 
@@ -44,23 +48,30 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         logger.info("selectAttackers called for " + getName());
         
-        currentState = new RLState(game);
+        currentState = new RLState(game);   
         List<Permanent> possibleAttackers = game.getBattlefield().getAllActivePermanents(
             StaticFilters.FILTER_PERMANENT_CREATURE,
             playerId,
             game
         );
         
+        List<RLAction> possibleActions = new ArrayList<>();
         for (Permanent creature : possibleAttackers) {
             if (creature.canAttack(null, game)) {
                 RLAction action = new RLAction(RLAction.ActionType.ATTACK, creature.getId());
+                possibleActions.add(action);
                 float score = model.predictQValue(currentState, action);
                 if (score > model.getActionThreshold()) {
                     // Declare the creature as an attacker
                     this.declareAttacker(creature.getId(), game.getCombat().getDefenders().iterator().next(), game, false);
+                    
+                    // Store the experience
+                    RLState nextState = new RLState(game, possibleActions); // Pass possible actions to RLState
+                    addExperience(currentState, action, nextState);
                 }
             }
         }
+        currentState.setPossibleActions(possibleActions);
     }
 
     //    @Override
@@ -122,6 +133,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             pass(game);
         } else {
             boolean usedStack = false;
+            currentState = new RLState(game); // Calculate current state before taking actions
             while (actions.peek() != null) {
                 Ability ability = actions.poll();
                 logger.info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
@@ -143,36 +155,53 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             if (usedStack) {
                 pass(game);
             }
+
+            // Calculate nextState after actions are executed
+            RLState nextState = new RLState(game, currentState.getPossibleActions());
+            // Store the experience with the updated nextState
+            for (RLAction action : currentState.getPossibleActions()) {
+                addExperience(currentState, action, nextState);
+            }
         }
     }
 
     protected void calculateActions(Game game) {
         logger.info("calculateActions called for " + getName());
-        // Get all playable actions
         boolean isSimulatedPlayer = true;
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
-        RLAction bestAction = null;
-        float bestScore = Float.NEGATIVE_INFINITY;
+        List<RLAction> possibleActions = new ArrayList<>();
 
         // Evaluate each action using the model
         for (ActivatedAbility ability : playables) {
-            RLState state = new RLState(game);
             RLAction action = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY, ability);
-            float score = model.predictQValue(state, action);
+            possibleActions.add(action);
+            float score = model.predictQValue(currentState, action);
 
-            // Select the action with the highest score
-            if (score > bestScore) {
-                bestScore = score;
-                bestAction = action;
+            // Add the action if it meets the threshold
+            if (score > model.getActionThreshold()) {
+                actions.add(action.getAbility());
+                // Store the experience
+                RLState nextState = new RLState(game, possibleActions);
+                addExperience(currentState, action, nextState);
             }
         }
 
-        // Add the best action to the actions list
-        if (bestAction != null) {
-            actions.clear();
-            actions.add(bestAction.getAbility());
-        } else {
+        currentState.setPossibleActions(possibleActions);
+
+        if (actions.isEmpty()) {
             logger.info("No valid actions found.");
         }
+    }
+
+    public void addExperience(RLState state, RLAction action, RLState nextState) {
+        experienceBuffer.add(new Experience(state, action, 0, nextState)); // Reward is set to 0 initially
+    }
+
+    public List<Experience> getExperienceBuffer() {
+        return experienceBuffer;
+    }
+
+    public void clearExperienceBuffer() {
+        experienceBuffer.clear();
     }
 }

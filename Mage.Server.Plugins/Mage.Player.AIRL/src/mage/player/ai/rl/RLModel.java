@@ -10,18 +10,19 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.UUID;
 import mage.player.ai.ComputerPlayerRL;
+import java.io.Serializable;
+import java.io.*;
 
-public class RLModel {
-    private final UUID playerId;
+public class RLModel implements Serializable {
     private NeuralNetwork network;
     private double explorationRate;
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
     public static final int STATE_SIZE = 45;  // 5 player state + 40 battlefield state
     public static final int ACTION_SIZE = 10; // Adjust based on number of possible actions
+    private static final long serialVersionUID = 1L;
 
-    public RLModel(UUID playerId) {
-        this.playerId = playerId;
+    public RLModel() {
         this.network = new NeuralNetwork(STATE_SIZE + ACTION_SIZE, 1);
         this.explorationRate = 0.1;
     }
@@ -62,5 +63,35 @@ public class RLModel {
     public float predictQValue(RLState state, RLAction action) {
         // Use neural network to predict Q-value for this state-action pair
         return network.predict(state.toFeatureVector(), action.toFeatureVector());
+    }
+
+    public void saveModel(String filePath) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
+            oos.writeObject(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static RLModel loadModel(String filePath) {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
+            return (RLModel) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void update(RLState state, RLAction action, double reward, RLState nextState) {
+        float currentQValue = predictQValue(state, action);
+        float maxNextQValue = 0;
+        for (RLAction nextAction : nextState.getPossibleActions()) {
+            float qValue = predictQValue(nextState, nextAction);
+            if (qValue > maxNextQValue) {
+                maxNextQValue = qValue;
+            }
+        }
+        float targetQValue = (float) (reward + DISCOUNT_FACTOR * maxNextQValue);
+        network.updateWeights(state.toFeatureVector(), action.toFeatureVector(), targetQValue, currentQValue);
     }
 } 

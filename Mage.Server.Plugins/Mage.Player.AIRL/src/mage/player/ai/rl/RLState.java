@@ -8,16 +8,22 @@ import org.apache.log4j.Logger;
 
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
-    private Game game;
     private List<Float> stateVector;
+    private List<RLAction> possibleActions;
 
-    public RLState(Game game) {
-        this.game = game;
+    public RLState(Game game, List<RLAction> possibleActions) {
         this.stateVector = new ArrayList<>();
-        buildStateVector();
+        this.possibleActions = new ArrayList<>(possibleActions);
+        buildStateVector(game);
     }
 
-    private void buildStateVector() {
+    public RLState(Game game) {
+        this.stateVector = new ArrayList<>();
+        this.possibleActions = new ArrayList<>();
+        buildStateVector(game);
+    }
+
+    private void buildStateVector(Game game) {
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player == null) {
             logger.error("No active player found in game " + game.getId());
@@ -30,21 +36,17 @@ public class RLState {
         stateVector.add((float) player.getLibrary().size());
         stateVector.add((float) player.getGraveyard().size());
         stateVector.add((float) player.getLandsPlayed());
-        
+
         // Battlefield state (pad to 40 values)
         game.getBattlefield().getAllPermanents().forEach(permanent -> {
             stateVector.add((float) permanent.getPower().getValue());
             stateVector.add((float) permanent.getToughness().getValue());
         });
-        
+
         // Pad remaining battlefield slots with zeros
         while (stateVector.size() < 45) {  // 5 player state + 40 battlefield state
             stateVector.add(0.0f);
         }
-    }
-
-    public Game getGame() {
-        return game;
     }
 
     public List<Float> getStateVector() {
@@ -57,5 +59,13 @@ public class RLState {
             features[i] = stateVector.get(i);
         }
         return features;
+    }
+
+    public List<RLAction> getPossibleActions() {
+        return possibleActions;
+    }
+
+    public void setPossibleActions(List<RLAction> possibleActions) {
+        this.possibleActions = new ArrayList<>(possibleActions);
     }
 } 

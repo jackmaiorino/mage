@@ -22,10 +22,11 @@ public class NeuralNetwork {
     
     public NeuralNetwork(int inputSize, int outputSize) {
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
+            .updater(new Adam())
             .list()
             .layer(0, new DenseLayer.Builder().nIn(inputSize).nOut(64).activation(Activation.RELU).build())
             .layer(1, new DenseLayer.Builder().nIn(64).nOut(32).activation(Activation.RELU).build())
-            .layer(2, new OutputLayer.Builder().nIn(32).nOut(outputSize).activation(Activation.IDENTITY).build())
+            .layer(2, new OutputLayer.Builder().nIn(32).nOut(outputSize).activation(Activation.IDENTITY).lossFunction(LossFunctions.LossFunction.MSE).build())
             .build();
         
         network = new MultiLayerNetwork(conf);
@@ -71,5 +72,17 @@ public class NeuralNetwork {
 
     public void loadModel(String filepath) throws IOException {
         network = ModelSerializer.restoreMultiLayerNetwork(filepath);
+    }
+
+    public void updateWeights(float[] state, float[] action, float targetQValue, float currentQValue) {
+        float[] combined = new float[state.length + action.length];
+        System.arraycopy(state, 0, combined, 0, state.length);
+        System.arraycopy(action, 0, combined, state.length, action.length);
+
+        INDArray input = Nd4j.create(combined);
+        INDArray target = Nd4j.create(new float[]{targetQValue});
+
+        // Perform a single training step
+        network.fit(input, target);
     }
 } 

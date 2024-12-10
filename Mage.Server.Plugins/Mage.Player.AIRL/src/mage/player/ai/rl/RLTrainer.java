@@ -34,6 +34,11 @@ public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
     private static final int NUM_EPISODES = 1;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
+    private static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/model.ser";
+
+    public RLTrainer() {
+        // No need to create a model here
+    }
 
     public void train() {
         try {
@@ -43,19 +48,25 @@ public class RLTrainer {
 
             Random random = new Random();
 
+            // Load model for each player
+            RLModel model = RLModel.loadModel(MODEL_FILE_PATH);
+            if (model == null) {
+                model = new RLModel();
+            }
+
             for (int episode = 0; episode < NUM_EPISODES; episode++) {
                 Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 60, 7);
 
                 // Select a random deck for RL player
                 Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                 Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
-                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 5);
+                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 5, model);
                 game.addPlayer(rlPlayer, rlPlayerDeck);
 
                 // Select a random deck for opponent
                 Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                 Deck opponentDeck = loadDeck(opponentDeckPath.toString());
-                ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 5);
+                ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 5, model);
                 game.addPlayer(opponent, opponentDeck);
 
                 // Load cards into the game
@@ -70,7 +81,13 @@ public class RLTrainer {
 
                 // Log final game state
                 logGameResult(game, rlPlayer);
+
+                // Update model based on game outcome
+                updateModelBasedOnOutcome(game, rlPlayer, opponent, model);
             }
+
+            // Save the model after training
+            model.saveModel(MODEL_FILE_PATH);
         } catch (IOException e) {
             logger.error("Error reading decks directory", e);
         }
@@ -86,21 +103,6 @@ public class RLTrainer {
         logger.info("[" + opponent.getName() + "]: " + opponent.getLife());
     }
 
-    private Deck generateForestGrizzlyDeck(UUID playerId) {
-        Deck deck = new Deck();
-        // Add 20 Forests
-        Stream.generate(() -> new Forest(playerId, new CardSetInfo("Forest", "TEST", "1", Rarity.LAND)))
-                .limit(20)
-                .forEach(deck.getCards()::add);
-
-        // Add 40 Grizzly Bears
-        Stream.generate(() -> new GrizzlyBears(playerId, new CardSetInfo("Grizzly Bears", "TEST", "2", Rarity.COMMON)))
-                .limit(40)
-                .forEach(deck.getCards()::add);
-
-        return deck;
-    }
-
     private Deck loadDeck(String filePath) {
         try {
             DeckCardLists deckCardLists = DeckImporter.importDeckFromFile(filePath, false);
@@ -111,17 +113,21 @@ public class RLTrainer {
         }
     }
 
-    private Deck generateMountainGoblinDeck(UUID playerId) {
-        // Fallback to manually creating a deck if loading fails
-        Deck deck = new Deck();
-        Stream.generate(() -> new Mountain(playerId, new CardSetInfo("Mountain", "TEST", "1", Rarity.LAND)))
-                .limit(20)
-                .forEach(deck.getCards()::add);
+    private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
+        boolean rlPlayerWon = game.getWinner().equals(rlPlayer.getId());
+        double reward = rlPlayerWon ? 1.0 : -1.0;
 
-        Stream.generate(() -> new SwabGoblin(playerId, new CardSetInfo("Swab Goblin", "TEST", "2", Rarity.COMMON)))
-                .limit(40)
-                .forEach(deck.getCards()::add);
+        // Update model for RL player
+        for (Experience exp : rlPlayer.getExperienceBuffer()) {
+            model.update(exp.state, exp.action, reward, exp.nextState);
+        }
+        rlPlayer.clearExperienceBuffer();
 
-        return deck;
+        // Update model for opponent
+        reward = rlPlayerWon ? -1.0 : 1.0;
+        for (Experience exp : opponent.getExperienceBuffer()) {
+            model.update(exp.state, exp.action, reward, exp.nextState);
+        }
+        opponent.clearExperienceBuffer();
     }
 } 
