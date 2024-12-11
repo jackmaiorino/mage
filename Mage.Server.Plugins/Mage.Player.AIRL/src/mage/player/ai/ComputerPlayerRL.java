@@ -64,8 +64,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 if (score > model.getActionThreshold()) {
                     // Declare the creature as an attacker
                     this.declareAttacker(creature.getId(), game.getCombat().getDefenders().iterator().next(), game, false);
-                    
                     // Store the experience
+                    creature.hashCode();
                     RLState nextState = new RLState(game, possibleActions); // Pass possible actions to RLState
                     addExperience(currentState, action, nextState);
                 }
@@ -168,6 +168,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     protected void calculateActions(Game game) {
         logger.info("calculateActions called for " + getName());
         boolean isSimulatedPlayer = true;
+        // Returns a list of all available spells and abilities the player can currently cast/activate with his available resources.
+        // Without target validation.
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
         List<RLAction> possibleActions = new ArrayList<>();
 
