@@ -5,6 +5,11 @@ import mage.players.Player;
 import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.SpellAbility;
+import mage.abilities.ClueAbility;
+import mage.abilities.SomeOtherAbilityType; // Replace with actual ability types
+import mage.abilities.effects.Effect;
 
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
@@ -44,7 +49,7 @@ public class RLState {
         });
 
         // Pad remaining battlefield slots with zeros
-        while (stateVector.size() < 45) {  // 5 player state + 40 battlefield state
+        while (stateVector.size() < 45) { // 5 player state + 40 battlefield state
             stateVector.add(0.0f);
         }
     }
@@ -68,4 +73,35 @@ public class RLState {
     public void setPossibleActions(List<RLAction> possibleActions) {
         this.possibleActions = new ArrayList<>(possibleActions);
     }
-} 
+
+    public float[] convertPermanentToFeatureVector(Permanent permanent) {
+        float[] featureVector = new float[40];
+
+        // Example features
+        featureVector[0] = (float) permanent.getPower().getValue();
+        featureVector[1] = (float) permanent.getToughness().getValue();
+        featureVector[2] = permanent.isTapped() ? 1.0f : 0.0f;
+        featureVector[3] = permanent.isAttacking() ? 1.0f : 0.0f;
+        featureVector[4] = permanent.isBlocking() ? 1.0f : 0.0f;
+        featureVector[5] = permanent.isCreature() ? 1.0f : 0.0f;
+        featureVector[6] = permanent.isArtifact() ? 1.0f : 0.0f;
+        featureVector[7] = permanent.isEnchantment() ? 1.0f : 0.0f;
+        featureVector[8] = permanent.isLand() ? 1.0f : 0.0f;
+        featureVector[9] = permanent.isPlaneswalker() ? 1.0f : 0.0f;
+
+        // Add more features as needed, such as abilities, counters, etc.
+
+        // Zero padding for remaining slots
+        for (int i = 10; i < featureVector.length; i++) {
+            featureVector[i] = 0.0f;
+        }
+
+        return featureVector;
+    }
+
+    private float[] getTextEmbedding(String text) {
+        // Implement text embedding logic here, possibly using a pre-trained NLP model
+        // TODO: Implement text embedding logic
+        return new float[10]; // Example: return a fixed-size embedding
+    }
+}
