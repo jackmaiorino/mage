@@ -59,6 +59,11 @@
             <artifactId>mage-player-ai-ma</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.microsoft.onnxruntime</groupId>
+            <artifactId>onnxruntime</artifactId>
+            <version>1.15.1</version>
+        </dependency>
     </dependencies>
 
     <build>

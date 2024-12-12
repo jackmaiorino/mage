@@ -1,25 +1,32 @@
 package mage.player.ai.rl;
 
 import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 
 import java.util.UUID;
 
-import org.deeplearning4j.models.embeddings.loader.WordVectorSerializer;
-import org.deeplearning4j.models.word2vec.Word2Vec;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
+import org.pytorch.IValue;
+import org.pytorch.Module;
+import org.pytorch.Tensor;
+import java.io.File;
+import ai.onnxruntime.*;
 
 public class RLAction {
-    private static Word2Vec word2Vec;
-    
+    private static Module bertModel;
+    private static BertTokenizer tokenizer;
+    private static OrtEnvironment env;
+    private static OrtSession session;
+
     static {
         try {
-            // Load pre-trained Word2Vec model
-            word2Vec = WordVectorSerializer.readWord2VecModel("path/to/pretrained/word2vec.bin");
+            bertModel = Module.load("./results/pytorch_model.bin");
+            tokenizer = BertTokenizer.from_pretrained("bert-base-uncased");
+            env = OrtEnvironment.getEnvironment();
+            session = env.createSession("path/to/bert_model.onnx");
         } catch (Exception e) {
-            throw new RuntimeException("Failed to load Word2Vec model", e);
+            throw new RuntimeException("Failed to load BERT model", e);
         }
     }
 
@@ -181,9 +188,26 @@ public class RLAction {
     }
 
     private float[] getTextEmbedding(String text) {
-        // Implement text embedding logic here, possibly using a pre-trained NLP model
-        // TODO: Implement text embedding logic
-        return new float[10]; // Example: return a fixed-size embedding
+        try {
+            // Tokenize the text
+            Map<String, Long> encodedInput = tokenizer.encode(text, true, true, 512);
+            long[] inputIds = encodedInput.get("input_ids");
+            long[] attentionMask = encodedInput.get("attention_mask");
+            
+            // Create input tensor
+            OnnxTensor inputTensor = OnnxTensor.createTensor(env, inputIds);
+
+            // Run the model
+            OrtSession.Result result = session.run(Collections.singletonMap("input_ids", inputTensor));
+
+            // Extract the output
+            float[] embedding = ((float[][]) result.get(0).getValue())[0];
+
+            return embedding;
+        } catch (OrtException e) {
+            e.printStackTrace();
+            return new float[768]; // Return zero vector on failure
+        }
     }
 
     private float[] getClassNameEmbedding(String className) {
