@@ -4,7 +4,6 @@ import mage.cards.Card;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +12,7 @@ import org.apache.log4j.Logger;
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
     private float[] stateVector;
-    private List<RLAction> possibleActions;
+    private RLAction currentAction;
     public static int STATE_VECTOR_SIZE = 0;
     public static final int MAX_PERMANENTS = 15;
     public static final int MAX_CARDS_IN_HAND = 10;
@@ -21,9 +20,9 @@ public class RLState {
     public static int EMBEDDING_SIZE = 0;
     public static final int CARD_STATS_SIZE = 8;
 
-    public RLState(Game game) {
+    public RLState(Game game, RLAction action) {
         this.stateVector = new float[STATE_VECTOR_SIZE];
-        this.possibleActions = new ArrayList<>();
+        this.currentAction = new RLAction(action);
         EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + CARD_STATS_SIZE;
         STATE_VECTOR_SIZE = 5 // Player 1 Numerical Stats
         + (MAX_CARDS_IN_HAND * EMBEDDING_SIZE) // Player 1 Cards in Hand
@@ -147,12 +146,12 @@ public class RLState {
         return stateVector;
     }
 
-    public List<RLAction> getPossibleActions() {
-        return possibleActions;
+    public RLAction getCurrentAction() {
+        return currentAction;
     }
 
-    public void setPossibleActions(List<RLAction> possibleActions) {
-        this.possibleActions = new ArrayList<>(possibleActions);
+    public void setCurrentAction(RLAction action) {
+        this.currentAction = action;
     }
 
     public float[] convertCardToFeatureVector(Card card) {

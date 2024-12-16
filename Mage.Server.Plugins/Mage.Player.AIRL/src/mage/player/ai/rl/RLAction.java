@@ -27,8 +27,8 @@ public class RLAction {
     private final List<ActivatedAbility> abilities;
     private final List<Permanent> creatures;
     private final Game game;
-    public float[] featureVector;
-    public static final int MAX_ABILITIES = 10;
+    private float[] featureVector;
+    public static final int MAX_ACTIONS = 10;
     public static int EMBEDDING_SIZE = 0;
     public static int FEATURE_VECTOR_SIZE = 0;
 
@@ -38,12 +38,17 @@ public class RLAction {
         this.creatures = creatures;
         this.game = game;
         EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + 4; // 4 for basic features
-        FEATURE_VECTOR_SIZE = MAX_ABILITIES * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
+        FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
+        
         this.featureVector = toFeatureVector(game);
     }
 
     public List<ActivatedAbility> getAbilities() {
         return abilities;
+    }
+
+    public float[] getFeatureVector() {
+        return featureVector;
     }
 
     public List<Permanent> getCreatures() {
