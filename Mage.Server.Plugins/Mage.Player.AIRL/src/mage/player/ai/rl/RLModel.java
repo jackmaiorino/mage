@@ -27,9 +27,8 @@ public class RLModel implements Serializable {
         return 0.2f; // Threshold can be tuned based on training
     }
 
-    public float[] predictDistribution(RLState state) {
-        // Convert INDArray to float[]
-        return network.predict(state.getStateVector(), state.getCurrentAction().getFeatureVector()).data().asFloat();
+    public float[] predictDistribution(RLState state, RLAction action) {
+        return network.predict(state.getStateVector(), action.getFeatureVector()).data().asFloat();
     }
 
     public void saveModel(String filePath) {
@@ -49,16 +48,16 @@ public class RLModel implements Serializable {
         }
     }
 
-    public void update(RLState state, double reward, RLState nextState) {
-        float[] currentQValues = predictDistribution(state);
+    public void update(RLState state, double reward, RLState nextState, RLAction action) {
+        float[] currentQValues = predictDistribution(state, action);
         float maxNextQValue = 0;
-        float[] nextQValues = predictDistribution(nextState);
+        float[] nextQValues = predictDistribution(nextState, action);
         for (float qValue : nextQValues) {
             if (qValue > maxNextQValue) {
                 maxNextQValue = qValue;
             }
         }
         float targetQValue = (float) (reward + DISCOUNT_FACTOR * maxNextQValue);
-        network.updateWeights(state.getStateVector(), state.getCurrentAction().getFeatureVector(), targetQValue, currentQValues[state.getCurrentAction().getType().ordinal()]);
+        network.updateWeights(state.getStateVector(), action.getFeatureVector(), targetQValue, currentQValues[action.getType().ordinal()]);
     }
 } 

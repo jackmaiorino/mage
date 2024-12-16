@@ -10,18 +10,11 @@ import mage.cards.decks.Deck;
 import mage.game.GameOptions;
 import mage.players.Player;
 import org.apache.log4j.Logger;
-import mage.cards.CardSetInfo;
-import mage.cards.basiclands.Forest;
-import mage.cards.basiclands.Mountain;
-import mage.cards.g.GrizzlyBears;
-import mage.cards.s.SwabGoblin;
-import mage.constants.Rarity;
 import mage.cards.decks.importer.DeckImporter;
 import mage.cards.decks.DeckCardLists;
 import mage.game.GameException;
 
 import java.util.UUID;
-import java.util.stream.Stream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -114,19 +107,19 @@ public class RLTrainer {
     }
 
     private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
-        boolean rlPlayerWon = game.getWinner().equals(rlPlayer.getId());
+        boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
         double reward = rlPlayerWon ? 1.0 : -1.0;
 
         // Update model for RL player
         for (Experience exp : rlPlayer.getExperienceBuffer()) {
-            model.update(exp.state, exp.action, reward, exp.nextState);
+            model.update(exp.state, reward, exp.nextState, exp.action);
         }
         rlPlayer.clearExperienceBuffer();
 
         // Update model for opponent
         reward = rlPlayerWon ? -1.0 : 1.0;
         for (Experience exp : opponent.getExperienceBuffer()) {
-            model.update(exp.state, exp.action, reward, exp.nextState);
+            model.update(exp.state, reward, exp.nextState, exp.action);
         }
         opponent.clearExperienceBuffer();
     }

@@ -4,13 +4,12 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.openai.client.OpenAIClient;
 import com.openai.client.okhttp.OpenAIOkHttpClient;
-import com.openai.embeddings.EmbeddingRequest;
-import com.openai.embeddings.EmbeddingResponse;
+import com.openai.models.CreateEmbeddingResponse;
+import com.openai.models.EmbeddingCreateParams;
 import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-import org.apache.commons.math3.linear.MatrixUtils;
 import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.linear.RealMatrixImpl;
 import org.apache.commons.math3.linear.SingularValueDecomposition;
+import java.util.List;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -58,18 +57,22 @@ public class EmbeddingManager {
 
     private static float[] queryOpenAIForEmbedding(String text) {
         try {
-            EmbeddingResponse response = openAIClient.createEmbedding(
-                EmbeddingRequest.builder()
-                    .model("text-embedding-ada-002")
-                    .input(text)
-                    .build()
-            );
+            EmbeddingCreateParams params = new EmbeddingCreateParams.Builder()
+                .model("text-embedding-ada-002")
+                .input(text)
+                .build();
 
-            if (response != null && !response.getData().isEmpty()) {
-                return response.getData().get(0).getEmbedding();
-            } else {
-                throw new RuntimeException("Failed to get embedding from OpenAI API");
+            CreateEmbeddingResponse response = openAIClient.embeddings().create(params);
+            
+            // TODO: We should probably change our implementation to use List<Double> instead of float[]
+            // This is a temporary fix to get the embedding
+            List<Double> embedding = response.data().get(0).embedding();
+            float[] result = new float[embedding.size()];
+            for (int i = 0; i < embedding.size(); i++) {
+                result[i] = embedding.get(i).floatValue();
             }
+            return result;
+
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException("Error querying OpenAI API for embedding", e);

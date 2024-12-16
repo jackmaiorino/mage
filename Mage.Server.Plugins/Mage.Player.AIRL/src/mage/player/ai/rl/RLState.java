@@ -1,37 +1,33 @@
 package mage.player.ai.rl;
 
-import mage.cards.Card;
-import mage.game.Game;
-import mage.game.permanent.Permanent;
-import mage.players.Player;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import mage.cards.Card;
+import mage.game.Game;
+import mage.game.permanent.Permanent;
+import mage.players.Player;
+
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
     private float[] stateVector;
-    private RLAction currentAction;
-    public static int STATE_VECTOR_SIZE = 0;
     public static final int MAX_PERMANENTS = 15;
     public static final int MAX_CARDS_IN_HAND = 10;
     public static final int MAX_CARDS_IN_GRAVEYARD = 20;
-    public static int EMBEDDING_SIZE = 0;
     public static final int CARD_STATS_SIZE = 8;
+    public static int EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + CARD_STATS_SIZE;
+    public static int STATE_VECTOR_SIZE = 5 // Player 1 Numerical Stats
+            + (MAX_CARDS_IN_HAND * EMBEDDING_SIZE) // Player 1 Cards in Hand
+            + (MAX_PERMANENTS * EMBEDDING_SIZE) // Player 1 Permanents
+            + (MAX_CARDS_IN_GRAVEYARD * EMBEDDING_SIZE) // Player 1 Graveyard
+            + 5 // Opponent Numerical Stats
+            + (MAX_CARDS_IN_HAND * EMBEDDING_SIZE) // Opponent Cards in Hand
+            + (MAX_PERMANENTS * EMBEDDING_SIZE) // Opponent Permanents
+            + (MAX_CARDS_IN_GRAVEYARD * EMBEDDING_SIZE); // Opponent Graveyard
 
-    public RLState(Game game, RLAction action) {
-        this.stateVector = new float[STATE_VECTOR_SIZE];
-        this.currentAction = new RLAction(action);
-        EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + CARD_STATS_SIZE;
-        STATE_VECTOR_SIZE = 5 // Player 1 Numerical Stats
-        + (MAX_CARDS_IN_HAND * EMBEDDING_SIZE) // Player 1 Cards in Hand
-        + (MAX_PERMANENTS * EMBEDDING_SIZE) // Player 1 Permanents
-        + (MAX_CARDS_IN_GRAVEYARD * EMBEDDING_SIZE) // Player 1 Graveyard
-        + 5 // Opponent Numerical Stats
-        + (MAX_CARDS_IN_HAND * EMBEDDING_SIZE) // Opponent Cards in Hand
-        + (MAX_PERMANENTS * EMBEDDING_SIZE) // Opponent Permanents
-        + (MAX_CARDS_IN_GRAVEYARD * EMBEDDING_SIZE); // Opponent Graveyard
+    public RLState(Game game) {
         stateVector = new float[STATE_VECTOR_SIZE];
         buildStateVector(game);
     }
@@ -144,14 +140,6 @@ public class RLState {
 
     public float[] getStateVector() {
         return stateVector;
-    }
-
-    public RLAction getCurrentAction() {
-        return currentAction;
-    }
-
-    public void setCurrentAction(RLAction action) {
-        this.currentAction = action;
     }
 
     public float[] convertCardToFeatureVector(Card card) {

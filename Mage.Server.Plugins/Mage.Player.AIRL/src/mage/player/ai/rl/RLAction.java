@@ -29,17 +29,14 @@ public class RLAction {
     private final Game game;
     private float[] featureVector;
     public static final int MAX_ACTIONS = 10;
-    public static int EMBEDDING_SIZE = 0;
-    public static int FEATURE_VECTOR_SIZE = 0;
+    public static int EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + 4; // 4 for basic features
+    public static int FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
 
     public RLAction(ActionType type, List<ActivatedAbility> abilities, List<Permanent> creatures, Game game) {
         this.type = type;
         this.abilities = abilities;
         this.creatures = creatures;
         this.game = game;
-        EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + 4; // 4 for basic features
-        FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
-        
         this.featureVector = toFeatureVector(game);
     }
 
