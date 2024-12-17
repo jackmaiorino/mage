@@ -1,27 +1,28 @@
 package mage.player.ai.rl;
 
-import mage.constants.MultiplayerAttackOption;
-import mage.constants.RangeOfInfluence;
-import mage.game.Game;
-import mage.game.TwoPlayerDuel;
-import mage.game.mulligan.LondonMulligan;
-import mage.player.ai.ComputerPlayerRL;
-import mage.cards.decks.Deck;
-import mage.game.GameOptions;
-import mage.players.Player;
-import org.apache.log4j.Logger;
-import mage.cards.decks.importer.DeckImporter;
-import mage.cards.decks.DeckCardLists;
-import mage.game.GameException;
-
-import java.util.UUID;
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 import java.util.stream.Collectors;
-import java.io.IOException;
+
+import org.apache.log4j.Logger;
+
+import mage.cards.decks.Deck;
+import mage.cards.decks.DeckCardLists;
+import mage.cards.decks.importer.DeckImporter;
+import mage.constants.MultiplayerAttackOption;
+import mage.constants.RangeOfInfluence;
+import mage.game.Game;
+import mage.game.GameException;
+import mage.game.GameOptions;
+import mage.game.TwoPlayerDuel;
+import mage.game.mulligan.LondonMulligan;
+import mage.player.ai.ComputerPlayerRL;
+import mage.players.Player;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
@@ -42,10 +43,8 @@ public class RLTrainer {
             Random random = new Random();
 
             // Load model for each player
-            RLModel model = RLModel.loadModel(MODEL_FILE_PATH);
-            if (model == null) {
-                model = new RLModel();
-            }
+            logger.info("Current working directory: " + System.getProperty("user.dir"));
+            RLModel model = new RLModel();
 
             for (int episode = 0; episode < NUM_EPISODES; episode++) {
                 Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 60, 7);

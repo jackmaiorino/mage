@@ -1,13 +1,11 @@
 package org.mage.test.player;
 
-import mage.constants.PhaseStep;
-import mage.constants.Zone;
-import mage.player.ai.ComputerPlayer7;
-import mage.player.ai.rl.RLTrainer;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.mage.test.serverside.base.CardTestPlayerBase;
+
+import mage.constants.PhaseStep;
+import mage.constants.Zone;
+import mage.player.ai.rl.RLTrainer;
 
 /**
  * Test class for the Reinforcement Learning AI player
@@ -16,10 +14,13 @@ import org.mage.test.serverside.base.CardTestPlayerBase;
  */
 public class TestComputerPlayerRL extends CardTestPlayerBase {
 
-    @Test
+    @Test(timeout=30000)
     public void test_RLPlayer_BasicTraining() {
         System.err.println("Starting RL Player Basic Training Test");
         System.err.flush();
+
+        // Change the current thread's name to "GAME" since timeout overrides it
+        Thread.currentThread().setName("GAME");
 
         RLTrainer trainer = new RLTrainer();
         trainer.train();

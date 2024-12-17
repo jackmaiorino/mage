@@ -1,12 +1,14 @@
 package mage.player.ai.rl;
 
-import mage.MageObject;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Ability;
-import mage.game.Game;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.log4j.Logger;
+
+import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.game.stack.StackObject;
 import mage.players.Player;
@@ -14,6 +16,8 @@ import mage.target.TargetAmount;
 import mage.util.CardUtil;
 
 public class RLAction {
+    private static final Logger logger = Logger.getLogger(RLAction.class);
+
     public enum ActionType {
         PASS_PRIORITY,
         ACTIVATE_ABILITY_OR_SPELL,
@@ -29,15 +33,15 @@ public class RLAction {
     private final Game game;
     private float[] featureVector;
     public static final int MAX_ACTIONS = 10;
-    public static int EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + 4; // 4 for basic features
-    public static int FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
+    public static final int EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + 4; // 4 for basic features
+    public static final int FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
 
     public RLAction(ActionType type, List<ActivatedAbility> abilities, List<Permanent> creatures, Game game) {
         this.type = type;
         this.abilities = abilities;
         this.creatures = creatures;
         this.game = game;
-        this.featureVector = toFeatureVector(game);
+        this.featureVector = toFeatureVector();
     }
 
     public List<ActivatedAbility> getAbilities() {
@@ -60,8 +64,8 @@ public class RLAction {
         return game;
     }
 
-    private float[] toFeatureVector(Game game) {
-        float[] featureVector = new float[FEATURE_VECTOR_SIZE];
+    private float[] toFeatureVector() {
+        featureVector = new float[FEATURE_VECTOR_SIZE];
         int index = 0;
 
         // One-hot encode action type
@@ -75,7 +79,8 @@ public class RLAction {
                 if (abilities != null) {
                     for (ActivatedAbility ability : abilities) {
                         if (index >= FEATURE_VECTOR_SIZE) {
-                            throw new IllegalStateException("Too many abilities");
+                            logger.error("Too many abilities, truncating");
+                            break;
                         }
                         float[] abilityFeatures = convertAbilityOrSpellToFeatureVector(ability);
                         System.arraycopy(abilityFeatures, 0, featureVector, index, abilityFeatures.length);

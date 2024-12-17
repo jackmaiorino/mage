@@ -88,6 +88,11 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <useFile>false</useFile> <!-- Output logs to console -->
+                        <forkCount>1</forkCount> <!-- Single fork for immediate output -->
+                        <redirectTestOutputToFile>false</redirectTestOutputToFile>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

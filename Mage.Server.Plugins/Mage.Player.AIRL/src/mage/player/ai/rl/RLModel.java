@@ -1,17 +1,12 @@
 package mage.player.ai.rl;
 
-import mage.game.Game;
-import mage.abilities.ActivatedAbility;
-import java.util.List;
-import java.util.ArrayList;
-import java.io.Serializable;
-import java.io.ObjectOutputStream;
-import java.io.ObjectInputStream;
-import java.io.FileOutputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.Serializable;
+
+import org.apache.log4j.Logger;
 
 public class RLModel implements Serializable {
+    private static final Logger logger = Logger.getLogger(RLModel.class);
     private NeuralNetwork network;
     private double explorationRate;
     private static final double LEARNING_RATE = 0.001;
@@ -19,8 +14,22 @@ public class RLModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public RLModel() {
-        this.network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, RLAction.MAX_ACTIONS);
-        this.explorationRate = 0.1;
+        // TODO: This is a little silly, creating a network and then loading it. Make it better
+        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, RLAction.MAX_ACTIONS);
+        try {
+            network.loadNetwork("network.ser");
+        } catch (IOException e) {
+            logger.error("Failed to load network, initializing a new one.", e);
+        }
+        explorationRate = 0.1;
+    }
+
+    public void saveModel(String filePath) {
+        try {
+            network.saveNetwork(filePath);
+        } catch (IOException e) {
+            logger.error("Failed to save network.", e);
+        }
     }
 
     public float getActionThreshold() {
@@ -31,33 +40,39 @@ public class RLModel implements Serializable {
         return network.predict(state.getStateVector(), action.getFeatureVector()).data().asFloat();
     }
 
-    public void saveModel(String filePath) {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {
-            oos.writeObject(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static RLModel loadModel(String filePath) {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(filePath))) {
-            return (RLModel) ois.readObject();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
+    // TODO: Research the algorithm used here. I don't really understand it.
     public void update(RLState state, double reward, RLState nextState, RLAction action) {
-        float[] currentQValues = predictDistribution(state, action);
-        float maxNextQValue = 0;
         float[] nextQValues = predictDistribution(nextState, action);
-        for (float qValue : nextQValues) {
-            if (qValue > maxNextQValue) {
-                maxNextQValue = qValue;
-            }
+        float[] targetQValues = new float[RLAction.MAX_ACTIONS];
+
+        switch (action.getType()) {
+            case DECLARE_ATTACKS:
+                // Set target Q-values for all attackers above the threshold
+                for (int i = 0; i < nextQValues.length; i++) {
+                    if (nextQValues[i] > getActionThreshold()) {
+                        targetQValues[i] = (float) (reward + DISCOUNT_FACTOR * nextQValues[i]);
+                    }
+                }
+                break;
+            case ACTIVATE_ABILITY_OR_SPELL:
+                // Find the index of the maximum Q-value for the next state
+                int maxIndex = 0;
+                float maxNextQValue = nextQValues[0];
+                for (int i = 1; i < nextQValues.length; i++) {
+                    if (nextQValues[i] > maxNextQValue) {
+                        maxNextQValue = nextQValues[i];
+                        maxIndex = i;
+                    }
+                }
+                targetQValues[maxIndex] = (float) (reward + DISCOUNT_FACTOR * maxNextQValue);
+                break;
+            default:
+                // Error since we don't know what to do with this action
+                logger.error("Unknown action type: " + action.getType());
+                throw new IllegalArgumentException("Unknown action type: " + action.getType());
         }
-        float targetQValue = (float) (reward + DISCOUNT_FACTOR * maxNextQValue);
-        network.updateWeights(state.getStateVector(), action.getFeatureVector(), targetQValue, currentQValues[action.getType().ordinal()]);
+
+        // Update the network weights
+        network.updateWeights(state.getStateVector(), action.getFeatureVector(), targetQValues);
     }
 } 

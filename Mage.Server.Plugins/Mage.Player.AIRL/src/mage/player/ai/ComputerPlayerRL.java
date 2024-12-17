@@ -1,25 +1,23 @@
 package mage.player.ai;
 
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.constants.RangeOfInfluence;
-import mage.game.Game;
-import mage.player.ai.rl.Experience;
-import mage.player.ai.rl.RLState;
-import mage.player.ai.rl.RLModel;
-import mage.player.ai.rl.RLAction;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
+
 import org.apache.log4j.Logger;
 
-import java.util.UUID;
-import java.util.List;
-import java.util.LinkedList;
-import java.util.ArrayList;
-
-import mage.target.Target;
-import mage.game.events.GameEvent;
-import mage.players.Player;
+import mage.abilities.ActivatedAbility;
+import mage.constants.RangeOfInfluence;
 import mage.filter.StaticFilters;
+import mage.game.Game;
+import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.player.ai.rl.Experience;
+import mage.player.ai.rl.RLAction;
+import mage.player.ai.rl.RLModel;
+import mage.player.ai.rl.RLState;
+import mage.target.Target;
 
 public class ComputerPlayerRL extends ComputerPlayer6 {
     private static final Logger logger = Logger.getLogger(ComputerPlayerRL.class);
@@ -63,7 +61,10 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         }
         currentAction = new RLAction(RLAction.ActionType.DECLARE_ATTACKS, null, possibleAttackers, game);
         float[] qValues = model.predictDistribution(currentState, currentAction);
-        for (int i = 0; i < qValues.length; i++) {
+        // We need to not even consider the case where there are no attacker
+        logger.info("possibleAttackers: " + possibleAttackers);
+        logger.info("qValues: " + Arrays.toString(qValues));
+        for (int i = 0; i < possibleAttackers.size(); i++) {
             if (qValues[i] > model.getActionThreshold()) {
                 // Declare the creature as an attacker
                 this.declareAttacker(possibleAttackers.get(i).getId(), game.getCombat().getDefenders().iterator().next(), game, false);
@@ -131,6 +132,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     // I'm changing the design here to not use an actions queue.
     // Instead, I'm passing the ability to the act method.
     // We don't calculate lists of actions, but instead just one action at a time.
+    // NOTE: I think the way computerplayer6 does this is because it implements the idea
+    // of holding priority
     protected void act(Game game, ActivatedAbility ability) {
         logger.info("act called for " + getName());
         if (ability == null) {
@@ -177,6 +180,9 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 bestIndex = i;
             }
         }
+
+        logger.info("playables: " + playables);
+        logger.info("qValues: " + Arrays.toString(qValues));
 
         // Get the corresponding ability and add it to actions queue
         if (bestIndex < playables.size()) {
