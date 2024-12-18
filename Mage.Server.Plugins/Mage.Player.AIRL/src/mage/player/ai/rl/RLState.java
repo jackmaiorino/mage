@@ -5,16 +5,19 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import mage.Mana;
+import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
 
+
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
     private float[] stateVector;
-    public static final int CARD_STATS_SIZE = ZoneType.values().length + 13; // ZoneType.values().length for one-hot encoding + 13 for other features
+    public static final int CARD_STATS_SIZE = ZoneType.values().length + 22; // ZoneType.values().length for one-hot encoding + 22 for other features
     public static final int NUM_PLAYER_STATS = 5;   
     public static final int NUM_CARDS = 60;
     public static final int EMBEDDING_SIZE = EmbeddingManager.EMBEDDING_SIZE + CARD_STATS_SIZE;
@@ -45,13 +48,13 @@ public class RLState {
             throw new IllegalStateException("Cannot build state vector: no active player");
         }
 
-        // Player Numerical Stats
+        // Player Numerical Stats Normalized (Some values like graveyard and land are arbitrary)
         int index = 0;
-        stateVector[index++] = (float) player.getLife();
-        stateVector[index++] = (float) player.getHand().size();
-        stateVector[index++] = (float) player.getLibrary().size();
-        stateVector[index++] = (float) player.getGraveyard().size();
-        stateVector[index++] = (float) player.getLandsPlayed();
+        stateVector[index++] = (float) player.getLife() / game.getStartingLife();
+        stateVector[index++] = (float) player.getHand().size() / 7;
+        stateVector[index++] = (float) player.getLibrary().size() / 60;
+        stateVector[index++] = (float) player.getGraveyard().size() / 10;
+        stateVector[index++] = (float) player.getLandsPlayed() / 10;
 
         // Player 1 Cards in Hand
         Set<Card> playerCardsInHand = player.getHand().getCards(game);
@@ -90,6 +93,7 @@ public class RLState {
         }
 
         // Player 1 Library
+        // TODO: Will the ai know what cards it is going to draw?
         List<Card> playerCardsInLibrary = player.getLibrary().getCards(game);
         for (Card card : playerCardsInLibrary) {
             if (index >= STATE_VECTOR_SIZE) {
@@ -107,23 +111,24 @@ public class RLState {
             logger.error("No opponent found in game " + game.getId());
             throw new IllegalStateException("Cannot build state vector: no opponent");
         }
-        stateVector[index++] = (float) opponent.getLife();
-        stateVector[index++] = (float) opponent.getHand().size();
-        stateVector[index++] = (float) opponent.getLibrary().size();
-        stateVector[index++] = (float) opponent.getGraveyard().size();
-        stateVector[index++] = (float) opponent.getLandsPlayed();
+        stateVector[index++] = (float) opponent.getLife() / game.getStartingLife();
+        stateVector[index++] = (float) opponent.getHand().size() / 7;
+        stateVector[index++] = (float) opponent.getLibrary().size() / 60;
+        stateVector[index++] = (float) opponent.getGraveyard().size() / 10;
+        stateVector[index++] = (float) opponent.getLandsPlayed() / 10;
 
+        // We can't know what cards are in the opponent's hand, unless we have special reveal effects
         // Opponent Cards in Hand
-        Set<Card> opponentCardsInHand = opponent.getHand().getCards(game);
-        for (Card card : opponentCardsInHand) {
-            if (index >= STATE_VECTOR_SIZE) {
-                logger.error("Opponent cards in hand exceed the maximum allowed size");
-                break;
-            }
-            float[] cardFeatures = convertCardToFeatureVector(card, ZoneType.HAND, game);
-            System.arraycopy(cardFeatures, 0, stateVector, index, cardFeatures.length);
-            index += cardFeatures.length;
-        }
+        // Set<Card> opponentCardsInHand = opponent.getHand().getCards(game);
+        // for (Card card : opponentCardsInHand) {
+        //     if (index >= STATE_VECTOR_SIZE) {
+        //         logger.error("Opponent cards in hand exceed the maximum allowed size");
+        //         break;
+        //     }
+        //     float[] cardFeatures = convertCardToFeatureVector(card, ZoneType.HAND, game);
+        //     System.arraycopy(cardFeatures, 0, stateVector, index, cardFeatures.length);
+        //     index += cardFeatures.length;
+        // }
 
         // Opponent Permanents on Battlefield
         List<Permanent> opponentPermanents = game.getBattlefield().getAllActivePermanents(opponent.getId());
@@ -178,6 +183,41 @@ public class RLState {
         featureVector[index++] = (float) card.getPower().getValue();
         featureVector[index++] = (float) card.getToughness().getValue();
         featureVector[index++] = (float) card.getManaValue();
+        // TODO: represent all possible mana costs
+        // getMana returns all possible mana costs, this is just one for now
+        // TODO: represent phyrexian mana
+
+        // if (card instanceof Spell) {
+        //     // Mana it costs to cast
+        //     currManaCost = card.getManaCost().get(0).getManaOptions().get(0);
+        // } else {
+        //      // This is for what mana it produces
+        //      // TODO: some spell cards can produce mana, need to handle that
+        //     currManaProduced = card.getMana().get(0);
+        // }
+        Mana currManaCost = new Mana();
+        if (!card.getManaCost().isEmpty()) {
+            for (ManaCost manaCost : card.getManaCost()) {
+                Mana TempManaCost = manaCost.getMana();
+                currManaCost.setWhite(TempManaCost.getWhite() + currManaCost.getWhite());
+                currManaCost.setBlue(TempManaCost.getBlue() + currManaCost.getBlue());
+                currManaCost.setGreen(TempManaCost.getGreen() + currManaCost.getGreen());
+                currManaCost.setBlack(TempManaCost.getBlack() + currManaCost.getBlack());
+                currManaCost.setRed(TempManaCost.getRed() + currManaCost.getRed());
+                currManaCost.setColorless(TempManaCost.getColorless() + currManaCost.getColorless());
+                currManaCost.setGeneric(TempManaCost.getGeneric() + currManaCost.getGeneric());
+            }
+        }else{
+            currManaCost = null;
+        }
+        featureVector[index++] = currManaCost != null ? currManaCost.getWhite() : 0.0f;
+        featureVector[index++] = currManaCost != null ? currManaCost.getBlue() : 0.0f;
+        featureVector[index++] = currManaCost != null ? currManaCost.getGreen() : 0.0f;
+        featureVector[index++] = currManaCost != null ? currManaCost.getBlack() : 0.0f;
+        featureVector[index++] = currManaCost != null ? currManaCost.getRed() : 0.0f;   
+        featureVector[index++] = currManaCost != null ? currManaCost.getColorless() : 0.0f;
+        featureVector[index++] = currManaCost != null ? currManaCost.getGeneric() : 0.0f;
+
         featureVector[index++] = card.isCreature() ? 1.0f : 0.0f;
         featureVector[index++] = card.isArtifact() ? 1.0f : 0.0f;
         featureVector[index++] = card.isEnchantment() ? 1.0f : 0.0f;
@@ -189,11 +229,16 @@ public class RLState {
         // Is the card tapped?
         if (zoneType == ZoneType.BATTLEFIELD) {
             featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isTapped() ? 1.0f : 0.0f : 0.0f;
+            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).hasSummoningSickness() ? 1.0f : 0.0f : 0.0f;
+            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).getDamage() : 0.0f;
         }else{
+            featureVector[index++] = 0.0f;
+            featureVector[index++] = 0.0f;
             featureVector[index++] = 0.0f;
         }
 
         // Add the text embedding of the text
+        String cardAbilities = card.getAbilities().toString();
         String cardText = String.join(" ", card.getRules());
         float[] textEmbedding = EmbeddingManager.getEmbedding(cardText);
         System.arraycopy(textEmbedding, 0, featureVector, index, textEmbedding.length);

@@ -49,15 +49,38 @@ public class EmbeddingManager {
     }
 
     public static float[] getEmbedding(String text) {
+        text = tokenizeCardText(text);
         embeddings = getEmbeddings();
         if (embeddings.containsKey(text)) {
             return embeddings.get(text);
         } else {
             float[] embedding = queryOpenAIForEmbedding(text);
             embeddings.put(text, embedding);
+            //TODO: lets only save after entire game is over
             saveEmbeddings();
             return embedding;
         }
+    }
+
+    public static String tokenizeCardText(String cardText) {
+        //TODO: Further tokenization of common effects and phrases could be beneficial
+        // Replace mana costs with structured tokens
+        // TODO: distinguish between cost and effect?
+        cardText = cardText.replaceAll("\\{(\\d+)\\}", "GENERIC_MANA_$1");
+        cardText = cardText.replaceAll("\\{W\\}", "WHITE_MANA");
+        cardText = cardText.replaceAll("\\{U\\}", "BLUE_MANA");
+        cardText = cardText.replaceAll("\\{B\\}", "BLACK_MANA");
+        cardText = cardText.replaceAll("\\{R\\}", "RED_MANA");
+        cardText = cardText.replaceAll("\\{G\\}", "GREEN_MANA");
+        cardText = cardText.replaceAll("\\{C\\}", "COLORLESS_MANA");
+        cardText = cardText.replaceAll("\\{T\\}", "COST_TAP");
+        cardText = cardText.replaceAll("\\{S\\}", "COST_SACRIFICE");
+        cardText = cardText.replaceAll("\\{X\\}", "COST_X");
+
+        // Optionally, add delimiters for different sections
+        cardText = cardText.replaceAll("\\. ", ". | ");
+
+        return cardText;
     }
 
     private static float[] queryOpenAIForEmbedding(String text) {

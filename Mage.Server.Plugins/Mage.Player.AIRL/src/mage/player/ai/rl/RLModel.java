@@ -11,11 +11,12 @@ public class RLModel implements Serializable {
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
+    private static final int OUTPUT_SIZE = RLAction.MAX_ACTIONS + 1;
 
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
         // Output is +1 for pass priority
-        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, RLAction.MAX_ACTIONS + 1, 0.1);
+        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, OUTPUT_SIZE, 0.1);
         try {
             network.loadNetwork("network.ser");
         } catch (IOException e) {
@@ -44,7 +45,7 @@ public class RLModel implements Serializable {
     // TODO: Research the algorithm used here. I don't really understand it.
     public void update(RLState state, double reward, RLState nextState, RLAction action) {
         float[] nextQValues = predictDistribution(nextState, action);
-        float[] targetQValues = new float[RLAction.MAX_ACTIONS];
+        float[] targetQValues = new float[OUTPUT_SIZE];
 
         switch (action.getType()) {
             case DECLARE_ATTACKS:

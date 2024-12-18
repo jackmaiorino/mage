@@ -14,13 +14,11 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.util.CardUtil;
-import mage.player.ai.rl.RLState.ZoneType;
 
 public class RLAction {
     private static final Logger logger = Logger.getLogger(RLAction.class);
 
     public enum ActionType {
-        PASS_PRIORITY,
         ACTIVATE_ABILITY_OR_SPELL,
         SELECT_TARGETS,
         DECLARE_ATTACKS,
@@ -35,7 +33,8 @@ public class RLAction {
     private float[] featureVector;
     public static final int MAX_ACTIONS = 10;
     public static final int EMBEDDING_SIZE = EmbeddingManager.EMBEDDING_SIZE + 4; // 4 for basic features
-    public static final int FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
+    //public static final int FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length;  Include space for one-hot encoding
+    public static final int FEATURE_VECTOR_SIZE = ActionType.values().length;
 
     public RLAction(ActionType type, List<ActivatedAbility> abilities, List<Permanent> creatures, Game game) {
         this.type = type;
@@ -65,6 +64,7 @@ public class RLAction {
         return game;
     }
 
+    // Temporarily going to try only passing the action type
     private float[] toFeatureVector() {
         featureVector = new float[FEATURE_VECTOR_SIZE];
         int index = 0;
@@ -75,47 +75,47 @@ public class RLAction {
         index += ActionType.values().length;
 
         // Type-specific features
-        switch (type) {
-            case ACTIVATE_ABILITY_OR_SPELL:
-                if (abilities != null) {
-                    for (ActivatedAbility ability : abilities) {
-                        if (index >= FEATURE_VECTOR_SIZE) {
-                            logger.error("Too many abilities, truncating");
-                            break;
-                        }
-                        float[] abilityFeatures = convertAbilityOrSpellToFeatureVector(ability);
-                        System.arraycopy(abilityFeatures, 0, featureVector, index, abilityFeatures.length);
-                        index += abilityFeatures.length;
-                    }
-                }
-                break;
-            case DECLARE_ATTACKS:
-                //TODO: I'm sure there is a better way to do this. I don't like duplicating the game state info here
-                if (creatures != null) {
-                    for (Permanent creature : creatures) {
-                        if (index >= FEATURE_VECTOR_SIZE) {
-                            logger.error("Too many creatures, truncating");
-                            break;
-                        }
-                        float[] creatureFeatures = convertCardToFeatureVector(creature, ZoneType.BATTLEFIELD, game);
-                        System.arraycopy(creatureFeatures, 0, featureVector, index, creatureFeatures.length);
-                        index += creatureFeatures.length;
-                    }
-                }
-                break;
-            case DECLARE_BLOCKS:
-                // Add block-specific features
-                // TODO: Implement block-specific features
-                break;
-            case MULLIGAN:
-                // TODO: Implement mulligan-specific features
-                break;
-            case PASS_PRIORITY:
-                // TODO: Implement pass priority-specific features
-                break;
-            default:
-                break;
-        }
+        // switch (type) {
+        //     case ACTIVATE_ABILITY_OR_SPELL:
+        //         if (abilities != null) {
+        //             for (ActivatedAbility ability : abilities) {
+        //                 if (index >= FEATURE_VECTOR_SIZE) {
+        //                     logger.error("Too many abilities, truncating");
+        //                     break;
+        //                 }
+        //                 float[] abilityFeatures = convertAbilityOrSpellToFeatureVector(ability);
+        //                 System.arraycopy(abilityFeatures, 0, featureVector, index, abilityFeatures.length);
+        //                 index += abilityFeatures.length;
+        //             }
+        //         }
+        //         break;
+        //     case DECLARE_ATTACKS:
+        //         //TODO: I'm sure there is a better way to do this. I don't like duplicating the game state info here
+        //         if (creatures != null) {
+        //             for (Permanent creature : creatures) {
+        //                 if (index >= FEATURE_VECTOR_SIZE) {
+        //                     logger.error("Too many creatures, truncating");
+        //                     break;
+        //                 }
+        //                 float[] creatureFeatures = convertCardToFeatureVector(creature, ZoneType.BATTLEFIELD, game);
+        //                 System.arraycopy(creatureFeatures, 0, featureVector, index, creatureFeatures.length);
+        //                 index += creatureFeatures.length;
+        //             }
+        //         }
+        //         break;
+        //     case DECLARE_BLOCKS:
+        //         // Add block-specific features
+        //         // TODO: Implement block-specific features
+        //         break;
+        //     case MULLIGAN:
+        //         // TODO: Implement mulligan-specific features
+        //         break;
+        //     case PASS_PRIORITY:
+        //         // TODO: Implement pass priority-specific features
+        //         break;
+        //     default:
+        //         break;
+        // }
 
         // Zero padding for remaining slots
         for (int i = index; i < featureVector.length; i++) {
