@@ -14,6 +14,7 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 import mage.target.TargetAmount;
 import mage.util.CardUtil;
+import mage.player.ai.rl.RLState.ZoneType;
 
 public class RLAction {
     private static final Logger logger = Logger.getLogger(RLAction.class);
@@ -33,7 +34,7 @@ public class RLAction {
     private final Game game;
     private float[] featureVector;
     public static final int MAX_ACTIONS = 10;
-    public static final int EMBEDDING_SIZE = EmbeddingManager.REDUCED_EMBEDDING_SIZE + 4; // 4 for basic features
+    public static final int EMBEDDING_SIZE = EmbeddingManager.EMBEDDING_SIZE + 4; // 4 for basic features
     public static final int FEATURE_VECTOR_SIZE = MAX_ACTIONS * EMBEDDING_SIZE + ActionType.values().length; // Include space for one-hot encoding
 
     public RLAction(ActionType type, List<ActivatedAbility> abilities, List<Permanent> creatures, Game game) {
@@ -89,8 +90,17 @@ public class RLAction {
                 }
                 break;
             case DECLARE_ATTACKS:
+                //TODO: I'm sure there is a better way to do this. I don't like duplicating the game state info here
                 if (creatures != null) {
-                    // TODO: implement
+                    for (Permanent creature : creatures) {
+                        if (index >= FEATURE_VECTOR_SIZE) {
+                            logger.error("Too many creatures, truncating");
+                            break;
+                        }
+                        float[] creatureFeatures = convertCardToFeatureVector(creature, ZoneType.BATTLEFIELD, game);
+                        System.arraycopy(creatureFeatures, 0, featureVector, index, creatureFeatures.length);
+                        index += creatureFeatures.length;
+                    }
                 }
                 break;
             case DECLARE_BLOCKS:
@@ -116,27 +126,29 @@ public class RLAction {
     }
 
     private float[] convertAbilityOrSpellToFeatureVector(ActivatedAbility ability) {
-        float[] featureVector = new float[EMBEDDING_SIZE];
-
-        // Get class name embedding and add it to the feature vector
-        String className = ability.getClass().getSimpleName();
-        float[] classEmbedding = EmbeddingManager.getEmbedding(className);
-        System.arraycopy(classEmbedding, 0, featureVector, 0, classEmbedding.length);
+        // TODO: We're setting a class global but also returning?!
+        featureVector = new float[EMBEDDING_SIZE];
 
         // Add basic ability features
-        int index = classEmbedding.length;
+        int index = 0;
         featureVector[index++] = ability.getManaCosts().manaValue(); // Total mana cost
         featureVector[index++] = ability.getEffects().size(); // Number of effects
         featureVector[index++] = ability.getTargets().size(); // Number of targets
         featureVector[index++] = ability.getCosts().size(); // Number of costs
+
+
+        // Get class name embedding and add it to the feature vector
+        String className = ability.getClass().getSimpleName();
 
         // Encode Card Text
         // TODO: This will likely not include all card text for casting creatures
         // i.e. it will say something like "Cast a 2/2 red Dragon"
         // but not "Cast a red Dragon with 2/2 with flying and lifeline"
         // not sure will need to test
-        String abilityText = getAbilityAndSourceInfo(game, ability, false);
-        float[] textEmbedding = EmbeddingManager.getEmbedding(abilityText);
+
+        //Might want to use this at some point
+        //String abilityText = getAbilityAndSourceInfo(game, ability, false);
+        float[] textEmbedding = EmbeddingManager.getEmbedding(className + " " + ability);
         System.arraycopy(textEmbedding, 0, featureVector, index, textEmbedding.length);
 
         // Zero padding for remaining slots
@@ -193,5 +205,34 @@ public class RLAction {
             targetsInfo = String.join(" + ", allTargetsInfo);
         }
         return abilityInfo + (targetsInfo.isEmpty() ? "" : " -> " + targetsInfo);
+    }
+
+    public float[] convertCreatureToFeatureVector(Permanent creature, Game game) {
+        // TODO: We're setting a class global but also returning?!
+        featureVector = new float[EMBEDDING_SIZE];
+
+        // One-hot encode the zone type
+        int index = 0;  
+        featureVector[index++] = creature.getOwnerId().equals(game.getActivePlayerId()) ? 1.0f : 0.0f;
+        featureVector[index++] = (float) creature.getPower().getValue();
+        featureVector[index++] = (float) creature.getToughness().getValue();
+        featureVector[index++] = (float) creature.getManaValue();
+        featureVector[index++] = creature.isCreature() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isArtifact() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isEnchantment() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isLand() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isPlaneswalker() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isPermanent() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isInstant() ? 1.0f : 0.0f;
+        featureVector[index++] = creature.isSorcery() ? 1.0f : 0.0f;
+        // Is the card tapped?
+        featureVector[index++] = creature.isTapped() ? 1.0f : 0.0f;
+
+        // Add the text embedding of the text
+        String cardText = String.join(" ", creature.getRules());
+        float[] textEmbedding = EmbeddingManager.getEmbedding(cardText);
+        System.arraycopy(textEmbedding, 0, featureVector, index, textEmbedding.length);
+
+        return featureVector;
     }
 } 

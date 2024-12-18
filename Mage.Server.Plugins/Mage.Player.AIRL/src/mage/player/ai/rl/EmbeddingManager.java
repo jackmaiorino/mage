@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.math3.linear.Array2DRowRealMatrix;
-import org.apache.commons.math3.linear.RealMatrix;
-import org.apache.commons.math3.linear.SingularValueDecomposition;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
@@ -25,8 +22,7 @@ public class EmbeddingManager {
     private static final String MAPPING_FILE = "mapping.json";
     private static Map<String, float[]> embeddings;
     private static OpenAIClient openAIClient;
-    public static final int EMBEDDING_SIZE = 1536;
-    public static final int REDUCED_EMBEDDING_SIZE = 100;
+    public static final int EMBEDDING_SIZE = 100;
 
     public static synchronized OpenAIClient getOpenAIClient() {
         if (openAIClient == null) {
@@ -58,17 +54,17 @@ public class EmbeddingManager {
             return embeddings.get(text);
         } else {
             float[] embedding = queryOpenAIForEmbedding(text);
-            float[] reducedEmbedding = reduceEmbedding(embedding);
-            embeddings.put(text, reducedEmbedding);
+            embeddings.put(text, embedding);
             saveEmbeddings();
-            return reducedEmbedding;
+            return embedding;
         }
     }
 
     private static float[] queryOpenAIForEmbedding(String text) {
         try {
             EmbeddingCreateParams params = new EmbeddingCreateParams.Builder()
-                .model("text-embedding-ada-002")
+                .model("text-embedding-3-small")
+                .dimensions(EMBEDDING_SIZE)
                 .input(text)
                 .build();
 
@@ -87,32 +83,6 @@ public class EmbeddingManager {
             e.printStackTrace();
             throw new RuntimeException("Error querying OpenAI API for embedding", e);
         }
-    }
-
-    // I don't really understand this.Need to research more.
-    private static float[] reduceEmbedding(float[] embedding) {
-        double[] doubleEmbedding = new double[embedding.length];
-        for (int i = 0; i < embedding.length; i++) {
-            doubleEmbedding[i] = embedding[i];
-        }
-        RealMatrix matrix = new Array2DRowRealMatrix(new double[][]{doubleEmbedding});
-        SingularValueDecomposition svd = new SingularValueDecomposition(matrix);
-
-        // Get actual dimensions of the U matrix
-        int uRows = svd.getU().getRowDimension();
-        int uCols = svd.getU().getColumnDimension();
-
-        // Ensure indices are within bounds
-        int numRows = Math.min(embedding.length, uRows);
-        int numCols = Math.min(REDUCED_EMBEDDING_SIZE, uCols);
-
-        RealMatrix reducedMatrix = svd.getU().getSubMatrix(0, numRows - 1, 0, numCols - 1);
-        double[] doubleResult = reducedMatrix.getColumn(0);
-        float[] result = new float[doubleResult.length];
-        for (int i = 0; i < doubleResult.length; i++) {
-            result[i] = (float) doubleResult[i];
-        }
-        return result;
     }
 
     private static void saveEmbeddings() {

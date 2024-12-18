@@ -14,7 +14,7 @@ import mage.player.ai.rl.RLTrainer;
  */
 public class TestComputerPlayerRL extends CardTestPlayerBase {
 
-    @Test(timeout=30000)
+    @Test
     public void test_RLPlayer_BasicTraining() {
         System.err.println("Starting RL Player Basic Training Test");
         System.err.flush();

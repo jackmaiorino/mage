@@ -18,8 +18,10 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 public class NeuralNetwork {
     private static final Logger logger = Logger.getLogger(NeuralNetwork.class);
     private MultiLayerNetwork network;
+    private final double explorationRate;
     
-    public NeuralNetwork(int inputSize, int outputSize) {
+    public NeuralNetwork(int inputSize, int outputSize, double explorationRate) {
+        this.explorationRate = explorationRate;
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
             .updater(new Adam())
             .list()
@@ -33,6 +35,21 @@ public class NeuralNetwork {
     }
     
     public INDArray predict(float[] state, float[] action) {
+        // Epsilon-greedy exploration
+        if (Math.random() <= explorationRate) {
+            // Generate random softmax distribution
+            float[] randomDist = new float[10];
+            float sum = 0;
+            for (int i = 0; i < 10; i++) {
+                randomDist[i] = (float) Math.random();
+                sum += randomDist[i];
+            }
+            // Normalize to sum to 1
+            for (int i = 0; i < 10; i++) {
+                randomDist[i] /= sum;
+            }
+            return Nd4j.create(randomDist);
+        }
         float[] combined = new float[state.length + action.length];
         System.arraycopy(state, 0, combined, 0, state.length);
         System.arraycopy(action, 0, combined, state.length, action.length);

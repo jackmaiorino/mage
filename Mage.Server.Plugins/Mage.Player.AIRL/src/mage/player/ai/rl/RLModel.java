@@ -7,21 +7,20 @@ import org.apache.log4j.Logger;
 
 public class RLModel implements Serializable {
     private static final Logger logger = Logger.getLogger(RLModel.class);
-    private NeuralNetwork network;
-    private double explorationRate;
+    private final NeuralNetwork network;
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
 
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
-        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, RLAction.MAX_ACTIONS);
+        // Output is +1 for pass priority
+        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, RLAction.MAX_ACTIONS + 1, 0.1);
         try {
             network.loadNetwork("network.ser");
         } catch (IOException e) {
             logger.error("Failed to load network, initializing a new one.", e);
         }
-        explorationRate = 0.1;
     }
 
     public void saveModel(String filePath) {
@@ -32,8 +31,10 @@ public class RLModel implements Serializable {
         }
     }
 
+
+    // This has to be this way to ensure its possible to attack with all creatures
     public float getActionThreshold() {
-        return 0.2f; // Threshold can be tuned based on training
+        return (float) 1 / RLAction.MAX_ACTIONS; // Threshold can be tuned based on training
     }
 
     public float[] predictDistribution(RLState state, RLAction action) {

@@ -91,6 +91,11 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             case PRECOMBAT_MAIN:
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
                 ActivatedAbility ability = calculateActions(game);
+                if (ability == null) {
+                    logger.info("Model opted to pass priority");
+                    pass(game);
+                    return false;
+                }
                 act(game, ability);
                 return true;
             case BEGIN_COMBAT:
@@ -188,7 +193,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         if (bestIndex < playables.size()) {
             return playables.get(bestIndex);
         }else{
-            logger.info("No valid actions found.");
+            //Model chose to pass
             return null;
         }
     }
