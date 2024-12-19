@@ -38,18 +38,28 @@ public class RLModel implements Serializable {
         return (float) 1 / RLAction.MAX_ACTIONS; // Threshold can be tuned based on training
     }
 
-    public float[] predictDistribution(RLState state, RLAction action) {
-        return network.predict(state.getStateVector(), action.getFeatureVector()).data().asFloat();
+    public float[] predictDistribution(RLState state, RLAction action, boolean isExploration) {
+        return network.predict(state.getStateVector(), action.getFeatureVector(),isExploration).data().asFloat();
     }
 
     // TODO: Research the algorithm used here. I don't really understand it.
     public void update(RLState state, double reward, RLState nextState, RLAction action) {
-        float[] nextQValues = predictDistribution(nextState, action);
+        float[] nextQValues = predictDistribution(nextState, action, false);
         float[] targetQValues = new float[OUTPUT_SIZE];
 
         switch (action.getType()) {
             case DECLARE_ATTACKS:
                 // Set target Q-values for all attackers above the threshold
+                for (int i = 0; i < nextQValues.length; i++) {
+                    if (nextQValues[i] > getActionThreshold()) {
+                        targetQValues[i] = (float) (reward + DISCOUNT_FACTOR * nextQValues[i]);
+                    }
+                }
+                break;
+            case DECLARE_BLOCKS:
+                // Set target Q-values for all blockers above the threshold
+                // TODO: This becomes confusing for the model because it won't understand that the nextstate is the state after
+                // it declared all its blockers.
                 for (int i = 0; i < nextQValues.length; i++) {
                     if (nextQValues[i] > getActionThreshold()) {
                         targetQValues[i] = (float) (reward + DISCOUNT_FACTOR * nextQValues[i]);

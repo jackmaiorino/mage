@@ -34,9 +34,9 @@ public class NeuralNetwork {
         network.init();
     }
     
-    public INDArray predict(float[] state, float[] action) {
+    public INDArray predict(float[] state, float[] action, boolean isExploration) {
         // Epsilon-greedy exploration
-        if (Math.random() <= explorationRate) {
+        if (Math.random() <= explorationRate && isExploration) {
             // Generate random softmax distribution
             float[] randomDist = new float[10];
             float sum = 0;

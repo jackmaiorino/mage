@@ -19,7 +19,7 @@ import com.openai.models.EmbeddingCreateParams;
 
 public class EmbeddingManager {
     private static final Logger logger = Logger.getLogger(EmbeddingManager.class);
-    private static final String MAPPING_FILE = "mapping.json";
+    private static final String MAPPING_FILE = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json";
     private static Map<String, float[]> embeddings;
     private static OpenAIClient openAIClient;
     public static final int EMBEDDING_SIZE = 100;
@@ -59,7 +59,7 @@ public class EmbeddingManager {
             //TODO: lets only save after entire game is over
             saveEmbeddings();
             return embedding;
-        }
+        }    
     }
 
     public static String tokenizeCardText(String cardText) {
@@ -72,10 +72,10 @@ public class EmbeddingManager {
         cardText = cardText.replaceAll("\\{B\\}", "BLACK_MANA");
         cardText = cardText.replaceAll("\\{R\\}", "RED_MANA");
         cardText = cardText.replaceAll("\\{G\\}", "GREEN_MANA");
-        cardText = cardText.replaceAll("\\{C\\}", "COLORLESS_MANA");
+        cardText = cardText.replaceAll("\\{C\\}", "COLORLESS_MANA");    
         cardText = cardText.replaceAll("\\{T\\}", "COST_TAP");
         cardText = cardText.replaceAll("\\{S\\}", "COST_SACRIFICE");
-        cardText = cardText.replaceAll("\\{X\\}", "COST_X");
+        cardText = cardText.replaceAll("\\{X\\}", "COST_X_MANA");
 
         // Optionally, add delimiters for different sections
         cardText = cardText.replaceAll("\\. ", ". | ");

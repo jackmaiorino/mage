@@ -17,7 +17,7 @@ import mage.players.Player;
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
     private float[] stateVector;
-    public static final int CARD_STATS_SIZE = ZoneType.values().length + 22; // ZoneType.values().length for one-hot encoding + 22 for other features
+    public static final int CARD_STATS_SIZE = ZoneType.values().length + 24; // ZoneType.values().length for one-hot encoding + 24 for other features
     public static final int NUM_PLAYER_STATS = 5;   
     public static final int NUM_CARDS = 60;
     public static final int EMBEDDING_SIZE = EmbeddingManager.EMBEDDING_SIZE + CARD_STATS_SIZE;
@@ -229,9 +229,13 @@ public class RLState {
         // Is the card tapped?
         if (zoneType == ZoneType.BATTLEFIELD) {
             featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isTapped() ? 1.0f : 0.0f : 0.0f;
+            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isAttacking() ? 1.0f : 0.0f : 0.0f;
+            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isBlocked(game) ? 1.0f : 0.0f : 0.0f;
             featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).hasSummoningSickness() ? 1.0f : 0.0f : 0.0f;
             featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).getDamage() : 0.0f;
         }else{
+            featureVector[index++] = 0.0f;
+            featureVector[index++] = 0.0f;
             featureVector[index++] = 0.0f;
             featureVector[index++] = 0.0f;
             featureVector[index++] = 0.0f;

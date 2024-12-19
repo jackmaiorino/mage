@@ -28,7 +28,7 @@ public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
     private static final int NUM_EPISODES = 1;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
-    private static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/model.ser";
+    private static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/model.ser";
 
     public RLTrainer() {
         // No need to create a model here

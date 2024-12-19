@@ -3,6 +3,8 @@ package mage.player.ai;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
@@ -17,6 +19,9 @@ import mage.player.ai.rl.Experience;
 import mage.player.ai.rl.RLAction;
 import mage.player.ai.rl.RLModel;
 import mage.player.ai.rl.RLState;
+import mage.player.ai.util.CombatInfo;
+import mage.player.ai.util.CombatUtil;
+import mage.players.Player;
 import mage.target.Target;
 
 public class ComputerPlayerRL extends ComputerPlayer6 {
@@ -42,6 +47,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         return result;
     }
 
+    //TODO: Implement ability to attack planeswalkers
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         logger.info("selectAttackers called for " + getName());
@@ -59,8 +65,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 possibleAttackers.add(creature);
             }
         }
-        currentAction = new RLAction(RLAction.ActionType.DECLARE_ATTACKS, null, possibleAttackers, game);
-        float[] qValues = model.predictDistribution(currentState, currentAction);
+        currentAction = new RLAction(RLAction.ActionType.DECLARE_ATTACKS, null, possibleAttackers, game, -1);
+        float[] qValues = model.predictDistribution(currentState, currentAction, true);
         // We need to not even consider the case where there are no attacker
         logger.info("possibleAttackers: " + possibleAttackers);
         logger.info("qValues: " + Arrays.toString(qValues));
@@ -70,6 +76,105 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 this.declareAttacker(possibleAttackers.get(i).getId(), game.getCombat().getDefenders().iterator().next(), game, false);
             }
         }   
+    }
+
+    // Don't need to override?
+    // TODO: Do we need to pass the action vector a reference for WHICH creature its declaring blocks?
+    private void declareBlockers(Game game, UUID activePlayerId) {
+        currentState = new RLState(game);
+        //TODO: Implement blocker selection
+        //TODO: Investigate comp player 6 firing these game events. Do we need them?
+
+        List<Permanent> attackers = getAttackers(game);
+        if (attackers == null) {
+            return;
+        }
+
+        List<Permanent> possibleBlockers = super.getAvailableBlockers(game);
+        possibleBlockers = filterOutNonblocking(game, attackers, possibleBlockers);
+        if (possibleBlockers.isEmpty()) {
+            return;
+        }
+
+        attackers = filterOutUnblockable(game, attackers, possibleBlockers);
+        if (attackers.isEmpty()) {
+            return;
+        }
+
+        int cardReferenceIndex = 0;
+        for (Permanent attacker : attackers) {
+            currentAction = new RLAction(RLAction.ActionType.DECLARE_BLOCKS, null, null, game, cardReferenceIndex);
+            float[] qValues = model.predictDistribution(currentState, currentAction, true);
+            for (int i = 0; i < possibleBlockers.size(); i++) {
+                if (qValues[i] > model.getActionThreshold()) {
+                    // Declare the creature as an attacker
+                    this.declareBlocker(playerId, possibleBlockers.get(i).getId(), attacker.getId(), game);
+                    // TODO: Add support for creatures that can block multiple attackers
+                    possibleBlockers.remove(i);
+                }
+            }   
+            cardReferenceIndex++;
+        }
+
+        CombatUtil.sortByPower(attackers, false);
+
+        CombatInfo combatInfo = CombatUtil.blockWithGoodTrade2(game, attackers, possibleBlockers);
+        Player player = game.getPlayer(playerId);
+
+        boolean blocked = false;
+        for (Map.Entry<Permanent, List<Permanent>> entry : combatInfo.getCombat().entrySet()) {
+            UUID attackerId = entry.getKey().getId();
+            List<Permanent> blockers = entry.getValue();
+            if (blockers != null) {
+                for (Permanent blocker : blockers) {
+                    player.declareBlocker(player.getId(), blocker.getId(), attackerId, game);
+                    blocked = true;
+                }
+            }
+        }
+        if (blocked) {
+            game.getPlayers().resetPassed();
+        }
+
+
+        pass(game);
+    }
+
+    private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
+        List<Permanent> blockersLeft = new ArrayList<>();
+        for (Permanent blocker : blockers) {
+            for (Permanent attacker : attackers) {
+                if (blocker.canBlock(attacker.getId(), game)) {
+                    blockersLeft.add(blocker);
+                    break;
+                }
+            }
+        }
+        return blockersLeft;
+    }
+
+    private List<Permanent> filterOutUnblockable(Game game, List<Permanent> attackers, List<Permanent> blockers) {
+        List<Permanent> attackersLeft = new ArrayList<>();
+        for (Permanent attacker : attackers) {
+            if (CombatUtil.canBeBlocked(game, attacker, blockers)) {
+                attackersLeft.add(attacker);
+            }
+        }
+        return attackersLeft;
+    }
+
+    private List<Permanent> getAttackers(Game game) {
+        Set<UUID> attackersUUID = game.getCombat().getAttackers();
+        if (attackersUUID.isEmpty()) {
+            return null;
+        }
+
+        List<Permanent> attackers = new ArrayList<>();
+        for (UUID attackerId : attackersUUID) {
+            Permanent permanent = game.getPermanent(attackerId);
+            attackers.add(permanent);
+        }
+        return attackers;
     }
 
     //    @Override
@@ -83,6 +188,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         logger.info("priorityPlay called for " + getName() + " during " + game.getTurnStepType());
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
+        RLState nextState;
         switch (game.getTurnStepType()) {
             case UPKEEP:
             case DRAW:
@@ -106,14 +212,17 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 selectAttackers(game, playerId);
                 // TODO: We can also perform actions here but lets simplify for now
                 pass(game);
-                RLState nextState = new RLState(game);
+                nextState = new RLState(game);
                 addExperience(currentState, currentAction, nextState);
                 //act(game);
                 return true;
             case DECLARE_BLOCKERS:
                 printBattlefieldScore(game, "Sim PRIORITY on DECLARE BLOCKERS");
-                //TODO: Implement blocker selection
-                act(game);
+                declareBlockers(game, playerId);
+                // TODO: We can also perform actions here but lets simplify for now
+                pass(game);
+                nextState = new RLState(game);
+                addExperience(currentState, currentAction, nextState);
                 return true;
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
@@ -170,11 +279,11 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         // Returns a list of all available spells and abilities the player can currently cast/activate with his available resources.
         // Without target validation.
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
-        currentAction = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY_OR_SPELL, playables, null, game);
+        currentAction = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY_OR_SPELL, playables, null, game, -1);
         currentState = new RLState(game);
 
         // Evaluate each action using the model
-        float[] qValues = model.predictDistribution(currentState, currentAction);
+        float[] qValues = model.predictDistribution(currentState, currentAction, true);
         float maxQValue = Float.NEGATIVE_INFINITY;
         int bestIndex = 0;
         
