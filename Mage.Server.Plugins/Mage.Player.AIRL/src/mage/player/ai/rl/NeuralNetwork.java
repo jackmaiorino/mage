@@ -19,9 +19,12 @@ public class NeuralNetwork {
     private static final Logger logger = Logger.getLogger(NeuralNetwork.class);
     private MultiLayerNetwork network;
     private final double explorationRate;
+    private final int outputSize;
     
+    // The neural net output is an outputSize x outputSize grid of probabilities
     public NeuralNetwork(int inputSize, int outputSize, double explorationRate) {
         this.explorationRate = explorationRate;
+        this.outputSize = outputSize;
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
             .updater(new Adam())
             .list()
@@ -29,6 +32,7 @@ public class NeuralNetwork {
             .layer(1, new DenseLayer.Builder().nIn(64).nOut(32).activation(Activation.RELU).build())
             .layer(2, new OutputLayer.Builder().nIn(32).nOut(outputSize).activation(Activation.SOFTMAX).lossFunction(LossFunctions.LossFunction.MCXENT).build())
             .build();
+        // Output is +1 for pass priority or no block or no attack
         
         network = new MultiLayerNetwork(conf);
         network.init();
@@ -38,17 +42,17 @@ public class NeuralNetwork {
         // Epsilon-greedy exploration
         if (Math.random() <= explorationRate && isExploration) {
             // Generate random softmax distribution
-            float[] randomDist = new float[10];
+            float[] randomDist = new float[outputSize * outputSize];
             float sum = 0;
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < randomDist.length; i++) {
                 randomDist[i] = (float) Math.random();
                 sum += randomDist[i];
             }
             // Normalize to sum to 1
-            for (int i = 0; i < 10; i++) {
+            for (int i = 0; i < randomDist.length; i++) {
                 randomDist[i] /= sum;
             }
-            return Nd4j.create(randomDist);
+            return Nd4j.create(randomDist).reshape(outputSize, outputSize);
         }
         float[] combined = new float[state.length + action.length];
         System.arraycopy(state, 0, combined, 0, state.length);
@@ -56,19 +60,60 @@ public class NeuralNetwork {
         
         INDArray input = Nd4j.create(combined);
         INDArray output = network.output(input);
-        return output;
+        return output.reshape(outputSize, outputSize);
     }
 
-    public void updateWeights(float[] state, float[] action, float[] targetQValues) {
+    // New idea
+    // public INDArray predict(float[] state, float[] action, boolean isExploration, INDArray actionMask) {
+    //     // Combine state and action into a single input vector
+    //     float[] combined = new float[state.length + action.length];
+    //     System.arraycopy(state, 0, combined, 0, state.length);
+    //     System.arraycopy(action, 0, combined, state.length, action.length);
+    
+    //     // Create input INDArray
+    //     INDArray input = Nd4j.create(combined);
+    
+    //     // Get output from the network
+    //     INDArray output = network.output(input);
+    
+    //     // Reshape to 2D array
+    //     output = output.reshape(outputSize, outputSize);
+    
+    //     if (isExploration && Math.random() <= explorationRate) {
+    //         // Exploration: generate random actions (but apply mask during inference)
+    //         output = Nd4j.rand(outputSize, outputSize);
+    //     }
+    
+    //     // During training: Penalize invalid actions
+    //     if (!isExploration) {
+    //         // Calculate penalties for invalid actions
+    //         INDArray invalidProbabilities = output.mul(actionMask.rsub(1)); // 1 - mask
+    //         float penalty = invalidProbabilities.sumNumber().floatValue();
+    
+    //         // Apply penalty to loss function (handled outside predict)
+    //         // Example: totalLoss += penalty * penaltyWeight;
+    //     }
+    
+    //     // During inference: Apply mask
+    //     output.muli(actionMask); // Element-wise multiply with mask
+    
+    //     // Normalize the masked output using softmax
+    //     INDArray expOutput = Transforms.exp(output); // Element-wise exponential
+    //     INDArray sumExp = expOutput.sum(); // Sum of all exponentials
+    //     INDArray softmaxOutput = expOutput.div(sumExp); // Normalize to get probabilities
+    
+    //     return softmaxOutput;
+    // }
+
+    public void updateWeights(float[] state, float[] action, INDArray targetQValues) {
         float[] combined = new float[state.length + action.length];
         System.arraycopy(state, 0, combined, 0, state.length);
         System.arraycopy(action, 0, combined, state.length, action.length);
 
         INDArray input = Nd4j.create(combined);
-        INDArray target = Nd4j.create(targetQValues);
 
         // Perform a single training step
-        network.fit(input, target);
+        network.fit(input, targetQValues);
     }
 
     public void saveNetwork(String filePath) throws IOException {

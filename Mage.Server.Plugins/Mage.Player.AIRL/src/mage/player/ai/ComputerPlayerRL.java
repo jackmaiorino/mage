@@ -1,13 +1,12 @@
 package mage.player.ai;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
 import org.apache.log4j.Logger;
+import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.abilities.ActivatedAbility;
 import mage.constants.RangeOfInfluence;
@@ -19,9 +18,7 @@ import mage.player.ai.rl.Experience;
 import mage.player.ai.rl.RLAction;
 import mage.player.ai.rl.RLModel;
 import mage.player.ai.rl.RLState;
-import mage.player.ai.util.CombatInfo;
 import mage.player.ai.util.CombatUtil;
-import mage.players.Player;
 import mage.target.Target;
 
 public class ComputerPlayerRL extends ComputerPlayer6 {
@@ -51,39 +48,64 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         logger.info("selectAttackers called for " + getName());
-        
-        currentState = new RLState(game);   
+
+        currentState = new RLState(game);
         List<Permanent> allAttackers = game.getBattlefield().getAllActivePermanents(
             StaticFilters.FILTER_PERMANENT_CREATURE,
             playerId,
             game
         );
         List<Permanent> possibleAttackers = new ArrayList<>();
-        
+
         for (Permanent creature : allAttackers) {
             if (creature.canAttack(null, game)) {
                 possibleAttackers.add(creature);
             }
         }
-        currentAction = new RLAction(RLAction.ActionType.DECLARE_ATTACKS, null, possibleAttackers, game, -1);
-        float[] qValues = model.predictDistribution(currentState, currentAction, true);
-        // We need to not even consider the case where there are no attacker
-        logger.info("possibleAttackers: " + possibleAttackers);
-        logger.info("qValues: " + Arrays.toString(qValues));
-        for (int i = 0; i < possibleAttackers.size(); i++) {
-            if (qValues[i] > model.getActionThreshold()) {
-                // Declare the creature as an attacker
-                this.declareAttacker(possibleAttackers.get(i).getId(), game.getCombat().getDefenders().iterator().next(), game, false);
+        currentAction = new RLAction(RLAction.ActionType.DECLARE_ATTACKS, null, possibleAttackers, game);
+        INDArray qValues = model.predictDistribution(currentState, currentAction, true);
+
+        if (possibleAttackers.size() > RLAction.MAX_ACTIONS) {
+            logger.error("ERROR: More attackers than max actions, Model truncating");
+        }
+
+        List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
+        if (possibleAttackTargets.size() > RLAction.MAX_ACTIONS) {
+            logger.error("ERROR: More attack targets than max actions, Model truncating");
+        }
+
+        for (int attackerIndex = 0; attackerIndex < RLAction.MAX_ACTIONS; attackerIndex++) {
+            Permanent attacker = possibleAttackers.get(attackerIndex);
+
+            // Create a list of defender indices with their Q-values for this attacker
+            List<AttackOption> attackOptions = new ArrayList<>();
+            // +1 to reserve the option to not attack
+            for (int defenderIndex = 0; defenderIndex < RLAction.MAX_ACTIONS + 1; defenderIndex++) {
+                double qValue = qValues.getDouble(attackerIndex, defenderIndex);
+                attackOptions.add(new AttackOption(defenderIndex, attackerIndex, qValue));
             }
-        }   
+
+            // Sort attack options by Q-value in descending order
+            attackOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
+
+            // Declare attacks based on sorted Q-values
+            for (AttackOption option : attackOptions) {
+                if (option.defenderIndex >= Math.min(RLAction.MAX_ACTIONS, possibleAttackTargets.size())) {
+                    continue; // Skip this attacker if the first choice is to not attack
+                }
+                UUID defenderId = possibleAttackTargets.get(option.defenderIndex);
+                if (attacker.canAttack(defenderId, game)) {
+                    this.declareAttacker(attacker.getId(), defenderId, game, false);
+                    break; // Once an attack is declared, move to the next attacker
+                }
+            }
+        }
     }
 
     // Don't need to override?
     // TODO: Do we need to pass the action vector a reference for WHICH creature its declaring blocks?
-    private void declareBlockers(Game game, UUID activePlayerId) {
+    private void declareBlockers(Game game) {
         currentState = new RLState(game);
-        //TODO: Implement blocker selection
-        //TODO: Investigate comp player 6 firing these game events. Do we need them?
 
         List<Permanent> attackers = getAttackers(game);
         if (attackers == null) {
@@ -95,49 +117,50 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         if (possibleBlockers.isEmpty()) {
             return;
         }
+        logger.info("possibleBlockers: " + possibleBlockers);
 
         attackers = filterOutUnblockable(game, attackers, possibleBlockers);
         if (attackers.isEmpty()) {
             return;
         }
-
-        int cardReferenceIndex = 0;
-        for (Permanent attacker : attackers) {
-            currentAction = new RLAction(RLAction.ActionType.DECLARE_BLOCKS, null, null, game, cardReferenceIndex);
-            float[] qValues = model.predictDistribution(currentState, currentAction, true);
-            for (int i = 0; i < possibleBlockers.size(); i++) {
-                if (qValues[i] > model.getActionThreshold()) {
-                    // Declare the creature as an attacker
-                    this.declareBlocker(playerId, possibleBlockers.get(i).getId(), attacker.getId(), game);
-                    // TODO: Add support for creatures that can block multiple attackers
-                    possibleBlockers.remove(i);
-                }
-            }   
-            cardReferenceIndex++;
+        currentAction = new RLAction(RLAction.ActionType.DECLARE_BLOCKS, null, null, game);
+        INDArray qValues = model.predictDistribution(currentState, currentAction, true);
+        
+        if (possibleBlockers.size() > RLAction.MAX_ACTIONS) {
+            logger.error("ERROR: More blockers than max actions, Model truncating");
+        }
+        if (attackers.size() > RLAction.MAX_ACTIONS) {
+            logger.error("ERROR: More attackers than max actions, Model truncating");
         }
 
-        CombatUtil.sortByPower(attackers, false);
+        for (int blockerIndex = 0; blockerIndex < RLAction.MAX_ACTIONS; blockerIndex++) {
+            Permanent blocker = possibleBlockers.get(blockerIndex);
 
-        CombatInfo combatInfo = CombatUtil.blockWithGoodTrade2(game, attackers, possibleBlockers);
-        Player player = game.getPlayer(playerId);
+            // Create a list of attacker indices with their Q-values for this blocker
+            List<BlockOption> blockOptions = new ArrayList<>();
+            for (int attackerIndex = 0; attackerIndex < RLAction.MAX_ACTIONS + 1; attackerIndex++) {
+                double qValue = qValues.getDouble(blockerIndex, attackerIndex);
+                blockOptions.add(new BlockOption(attackerIndex, blockerIndex, qValue));
+            }
 
-        boolean blocked = false;
-        for (Map.Entry<Permanent, List<Permanent>> entry : combatInfo.getCombat().entrySet()) {
-            UUID attackerId = entry.getKey().getId();
-            List<Permanent> blockers = entry.getValue();
-            if (blockers != null) {
-                for (Permanent blocker : blockers) {
-                    player.declareBlocker(player.getId(), blocker.getId(), attackerId, game);
-                    blocked = true;
+            // Sort block options by Q-value in descending order
+            blockOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
+ 
+            // Declare blocks based on sorted Q-values
+            for (BlockOption option : blockOptions) {
+                if (option.attackerIndex >= Math.min(RLAction.MAX_ACTIONS, attackers.size())) {
+                    continue; // Skip this blocker if the first choice is to not block
+                }
+                Permanent attacker = attackers.get(option.attackerIndex);
+                if (blocker.canBlock(attacker.getId(), game)) {
+                    this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
+                    // Remove the attacker if it can't be blocked anymore
+                    // if (!attacker.canBeBlocked(game)) {
+                    //     attackers.remove(option.attackerIndex);
+                    // }
                 }
             }
         }
-        if (blocked) {
-            game.getPlayers().resetPassed();
-        }
-
-
-        pass(game);
     }
 
     private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
@@ -209,6 +232,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 return false;
             case DECLARE_ATTACKERS:
                 printBattlefieldScore(game, "Sim PRIORITY on DECLARE ATTACKERS");
+                //TODO: only selectattackers if its your turn
                 selectAttackers(game, playerId);
                 // TODO: We can also perform actions here but lets simplify for now
                 pass(game);
@@ -218,7 +242,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 return true;
             case DECLARE_BLOCKERS:
                 printBattlefieldScore(game, "Sim PRIORITY on DECLARE BLOCKERS");
-                declareBlockers(game, playerId);
+                //TODO: only declareblockers if its your turn
+                declareBlockers(game);
                 // TODO: We can also perform actions here but lets simplify for now
                 pass(game);
                 nextState = new RLState(game);
@@ -279,27 +304,28 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         // Returns a list of all available spells and abilities the player can currently cast/activate with his available resources.
         // Without target validation.
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
-        currentAction = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY_OR_SPELL, playables, null, game, -1);
+        currentAction = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY_OR_SPELL, playables, null, game);
         currentState = new RLState(game);
 
         // Evaluate each action using the model
-        float[] qValues = model.predictDistribution(currentState, currentAction, true);
-        float maxQValue = Float.NEGATIVE_INFINITY;
+        INDArray qValues = model.predictDistribution(currentState, currentAction, true);
+        double maxQValue = Double.NEGATIVE_INFINITY;
         int bestIndex = 0;
         
         // Find index with highest Q-value
-        for (int i = 0; i < qValues.length; i++) {
-            if (qValues[i] > maxQValue) {
-                maxQValue = qValues[i];
+        for (int i = 0; i < qValues.length(); i++) {
+            if (qValues.getDouble(i) > maxQValue) {
+                maxQValue = qValues.getDouble(i);
                 bestIndex = i;
             }
         }
 
         logger.info("playables: " + playables);
-        logger.info("qValues: " + Arrays.toString(qValues));
+        logger.info("qValues: " + qValues);
 
         // Get the corresponding ability and add it to actions queue
-        if (bestIndex < playables.size()) {
+        // -1 on range is to reserve the option to do nothing
+        if (bestIndex < Math.min(RLModel.OUTPUT_SIZE - 1, playables.size())) {
             return playables.get(bestIndex);
         }else{
             //Model chose to pass
@@ -317,5 +343,31 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 
     public void clearExperienceBuffer() {
         experienceBuffer.clear();
+    }
+}
+
+// Helper class to store block options
+class BlockOption {
+    int attackerIndex;
+    int blockerIndex;
+    double qValue;
+
+    BlockOption(int attackerIndex, int blockerIndex, double qValue) {
+        this.attackerIndex = attackerIndex;
+        this.blockerIndex = blockerIndex;
+        this.qValue = qValue;
+    }
+}
+
+// Helper class to store attack options
+class AttackOption {
+    int defenderIndex;
+    int attackerIndex;
+    double qValue;
+
+    AttackOption(int defenderIndex, int attackerIndex, double qValue) {
+        this.defenderIndex = defenderIndex;
+        this.attackerIndex = attackerIndex;
+        this.qValue = qValue;
     }
 }

@@ -30,7 +30,6 @@ public class RLAction {
     private final List<ActivatedAbility> abilities;
     private final List<Permanent> creatures;
     private final Game game;
-    private final int cardReferenceIndex;
     public static final int REFERENCE_INDEX_SIZE = 10;
     private float[] featureVector;
     public static final int MAX_ACTIONS = 10;
@@ -39,13 +38,12 @@ public class RLAction {
     public static final int FEATURE_VECTOR_SIZE = ActionType.values().length + REFERENCE_INDEX_SIZE;
 
 
-    public RLAction(ActionType type, List<ActivatedAbility> abilities, List<Permanent> creatures, Game game, int cardReferenceIndex) {
+    public RLAction(ActionType type, List<ActivatedAbility> abilities, List<Permanent> creatures, Game game) {
         this.type = type;
         this.abilities = abilities;
         this.creatures = creatures;
         this.game = game;
         this.featureVector = toFeatureVector();
-        this.cardReferenceIndex = cardReferenceIndex;
     }
 
     public List<ActivatedAbility> getAbilities() {
@@ -77,16 +75,6 @@ public class RLAction {
         int typeIndex = type.ordinal();
         featureVector[typeIndex] = 1.0f;
         index += ActionType.values().length;
-
-        // Add the card reference index
-        // This will be used to reference the card in the game state
-        // For example: If we are deciding on how to block a creature, if the (attacking creature) that appear
-        // in the game state is at index 5, then the card reference index will be 5
-
-        //Right now we are going to allow the option to pass -1 as the index to not specify a card
-        if (cardReferenceIndex != -1) {
-            featureVector[index + cardReferenceIndex] = 1.0f;
-        }
 
         // Type-specific features
         // switch (type) {

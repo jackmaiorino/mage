@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import org.apache.log4j.Logger;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 public class RLModel implements Serializable {
     private static final Logger logger = Logger.getLogger(RLModel.class);
@@ -11,11 +13,10 @@ public class RLModel implements Serializable {
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
-    private static final int OUTPUT_SIZE = RLAction.MAX_ACTIONS + 1;
+    public static final int OUTPUT_SIZE = (RLAction.MAX_ACTIONS + 1) * (RLAction.MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
 
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
-        // Output is +1 for pass priority
         network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, OUTPUT_SIZE, 0.1);
         try {
             network.loadNetwork("network.ser");
@@ -34,49 +35,50 @@ public class RLModel implements Serializable {
 
 
     // This has to be this way to ensure its possible to attack with all creatures
-    public float getActionThreshold() {
-        return (float) 1 / RLAction.MAX_ACTIONS; // Threshold can be tuned based on training
+    public double getAttackOrBlockThreshold() {
+        return (double) 1 / RLAction.MAX_ACTIONS; // Threshold can be tuned based on training
     }
 
-    public float[] predictDistribution(RLState state, RLAction action, boolean isExploration) {
-        return network.predict(state.getStateVector(), action.getFeatureVector(),isExploration).data().asFloat();
+    public INDArray predictDistribution(RLState state, RLAction action, boolean isExploration) {
+        return network.predict(state.getStateVector(), action.getFeatureVector(),isExploration);
     }
 
     // TODO: Research the algorithm used here. I don't really understand it.
+    // NOTE: action here is WRONG. It is the output from state, not the input to state
     public void update(RLState state, double reward, RLState nextState, RLAction action) {
-        float[] nextQValues = predictDistribution(nextState, action, false);
-        float[] targetQValues = new float[OUTPUT_SIZE];
+        INDArray nextQValues = predictDistribution(nextState, action, false);
+        INDArray targetQValues = Nd4j.zeros(OUTPUT_SIZE, OUTPUT_SIZE);
 
+        //TODO: Don't set qval if skip action was selected
+        // Need to save gamestate?
         switch (action.getType()) {
             case DECLARE_ATTACKS:
                 // Set target Q-values for all attackers above the threshold
-                for (int i = 0; i < nextQValues.length; i++) {
-                    if (nextQValues[i] > getActionThreshold()) {
-                        targetQValues[i] = (float) (reward + DISCOUNT_FACTOR * nextQValues[i]);
+                for (int i = 0; i < RLAction.MAX_ACTIONS; i++) {
+                    if (nextQValues.getDouble(i) > getAttackOrBlockThreshold()) {
+                        targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
                     }
                 }
                 break;
             case DECLARE_BLOCKS:
                 // Set target Q-values for all blockers above the threshold
-                // TODO: This becomes confusing for the model because it won't understand that the nextstate is the state after
-                // it declared all its blockers.
-                for (int i = 0; i < nextQValues.length; i++) {
-                    if (nextQValues[i] > getActionThreshold()) {
-                        targetQValues[i] = (float) (reward + DISCOUNT_FACTOR * nextQValues[i]);
+                for (int i = 0; i < nextQValues.length(); i++) {
+                    if (nextQValues.getDouble(i) > getAttackOrBlockThreshold()) {
+                        targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
                     }
                 }
                 break;
             case ACTIVATE_ABILITY_OR_SPELL:
                 // Find the index of the maximum Q-value for the next state
                 int maxIndex = 0;
-                float maxNextQValue = nextQValues[0];
-                for (int i = 1; i < nextQValues.length; i++) {
-                    if (nextQValues[i] > maxNextQValue) {
-                        maxNextQValue = nextQValues[i];
+                double maxNextQValue = nextQValues.getDouble(0);
+                for (int i = 1; i < nextQValues.length(); i++) {
+                    if (nextQValues.getDouble(i) > maxNextQValue) {
+                        maxNextQValue = nextQValues.getDouble(i);
                         maxIndex = i;
                     }
                 }
-                targetQValues[maxIndex] = (float) (reward + DISCOUNT_FACTOR * maxNextQValue);
+                targetQValues.putScalar(maxIndex, reward + DISCOUNT_FACTOR * maxNextQValue);
                 break;
             default:
                 // Error since we don't know what to do with this action
