@@ -107,19 +107,22 @@ public class RLTrainer {
 
     private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
-        double reward = rlPlayerWon ? 1.0 : -1.0;
-
         // Update model for RL player
-        for (Experience exp : rlPlayer.getExperienceBuffer()) {
-            model.update(exp.state, reward, exp.nextState, exp.action);
+        double reward = rlPlayerWon ? 1.0 : -1.0;
+        List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();
+        for (int i = 0; i < rlPlayerStates.size() - 1; i++) {
+            RLState state = rlPlayerStates.get(i);
+            RLState nextState = rlPlayerStates.get(i + 1);
+            model.update(state, reward, nextState);
         }
-        rlPlayer.clearExperienceBuffer();
 
         // Update model for opponent
         reward = rlPlayerWon ? -1.0 : 1.0;
-        for (Experience exp : opponent.getExperienceBuffer()) {
-            model.update(exp.state, reward, exp.nextState, exp.action);
+        List<RLState> opponentStates = opponent.getStateBuffer();
+        for (int i = 0; i < opponentStates.size() - 1; i++) {
+            RLState state = opponentStates.get(i);
+            RLState nextState = opponentStates.get(i + 1);
+            model.update(state, reward, nextState);
         }
-        opponent.clearExperienceBuffer();
     }
 } 

@@ -13,11 +13,13 @@ public class RLModel implements Serializable {
     private static final double LEARNING_RATE = 0.001;
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
-    public static final int OUTPUT_SIZE = (RLAction.MAX_ACTIONS + 1) * (RLAction.MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
+    public static final int MAX_ACTIONS = 10;
+    public static final int OUTPUT_SIZE = (MAX_ACTIONS + 1) * (MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
+
 
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
-        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE + RLAction.FEATURE_VECTOR_SIZE, OUTPUT_SIZE, 0.1);
+        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, OUTPUT_SIZE, 0.1);
         try {
             network.loadNetwork("network.ser");
         } catch (IOException e) {
@@ -36,25 +38,25 @@ public class RLModel implements Serializable {
 
     // This has to be this way to ensure its possible to attack with all creatures
     public double getAttackOrBlockThreshold() {
-        return (double) 1 / RLAction.MAX_ACTIONS; // Threshold can be tuned based on training
+        return (double) 1 / MAX_ACTIONS; // Threshold can be tuned based on training
     }
 
-    public INDArray predictDistribution(RLState state, RLAction action, boolean isExploration) {
-        return network.predict(state.getStateVector(), action.getFeatureVector(),isExploration);
+    public INDArray predictDistribution(RLState state, boolean isExploration) {
+        return network.predict(state.getStateVector(), isExploration);
     }
 
     // TODO: Research the algorithm used here. I don't really understand it.
     // NOTE: action here is WRONG. It is the output from state, not the input to state
-    public void update(RLState state, double reward, RLState nextState, RLAction action) {
-        INDArray nextQValues = predictDistribution(nextState, action, false);
+    public void update(RLState state, double reward, RLState nextState) {
+        INDArray nextQValues = predictDistribution(nextState, false);
         INDArray targetQValues = Nd4j.zeros(OUTPUT_SIZE, OUTPUT_SIZE);
 
         //TODO: Don't set qval if skip action was selected
         // Need to save gamestate?
-        switch (action.getType()) {
+        switch (state.actionType) {
             case DECLARE_ATTACKS:
                 // Set target Q-values for all attackers above the threshold
-                for (int i = 0; i < RLAction.MAX_ACTIONS; i++) {
+                for (int i = 0; i < MAX_ACTIONS; i++) {
                     if (nextQValues.getDouble(i) > getAttackOrBlockThreshold()) {
                         targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
                     }
@@ -82,11 +84,11 @@ public class RLModel implements Serializable {
                 break;
             default:
                 // Error since we don't know what to do with this action
-                logger.error("Unknown action type: " + action.getType());
-                throw new IllegalArgumentException("Unknown action type: " + action.getType());
+                logger.error("Unknown action type: " + state.actionType);
+                throw new IllegalArgumentException("Unknown action type: " + state.actionType);
         }
 
         // Update the network weights
-        network.updateWeights(state.getStateVector(), action.getFeatureVector(), targetQValues);
+        network.updateWeights(state.getStateVector(), targetQValues);
     }
 } 

@@ -14,8 +14,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.player.ai.rl.Experience;
-import mage.player.ai.rl.RLAction;
 import mage.player.ai.rl.RLModel;
 import mage.player.ai.rl.RLState;
 import mage.player.ai.util.CombatUtil;
@@ -25,13 +23,12 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     private static final Logger logger = Logger.getLogger(ComputerPlayerRL.class);
     public RLModel model;
     protected RLState currentState;
-    protected RLAction currentAction;
-    private final List<Experience> experienceBuffer;
+    private final List<RLState> stateBuffer;
 
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill, RLModel model) {
         super(name, range, skill);
         this.model = model;
-        this.experienceBuffer = new ArrayList<>();
+        this.stateBuffer = new ArrayList<>();
         logger.info("ComputerPlayerRL initialized for " + name);
     }
 
@@ -48,8 +45,6 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         logger.info("selectAttackers called for " + getName());
-
-        currentState = new RLState(game);
         List<Permanent> allAttackers = game.getBattlefield().getAllActivePermanents(
             StaticFilters.FILTER_PERMANENT_CREATURE,
             playerId,
@@ -62,25 +57,24 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 possibleAttackers.add(creature);
             }
         }
-        currentAction = new RLAction(RLAction.ActionType.DECLARE_ATTACKS, null, possibleAttackers, game);
-        INDArray qValues = model.predictDistribution(currentState, currentAction, true);
+        INDArray qValues = model.predictDistribution(currentState, true);
 
-        if (possibleAttackers.size() > RLAction.MAX_ACTIONS) {
+        if (possibleAttackers.size() > RLModel.MAX_ACTIONS) {
             logger.error("ERROR: More attackers than max actions, Model truncating");
         }
 
         List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
-        if (possibleAttackTargets.size() > RLAction.MAX_ACTIONS) {
+        if (possibleAttackTargets.size() > RLModel.MAX_ACTIONS) {
             logger.error("ERROR: More attack targets than max actions, Model truncating");
         }
 
-        for (int attackerIndex = 0; attackerIndex < RLAction.MAX_ACTIONS; attackerIndex++) {
+        for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS; attackerIndex++) {
             Permanent attacker = possibleAttackers.get(attackerIndex);
 
             // Create a list of defender indices with their Q-values for this attacker
             List<AttackOption> attackOptions = new ArrayList<>();
             // +1 to reserve the option to not attack
-            for (int defenderIndex = 0; defenderIndex < RLAction.MAX_ACTIONS + 1; defenderIndex++) {
+            for (int defenderIndex = 0; defenderIndex < RLModel.MAX_ACTIONS + 1; defenderIndex++) {
                 double qValue = qValues.getDouble(attackerIndex, defenderIndex);
                 attackOptions.add(new AttackOption(defenderIndex, attackerIndex, qValue));
             }
@@ -90,7 +84,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 
             // Declare attacks based on sorted Q-values
             for (AttackOption option : attackOptions) {
-                if (option.defenderIndex >= Math.min(RLAction.MAX_ACTIONS, possibleAttackTargets.size())) {
+                if (option.defenderIndex >= Math.min(RLModel.MAX_ACTIONS, possibleAttackTargets.size())) {
                     continue; // Skip this attacker if the first choice is to not attack
                 }
                 UUID defenderId = possibleAttackTargets.get(option.defenderIndex);
@@ -105,8 +99,6 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     // Don't need to override?
     // TODO: Do we need to pass the action vector a reference for WHICH creature its declaring blocks?
     private void declareBlockers(Game game) {
-        currentState = new RLState(game);
-
         List<Permanent> attackers = getAttackers(game);
         if (attackers == null) {
             return;
@@ -123,22 +115,21 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         if (attackers.isEmpty()) {
             return;
         }
-        currentAction = new RLAction(RLAction.ActionType.DECLARE_BLOCKS, null, null, game);
-        INDArray qValues = model.predictDistribution(currentState, currentAction, true);
+        INDArray qValues = model.predictDistribution(currentState, true);
         
-        if (possibleBlockers.size() > RLAction.MAX_ACTIONS) {
+        if (possibleBlockers.size() > RLModel.MAX_ACTIONS) {
             logger.error("ERROR: More blockers than max actions, Model truncating");
         }
-        if (attackers.size() > RLAction.MAX_ACTIONS) {
+        if (attackers.size() > RLModel.MAX_ACTIONS) {
             logger.error("ERROR: More attackers than max actions, Model truncating");
         }
 
-        for (int blockerIndex = 0; blockerIndex < RLAction.MAX_ACTIONS; blockerIndex++) {
+        for (int blockerIndex = 0; blockerIndex < RLModel.MAX_ACTIONS; blockerIndex++) {
             Permanent blocker = possibleBlockers.get(blockerIndex);
 
             // Create a list of attacker indices with their Q-values for this blocker
             List<BlockOption> blockOptions = new ArrayList<>();
-            for (int attackerIndex = 0; attackerIndex < RLAction.MAX_ACTIONS + 1; attackerIndex++) {
+            for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS + 1; attackerIndex++) {
                 double qValue = qValues.getDouble(blockerIndex, attackerIndex);
                 blockOptions.add(new BlockOption(attackerIndex, blockerIndex, qValue));
             }
@@ -148,7 +139,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
  
             // Declare blocks based on sorted Q-values
             for (BlockOption option : blockOptions) {
-                if (option.attackerIndex >= Math.min(RLAction.MAX_ACTIONS, attackers.size())) {
+                if (option.attackerIndex >= Math.min(RLModel.MAX_ACTIONS, attackers.size())) {
                     continue; // Skip this blocker if the first choice is to not block
                 }
                 Permanent attacker = attackers.get(option.attackerIndex);
@@ -211,13 +202,14 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         logger.info("priorityPlay called for " + getName() + " during " + game.getTurnStepType());
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
-        RLState nextState;
         switch (game.getTurnStepType()) {
             case UPKEEP:
             case DRAW:
                 pass(game);
                 return false;
             case PRECOMBAT_MAIN:
+                currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
+                stateBuffer.add(currentState);
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
                 ActivatedAbility ability = calculateActions(game);
                 if (ability == null) {
@@ -231,23 +223,23 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
+                currentState = new RLState(game, RLState.ActionType.DECLARE_ATTACKS);
+                stateBuffer.add(currentState);
                 printBattlefieldScore(game, "Sim PRIORITY on DECLARE ATTACKERS");
                 //TODO: only selectattackers if its your turn
                 selectAttackers(game, playerId);
                 // TODO: We can also perform actions here but lets simplify for now
                 pass(game);
-                nextState = new RLState(game);
-                addExperience(currentState, currentAction, nextState);
                 //act(game);
                 return true;
             case DECLARE_BLOCKERS:
+                currentState = new RLState(game, RLState.ActionType.DECLARE_BLOCKS);
+                stateBuffer.add(currentState);
                 printBattlefieldScore(game, "Sim PRIORITY on DECLARE BLOCKERS");
                 //TODO: only declareblockers if its your turn
                 declareBlockers(game);
                 // TODO: We can also perform actions here but lets simplify for now
                 pass(game);
-                nextState = new RLState(game);
-                addExperience(currentState, currentAction, nextState);
                 return true;
             case FIRST_COMBAT_DAMAGE:
             case COMBAT_DAMAGE:
@@ -255,6 +247,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
+                currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
+                stateBuffer.add(currentState);
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 2");
                 calculateActions(game);
                 act(game);
@@ -291,10 +285,6 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 }
             }
             this.activateAbility((ActivatedAbility) ability, game);
-
-            // Store the experience with the updated nextState
-            RLState nextState = new RLState(game);
-            addExperience(currentState, currentAction, nextState);
         }
     }
 
@@ -304,11 +294,9 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         // Returns a list of all available spells and abilities the player can currently cast/activate with his available resources.
         // Without target validation.
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
-        currentAction = new RLAction(RLAction.ActionType.ACTIVATE_ABILITY_OR_SPELL, playables, null, game);
-        currentState = new RLState(game);
 
         // Evaluate each action using the model
-        INDArray qValues = model.predictDistribution(currentState, currentAction, true);
+        INDArray qValues = model.predictDistribution(currentState, true);
         double maxQValue = Double.NEGATIVE_INFINITY;
         int bestIndex = 0;
         
@@ -333,16 +321,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         }
     }
 
-    public void addExperience(RLState state, RLAction action, RLState nextState) {
-        experienceBuffer.add(new Experience(state, action, 0, nextState)); // Reward is set to 0 initially
-    }
-
-    public List<Experience> getExperienceBuffer() {
-        return experienceBuffer;
-    }
-
-    public void clearExperienceBuffer() {
-        experienceBuffer.clear();
+    public List<RLState> getStateBuffer() {
+        return stateBuffer;
     }
 }
 

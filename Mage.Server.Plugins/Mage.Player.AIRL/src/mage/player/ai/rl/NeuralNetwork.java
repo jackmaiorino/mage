@@ -38,7 +38,7 @@ public class NeuralNetwork {
         network.init();
     }
     
-    public INDArray predict(float[] state, float[] action, boolean isExploration) {
+    public INDArray predict(float[] state, boolean isExploration) {
         // Epsilon-greedy exploration
         if (Math.random() <= explorationRate && isExploration) {
             // Generate random softmax distribution
@@ -54,13 +54,7 @@ public class NeuralNetwork {
             }
             return Nd4j.create(randomDist).reshape(outputSize, outputSize);
         }
-        float[] combined = new float[state.length + action.length];
-        System.arraycopy(state, 0, combined, 0, state.length);
-        System.arraycopy(action, 0, combined, state.length, action.length);
-        
-        INDArray input = Nd4j.create(combined);
-        INDArray output = network.output(input);
-        return output.reshape(outputSize, outputSize);
+        return network.output(Nd4j.create(state)).reshape(outputSize, outputSize);
     }
 
     // New idea
@@ -105,15 +99,11 @@ public class NeuralNetwork {
     //     return softmaxOutput;
     // }
 
-    public void updateWeights(float[] state, float[] action, INDArray targetQValues) {
-        float[] combined = new float[state.length + action.length];
-        System.arraycopy(state, 0, combined, 0, state.length);
-        System.arraycopy(action, 0, combined, state.length, action.length);
-
-        INDArray input = Nd4j.create(combined);
-
+    public void updateWeights(float[] state, INDArray targetQValues) {
+        INDArray input = Nd4j.create(state);
+        INDArray target = Nd4j.create(targetQValues.data().asFloat());
         // Perform a single training step
-        network.fit(input, targetQValues);
+        network.fit(input, target);
     }
 
     public void saveNetwork(String filePath) throws IOException {

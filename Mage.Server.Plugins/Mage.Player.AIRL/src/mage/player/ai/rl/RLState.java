@@ -21,9 +21,12 @@ public class RLState {
     public static final int NUM_PLAYER_STATS = 5;   
     public static final int NUM_CARDS = 60;
     public static final int EMBEDDING_SIZE = EmbeddingManager.EMBEDDING_SIZE + CARD_STATS_SIZE;
+    public static final int ACTION_TYPE_SIZE = ActionType.values().length;
     // The possibility of having tons of tokens may break this
-    public static final int STATE_VECTOR_SIZE = NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE) // Player
-                                        + NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE); // Opponent
+    public static final int STATE_VECTOR_SIZE = ACTION_TYPE_SIZE +
+                                                NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE) // Player
+                                                + NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE); // Opponent
+    public ActionType actionType;
 
     public enum ZoneType {
         HAND,
@@ -35,9 +38,17 @@ public class RLState {
         STACK
     }
 
+    public enum ActionType {
+        ACTIVATE_ABILITY_OR_SPELL,
+        SELECT_TARGETS,
+        DECLARE_ATTACKS,
+        DECLARE_BLOCKS,
+        MULLIGAN
+    }
                                         
-    public RLState(Game game) {
+    public RLState(Game game, ActionType actionType) {
         stateVector = new float[STATE_VECTOR_SIZE];
+        this.actionType = actionType;
         buildStateVector(game);
     }
 
@@ -47,9 +58,12 @@ public class RLState {
             logger.error("No active player found in game " + game.getId());
             throw new IllegalStateException("Cannot build state vector: no active player");
         }
+        int index = 0;
+        // Action Type
+        stateVector[actionType.ordinal()] = 1.0f;
+        index += ActionType.values().length;
 
         // Player Numerical Stats Normalized (Some values like graveyard and land are arbitrary)
-        int index = 0;
         stateVector[index++] = (float) player.getLife() / game.getStartingLife();
         stateVector[index++] = (float) player.getHand().size() / 7;
         stateVector[index++] = (float) player.getLibrary().size() / 60;
@@ -170,6 +184,10 @@ public class RLState {
 
     public float[] getStateVector() {
         return stateVector;
+    }
+
+    public ActionType getActionType() {
+        return actionType;
     }
 
     public float[] convertCardToFeatureVector(Card card, ZoneType zoneType, Game game) {
