@@ -41,20 +41,25 @@ public class NeuralNetwork {
     public INDArray predict(float[] state, boolean isExploration) {
         // Epsilon-greedy exploration
         if (Math.random() <= explorationRate && isExploration) {
-            // Generate random softmax distribution
-            float[] randomDist = new float[outputSize * outputSize];
+            logger.info("Exploration!");
+            // Generate random values for the first 10 indices to favor exploration
+            float[] randomDist = new float[outputSize];
             float sum = 0;
-            for (int i = 0; i < randomDist.length; i++) {
+            for (int i = 0; i < RLModel.MAX_ACTIONS + 1; i++) {
                 randomDist[i] = (float) Math.random();
                 sum += randomDist[i];
             }
-            // Normalize to sum to 1
-            for (int i = 0; i < randomDist.length; i++) {
+            // Normalize the first 10 values to sum to 1
+            for (int i = 0; i < RLModel.MAX_ACTIONS; i++) {
                 randomDist[i] /= sum;
             }
-            return Nd4j.create(randomDist).reshape(outputSize, outputSize);
+            // Fill the rest of the array with zeros
+            for (int i = RLModel.MAX_ACTIONS; i < randomDist.length; i++) {
+                randomDist[i] = 0;
+            }
+            return Nd4j.create(randomDist).reshape(RLModel.MAX_ACTIONS + 1, RLModel.MAX_ACTIONS);
         }
-        return network.output(Nd4j.create(state)).reshape(outputSize, outputSize);
+        return network.output(Nd4j.create(state)).reshape(RLModel.MAX_ACTIONS + 1, RLModel.MAX_ACTIONS);
     }
 
     // New idea

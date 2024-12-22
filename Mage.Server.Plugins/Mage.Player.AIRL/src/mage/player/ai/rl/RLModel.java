@@ -10,18 +10,19 @@ import org.nd4j.linalg.factory.Nd4j;
 public class RLModel implements Serializable {
     private static final Logger logger = Logger.getLogger(RLModel.class);
     private final NeuralNetwork network;
-    private static final double LEARNING_RATE = 0.001;
+    private static final double EXPLORATION_RATE = 0.5;
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
+    // TODO: Eliminate the need for a MAX_ACTIONS by finding ways to indicate multiple copies of same card efficiently
     public static final int MAX_ACTIONS = 10;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS + 1) * (MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
 
 
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
-        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, OUTPUT_SIZE, 0.1);
+        network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, OUTPUT_SIZE, EXPLORATION_RATE);
         try {
-            network.loadNetwork("network.ser");
+            network.loadNetwork(RLTrainer.MODEL_FILE_PATH);
         } catch (IOException e) {
             logger.error("Failed to load network, initializing a new one.", e);
         }
@@ -48,39 +49,34 @@ public class RLModel implements Serializable {
     // TODO: Research the algorithm used here. I don't really understand it.
     // NOTE: action here is WRONG. It is the output from state, not the input to state
     public void update(RLState state, double reward, RLState nextState) {
-        INDArray nextQValues = predictDistribution(nextState, false);
-        INDArray targetQValues = Nd4j.zeros(OUTPUT_SIZE, OUTPUT_SIZE);
+        INDArray nextQValues = nextState.targetQValues;
+        INDArray targetQValues = Nd4j.zeros(RLModel.OUTPUT_SIZE);
 
-        //TODO: Don't set qval if skip action was selected
-        // Need to save gamestate?
+        // TODO: Some redundant code here. Can we clean it up?
         switch (state.actionType) {
             case DECLARE_ATTACKS:
-                // Set target Q-values for all attackers above the threshold
-                for (int i = 0; i < MAX_ACTIONS; i++) {
-                    if (nextQValues.getDouble(i) > getAttackOrBlockThreshold()) {
+                // Set target Q-values
+                for (int i = 0; i < nextQValues.data().length(); i++) {
+                    if (nextQValues.getDouble(i) != 0) {
                         targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
                     }
                 }
                 break;
             case DECLARE_BLOCKS:
-                // Set target Q-values for all blockers above the threshold
-                for (int i = 0; i < nextQValues.length(); i++) {
-                    if (nextQValues.getDouble(i) > getAttackOrBlockThreshold()) {
+                // Set target Q-values
+                for (int i = 0; i < nextQValues.data().length(); i++) {
+                    if (nextQValues.getDouble(i) != 0) {
                         targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
                     }
                 }
                 break;
             case ACTIVATE_ABILITY_OR_SPELL:
-                // Find the index of the maximum Q-value for the next state
-                int maxIndex = 0;
-                double maxNextQValue = nextQValues.getDouble(0);
-                for (int i = 1; i < nextQValues.length(); i++) {
-                    if (nextQValues.getDouble(i) > maxNextQValue) {
-                        maxNextQValue = nextQValues.getDouble(i);
-                        maxIndex = i;
+                // Set target Q-values
+                for (int i = 0; i < nextQValues.data().length(); i++) {
+                    if (nextQValues.getDouble(i) != 0) {
+                        targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
                     }
                 }
-                targetQValues.putScalar(maxIndex, reward + DISCOUNT_FACTOR * maxNextQValue);
                 break;
             default:
                 // Error since we don't know what to do with this action

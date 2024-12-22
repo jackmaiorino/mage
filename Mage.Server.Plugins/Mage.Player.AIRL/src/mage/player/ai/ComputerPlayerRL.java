@@ -7,6 +7,7 @@ import java.util.UUID;
 
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import mage.abilities.ActivatedAbility;
 import mage.constants.RangeOfInfluence;
@@ -34,41 +35,43 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 
     @Override
     public boolean priority(Game game) {
-        logger.info("priority called for " + getName());
         game.resumeTimer(getTurnControlledBy());
         boolean result = priorityPlay(game);
         game.pauseTimer(getTurnControlledBy());
         return result;
     }
 
-    //TODO: Implement ability to attack planeswalkers
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
-        logger.info("selectAttackers called for " + getName());
+        // Generate list of possible attackers
         List<Permanent> allAttackers = game.getBattlefield().getAllActivePermanents(
             StaticFilters.FILTER_PERMANENT_CREATURE,
             playerId,
             game
         );
         List<Permanent> possibleAttackers = new ArrayList<>();
-
         for (Permanent creature : allAttackers) {
             if (creature.canAttack(null, game)) {
                 possibleAttackers.add(creature);
             }
         }
-        INDArray qValues = model.predictDistribution(currentState, true);
-
         if (possibleAttackers.size() > RLModel.MAX_ACTIONS) {
             logger.error("ERROR: More attackers than max actions, Model truncating");
         }
 
+        // Predict on game state
+        INDArray qValues = model.predictDistribution(currentState, true);
+
+        // Generate list of attack targets (Player,planeswalkers,battles)
         List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
         if (possibleAttackTargets.size() > RLModel.MAX_ACTIONS) {
             logger.error("ERROR: More attack targets than max actions, Model truncating");
         }
 
-        for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS; attackerIndex++) {
+        // Save this for updating later
+        currentState.numAttackers = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
+        // For each attacker
+        for (int attackerIndex = 0; attackerIndex < currentState.numAttackers; attackerIndex++) {
             Permanent attacker = possibleAttackers.get(attackerIndex);
 
             // Create a list of defender indices with their Q-values for this attacker
@@ -83,13 +86,17 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             attackOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
 
             // Declare attacks based on sorted Q-values
+            currentState.numAttackTargets = Math.min(RLModel.MAX_ACTIONS, possibleAttackTargets.size());
             for (AttackOption option : attackOptions) {
-                if (option.defenderIndex >= Math.min(RLModel.MAX_ACTIONS, possibleAttackTargets.size())) {
-                    continue; // Skip this attacker if the first choice is to not attack
+                if (option.defenderIndex >= currentState.numAttackTargets) {
+                    // TODO: Investigate, is storing this "Pass value" correct?
+                    currentState.targetQValues.putScalar(option.attackerIndex, option.defenderIndex, option.qValue);
+                    break; // Skip this attacker if the first choice is to not attack
                 }
                 UUID defenderId = possibleAttackTargets.get(option.defenderIndex);
                 if (attacker.canAttack(defenderId, game)) {
                     this.declareAttacker(attacker.getId(), defenderId, game, false);
+                    currentState.targetQValues.putScalar(option.attackerIndex, option.defenderIndex, option.qValue);
                     break; // Once an attack is declared, move to the next attacker
                 }
             }
@@ -124,7 +131,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             logger.error("ERROR: More attackers than max actions, Model truncating");
         }
 
-        for (int blockerIndex = 0; blockerIndex < RLModel.MAX_ACTIONS; blockerIndex++) {
+        currentState.numBlockers = Math.min(RLModel.MAX_ACTIONS, possibleBlockers.size());
+        for (int blockerIndex = 0; blockerIndex < currentState.numBlockers; blockerIndex++) {
             Permanent blocker = possibleBlockers.get(blockerIndex);
 
             // Create a list of attacker indices with their Q-values for this blocker
@@ -138,13 +146,17 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             blockOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
  
             // Declare blocks based on sorted Q-values
+            currentState.numAttackers = Math.min(RLModel.MAX_ACTIONS, attackers.size());
             for (BlockOption option : blockOptions) {
-                if (option.attackerIndex >= Math.min(RLModel.MAX_ACTIONS, attackers.size())) {
-                    continue; // Skip this blocker if the first choice is to not block
+                if (option.attackerIndex >= currentState.numAttackers) {
+                    // TODO: Investigate, is storing this "Pass value" correct?
+                    currentState.targetQValues.putScalar(option.blockerIndex, option.attackerIndex, option.qValue);
+                    break; // Skip this blocker if the first choice is to not block
                 }
                 Permanent attacker = attackers.get(option.attackerIndex);
                 if (blocker.canBlock(attacker.getId(), game)) {
                     this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
+                    currentState.targetQValues.putScalar(option.blockerIndex, option.attackerIndex, option.qValue);
                     // Remove the attacker if it can't be blocked anymore
                     // if (!attacker.canBeBlocked(game)) {
                     //     attackers.remove(option.attackerIndex);
@@ -202,6 +214,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         logger.info("priorityPlay called for " + getName() + " during " + game.getTurnStepType());
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
+        ActivatedAbility ability;
         switch (game.getTurnStepType()) {
             case UPKEEP:
             case DRAW:
@@ -211,13 +224,11 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
                 stateBuffer.add(currentState);
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
-                ActivatedAbility ability = calculateActions(game);
-                if (ability == null) {
-                    logger.info("Model opted to pass priority");
-                    pass(game);
-                    return false;
-                }
-                act(game, ability);
+                do {
+                    ability = calculateActions(game);
+                    act(game, ability);
+                    printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
+                } while (ability == null);
                 return true;
             case BEGIN_COMBAT:
                 pass(game);
@@ -250,10 +261,13 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
                 stateBuffer.add(currentState);
                 printBattlefieldScore(game, "Sim PRIORITY on MAIN 2");
-                calculateActions(game);
-                act(game);
+                do {
+                    ability = calculateActions(game);
+                    act(game, ability);
+                    printBattlefieldScore(game, "Sim PRIORITY on MAIN 2");
+                } while (ability == null);
                 return true;
-            case END_TURN:
+            case END_TURN:  
             case CLEANUP:
                 actionCache.clear();
                 pass(game);
@@ -268,8 +282,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
     // NOTE: I think the way computerplayer6 does this is because it implements the idea
     // of holding priority
     protected void act(Game game, ActivatedAbility ability) {
-        logger.info("act called for " + getName());
         if (ability == null) {
+            logger.info("Model opted to pass priority");
             pass(game);
         } else {
             logger.info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
@@ -284,12 +298,13 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                     }
                 }
             }
-            this.activateAbility((ActivatedAbility) ability, game);
+            this.activateAbility(ability, game);
+            //TODO: Implement holding priority for abilities that don't use the stack
+            pass(game);
         }
     }
 
     protected ActivatedAbility calculateActions(Game game) {
-        logger.info("calculateActions called for " + getName());
         boolean isSimulatedPlayer = true;
         // Returns a list of all available spells and abilities the player can currently cast/activate with his available resources.
         // Without target validation.
@@ -301,15 +316,19 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         int bestIndex = 0;
         
         // Find index with highest Q-value
-        for (int i = 0; i < qValues.length(); i++) {
+        long max = qValues.data().length();
+        for (int i = 0; i < max; i++) {
             if (qValues.getDouble(i) > maxQValue) {
                 maxQValue = qValues.getDouble(i);
                 bestIndex = i;
             }
         }
 
-        logger.info("playables: " + playables);
+        logger.info("bestIndex: " + bestIndex);
         logger.info("qValues: " + qValues);
+        logger.info("playables: " + playables);
+
+        currentState.targetQValues.putScalar(bestIndex, qValues.getDouble(bestIndex));
 
         // Get the corresponding ability and add it to actions queue
         // -1 on range is to reserve the option to do nothing
