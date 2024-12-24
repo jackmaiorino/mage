@@ -1,6 +1,9 @@
 package mage.player.ai.rl;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
@@ -36,73 +39,45 @@ public class NeuralNetwork {
         
         network = new MultiLayerNetwork(conf);
         network.init();
+
+        // Log if using GPU
+        Properties envInfoProps = Nd4j.getExecutioner().getEnvironmentInformation();
+        Map<String, Object> envInfo = propertiesToMap(envInfoProps);
+        if ("CUDA".equals(envInfo.get("backend"))) {
+            logger.info("Neural Network is using a GPU.");
+        } else {
+            logger.info("Neural Network is using a CPU.");
+        }
     }
     
     public INDArray predict(float[] state, boolean isExploration) {
         // Epsilon-greedy exploration
         if (Math.random() <= explorationRate && isExploration) {
             logger.info("Exploration!");
-            // Generate random values for the first 10 indices to favor exploration
-            float[] randomDist = new float[outputSize];
+            // Create a 2D array for the output
+            float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_ACTIONS + 1];
+            
+            // Generate random values for the first 11 indices of the first row
             float sum = 0;
-            for (int i = 0; i < RLModel.MAX_ACTIONS + 1; i++) {
-                randomDist[i] = (float) Math.random();
-                sum += randomDist[i];
+            for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
+                randomDist[0][j] = (float) Math.random();
+                sum += randomDist[0][j];
             }
-            // Normalize the first 10 values to sum to 1
-            for (int i = 0; i < RLModel.MAX_ACTIONS; i++) {
-                randomDist[i] /= sum;
+            // Normalize the first 11 values to sum to 1
+            for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
+                randomDist[0][j] /= sum;
             }
-            // Fill the rest of the array with zeros
-            for (int i = RLModel.MAX_ACTIONS; i < randomDist.length; i++) {
-                randomDist[i] = 0;
+            
+            // Set the rest of the array to zeros
+            for (int i = 1; i < RLModel.MAX_ACTIONS; i++) {
+                for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
+                    randomDist[i][j] = 0;
+                }
             }
-            return Nd4j.create(randomDist).reshape(RLModel.MAX_ACTIONS + 1, RLModel.MAX_ACTIONS);
+            return Nd4j.create(randomDist);
         }
-        return network.output(Nd4j.create(state)).reshape(RLModel.MAX_ACTIONS + 1, RLModel.MAX_ACTIONS);
+        return network.output(Nd4j.create(state)).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
     }
-
-    // New idea
-    // public INDArray predict(float[] state, float[] action, boolean isExploration, INDArray actionMask) {
-    //     // Combine state and action into a single input vector
-    //     float[] combined = new float[state.length + action.length];
-    //     System.arraycopy(state, 0, combined, 0, state.length);
-    //     System.arraycopy(action, 0, combined, state.length, action.length);
-    
-    //     // Create input INDArray
-    //     INDArray input = Nd4j.create(combined);
-    
-    //     // Get output from the network
-    //     INDArray output = network.output(input);
-    
-    //     // Reshape to 2D array
-    //     output = output.reshape(outputSize, outputSize);
-    
-    //     if (isExploration && Math.random() <= explorationRate) {
-    //         // Exploration: generate random actions (but apply mask during inference)
-    //         output = Nd4j.rand(outputSize, outputSize);
-    //     }
-    
-    //     // During training: Penalize invalid actions
-    //     if (!isExploration) {
-    //         // Calculate penalties for invalid actions
-    //         INDArray invalidProbabilities = output.mul(actionMask.rsub(1)); // 1 - mask
-    //         float penalty = invalidProbabilities.sumNumber().floatValue();
-    
-    //         // Apply penalty to loss function (handled outside predict)
-    //         // Example: totalLoss += penalty * penaltyWeight;
-    //     }
-    
-    //     // During inference: Apply mask
-    //     output.muli(actionMask); // Element-wise multiply with mask
-    
-    //     // Normalize the masked output using softmax
-    //     INDArray expOutput = Transforms.exp(output); // Element-wise exponential
-    //     INDArray sumExp = expOutput.sum(); // Sum of all exponentials
-    //     INDArray softmaxOutput = expOutput.div(sumExp); // Normalize to get probabilities
-    
-    //     return softmaxOutput;
-    // }
 
     public void updateWeights(float[] state, INDArray targetQValues) {
         INDArray input = Nd4j.create(state);
@@ -121,5 +96,14 @@ public class NeuralNetwork {
         } catch (IOException e) {
             logger.error("Can't find file: " + filePath, e);
         }
+    }
+
+    // Helper method to convert Properties to Map<String, Object>
+    private Map<String, Object> propertiesToMap(Properties properties) {
+        Map<String, Object> map = new HashMap<>();
+        for (String name : properties.stringPropertyNames()) {
+            map.put(name, properties.getProperty(name));
+        }
+        return map;
     }
 } 

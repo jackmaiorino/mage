@@ -56,7 +56,7 @@ public class RLState {
     public RLState(Game game, ActionType actionType) {
         stateVector = new float[STATE_VECTOR_SIZE];
         this.actionType = actionType;
-        this.targetQValues = Nd4j.zeros(RLModel.MAX_ACTIONS + 1, RLModel.MAX_ACTIONS);
+        this.targetQValues = Nd4j.zeros(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
         buildStateVector(game);
     }
 
