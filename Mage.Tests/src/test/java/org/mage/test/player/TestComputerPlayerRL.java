@@ -24,7 +24,7 @@ public class TestComputerPlayerRL extends CardTestPlayerBase {
 
         RLTrainer trainer = new RLTrainer();
         trainer.train();
-
+        //trainer.eval(5);
         System.err.println("Test Complete");
         System.err.flush();
     }

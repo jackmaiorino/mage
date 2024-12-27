@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,7 +35,7 @@ import mage.players.Player;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
-    private static final int NUM_EPISODES = 30;
+    private static final int NUM_EPISODES = 1;
     private static final int NUM_EVAL_EPISODES = 5;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
@@ -52,54 +51,47 @@ public class RLTrainer {
                                         .collect(Collectors.toList());
 
             Random random = new Random();
-
-            // Load model for each player
-            logger.info("Current working directory: " + System.getProperty("user.dir"));
+            // TODO: multithreaded access to
             RLModel model = new RLModel();
 
             // Determine the number of available threads
             int numThreads = Runtime.getRuntime().availableProcessors();
+            numThreads = 1;
             int episodesPerThread = NUM_EPISODES / numThreads;
             logger.info("Number of threads: " + numThreads);
             logger.info("Episodes per thread: " + episodesPerThread);
 
-            // Create a fixed thread pool
+            // Record start time
+            long startTime = System.nanoTime();
+
             ExecutorService executor = Executors.newFixedThreadPool(numThreads);
             List<Future<Void>> futures = new ArrayList<>();
 
-            // Self-play training
             for (int i = 0; i < numThreads; i++) {
                 Future<Void> future = executor.submit(() -> {
                     Thread.currentThread().setName("GAME");
                     for (int episode = 0; episode < episodesPerThread; episode++) {
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
-                        // Select a random deck for RL player
                         Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                         Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, model);
                         game.addPlayer(rlPlayer, rlPlayerDeck);
 
-                        // Select a random deck for opponent
                         Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                         Deck opponentDeck = loadDeck(opponentDeckPath.toString());
                         ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, model);
                         game.addPlayer(opponent, opponentDeck);
 
-                        // Load cards into the game
                         game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
                         game.loadCards(opponentDeck.getCards(), opponent.getId());
 
                         GameOptions options = new GameOptions();
                         game.setGameOptions(options);
 
-                        // Start the game
                         game.start(rlPlayer.getId());
 
-                        // Log final game state
                         logGameResult(game, rlPlayer);
-
-                        // Update model based on game outcome
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, model);
                     }
                     return null;
@@ -107,75 +99,86 @@ public class RLTrainer {
                 futures.add(future);
             }
 
-            // Shutdown the executor
             executor.shutdown();
             executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
 
-            // Check for exceptions
             for (Future<Void> future : futures) {
                 try {
-                    future.get(); // This will throw an exception if the task failed
+                    future.get();
                 } catch (ExecutionException e) {
                     logger.error("Error in thread execution", e.getCause());
                     throw new RuntimeException(e.getCause());
                 }
             }
 
-            // Evaluation against ComputerPlayer7
-            int winsAgainstComputerPlayer7 = 0;
-            for (int evalEpisode = 0; evalEpisode < NUM_EVAL_EPISODES; evalEpisode++) {
-                // This match wrapper is confusing
-                // TODO: Why do we need a match wrapper?
-                TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
-                try {
-                    match.startGame();
-                } catch (GameException e) {
-                    e.printStackTrace();
-                }
-                Game game = match.getGames().get(0);
+            // Record end time
+            long endTime = System.nanoTime();
+            long totalTime = endTime - startTime;
+            double averageTimePerEpisode = (double) totalTime / NUM_EPISODES / 1_000_000_000.0; // Convert to seconds
+            logger.info("Average time per episode: " + averageTimePerEpisode + " seconds");
 
-                // Select a random deck for RL player
-                Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-                Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
-                ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, model);
-                game.addPlayer(rlPlayer, rlPlayerDeck);
-                match.addPlayer(rlPlayer, rlPlayerDeck);
-
-                // Select a random deck for ComputerPlayer7
-                Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-                Deck opponentDeck = loadDeck(opponentDeckPath.toString());
-                ComputerPlayer7 opponent = new ComputerPlayer7("Player7", RangeOfInfluence.ALL, 3);
-                game.addPlayer(opponent, opponentDeck);
-                match.addPlayer(opponent, opponentDeck);
-
-                // Load cards into the game
-                game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
-                game.loadCards(opponentDeck.getCards(), opponent.getId());
-
-                GameOptions options = new GameOptions();
-                game.setGameOptions(options);
-
-                // Start the game
-                game.start(rlPlayer.getId());
-
-                // Log final game state
-                logGameResult(game, rlPlayer);
-
-                // Check if RL player won
-                if (game.getWinner().contains(rlPlayer.getName())) {
-                    winsAgainstComputerPlayer7++;
-                }
-            }
-
-            // Log win rate against ComputerPlayer7
-            double winRate = (double) winsAgainstComputerPlayer7 / NUM_EVAL_EPISODES;
-            logger.info("Win rate against ComputerPlayer7: " + (winRate * 100) + "%");
-
-            // Save the model after training
             model.saveModel(MODEL_FILE_PATH);
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
         }
+    }
+
+    public void eval(int numEpisodes) {
+        List<Path> deckFiles = null;
+        try {  
+            deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
+                                        .filter(Files::isRegularFile)
+                                        .collect(Collectors.toList());
+        } catch (IOException e) {
+            logger.error("Error during evaluation", e);
+        }
+        if (deckFiles == null) {
+            logger.error("No deck files found");
+            return;
+        }
+
+        RLModel model = new RLModel();
+
+        int winsAgainstComputerPlayer7 = 0;
+        Random random = new Random();
+        for (int evalEpisode = 0; evalEpisode < numEpisodes; evalEpisode++) {
+            TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
+            try {
+                match.startGame();
+            } catch (GameException e) {
+                e.printStackTrace();
+            }
+            Game game = match.getGames().get(0);
+
+            Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+            Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
+            ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, model);
+            game.addPlayer(rlPlayer, rlPlayerDeck);
+            match.addPlayer(rlPlayer, rlPlayerDeck);
+
+            Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+            Deck opponentDeck = loadDeck(opponentDeckPath.toString());
+            ComputerPlayer7 opponent = new ComputerPlayer7("Player7", RangeOfInfluence.ALL, 3);
+            game.addPlayer(opponent, opponentDeck);
+            match.addPlayer(opponent, opponentDeck);
+
+            game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
+            game.loadCards(opponentDeck.getCards(), opponent.getId());
+
+            GameOptions options = new GameOptions();
+            game.setGameOptions(options);
+
+            game.start(rlPlayer.getId());
+
+            logGameResult(game, rlPlayer);
+
+            if (game.getWinner().contains(rlPlayer.getName())) {
+                winsAgainstComputerPlayer7++;
+            }
+        }
+
+        double winRate = (double) winsAgainstComputerPlayer7 / NUM_EVAL_EPISODES;
+        logger.info("Win rate against ComputerPlayer7: " + (winRate * 100) + "%");
     }
 
     private void logGameResult(Game game, ComputerPlayerRL rlPlayer) {
