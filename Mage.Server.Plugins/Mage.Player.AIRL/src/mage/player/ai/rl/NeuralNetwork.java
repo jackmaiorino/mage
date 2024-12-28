@@ -51,6 +51,11 @@ public class NeuralNetwork {
     }
     
     public INDArray predict(float[] state, boolean isExploration) {
+        if (state == null) {
+            logger.error("State array is null");
+            throw new IllegalArgumentException("State array cannot be null");
+        }
+        logger.info("State array size: " + state.length);
         // Epsilon-greedy exploration
         if (Math.random() <= explorationRate && isExploration) {
             logger.info("Exploration!");

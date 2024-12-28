@@ -35,7 +35,7 @@ import mage.players.Player;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
-    private static final int NUM_EPISODES = 1;
+    private static final int NUM_EPISODES = 16;
     private static final int NUM_EVAL_EPISODES = 5;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
@@ -56,7 +56,6 @@ public class RLTrainer {
 
             // Determine the number of available threads
             int numThreads = Runtime.getRuntime().availableProcessors();
-            numThreads = 1;
             int episodesPerThread = NUM_EPISODES / numThreads;
             logger.info("Number of threads: " + numThreads);
             logger.info("Episodes per thread: " + episodesPerThread);
@@ -70,17 +69,20 @@ public class RLTrainer {
             for (int i = 0; i < numThreads; i++) {
                 Future<Void> future = executor.submit(() -> {
                     Thread.currentThread().setName("GAME");
+                    // Load decks
+                    Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+                    Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
+                    Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+                    Deck opponentDeck = loadDeck(opponentDeckPath.toString());
+                    RLModel threadModel = new RLModel();
+
                     for (int episode = 0; episode < episodesPerThread; episode++) {
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
-                        Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-                        Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
-                        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, model);
+                        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, threadModel);
                         game.addPlayer(rlPlayer, rlPlayerDeck);
 
-                        Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-                        Deck opponentDeck = loadDeck(opponentDeckPath.toString());
-                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, model);
+                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, threadModel);
                         game.addPlayer(opponent, opponentDeck);
 
                         game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
@@ -141,6 +143,9 @@ public class RLTrainer {
 
         int winsAgainstComputerPlayer7 = 0;
         Random random = new Random();
+        Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+        Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
+
         for (int evalEpisode = 0; evalEpisode < numEpisodes; evalEpisode++) {
             TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
             try {
@@ -150,8 +155,6 @@ public class RLTrainer {
             }
             Game game = match.getGames().get(0);
 
-            Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-            Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
             ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, model);
             game.addPlayer(rlPlayer, rlPlayerDeck);
             match.addPlayer(rlPlayer, rlPlayerDeck);
@@ -203,7 +206,7 @@ public class RLTrainer {
 
     private synchronized void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
-        // Update model for RL player
+        // Update model for RL player   
         double reward = rlPlayerWon ? 1.0 : -1.0;
         List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();
         for (int i = 0; i < rlPlayerStates.size() - 1; i++) {

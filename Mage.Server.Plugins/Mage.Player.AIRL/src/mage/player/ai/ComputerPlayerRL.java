@@ -6,6 +6,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
@@ -32,6 +33,9 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         this.model = model;
         this.stateBuffer = new ArrayList<>();
         logger.info("ComputerPlayerRL initialized for " + name);
+        //hardcoded disable for logging
+        // TODO: More dynamic logging control
+        //logger.setLevel(Level.WARN);
     }
 
     @Override

@@ -15,13 +15,14 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>mage</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.2</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mage-common</artifactId>
+            <artifactId>mage</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -101,12 +102,6 @@
         </plugins>
 
         <finalName>mage-player-airl</finalName>
-        <resources>
-            <resource>
-                <directory>models</directory>
-                <targetPath>models</targetPath>
-            </resource>
-        </resources>
     </build>
 
     <properties>

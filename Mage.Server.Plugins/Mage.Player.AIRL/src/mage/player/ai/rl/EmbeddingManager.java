@@ -49,14 +49,15 @@ public class EmbeddingManager {
     }
 
     public static float[] getEmbedding(String text) {
-        text = tokenizeCardText(text);
         embeddings = getEmbeddings();
         if (embeddings.containsKey(text)) {
             return embeddings.get(text);
         } else {
-            float[] embedding = queryOpenAIForEmbedding(text);
+            // Tokenize only if we need to query OpenAI
+            String tokenizedText = tokenizeCardText(text);
+            float[] embedding = queryOpenAIForEmbedding(tokenizedText);
             embeddings.put(text, embedding);
-            //TODO: lets only save after entire game is over
+            // TODO: lets only save after entire game is over
             saveEmbeddings();
             return embedding;
         }    
