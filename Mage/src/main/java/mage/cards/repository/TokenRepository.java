@@ -1,13 +1,23 @@
 package mage.cards.repository;
 
-import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Random;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
+import mage.util.RandomUtil;
 
 /**
  * @author JayDi85
@@ -38,41 +48,33 @@ public enum TokenRepository {
 
     private static final Logger logger = Logger.getLogger(TokenRepository.class);
 
-    private ArrayList<TokenInfo> allTokens = new ArrayList<>();
-    private final Map<String, List<TokenInfo>> indexByClassName = new HashMap<>();
-    private final Map<TokenType, List<TokenInfo>> indexByType = new HashMap<>();
+    private List<TokenInfo> allTokens = new CopyOnWriteArrayList<>();
+    private final Map<String, List<TokenInfo>> indexByClassName = new ConcurrentHashMap<>();
+    private final Map<TokenType, List<TokenInfo>> indexByType = new ConcurrentHashMap<>();
 
     TokenRepository() {
     }
 
     public void init() {
-        if (!allTokens.isEmpty()) {
-            return;
+        synchronized (this) {
+            if (!allTokens.isEmpty()) {
+                return;
+            }
+
+            // tokens
+            allTokens = loadMtgTokens();
+            allTokens.addAll(loadXmageTokens());
+
+            // index
+            allTokens.forEach(token -> {
+                // by class
+                String needClass = token.getFullClassFileName();
+                indexByClassName.computeIfAbsent(needClass, k -> new CopyOnWriteArrayList<>()).add(token);
+
+                // by type
+                indexByType.computeIfAbsent(token.getTokenType(), k -> new CopyOnWriteArrayList<>()).add(token);
+            });
         }
-
-        // tokens
-        allTokens = loadMtgTokens();
-        allTokens.addAll(loadXmageTokens());
-
-        // index
-        allTokens.forEach(token -> {
-            // by class
-            String needClass = token.getFullClassFileName();
-            List<TokenInfo> list = indexByClassName.getOrDefault(needClass, null);
-            if (list == null) {
-                list = new ArrayList<>();
-                indexByClassName.put(needClass, list);
-            }
-            list.add(token);
-
-            // by type
-            list = indexByType.getOrDefault(token.getTokenType(), null);
-            if (list == null) {
-                list = new ArrayList<>();
-                indexByType.put(token.getTokenType(), list);
-            }
-            list.add(token);
-        });
     }
 
     public List<TokenInfo> getAll() {

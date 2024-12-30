@@ -117,8 +117,9 @@ public class RLTrainer {
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
             double averageTimePerEpisode = (double) totalTime / NUM_EPISODES / 1_000_000_000.0; // Convert to seconds
+            double averageTimePerEpisodePerThread = (double) totalTime / episodesPerThread / 1_000_000_000.0;
             logger.info("Average time per episode: " + averageTimePerEpisode + " seconds");
-
+            logger.info("Average time per episode per thread: " + averageTimePerEpisodePerThread + " seconds");
             model.saveModel(MODEL_FILE_PATH);
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);

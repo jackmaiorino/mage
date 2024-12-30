@@ -14,9 +14,6 @@ public final class TestComputerPlayerRL {
     @Test
     public void test_RLPlayer_BasicTraining() {
 
-        // Set logging level
-        
-
         RLTrainer trainer = new RLTrainer();
         trainer.train();
 
