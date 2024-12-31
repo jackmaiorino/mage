@@ -2,6 +2,9 @@ package mage.player.ai.rl;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
@@ -17,7 +20,6 @@ public class RLModel implements Serializable {
     public static final int MAX_ACTIONS = 10;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS + 1) * (MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
 
-
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
         network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, OUTPUT_SIZE, EXPLORATION_RATE);
@@ -28,6 +30,10 @@ public class RLModel implements Serializable {
         }
     }
 
+    public NeuralNetwork getNetwork() {
+        return network;
+    }
+
     public void saveModel(String filePath) {
         try {
             network.saveNetwork(filePath);
@@ -36,55 +42,51 @@ public class RLModel implements Serializable {
         }
     }
 
-
-    // This has to be this way to ensure its possible to attack with all creatures
-    public double getAttackOrBlockThreshold() {
-        return (double) 1 / MAX_ACTIONS; // Threshold can be tuned based on training
-    }
-
     public INDArray predictDistribution(RLState state, boolean isExploration) {
         return network.predict(state.getStateVector(), isExploration);
     }
 
     // TODO: Research the algorithm used here. I don't really understand it.
     // NOTE: action here is WRONG. It is the output from state, not the input to state
+    public INDArray getTargetQValue(INDArray nextQValues, double reward) {
+        INDArray targetQValues = Nd4j.zeros(RLModel.OUTPUT_SIZE);
+        for (int i = 0; i < nextQValues.data().length(); i++) {
+            if (nextQValues.getDouble(i) != 0) {
+                targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
+            }
+        }
+        return targetQValues;
+    }
+
     public void update(RLState state, double reward, RLState nextState) {
         INDArray nextQValues = nextState.targetQValues;
-        INDArray targetQValues = Nd4j.zeros(RLModel.OUTPUT_SIZE);
+        INDArray targetQValues;
 
-        // TODO: Some redundant code here. Can we clean it up?
         switch (state.actionType) {
             case DECLARE_ATTACKS:
-                // Set target Q-values
-                for (int i = 0; i < nextQValues.data().length(); i++) {
-                    if (nextQValues.getDouble(i) != 0) {
-                        targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
-                    }
-                }
-                break;
             case DECLARE_BLOCKS:
-                // Set target Q-values
-                for (int i = 0; i < nextQValues.data().length(); i++) {
-                    if (nextQValues.getDouble(i) != 0) {
-                        targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
-                    }
-                }
-                break;
             case ACTIVATE_ABILITY_OR_SPELL:
-                // Set target Q-values
-                for (int i = 0; i < nextQValues.data().length(); i++) {
-                    if (nextQValues.getDouble(i) != 0) {
-                        targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
-                    }
-                }
+                targetQValues = getTargetQValue(nextQValues, reward);
                 break;
             default:
-                // Error since we don't know what to do with this action
                 logger.error("Unknown action type: " + state.actionType);
                 throw new IllegalArgumentException("Unknown action type: " + state.actionType);
         }
 
-        // Update the network weights
-        network.updateWeights(state.getStateVector(), targetQValues);
+        network.updateWeightsCPU(state.getStateVector(), targetQValues);
+    }
+
+    public void updateBatch(List<RLState> states, List<Double> rewards, List<RLState> nextStates) {
+        List<float[]> statesArray = states.stream().map(RLState::getStateVector).collect(Collectors.toList());
+        List<INDArray> targetQValuesList = new ArrayList<>();
+
+        for (int i = 0; i < states.size(); i++) {
+            INDArray nextQValues = nextStates.get(i).targetQValues;
+            double reward = rewards.get(i);
+            INDArray targetQValues = getTargetQValue(nextQValues, reward);
+            targetQValuesList.add(targetQValues);
+        }
+
+        network.updateWeightsGPU(statesArray, targetQValuesList);
     }
 } 

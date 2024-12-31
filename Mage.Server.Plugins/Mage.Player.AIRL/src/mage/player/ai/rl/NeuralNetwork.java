@@ -2,8 +2,10 @@ package mage.player.ai.rl;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
@@ -18,16 +20,20 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 
+
 public class NeuralNetwork {
     private static final Logger logger = Logger.getLogger(NeuralNetwork.class);
-    private MultiLayerNetwork network;
+    public MultiLayerNetwork network;
     private final double explorationRate;
     private final int outputSize;
+    private final BatchPredictionRequest batchPredictionRequest;
     
     // The neural net output is an outputSize x outputSize grid of probabilities
     public NeuralNetwork(int inputSize, int outputSize, double explorationRate) {
         this.explorationRate = explorationRate;
         this.outputSize = outputSize;
+        //TODO: Change batch size to be thread related
+        this.batchPredictionRequest = BatchPredictionRequest.getInstance(10, 100, TimeUnit.MILLISECONDS); // Example batch size and timeout
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
             .updater(new Adam())
             .list()
@@ -81,14 +87,41 @@ public class NeuralNetwork {
             }
             return Nd4j.create(randomDist);
         }
-        return network.output(Nd4j.create(state)).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
+        // Use BatchPredictionRequest for batch processing
+        try {
+            INDArray input = Nd4j.create(state).reshape(1, state.length);
+            return batchPredictionRequest.predict(input);
+        } catch (InterruptedException e) {
+            logger.error("Prediction interrupted", e);
+            Thread.currentThread().interrupt();
+            return null;
+        }
     }
 
-    public void updateWeights(float[] state, INDArray targetQValues) {
+    public void updateWeightsCPU(float[] state, INDArray targetQValues) {
         INDArray input = Nd4j.create(state);
         INDArray target = Nd4j.create(targetQValues.data().asFloat());
-        // Perform a single training step
         network.fit(input, target);
+    }
+
+    public void updateWeightsGPU(List<float[]> states, List<INDArray> targetQValuesList) {
+        int batchSize = states.size();
+        int stateLength = states.get(0).length;
+        
+        // Create a 2D INDArray for the batch of states
+        INDArray inputBatch = Nd4j.create(new int[]{batchSize, stateLength});
+        for (int i = 0; i < batchSize; i++) {
+            inputBatch.putRow(i, Nd4j.create(states.get(i)));
+        }
+        
+        // Create a 2D INDArray for the batch of target Q-values
+        INDArray targetBatch = Nd4j.create(new long[]{batchSize, targetQValuesList.get(0).length()});
+        for (int i = 0; i < batchSize; i++) {
+            targetBatch.putRow(i, targetQValuesList.get(i));
+        }
+        
+        // Perform a single training step with the batch
+        network.fit(inputBatch, targetBatch);
     }
 
     public void saveNetwork(String filePath) throws IOException {

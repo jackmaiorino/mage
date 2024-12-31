@@ -384,7 +384,6 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         }
 
         logger.info("bestIndex: " + bestIndex);
-        logger.info("qValues: " + qValues);
         logger.info("playables: " + playables);
 
         currentState.targetQValues.putScalar(bestIndex, qValues.getDouble(bestIndex));

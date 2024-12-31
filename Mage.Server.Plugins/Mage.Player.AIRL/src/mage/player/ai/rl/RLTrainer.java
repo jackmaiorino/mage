@@ -35,10 +35,12 @@ import mage.players.Player;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
-    private static final int NUM_EPISODES = 16;
+    private static final int NUM_EPISODES = 24;
     private static final int NUM_EVAL_EPISODES = 5;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
+
+    public static final RLModel sharedModel = new RLModel();
 
     public RLTrainer() {
         // No need to create a model here
@@ -52,11 +54,16 @@ public class RLTrainer {
 
             Random random = new Random();
             // TODO: multithreaded access to
-            RLModel model = new RLModel();
 
-            // Determine the number of available threads
+            // Determine the number of available threads; -1 to leave one for BatchPredictionRequest; -1 to leave one for the main thread
             int numThreads = Runtime.getRuntime().availableProcessors();
             int episodesPerThread = NUM_EPISODES / numThreads;
+            //TODO: should this be numthreads or -1,-2 to account for the batch prediction request and the main thread?
+            int batchSize = numThreads; // Assuming each thread runs one game
+
+            // Create singleton instance
+            BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 100, TimeUnit.MILLISECONDS);
+
             logger.info("Number of threads: " + numThreads);
             logger.info("Episodes per thread: " + episodesPerThread);
 
@@ -68,21 +75,25 @@ public class RLTrainer {
 
             for (int i = 0; i < numThreads; i++) {
                 Future<Void> future = executor.submit(() -> {
+                    batchPredictionRequest.incrementBatchSize();
                     Thread.currentThread().setName("GAME");
                     // Load decks
                     Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                     Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
                     Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                     Deck opponentDeck = loadDeck(opponentDeckPath.toString());
-                    RLModel threadModel = new RLModel();
+                    if (rlPlayerDeck.getCards().isEmpty() || opponentDeck.getCards().isEmpty()) {
+                        logger.error("Failed to load decks");
+                        return null;
+                    }
 
                     for (int episode = 0; episode < episodesPerThread; episode++) {
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
-                        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, threadModel);
+                        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
                         game.addPlayer(rlPlayer, rlPlayerDeck);
 
-                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, threadModel);
+                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, sharedModel);
                         game.addPlayer(opponent, opponentDeck);
 
                         game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
@@ -94,8 +105,9 @@ public class RLTrainer {
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
-                        updateModelBasedOnOutcome(game, rlPlayer, opponent, model);
+                        updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
                     }
+                    batchPredictionRequest.decrementBatchSize();
                     return null;
                 });
                 futures.add(future);
@@ -120,7 +132,7 @@ public class RLTrainer {
             double averageTimePerEpisodePerThread = (double) totalTime / episodesPerThread / 1_000_000_000.0;
             logger.info("Average time per episode: " + averageTimePerEpisode + " seconds");
             logger.info("Average time per episode per thread: " + averageTimePerEpisodePerThread + " seconds");
-            model.saveModel(MODEL_FILE_PATH);
+            sharedModel.saveModel(MODEL_FILE_PATH);
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
         }
@@ -207,22 +219,31 @@ public class RLTrainer {
 
     private synchronized void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
-        // Update model for RL player   
         double reward = rlPlayerWon ? 1.0 : -1.0;
-        List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();
-        for (int i = 0; i < rlPlayerStates.size() - 1; i++) {
-            RLState state = rlPlayerStates.get(i);
-            RLState nextState = rlPlayerStates.get(i + 1);
-            model.update(state, reward, nextState);
-        }
 
-        // Update model for opponent
-        reward = rlPlayerWon ? -1.0 : 1.0;
+        // Get states for both players
+        List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();
         List<RLState> opponentStates = opponent.getStateBuffer();
-        for (int i = 0; i < opponentStates.size() - 1; i++) {
-            RLState state = opponentStates.get(i);
-            RLState nextState = opponentStates.get(i + 1);
-            model.update(state, reward, nextState);
+        
+        // Batch update for GPU
+        List<RLState> allStates = new ArrayList<>(rlPlayerStates);
+        allStates.addAll(opponentStates);
+        List<Double> rewards = new ArrayList<>();
+        // Add rewards for RL player states
+        for (RLState ignored : rlPlayerStates) {
+            rewards.add(reward);
         }
+        // Add rewards for opponent states
+        for (RLState state : opponentStates) {
+            rewards.add(-reward);
+        }
+        // Adjust the sublist to exclude the last element
+        model.updateBatch(allStates.subList(0, allStates.size() - 1), rewards, allStates.subList(1, allStates.size()));
+
     }
+
+    public static RLModel getSharedModel() {
+        return sharedModel;
+    }
+
 } 
