@@ -72,7 +72,12 @@ public class BatchPredictionRequest {
     }
 
     private void processBatch() throws InterruptedException {
-        if (batchSize <= 0) {
+//        if (batchSize <= 0) {
+//            // If batchSize is 0, wait for the timeout duration before retrying
+//            Thread.sleep(timeUnit.toMillis(1000));
+//            return;
+//        }
+        if (requestQueue.isEmpty()) {
             // If batchSize is 0, wait for the timeout duration before retrying
             Thread.sleep(timeUnit.toMillis(1000));
             return;
@@ -83,13 +88,16 @@ public class BatchPredictionRequest {
         logger.warn("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
         lastProcessTime = currentTime;
 
-        int currentBatchSize = (int) Math.min(batchSize, RLTrainer.BATCH_SIZE);
+        //int currentBatchSize = (int) Math.min(batchSize, RLTrainer.BATCH_SIZE);
+        int currentBatchSize = Math.min(requestQueue.size(), RLTrainer.BATCH_SIZE);
         Request[] batch = new Request[currentBatchSize];
         int count = 0;
         long batchStartTime = System.currentTimeMillis();
 
+        // New design? Don't wait for the full batch to fill up
+        Request request = requestQueue.poll(timeout, timeUnit);
         while (count < currentBatchSize && (System.currentTimeMillis() - batchStartTime) < timeUnit.toMillis(timeout)) {
-            Request request = requestQueue.poll(timeout, timeUnit);
+            request = requestQueue.poll(timeout, timeUnit);
             if (request != null) {
                 batch[count++] = request;
             }

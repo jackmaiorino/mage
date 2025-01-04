@@ -40,8 +40,10 @@ public class RLTrainer {
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 70;
-    public static final int BATCH_SIZE = NUM_GAME_RUNNERS;
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 100;
+    // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
+    // It is also technically a GPU bound value but cpu processing is the bottleneck
+    public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
     public static final int NUM_EPISODES_PER_GAME_RUNNER = NUM_EPISODES / NUM_GAME_RUNNERS;
 
@@ -75,30 +77,32 @@ public class RLTrainer {
                 return thread;
             });
 
+            // Load a random deck for the RL player
+            Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+            Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
+            Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+            Deck opponentDeck = loadDeck(opponentDeckPath.toString());
+
             List<Future<Void>> futures = new ArrayList<>();
             for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
                 Future<Void> future = executor.submit(() -> {
 
                     Thread.currentThread().setName("GAME");
-
-                    // Load a random deck for the RL player
-                    Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-                    Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
-                    Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-                    Deck opponentDeck = loadDeck(opponentDeckPath.toString());
+                    Deck rlPlayerDeckThread = rlPlayerDeck.copy();
+                    Deck opponentDeckThread = opponentDeck.copy();
 
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
                         batchPredictionRequest.incrementBatchSize();
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
-                        game.addPlayer(rlPlayer, rlPlayerDeck);
+                        game.addPlayer(rlPlayer, rlPlayerDeckThread);
 
                         ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, sharedModel);
-                        game.addPlayer(opponent, opponentDeck);
+                        game.addPlayer(opponent, opponentDeckThread);
 
-                        game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
-                        game.loadCards(opponentDeck.getCards(), opponent.getId());
+                        game.loadCards(rlPlayerDeckThread.getCards(), rlPlayer.getId());
+                        game.loadCards(opponentDeckThread.getCards(), opponent.getId());
 
                         GameOptions options = new GameOptions();
                         game.setGameOptions(options);
