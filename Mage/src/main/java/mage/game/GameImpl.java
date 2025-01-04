@@ -387,15 +387,6 @@ public abstract class GameImpl implements Game {
 
     @Override
     public void addPlayer(Player player, Deck deck) {
-        logger.error("DEBUG: addPlayer called");
-        if (player == null) {
-            logger.error("player is null before addPlayer");
-            return;
-        }
-        if (deck == null) {
-            logger.error("deck is null before addPlayer");
-            return;
-        }
         player.useDeck(deck, this);
         state.addPlayer(player);
         initPlayerDefaultWatchers(player.getId());

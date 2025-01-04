@@ -66,7 +66,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             }
 
             // Predict on game state
-            INDArray qValues = model.predictDistribution(currentState, true);
+            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
 
             // Generate list of attack targets (Player,planeswalkers,battles)
             List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());

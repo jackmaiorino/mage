@@ -268,7 +268,7 @@ public class RLState {
         }
 
         // Add the text embedding of the text
-        String cardAbilities = card.getAbilities().toString();
+        // String cardAbilities = card.getAbilities().toString();
         String cardText = String.join(" ", card.getRules());
         float[] textEmbedding = EmbeddingManager.getEmbedding(cardText);
         System.arraycopy(textEmbedding, 0, featureVector, index, textEmbedding.length);

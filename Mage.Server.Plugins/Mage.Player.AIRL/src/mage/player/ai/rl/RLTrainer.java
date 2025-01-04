@@ -35,10 +35,15 @@ import mage.players.Player;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
-    private static final int NUM_EPISODES = 24;
+    private static final int NUM_EPISODES = 10000;
     private static final int NUM_EVAL_EPISODES = 5;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
+    public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 70;
+    public static final int BATCH_SIZE = NUM_GAME_RUNNERS;
+
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = NUM_EPISODES / NUM_GAME_RUNNERS;
 
     public static final RLModel sharedModel = new RLModel();
 
@@ -53,41 +58,37 @@ public class RLTrainer {
                                         .collect(Collectors.toList());
 
             Random random = new Random();
-            // TODO: multithreaded access to
-
-            // Determine the number of available threads; -1 to leave one for BatchPredictionRequest; -1 to leave one for the main thread
-            int numThreads = Runtime.getRuntime().availableProcessors();
-            int episodesPerThread = NUM_EPISODES / numThreads;
-            //TODO: should this be numthreads or -1,-2 to account for the batch prediction request and the main thread?
-            int batchSize = numThreads; // Assuming each thread runs one game
-
+            
             // Create singleton instance
-            BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 100, TimeUnit.MILLISECONDS);
+            BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
 
-            logger.info("Number of threads: " + numThreads);
-            logger.info("Episodes per thread: " + episodesPerThread);
+            logger.info("Number of threads: " + NUM_THREADS);
+            logger.info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
 
             // Record start time
             long startTime = System.nanoTime();
 
-            ExecutorService executor = Executors.newFixedThreadPool(numThreads);
-            List<Future<Void>> futures = new ArrayList<>();
+            ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS, runnable -> {
+                Thread thread = new Thread(runnable);
+                // One less prio than BatchPredictManager
+                thread.setPriority(Thread.MAX_PRIORITY - 1);
+                return thread;
+            });
 
-            for (int i = 0; i < numThreads; i++) {
+            List<Future<Void>> futures = new ArrayList<>();
+            for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
                 Future<Void> future = executor.submit(() -> {
-                    batchPredictionRequest.incrementBatchSize();
+
                     Thread.currentThread().setName("GAME");
-                    // Load decks
+
+                    // Load a random deck for the RL player
                     Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                     Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
                     Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
                     Deck opponentDeck = loadDeck(opponentDeckPath.toString());
-                    if (rlPlayerDeck.getCards().isEmpty() || opponentDeck.getCards().isEmpty()) {
-                        logger.error("Failed to load decks");
-                        return null;
-                    }
 
-                    for (int episode = 0; episode < episodesPerThread; episode++) {
+                    for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
+                        batchPredictionRequest.incrementBatchSize();
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
@@ -105,9 +106,9 @@ public class RLTrainer {
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
+                        batchPredictionRequest.decrementBatchSize();
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
                     }
-                    batchPredictionRequest.decrementBatchSize();
                     return null;
                 });
                 futures.add(future);
@@ -129,7 +130,7 @@ public class RLTrainer {
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
             double averageTimePerEpisode = (double) totalTime / NUM_EPISODES / 1_000_000_000.0; // Convert to seconds
-            double averageTimePerEpisodePerThread = (double) totalTime / episodesPerThread / 1_000_000_000.0;
+            double averageTimePerEpisodePerThread = (double) totalTime / NUM_EPISODES_PER_GAME_RUNNER / 1_000_000_000.0;
             logger.info("Average time per episode: " + averageTimePerEpisode + " seconds");
             logger.info("Average time per episode per thread: " + averageTimePerEpisodePerThread + " seconds");
             sharedModel.saveModel(MODEL_FILE_PATH);

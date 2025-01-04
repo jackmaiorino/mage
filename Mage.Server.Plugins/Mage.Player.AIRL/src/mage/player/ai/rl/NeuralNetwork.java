@@ -27,13 +27,15 @@ public class NeuralNetwork {
     private final double explorationRate;
     private final int outputSize;
     private final BatchPredictionRequest batchPredictionRequest;
+    private INDArray predictionInput;
+    private INDArray explorationOutput;
     
     // The neural net output is an outputSize x outputSize grid of probabilities
     public NeuralNetwork(int inputSize, int outputSize, double explorationRate) {
         this.explorationRate = explorationRate;
         this.outputSize = outputSize;
         //TODO: Change batch size to be thread related
-        this.batchPredictionRequest = BatchPredictionRequest.getInstance(10, 100, TimeUnit.MILLISECONDS); // Example batch size and timeout
+        this.batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
             .updater(new Adam())
             .list()
@@ -45,6 +47,10 @@ public class NeuralNetwork {
         
         network = new MultiLayerNetwork(conf);
         network.init();
+
+        // This exists to avoid creating a new INDArray every time predict is called
+        predictionInput = Nd4j.create(1, RLState.STATE_VECTOR_SIZE);
+        explorationOutput = Nd4j.create(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
 
         // Log if using GPU
         Properties envInfoProps = Nd4j.getExecutioner().getEnvironmentInformation();
@@ -76,21 +82,26 @@ public class NeuralNetwork {
             }
             // Normalize the first 11 values to sum to 1
             for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
-                randomDist[0][j] /= sum;
+                explorationOutput.putScalar(j, randomDist[0][j] / sum);
             }
             
             // Set the rest of the array to zeros
             for (int i = 1; i < RLModel.MAX_ACTIONS; i++) {
                 for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
-                    randomDist[i][j] = 0;
+                    explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, 0);
                 }
             }
-            return Nd4j.create(randomDist);
+            
+            return explorationOutput;
+            //return Nd4j.create(randomDist);
         }
         // Use BatchPredictionRequest for batch processing
         try {
-            INDArray input = Nd4j.create(state).reshape(1, state.length);
-            return batchPredictionRequest.predict(input);
+            //TODO: Is this faster than doing ND4J.create()?
+            for (int i = 0; i < state.length; i++) {
+                predictionInput.putScalar(i, state[i]);
+            }
+            return batchPredictionRequest.predict(predictionInput);
         } catch (InterruptedException e) {
             logger.error("Prediction interrupted", e);
             Thread.currentThread().interrupt();

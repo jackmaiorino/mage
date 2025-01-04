@@ -5,6 +5,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
@@ -22,12 +23,18 @@ public class BatchPredictionRequest {
     private int batchSize;
     private final long timeout;
     private final TimeUnit timeUnit;
+    private long lastProcessTime = System.currentTimeMillis();
+    private long totalPredictions = 0;
+    private long startTime = System.currentTimeMillis();
+    private final INDArray inputBatch;
+    private static final Logger logger = Logger.getLogger(BatchPredictionRequest.class);
 
     public BatchPredictionRequest(int batchSize, long timeout, TimeUnit timeUnit) {
         this.batchSize = batchSize;
         this.timeout = timeout;
         this.timeUnit = timeUnit;
         this.requestQueue = new LinkedBlockingQueue<>();
+        this.inputBatch = Nd4j.create(RLTrainer.BATCH_SIZE, RLState.STATE_VECTOR_SIZE, 'c').assign(0);
         startBatchProcessor();
     }
 
@@ -56,45 +63,81 @@ public class BatchPredictionRequest {
                 }
             }
         });
+
+        batchProcessor.setName("BatchPredictManager");
+
+        batchProcessor.setPriority(Thread.MAX_PRIORITY);
+
         batchProcessor.start();
     }
 
     private void processBatch() throws InterruptedException {
-        Request[] batch = new Request[batchSize];
-        int count = 0;
-        long startTime = System.currentTimeMillis();
+        if (batchSize <= 0) {
+            // If batchSize is 0, wait for the timeout duration before retrying
+            Thread.sleep(timeUnit.toMillis(1000));
+            return;
+        }
 
-        while (count < batchSize && (System.currentTimeMillis() - startTime) < timeUnit.toMillis(timeout)) {
+        long currentTime = System.currentTimeMillis();
+        System.out.println("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
+        logger.warn("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
+        lastProcessTime = currentTime;
+
+        int currentBatchSize = (int) Math.min(batchSize, RLTrainer.BATCH_SIZE);
+        Request[] batch = new Request[currentBatchSize];
+        int count = 0;
+        long batchStartTime = System.currentTimeMillis();
+
+        while (count < currentBatchSize && (System.currentTimeMillis() - batchStartTime) < timeUnit.toMillis(timeout)) {
             Request request = requestQueue.poll(timeout, timeUnit);
             if (request != null) {
                 batch[count++] = request;
             }
         }
 
+        System.out.println("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
+        System.out.println("Batch size: " + count);
+        logger.warn("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
+        logger.warn("Batch size: " + count);
+
         if (count > 0) {
+            totalPredictions += count;
             INDArray[] states = new INDArray[count];
             for (int i = 0; i < count; i++) {
                 states[i] = batch[i].state;
             }
             INDArray predictions = batchPredict(states);
             
-
             for (int i = 0; i < count; i++) {
-                batch[i].setPrediction(predictions.getRow(i));
+                batch[i].setPrediction(predictions.getRow(i, true));
             }
         }
+
+        // Calculate and print average predictions per second
+        long totalTimeElapsed = System.currentTimeMillis() - startTime;
+        double averagePredictionsPerSecond = (totalPredictions * 1000.0) / totalTimeElapsed;
+        System.out.println("Average predictions per second: " + String.format("%.2f", averagePredictionsPerSecond));
+        logger.warn("Average predictions per second: " + String.format("%.2f", averagePredictionsPerSecond));
     }
 
     private INDArray batchPredict(INDArray[] states) {
-        // Create an input batch with the correct shape
-        INDArray inputBatch = Nd4j.create(states.length, RLState.STATE_VECTOR_SIZE);
+        // Create an input batch with the correct shape on the GPU
         for (int i = 0; i < states.length; i++) {
             inputBatch.putRow(i, states[i]);
         }
 
+        // Start timing the prediction
+        long predictionStartTime = System.currentTimeMillis();
+
         // Get predictions from the neural network
         INDArray predictions = RLTrainer.sharedModel.getNetwork().network.output(inputBatch);
-        return predictions.reshape(states.length, RLModel.OUTPUT_SIZE);
+
+        // End timing the prediction
+        long predictionEndTime = System.currentTimeMillis();
+        System.out.println("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
+        logger.warn("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
+
+        return predictions;
     }
 
     private static class Request {
