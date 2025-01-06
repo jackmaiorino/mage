@@ -44,12 +44,12 @@ public class RLTrainer {
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     // Seems like we are GPU Memory Bound
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 60;
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 10;
     // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
     // It is also technically a GPU bound value but cpu processing is the bottleneck
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = NUM_EPISODES / NUM_GAME_RUNNERS;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
 
     public static final RLModel sharedModel = new RLModel();
 
@@ -129,7 +129,7 @@ public class RLTrainer {
                     Deck opponentDeckThread = opponentDeck.copy();
 
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
-                        batchPredictionRequest.incrementBatchSize();
+                        batchPredictionRequest.incrementActiveGameRunners();
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
@@ -148,7 +148,7 @@ public class RLTrainer {
 
                         logGameResult(game, rlPlayer);
 
-                        batchPredictionRequest.decrementBatchSize();
+                        batchPredictionRequest.decrementActiveGameRunners();
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
                     }
                     return null;
@@ -283,6 +283,7 @@ public class RLTrainer {
             rewards.add(-reward);
         }
         // Adjust the sublist to exclude the last element
+        // TODO: rewards needs to be sublisted like states
         model.updateBatch(allStates.subList(0, allStates.size() - 1), rewards, allStates.subList(1, allStates.size()));
 
     }

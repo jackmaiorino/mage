@@ -12,15 +12,15 @@ import org.nd4j.linalg.factory.Nd4j;
 public class BatchPredictionRequest {
     private static BatchPredictionRequest instance;
 
-    public static synchronized BatchPredictionRequest getInstance(int batchSize, long timeout, TimeUnit timeUnit) {
+    public static synchronized BatchPredictionRequest getInstance(int activeGameRunners, long timeout, TimeUnit timeUnit) {
         if (instance == null) {
-            instance = new BatchPredictionRequest(batchSize, timeout, timeUnit);
+            instance = new BatchPredictionRequest(activeGameRunners, timeout, timeUnit);
         }
         return instance;
     }
 
     private final BlockingQueue<Request> requestQueue;
-    private int batchSize;
+    private int activeGameRunners;
     private final long timeout;
     private final TimeUnit timeUnit;
     private long lastProcessTime = System.currentTimeMillis();
@@ -29,8 +29,8 @@ public class BatchPredictionRequest {
     private final INDArray inputBatch;
     private static final Logger logger = Logger.getLogger(BatchPredictionRequest.class);
 
-    public BatchPredictionRequest(int batchSize, long timeout, TimeUnit timeUnit) {
-        this.batchSize = batchSize;
+    public BatchPredictionRequest(int activeGameRunners, long timeout, TimeUnit timeUnit) {
+        this.activeGameRunners = activeGameRunners;
         this.timeout = timeout;
         this.timeUnit = timeUnit;
         this.requestQueue = new LinkedBlockingQueue<>();
@@ -38,12 +38,12 @@ public class BatchPredictionRequest {
         startBatchProcessor();
     }
 
-    public synchronized void decrementBatchSize() {
-        this.batchSize--;
+    public synchronized void decrementActiveGameRunners() {
+        this.activeGameRunners--;
     }
 
-    public synchronized void incrementBatchSize() {
-        this.batchSize++;
+    public synchronized void incrementActiveGameRunners() {
+        this.activeGameRunners++;
     }
 
     public INDArray predict(INDArray state) throws InterruptedException {
@@ -72,8 +72,8 @@ public class BatchPredictionRequest {
     }
 
     private void processBatch() throws InterruptedException {
-        if (batchSize <= 0) {
-            // If batchSize is 0, wait for the timeout duration before retrying
+        if (activeGameRunners <= 0) {
+            // If activeGameRunners is 0, wait for the timeout duration before retrying
             Thread.sleep(timeUnit.toMillis(1000));
             return;
         }
@@ -82,13 +82,19 @@ public class BatchPredictionRequest {
         logger.warn("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
         lastProcessTime = currentTime;
 
-        int currentBatchSize = (int) Math.min(batchSize, RLTrainer.BATCH_SIZE);
-        //int currentBatchSize = Math.min(requestQueue.size(), RLTrainer.BATCH_SIZE);
-        Request[] batch = new Request[currentBatchSize];
+        // This allows the CPU to work while GPU is working
+        int batchSize;
+        if (activeGameRunners == 1) {
+            batchSize = activeGameRunners;
+        } else{
+            batchSize = activeGameRunners / 2;
+        }
+        //int currentactiveGameRunners = Math.min(requestQueue.size(), RLTrainer.BATCH_SIZE);
+        Request[] batch = new Request[batchSize];
         int count = 0;
         long batchStartTime = System.currentTimeMillis();
 
-        while (count < currentBatchSize && (System.currentTimeMillis() - batchStartTime) < timeUnit.toMillis(timeout)) {
+        while (count < batchSize && (System.currentTimeMillis() - batchStartTime) < timeUnit.toMillis(timeout)) {
             Request request = requestQueue.poll(timeout, timeUnit);
             if (request != null) {
                 batch[count++] = request;
@@ -124,14 +130,14 @@ public class BatchPredictionRequest {
         }
 
         // Start timing the prediction
-        long predictionStartTime = System.currentTimeMillis();
+//        long predictionStartTime = System.currentTimeMillis();
 
         // Get predictions from the neural network
         INDArray predictions = RLTrainer.sharedModel.getNetwork().network.output(inputBatch);
 
         // End timing the prediction
-        long predictionEndTime = System.currentTimeMillis();
-        logger.warn("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
+//        long predictionEndTime = System.currentTimeMillis();
+//        logger.warn("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
 
         return predictions;
     }

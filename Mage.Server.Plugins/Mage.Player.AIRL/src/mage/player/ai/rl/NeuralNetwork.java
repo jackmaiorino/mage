@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
-import org.apache.log4j.Logger;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
@@ -22,7 +21,6 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 
 public class NeuralNetwork {
-    private static final Logger logger = Logger.getLogger(NeuralNetwork.class);
     public MultiLayerNetwork network;
     private final double explorationRate;
     private final int outputSize;
@@ -51,44 +49,44 @@ public class NeuralNetwork {
         // This exists to avoid creating a new INDArray every time predict is called
         predictionInput = Nd4j.create(1, RLState.STATE_VECTOR_SIZE);
         explorationOutput = Nd4j.create(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
-
-        // Log if using GPU
-        Properties envInfoProps = Nd4j.getExecutioner().getEnvironmentInformation();
-        Map<String, Object> envInfo = propertiesToMap(envInfoProps);
-        if ("CUDA".equals(envInfo.get("backend"))) {
-            logger.info("Neural Network is using a GPU.");
-        } else {
-            logger.info("Neural Network is using a CPU.");
-        }
     }
     
-    public INDArray predict(float[] state, boolean isExploration) {
+    public INDArray predict(RLState state, boolean isExploration) {
+        float[] stateVector = state.getStateVector();
         if (state == null) {
-            logger.error("State array is null");
+            RLTrainer.threadLocalLogger.get().error("State array is null");
             throw new IllegalArgumentException("State array cannot be null");
         }
-        logger.info("State array size: " + state.length);
         // Epsilon-greedy exploration
         if (Math.random() <= explorationRate && isExploration) {
-            logger.info("Exploration!");
+            RLTrainer.threadLocalLogger.get().info("Exploration!");
             // Create a 2D array for the output
             float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_ACTIONS + 1];
 
-            // Generate random values for the first 11 indices of the first row
-            float sum = 0;
-            for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
-                randomDist[0][j] = (float) Math.random();
-                sum += randomDist[0][j];
-            }
-            // Normalize the first 11 values to sum to 1
-            for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
-                explorationOutput.putScalar(j, randomDist[0][j] / sum);
+            // Generate random values
+            float totalSum = 0;
+            for (int i = 0; i < state.exploreXCol; i++) {
+                for (int j = 0; j < state.exploreYCol; j++) {
+                    randomDist[i][j] = (float) Math.random();
+                    totalSum += randomDist[i][j];
+                }
             }
 
-            // Set the rest of the array to zeros
-            for (int i = 1; i < RLModel.MAX_ACTIONS; i++) {
+            // Normalize all values to sum to 1
+            for (int i = 0; i < state.exploreXCol; i++) {
+                for (int j = 0; j < state.exploreYCol; j++) {
+                    randomDist[i][j] /= totalSum;
+                }
+            }
+
+            // Set the exploration output
+            for (int i = 0; i < RLModel.MAX_ACTIONS; i++) {
                 for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
-                    explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, 0);
+                    if (i < state.exploreXCol && j < state.exploreYCol) {
+                        explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, randomDist[i][j]);
+                    } else {
+                        explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, 0);
+                    }
                 }
             }
 
@@ -102,10 +100,10 @@ public class NeuralNetwork {
 //                predictionInput.putScalar(i, state[i]);
 //            }
             // This seems to be better
-            predictionInput = Nd4j.create(state);
+            predictionInput = Nd4j.create(stateVector);
             return batchPredictionRequest.predict(predictionInput);
         } catch (InterruptedException e) {
-            logger.error("Prediction interrupted", e);
+            RLTrainer.threadLocalLogger.get().error("Prediction interrupted", e);
             Thread.currentThread().interrupt();
             return null;
         }
@@ -147,7 +145,7 @@ public class NeuralNetwork {
         try {
             network = ModelSerializer.restoreMultiLayerNetwork(filePath);
         } catch (IOException e) {
-            logger.error("Can't find file: " + filePath, e);
+            RLTrainer.threadLocalLogger.get().error("Can't find file: " + filePath, e);
         }
     }
 

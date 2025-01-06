@@ -2,7 +2,6 @@ package mage.player.ai.rl;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,44 +42,62 @@ public class RLModel implements Serializable {
     }
 
     public INDArray predictDistribution(RLState state, boolean isExploration) {
-        return network.predict(state.getStateVector(), isExploration);
+        return network.predict(state, isExploration);
     }
 
     public void updateBatch(List<RLState> states, List<Double> rewards, List<RLState> nextStates) {
-        int batchSize = RLTrainer.BATCH_SIZE;
+        int batchSize = 100;
         int totalSize = states.size();
+        System.out.println("Replay Buffer Total size: " + totalSize);
 
-        INDArray[] targetQValuesArray = new INDArray[RLTrainer.BATCH_SIZE];
-        for (int i = 0; i < RLTrainer.BATCH_SIZE; i++) {
-            targetQValuesArray[i] = Nd4j.zeros(RLModel.OUTPUT_SIZE);
+        INDArray[] targetQValuesArray = new INDArray[totalSize];
+        for (int i = 0; i < totalSize; i++) {
+            targetQValuesArray[i] = Nd4j.zeros(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
         }
 
-        for (int start = 0; start < totalSize; start += batchSize) {
-            int end = Math.min(start + batchSize, totalSize);
-
-            List<float[]> statesArray = states.subList(start, end).stream()
-                .map(RLState::getStateVector)
-                .collect(Collectors.toList());
-
-            // The set/unset design here is to avoid the heavy load of creating new INDArrays
-            // Set Q-vals
-            for (int i = start; i < end; i++) {
-                double reward = rewards.get(i);
-                for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
-                    targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
-                }
+        for (int i = 0; i < totalSize; i++) {
+            double reward = rewards.get(i);
+            for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
+                targetQValuesArray[i].putScalar(qValueEntry.getXIndex(), qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
             }
-
-            // Process
-            network.updateWeightsBatch(statesArray, targetQValuesArray);
-
-            //Unset Q-vals
-            for (int i = start; i < end; i++) {
-                for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
-                    targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), 0);
-                }
-            }
-
         }
+
+        List<float[]> statesArray = states.stream()
+            .map(RLState::getStateVector)
+            .collect(Collectors.toList());
+
+        // Process
+        network.updateWeightsBatch(statesArray, targetQValuesArray);
+        //TODO: We aren't getting here
+        System.out.println("Batch updated");
+
+        // Maybe use this idea for a batch manager
+        // for (int start = 0; start < totalSize; start += batchSize) {
+        //     int end = Math.min(start + batchSize, totalSize);
+
+        //     List<float[]> statesArray = states.subList(start, end).stream()
+        //         .map(RLState::getStateVector)
+        //         .collect(Collectors.toList());
+
+        //     // The set/unset design here is to avoid the heavy load of creating new INDArrays
+        //     // Set Q-vals
+        //     for (int i = start; i < end; i++) {
+        //         double reward = rewards.get(i);
+        //         for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
+        //             targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
+        //         }
+        //     }
+
+        //     // Process
+        //     network.updateWeightsBatch(statesArray, targetQValuesArray);
+
+        //     //Unset Q-vals
+        //     for (int i = start; i < end; i++) {
+        //         for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
+        //             targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), 0);
+        //         }
+        //     }
+
+        // }
     }
 } 

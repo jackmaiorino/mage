@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCost;
@@ -13,8 +15,6 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 
 public class RLState {
@@ -33,9 +33,8 @@ public class RLState {
                                                 + NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE); // Opponent
     public ActionType actionType;
     // TODO: Might not need these anymore
-    public int numAttackers;
-    public int numAttackTargets;
-    public int numBlockers;
+    public int exploreXCol;
+    public int exploreYCol;
 
     public enum ZoneType {
         HAND,

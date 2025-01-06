@@ -7,7 +7,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.apache.commons.lang3.tuple.Pair;
 
 import mage.abilities.ActivatedAbility;
 import mage.constants.RangeOfInfluence;
@@ -15,13 +14,13 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.player.ai.rl.QValueEntry;
 import mage.player.ai.rl.RLModel;
 import mage.player.ai.rl.RLState;
+import mage.player.ai.rl.RLTrainer;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
-import mage.player.ai.rl.QValueEntry;
-import mage.player.ai.rl.RLTrainer;
 
 public class ComputerPlayerRL extends ComputerPlayer6 {
     public RLModel model;
@@ -63,19 +62,19 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
             }
 
-            // Predict on game state
-            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
-
+            int numAttackers = currentState.exploreYCol = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
             // Generate list of attack targets (Player, planeswalkers, battles)
             List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
             if (possibleAttackTargets.size() > RLModel.MAX_ACTIONS) {
                 RLTrainer.threadLocalLogger.get().error("ERROR: More attack targets than max actions, Model truncating");
             }
+            int numAttackTargets = currentState.exploreXCol = Math.min(RLModel.MAX_ACTIONS, possibleAttackTargets.size());
 
-            // Save this for updating later
-            currentState.numAttackers = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
+            // Predict on game state
+            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
+
             // For each attacker
-            for (int attackerIndex = 0; attackerIndex < currentState.numAttackers; attackerIndex++) {
+            for (int attackerIndex = 0; attackerIndex < numAttackers; attackerIndex++) {
                 Permanent attacker = possibleAttackers.get(attackerIndex);
 
                 // Create a list of defender indices with their Q-values for this attacker
@@ -90,9 +89,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 attackOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
 
                 // Declare attacks based on sorted Q-values
-                currentState.numAttackTargets = Math.min(RLModel.MAX_ACTIONS, possibleAttackTargets.size());
                 for (AttackOption option : attackOptions) {
-                    if (option.defenderIndex >= currentState.numAttackTargets) {
+                    if (option.defenderIndex >= numAttackTargets) {
                         currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.defenderIndex));
                         break; // Skip this attacker if the first choice is to not attack
                     }
@@ -129,6 +127,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             if (attackers.isEmpty()) {
                 return;
             }
+            int numBlockers = currentState.exploreYCol = Math.min(RLModel.MAX_ACTIONS, possibleBlockers.size());
+            int numAttackers = currentState.exploreXCol = Math.min(RLModel.MAX_ACTIONS, attackers.size());
             INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
             
             if (possibleBlockers.size() > RLModel.MAX_ACTIONS) {
@@ -139,8 +139,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
             }
 
             boolean blockerDeclared = false;
-            currentState.numBlockers = Math.min(RLModel.MAX_ACTIONS, possibleBlockers.size());
-            for (int blockerIndex = 0; blockerIndex < currentState.numBlockers; blockerIndex++) {
+            
+            for (int blockerIndex = 0; blockerIndex < numBlockers; blockerIndex++) {
                 Permanent blocker = possibleBlockers.get(blockerIndex);
 
                 // Create a list of attacker indices with their Q-values for this blocker
@@ -154,9 +154,8 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                 blockOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
     
                 // Declare blocks based on sorted Q-values
-                currentState.numAttackers = Math.min(RLModel.MAX_ACTIONS, attackers.size());
                 for (BlockOption option : blockOptions) {
-                    if (option.attackerIndex >= currentState.numAttackers) {
+                    if (option.attackerIndex >= numAttackers) {
                         // TODO: Investigate, is storing this "Pass value" correct?
                         currentState.targetQValues.add(new QValueEntry(option.qValue, blockerIndex, option.attackerIndex));
                         break; // Skip this blocker if the first choice is to not block
@@ -227,7 +226,6 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 //    }
 
     protected boolean priorityPlay(Game game) {
-        RLTrainer.threadLocalLogger.get().info("priorityPlay called for " + getName() + " during " + game.getTurnStepType());
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
         ActivatedAbility ability;
@@ -296,9 +294,14 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 
     protected void printBattleField(Game game, String info) {
         if (RLTrainer.threadLocalLogger.get().isInfoEnabled()) {
-            RLTrainer.threadLocalLogger.get().info("");
-            RLTrainer.threadLocalLogger.get().info("=================== " + info + ", turn " + game.getTurnNum() + ", " + game.getPlayer(game.getPriorityPlayerId()).getName() + " ===================");
-            RLTrainer.threadLocalLogger.get().info("[Stack]: " + game.getStack());
+            // Clear the console line
+            System.out.print("\033[2K"); // ANSI escape code to clear the current line
+            // Move the cursor up one line
+            System.out.print("\033[1A");
+
+            // Print the battlefield information
+            System.out.println("=================== " + info + ", turn " + game.getTurnNum() + ", " + game.getPlayer(game.getPriorityPlayerId()).getName() + " ===================");
+            System.out.println("[Stack]: " + game.getStack());
             printBattleField(game, playerId);
             for (UUID opponentId : game.getOpponents(playerId)) {
                 printBattleField(game, opponentId);
@@ -308,7 +311,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
 
     protected void printBattleField(Game game, UUID playerId) {
         Player player = game.getPlayer(playerId);
-        RLTrainer.threadLocalLogger.get().info(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("]")
+        System.out.println(new StringBuilder("[").append(game.getPlayer(playerId).getName()).append("]")
                 .append(", life = ").append(player.getLife())
                 .toString());
         String cardsInfo = player.getHand().getCards(game).stream()
@@ -317,7 +320,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         StringBuilder sb = new StringBuilder("-> Hand: [")
                 .append(cardsInfo)
                 .append("]");
-        RLTrainer.threadLocalLogger.get().info(sb.toString());
+        System.out.println(sb.toString());
 
         // battlefield
         sb.setLength(0);
@@ -329,7 +332,7 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
                         + (p.getBlocking() > 0 ? ",blocking" : ""))
                 .collect(Collectors.joining("; "));
         sb.append("-> Permanents: [").append(ownPermanentsInfo).append("]");
-        RLTrainer.threadLocalLogger.get().info(sb.toString());
+        System.out.println(sb.toString());
     }
 
     // I'm changing the design here to not use an actions queue.
@@ -366,6 +369,9 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         // Without target validation.
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
 
+        // Set the exploration columns so it only selects playables
+        currentState.exploreXCol = 1;
+        currentState.exploreYCol = Math.min(RLModel.MAX_ACTIONS, playables.size());
         // Evaluate each action using the model
         INDArray qValues = model.predictDistribution(currentState, true);
         float maxQValue = Float.NEGATIVE_INFINITY;
@@ -383,7 +389,10 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         RLTrainer.threadLocalLogger.get().info("bestIndex: " + bestIndex);
         RLTrainer.threadLocalLogger.get().info("playables: " + playables);
 
-        currentState.targetQValues.add(new QValueEntry(maxQValue, bestIndex, 0));
+        // Convert 1D index to 2D coordinates on 10x11 matrix
+        int row = bestIndex / (RLModel.MAX_ACTIONS + 1); 
+        int col = bestIndex % (RLModel.MAX_ACTIONS + 1);
+        currentState.targetQValues.add(new QValueEntry(maxQValue, row, col));
 
         // Get the corresponding ability and add it to actions queue
         // -1 on range is to reserve the option to do nothing

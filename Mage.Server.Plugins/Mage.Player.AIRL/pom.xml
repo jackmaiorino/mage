@@ -50,18 +50,18 @@
             <artifactId>nd4j-cuda-11.4</artifactId>
             <version>1.0.0-M2.1</version>
         </dependency>
-<!--        Needed for CudNN-->
+        <!--        Needed for CudNN-->
         <dependency>
             <groupId>org.nd4j</groupId>
             <artifactId>nd4j-cuda-11.4</artifactId>
             <version>1.0.0-M2.1</version>
             <classifier>windows-x86_64-cudnn</classifier>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.nd4j</groupId>-->
-<!--            <artifactId>nd4j-native-platform</artifactId>-->
-<!--            <version>1.0.0-M2.1</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.nd4j</groupId>-->
+        <!--            <artifactId>nd4j-native-platform</artifactId>-->
+        <!--            <version>1.0.0-M2.1</version>-->
+        <!--        </dependency>-->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-twoplayerduel</artifactId>
@@ -95,18 +95,18 @@
         <dependency>
             <groupId>com.openai</groupId>
             <artifactId>openai-java</artifactId>
-            <version>0.7.5</version>
+            <version>0.9.0</version>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.bytedeco</groupId>-->
-<!--            <artifactId>javacpp</artifactId>-->
-<!--            <version>1.5.6</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.bytedeco</groupId>-->
-<!--            <artifactId>cuda</artifactId>-->
-<!--            <version>11.4-8.2-1.5.6</version>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.bytedeco</groupId>-->
+        <!--            <artifactId>javacpp</artifactId>-->
+        <!--            <version>1.5.6</version>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.bytedeco</groupId>-->
+        <!--            <artifactId>cuda</artifactId>-->
+        <!--            <version>11.4-8.2-1.5.6</version>-->
+        <!--        </dependency>-->
     </dependencies>
 
     <build>

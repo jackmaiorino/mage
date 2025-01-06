@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.openai.models.EmbeddingModel;
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
@@ -17,6 +18,7 @@ import com.openai.client.okhttp.OpenAIOkHttpClient;
 import com.openai.models.CreateEmbeddingResponse;
 import com.openai.models.EmbeddingCreateParams;
 
+//TODO: This may be oversynchronized slowing training, investigating.
 public class EmbeddingManager {
     private static final Logger logger = Logger.getLogger(EmbeddingManager.class);
     private static final String MAPPING_FILE = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json";
@@ -26,7 +28,15 @@ public class EmbeddingManager {
 
     public static synchronized OpenAIClient getOpenAIClient() {
         if (openAIClient == null) {
-            openAIClient = OpenAIOkHttpClient.fromEnv();
+            String apiKey = System.getenv("OPENAI_API_KEY");
+            if (apiKey == null) {
+                throw new IllegalStateException("Environment variable OPENAI_API_KEY is not set.");
+            }
+            System.out.println("Using API Key: " + apiKey); // Avoid logging sensitive info in production!
+            // TODO: Why doesn't FromEnv work here anymore?!
+            openAIClient = OpenAIOkHttpClient.builder()
+                                .apiKey(apiKey)
+                                .build();
         }
         return openAIClient;
     }
@@ -38,10 +48,16 @@ public class EmbeddingManager {
         return embeddings;
     }
 
-    private static Map<String, float[]> loadEmbeddings() {
+    private static synchronized Map<String, float[]> loadEmbeddings() {
         try (FileReader reader = new FileReader(MAPPING_FILE)) {
             Type type = new TypeToken<HashMap<String, float[]>>() {}.getType();
-            return new Gson().fromJson(reader, type);
+            Map<String, float[]> loadedEmbeddings = new Gson().fromJson(reader, type);
+            if (loadedEmbeddings == null) {
+                logger.error("Loaded embeddings are null. Check the file content and format.");
+                return new HashMap<>();
+            }
+            logger.info("Successfully loaded embeddings from " + MAPPING_FILE);
+            return loadedEmbeddings;
         } catch (IOException e) {
             logger.error("Error loading embeddings from " + MAPPING_FILE, e);
             return new HashMap<>();
@@ -84,12 +100,12 @@ public class EmbeddingManager {
         return cardText;
     }
 
-    private static float[] queryOpenAIForEmbedding(String text) {
+    private static synchronized float[] queryOpenAIForEmbedding(String text) {
         try {
             EmbeddingCreateParams params = new EmbeddingCreateParams.Builder()
-                .model("text-embedding-3-small")
+                .model(EmbeddingModel.TEXT_EMBEDDING_3_SMALL)
                 .dimensions(EMBEDDING_SIZE)
-                .input(text)
+                .input(EmbeddingCreateParams.Input.ofString(text))
                 .build();
 
             CreateEmbeddingResponse response = getOpenAIClient().embeddings().create(params);
@@ -109,7 +125,7 @@ public class EmbeddingManager {
         }
     }
 
-    private static void saveEmbeddings() {
+    public static synchronized void saveEmbeddings() {
         try (FileWriter writer = new FileWriter(MAPPING_FILE)) {
             new Gson().toJson(getEmbeddings(), writer);
         } catch (IOException e) {
