@@ -73,7 +73,7 @@ public class NeuralNetwork {
             logger.info("Exploration!");
             // Create a 2D array for the output
             float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_ACTIONS + 1];
-            
+
             // Generate random values for the first 11 indices of the first row
             float sum = 0;
             for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
@@ -84,23 +84,25 @@ public class NeuralNetwork {
             for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
                 explorationOutput.putScalar(j, randomDist[0][j] / sum);
             }
-            
+
             // Set the rest of the array to zeros
             for (int i = 1; i < RLModel.MAX_ACTIONS; i++) {
                 for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
                     explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, 0);
                 }
             }
-            
+
             return explorationOutput;
             //return Nd4j.create(randomDist);
         }
         // Use BatchPredictionRequest for batch processing
         try {
             //TODO: Is this faster than doing ND4J.create()?
-            for (int i = 0; i < state.length; i++) {
-                predictionInput.putScalar(i, state[i]);
-            }
+//            for (int i = 0; i < state.length; i++) {
+//                predictionInput.putScalar(i, state[i]);
+//            }
+            // This seems to be better
+            predictionInput = Nd4j.create(state);
             return batchPredictionRequest.predict(predictionInput);
         } catch (InterruptedException e) {
             logger.error("Prediction interrupted", e);
@@ -115,22 +117,24 @@ public class NeuralNetwork {
         network.fit(input, target);
     }
 
-    public void updateWeightsGPU(List<float[]> states, List<INDArray> targetQValuesList) {
+    public void updateWeightsBatch(List<float[]> states, INDArray[] targetQValuesList) {
         int batchSize = states.size();
         int stateLength = states.get(0).length;
         
         // Create a 2D INDArray for the batch of states
+        // TODO: This is redundant, kinda. We already create these during predictions when not exploring
+        // There is an argument to keeping this here due to saving wait time caused
         INDArray inputBatch = Nd4j.create(new int[]{batchSize, stateLength});
         for (int i = 0; i < batchSize; i++) {
             inputBatch.putRow(i, Nd4j.create(states.get(i)));
         }
         
         // Create a 2D INDArray for the batch of target Q-values
-        INDArray targetBatch = Nd4j.create(new long[]{batchSize, targetQValuesList.get(0).length()});
+        INDArray targetBatch = Nd4j.create(new long[]{batchSize, targetQValuesList[0].length()});
         for (int i = 0; i < batchSize; i++) {
-            targetBatch.putRow(i, targetQValuesList.get(i));
+            targetBatch.putRow(i, targetQValuesList[i]);
         }
-        
+        // TODO: Are these arrays placed on the GPU?
         // Perform a single training step with the batch
         network.fit(inputBatch, targetBatch);
     }

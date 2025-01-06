@@ -1,11 +1,10 @@
 package mage.player.ai.rl;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCost;
@@ -14,12 +13,15 @@ import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import org.nd4j.linalg.api.ndarray.INDArray;
+import org.nd4j.linalg.factory.Nd4j;
 
 
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
     private float[] stateVector;
-    public INDArray targetQValues;
+    public INDArray stateVectorINDArray;
+    public List<QValueEntry> targetQValues;
     public static final int CARD_STATS_SIZE = ZoneType.values().length + 24; // ZoneType.values().length for one-hot encoding + 24 for other features
     public static final int NUM_PLAYER_STATS = 5;   
     public static final int NUM_CARDS = 60;
@@ -54,9 +56,9 @@ public class RLState {
     }
                                         
     public RLState(Game game, ActionType actionType) {
-        stateVector = new float[STATE_VECTOR_SIZE];
+        this.stateVector = new float[STATE_VECTOR_SIZE];
         this.actionType = actionType;
-        this.targetQValues = Nd4j.zeros(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
+        this.targetQValues = new ArrayList<>();
         buildStateVector(game);
     }
 
@@ -188,6 +190,8 @@ public class RLState {
                 index += cardFeatures.length;
             }
         }
+
+        stateVectorINDArray = Nd4j.create(stateVector);
     }
 
     public float[] getStateVector() {

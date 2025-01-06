@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
@@ -15,6 +16,8 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.Level;
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 import mage.cards.decks.Deck;
@@ -40,7 +43,8 @@ public class RLTrainer {
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 100;
+    // Seems like we are GPU Memory Bound
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 60;
     // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
     // It is also technically a GPU bound value but cpu processing is the bottleneck
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
@@ -48,6 +52,22 @@ public class RLTrainer {
     public static final int NUM_EPISODES_PER_GAME_RUNNER = NUM_EPISODES / NUM_GAME_RUNNERS;
 
     public static final RLModel sharedModel = new RLModel();
+
+    static {
+        // Set default logging level for all loggers to WARN
+        List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
+        loggers.add(LogManager.getRootLogger());
+        for (Logger logger : loggers) {
+            logger.setLevel(Level.WARN);
+        }
+    }
+
+    // ThreadLocal logger
+    public static final ThreadLocal<Logger> threadLocalLogger = ThreadLocal.withInitial(() -> {
+        Logger threadLogger = Logger.getLogger("Thread-" + Thread.currentThread().getId());
+        threadLogger.setLevel(Level.WARN); // Default level
+        return threadLogger;
+    });
 
     public RLTrainer() {
         // No need to create a model here
@@ -84,8 +104,25 @@ public class RLTrainer {
             Deck opponentDeck = loadDeck(opponentDeckPath.toString());
 
             List<Future<Void>> futures = new ArrayList<>();
+            final Object lock = new Object(); // Lock object for synchronization
+            final boolean[] isFirstThread = {true}; // Flag to track the first thread
+
             for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
                 Future<Void> future = executor.submit(() -> {
+                    boolean isFirst = false;
+
+                    synchronized (lock) {
+                        if (isFirstThread[0]) {
+                            isFirst = true;
+                            isFirstThread[0] = false;
+                        }
+                    }
+                    
+                    Logger currentLogger = threadLocalLogger.get();
+                    if (isFirst) {
+                        currentLogger.setLevel(Level.INFO);
+                    }  
+                    currentLogger.info("Starting Game Runner ");
 
                     Thread.currentThread().setName("GAME");
                     Deck rlPlayerDeckThread = rlPlayerDeck.copy();
@@ -110,6 +147,7 @@ public class RLTrainer {
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
+
                         batchPredictionRequest.decrementBatchSize();
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
                     }
@@ -222,6 +260,7 @@ public class RLTrainer {
         }
     }
 
+    // TODO: Should this be synchronized? I dont think so, I think we sync the network later
     private synchronized void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
         double reward = rlPlayerWon ? 1.0 : -1.0;
@@ -230,8 +269,9 @@ public class RLTrainer {
         List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();
         List<RLState> opponentStates = opponent.getStateBuffer();
         
-        // Batch update for GPU
+        // Add states for player
         List<RLState> allStates = new ArrayList<>(rlPlayerStates);
+        // Add states for opponent
         allStates.addAll(opponentStates);
         List<Double> rewards = new ArrayList<>();
         // Add rewards for RL player states

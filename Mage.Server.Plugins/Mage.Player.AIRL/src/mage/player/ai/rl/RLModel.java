@@ -46,47 +46,41 @@ public class RLModel implements Serializable {
         return network.predict(state.getStateVector(), isExploration);
     }
 
-    // TODO: Research the algorithm used here. I don't really understand it.
-    // NOTE: action here is WRONG. It is the output from state, not the input to state
-    public INDArray getTargetQValue(INDArray nextQValues, double reward) {
-        INDArray targetQValues = Nd4j.zeros(RLModel.OUTPUT_SIZE);
-        for (int i = 0; i < nextQValues.data().length(); i++) {
-            if (nextQValues.getDouble(i) != 0) {
-                targetQValues.putScalar(i, reward + DISCOUNT_FACTOR * nextQValues.getDouble(i));
-            }
-        }
-        return targetQValues;
-    }
-
-    public void update(RLState state, double reward, RLState nextState) {
-        INDArray nextQValues = nextState.targetQValues;
-        INDArray targetQValues;
-
-        switch (state.actionType) {
-            case DECLARE_ATTACKS:
-            case DECLARE_BLOCKS:
-            case ACTIVATE_ABILITY_OR_SPELL:
-                targetQValues = getTargetQValue(nextQValues, reward);
-                break;
-            default:
-                logger.error("Unknown action type: " + state.actionType);
-                throw new IllegalArgumentException("Unknown action type: " + state.actionType);
-        }
-
-        network.updateWeightsCPU(state.getStateVector(), targetQValues);
-    }
-
     public void updateBatch(List<RLState> states, List<Double> rewards, List<RLState> nextStates) {
-        List<float[]> statesArray = states.stream().map(RLState::getStateVector).collect(Collectors.toList());
-        List<INDArray> targetQValuesList = new ArrayList<>();
+        int batchSize = RLTrainer.BATCH_SIZE;
+        int totalSize = states.size();
 
-        for (int i = 0; i < states.size(); i++) {
-            INDArray nextQValues = nextStates.get(i).targetQValues;
-            double reward = rewards.get(i);
-            INDArray targetQValues = getTargetQValue(nextQValues, reward);
-            targetQValuesList.add(targetQValues);
+        INDArray[] targetQValuesArray = new INDArray[RLTrainer.BATCH_SIZE];
+        for (int i = 0; i < RLTrainer.BATCH_SIZE; i++) {
+            targetQValuesArray[i] = Nd4j.zeros(RLModel.OUTPUT_SIZE);
         }
 
-        network.updateWeightsGPU(statesArray, targetQValuesList);
+        for (int start = 0; start < totalSize; start += batchSize) {
+            int end = Math.min(start + batchSize, totalSize);
+
+            List<float[]> statesArray = states.subList(start, end).stream()
+                .map(RLState::getStateVector)
+                .collect(Collectors.toList());
+
+            // The set/unset design here is to avoid the heavy load of creating new INDArrays
+            // Set Q-vals
+            for (int i = start; i < end; i++) {
+                double reward = rewards.get(i);
+                for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
+                    targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
+                }
+            }
+
+            // Process
+            network.updateWeightsBatch(statesArray, targetQValuesArray);
+
+            //Unset Q-vals
+            for (int i = start; i < end; i++) {
+                for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
+                    targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), 0);
+                }
+            }
+
+        }
     }
 } 

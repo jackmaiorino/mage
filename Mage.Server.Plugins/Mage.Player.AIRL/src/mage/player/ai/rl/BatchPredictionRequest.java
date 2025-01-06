@@ -72,39 +72,29 @@ public class BatchPredictionRequest {
     }
 
     private void processBatch() throws InterruptedException {
-//        if (batchSize <= 0) {
-//            // If batchSize is 0, wait for the timeout duration before retrying
-//            Thread.sleep(timeUnit.toMillis(1000));
-//            return;
-//        }
-        if (requestQueue.isEmpty()) {
+        if (batchSize <= 0) {
             // If batchSize is 0, wait for the timeout duration before retrying
             Thread.sleep(timeUnit.toMillis(1000));
             return;
         }
 
         long currentTime = System.currentTimeMillis();
-        System.out.println("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
         logger.warn("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
         lastProcessTime = currentTime;
 
-        //int currentBatchSize = (int) Math.min(batchSize, RLTrainer.BATCH_SIZE);
-        int currentBatchSize = Math.min(requestQueue.size(), RLTrainer.BATCH_SIZE);
+        int currentBatchSize = (int) Math.min(batchSize, RLTrainer.BATCH_SIZE);
+        //int currentBatchSize = Math.min(requestQueue.size(), RLTrainer.BATCH_SIZE);
         Request[] batch = new Request[currentBatchSize];
         int count = 0;
         long batchStartTime = System.currentTimeMillis();
 
-        // New design? Don't wait for the full batch to fill up
-        Request request = requestQueue.poll(timeout, timeUnit);
         while (count < currentBatchSize && (System.currentTimeMillis() - batchStartTime) < timeUnit.toMillis(timeout)) {
-            request = requestQueue.poll(timeout, timeUnit);
+            Request request = requestQueue.poll(timeout, timeUnit);
             if (request != null) {
                 batch[count++] = request;
             }
         }
 
-        System.out.println("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
-        System.out.println("Batch size: " + count);
         logger.warn("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
         logger.warn("Batch size: " + count);
 
@@ -124,7 +114,6 @@ public class BatchPredictionRequest {
         // Calculate and print average predictions per second
         long totalTimeElapsed = System.currentTimeMillis() - startTime;
         double averagePredictionsPerSecond = (totalPredictions * 1000.0) / totalTimeElapsed;
-        System.out.println("Average predictions per second: " + String.format("%.2f", averagePredictionsPerSecond));
         logger.warn("Average predictions per second: " + String.format("%.2f", averagePredictionsPerSecond));
     }
 
@@ -142,7 +131,6 @@ public class BatchPredictionRequest {
 
         // End timing the prediction
         long predictionEndTime = System.currentTimeMillis();
-        System.out.println("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
         logger.warn("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
 
         return predictions;
