@@ -121,6 +121,8 @@ public class NeuralNetwork {
         
         // Create a 2D INDArray for the batch of states
         // TODO: This is redundant, kinda. We already create these during predictions when not exploring
+        // TODO: This is the heaviest part of the training process right now. Likely we will have to deal with
+        // time memory tradeoffs
         // There is an argument to keeping this here due to saving wait time caused
         INDArray inputBatch = Nd4j.create(new int[]{batchSize, stateLength});
         for (int i = 0; i < batchSize; i++) {
@@ -132,9 +134,10 @@ public class NeuralNetwork {
         for (int i = 0; i < batchSize; i++) {
             targetBatch.putRow(i, targetQValuesList[i]);
         }
-        // TODO: Are these arrays placed on the GPU?
         // Perform a single training step with the batch
-        network.fit(inputBatch, targetBatch);
+        synchronized (network) {
+            network.fit(inputBatch, targetBatch);
+        }
     }
 
     public void saveNetwork(String filePath) throws IOException {

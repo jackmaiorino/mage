@@ -44,7 +44,7 @@ public class RLTrainer {
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     // Seems like we are GPU Memory Bound
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 10;
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 40;
     // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
     // It is also technically a GPU bound value but cpu processing is the bottleneck
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
@@ -181,12 +181,12 @@ public class RLTrainer {
         }
     }
 
-    public void eval(int numEpisodes) {
+    public void eval(int numEpisodesPerThread) {
         List<Path> deckFiles = null;
-        try {  
+        try {
             deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
-                                        .filter(Files::isRegularFile)
-                                        .collect(Collectors.toList());
+                             .filter(Files::isRegularFile)
+                             .collect(Collectors.toList());
         } catch (IOException e) {
             logger.error("Error during evaluation", e);
         }
@@ -195,48 +195,107 @@ public class RLTrainer {
             return;
         }
 
-        RLModel model = new RLModel();
+        // TODO: Make ComputerPlayerRL not dependant on so much setup always
+        // Create singleton instance
+        BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
 
-        int winsAgainstComputerPlayer7 = 0;
+        // Stop the model from exploring
+        RLModel.IS_TRAINING = false;
+
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
+        final Object lock = new Object();
+        final boolean[] isFirstThread = {true};
+
+        List<Future<Integer>> futures = new ArrayList<>();
+
         Random random = new Random();
         Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
         Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
+        Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+        Deck opponentDeck = loadDeck(opponentDeckPath.toString());
 
-        for (int evalEpisode = 0; evalEpisode < numEpisodes; evalEpisode++) {
-            TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
-            try {
-                match.startGame();
-            } catch (GameException e) {
-                e.printStackTrace();
-            }
-            Game game = match.getGames().get(0);
+        for (int i = 0; i < NUM_THREADS; i++) {
+            Future<Integer> future = executor.submit(() -> {
+                boolean isFirst = false;
 
-            ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, model);
-            game.addPlayer(rlPlayer, rlPlayerDeck);
-            match.addPlayer(rlPlayer, rlPlayerDeck);
+                synchronized (lock) {
+                    if (isFirstThread[0]) {
+                        isFirst = true;
+                        isFirstThread[0] = false;
+                    }
+                }
 
-            Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-            Deck opponentDeck = loadDeck(opponentDeckPath.toString());
-            ComputerPlayer7 opponent = new ComputerPlayer7("Player7", RangeOfInfluence.ALL, 3);
-            game.addPlayer(opponent, opponentDeck);
-            match.addPlayer(opponent, opponentDeck);
+                Logger currentLogger = threadLocalLogger.get();
+                if (isFirst) {
+                    currentLogger.setLevel(Level.INFO);
+                }
 
-            game.loadCards(rlPlayerDeck.getCards(), rlPlayer.getId());
-            game.loadCards(opponentDeck.getCards(), opponent.getId());
+                int localWinsAgainstComputerPlayer7 = 0;
 
-            GameOptions options = new GameOptions();
-            game.setGameOptions(options);
+                Thread.currentThread().setName("GAME");
+                Deck rlPlayerDeckThread = rlPlayerDeck.copy();
+                Deck opponentDeckThread = opponentDeck.copy();
 
-            game.start(rlPlayer.getId());
+                for (int evalEpisode = 0; evalEpisode < numEpisodesPerThread; evalEpisode++) {
+                    batchPredictionRequest.incrementActiveGameRunners();
+                    TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
+                    try {
+                        match.startGame();
+                    } catch (GameException e) {
+                        e.printStackTrace();
+                    }
+                    Game game = match.getGames().get(0);
 
-            logGameResult(game, rlPlayer);
+                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
+                    game.addPlayer(rlPlayer, rlPlayerDeckThread);
+                    match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
-            if (game.getWinner().contains(rlPlayer.getName())) {
-                winsAgainstComputerPlayer7++;
-            }
+ 
+                    ComputerPlayer7 opponent = new ComputerPlayer7("Player7", RangeOfInfluence.ALL, 3);
+                    game.addPlayer(opponent, opponentDeckThread);
+                    match.addPlayer(opponent, opponentDeckThread);
+
+                    game.loadCards(rlPlayerDeckThread.getCards(), rlPlayer.getId());
+                    game.loadCards(opponentDeckThread.getCards(), opponent.getId());
+
+                    GameOptions options = new GameOptions();
+                    game.setGameOptions(options);
+
+                    game.start(rlPlayer.getId());
+
+                    if (isFirst) {
+                        logGameResult(game, rlPlayer);
+                    }
+
+                    if (game.getWinner().contains(rlPlayer.getName())) {
+                        localWinsAgainstComputerPlayer7++;
+                    }
+                    batchPredictionRequest.decrementActiveGameRunners();
+                }
+                return localWinsAgainstComputerPlayer7;
+            });
+            futures.add(future);
         }
 
-        double winRate = (double) winsAgainstComputerPlayer7 / NUM_EVAL_EPISODES;
+        executor.shutdown();
+        try {
+            executor.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+        } catch (InterruptedException e) {
+            logger.error("Evaluation interrupted", e);
+            Thread.currentThread().interrupt();
+        }
+
+        int totalWinsAgainstComputerPlayer7 = futures.stream().mapToInt(future -> {
+            try {
+                return future.get();
+            } catch (InterruptedException | ExecutionException e) {
+                logger.error("Error in thread execution", e.getCause());
+                return 0;
+            }
+        }).sum();
+
+        double winRate = (double) totalWinsAgainstComputerPlayer7 / (numEpisodesPerThread*NUM_THREADS);
+        logger.setLevel(Level.INFO);
         logger.info("Win rate against ComputerPlayer7: " + (winRate * 100) + "%");
     }
 
@@ -261,7 +320,7 @@ public class RLTrainer {
     }
 
     // TODO: Should this be synchronized? I dont think so, I think we sync the network later
-    private synchronized void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
+    private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
         double reward = rlPlayerWon ? 1.0 : -1.0;
 

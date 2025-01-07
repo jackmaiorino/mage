@@ -28,4 +28,10 @@ public class TestComputerPlayerRL extends CardTestPlayerBase
 
         //trainer.eval(5);
     }
+
+    @Test
+    public void test_RLPlayer_Eval() {
+        RLTrainer trainer = new RLTrainer();
+        trainer.eval(1);
+    }
 }

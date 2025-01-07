@@ -368,7 +368,9 @@ public class ComputerPlayerRL extends ComputerPlayer6 {
         // Returns a list of all available spells and abilities the player can currently cast/activate with his available resources.
         // Without target validation.
         List<ActivatedAbility> playables = game.getPlayer(playerId).getPlayable(game, isSimulatedPlayer);
-
+        if (playables.isEmpty()) {
+            return null;
+        }
         // Set the exploration columns so it only selects playables
         currentState.exploreXCol = 1;
         currentState.exploreYCol = Math.min(RLModel.MAX_ACTIONS, playables.size());

@@ -18,6 +18,7 @@ public class RLModel implements Serializable {
     // TODO: Eliminate the need for a MAX_ACTIONS by finding ways to indicate multiple copies of same card efficiently
     public static final int MAX_ACTIONS = 10;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS + 1) * (MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
+    public static boolean IS_TRAINING = true;
 
     public RLModel() {
         // TODO: This is a little silly, creating a network and then loading it. Make it better
@@ -42,13 +43,16 @@ public class RLModel implements Serializable {
     }
 
     public INDArray predictDistribution(RLState state, boolean isExploration) {
-        return network.predict(state, isExploration);
+        if (IS_TRAINING) {
+            return network.predict(state, isExploration);
+        } else {
+            return network.predict(state, false);
+        }
     }
 
     public void updateBatch(List<RLState> states, List<Double> rewards, List<RLState> nextStates) {
         int batchSize = 100;
         int totalSize = states.size();
-        System.out.println("Replay Buffer Total size: " + totalSize);
 
         INDArray[] targetQValuesArray = new INDArray[totalSize];
         for (int i = 0; i < totalSize; i++) {
@@ -68,8 +72,6 @@ public class RLModel implements Serializable {
 
         // Process
         network.updateWeightsBatch(statesArray, targetQValuesArray);
-        //TODO: We aren't getting here
-        System.out.println("Batch updated");
 
         // Maybe use this idea for a batch manager
         // for (int start = 0; start < totalSize; start += batchSize) {
