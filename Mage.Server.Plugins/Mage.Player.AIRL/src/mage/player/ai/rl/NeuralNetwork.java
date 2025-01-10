@@ -48,7 +48,7 @@ public class NeuralNetwork {
 
         // This exists to avoid creating a new INDArray every time predict is called
         predictionInput = Nd4j.create(1, RLState.STATE_VECTOR_SIZE);
-        explorationOutput = Nd4j.create(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
+        explorationOutput = Nd4j.create(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
     }
     
     public INDArray predict(RLState state, boolean isExploration) {
@@ -61,31 +61,33 @@ public class NeuralNetwork {
         if (Math.random() <= explorationRate && isExploration) {
             RLTrainer.threadLocalLogger.get().info("Exploration!");
             // Create a 2D array for the output
-            float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_ACTIONS + 1];
+            float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_OPTIONS];
+            int maxXexplore = Math.min(state.exploreXCol, RLModel.MAX_ACTIONS);
+            int maxYexplore = Math.min(state.exploreYCol, RLModel.MAX_OPTIONS);
 
             // Generate random values
             float totalSum = 0;
-            for (int i = 0; i < state.exploreXCol; i++) {
-                for (int j = 0; j < state.exploreYCol; j++) {
+            for (int i = 0; i < maxXexplore; i++) {
+                for (int j = 0; j < maxYexplore; j++) {
                     randomDist[i][j] = (float) Math.random();
                     totalSum += randomDist[i][j];
                 }
             }
 
             // Normalize all values to sum to 1
-            for (int i = 0; i < state.exploreXCol; i++) {
-                for (int j = 0; j < state.exploreYCol; j++) {
+            for (int i = 0; i < maxXexplore; i++) {
+                for (int j = 0; j < maxYexplore; j++) {
                     randomDist[i][j] /= totalSum;
                 }
             }
 
             // Set the exploration output
             for (int i = 0; i < RLModel.MAX_ACTIONS; i++) {
-                for (int j = 0; j < RLModel.MAX_ACTIONS + 1; j++) {
-                    if (i < state.exploreXCol && j < state.exploreYCol) {
-                        explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, randomDist[i][j]);
+                for (int j = 0; j < RLModel.MAX_OPTIONS; j++) {
+                    if (i < maxXexplore && j < maxYexplore) {
+                        explorationOutput.putScalar(i * RLModel.MAX_OPTIONS + j, randomDist[i][j]);
                     } else {
-                        explorationOutput.putScalar(i * (RLModel.MAX_ACTIONS + 1) + j, 0);
+                        explorationOutput.putScalar(i * RLModel.MAX_OPTIONS + j, 0);
                     }
                 }
             }

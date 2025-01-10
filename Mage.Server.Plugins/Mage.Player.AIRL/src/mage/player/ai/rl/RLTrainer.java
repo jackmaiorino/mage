@@ -42,14 +42,16 @@ public class RLTrainer {
     private static final int NUM_EVAL_EPISODES = 5;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
-    public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
+    //public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
+    public static final int NUM_THREADS = 1;
     // Seems like we are GPU Memory Bound
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 40;
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 35;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 3;
     // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
     // It is also technically a GPU bound value but cpu processing is the bottleneck
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
+
 
     public static final RLModel sharedModel = new RLModel();
 
@@ -89,6 +91,7 @@ public class RLTrainer {
 
             // Record start time
             long startTime = System.nanoTime();
+            long gamesRun = 0;
 
             ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS, runnable -> {
                 Thread thread = new Thread(runnable);
@@ -132,10 +135,10 @@ public class RLTrainer {
                         batchPredictionRequest.incrementActiveGameRunners();
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
 
-                        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
+                        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
 
-                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, 10, sharedModel);
+                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, sharedModel);
                         game.addPlayer(opponent, opponentDeckThread);
 
                         game.loadCards(rlPlayerDeckThread.getCards(), rlPlayer.getId());
@@ -168,6 +171,7 @@ public class RLTrainer {
                 }
             }
 
+            //TODO: Clean up end loggin
             // Record end time
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
@@ -176,6 +180,13 @@ public class RLTrainer {
             logger.info("Average time per episode: " + averageTimePerEpisode + " seconds");
             logger.info("Average time per episode per thread: " + averageTimePerEpisodePerThread + " seconds");
             sharedModel.saveModel(MODEL_FILE_PATH);
+
+            // Calculate and log the games run per minute
+            double totalTimeInMinutes = (endTime - startTime) / 1_000_000_000.0 / 60.0;
+            double gamesRunPerMinute = NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER / totalTimeInMinutes;
+            logger.info("Games Run Per Minute: " + gamesRunPerMinute);
+            System.out.println("Total Games Run: " + gamesRun);
+            System.out.println("Games Run Per Minute: " + gamesRunPerMinute);
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
         }
@@ -209,9 +220,9 @@ public class RLTrainer {
         List<Future<Integer>> futures = new ArrayList<>();
 
         Random random = new Random();
-        Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+        Path rlPlayerDeckPath = deckFiles.get(1);
         Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
-        Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
+        Path opponentDeckPath = deckFiles.get(1);
         Deck opponentDeck = loadDeck(opponentDeckPath.toString());
 
         for (int i = 0; i < NUM_THREADS; i++) {
@@ -226,6 +237,8 @@ public class RLTrainer {
                 }
 
                 Logger currentLogger = threadLocalLogger.get();
+
+                //Temp set all to log
                 if (isFirst) {
                     currentLogger.setLevel(Level.INFO);
                 }
@@ -246,7 +259,7 @@ public class RLTrainer {
                     }
                     Game game = match.getGames().get(0);
 
-                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, 10, sharedModel);
+                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
@@ -319,7 +332,6 @@ public class RLTrainer {
         }
     }
 
-    // TODO: Should this be synchronized? I dont think so, I think we sync the network later
     private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
         double reward = rlPlayerWon ? 1.0 : -1.0;

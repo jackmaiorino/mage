@@ -79,7 +79,7 @@ public class BatchPredictionRequest {
         }
 
         long currentTime = System.currentTimeMillis();
-        logger.warn("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
+        logger.info("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
         lastProcessTime = currentTime;
 
         // This allows the CPU to work while GPU is working
@@ -101,7 +101,7 @@ public class BatchPredictionRequest {
             }
         }
 
-        logger.warn("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
+        logger.info("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
         logger.warn("Batch size: " + count);
 
         if (count > 0) {

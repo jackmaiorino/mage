@@ -73,7 +73,6 @@ public class EmbeddingManager {
             String tokenizedText = tokenizeCardText(text);
             float[] embedding = queryOpenAIForEmbedding(tokenizedText);
             embeddings.put(text, embedding);
-            // TODO: lets only save after entire game is over
             saveEmbeddings();
             return embedding;
         }    

@@ -32,7 +32,6 @@ public class RLState {
                                                 NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE) // Player
                                                 + NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE); // Opponent
     public ActionType actionType;
-    // TODO: Might not need these anymore
     public int exploreXCol;
     public int exploreYCol;
 

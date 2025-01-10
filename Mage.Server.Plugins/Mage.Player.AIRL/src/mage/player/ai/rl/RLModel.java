@@ -16,8 +16,9 @@ public class RLModel implements Serializable {
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
     // TODO: Eliminate the need for a MAX_ACTIONS by finding ways to indicate multiple copies of same card efficiently
-    public static final int MAX_ACTIONS = 10;
-    public static final int OUTPUT_SIZE = (MAX_ACTIONS + 1) * (MAX_ACTIONS); // +1 for no attack/no block per attacker/blocker
+    public static final int MAX_ACTIONS = 15;
+    public static final int MAX_OPTIONS = 15;
+    public static final int OUTPUT_SIZE = (MAX_ACTIONS) * (MAX_OPTIONS);
     public static boolean IS_TRAINING = true;
 
     public RLModel() {
@@ -56,7 +57,7 @@ public class RLModel implements Serializable {
 
         INDArray[] targetQValuesArray = new INDArray[totalSize];
         for (int i = 0; i < totalSize; i++) {
-            targetQValuesArray[i] = Nd4j.zeros(RLModel.MAX_ACTIONS, RLModel.MAX_ACTIONS + 1);
+            targetQValuesArray[i] = Nd4j.zeros(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
         }
 
         for (int i = 0; i < totalSize; i++) {
