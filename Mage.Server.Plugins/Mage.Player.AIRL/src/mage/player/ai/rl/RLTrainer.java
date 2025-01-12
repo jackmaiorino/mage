@@ -35,18 +35,18 @@ import mage.game.mulligan.LondonMulligan;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerRL;
 import mage.players.Player;
+import org.nd4j.linalg.factory.Nd4j;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
     private static final int NUM_EPISODES = 10000;
     private static final int NUM_EVAL_EPISODES = 5;
-    private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks";
+    private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Legacy";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
-    //public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_THREADS = 1;
+    public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     // Seems like we are GPU Memory Bound
     public static final int NUM_GAME_RUNNERS = NUM_THREADS * 35;
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 3;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
     // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
     // It is also technically a GPU bound value but cpu processing is the bottleneck
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
@@ -153,6 +153,7 @@ public class RLTrainer {
 
                         batchPredictionRequest.decrementActiveGameRunners();
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
+                        Nd4j.getWorkspaceManager().destroyAllWorkspacesForCurrentThread();
                     }
                     return null;
                 });
@@ -185,7 +186,7 @@ public class RLTrainer {
             double totalTimeInMinutes = (endTime - startTime) / 1_000_000_000.0 / 60.0;
             double gamesRunPerMinute = NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER / totalTimeInMinutes;
             logger.info("Games Run Per Minute: " + gamesRunPerMinute);
-            System.out.println("Total Games Run: " + gamesRun);
+            System.out.println("Total Games Run: " + NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER);
             System.out.println("Games Run Per Minute: " + gamesRunPerMinute);
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);

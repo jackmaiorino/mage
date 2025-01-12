@@ -1,18 +1,24 @@
 package mage.player.ai;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import mage.target.TargetAmount;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
+import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.filter.StaticFilters;
 import mage.game.Game;
@@ -56,6 +62,164 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
+    //TODO: Implement this
+//    @Override
+//    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+//        log.debug("chooseTriggeredAbility: " + abilities.toString());
+//        //TODO: improve this
+//        if (!abilities.isEmpty()) {
+//            return abilities.get(0);
+//        }
+//        return null;
+//    }
+
+    @Override
+    public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        return choose(outcome, target, source, game, null);
+    }
+
+    // Will this work?
+    @Override
+    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        return choose(outcome, target, source, game, null);
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
+        return choose(outcome, target, source, game, null);
+    }
+
+    @Override
+    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
+        UUID abilityControllerId = playerId;
+        if (target.getTargetController() != null && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+        UUID sourceId = source != null ? source.getSourceId() : null;
+
+        // Not really sure why we are prompted to choose the starting player
+        // Just hand it off to the superclass
+        if (Objects.equals(target.getTargetName(), "starting player")) {
+            return super.choose(outcome, target, source, game, null);
+        }
+
+        boolean required = target.isRequired(sourceId, game);
+        List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+        if (possibleTargetsList.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
+            required = false;
+        }
+
+        // If we can't choose any targets, pass
+        if (possibleTargetsList.isEmpty()) {
+            return false;
+        }
+
+        int maxTargets = target.getMaxNumberOfTargets();
+        int minTargets = target.getMinNumberOfTargets();
+
+        // TODO: Differentiate between ACTIVATE_ABILITY_OR_SPELL and CHOOSE_TARGET
+        currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
+        stateBuffer.add(currentState);
+
+        // Initialize explore dimensions as a 2D list
+        List<Integer> exploreDimensions = new ArrayList<>();
+        int totalTargets = possibleTargetsList.size();
+        int fullRows = totalTargets / RLModel.MAX_OPTIONS;
+        int remainingTargets = totalTargets % RLModel.MAX_OPTIONS;
+
+        // Fill the 2D list with indices
+        for (int i = 0; i < fullRows; i++) {
+            exploreDimensions.add(RLModel.MAX_OPTIONS);
+        }
+        if (remainingTargets > 0) {
+            exploreDimensions.add(remainingTargets);
+        }
+
+        currentState.exploreDimensions = exploreDimensions;
+
+        INDArray qValues = model.predictDistribution(currentState, true);
+
+        // Create a list to store Q-values with their indices
+        List<QValueWithIndex> qValueList = new ArrayList<>();
+        for (int i = 0; i < qValues.length(); i++) {
+            qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
+        }
+
+        // Sort the list by Q-value in descending order
+        qValueList.sort((a, b) -> Float.compare(b.qValue, a.qValue));
+
+        // Use the sorted Q-values and their indices as needed
+        int selectedTargets = 0;
+        List<UUID> selectedTargetsList = new ArrayList<>();
+        for (QValueWithIndex qValueWithIndex : qValueList) {
+            // Access the original index and Q-value
+            int originalIndex = qValueWithIndex.index;
+
+            // Check if the index is valid
+            if (originalIndex < possibleTargetsList.size()) {
+                target.add(possibleTargetsList.get(originalIndex), game);
+                // Convert 1D index to 2D index
+                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex % RLModel.MAX_ACTIONS, originalIndex / RLModel.MAX_ACTIONS));
+                selectedTargetsList.add(possibleTargetsList.get(originalIndex));
+                selectedTargets++;
+            }
+
+            // Stop if we've reached the minimum and encounter an invalid index
+            if (selectedTargets >= minTargets && originalIndex >= possibleTargetsList.size()) {
+                break;
+            }
+
+            // Stop if we've reached the maximum number of targets
+            if (selectedTargets >= maxTargets) {
+                break;
+            }
+        }
+
+        List<String> selectedTargetNames = new ArrayList<>();
+        for (UUID targetId : selectedTargetsList) {
+            MageObject mageObject = game.getObject(targetId);
+            if (mageObject != null) {
+                selectedTargetNames.add(mageObject.getName());
+            } else {
+                Player player = game.getPlayer(targetId);
+                if (player != null) {
+                    selectedTargetNames.add(player.getName());
+                }
+            }
+        }
+
+        // Retrieve the source name
+        String sourceName = "Unknown Source";
+        if (source != null) {
+            MageObject sourceMageObject = game.getObject(source.getSourceId());
+            if (sourceMageObject != null) {
+                sourceName = sourceMageObject.getName();
+            } else {
+                Player sourcePlayer = game.getPlayer(source.getSourceId());
+                if (sourcePlayer != null) {
+                    sourceName = sourcePlayer.getName();
+                }
+            }
+        } else {
+            sourceName = outcome.name();
+        }
+
+        RLTrainer.threadLocalLogger.get().info("Selected targets: " + selectedTargetNames + " for source: " + sourceName);
+
+        if (currentState.targetQValues.isEmpty()){
+            // If no targets are selected, but minTargets is 0, the selected action was the "non-action"
+            if (minTargets == 0) {
+                QValueWithIndex qValueWithIndex = qValueList.get(0);
+                int originalIndex = qValueWithIndex.index;
+                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex % RLModel.MAX_ACTIONS, originalIndex / RLModel.MAX_ACTIONS));
+            }else{
+                stateBuffer.remove(currentState);
+            }
+        }
+        // Return true if the minimum number of targets is selected
+        return selectedTargets >= minTargets;
+    }
+
     @Override
     public void selectAttackers(Game game, UUID attackingPlayerId) {
         game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, attackingPlayerId));
@@ -78,32 +242,38 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 return;
             }
 
-            if (possibleAttackers.size() > RLModel.MAX_OPTIONS) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
-            }
-
             currentState = new RLState(game, RLState.ActionType.DECLARE_ATTACKS);
             stateBuffer.add(currentState);
-            int numAttackers = currentState.exploreYCol = Math.min(RLModel.MAX_OPTIONS, possibleAttackers.size());
             // Generate list of attack targets (Player, planeswalkers, battles)
             List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
-            if (possibleAttackTargets.size() > RLModel.MAX_ACTIONS) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More attack targets than max actions, Model truncating");
+            if (possibleAttackers.size() > RLModel.MAX_ACTIONS) {
+                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
             }
-            int numAttackTargets = currentState.exploreXCol = Math.min(RLModel.MAX_ACTIONS, possibleAttackTargets.size());
+            if (possibleAttackTargets.size() > RLModel.MAX_OPTIONS - 1) {
+                RLTrainer.threadLocalLogger.get().error("ERROR: More attack targets than max options, Model truncating");
+            }
+            int numAttackers = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
+            // -1 to reserve the option to not attack
+            int numAttackTargets = Math.min(RLModel.MAX_OPTIONS-1, possibleAttackTargets.size());
+
+            for(int i = 0; i < numAttackers; i++){
+                // +1 to explore the option to not attack
+                currentState.exploreDimensions.add(numAttackTargets+1);
+            }
 
             // Predict on game state
             INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
 
             // For each attacker
+            // Attacker = X, Attack Target = Y
             for (int attackerIndex = 0; attackerIndex < numAttackers; attackerIndex++) {
                 Permanent attacker = possibleAttackers.get(attackerIndex);
 
                 // Create a list of defender indices with their Q-values for this attacker
                 List<AttackOption> attackOptions = new ArrayList<>();
-                for (int defenderIndex = 0; defenderIndex < RLModel.MAX_OPTIONS; defenderIndex++) {
-                    float qValue = qValues.getFloat(attackerIndex, defenderIndex);
-                    attackOptions.add(new AttackOption(defenderIndex, attackerIndex, qValue));
+                for (int attackTargetIndex = 0; attackTargetIndex < RLModel.MAX_OPTIONS; attackTargetIndex++) {
+                    float qValue = qValues.getFloat(attackerIndex, attackTargetIndex);
+                    attackOptions.add(new AttackOption(attackTargetIndex, attackerIndex, qValue));
                 }
 
                 // Sort attack options by Q-value in descending order
@@ -111,19 +281,22 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
                 // Declare attacks based on sorted Q-values
                 for (AttackOption option : attackOptions) {
-                    if (option.defenderIndex >= numAttackTargets) {
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.defenderIndex));
+                    if (option.attackTargetIndex >= numAttackTargets) {
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.attackTargetIndex));
                         break; // Skip this attacker if the first choice is to not attack
                     }
-                    UUID defenderId = possibleAttackTargets.get(option.defenderIndex);
-                    if (attacker.canAttack(defenderId, game)) {
-                        RLTrainer.threadLocalLogger.get().info("Declaring attacker: " + attacker.getName() + " for defender: " + defenderId.toString());
-                        this.declareAttacker(attacker.getId(), defenderId, game, false);
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.defenderIndex));
+                    UUID attackTargetId = possibleAttackTargets.get(option.attackTargetIndex);
+                    if (attacker.canAttack(attackTargetId, game)) {
+                        RLTrainer.threadLocalLogger.get().info("Declaring attacker: " + attacker.getName() + " for attack target: " + attackTargetId.toString());
+                        this.declareAttacker(attacker.getId(), attackTargetId, game, false);
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.attackTargetIndex));
                         break; // Once an attack is declared, move to the next attacker
                     }
                 }
             }
+        }
+        if (currentState.targetQValues.isEmpty()){
+            stateBuffer.remove(currentState);
         }
     }
 
@@ -152,28 +325,34 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
             currentState = new RLState(game, RLState.ActionType.DECLARE_BLOCKS);
             stateBuffer.add(currentState);
-            int numAttackers = currentState.exploreXCol = Math.min(RLModel.MAX_ACTIONS, attackers.size());
-            // -1 to reserve the option to not block
-            int numBlockers = currentState.exploreYCol = Math.min(RLModel.MAX_OPTIONS - 1, possibleBlockers.size());
-            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
-
-            if (attackers.size() > RLModel.MAX_ACTIONS) {
+            // -1 to reserve the option to not block nothing no a creature. Essentially an attacker that is "nothing"
+            int numAttackers = Math.min(RLModel.MAX_ACTIONS - 1, attackers.size());
+            int numBlockers = Math.min(RLModel.MAX_OPTIONS, possibleBlockers.size());
+            if (attackers.size() > RLModel.MAX_ACTIONS - 1) {
                 RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
             }
-            if (possibleBlockers.size() > RLModel.MAX_OPTIONS - 1) {
+            if (possibleBlockers.size() > RLModel.MAX_OPTIONS) {
                 RLTrainer.threadLocalLogger.get().error("ERROR: More blockers than max actions, Model truncating");
             }
 
+            // Build exploration dimensions
+            // +1 to explore the option to not block
+            for(int i = 0; i < numAttackers + 1; i++){
+                currentState.exploreDimensions.add(numBlockers);
+            }
+            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
+
             boolean blockerDeclared = false;
 
-            // Iterate over attackers first
-            for (int attackerIndex = 0; attackerIndex < numAttackers; attackerIndex++) {
-                Permanent attacker = attackers.get(attackerIndex);
+            // Iterate over blockers first
+            // Attacker = X, Blockers = Y
+            for (int blockerIndex = 0; blockerIndex < numBlockers; blockerIndex++) {
+                Permanent blocker = possibleBlockers.get(blockerIndex);
 
                 // Create a list of blocker indices with their Q-values for this attacker
                 List<BlockOption> blockOptions = new ArrayList<>();
                 // We use the full MAX_OPTIONS because we need to reserve the option to not block
-                for (int blockerIndex = 0; blockerIndex < RLModel.MAX_OPTIONS; blockerIndex++) {
+                for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS; attackerIndex++) {
                     float qValue = qValues.getFloat(attackerIndex, blockerIndex);
                     blockOptions.add(new BlockOption(attackerIndex, blockerIndex, qValue));
                 }
@@ -183,15 +362,15 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
                 // Declare blocks based on sorted Q-values
                 for (BlockOption option : blockOptions) {
-                    if (option.blockerIndex >= numBlockers) {
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, option.blockerIndex, option.attackerIndex));
-                        break; // Skip this attacker if the first choice is to not block
+                    if (option.attackerIndex >= numAttackers) {
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, option.attackerIndex, option.blockerIndex));
+                        break; // Skip this blocker if the first choice is to not block
                     }
-                    Permanent blocker = possibleBlockers.get(option.blockerIndex);
+                    Permanent attacker = attackers.get(option.attackerIndex);
                     if (blocker.canBlock(attacker.getId(), game)) {
                         RLTrainer.threadLocalLogger.get().info("Declaring blocker: " + blocker.getName() + " for attacker: " + attacker.getName());
                         this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, option.blockerIndex, option.attackerIndex));
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, option.attackerIndex, option.blockerIndex));
                         blockerDeclared = true;
                         // TODO: implement multiblock
                         break;
@@ -201,6 +380,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
             if (blockerDeclared) {
                 game.getPlayers().resetPassed();
             }
+        }
+        if (currentState.targetQValues.isEmpty()){
+            stateBuffer.remove(currentState);
         }
     }
 
@@ -405,13 +587,16 @@ public class ComputerPlayerRL extends ComputerPlayer {
             allOptions.add(options);
         }
 
-        // Ensure the list is of size RLModel.MAX_ACTIONS x RLModel.MAX_OPTIONS
-        while (allOptions.size() < RLModel.MAX_ACTIONS) {
-            allOptions.add(new ArrayList<>());
+        // Ensure the list does not exceed RLModel.MAX_ACTIONS x RLModel.MAX_OPTIONS
+        if (allOptions.size() > RLModel.MAX_ACTIONS) {
+            RLTrainer.threadLocalLogger.get().error("ERROR: More actions than max actions, Model truncating");
+            allOptions = allOptions.subList(0, RLModel.MAX_ACTIONS);
         }
-        for (List<Ability> optionList : allOptions) {
-            while (optionList.size() < RLModel.MAX_OPTIONS) {
-                optionList.add(null); // or some placeholder if needed
+        for (int i = 0; i < allOptions.size(); i++) {
+            List<Ability> optionList = allOptions.get(i);
+            if (optionList.size() > RLModel.MAX_OPTIONS) {
+                RLTrainer.threadLocalLogger.get().error("ERROR: More options than max options, Model truncating");
+                allOptions.set(i, optionList.subList(0, RLModel.MAX_OPTIONS));
             }
         }
 
@@ -455,15 +640,20 @@ public class ComputerPlayerRL extends ComputerPlayer {
     protected Ability calculateActions(Game game) {
         // Get the 2D list of playable options
         List<List<Ability>> playableOptions = getPlayableOptions(game);
+        // If we can only pass, don't query model
+        if (playableOptions.size() == 1){
+            return null;
+        }
 
         // Set the exploration columns so it only selects playableOptions
         currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
         stateBuffer.add(currentState);
-        currentState.exploreXCol = Math.min(RLModel.MAX_ACTIONS, playableOptions.size());
-        currentState.exploreYCol = Math.min(RLModel.MAX_OPTIONS, playableOptions.stream().mapToInt(List::size).max().orElse(0));
+        for (List<Ability> options : playableOptions) {
+            currentState.exploreDimensions.add(options.size());
+        }
 
         // Evaluate each action using the model
-        INDArray qValues = model.predictDistribution(currentState, true);
+        INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
         float maxQValue = Float.NEGATIVE_INFINITY;
         int bestRowIndex = 0;
         int bestColIndex = 0;
@@ -513,13 +703,24 @@ class BlockOption {
 
 // Helper class to store attack options
 class AttackOption {
-    int defenderIndex;
+    int attackTargetIndex;
     int attackerIndex;
     float qValue;
 
-    AttackOption(int defenderIndex, int attackerIndex, float qValue) {
-        this.defenderIndex = defenderIndex;
+    AttackOption(int attackTargetIndex, int attackerIndex, float qValue) {
+        this.attackTargetIndex = attackTargetIndex;
         this.attackerIndex = attackerIndex;
         this.qValue = qValue;
+    }
+}
+
+// Helper class to store Q-value with its index
+class QValueWithIndex {
+    float qValue;
+    int index;
+
+    QValueWithIndex(float qValue, int index) {
+        this.qValue = qValue;
+        this.index = index;
     }
 }

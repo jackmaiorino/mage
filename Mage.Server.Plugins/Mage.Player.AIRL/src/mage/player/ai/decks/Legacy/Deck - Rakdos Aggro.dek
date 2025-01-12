@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="52697" Quantity="4" Sideboard="false" Name="Ancient Tomb" Annotation="0"/>
+  <Cards CatID="53078" Quantity="4" Sideboard="false" Name="Badlands" Annotation="0"/>
+  <Cards CatID="127403" Quantity="2" Sideboard="false" Name="Barrowgoyf" Annotation="0"/>
+  <Cards CatID="38293" Quantity="4" Sideboard="false" Name="Blackcleave Cliffs" Annotation="0"/>
+  <Cards CatID="66637" Quantity="4" Sideboard="false" Name="Blood Sun" Annotation="0"/>
+  <Cards CatID="126517" Quantity="2" Sideboard="false" Name="Boggart Trawler" Annotation="0"/>
+  <Cards CatID="19995" Quantity="4" Sideboard="false" Name="Chalice of the Void" Annotation="0"/>
+  <Cards CatID="19831" Quantity="3" Sideboard="false" Name="Chrome Mox" Annotation="0"/>
+  <Cards CatID="10685" Quantity="4" Sideboard="false" Name="City of Traitors" Annotation="0"/>
+  <Cards CatID="97210" Quantity="4" Sideboard="false" Name="Fable of the Mirror-Breaker" Annotation="0"/>
+  <Cards CatID="90629" Quantity="3" Sideboard="false" Name="Fury" Annotation="0"/>
+  <Cards CatID="125731" Quantity="2" Sideboard="false" Name="Laelia, the Blade Reforged" Annotation="0"/>
+  <Cards CatID="56432" Quantity="3" Sideboard="false" Name="Lotus Petal" Annotation="0"/>
+  <Cards CatID="86078" Quantity="3" Sideboard="false" Name="Opposition Agent" Annotation="0"/>
+  <Cards CatID="127421" Quantity="4" Sideboard="false" Name="Pyrogoyf" Annotation="0"/>
+  <Cards CatID="83297" Quantity="1" Sideboard="false" Name="Shatterskull Smashing" Annotation="0"/>
+  <Cards CatID="106431" Quantity="2" Sideboard="false" Name="Sheoldred's Edict" Annotation="0"/>
+  <Cards CatID="26357" Quantity="2" Sideboard="false" Name="Simian Spirit Guide" Annotation="0"/>
+  <Cards CatID="126537" Quantity="1" Sideboard="false" Name="Sundering Eruption" Annotation="0"/>
+  <Cards CatID="119784" Quantity="4" Sideboard="false" Name="The One Ring" Annotation="0"/>
+  <Cards CatID="20065" Quantity="2" Sideboard="true" Name="Damping Matrix" Annotation="0"/>
+  <Cards CatID="59177" Quantity="2" Sideboard="true" Name="Fiery Confluence" Annotation="0"/>
+  <Cards CatID="23911" Quantity="4" Sideboard="true" Name="Leyline of the Void" Annotation="0"/>
+  <Cards CatID="34802" Quantity="2" Sideboard="true" Name="Mindbreak Trap" Annotation="0"/>
+  <Cards CatID="106431" Quantity="2" Sideboard="true" Name="Sheoldred's Edict" Annotation="0"/>
+  <Cards CatID="20492" Quantity="3" Sideboard="true" Name="Trinisphere" Annotation="0"/>
+</Deck>

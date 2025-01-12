@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="126075" Quantity="4" Sideboard="false" Name="Guide of Souls" Annotation="0"/>
+  <Cards CatID="126093" Quantity="4" Sideboard="false" Name="Ocelot Pride" Annotation="0"/>
+  <Cards CatID="99679" Quantity="2" Sideboard="false" Name="Ragavan, Nimble Pilferer" Annotation="0"/>
+  <Cards CatID="125781" Quantity="4" Sideboard="false" Name="Ajani, Nacatl Pariah" Annotation="0"/>
+  <Cards CatID="126097" Quantity="2" Sideboard="false" Name="Phelia, Exuberant Shepherd" Annotation="0"/>
+  <Cards CatID="126413" Quantity="4" Sideboard="false" Name="Phlage, Titan of Fire's Fury" Annotation="0"/>
+  <Cards CatID="102269" Quantity="4" Sideboard="false" Name="Seasoned Pyromancer" Annotation="0"/>
+  <Cards CatID="126261" Quantity="4" Sideboard="false" Name="Galvanic Discharge" Annotation="0"/>
+  <Cards CatID="126107" Quantity="2" Sideboard="false" Name="Thraben Charm" Annotation="0"/>
+  <Cards CatID="126105" Quantity="3" Sideboard="false" Name="Static Prison" Annotation="0"/>
+  <Cards CatID="90981" Quantity="3" Sideboard="false" Name="Goblin Bombardment" Annotation="0"/>
+  <Cards CatID="22775" Quantity="2" Sideboard="false" Name="Blood Moon" Annotation="0"/>
+  <Cards CatID="126449" Quantity="2" Sideboard="false" Name="Arena of Glory" Annotation="0"/>
+  <Cards CatID="23590" Quantity="3" Sideboard="false" Name="Sacred Foundry" Annotation="0"/>
+  <Cards CatID="122012" Quantity="2" Sideboard="false" Name="Elegant Parlor" Annotation="0"/>
+  <Cards CatID="79624" Quantity="3" Sideboard="false" Name="Plains" Annotation="0"/>
+  <Cards CatID="79630" Quantity="1" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="90869" Quantity="4" Sideboard="false" Name="Arid Mesa" Annotation="0"/>
+  <Cards CatID="54194" Quantity="3" Sideboard="false" Name="Flooded Strand" Annotation="0"/>
+  <Cards CatID="34647" Quantity="2" Sideboard="false" Name="Marsh Flats" Annotation="0"/>
+  <Cards CatID="125711" Quantity="2" Sideboard="false" Name="Windswept Heath" Annotation="0"/>
+  <Cards CatID="50252" Quantity="1" Sideboard="true" Name="Chained to the Rocks" Annotation="0"/>
+  <Cards CatID="112160" Quantity="2" Sideboard="true" Name="Fear, Fire, Foes!" Annotation="0"/>
+  <Cards CatID="130627" Quantity="1" Sideboard="true" Name="Ghost Vacuum" Annotation="0"/>
+  <Cards CatID="40024" Quantity="2" Sideboard="true" Name="Surgical Extraction" Annotation="0"/>
+  <Cards CatID="81253" Quantity="2" Sideboard="true" Name="Containment Priest" Annotation="0"/>
+  <Cards CatID="80031" Quantity="2" Sideboard="true" Name="Drannith Magistrate" Annotation="0"/>
+  <Cards CatID="48524" Quantity="2" Sideboard="true" Name="Wear/Tear" Annotation="0"/>
+  <Cards CatID="90651" Quantity="3" Sideboard="true" Name="Obsidian Charmaw" Annotation="0"/>
+</Deck>

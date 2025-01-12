@@ -16,7 +16,7 @@ public class RLModel implements Serializable {
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
     // TODO: Eliminate the need for a MAX_ACTIONS by finding ways to indicate multiple copies of same card efficiently
-    public static final int MAX_ACTIONS = 15;
+    public static final int MAX_ACTIONS = 25;
     public static final int MAX_OPTIONS = 15;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS) * (MAX_OPTIONS);
     public static boolean IS_TRAINING = true;
@@ -62,6 +62,9 @@ public class RLModel implements Serializable {
 
         for (int i = 0; i < totalSize; i++) {
             double reward = rewards.get(i);
+            if (nextStates.get(i).targetQValues.isEmpty()) {
+                throw new IllegalArgumentException("Next state Q-values are empty");
+            }
             for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
                 targetQValuesArray[i].putScalar(qValueEntry.getXIndex(), qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
             }

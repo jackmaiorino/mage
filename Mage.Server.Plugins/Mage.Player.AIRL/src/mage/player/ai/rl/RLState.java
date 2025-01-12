@@ -32,8 +32,7 @@ public class RLState {
                                                 NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE) // Player
                                                 + NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE); // Opponent
     public ActionType actionType;
-    public int exploreXCol;
-    public int exploreYCol;
+    public List<Integer> exploreDimensions;
 
     public enum ZoneType {
         HAND,
@@ -57,6 +56,7 @@ public class RLState {
         this.stateVector = new float[STATE_VECTOR_SIZE];
         this.actionType = actionType;
         this.targetQValues = new ArrayList<>();
+        this.exploreDimensions = new ArrayList<>();
         buildStateVector(game);
     }
 

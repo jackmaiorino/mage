@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="130215" Quantity="4" Sideboard="false" Name="Abhorrent Oculus" Annotation="0"/>
+  <Cards CatID="125761" Quantity="2" Sideboard="false" Name="Bloodstained Mire" Annotation="0"/>
+  <Cards CatID="93020" Quantity="3" Sideboard="false" Name="Consider" Annotation="0"/>
+  <Cards CatID="67014" Quantity="4" Sideboard="false" Name="Counterspell" Annotation="0"/>
+  <Cards CatID="64997" Quantity="3" Sideboard="false" Name="Fatal Push" Annotation="0"/>
+  <Cards CatID="72476" Quantity="2" Sideboard="false" Name="Force of Negation" Annotation="0"/>
+  <Cards CatID="126143" Quantity="2" Sideboard="false" Name="Harbinger of the Seas" Annotation="0"/>
+  <Cards CatID="79626" Quantity="2" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="90473" Quantity="2" Sideboard="false" Name="Murktide Regent" Annotation="0"/>
+  <Cards CatID="54196" Quantity="4" Sideboard="false" Name="Polluted Delta" Annotation="0"/>
+  <Cards CatID="126417" Quantity="4" Sideboard="false" Name="Psychic Frog" Annotation="0"/>
+  <Cards CatID="124123" Quantity="2" Sideboard="false" Name="Shoot the Sheriff" Annotation="0"/>
+  <Cards CatID="126509" Quantity="2" Sideboard="false" Name="Sink into Stupor" Annotation="0"/>
+  <Cards CatID="63192" Quantity="2" Sideboard="false" Name="Spell Pierce" Annotation="0"/>
+  <Cards CatID="49015" Quantity="2" Sideboard="false" Name="Spell Snare" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="101614" Quantity="4" Sideboard="false" Name="Thought Scour" Annotation="0"/>
+  <Cards CatID="121448" Quantity="2" Sideboard="false" Name="Undercity Sewers" Annotation="0"/>
+  <Cards CatID="72598" Quantity="4" Sideboard="false" Name="Unearth" Annotation="0"/>
+  <Cards CatID="23586" Quantity="2" Sideboard="false" Name="Watery Grave" Annotation="0"/>
+  <Cards CatID="93164" Quantity="2" Sideboard="false" Name="Graveyard Trespasser" Annotation="0"/>
+  <Cards CatID="98123" Quantity="1" Sideboard="false" Name="Otawara, Soaring City" Annotation="0"/>
+  <Cards CatID="90889" Quantity="2" Sideboard="false" Name="Scalding Tarn" Annotation="0"/>
+  <Cards CatID="90881" Quantity="1" Sideboard="false" Name="Misty Rainforest" Annotation="0"/>
+  <Cards CatID="106095" Quantity="1" Sideboard="false" Name="Darkslick Shores" Annotation="0"/>
+  <Cards CatID="78826" Quantity="1" Sideboard="true" Name="Brazen Borrower" Annotation="0"/>
+  <Cards CatID="112116" Quantity="2" Sideboard="true" Name="Orcish Bowmasters" Annotation="0"/>
+  <Cards CatID="78226" Quantity="2" Sideboard="true" Name="Mystical Dispute" Annotation="0"/>
+  <Cards CatID="125965" Quantity="2" Sideboard="true" Name="Toxic Deluge" Annotation="0"/>
+  <Cards CatID="38315" Quantity="2" Sideboard="true" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="40024" Quantity="2" Sideboard="true" Name="Surgical Extraction" Annotation="0"/>
+  <Cards CatID="64997" Quantity="1" Sideboard="true" Name="Fatal Push" Annotation="0"/>
+  <Cards CatID="126125" Quantity="3" Sideboard="true" Name="Consign to Memory" Annotation="0"/>
+</Deck>

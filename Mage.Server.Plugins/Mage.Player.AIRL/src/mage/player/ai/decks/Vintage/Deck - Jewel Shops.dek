@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="53177" Quantity="1" Sideboard="false" Name="Ancestral Recall" Annotation="0"/>
+  <Cards CatID="70673" Quantity="4" Sideboard="false" Name="Coveted Jewel" Annotation="0"/>
+  <Cards CatID="53155" Quantity="1" Sideboard="false" Name="Black Lotus" Annotation="0"/>
+  <Cards CatID="52913" Quantity="3" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="52913" Quantity="1" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="119784" Quantity="4" Sideboard="false" Name="The One Ring" Annotation="0"/>
+  <Cards CatID="37308" Quantity="1" Sideboard="false" Name="Voltaic Key" Annotation="0"/>
+  <Cards CatID="71608" Quantity="1" Sideboard="false" Name="Karn, the Great Creator" Annotation="0"/>
+  <Cards CatID="52941" Quantity="1" Sideboard="false" Name="Mana Crypt" Annotation="0"/>
+  <Cards CatID="52761" Quantity="1" Sideboard="false" Name="Tolarian Academy" Annotation="0"/>
+  <Cards CatID="33933" Quantity="1" Sideboard="false" Name="Tinker" Annotation="0"/>
+  <Cards CatID="53163" Quantity="4" Sideboard="false" Name="Mishra's Workshop" Annotation="0"/>
+  <Cards CatID="52877" Quantity="1" Sideboard="false" Name="Mox Emerald" Annotation="0"/>
+  <Cards CatID="52713" Quantity="1" Sideboard="false" Name="Mox Jet" Annotation="0"/>
+  <Cards CatID="52597" Quantity="1" Sideboard="false" Name="Mox Pearl" Annotation="0"/>
+  <Cards CatID="53243" Quantity="1" Sideboard="false" Name="Mox Ruby" Annotation="0"/>
+  <Cards CatID="52919" Quantity="1" Sideboard="false" Name="Mox Sapphire" Annotation="0"/>
+  <Cards CatID="98123" Quantity="1" Sideboard="false" Name="Otawara, Soaring City" Annotation="0"/>
+  <Cards CatID="53091" Quantity="1" Sideboard="false" Name="Time Vault" Annotation="0"/>
+  <Cards CatID="39734" Quantity="4" Sideboard="false" Name="Phyrexian Metamorph" Annotation="0"/>
+  <Cards CatID="125373" Quantity="1" Sideboard="false" Name="Simulacrum Synthesizer" Annotation="0"/>
+  <Cards CatID="126509" Quantity="4" Sideboard="false" Name="Sink into Stupor" Annotation="0"/>
+  <Cards CatID="51096" Quantity="1" Sideboard="false" Name="Sol Ring" Annotation="0"/>
+  <Cards CatID="126727" Quantity="2" Sideboard="false" Name="Talon Gates of Madara" Annotation="0"/>
+  <Cards CatID="61909" Quantity="4" Sideboard="false" Name="Paradoxical Outcome" Annotation="0"/>
+  <Cards CatID="52987" Quantity="1" Sideboard="false" Name="Time Walk" Annotation="0"/>
+  <Cards CatID="73359" Quantity="1" Sideboard="false" Name="Manifold Key" Annotation="0"/>
+  <Cards CatID="53161" Quantity="1" Sideboard="false" Name="Mana Vault" Annotation="0"/>
+  <Cards CatID="20492" Quantity="1" Sideboard="false" Name="Trinisphere" Annotation="0"/>
+  <Cards CatID="90899" Quantity="1" Sideboard="false" Name="Urza's Saga" Annotation="0"/>
+  <Cards CatID="126443" Quantity="1" Sideboard="false" Name="Vexing Bauble" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="52697" Quantity="4" Sideboard="false" Name="Ancient Tomb" Annotation="0"/>
+  <Cards CatID="61567" Quantity="3" Sideboard="false" Name="Grim Monolith" Annotation="0"/>
+  <Cards CatID="27667" Quantity="1" Sideboard="true" Name="Pithing Needle" Annotation="0"/>
+  <Cards CatID="57331" Quantity="2" Sideboard="true" Name="Dismember" Annotation="0"/>
+  <Cards CatID="125951" Quantity="3" Sideboard="true" Name="Kappa Cannoneer" Annotation="0"/>
+  <Cards CatID="43491" Quantity="1" Sideboard="true" Name="Grafdigger's Cage" Annotation="0"/>
+  <Cards CatID="86020" Quantity="2" Sideboard="true" Name="Hullbreacher" Annotation="0"/>
+  <Cards CatID="106021" Quantity="2" Sideboard="true" Name="Argentum Masticore" Annotation="0"/>
+  <Cards CatID="37861" Quantity="2" Sideboard="true" Name="Wurmcoil Engine" Annotation="0"/>
+  <Cards CatID="72476" Quantity="2" Sideboard="true" Name="Force of Negation" Annotation="0"/>
+</Deck>

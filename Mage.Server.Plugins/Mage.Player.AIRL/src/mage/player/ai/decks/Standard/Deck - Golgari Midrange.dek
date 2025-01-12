@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="106153" Quantity="3" Sideboard="false" Name="Glissa Sunslayer" Annotation="0"/>
+  <Cards CatID="104812" Quantity="2" Sideboard="false" Name="Gix's Command" Annotation="0"/>
+  <Cards CatID="102654" Quantity="3" Sideboard="false" Name="Cut Down" Annotation="0"/>
+  <Cards CatID="108871" Quantity="1" Sideboard="false" Name="Blot Out" Annotation="0"/>
+  <Cards CatID="116152" Quantity="1" Sideboard="false" Name="The End" Annotation="0"/>
+  <Cards CatID="102690" Quantity="3" Sideboard="false" Name="Sheoldred, the Apocalypse" Annotation="0"/>
+  <Cards CatID="105951" Quantity="2" Sideboard="false" Name="Thrun, Breaker of Silence" Annotation="0"/>
+  <Cards CatID="133480" Quantity="4" Sideboard="false" Name="Llanowar Elves" Annotation="0"/>
+  <Cards CatID="102842" Quantity="1" Sideboard="false" Name="Tear Asunder" Annotation="0"/>
+  <Cards CatID="104822" Quantity="4" Sideboard="false" Name="Go for the Throat" Annotation="0"/>
+  <Cards CatID="106377" Quantity="1" Sideboard="false" Name="Anoint with Affliction" Annotation="0"/>
+  <Cards CatID="130353" Quantity="1" Sideboard="false" Name="Nowhere to Run" Annotation="0"/>
+  <Cards CatID="118033" Quantity="3" Sideboard="false" Name="Preacher of the Schism" Annotation="0"/>
+  <Cards CatID="116052" Quantity="4" Sideboard="false" Name="Mosswood Dreadknight" Annotation="0"/>
+  <Cards CatID="116904" Quantity="4" Sideboard="false" Name="Restless Cottage" Annotation="0"/>
+  <Cards CatID="27464" Quantity="4" Sideboard="false" Name="Llanowar Wastes" Annotation="0"/>
+  <Cards CatID="124445" Quantity="4" Sideboard="false" Name="Blooming Marsh" Annotation="0"/>
+  <Cards CatID="133834" Quantity="3" Sideboard="false" Name="Soulstone Sanctuary" Annotation="0"/>
+  <Cards CatID="79628" Quantity="4" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="79632" Quantity="5" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="122034" Quantity="1" Sideboard="false" Name="Underground Mortuary" Annotation="0"/>
+  <Cards CatID="48842" Quantity="2" Sideboard="false" Name="Maelstrom Pulse" Annotation="0"/>
+  <Cards CatID="130627" Quantity="1" Sideboard="true" Name="Ghost Vacuum" Annotation="0"/>
+  <Cards CatID="102842" Quantity="1" Sideboard="true" Name="Tear Asunder" Annotation="0"/>
+  <Cards CatID="102648" Quantity="1" Sideboard="true" Name="Choking Miasma" Annotation="0"/>
+  <Cards CatID="106377" Quantity="1" Sideboard="true" Name="Anoint with Affliction" Annotation="0"/>
+  <Cards CatID="125379" Quantity="2" Sideboard="true" Name="Harvester of Misery" Annotation="0"/>
+  <Cards CatID="60628" Quantity="3" Sideboard="true" Name="Duress" Annotation="0"/>
+  <Cards CatID="116152" Quantity="1" Sideboard="true" Name="The End" Annotation="0"/>
+  <Cards CatID="106051" Quantity="2" Sideboard="true" Name="Nissa, Ascended Animist" Annotation="0"/>
+  <Cards CatID="108982" Quantity="2" Sideboard="true" Name="Tranquil Frillback" Annotation="0"/>
+  <Cards CatID="133490" Quantity="1" Sideboard="true" Name="Scavenging Ooze" Annotation="0"/>
+</Deck>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="47475" Quantity="1" Sideboard="false" Name="Breeding Pool" Annotation="0"/>
+  <Cards CatID="44245" Quantity="1" Sideboard="false" Name="Cavern of Souls" Annotation="0"/>
+  <Cards CatID="121436" Quantity="1" Sideboard="false" Name="Hedge Maze" Annotation="0"/>
+  <Cards CatID="126021" Quantity="2" Sideboard="false" Name="Devourer of Destiny" Annotation="0"/>
+  <Cards CatID="36780" Quantity="4" Sideboard="false" Name="Eldrazi Temple" Annotation="0"/>
+  <Cards CatID="61068" Quantity="3" Sideboard="false" Name="Emrakul, the Promised End" Annotation="0"/>
+  <Cards CatID="79632" Quantity="3" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="42294" Quantity="1" Sideboard="false" Name="Ghost Quarter" Annotation="0"/>
+  <Cards CatID="126019" Quantity="1" Sideboard="false" Name="Breaker of Creation" Annotation="0"/>
+  <Cards CatID="126039" Quantity="4" Sideboard="false" Name="Kozilek's Command" Annotation="0"/>
+  <Cards CatID="126339" Quantity="4" Sideboard="false" Name="Malevolent Rumble" Annotation="0"/>
+  <Cards CatID="126475" Quantity="1" Sideboard="false" Name="Shifting Woodland" Annotation="0"/>
+  <Cards CatID="126357" Quantity="4" Sideboard="false" Name="Sowing Mycospawn" Annotation="0"/>
+  <Cards CatID="71558" Quantity="1" Sideboard="false" Name="Stomping Ground" Annotation="0"/>
+  <Cards CatID="72836" Quantity="2" Sideboard="false" Name="Talisman of Curiosity" Annotation="0"/>
+  <Cards CatID="127167" Quantity="2" Sideboard="false" Name="Talisman of Impulse" Annotation="0"/>
+  <Cards CatID="126043" Quantity="3" Sideboard="false" Name="Nulldrifter" Annotation="0"/>
+  <Cards CatID="126485" Quantity="4" Sideboard="false" Name="Ugin's Labyrinth" Annotation="0"/>
+  <Cards CatID="120288" Quantity="4" Sideboard="false" Name="Utopia Sprawl" Annotation="0"/>
+  <Cards CatID="90902" Quantity="4" Sideboard="false" Name="Verdant Catacombs" Annotation="0"/>
+  <Cards CatID="59563" Quantity="3" Sideboard="false" Name="World Breaker" Annotation="0"/>
+  <Cards CatID="58619" Quantity="1" Sideboard="false" Name="Sanctum of Ugin" Annotation="0"/>
+  <Cards CatID="59331" Quantity="2" Sideboard="false" Name="Kozilek's Return" Annotation="0"/>
+  <Cards CatID="82336" Quantity="4" Sideboard="false" Name="Ancient Stirrings" Annotation="0"/>
+  <Cards CatID="126125" Quantity="2" Sideboard="true" Name="Consign to Memory" Annotation="0"/>
+  <Cards CatID="59331" Quantity="2" Sideboard="true" Name="Kozilek's Return" Annotation="0"/>
+  <Cards CatID="20065" Quantity="3" Sideboard="true" Name="Damping Matrix" Annotation="0"/>
+  <Cards CatID="78226" Quantity="2" Sideboard="true" Name="Mystical Dispute" Annotation="0"/>
+  <Cards CatID="72701" Quantity="3" Sideboard="true" Name="Force of Vigor" Annotation="0"/>
+  <Cards CatID="106697" Quantity="2" Sideboard="true" Name="Soulless Jailer" Annotation="0"/>
+  <Cards CatID="52973" Quantity="1" Sideboard="true" Name="Flusterstorm" Annotation="0"/>
+</Deck>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="46246" Quantity="1" Sideboard="false" Name="Dryad Arbor" Annotation="0"/>
+  <Cards CatID="71904" Quantity="1" Sideboard="false" Name="Arboreal Grazer" Annotation="0"/>
+  <Cards CatID="121772" Quantity="2" Sideboard="false" Name="Aftermath Analyst" Annotation="0"/>
+  <Cards CatID="79462" Quantity="1" Sideboard="false" Name="Dryad of the Ilysian Grove" Annotation="0"/>
+  <Cards CatID="41307" Quantity="4" Sideboard="false" Name="Primeval Titan" Annotation="0"/>
+  <Cards CatID="48648" Quantity="2" Sideboard="false" Name="Summoner's Pact" Annotation="0"/>
+  <Cards CatID="35633" Quantity="4" Sideboard="false" Name="Amulet of Vigor" Annotation="0"/>
+  <Cards CatID="82545" Quantity="1" Sideboard="false" Name="Expedition Map" Annotation="0"/>
+  <Cards CatID="35578" Quantity="3" Sideboard="false" Name="Explore" Annotation="0"/>
+  <Cards CatID="118260" Quantity="3" Sideboard="false" Name="Spelunking" Annotation="0"/>
+  <Cards CatID="28954" Quantity="1" Sideboard="false" Name="Scapeshift" Annotation="0"/>
+  <Cards CatID="39581" Quantity="4" Sideboard="false" Name="Green Sun's Zenith" Annotation="0"/>
+  <Cards CatID="66358" Quantity="4" Sideboard="false" Name="Gruul Turf" Annotation="0"/>
+  <Cards CatID="90899" Quantity="4" Sideboard="false" Name="Urza's Saga" Annotation="0"/>
+  <Cards CatID="98135" Quantity="3" Sideboard="false" Name="Boseiju, Who Endures" Annotation="0"/>
+  <Cards CatID="61566" Quantity="2" Sideboard="false" Name="Crumbling Vestige" Annotation="0"/>
+  <Cards CatID="79632" Quantity="2" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="73397" Quantity="2" Sideboard="false" Name="Lotus Field" Annotation="0"/>
+  <Cards CatID="24031" Quantity="2" Sideboard="false" Name="Simic Growth Chamber" Annotation="0"/>
+  <Cards CatID="117704" Quantity="1" Sideboard="false" Name="Echoing Deeps" Annotation="0"/>
+  <Cards CatID="34604" Quantity="1" Sideboard="false" Name="Valakut, the Molten Pinnacle" Annotation="0"/>
+  <Cards CatID="25657" Quantity="1" Sideboard="false" Name="Vesuva" Annotation="0"/>
+  <Cards CatID="59311" Quantity="1" Sideboard="false" Name="Mirrorpool" Annotation="0"/>
+  <Cards CatID="26822" Quantity="1" Sideboard="false" Name="Tolaria West" Annotation="0"/>
+  <Cards CatID="98123" Quantity="1" Sideboard="false" Name="Otawara, Soaring City" Annotation="0"/>
+  <Cards CatID="90881" Quantity="1" Sideboard="false" Name="Misty Rainforest" Annotation="0"/>
+  <Cards CatID="121432" Quantity="1" Sideboard="false" Name="Commercial District" Annotation="0"/>
+  <Cards CatID="44245" Quantity="1" Sideboard="false" Name="Cavern of Souls" Annotation="0"/>
+  <Cards CatID="126487" Quantity="1" Sideboard="false" Name="Urza's Cave" Annotation="0"/>
+  <Cards CatID="61228" Quantity="1" Sideboard="false" Name="Hanweir Battlements" Annotation="0"/>
+  <Cards CatID="129611" Quantity="1" Sideboard="false" Name="Lumra, Bellow of the Woods" Annotation="0"/>
+  <Cards CatID="126475" Quantity="2" Sideboard="false" Name="Shifting Woodland" Annotation="0"/>
+  <Cards CatID="72688" Quantity="1" Sideboard="true" Name="Collector Ouphe" Annotation="0"/>
+  <Cards CatID="60320" Quantity="2" Sideboard="true" Name="Tireless Tracker" Annotation="0"/>
+  <Cards CatID="126443" Quantity="1" Sideboard="true" Name="Vexing Bauble" Annotation="0"/>
+  <Cards CatID="22447" Quantity="2" Sideboard="true" Name="Defense Grid" Annotation="0"/>
+  <Cards CatID="57331" Quantity="2" Sideboard="true" Name="Dismember" Annotation="0"/>
+  <Cards CatID="40521" Quantity="2" Sideboard="true" Name="Firespout" Annotation="0"/>
+  <Cards CatID="72701" Quantity="2" Sideboard="true" Name="Force of Vigor" Annotation="0"/>
+  <Cards CatID="35515" Quantity="1" Sideboard="true" Name="Bojuka Bog" Annotation="0"/>
+  <Cards CatID="98135" Quantity="1" Sideboard="true" Name="Boseiju, Who Endures" Annotation="0"/>
+  <Cards CatID="81724" Quantity="1" Sideboard="true" Name="Radiant Fountain" Annotation="0"/>
+</Deck>

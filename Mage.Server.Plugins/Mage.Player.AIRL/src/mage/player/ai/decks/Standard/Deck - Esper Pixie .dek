@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="27460" Quantity="3" Sideboard="false" Name="Caves of Koilos" Annotation="0"/>
+  <Cards CatID="61859" Quantity="4" Sideboard="false" Name="Concealed Courtyard" Annotation="0"/>
+  <Cards CatID="130353" Quantity="4" Sideboard="false" Name="Nowhere to Run" Annotation="0"/>
+  <Cards CatID="130247" Quantity="4" Sideboard="false" Name="Fear of Isolation" Annotation="0"/>
+  <Cards CatID="130173" Quantity="4" Sideboard="false" Name="Optimistic Scavenger" Annotation="0"/>
+  <Cards CatID="129395" Quantity="4" Sideboard="false" Name="Stormchaser's Talent" Annotation="0"/>
+  <Cards CatID="130571" Quantity="3" Sideboard="false" Name="Kaito, Bane of Nightmares" Annotation="0"/>
+  <Cards CatID="124059" Quantity="4" Sideboard="false" Name="This Town Ain't Big Enough" Annotation="0"/>
+  <Cards CatID="123951" Quantity="4" Sideboard="false" Name="Nurturing Pixie" Annotation="0"/>
+  <Cards CatID="116506" Quantity="4" Sideboard="false" Name="Hopeless Nightmare" Annotation="0"/>
+  <Cards CatID="38289" Quantity="4" Sideboard="false" Name="Seachrome Coast" Annotation="0"/>
+  <Cards CatID="22623" Quantity="3" Sideboard="false" Name="Underground River" Annotation="0"/>
+  <Cards CatID="117706" Quantity="2" Sideboard="false" Name="Restless Anchorage" Annotation="0"/>
+  <Cards CatID="106095" Quantity="4" Sideboard="false" Name="Darkslick Shores" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="104822" Quantity="2" Sideboard="false" Name="Go for the Throat" Annotation="0"/>
+  <Cards CatID="27384" Quantity="2" Sideboard="false" Name="Adarkar Wastes" Annotation="0"/>
+  <Cards CatID="116164" Quantity="2" Sideboard="false" Name="Spiteful Hexmage" Annotation="0"/>
+  <Cards CatID="118064" Quantity="1" Sideboard="false" Name="Tithing Blade" Annotation="0"/>
+  <Cards CatID="130313" Quantity="1" Sideboard="false" Name="Defiled Crypt/Cadaver Lab" Annotation="0"/>
+  <Cards CatID="125405" Quantity="3" Sideboard="true" Name="Pest Control" Annotation="0"/>
+  <Cards CatID="121916" Quantity="1" Sideboard="true" Name="No More Lies" Annotation="0"/>
+  <Cards CatID="130571" Quantity="1" Sideboard="true" Name="Kaito, Bane of Nightmares" Annotation="0"/>
+  <Cards CatID="102548" Quantity="2" Sideboard="true" Name="Temporary Lockdown" Annotation="0"/>
+  <Cards CatID="116556" Quantity="2" Sideboard="true" Name="The Witch's Vanity" Annotation="0"/>
+  <Cards CatID="102510" Quantity="3" Sideboard="true" Name="Destroy Evil" Annotation="0"/>
+  <Cards CatID="128431" Quantity="1" Sideboard="true" Name="Loran of the Third Path" Annotation="0"/>
+  <Cards CatID="102654" Quantity="1" Sideboard="true" Name="Cut Down" Annotation="0"/>
+  <Cards CatID="130313" Quantity="1" Sideboard="true" Name="Defiled Crypt/Cadaver Lab" Annotation="0"/>
+</Deck>

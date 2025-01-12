@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="52990" Quantity="4" Sideboard="false" Name="Animate Dead" Annotation="0"/>
+  <Cards CatID="90523" Quantity="1" Sideboard="false" Name="Archon of Cruelty" Annotation="0"/>
+  <Cards CatID="106607" Quantity="1" Sideboard="false" Name="Atraxa, Grand Unifier" Annotation="0"/>
+  <Cards CatID="53117" Quantity="4" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="78826" Quantity="2" Sideboard="false" Name="Brazen Borrower" Annotation="0"/>
+  <Cards CatID="60897" Quantity="3" Sideboard="false" Name="Daze" Annotation="0"/>
+  <Cards CatID="70261" Quantity="4" Sideboard="false" Name="Entomb" Annotation="0"/>
+  <Cards CatID="64997" Quantity="2" Sideboard="false" Name="Fatal Push" Annotation="0"/>
+  <Cards CatID="52913" Quantity="4" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="130725" Quantity="1" Sideboard="false" Name="Metamorphosis Fanatic" Annotation="0"/>
+  <Cards CatID="90881" Quantity="1" Sideboard="false" Name="Misty Rainforest" Annotation="0"/>
+  <Cards CatID="112116" Quantity="3" Sideboard="false" Name="Orcish Bowmasters" Annotation="0"/>
+  <Cards CatID="54196" Quantity="4" Sideboard="false" Name="Polluted Delta" Annotation="0"/>
+  <Cards CatID="41241" Quantity="4" Sideboard="false" Name="Ponder" Annotation="0"/>
+  <Cards CatID="52695" Quantity="4" Sideboard="false" Name="Reanimate" Annotation="0"/>
+  <Cards CatID="90889" Quantity="1" Sideboard="false" Name="Scalding Tarn" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="50256" Quantity="3" Sideboard="false" Name="Thoughtseize" Annotation="0"/>
+  <Cards CatID="112132" Quantity="4" Sideboard="false" Name="Troll of Khazad-dum" Annotation="0"/>
+  <Cards CatID="121448" Quantity="1" Sideboard="false" Name="Undercity Sewers" Annotation="0"/>
+  <Cards CatID="53097" Quantity="4" Sideboard="false" Name="Underground Sea" Annotation="0"/>
+  <Cards CatID="36877" Quantity="3" Sideboard="false" Name="Wasteland" Annotation="0"/>
+  <Cards CatID="127403" Quantity="2" Sideboard="true" Name="Barrowgoyf" Annotation="0"/>
+  <Cards CatID="78826" Quantity="1" Sideboard="true" Name="Brazen Borrower" Annotation="0"/>
+  <Cards CatID="126125" Quantity="3" Sideboard="true" Name="Consign to Memory" Annotation="0"/>
+  <Cards CatID="90535" Quantity="3" Sideboard="true" Name="Dauthi Voidwalker" Annotation="0"/>
+  <Cards CatID="57331" Quantity="1" Sideboard="true" Name="Dismember" Annotation="0"/>
+  <Cards CatID="70049" Quantity="1" Sideboard="true" Name="Engineered Explosives" Annotation="0"/>
+  <Cards CatID="64997" Quantity="1" Sideboard="true" Name="Fatal Push" Annotation="0"/>
+  <Cards CatID="104822" Quantity="1" Sideboard="true" Name="Go for the Throat" Annotation="0"/>
+  <Cards CatID="126143" Quantity="2" Sideboard="true" Name="Harbinger of the Seas" Annotation="0"/>
+</Deck>

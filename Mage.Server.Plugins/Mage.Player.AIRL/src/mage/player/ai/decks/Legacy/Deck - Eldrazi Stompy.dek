@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="127886" Quantity="1" Sideboard="false" Name="Abstergo Entertainment" Annotation="0"/>
+  <Cards CatID="52697" Quantity="4" Sideboard="false" Name="Ancient Tomb" Annotation="0"/>
+  <Cards CatID="44245" Quantity="4" Sideboard="false" Name="Cavern of Souls" Annotation="0"/>
+  <Cards CatID="19995" Quantity="4" Sideboard="false" Name="Chalice of the Void" Annotation="0"/>
+  <Cards CatID="126021" Quantity="4" Sideboard="false" Name="Devourer of Destiny" Annotation="0"/>
+  <Cards CatID="36780" Quantity="4" Sideboard="false" Name="Eldrazi Temple" Annotation="0"/>
+  <Cards CatID="35539" Quantity="3" Sideboard="false" Name="Eye of Ugin" Annotation="0"/>
+  <Cards CatID="59655" Quantity="1" Sideboard="false" Name="Gaea's Cradle" Annotation="0"/>
+  <Cards CatID="126031" Quantity="4" Sideboard="false" Name="Glaring Fleshraker" Annotation="0"/>
+  <Cards CatID="126035" Quantity="3" Sideboard="false" Name="It That Heralds the End" Annotation="0"/>
+  <Cards CatID="126039" Quantity="4" Sideboard="false" Name="Kozilek's Command" Annotation="0"/>
+  <Cards CatID="56432" Quantity="4" Sideboard="false" Name="Lotus Petal" Annotation="0"/>
+  <Cards CatID="46255" Quantity="1" Sideboard="false" Name="Maze of Ith" Annotation="0"/>
+  <Cards CatID="126043" Quantity="1" Sideboard="false" Name="Nulldrifter" Annotation="0"/>
+  <Cards CatID="78478" Quantity="4" Sideboard="false" Name="Once Upon a Time" Annotation="0"/>
+  <Cards CatID="126357" Quantity="4" Sideboard="false" Name="Sowing Mycospawn" Annotation="0"/>
+  <Cards CatID="59463" Quantity="4" Sideboard="false" Name="Thought-Knot Seer" Annotation="0"/>
+  <Cards CatID="36877" Quantity="4" Sideboard="false" Name="Wasteland" Annotation="0"/>
+  <Cards CatID="59605" Quantity="1" Sideboard="false" Name="Wastes" Annotation="0"/>
+  <Cards CatID="90903" Quantity="2" Sideboard="false" Name="Yavimaya, Cradle of Growth" Annotation="0"/>
+  <Cards CatID="57331" Quantity="2" Sideboard="true" Name="Dismember" Annotation="0"/>
+  <Cards CatID="126437" Quantity="2" Sideboard="true" Name="Disruptor Flute" Annotation="0"/>
+  <Cards CatID="23911" Quantity="4" Sideboard="true" Name="Leyline of the Void" Annotation="0"/>
+  <Cards CatID="34802" Quantity="2" Sideboard="true" Name="Mindbreak Trap" Annotation="0"/>
+  <Cards CatID="52647" Quantity="3" Sideboard="true" Name="Null Rod" Annotation="0"/>
+  <Cards CatID="126051" Quantity="2" Sideboard="true" Name="Wastescape Battlemage" Annotation="0"/>
+</Deck>

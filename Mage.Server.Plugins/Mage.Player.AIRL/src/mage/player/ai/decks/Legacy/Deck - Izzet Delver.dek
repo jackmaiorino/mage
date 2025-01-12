@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="42436" Quantity="4" Sideboard="false" Name="Delver of Secrets" Annotation="0"/>
+  <Cards CatID="78826" Quantity="1" Sideboard="false" Name="Brazen Borrower" Annotation="0"/>
+  <Cards CatID="90615" Quantity="4" Sideboard="false" Name="Dragon's Rage Channeler" Annotation="0"/>
+  <Cards CatID="90473" Quantity="3" Sideboard="false" Name="Murktide Regent" Annotation="0"/>
+  <Cards CatID="116840" Quantity="2" Sideboard="false" Name="Questing Druid" Annotation="0"/>
+  <Cards CatID="53117" Quantity="4" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="60897" Quantity="4" Sideboard="false" Name="Daze" Annotation="0"/>
+  <Cards CatID="52913" Quantity="4" Sideboard="false" Name="Force of Will" Annotation="0"/>
+  <Cards CatID="41241" Quantity="4" Sideboard="false" Name="Ponder" Annotation="0"/>
+  <Cards CatID="37240" Quantity="4" Sideboard="false" Name="Lightning Bolt" Annotation="0"/>
+  <Cards CatID="104486" Quantity="4" Sideboard="false" Name="Mishra's Bauble" Annotation="0"/>
+  <Cards CatID="36877" Quantity="4" Sideboard="false" Name="Wasteland" Annotation="0"/>
+  <Cards CatID="53099" Quantity="4" Sideboard="false" Name="Volcanic Island" Annotation="0"/>
+  <Cards CatID="53093" Quantity="1" Sideboard="false" Name="Tropical Island" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="90667" Quantity="1" Sideboard="false" Name="Unholy Heat" Annotation="0"/>
+  <Cards CatID="54194" Quantity="3" Sideboard="false" Name="Flooded Strand" Annotation="0"/>
+  <Cards CatID="54196" Quantity="3" Sideboard="false" Name="Polluted Delta" Annotation="0"/>
+  <Cards CatID="90889" Quantity="2" Sideboard="false" Name="Scalding Tarn" Annotation="0"/>
+  <Cards CatID="72476" Quantity="1" Sideboard="false" Name="Force of Negation" Annotation="0"/>
+  <Cards CatID="57331" Quantity="1" Sideboard="false" Name="Dismember" Annotation="0"/>
+  <Cards CatID="107317" Quantity="1" Sideboard="false" Name="Chain Lightning" Annotation="0"/>
+  <Cards CatID="126125" Quantity="3" Sideboard="true" Name="Consign to Memory" Annotation="0"/>
+  <Cards CatID="39237" Quantity="2" Sideboard="true" Name="Price of Progress" Annotation="0"/>
+  <Cards CatID="24591" Quantity="1" Sideboard="true" Name="Counterbalance" Annotation="0"/>
+  <Cards CatID="28041" Quantity="2" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="28063" Quantity="3" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="43491" Quantity="2" Sideboard="true" Name="Grafdigger's Cage" Annotation="0"/>
+  <Cards CatID="125975" Quantity="1" Sideboard="true" Name="Meltdown" Annotation="0"/>
+  <Cards CatID="40024" Quantity="1" Sideboard="true" Name="Surgical Extraction" Annotation="0"/>
+</Deck>

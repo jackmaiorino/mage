@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.log4j.Logger;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
@@ -21,12 +22,11 @@ import org.nd4j.linalg.lossfunctions.LossFunctions;
 
 
 public class NeuralNetwork {
+    private static final Logger logger = Logger.getLogger(NeuralNetwork.class);
     public MultiLayerNetwork network;
     private final double explorationRate;
     private final int outputSize;
     private final BatchPredictionRequest batchPredictionRequest;
-    private INDArray predictionInput;
-    private INDArray explorationOutput;
     
     // The neural net output is an outputSize x outputSize grid of probabilities
     public NeuralNetwork(int inputSize, int outputSize, double explorationRate) {
@@ -45,10 +45,6 @@ public class NeuralNetwork {
         
         network = new MultiLayerNetwork(conf);
         network.init();
-
-        // This exists to avoid creating a new INDArray every time predict is called
-        predictionInput = Nd4j.create(1, RLState.STATE_VECTOR_SIZE);
-        explorationOutput = Nd4j.create(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
     }
     
     public INDArray predict(RLState state, boolean isExploration) {
@@ -62,38 +58,24 @@ public class NeuralNetwork {
             RLTrainer.threadLocalLogger.get().info("Exploration!");
             // Create a 2D array for the output
             float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_OPTIONS];
-            int maxXexplore = Math.min(state.exploreXCol, RLModel.MAX_ACTIONS);
-            int maxYexplore = Math.min(state.exploreYCol, RLModel.MAX_OPTIONS);
 
             // Generate random values
             float totalSum = 0;
-            for (int i = 0; i < maxXexplore; i++) {
-                for (int j = 0; j < maxYexplore; j++) {
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for(int j = 0; j < state.exploreDimensions.get(i); j++) {
                     randomDist[i][j] = (float) Math.random();
                     totalSum += randomDist[i][j];
                 }
             }
 
             // Normalize all values to sum to 1
-            for (int i = 0; i < maxXexplore; i++) {
-                for (int j = 0; j < maxYexplore; j++) {
-                    randomDist[i][j] /= totalSum;
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for(int j = 0; j < state.exploreDimensions.get(i); j++) {
+                    randomDist[i][j] = randomDist[i][j]/totalSum;
                 }
             }
 
-            // Set the exploration output
-            for (int i = 0; i < RLModel.MAX_ACTIONS; i++) {
-                for (int j = 0; j < RLModel.MAX_OPTIONS; j++) {
-                    if (i < maxXexplore && j < maxYexplore) {
-                        explorationOutput.putScalar(i * RLModel.MAX_OPTIONS + j, randomDist[i][j]);
-                    } else {
-                        explorationOutput.putScalar(i * RLModel.MAX_OPTIONS + j, 0);
-                    }
-                }
-            }
-
-            return explorationOutput;
-            //return Nd4j.create(randomDist);
+            return Nd4j.create(randomDist);
         }
         // Use BatchPredictionRequest for batch processing
         try {
@@ -102,19 +84,12 @@ public class NeuralNetwork {
 //                predictionInput.putScalar(i, state[i]);
 //            }
             // This seems to be better
-            predictionInput = Nd4j.create(stateVector);
-            return batchPredictionRequest.predict(predictionInput);
+            return batchPredictionRequest.predict(Nd4j.create(stateVector));
         } catch (InterruptedException e) {
             RLTrainer.threadLocalLogger.get().error("Prediction interrupted", e);
             Thread.currentThread().interrupt();
             return null;
         }
-    }
-
-    public void updateWeightsCPU(float[] state, INDArray targetQValues) {
-        INDArray input = Nd4j.create(state);
-        INDArray target = Nd4j.create(targetQValues.data().asFloat());
-        network.fit(input, target);
     }
 
     public void updateWeightsBatch(List<float[]> states, INDArray[] targetQValuesList) {
@@ -150,7 +125,7 @@ public class NeuralNetwork {
         try {
             network = ModelSerializer.restoreMultiLayerNetwork(filePath);
         } catch (IOException e) {
-            RLTrainer.threadLocalLogger.get().error("Can't find file: " + filePath, e);
+            logger.info("Could not load network from file, creating new network");
         }
     }
 
