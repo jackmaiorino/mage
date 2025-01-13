@@ -9,13 +9,15 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import mage.target.TargetAmount;
+import mage.abilities.*;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.choices.Choice;
+import mage.filter.common.FilterLandCard;
+import mage.target.TargetCard;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.constants.Outcome;
@@ -31,6 +33,7 @@ import mage.player.ai.rl.RLTrainer;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
+import mage.target.TargetAmount;
 
 public class ComputerPlayerRL extends ComputerPlayer {
     public RLModel model;
@@ -62,7 +65,53 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
-    //TODO: Implement this
+    // Stuff like Opp agent? Investigate further how to handle. Just choosing how to handle multiple replacement effects?
+    // TODO
+//    @Override
+//    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
+//        log.debug("chooseReplacementEffect");
+
+    // Stuff like sheoldred's edict (I think this can just intercept a set mode. Same with set mana cost.)
+    // TODO: How do we preset modes and manacost.
+    // TODO
+//    @Override
+//    public Mode chooseMode(Modes modes, Ability source, Game game) {
+//        log.debug("chooseMode");
+
+    // TODO
+//    @Override
+//    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+//        log.debug("announceXMana");
+
+    // Deciding to use FOW alt cast
+    // TODO
+//    @Override
+//    public boolean choose(Outcome outcome, Choice choice, Game game) {
+//        log.debug("choose 3");
+
+    // Deciding ponder cards
+    // TODO
+//    @Override
+//    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+//        log.debug("choose 2");
+
+    // TODO
+//    @Override
+//    public boolean chooseMulligan(Game game) {
+//        log.debug("chooseMulligan");
+//        if (hand.size() < 6
+//                || isTestsMode() // ignore mulligan in tests
+//                || game.getClass().getName().contains("Momir") // ignore mulligan in Momir games
+//        ) {
+//            return false;
+//        }
+//        Set<Card> lands = hand.getCards(new FilterLandCard(), game);
+//        return lands.size() < 2
+//                || lands.size() > hand.size() - 2;
+//    }
+
+    // Choosing which stack ability from the stack you want to resolve
+    // TODO
 //    @Override
 //    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
 //        log.debug("chooseTriggeredAbility: " + abilities.toString());
@@ -79,6 +128,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
     }
 
     // Will this work?
+    // TODO: This breaks on mulligans? Because there is no active player?
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         return choose(outcome, target, source, game, null);
@@ -170,7 +220,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             }
 
             // Stop if we've reached the maximum number of targets
-            if (selectedTargets >= maxTargets) {
+            if (selectedTargets >= maxTargets && maxTargets != 0) {
                 break;
             }
         }
@@ -302,9 +352,10 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
     // Don't need to override?
     // TODO: Do we need to pass the action vector a reference for WHICH creature its declaring blocks?
-    private void declareBlockers(Game game, UUID activePlayerId) {
-        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, activePlayerId));
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, activePlayerId, activePlayerId))) {
+    @Override
+    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
+        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, defendingPlayerId));
+        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, defendingPlayerId, defendingPlayerId))) {
             List<Permanent> attackers = getAttackers(game);
             if (attackers == null) {
                 return;
@@ -380,9 +431,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
             if (blockerDeclared) {
                 game.getPlayers().resetPassed();
             }
-        }
-        if (currentState.targetQValues.isEmpty()){
-            stateBuffer.remove(currentState);
+            if (currentState.targetQValues.isEmpty()){
+                stateBuffer.remove(currentState);
+            }
         }
     }
 
@@ -448,20 +499,15 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
-                if (game.isActivePlayer(playerId)) {
-                    printBattleField(game, "Sim PRIORITY on DECLARE ATTACKERS");
-                    selectAttackers(game, playerId);
-                }
-                // TODO: We can also perform actions here but lets simplify for now
+                printBattleField(game, "Sim PRIORITY on DECLARE ATTACKERS");
+                ability = calculateActions(game);
+                act(game, (ActivatedAbility) ability);
                 pass(game);
-                //act(game);
                 return true;
             case DECLARE_BLOCKERS:
-                if (!game.isActivePlayer(playerId)) {
-                    printBattleField(game, "Sim PRIORITY on DECLARE BLOCKERS");
-                    declareBlockers(game, playerId);
-                }
-                // TODO: We can also perform actions here but lets simplify for now
+                printBattleField(game, "Sim PRIORITY on DECLARE BLOCKERS");
+                ability = calculateActions(game);
+                act(game, (ActivatedAbility) ability);
                 pass(game);
                 return true;
             case FIRST_COMBAT_DAMAGE:
@@ -594,6 +640,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
         for (int i = 0; i < allOptions.size(); i++) {
             List<Ability> optionList = allOptions.get(i);
+
+
             if (optionList.size() > RLModel.MAX_OPTIONS) {
                 RLTrainer.threadLocalLogger.get().error("ERROR: More options than max options, Model truncating");
                 allOptions.set(i, optionList.subList(0, RLModel.MAX_OPTIONS));

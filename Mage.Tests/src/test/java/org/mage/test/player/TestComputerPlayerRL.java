@@ -15,18 +15,10 @@ public class TestComputerPlayerRL extends CardTestPlayerBase
  {
     @Test
     public void test_RLPlayer_BasicTraining() {
-        // logger.info("Disabling Logging for RLTrainer");
-        // List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
-        // loggers.add(LogManager.getRootLogger());
-        // for ( Logger logger : loggers ) {
-        //     logger.setLevel(Level.WARN);
-        // }
-
-        // logger.warn("Warning Test");
         RLTrainer trainer = new RLTrainer();
-        trainer.train();
-
-        //trainer.eval(5);
+        for(int i = 0; i < 1; i++) {
+            trainer.train();
+        }
     }
 
     @Test

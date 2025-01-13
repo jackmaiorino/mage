@@ -12,12 +12,12 @@ import org.nd4j.linalg.factory.Nd4j;
 public class RLModel implements Serializable {
     private static final Logger logger = Logger.getLogger(RLModel.class);
     private final NeuralNetwork network;
-    private static final double EXPLORATION_RATE = 0.5;
+    public static final double EXPLORATION_RATE = 0.5;
     private static final double DISCOUNT_FACTOR = 0.95;
     private static final long serialVersionUID = 1L;
     // TODO: Eliminate the need for a MAX_ACTIONS by finding ways to indicate multiple copies of same card efficiently
     public static final int MAX_ACTIONS = 25;
-    public static final int MAX_OPTIONS = 15;
+    public static final int MAX_OPTIONS = 50;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS) * (MAX_OPTIONS);
     public static boolean IS_TRAINING = true;
 
@@ -29,6 +29,10 @@ public class RLModel implements Serializable {
         } catch (IOException e) {
             logger.error("Failed to load network, initializing a new one.", e);
         }
+    }
+
+    public RLModel(NeuralNetwork network) {
+        this.network = network;
     }
 
     public NeuralNetwork getNetwork() {

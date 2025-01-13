@@ -52,7 +52,7 @@ public class RLTrainer {
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
 
-
+    //public static final NeuralNetwork globalNetwork = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, RLModel.OUTPUT_SIZE, RLModel.EXPLORATION_RATE);
     public static final RLModel sharedModel = new RLModel();
 
     static {
