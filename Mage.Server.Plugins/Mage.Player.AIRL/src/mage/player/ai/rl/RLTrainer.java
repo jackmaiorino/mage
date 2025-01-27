@@ -221,12 +221,12 @@ public class RLTrainer {
         List<Future<Integer>> futures = new ArrayList<>();
 
         Random random = new Random();
-        Path rlPlayerDeckPath = deckFiles.get(1);
+        Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
         Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
-        Path opponentDeckPath = deckFiles.get(1);
+        Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
         Deck opponentDeck = loadDeck(opponentDeckPath.toString());
 
-        for (int i = 0; i < NUM_THREADS; i++) {
+        for (int i = 0; i < 1; i++) {
             Future<Integer> future = executor.submit(() -> {
                 boolean isFirst = false;
 
@@ -335,7 +335,7 @@ public class RLTrainer {
 
     private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
-        double reward = rlPlayerWon ? 1.0 : -1.0;
+        double reward = rlPlayerWon ? 0.15 : -0.15;
 
         // Get states for both players
         List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();

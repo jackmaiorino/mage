@@ -10,7 +10,9 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.deeplearning4j.nn.conf.MultiLayerConfiguration;
 import org.deeplearning4j.nn.conf.NeuralNetConfiguration;
+import org.deeplearning4j.nn.conf.layers.BatchNormalization;
 import org.deeplearning4j.nn.conf.layers.DenseLayer;
+import org.deeplearning4j.nn.conf.layers.DropoutLayer;
 import org.deeplearning4j.nn.conf.layers.OutputLayer;
 import org.deeplearning4j.nn.multilayer.MultiLayerNetwork;
 import org.deeplearning4j.util.ModelSerializer;
@@ -35,13 +37,38 @@ public class NeuralNetwork {
         //TODO: Change batch size to be thread related
         this.batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
         MultiLayerConfiguration conf = new NeuralNetConfiguration.Builder()
-            .updater(new Adam())
-            .list()
-            .layer(0, new DenseLayer.Builder().nIn(inputSize).nOut(64).activation(Activation.RELU).build())
-            .layer(1, new DenseLayer.Builder().nIn(64).nOut(32).activation(Activation.RELU).build())
-            .layer(2, new OutputLayer.Builder().nIn(32).nOut(outputSize).activation(Activation.SOFTMAX).lossFunction(LossFunctions.LossFunction.MCXENT).build())
-            .build();
-        // Output is +1 for pass priority or no block or no attack
+        .updater(new Adam(0.0001)) // Adam optimizer with default parameters
+        .weightDecay(1e-5) // L2 regularization to prevent overfitting
+        .list()
+        // Gradual dimensionality reduction from 15,000 -> 4096 -> 1024 -> 256 -> outputSize
+        .layer(0, new DenseLayer.Builder()
+            .nIn(inputSize)
+            .nOut(4096)
+            .activation(Activation.RELU) // ReLU activation for non-linearity
+            .build())
+        .layer(1, new BatchNormalization.Builder().build()) // Batch normalization to stabilize training
+        .layer(2, new DenseLayer.Builder()
+            .nIn(4096)
+            .nOut(1024)
+            .activation(Activation.RELU)
+            .build())
+        .layer(3, new DropoutLayer(0.3)) // Dropout to reduce overfitting (30%)
+        .layer(4, new DenseLayer.Builder()
+            .nIn(1024)
+            .nOut(256)
+
+
+            
+            .activation(Activation.RELU)
+            .build())
+        .layer(5, new DropoutLayer(0.3))
+        .layer(6, new OutputLayer.Builder()
+            .nIn(256)
+            .nOut(outputSize)
+            .activation(Activation.SOFTMAX) // Softmax for multi-class classification
+            .lossFunction(LossFunctions.LossFunction.MCXENT) // Multi-class cross-entropy loss
+            .build())
+        .build();
         
         network = new MultiLayerNetwork(conf);
         network.init();
@@ -71,20 +98,42 @@ public class NeuralNetwork {
             // Normalize all values to sum to 1
             for (int i = 0; i < state.exploreDimensions.size(); i++) {
                 for(int j = 0; j < state.exploreDimensions.get(i); j++) {
-                    randomDist[i][j] = randomDist[i][j]/totalSum;
+                    randomDist[i][j] = (randomDist[i][j]/totalSum);
                 }
             }
 
-            return Nd4j.create(randomDist);
+            state.output = Nd4j.create(randomDist);
+            return state.output;
         }
         // Use BatchPredictionRequest for batch processing
         try {
-            //TODO: Is this faster than doing ND4J.create()?
-//            for (int i = 0; i < state.length; i++) {
-//                predictionInput.putScalar(i, state[i]);
-//            }
-            // This seems to be better
-            return batchPredictionRequest.predict(Nd4j.create(stateVector));
+            INDArray input = Nd4j.create(stateVector);
+            INDArray output = batchPredictionRequest.predict(input);
+            // Convert output to 2D array for masking
+            float[][] outputArray = new float[RLModel.MAX_ACTIONS][RLModel.MAX_OPTIONS];
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for (int j = 0; j < state.exploreDimensions.get(i); j++) {
+                    outputArray[i][j] = output.getFloat(i * RLModel.MAX_OPTIONS + j);
+                }
+            }
+
+            // Mask values outside explore dimensions
+            float totalSum = 0;
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for (int j = 0; j < state.exploreDimensions.get(i); j++) {
+                    totalSum += outputArray[i][j];
+                }
+            }
+
+            // Normalize remaining values to sum to 1
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for (int j = 0; j < state.exploreDimensions.get(i); j++) {
+                    outputArray[i][j] = outputArray[i][j] / totalSum;
+                }
+            }
+
+            state.output = Nd4j.create(outputArray);
+            return state.output;
         } catch (InterruptedException e) {
             RLTrainer.threadLocalLogger.get().error("Prediction interrupted", e);
             Thread.currentThread().interrupt();
@@ -95,22 +144,19 @@ public class NeuralNetwork {
     public void updateWeightsBatch(List<float[]> states, INDArray[] targetQValuesList) {
         int batchSize = states.size();
         int stateLength = states.get(0).length;
-        
+
         // Create a 2D INDArray for the batch of states
-        // TODO: This is redundant, kinda. We already create these during predictions when not exploring
-        // TODO: This is the heaviest part of the training process right now. Likely we will have to deal with
-        // time memory tradeoffs
-        // There is an argument to keeping this here due to saving wait time caused
         INDArray inputBatch = Nd4j.create(new int[]{batchSize, stateLength});
         for (int i = 0; i < batchSize; i++) {
             inputBatch.putRow(i, Nd4j.create(states.get(i)));
         }
-        
+
         // Create a 2D INDArray for the batch of target Q-values
         INDArray targetBatch = Nd4j.create(new long[]{batchSize, targetQValuesList[0].length()});
         for (int i = 0; i < batchSize; i++) {
             targetBatch.putRow(i, targetQValuesList[i]);
         }
+
         // Perform a single training step with the batch
         synchronized (network) {
             network.fit(inputBatch, targetBatch);

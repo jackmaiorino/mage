@@ -102,7 +102,7 @@ public class BatchPredictionRequest {
         }
 
         logger.info("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
-        logger.warn("Batch size: " + count);
+        logger.info("Batch size: " + count);
 
         if (count > 0) {
             totalPredictions += count;

@@ -1,14 +1,56 @@
 package mage.players;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.stream.Collectors;
+
+import org.apache.log4j.Logger;
+
 import com.google.common.collect.ImmutableMap;
-import mage.*;
-import mage.abilities.*;
+
+import mage.ApprovingObject;
+import mage.ConditionalMana;
+import mage.MageIdentifier;
+import mage.MageItem;
+import mage.MageObject;
+import mage.Mana;
+import mage.abilities.Abilities;
+import mage.abilities.AbilitiesImpl;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
 import mage.abilities.ActivatedAbility.ActivationStatus;
+import mage.abilities.DelayedTriggeredAbility;
+import mage.abilities.Mode;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpecialAction;
+import mage.abilities.SpellAbility;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
 import mage.abilities.common.delayed.AtTheEndOfTurnStepPostDelayedTriggeredAbility;
-import mage.abilities.costs.*;
+import mage.abilities.costs.AlternativeCost;
+import mage.abilities.costs.AlternativeCostSourceAbility;
+import mage.abilities.costs.AlternativeSourceCosts;
+import mage.abilities.costs.Cost;
+import mage.abilities.costs.Costs;
+import mage.abilities.costs.DynamicCost;
 import mage.abilities.costs.mana.AlternateManaPaymentAbility;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.ManaCosts;
@@ -16,14 +58,40 @@ import mage.abilities.costs.mana.ManaCostsImpl;
 import mage.abilities.effects.RestrictionEffect;
 import mage.abilities.effects.RestrictionUntapNotMoreThanEffect;
 import mage.abilities.effects.common.LoseControlOnOtherPlayersControllerEffect;
-import mage.abilities.keyword.*;
+import mage.abilities.keyword.HexproofBaseAbility;
+import mage.abilities.keyword.InfectAbility;
+import mage.abilities.keyword.LifelinkAbility;
+import mage.abilities.keyword.MorphAbility;
+import mage.abilities.keyword.ProtectionAbility;
+import mage.abilities.keyword.ShroudAbility;
+import mage.abilities.keyword.SquirrellinkAbility;
+import mage.abilities.keyword.ToxicAbility;
+import mage.abilities.keyword.TransformAbility;
 import mage.abilities.mana.ActivatedManaAbilityImpl;
 import mage.abilities.mana.ManaOptions;
-import mage.cards.*;
+import mage.cards.AdventureCard;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.cards.CardsImpl;
+import mage.cards.ModalDoubleFacedCard;
+import mage.cards.ModalDoubleFacedCardHalf;
+import mage.cards.SplitCard;
 import mage.cards.decks.Deck;
 import mage.choices.Choice;
 import mage.choices.ChoiceImpl;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.EmptyNames;
+import mage.constants.ManaType;
+import mage.constants.Outcome;
+import mage.constants.PhaseStep;
+import mage.constants.PlanarDieRollResult;
+import mage.constants.PlayerAction;
+import mage.constants.RangeOfInfluence;
+import mage.constants.RollDieType;
+import mage.constants.SpellAbilityType;
+import mage.constants.SubType;
+import mage.constants.Zone;
 import mage.counters.Counter;
 import mage.counters.CounterType;
 import mage.counters.Counters;
@@ -38,10 +106,45 @@ import mage.filter.common.FilterCreatureForCombat;
 import mage.filter.common.FilterCreatureForCombatBlock;
 import mage.filter.predicate.Predicates;
 import mage.filter.predicate.permanent.PermanentIdPredicate;
-import mage.game.*;
+import mage.game.ExileZone;
+import mage.game.Game;
+import mage.game.GameOptions;
+import mage.game.Graveyard;
+import mage.game.Table;
+import mage.game.ZoneChangeInfo;
+import mage.game.ZonesHandler;
 import mage.game.combat.CombatGroup;
 import mage.game.command.CommandObject;
-import mage.game.events.*;
+import mage.game.events.CounterRemovedEvent;
+import mage.game.events.CountersRemovedEvent;
+import mage.game.events.DamageEvent;
+import mage.game.events.DamagePlayerEvent;
+import mage.game.events.DamagedEvent;
+import mage.game.events.DamagedPlayerEvent;
+import mage.game.events.DiceRolledEvent;
+import mage.game.events.DieRolledEvent;
+import mage.game.events.DiscardedCardsEvent;
+import mage.game.events.DrawCardEvent;
+import mage.game.events.DrawTwoOrMoreCardsEvent;
+import mage.game.events.DrewCardEvent;
+import mage.game.events.EnchantPlayerEvent;
+import mage.game.events.EnchantedPlayerEvent;
+import mage.game.events.FlipCoinEvent;
+import mage.game.events.GameEvent;
+import mage.game.events.LibrarySearchedEvent;
+import mage.game.events.LifeLostEvent;
+import mage.game.events.MilledCardEvent;
+import mage.game.events.PreventDamageEvent;
+import mage.game.events.PreventedDamageEvent;
+import mage.game.events.RemoveCounterEvent;
+import mage.game.events.RemoveCountersEvent;
+import mage.game.events.RollDiceEvent;
+import mage.game.events.RollDieEvent;
+import mage.game.events.SearchLibraryEvent;
+import mage.game.events.TargetEvent;
+import mage.game.events.UnattachEvent;
+import mage.game.events.UnattachedEvent;
+import mage.game.events.ZoneChangeEvent;
 import mage.game.match.MatchPlayer;
 import mage.game.permanent.Permanent;
 import mage.game.permanent.PermanentCard;
@@ -62,12 +165,6 @@ import mage.target.common.TargetDiscard;
 import mage.util.CardUtil;
 import mage.util.GameLog;
 import mage.util.RandomUtil;
-import org.apache.log4j.Logger;
-
-import java.io.Serializable;
-import java.util.*;
-import java.util.Map.Entry;
-import java.util.stream.Collectors;
 
 /**
  * Server: basic player implementation, shared for human and AI
@@ -552,7 +649,7 @@ public abstract class PlayerImpl implements Player, Serializable {
     @Override
     public void updateRange(Game game) {
         // 20100423 - 801.2c
-        // 801.2c The particular players within each player’s range of influence are determined as each turn begins.
+        // 801.2c The particular players within each player's range of influence are determined as each turn begins.
         // BUT it also uses before game start to fill game and card data in starting game events
         inRange.clear();
         inRange.add(this.playerId);
@@ -1734,7 +1831,7 @@ public abstract class PlayerImpl implements Player, Serializable {
             switch (spellAbility.getSpellAbilityType()) {
                 case BASE_ALTERNATE:
                     // rules:
-                    // If you cast a spell “without paying its mana cost,” you can’t choose to cast it for
+                    // If you cast a spell "without paying its mana cost," you can't choose to cast it for
                     // any alternative costs. You can, however, pay additional costs, such as kicker costs.
                     // If the card has any mandatory additional costs, those must be paid to cast the spell.
                     // (2021-02-05)
@@ -2886,7 +2983,7 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // https://www.reddit.com/r/magicTCG/comments/jj8gh9/opposition_agent_and_panglacial_wurm_interaction/
         // You must take full player control while searching, e.g. you can cast opponent's cards by Panglacial Wurm effect:
-        // * While you’re searching your library, you may cast Panglacial Wurm from your library.
+        // * While you're searching your library, you may cast Panglacial Wurm from your library.
         // So use here same code as Word of Command
         // P.S. no needs in searchingController, but it helps with unit tests, see TakeControlWhileSearchingLibraryTest
         boolean takeControl = false;
@@ -3269,7 +3366,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // In a Planechase game, rolling the planar die will cause any ability that triggers whenever a
         // player rolls one or more dice to trigger. However, any effect that refers to a numerical
         // result of a die roll, including ones that compare the results of that roll to other rolls
-        // or to a given number, ignores the rolling of the planar die. See rule 901, “Planechase.”
+        // or to a given number, ignores the rolling of the planar die. See rule 901, "Planechase."
         // ROLL MULTIPLE dies
         // results amount can be less than a rolls amount (example: The Big Idea allows rolling 2x instead 1x)
         List<Object> dieResults = new ArrayList<>();
@@ -4473,18 +4570,36 @@ public abstract class PlayerImpl implements Player, Serializable {
     }
 
     private void addModeOptions(List<Ability> options, Ability option, Game game) {
-        // TODO: support modal spells with more than one selectable mode (also must use max modes filter)
-        for (Mode mode : option.getModes().values()) {
+        // Get the minimum and maximum number of modes that can be selected
+        int minModes = option.getModes().getMinModes();
+        int maxModes = option.getModes().getMaxModes(game, option);
+
+        // Generate all combinations of modes within the min and max range
+        List<List<Mode>> modeCombinations = generateModeCombinations(option.getModes().values(), minModes, maxModes);
+
+        for (List<Mode> modeCombination : modeCombinations) {
             Ability newOption = option.copy();
-            // TODO: bugged? Research option.getModes().isMayChooseSameModeMoreThanOnce() - is it affected here
             newOption.getModes().clearSelectedModes();
-            newOption.getModes().addSelectedMode(mode.getId());
-            newOption.getModes().setActiveMode(mode);
-            if (!newOption.getTargets().getUnchosen(game).isEmpty()) {
-                if (!newOption.getManaCosts().getVariableCosts().isEmpty()) {
-                    addVariableXOptions(options, newOption, 0, game);
-                } else {
-                    addTargetOptions(options, newOption, 0, game);
+            for (Mode mode : modeCombination) {
+                newOption.getModes().addSelectedMode(mode.getId());
+                newOption.getModes().setActiveMode(mode);
+            }
+            //unchosen targets
+            if (!newOption.getAllSelectedTargets().getUnchosen(game).isEmpty()) {
+                for(Target target : newOption.getAllSelectedTargets().getUnchosen(game)) {
+                    Ability newOption2 = newOption.copy();
+                    for (UUID targetId : target.possibleTargets(newOption2.getControllerId(), newOption2, game)) {
+                        Ability newOption3 = newOption2.copy();
+                        if (!newOption3.getManaCosts().getVariableCosts().isEmpty()) {
+                            //TODO: implement variable X cost adding
+                            //addVariableXOptions(options, newOption3, 0, game);
+                            target.addTarget(targetId, newOption3, game, true);
+                            options.add(newOption3);
+                        } else {
+                            target.addTarget(targetId, newOption3, game, true);
+                            options.add(newOption3);
+                        }
+                    }
                 }
             } else if (!newOption.getCosts().getTargets().getUnchosen(game).isEmpty()) {
                 addCostTargetOptions(options, newOption, 0, game);
@@ -4492,6 +4607,46 @@ public abstract class PlayerImpl implements Player, Serializable {
                 options.add(newOption);
             }
         }
+    }
+
+    private List<List<Mode>> generateModeCombinations(Collection<Mode> modes, int minModes, int maxModes) {
+        List<List<Mode>> combinations = new ArrayList<>();
+        List<Mode> modeList = new ArrayList<>(modes);
+        int n = modeList.size();
+
+        // Generate combinations for each number of modes from minModes to maxModes
+        for (int r = minModes; r <= maxModes; r++) {
+            combinations.addAll(combine(modeList, n, r));
+        }
+
+        return combinations;
+    }
+
+    private List<List<Mode>> combine(List<Mode> modes, int n, int r) {
+        List<List<Mode>> combinations = new ArrayList<>();
+        int[] indices = new int[r];
+        for (int i = 0; i < r; i++) {
+            indices[i] = i;
+        }
+
+        while (indices[r - 1] < n) {
+            List<Mode> combination = new ArrayList<>();
+            for (int i = 0; i < r; i++) {
+                combination.add(modes.get(indices[i]));
+            }
+            combinations.add(combination);
+
+            int t = r - 1;
+            while (t != 0 && indices[t] == n - r + t) {
+                t--;
+            }
+            indices[t]++;
+            for (int i = t + 1; i < r; i++) {
+                indices[i] = indices[i - 1] + 1;
+            }
+        }
+
+        return combinations;
     }
 
     protected void addVariableXOptions(List<Ability> options, Ability option, int targetNum, Game game) {
@@ -5470,7 +5625,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                 .orElse(null);
     }
 
-    // 701.52a Certain spells and abilities have the text “the Ring tempts you.” Each time the Ring tempts
+    // 701.52a Certain spells and abilities have the text "the Ring tempts you." Each time the Ring tempts
     // you, choose a creature you control. That creature becomes your Ring-bearer until another
     // creature becomes your Ring-bearer or another player gains control of it.
     @Override

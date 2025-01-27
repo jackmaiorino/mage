@@ -283,6 +283,7 @@ public class ChoiceImpl implements Choice {
             }
         } else {
             // string mode
+            
             String[] vals = this.getChoices().toArray(new String[0]);
             if (vals.length > 0) {
                 int choiceNum = RandomUtil.nextInt(vals.length);

@@ -9,17 +9,23 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import mage.abilities.*;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.choices.Choice;
-import mage.filter.common.FilterLandCard;
-import mage.target.TargetCard;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
+import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
+import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.VariableManaCost;
+import mage.cards.Card;
+import mage.cards.Cards;
+import mage.choices.Choice;
+import mage.constants.ColoredManaSymbol;
 import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
 import mage.filter.StaticFilters;
@@ -34,11 +40,14 @@ import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
+import mage.target.TargetCard;
+import mage.util.RandomUtil;
 
 public class ComputerPlayerRL extends ComputerPlayer {
     public RLModel model;
     protected RLState currentState;
     private final List<RLState> stateBuffer;
+    private Ability currentAbility;
 
     public ComputerPlayerRL(String name, RangeOfInfluence range, RLModel model) {
         super(name, range);
@@ -65,6 +74,22 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
+    public INDArray genericChoose(int options, RLState.ActionType actionType, Game game){
+        currentState = new RLState(game, actionType);
+        int numRows = options / RLModel.MAX_OPTIONS;
+        int remainingOptions = options % RLModel.MAX_OPTIONS;
+        for(int i = 0; i < numRows; i++){
+            currentState.exploreDimensions.add(RLModel.MAX_OPTIONS);
+        }
+        if(remainingOptions > 0){
+            currentState.exploreDimensions.add(remainingOptions);
+        }
+
+        stateBuffer.add(currentState);
+        INDArray qValues = model.predictDistribution(currentState, true);
+        return qValues;
+    }
+
     // Stuff like Opp agent? Investigate further how to handle. Just choosing how to handle multiple replacement effects?
     // TODO
 //    @Override
@@ -73,27 +98,174 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
     // Stuff like sheoldred's edict (I think this can just intercept a set mode. Same with set mana cost.)
     // TODO: How do we preset modes and manacost.
-    // TODO
-//    @Override
-//    public Mode chooseMode(Modes modes, Ability source, Game game) {
-//        log.debug("chooseMode");
+    @Override
+    public Mode chooseMode(Modes modes, Ability source, Game game) {
+        // Weird override
+        // TODO: I think there is a bug in the base computerplayer here creating a shallow copy of ability higher up
+        source = currentAbility;
+        modes = currentAbility.getModes();
 
-    // TODO
-//    @Override
-//    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-//        log.debug("announceXMana");
+        if (modes.getMode() != null && modes.getMaxModes(game, source) == modes.getSelectedModes().size()) {
+            // mode was already set by the AI
+            return modes.getMode();
+        } else{
+            RLTrainer.threadLocalLogger.get().error("Mode not set by AI");
+            //return super.chooseMode(modes, source, game);
+            throw new RuntimeException("Mode not set by AI");
+        }
+    }
 
-    // Deciding to use FOW alt cast
-    // TODO
-//    @Override
-//    public boolean choose(Outcome outcome, Choice choice, Game game) {
-//        log.debug("choose 3");
+    // TODO: Make this an AI decision
+    @Override
+    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+        VariableManaCost variableManaCost = null;
+        for (ManaCost cost : ability.getManaCostsToPay()) {
+            if (cost instanceof VariableManaCost) {
+                if (variableManaCost == null) {
+                    variableManaCost = (VariableManaCost) cost;
+                } else {
+                    throw new RuntimeException("More than one VariableManaCost in spell");
+                }
+            }
+        }
+        if (variableManaCost == null) {
+            throw new RuntimeException("No VariableManaCost in spell");
+        }
 
-    // Deciding ponder cards
-    // TODO
-//    @Override
-//    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-//        log.debug("choose 2");
+        //TODO: eventually this getmanaAvailable should be sometime more specific. For example, mishras workshop
+        // can only be used for artifacts
+        int numAvailable = getManaAvailable(game).size() - ability.getManaCostsToPay().manaValue();
+        if (numAvailable < 0) {
+            numAvailable = 0;
+        }
+
+        // Create a list of possible values for X
+        List<Integer> possibleXValues = new ArrayList<>();
+        for (int x = min; x <= max; x++) {
+            if (variableManaCost.getXInstancesCount() * x <= numAvailable) {
+                possibleXValues.add(x);
+            }else {
+                break;
+            }
+        }
+
+        // Select a random option from the possible values
+        if (!possibleXValues.isEmpty()) {
+            return possibleXValues.get(RandomUtil.nextInt(possibleXValues.size()));
+        }
+
+        return 0; // Default to 0 if no valid options are found
+    }
+
+    //TODO: Implement
+    @Override
+    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
+        return super.announceXCost(min, max, message, game, ability, variableCost);
+    }
+
+    // Deciding to use FOW alt cast, choosing creaturetype for cavern of souls
+    // TODO: Implement
+    @Override
+    public boolean choose(Outcome outcome, Choice choice, Game game) {
+        // TODO: Allow RLModel to handle this logic
+        // choose the correct color to pay a spell (use last unpaid ability for color hint)
+        ManaCost unpaid = null;
+        if (!getLastUnpaidMana().isEmpty()) {
+            unpaid = new ArrayList<>(getLastUnpaidMana().values()).get(getLastUnpaidMana().size() - 1);
+        }
+        if (outcome == Outcome.PutManaInPool && unpaid != null && choice.isManaColorChoice()) {
+            if (unpaid.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
+                choice.setChoice("White");
+                return true;
+            }
+            if (unpaid.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
+                choice.setChoice("Red");
+                return true;
+            }
+            if (unpaid.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
+                choice.setChoice("Green");
+                return true;
+            }
+            if (unpaid.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
+                choice.setChoice("Blue");
+                return true;
+            }
+            if (unpaid.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
+                choice.setChoice("Black");
+                return true;
+            }
+            if (unpaid.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
+                choice.setChoice("Colorless");
+                return true;
+            }
+        }
+
+        // choose by RLModel
+        if (!choice.isChosen()) {
+            INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game);
+            int bestChoice = 0;
+            double bestQVal = Double.NEGATIVE_INFINITY;
+            for (int i = 0; i < qValues.length(); i++) {
+                double qVal = qValues.getDouble(i);
+                if (qVal > bestQVal) {
+                    bestQVal = qVal;
+                    bestChoice = i;
+                }
+            }
+            choice.setChoice(choice.getKeyChoices().get(bestChoice));
+            return true;
+        }
+        return super.choose(outcome, choice, game);
+    }
+
+    // Deciding ponder cards, exile card from opponent's hand
+    //Choose2
+    @Override
+    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (cards == null || cards.isEmpty()) {
+            return true;
+        }
+
+        // sometimes a target selection can be made from a player that does not control the ability
+        UUID abilityControllerId = playerId;
+        if (target.getTargetController() != null
+                && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+
+        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
+        if (cardChoices.isEmpty()) {
+            return true;
+        }
+
+        INDArray qValues = genericChoose(cardChoices.size(), RLState.ActionType.SELECT_CARD, game);
+        
+        // Create sorted indices based on q-values
+        List<Integer> sortedIndices = new ArrayList<>();
+        for (int i = 0; i < cardChoices.size(); i++) {
+            sortedIndices.add(i);
+        }
+        sortedIndices.sort((a, b) -> Double.compare(qValues.getDouble(b), qValues.getDouble(a)));
+        
+        int currentIndex = 0;
+        while (!target.doneChoosing(game)) {
+            if (currentIndex >= sortedIndices.size()) {
+                return target.getTargets().size() >= target.getNumberOfTargets();
+            }
+
+            Card card = cardChoices.get(sortedIndices.get(currentIndex));
+            if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+                target.add(card.getId(), game);
+                cardChoices.remove((int)sortedIndices.get(currentIndex));
+            }
+            currentIndex++;
+
+            if (outcome == Outcome.Neutral && target.getTargets().size() > target.getNumberOfTargets() + (target.getMaxNumberOfTargets() - target.getNumberOfTargets()) / 2) {
+                return true;
+            }
+        }
+        return true;
+    }
 
     // TODO
 //    @Override
@@ -111,29 +283,45 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //    }
 
     // Choosing which stack ability from the stack you want to resolve
-    // TODO
-//    @Override
-//    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-//        log.debug("chooseTriggeredAbility: " + abilities.toString());
-//        //TODO: improve this
-//        if (!abilities.isEmpty()) {
-//            return abilities.get(0);
-//        }
-//        return null;
-//    }
-
+    // TODO: Implement
     @Override
-    public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        return choose(outcome, target, source, game, null);
+    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+        //TODO: improve this
+        if (!abilities.isEmpty()) {
+            INDArray qValues = genericChoose(abilities.size(), RLState.ActionType.SELECT_TRIGGERED_ABILITY, game);
+            int bestChoice = 0;
+            double bestQVal = Double.NEGATIVE_INFINITY;
+            for (int i = 0; i < qValues.length(); i++) {
+                double qVal = qValues.getDouble(i);
+                if (qVal > bestQVal) {
+                    bestQVal = qVal;
+                    bestChoice = i;
+                }
+            }
+            return abilities.get(bestChoice);
+        }
+        return null;
     }
 
-    // Will this work?
+    // Examples:
+    // Damage assignment from fury
+    // ((TargetCreatureOrPlaneswalkerAmount) target).getAmountRemaining()
+    @Override
+    public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+        // TODO: Investigate what calls this
+        return super.chooseTargetAmount(outcome, target, source, game);
+        //return choose(outcome, target, source, game, null);
+    }
+
     // TODO: This breaks on mulligans? Because there is no active player?
+    // Examples: Return card from graveyard to hand,
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
         return choose(outcome, target, source, game, null);
     }
 
+    // Examples:
+    // Discarding to hand size, Choosing to keep which legend for legend rule
     @Override
     public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
         return choose(outcome, target, source, game, null);
@@ -167,27 +355,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         int maxTargets = target.getMaxNumberOfTargets();
         int minTargets = target.getMinNumberOfTargets();
 
-        // TODO: Differentiate between ACTIVATE_ABILITY_OR_SPELL and CHOOSE_TARGET
-        currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
-        stateBuffer.add(currentState);
-
-        // Initialize explore dimensions as a 2D list
-        List<Integer> exploreDimensions = new ArrayList<>();
-        int totalTargets = possibleTargetsList.size();
-        int fullRows = totalTargets / RLModel.MAX_OPTIONS;
-        int remainingTargets = totalTargets % RLModel.MAX_OPTIONS;
-
-        // Fill the 2D list with indices
-        for (int i = 0; i < fullRows; i++) {
-            exploreDimensions.add(RLModel.MAX_OPTIONS);
-        }
-        if (remainingTargets > 0) {
-            exploreDimensions.add(remainingTargets);
-        }
-
-        currentState.exploreDimensions = exploreDimensions;
-
-        INDArray qValues = model.predictDistribution(currentState, true);
+        INDArray qValues = genericChoose(possibleTargetsList.size(), RLState.ActionType.SELECT_TARGETS, game);
 
         // Create a list to store Q-values with their indices
         List<QValueWithIndex> qValueList = new ArrayList<>();
@@ -211,6 +379,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 // Convert 1D index to 2D index
                 currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex % RLModel.MAX_ACTIONS, originalIndex / RLModel.MAX_ACTIONS));
                 selectedTargetsList.add(possibleTargetsList.get(originalIndex));
+                //TODO: We never actually add the target? target.add?
                 selectedTargets++;
             }
 
@@ -254,7 +423,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             sourceName = outcome.name();
         }
 
-        RLTrainer.threadLocalLogger.get().info("Selected targets: " + selectedTargetNames + " for source: " + sourceName);
+           RLTrainer.threadLocalLogger.get().info("Selected targets: " + selectedTargetNames + " for source: " + sourceName);
 
         if (currentState.targetQValues.isEmpty()){
             // If no targets are selected, but minTargets is 0, the selected action was the "non-action"
@@ -344,9 +513,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
                     }
                 }
             }
-        }
-        if (currentState.targetQValues.isEmpty()){
-            stateBuffer.remove(currentState);
+            if (currentState.targetQValues.isEmpty()){
+                stateBuffer.remove(currentState);
+            }
         }
     }
 
@@ -492,22 +661,22 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 return false;
             case PRECOMBAT_MAIN:
                 printBattleField(game, "Sim PRIORITY on MAIN 1");
-                ability = calculateActions(game);
-                act(game, (ActivatedAbility) ability);
+                currentAbility = calculateActions(game);
+                act(game, (ActivatedAbility) currentAbility);
                 return true;
             case BEGIN_COMBAT:
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
                 printBattleField(game, "Sim PRIORITY on DECLARE ATTACKERS");
-                ability = calculateActions(game);
-                act(game, (ActivatedAbility) ability);
+                currentAbility = calculateActions(game);
+                act(game, (ActivatedAbility) currentAbility);
                 pass(game);
                 return true;
             case DECLARE_BLOCKERS:
                 printBattleField(game, "Sim PRIORITY on DECLARE BLOCKERS");
-                ability = calculateActions(game);
-                act(game, (ActivatedAbility) ability);
+                currentAbility = calculateActions(game);
+                act(game, (ActivatedAbility) currentAbility);
                 pass(game);
                 return true;
             case FIRST_COMBAT_DAMAGE:
@@ -517,8 +686,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 return false;
             case POSTCOMBAT_MAIN:
                 printBattleField(game, "Sim PRIORITY on MAIN 2");
-                ability = calculateActions(game);
-                act(game, (ActivatedAbility) ability);
+                currentAbility = calculateActions(game);
+                act(game, (ActivatedAbility) currentAbility);
                 return true;
             case END_TURN:  
             case CLEANUP:
@@ -593,7 +762,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
                     }
                 }
             }
-            this.activateAbility(ability, game);
+            if (!this.activateAbility(ability, game)){
+                throw new RuntimeException("Failed to activate ability: " + ability);
+            }
             //TODO: Implement holding priority for abilities that don't use the stack
             if (ability.isUsesStack()){
                 pass(game);
@@ -634,35 +805,30 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
 
         // Ensure the list does not exceed RLModel.MAX_ACTIONS x RLModel.MAX_OPTIONS
-        if (allOptions.size() > RLModel.MAX_ACTIONS) {
-            RLTrainer.threadLocalLogger.get().error("ERROR: More actions than max actions, Model truncating");
-            allOptions = allOptions.subList(0, RLModel.MAX_ACTIONS);
-        }
-        for (int i = 0; i < allOptions.size(); i++) {
-            List<Ability> optionList = allOptions.get(i);
-
-
-            if (optionList.size() > RLModel.MAX_OPTIONS) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More options than max options, Model truncating");
-                allOptions.set(i, optionList.subList(0, RLModel.MAX_OPTIONS));
-            }
-        }
+//        if (allOptions.size() > RLModel.MAX_ACTIONS) {
+//            RLTrainer.threadLocalLogger.get().error("ERROR: More actions than max actions, Model truncating");
+//            allOptions = allOptions.subList(0, RLModel.MAX_ACTIONS);
+//        }
+//        for (int i = 0; i < allOptions.size(); i++) {
+//            List<Ability> optionList = allOptions.get(i);
+//
+//
+//            if (optionList.size() > RLModel.MAX_OPTIONS) {
+//                RLTrainer.threadLocalLogger.get().error("ERROR: More options than max options, Model truncating");
+//                allOptions.set(i, optionList.subList(0, RLModel.MAX_OPTIONS));
+//            }
+//        }
 
         return allOptions;
     }
 
+    // TODO: This doesn't work for XX costs, i think it will suggest spending 1 mana on an XX
     private List<Ability> simulateVariableCosts(Ability ability, Game game) {
         List<Ability> options = new ArrayList<>();
+        // TODO: This is wrong. getavailproducers returns 1 if you have an ancient tomb which can produce mana values of 2
         int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
         int start = 0;
-        if (!(ability instanceof SpellAbility)) {
-            if (numAvailable == 0) {
-                return options;
-            } else {
-                start = 1;
-            }
-        }
-        for (int i = start; i < numAvailable; i++) {
+        for (int i = 0; i < numAvailable; i++) {
             Ability newAbility = ability.copy();
             newAbility.addManaCostsToPay(new GenericManaCost(i));
             options.add(newAbility);
@@ -688,46 +854,62 @@ public class ComputerPlayerRL extends ComputerPlayer {
     protected Ability calculateActions(Game game) {
         // Get the 2D list of playable options
         List<List<Ability>> playableOptions = getPlayableOptions(game);
-        // If we can only pass, don't query model
-        if (playableOptions.size() == 1){
-            return null;
+
+        // Remove any sublists of size 0
+        playableOptions.removeIf(list -> list.isEmpty());
+
+
+        // Flatten the 2D list into a 1D list
+        List<Ability> flattenedOptions = new ArrayList<>();
+        for (List<Ability> options : playableOptions) {
+            flattenedOptions.addAll(options);
         }
 
-        // Set the exploration columns so it only selects playableOptions
+        // If we can only pass, don't query model
+        if (flattenedOptions.size() == 1) {
+            return flattenedOptions.get(0);
+        }
+
+        // Set the exploration dimensions to the size of the flattened list
         currentState = new RLState(game, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL);
         stateBuffer.add(currentState);
-        for (List<Ability> options : playableOptions) {
-            currentState.exploreDimensions.add(options.size());
+        int numRows = (flattenedOptions.size()) / RLModel.MAX_OPTIONS;
+        int numCols = (flattenedOptions.size()) % RLModel.MAX_OPTIONS;
+        for (int i = 0; i < numRows; i++) {
+            currentState.exploreDimensions.add(RLModel.MAX_OPTIONS);
+        }
+        if (numCols > 0) {
+            currentState.exploreDimensions.add(numCols);
         }
 
         // Evaluate each action using the model
-        INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
+        INDArray qValues = model.predictDistribution(currentState, true);
         float maxQValue = Float.NEGATIVE_INFINITY;
-        int bestRowIndex = 0;
-        int bestColIndex = 0;
+        int bestIndex = 0;
 
         // Find the index with the highest Q-value
-        for (int i = 0; i < RLModel.MAX_ACTIONS; i++) {
-            for (int j = 0; j < RLModel.MAX_OPTIONS; j++) {
-                float qValue = qValues.getFloat(i, j);
-                if (qValue > maxQValue) {
-                    maxQValue = qValue;
-                    bestRowIndex = i;
-                    bestColIndex = j;
-                }
+        for (int i = 0; i < RLModel.OUTPUT_SIZE; i++) {
+            float qValue = qValues.getFloat(i);
+            if (qValue > maxQValue) {
+                maxQValue = qValue;
+                bestIndex = i;
             }
         }
 
-        currentState.targetQValues.add(new QValueEntry(maxQValue, bestRowIndex, bestColIndex));
-        RLTrainer.threadLocalLogger.get().info("Best action index: (" + bestRowIndex + ", " + bestColIndex + ")");
-        RLTrainer.threadLocalLogger.get().info("Playable options: " + playableOptions);
+        // Convert the best index to 2D coordinates
+        int row = bestIndex / RLModel.MAX_OPTIONS;
+        int col = bestIndex % RLModel.MAX_OPTIONS;
 
-        // Check if the selected index is valid and return the corresponding ability
-        if (bestRowIndex < playableOptions.size() && bestColIndex < playableOptions.get(bestRowIndex).size()) {
-            return playableOptions.get(bestRowIndex).get(bestColIndex);
+        currentState.targetQValues.add(new QValueEntry(maxQValue, row, col));
+        RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
+        RLTrainer.threadLocalLogger.get().info("Best action index: " + bestIndex + " (row: " + row + ", col: " + col + ")");
+        RLTrainer.threadLocalLogger.get().info("Best Q-value: " + maxQValue);
+
+        // Return the ability corresponding to the best index
+        if (bestIndex < flattenedOptions.size()) {
+            return flattenedOptions.get(bestIndex);
         } else {
-            // Masking invalid choice to passing
-            return null;
+            throw new RuntimeException("Best index out of bounds");
         }
     }
 

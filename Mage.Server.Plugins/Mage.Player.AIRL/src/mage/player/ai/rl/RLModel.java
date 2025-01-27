@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
 
 public class RLModel implements Serializable {
     private static final Logger logger = Logger.getLogger(RLModel.class);
@@ -17,7 +16,7 @@ public class RLModel implements Serializable {
     private static final long serialVersionUID = 1L;
     // TODO: Eliminate the need for a MAX_ACTIONS by finding ways to indicate multiple copies of same card efficiently
     public static final int MAX_ACTIONS = 25;
-    public static final int MAX_OPTIONS = 50;
+    public static final int MAX_OPTIONS = 15;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS) * (MAX_OPTIONS);
     public static boolean IS_TRAINING = true;
 
@@ -59,55 +58,35 @@ public class RLModel implements Serializable {
         int batchSize = 100;
         int totalSize = states.size();
 
+        // Initialize target Q-values array
         INDArray[] targetQValuesArray = new INDArray[totalSize];
         for (int i = 0; i < totalSize; i++) {
-            targetQValuesArray[i] = Nd4j.zeros(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
+            targetQValuesArray[i] = nextStates.get(i).output;
         }
 
+        // Compute target Q-values for the batch
         for (int i = 0; i < totalSize; i++) {
             double reward = rewards.get(i);
-            if (nextStates.get(i).targetQValues.isEmpty()) {
+            RLState nextState = nextStates.get(i);
+
+            if (nextState.targetQValues.isEmpty()) {
                 throw new IllegalArgumentException("Next state Q-values are empty");
             }
-            for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
-                targetQValuesArray[i].putScalar(qValueEntry.getXIndex(), qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
+
+            for (QValueEntry qValueEntry : nextState.targetQValues) {
+                double updatedQValue = reward + DISCOUNT_FACTOR * qValueEntry.getQValue();
+                // Normalize Q-values to the range [0, 1]
+                updatedQValue = Math.max(0.0, Math.min(1.0, updatedQValue));
+                targetQValuesArray[i].putScalar(qValueEntry.getXIndex(), qValueEntry.getYIndex(), updatedQValue);
             }
         }
 
+        // Map states to input vectors
         List<float[]> statesArray = states.stream()
-            .map(RLState::getStateVector)
-            .collect(Collectors.toList());
+                .map(RLState::getStateVector)
+                .collect(Collectors.toList());
 
-        // Process
+        // Update weights using the processed batch
         network.updateWeightsBatch(statesArray, targetQValuesArray);
-
-        // Maybe use this idea for a batch manager
-        // for (int start = 0; start < totalSize; start += batchSize) {
-        //     int end = Math.min(start + batchSize, totalSize);
-
-        //     List<float[]> statesArray = states.subList(start, end).stream()
-        //         .map(RLState::getStateVector)
-        //         .collect(Collectors.toList());
-
-        //     // The set/unset design here is to avoid the heavy load of creating new INDArrays
-        //     // Set Q-vals
-        //     for (int i = start; i < end; i++) {
-        //         double reward = rewards.get(i);
-        //         for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
-        //             targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), reward + DISCOUNT_FACTOR * qValueEntry.getQValue());
-        //         }
-        //     }
-
-        //     // Process
-        //     network.updateWeightsBatch(statesArray, targetQValuesArray);
-
-        //     //Unset Q-vals
-        //     for (int i = start; i < end; i++) {
-        //         for (QValueEntry qValueEntry : nextStates.get(i).targetQValues) {
-        //             targetQValuesArray[i].putScalar(qValueEntry.getXIndex(),qValueEntry.getYIndex(), 0);
-        //         }
-        //     }
-
-        // }
     }
 } 

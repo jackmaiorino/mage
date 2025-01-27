@@ -16,7 +16,7 @@ public class TestComputerPlayerRL extends CardTestPlayerBase
     @Test
     public void test_RLPlayer_BasicTraining() {
         RLTrainer trainer = new RLTrainer();
-        for(int i = 0; i < 1; i++) {
+        for(int i = 0; i < 2; i++) {
             trainer.train();
         }
     }
@@ -24,6 +24,6 @@ public class TestComputerPlayerRL extends CardTestPlayerBase
     @Test
     public void test_RLPlayer_Eval() {
         RLTrainer trainer = new RLTrainer();
-        trainer.eval(20);
+        trainer.eval(2);
     }
 }

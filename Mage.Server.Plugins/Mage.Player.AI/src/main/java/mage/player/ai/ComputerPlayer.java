@@ -111,6 +111,10 @@ public class ComputerPlayer extends PlayerImpl {
         super(player);
     }
 
+    protected Map<UUID, ManaCost> getLastUnpaidMana() {
+        return lastUnpaidMana;
+    }
+
     @Override
     public boolean chooseMulligan(Game game) {
         log.debug("chooseMulligan");

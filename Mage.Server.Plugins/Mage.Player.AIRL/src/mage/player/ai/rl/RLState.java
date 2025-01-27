@@ -14,6 +14,7 @@ import mage.cards.Card;
 import mage.game.ExileZone;
 import mage.game.Game;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.players.Player;
 
 
@@ -22,6 +23,7 @@ public class RLState {
     private float[] stateVector;
     public INDArray stateVectorINDArray;
     public List<QValueEntry> targetQValues;
+    public INDArray output;
     public static final int CARD_STATS_SIZE = ZoneType.values().length + 24; // ZoneType.values().length for one-hot encoding + 24 for other features
     public static final int NUM_PLAYER_STATS = 5;   
     public static final int NUM_CARDS = 60;
@@ -40,7 +42,6 @@ public class RLState {
         GRAVEYARD,
         EXILE,
         LIBRARY,
-        //TODO: IMPLEMENT STACK AWARENESS?
         STACK
     }
 
@@ -49,7 +50,10 @@ public class RLState {
         SELECT_TARGETS,
         DECLARE_ATTACKS,
         DECLARE_BLOCKS,
-        MULLIGAN
+        MULLIGAN,
+        SELECT_CHOICE,
+        SELECT_TRIGGERED_ABILITY,
+        SELECT_CARD
     }
                                         
     public RLState(Game game, ActionType actionType) {
@@ -61,10 +65,14 @@ public class RLState {
     }
 
     private void buildStateVector(Game game) {
+        //TODO: There are several ways to get player. ChoosingPlayerId Activeplayerid, priorityplayerid
         Player player = game.getPlayer(game.getActivePlayerId());
         if (player == null) {
-            logger.error("No active player found in game " + game.getId());
-            throw new IllegalStateException("Cannot build state vector: no active player");
+            player = game.getPlayer(game.getState().getChoosingPlayerId());
+            if (player == null){
+                logger.error("No active player found in game " + game.getId());
+                throw new IllegalStateException("Cannot build state vector: no active player");
+            }
         }
         int index = 0;
         // Action Type
@@ -188,6 +196,20 @@ public class RLState {
                 index += cardFeatures.length;
             }
         }
+
+        //Cards on Stack
+        for (StackObject stackObj : game.getStack()) {
+            if (index >= STATE_VECTOR_SIZE) {
+                logger.error("Cards on stack exceed the maximum allowed size");
+                break;
+            }
+            if (stackObj instanceof Card) {
+                float[] cardFeatures = convertCardToFeatureVector((Card)stackObj, ZoneType.STACK, game);
+                System.arraycopy(cardFeatures, 0, stateVector, index, cardFeatures.length);
+                index += cardFeatures.length;
+            }
+        }
+
 
         stateVectorINDArray = Nd4j.create(stateVector);
     }
