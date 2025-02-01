@@ -184,7 +184,10 @@ public class ComputerPlayer6 extends ComputerPlayer {
                         }
                     }
                 }
-                this.activateAbility((ActivatedAbility) ability, game);
+
+                if(!this.activateAbility((ActivatedAbility) ability, game)){
+                    logger.error("AI: ability activation failed: " + ability);
+                }
                 if (ability.isUsesStack()) {
                     usedStack = true;
                 }

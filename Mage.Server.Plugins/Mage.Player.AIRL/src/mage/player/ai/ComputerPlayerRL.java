@@ -1,22 +1,18 @@
 package mage.player.ai;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import mage.abilities.*;
+import mage.abilities.mana.ManaOptions;
+import mage.constants.Zone;
+import mage.game.ExileZone;
+import mage.game.command.CommandObject;
+import mage.game.stack.StackObject;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.MageObject;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -202,6 +198,13 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
         // choose by RLModel
         if (!choice.isChosen()) {
+//            Map<String,String> keyChoices = choice.getKeyChoices();
+//            for(String key : keyChoices.keySet()){
+//                choice.setChoice(keyChoices.get(key));
+//                if(canActivateAlternativeCostsNow(, game)){
+//                    return true;
+//                }
+//            }
             INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game);
             int bestChoice = 0;
             double bestQVal = Double.NEGATIVE_INFINITY;
@@ -212,7 +215,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
                     bestChoice = i;
                 }
             }
-            choice.setChoice(choice.getKeyChoices().get(bestChoice));
+            //This is 1 indexed
+            choice.setChoice(choice.getKeyChoices().get(bestChoice+1));
             return true;
         }
         return super.choose(outcome, choice, game);
@@ -851,19 +855,40 @@ public class ComputerPlayerRL extends ComputerPlayer {
         // }
         // playableOptions=filtered;
 
-    protected Ability calculateActions(Game game) {
-        // Get the 2D list of playable options
-        List<List<Ability>> playableOptions = getPlayableOptions(game);
-
-        // Remove any sublists of size 0
-        playableOptions.removeIf(list -> list.isEmpty());
-
-
-        // Flatten the 2D list into a 1D list
-        List<Ability> flattenedOptions = new ArrayList<>();
-        for (List<Ability> options : playableOptions) {
-            flattenedOptions.addAll(options);
+    protected Game createSimulation(Game game) {
+        Game sim = game.createSimulationForAI();
+        for (Player oldPlayer : sim.getState().getPlayers().values()) {
+            // replace original player by simulated player and find result (execute/resolve current action)
+            Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
+            SimulatedPlayer2 simPlayer = new SimulatedPlayer2(oldPlayer, oldPlayer.getId().equals(playerId));
+            simPlayer.restore(origPlayer);
+            sim.getState().getPlayers().put(oldPlayer.getId(), simPlayer);
         }
+        return sim;
+    }
+
+    protected Ability calculateActions(Game game) {
+        Game sim = createSimulation(game);
+        SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) sim.getPlayer(game.getPlayerList().get());
+        List<Ability> flattenedOptions = currentPlayer.simulatePriority(sim);
+        for (Ability ability : flattenedOptions) {
+            for(Ability subAbility : ability.getSubAbilities()){
+            }
+        }
+        //TODO: Check what Computerplayer6 does for optimization here, does it remove illegal actions?
+
+//        // Get the 2D list of playable options
+//        List<List<Ability>> playableOptions = getPlayableOptions(game);
+//
+//        // Remove any sublists of size 0
+//        playableOptions.removeIf(list -> list.isEmpty());
+//
+//
+//        // Flatten the 2D list into a 1D list
+//        List<Ability> flattenedOptions = new ArrayList<>();
+//        for (List<Ability> options : playableOptions) {
+//            flattenedOptions.addAll(options);
+//        }
 
         // If we can only pass, don't query model
         if (flattenedOptions.size() == 1) {

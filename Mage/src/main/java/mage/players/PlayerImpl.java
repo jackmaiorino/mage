@@ -3821,7 +3821,7 @@ public abstract class PlayerImpl implements Player, Serializable {
      * @param game          The game to calculate this for.
      * @return Boolean. True if the minimum can be paid, false otherwise.
      */
-    protected boolean canPayMinimumManaCost(ActivatedAbility ability, ManaOptions availableMana, Game game) {
+    public boolean canPayMinimumManaCost(ActivatedAbility ability, ManaOptions availableMana, Game game) {
         ManaOptions abilityOptions = ability.getMinimumCostToActivate(playerId, game); // All possible combinations of mana costs
         if (abilityOptions.isEmpty()) {
             return true;

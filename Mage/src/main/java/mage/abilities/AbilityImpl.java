@@ -34,6 +34,7 @@ import mage.game.permanent.Permanent;
 import mage.game.stack.Spell;
 import mage.game.stack.StackAbility;
 import mage.players.Player;
+import mage.players.PlayerImpl;
 import mage.target.Target;
 import mage.target.TargetCard;
 import mage.target.Targets;
@@ -554,6 +555,10 @@ public abstract class AbilityImpl implements Ability {
             // At least one alternative cost is available.
             // We open a menu for the player to choose up to one.
             boolean mustChooseAlternative = !(allowedIdentifiers.contains(MageIdentifier.Default) || allowedIdentifiers.contains(getIdentifier()));
+            if(!((PlayerImpl)player).canPayMinimumManaCost(((Spell) sourceObject).getSpellAbility(),player.getManaAvailable(game),game)){
+                mustChooseAlternative = true;
+            }
+
             choice.setMessage(
                     mustChooseAlternative
                             ? "Choose an alternative cost"
