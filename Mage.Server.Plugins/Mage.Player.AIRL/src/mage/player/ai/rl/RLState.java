@@ -9,6 +9,7 @@ import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
 import mage.Mana;
+import mage.abilities.Ability;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.game.ExileZone;
@@ -20,6 +21,7 @@ import mage.players.Player;
 
 public class RLState {
     private static final Logger logger = Logger.getLogger(RLState.class);
+    private final Ability sourceAbility;
     private float[] stateVector;
     public INDArray stateVectorINDArray;
     public List<QValueEntry> targetQValues;
@@ -31,6 +33,7 @@ public class RLState {
     public static final int ACTION_TYPE_SIZE = ActionType.values().length;
     // The possibility of having tons of tokens may break this
     public static final int STATE_VECTOR_SIZE = ACTION_TYPE_SIZE +
+                                                EMBEDDING_SIZE + // Source Card
                                                 NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE) // Player
                                                 + NUM_PLAYER_STATS + (NUM_CARDS * EMBEDDING_SIZE); // Opponent
     public ActionType actionType;
@@ -42,7 +45,9 @@ public class RLState {
         GRAVEYARD,
         EXILE,
         LIBRARY,
-        STACK
+        STACK,
+        // This is a special case for the source card
+        REFERENCE
     }
 
     public enum ActionType {
@@ -59,6 +64,16 @@ public class RLState {
     public RLState(Game game, ActionType actionType) {
         this.stateVector = new float[STATE_VECTOR_SIZE];
         this.actionType = actionType;
+        this.sourceAbility = null;
+        this.targetQValues = new ArrayList<>();
+        this.exploreDimensions = new ArrayList<>();
+        buildStateVector(game);
+    }
+
+    public RLState(Game game, ActionType actionType, Ability source) {
+        this.stateVector = new float[STATE_VECTOR_SIZE];
+        this.actionType = actionType;
+        this.sourceAbility = source;
         this.targetQValues = new ArrayList<>();
         this.exploreDimensions = new ArrayList<>();
         buildStateVector(game);
@@ -78,6 +93,13 @@ public class RLState {
         // Action Type
         stateVector[actionType.ordinal()] = 1.0f;
         index += ActionType.values().length;
+        
+        // Source Card (if applicable)
+        if (sourceAbility != null) {
+            float[] sourceCardFeatures = convertCardToFeatureVector(game.getCard(sourceAbility.getSourceId()), ZoneType.REFERENCE, game);
+            System.arraycopy(sourceCardFeatures, 0, stateVector, index, sourceCardFeatures.length);
+        }
+        index += EMBEDDING_SIZE;
 
         // Player Numerical Stats Normalized (Some values like graveyard and land are arbitrary)
         stateVector[index++] = (float) player.getLife() / game.getStartingLife();

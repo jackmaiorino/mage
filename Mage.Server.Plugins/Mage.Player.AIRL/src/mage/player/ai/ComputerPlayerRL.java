@@ -1,18 +1,23 @@
 package mage.player.ai;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-import mage.abilities.*;
-import mage.abilities.mana.ManaOptions;
-import mage.constants.Zone;
-import mage.game.ExileZone;
-import mage.game.command.CommandObject;
-import mage.game.stack.StackObject;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.MageObject;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -37,7 +42,6 @@ import mage.players.Player;
 import mage.target.Target;
 import mage.target.TargetAmount;
 import mage.target.TargetCard;
-import mage.util.RandomUtil;
 
 public class ComputerPlayerRL extends ComputerPlayer {
     public RLModel model;
@@ -70,10 +74,10 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
-    public INDArray genericChoose(int options, RLState.ActionType actionType, Game game){
-        currentState = new RLState(game, actionType);
-        int numRows = options / RLModel.MAX_OPTIONS;
-        int remainingOptions = options % RLModel.MAX_OPTIONS;
+    public INDArray genericChoose(int numOptions, RLState.ActionType actionType, Game game, Ability source) {
+        currentState = new RLState(game, actionType, source);
+        int numRows = numOptions / RLModel.MAX_OPTIONS;
+        int remainingOptions = numOptions % RLModel.MAX_OPTIONS;
         for(int i = 0; i < numRows; i++){
             currentState.exploreDimensions.add(RLModel.MAX_OPTIONS);
         }
@@ -92,23 +96,67 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
 //        log.debug("chooseReplacementEffect");
 
-    // Stuff like sheoldred's edict (I think this can just intercept a set mode. Same with set mana cost.)
-    // TODO: How do we preset modes and manacost.
+    // Stuff like sheoldred's edict
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        // Weird override
-        // TODO: I think there is a bug in the base computerplayer here creating a shallow copy of ability higher up
-        source = currentAbility;
-        modes = currentAbility.getModes();
+        Modes availableModes = modes.copy();
 
-        if (modes.getMode() != null && modes.getMaxModes(game, source) == modes.getSelectedModes().size()) {
-            // mode was already set by the AI
-            return modes.getMode();
-        } else{
-            RLTrainer.threadLocalLogger.get().error("Mode not set by AI");
-            //return super.chooseMode(modes, source, game);
-            throw new RuntimeException("Mode not set by AI");
+        INDArray qValues = genericChoose(availableModes.size() + 1, RLState.ActionType.SELECT_CHOICE, game, source);
+        // Create a list to store Q-values with their indices
+        List<QValueWithIndex> qValueList = new ArrayList<>();
+        for (int i = 0; i < availableModes.size() + 1; i++) {
+            qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
         }
+
+        // Sort the list by Q-value in descending order
+        qValueList.sort((a, b) -> Float.compare(b.qValue, a.qValue));
+
+        // Use the sorted Q-values and their indices as needed
+        int selectedModes = 0;
+        List<Integer> selectedModesList = new ArrayList<>();
+        boolean stopChoosing = false;
+        for (QValueWithIndex qValueWithIndex : qValueList) {
+            // Stop if we've reached the maximum number of modes
+            if (selectedModes >= modes.getMaxModes(game, source) && modes.getMaxModes(game, source) > 0) {
+                break;
+            }
+
+            // Stop if we've reached minimum number of modes
+            if (stopChoosing && selectedModes >= modes.getMinModes()) {
+                break;
+            }
+
+            // Stop if we've reached the minimum and the do nothing option is the best option
+            if (qValueWithIndex.index == availableModes.size()) {
+                //TODO: Good design to mark this as target?
+                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
+                if (selectedModes >= modes.getMinModes()) {
+                    break;
+                }else{
+                    stopChoosing = true;
+                    continue;
+                }
+            }
+
+            // Access the original index and Q-value
+            int originalIndex = qValueWithIndex.index;
+            currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex));
+            selectedModes++;
+            selectedModesList.add(originalIndex);
+        }
+
+        if (selectedModes == 0) {
+            return null;
+        } else {
+            // Add all selected modes except the last one
+            for(int i = 0; i < selectedModesList.size() - 1; i++){
+                Mode mode = (Mode) availableModes.values().toArray()[selectedModesList.get(i)];
+                modes.addSelectedMode(mode.getId());
+            }
+            // Return the last selected mode to let outer loop handle it
+            return (Mode) availableModes.values().toArray()[selectedModesList.get(selectedModesList.size() - 1)];
+        }
+
     }
 
     // TODO: Make this an AI decision
@@ -146,8 +194,21 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
 
         // Select a random option from the possible values
-        if (!possibleXValues.isEmpty()) {
-            return possibleXValues.get(RandomUtil.nextInt(possibleXValues.size()));
+        if (!possibleXValues.isEmpty() && possibleXValues.size() > 1) {
+            INDArray qValues = genericChoose(possibleXValues.size(), RLState.ActionType.SELECT_CHOICE, game, ability);
+            int bestChoice = 0;
+            double bestQVal = Double.NEGATIVE_INFINITY;
+            for (int i = 0; i < possibleXValues.size(); i++) {
+                double qVal = qValues.getDouble(i);
+                if (qVal > bestQVal) {
+                    bestQVal = qVal;
+                    bestChoice = i;
+                }
+            }
+            return possibleXValues.get(bestChoice);
+        } else if (possibleXValues.size() == 1) {
+            // No need to query model for only 1 option
+            return possibleXValues.get(0);
         }
 
         return 0; // Default to 0 if no valid options are found
@@ -198,28 +259,50 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
         // choose by RLModel
         if (!choice.isChosen()) {
-//            Map<String,String> keyChoices = choice.getKeyChoices();
-//            for(String key : keyChoices.keySet()){
-//                choice.setChoice(keyChoices.get(key));
-//                if(canActivateAlternativeCostsNow(, game)){
-//                    return true;
-//                }
-//            }
-            INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game);
-            int bestChoice = 0;
-            double bestQVal = Double.NEGATIVE_INFINITY;
-            for (int i = 0; i < qValues.length(); i++) {
-                double qVal = qValues.getDouble(i);
-                if (qVal > bestQVal) {
-                    bestQVal = qVal;
-                    bestChoice = i;
+            if (choice.getKeyChoices() != null && !choice.getKeyChoices().isEmpty()) {
+                //Keychoice
+                if(choice.getKeyChoices().size() > 1){
+                    // TODO: This grab of source ability could def be wrong
+                    INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game, game.getStack().getFirst().getStackAbility());
+                    int bestChoice = 0;
+                    double bestQVal = Double.NEGATIVE_INFINITY;
+                    for (int i = 0; i < choice.getKeyChoices().size(); i++) {
+                        double qVal = qValues.getDouble(i);
+                        if (qVal > bestQVal) {
+                            bestQVal = qVal;
+                            bestChoice = i;
+                        }
+                    }
+                    choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[bestChoice].toString());
+                    return true;
+                } else {
+                    // Only one choice
+                    choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[0].toString());
+                    return true;
+                }
+            } else if(choice.getChoices() != null && !choice.getChoices().isEmpty()) {
+                // Normal Choice
+                if (choice.getChoices().size() > 1) {
+                    INDArray qValues = genericChoose(choice.getChoices().size(), RLState.ActionType.SELECT_CHOICE, game, game.getStack().getFirst().getStackAbility());
+                    int bestChoice = 0;
+                    double bestQVal = Double.NEGATIVE_INFINITY;
+                    for (int i = 0; i < choice.getChoices().size(); i++) {
+                        double qVal = qValues.getDouble(i);
+                        if (qVal > bestQVal) {
+                            bestQVal = qVal;
+                            bestChoice = i;
+                        }
+                    }
+                    choice.setChoice(choice.getChoices().toArray()[bestChoice].toString());
+                    return true;
+                } else {
+                    choice.setChoice(choice.getChoices().toArray()[0].toString());
+                    return true;
                 }
             }
-            //This is 1 indexed
-            choice.setChoice(choice.getKeyChoices().get(bestChoice+1));
-            return true;
         }
-        return super.choose(outcome, choice, game);
+        throw new RuntimeException("No choice made");
+//        return super.choose(outcome, choice, game);
     }
 
     // Deciding ponder cards, exile card from opponent's hand
@@ -242,7 +325,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             return true;
         }
 
-        INDArray qValues = genericChoose(cardChoices.size(), RLState.ActionType.SELECT_CARD, game);
+        INDArray qValues = genericChoose(cardChoices.size(), RLState.ActionType.SELECT_CARD, game, source);
         
         // Create sorted indices based on q-values
         List<Integer> sortedIndices = new ArrayList<>();
@@ -287,21 +370,23 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //    }
 
     // Choosing which stack ability from the stack you want to resolve
-    // TODO: Implement
     @Override
     public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        //TODO: improve this
         if (!abilities.isEmpty()) {
-            INDArray qValues = genericChoose(abilities.size(), RLState.ActionType.SELECT_TRIGGERED_ABILITY, game);
+            if (abilities.size() == 1) {
+                return abilities.get(0);
+            }
+            INDArray qValues = genericChoose(abilities.size(), RLState.ActionType.SELECT_TRIGGERED_ABILITY, game, null);
             int bestChoice = 0;
             double bestQVal = Double.NEGATIVE_INFINITY;
-            for (int i = 0; i < qValues.length(); i++) {
+            for (int i = 0; i < abilities.size(); i++) {
                 double qVal = qValues.getDouble(i);
                 if (qVal > bestQVal) {
                     bestQVal = qVal;
                     bestChoice = i;
                 }
             }
+            currentState.targetQValues.add(new QValueEntry((float)bestQVal, bestChoice));
             return abilities.get(bestChoice);
         }
         return null;
@@ -337,19 +422,15 @@ public class ComputerPlayerRL extends ComputerPlayer {
         if (target.getTargetController() != null && target.getAbilityController() != null) {
             abilityControllerId = target.getAbilityController();
         }
-        UUID sourceId = source != null ? source.getSourceId() : null;
 
         // Not really sure why we are prompted to choose the starting player
         // Just hand it off to the superclass
+        // TODO: Investigate why this is called
         if (Objects.equals(target.getTargetName(), "starting player")) {
             return super.choose(outcome, target, source, game, null);
         }
 
-        boolean required = target.isRequired(sourceId, game);
         List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
-        if (possibleTargetsList.isEmpty() || target.getTargets().size() >= target.getNumberOfTargets()) {
-            required = false;
-        }
 
         // If we can't choose any targets, pass
         if (possibleTargetsList.isEmpty()) {
@@ -359,11 +440,12 @@ public class ComputerPlayerRL extends ComputerPlayer {
         int maxTargets = target.getMaxNumberOfTargets();
         int minTargets = target.getMinNumberOfTargets();
 
-        INDArray qValues = genericChoose(possibleTargetsList.size(), RLState.ActionType.SELECT_TARGETS, game);
+        // +1 allows option to not select target or select fewer targets
+        INDArray qValues = genericChoose(possibleTargetsList.size()+1, RLState.ActionType.SELECT_TARGETS, game, source);
 
         // Create a list to store Q-values with their indices
         List<QValueWithIndex> qValueList = new ArrayList<>();
-        for (int i = 0; i < qValues.length(); i++) {
+        for (int i = 0; i < possibleTargetsList.size() + 1; i++) {
             qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
         }
 
@@ -373,29 +455,38 @@ public class ComputerPlayerRL extends ComputerPlayer {
         // Use the sorted Q-values and their indices as needed
         int selectedTargets = 0;
         List<UUID> selectedTargetsList = new ArrayList<>();
+        boolean stopChoosing = false;
         for (QValueWithIndex qValueWithIndex : qValueList) {
+            // Stop if we've tried to stop choosing or we've reached the maximum number of targets
+            if (maxTargets != 0 && selectedTargets >= maxTargets) {
+                break;
+            }
+
+            // Stop if we've reached the minimum number of targets
+            if (stopChoosing && selectedTargets >= minTargets) {
+                break;
+            }
+
+            // Stop if we've reached the minimum number of targets and the "do nothing" option is the best option
+            if (qValueWithIndex.index == possibleTargetsList.size()){
+                //TODO: Good design to mark this as target?
+                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
+                // Can we stop? Or do we need more targets?
+                if (selectedTargets >= minTargets) {
+                    break;
+                }else{
+                    stopChoosing = true;
+                    continue;
+                }
+            }
             // Access the original index and Q-value
             int originalIndex = qValueWithIndex.index;
+            target.add(possibleTargetsList.get(originalIndex), game);
+            currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex));
+            selectedTargets++;
 
-            // Check if the index is valid
-            if (originalIndex < possibleTargetsList.size()) {
-                target.add(possibleTargetsList.get(originalIndex), game);
-                // Convert 1D index to 2D index
-                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex % RLModel.MAX_ACTIONS, originalIndex / RLModel.MAX_ACTIONS));
-                selectedTargetsList.add(possibleTargetsList.get(originalIndex));
-                //TODO: We never actually add the target? target.add?
-                selectedTargets++;
-            }
-
-            // Stop if we've reached the minimum and encounter an invalid index
-            if (selectedTargets >= minTargets && originalIndex >= possibleTargetsList.size()) {
-                break;
-            }
-
-            // Stop if we've reached the maximum number of targets
-            if (selectedTargets >= maxTargets && maxTargets != 0) {
-                break;
-            }
+            // For logging purposes
+            selectedTargetsList.add(possibleTargetsList.get(originalIndex));
         }
 
         List<String> selectedTargetNames = new ArrayList<>();
@@ -410,7 +501,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 }
             }
         }
-
         // Retrieve the source name
         String sourceName = "Unknown Source";
         if (source != null) {
@@ -426,19 +516,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
         } else {
             sourceName = outcome.name();
         }
+        RLTrainer.threadLocalLogger.get().info("Selected targets: " + selectedTargetNames + " for source: " + sourceName);
 
-           RLTrainer.threadLocalLogger.get().info("Selected targets: " + selectedTargetNames + " for source: " + sourceName);
-
-        if (currentState.targetQValues.isEmpty()){
-            // If no targets are selected, but minTargets is 0, the selected action was the "non-action"
-            if (minTargets == 0) {
-                QValueWithIndex qValueWithIndex = qValueList.get(0);
-                int originalIndex = qValueWithIndex.index;
-                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex % RLModel.MAX_ACTIONS, originalIndex / RLModel.MAX_ACTIONS));
-            }else{
-                stateBuffer.remove(currentState);
-            }
-        }
         // Return true if the minimum number of targets is selected
         return selectedTargets >= minTargets;
     }
@@ -505,15 +584,19 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 // Declare attacks based on sorted Q-values
                 for (AttackOption option : attackOptions) {
                     if (option.attackTargetIndex >= numAttackTargets) {
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.attackTargetIndex));
+                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
                         break; // Skip this attacker if the first choice is to not attack
+
                     }
                     UUID attackTargetId = possibleAttackTargets.get(option.attackTargetIndex);
                     if (attacker.canAttack(attackTargetId, game)) {
                         RLTrainer.threadLocalLogger.get().info("Declaring attacker: " + attacker.getName() + " for attack target: " + attackTargetId.toString());
                         this.declareAttacker(attacker.getId(), attackTargetId, game, false);
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, attackerIndex, option.attackTargetIndex));
+                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
                         break; // Once an attack is declared, move to the next attacker
+
                     }
                 }
             }
@@ -587,17 +670,21 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 // Declare blocks based on sorted Q-values
                 for (BlockOption option : blockOptions) {
                     if (option.attackerIndex >= numAttackers) {
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, option.attackerIndex, option.blockerIndex));
+                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
                         break; // Skip this blocker if the first choice is to not block
                     }
+
                     Permanent attacker = attackers.get(option.attackerIndex);
                     if (blocker.canBlock(attacker.getId(), game)) {
                         RLTrainer.threadLocalLogger.get().info("Declaring blocker: " + blocker.getName() + " for attacker: " + attacker.getName());
                         this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, option.attackerIndex, option.blockerIndex));
+                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
+                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
                         blockerDeclared = true;
                         // TODO: implement multiblock
                         break;
+
                     }
                 }
             }
@@ -871,24 +958,21 @@ public class ComputerPlayerRL extends ComputerPlayer {
         Game sim = createSimulation(game);
         SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) sim.getPlayer(game.getPlayerList().get());
         List<Ability> flattenedOptions = currentPlayer.simulatePriority(sim);
+
+        // Remove duplicate spell abilities with the same name
+        List<Ability> uniqueOptions = new ArrayList<>();
+        Set<String> seenNames = new HashSet<>();
+
+        // Remove duplicate spell abilities with the same name
+        // TODO: Investigate if this is what we want. I did this because despite "setting targets" during selection. we still get prompted for choices later anyway
         for (Ability ability : flattenedOptions) {
-            for(Ability subAbility : ability.getSubAbilities()){
+            String name = ability.toString();
+            if (!seenNames.contains(name)) {
+                seenNames.add(name);
+                uniqueOptions.add(ability);
             }
         }
-        //TODO: Check what Computerplayer6 does for optimization here, does it remove illegal actions?
-
-//        // Get the 2D list of playable options
-//        List<List<Ability>> playableOptions = getPlayableOptions(game);
-//
-//        // Remove any sublists of size 0
-//        playableOptions.removeIf(list -> list.isEmpty());
-//
-//
-//        // Flatten the 2D list into a 1D list
-//        List<Ability> flattenedOptions = new ArrayList<>();
-//        for (List<Ability> options : playableOptions) {
-//            flattenedOptions.addAll(options);
-//        }
+        flattenedOptions = uniqueOptions;
 
         // If we can only pass, don't query model
         if (flattenedOptions.size() == 1) {
@@ -921,14 +1005,11 @@ public class ComputerPlayerRL extends ComputerPlayer {
             }
         }
 
-        // Convert the best index to 2D coordinates
-        int row = bestIndex / RLModel.MAX_OPTIONS;
-        int col = bestIndex % RLModel.MAX_OPTIONS;
-
-        currentState.targetQValues.add(new QValueEntry(maxQValue, row, col));
+        currentState.targetQValues.add(new QValueEntry(maxQValue, bestIndex));
         RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
-        RLTrainer.threadLocalLogger.get().info("Best action index: " + bestIndex + " (row: " + row + ", col: " + col + ")");
+        RLTrainer.threadLocalLogger.get().info("Best action index: " + bestIndex);
         RLTrainer.threadLocalLogger.get().info("Best Q-value: " + maxQValue);
+
 
         // Return the ability corresponding to the best index
         if (bestIndex < flattenedOptions.size()) {

@@ -77,7 +77,7 @@ public class RLModel implements Serializable {
                 double updatedQValue = reward + DISCOUNT_FACTOR * qValueEntry.getQValue();
                 // Normalize Q-values to the range [0, 1]
                 updatedQValue = Math.max(0.0, Math.min(1.0, updatedQValue));
-                targetQValuesArray[i].putScalar(qValueEntry.getXIndex(), qValueEntry.getYIndex(), updatedQValue);
+                targetQValuesArray[i].putScalar(qValueEntry.getIndex(), updatedQValue);
             }
         }
 
