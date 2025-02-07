@@ -96,7 +96,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
 //        log.debug("chooseReplacementEffect");
 
-    // Stuff like sheoldred's edict
+    // Stuff like sheoldred's edict, kozilek's command
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         Modes availableModes = modes.copy();
@@ -262,8 +262,13 @@ public class ComputerPlayerRL extends ComputerPlayer {
             if (choice.getKeyChoices() != null && !choice.getKeyChoices().isEmpty()) {
                 //Keychoice
                 if(choice.getKeyChoices().size() > 1){
-                    // TODO: This grab of source ability could def be wrong
-                    INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game, game.getStack().getFirst().getStackAbility());
+                    Ability source;
+                    if (game.getStack().isEmpty()) {
+                        source = currentAbility;
+                    }else{
+                        source = game.getStack().getFirst().getStackAbility();
+                    }
+                    INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game, source);
                     int bestChoice = 0;
                     double bestQVal = Double.NEGATIVE_INFINITY;
                     for (int i = 0; i < choice.getKeyChoices().size(); i++) {
