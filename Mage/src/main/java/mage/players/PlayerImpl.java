@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import mage.abilities.mana.*;
 import org.apache.log4j.Logger;
 
 import com.google.common.collect.ImmutableMap;
@@ -67,8 +68,6 @@ import mage.abilities.keyword.ShroudAbility;
 import mage.abilities.keyword.SquirrellinkAbility;
 import mage.abilities.keyword.ToxicAbility;
 import mage.abilities.keyword.TransformAbility;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.abilities.mana.ManaOptions;
 import mage.cards.AdventureCard;
 import mage.cards.Card;
 import mage.cards.Cards;
@@ -3549,6 +3548,11 @@ public abstract class PlayerImpl implements Player, Serializable {
     public List<Permanent> getAvailableBlockers(Game game) {
         FilterCreatureForCombatBlock blockFilter = new FilterCreatureForCombatBlock();
         return game.getBattlefield().getAllActivePermanents(blockFilter, playerId, game);
+    }
+
+    private boolean isConditionalMana(Ability ability) {
+        return ability instanceof ConditionalManaAbility || ability instanceof ConditionalColorlessManaAbility ||
+                ability instanceof ConditionalColoredManaAbility || ability instanceof ConditionalAnyColorManaAbility;
     }
 
     /**

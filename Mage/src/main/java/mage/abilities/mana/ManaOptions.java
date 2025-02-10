@@ -70,6 +70,10 @@ public class ManaOptions extends LinkedHashSet<Mana> {
                         SkipAddMana:
                         for (Mana mana : copy) {
                             Mana newMana = new Mana();
+                            if(triggeredManaVariation instanceof ConditionalMana) {
+                                newMana = new ConditionalMana(newMana);
+                            }
+
                             newMana.add(mana);
                             newMana.add(triggeredManaVariation);
                             for (Mana existingMana : this) {

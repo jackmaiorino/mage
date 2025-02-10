@@ -12,7 +12,9 @@ import java.util.stream.Collectors;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 
+import mage.ConditionalMana;
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
 import mage.abilities.Mode;
@@ -23,6 +25,7 @@ import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
+import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -176,24 +179,33 @@ public class ComputerPlayerRL extends ComputerPlayer {
             throw new RuntimeException("No VariableManaCost in spell");
         }
 
-        //TODO: eventually this getmanaAvailable should be sometime more specific. For example, mishras workshop
-        // can only be used for artifacts
-        int numAvailable = getManaAvailable(game).size() - ability.getManaCostsToPay().manaValue();
-        if (numAvailable < 0) {
-            numAvailable = 0;
+        // Get all possible mana combinations
+        ManaOptions manaOptions = getManaAvailable(game);
+        if (manaOptions.isEmpty() && min == 0) {
+            return 0;
         }
+        // Use a Set to ensure unique X values
+        Set<Integer> possibleXValuesSet = new HashSet<>();
+        for (Mana mana : manaOptions) {
+            //TODO: Make this work, it will never hit
+            if (mana instanceof ConditionalMana && !((ConditionalMana) mana).apply(ability, game, getId(), ability.getManaCosts())) {
+                continue;
+            }
+            int availableMana = mana.count() - ability.getManaCostsToPay().manaValue();
 
-        // Create a list of possible values for X
-        List<Integer> possibleXValues = new ArrayList<>();
-        for (int x = min; x <= max; x++) {
-            if (variableManaCost.getXInstancesCount() * x <= numAvailable) {
-                possibleXValues.add(x);
-            }else {
-                break;
+            for (int x = min; x <= max; x++) {
+                if (variableManaCost.getXInstancesCount() * x <= availableMana) {
+                    possibleXValuesSet.add(x);
+                } else {
+                    break;
+                }
             }
         }
 
-        // Select a random option from the possible values
+        // Convert the Set to a List
+        List<Integer> possibleXValues = new ArrayList<>(possibleXValuesSet);
+
+        // Select the best X value using Q-values
         if (!possibleXValues.isEmpty() && possibleXValues.size() > 1) {
             INDArray qValues = genericChoose(possibleXValues.size(), RLState.ActionType.SELECT_CHOICE, game, ability);
             int bestChoice = 0;
@@ -215,6 +227,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
     }
 
     //TODO: Implement
+    //TODO: I don't know when this is used?
     @Override
     public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
         return super.announceXCost(min, max, message, game, ability, variableCost);
@@ -859,6 +872,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 }
             }
             if (!this.activateAbility(ability, game)){
+                //TODO: if we are here it is because the ComputerPlayerRL chose an invalid subaction (choose likely)
                 throw new RuntimeException("Failed to activate ability: " + ability);
             }
             //TODO: Implement holding priority for abilities that don't use the stack
@@ -963,6 +977,19 @@ public class ComputerPlayerRL extends ComputerPlayer {
         Game sim = createSimulation(game);
         SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) sim.getPlayer(game.getPlayerList().get());
         List<Ability> flattenedOptions = currentPlayer.simulatePriority(sim);
+        List<Ability> validOptions = new ArrayList<>();
+        for(Ability ability : flattenedOptions){
+            Game tmpGame = createSimulation(game);
+            SimulatedPlayer2 tmpPlayer = (SimulatedPlayer2) tmpGame.getPlayer(game.getPlayerList().get());
+            ActivatedAbility tmpAbility = (ActivatedAbility) ability.copy();
+            if (tmpPlayer.activateAbility(tmpAbility, tmpGame)){
+                validOptions.add(ability);
+            } else{
+                RLTrainer.threadLocalLogger.get().info("Invalid ability: " + ability);
+            }
+        }
+
+        flattenedOptions = validOptions;
 
         // Remove duplicate spell abilities with the same name
         List<Ability> uniqueOptions = new ArrayList<>();

@@ -1927,19 +1927,47 @@ public class ComputerPlayer extends PlayerImpl {
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         log.debug("announceXMana");
-        //TODO: improve this
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
-        if (numAvailable < 0) {
-            numAvailable = 0;
-        } else {
-            if (numAvailable < min) {
-                numAvailable = min;
-            }
-            if (numAvailable > max) {
-                numAvailable = max;
+        VariableManaCost variableManaCost = null;
+        for (ManaCost cost : ability.getManaCostsToPay()) {
+            if (cost instanceof VariableManaCost) {
+                if (variableManaCost == null) {
+                    variableManaCost = (VariableManaCost) cost;
+                } else {
+                    throw new RuntimeException("More than one VariableManaCost in spell");
+                }
             }
         }
-        return numAvailable;
+        if (variableManaCost == null) {
+            throw new RuntimeException("No VariableManaCost in spell");
+        }
+        // Get all possible mana combinations
+        ManaOptions manaOptions = getManaAvailable(game);
+        if (manaOptions.isEmpty() && min == 0) {
+            return 0;
+        }
+        // Use a Set to ensure unique X values
+        Set<Integer> possibleXValuesSet = new HashSet<>();
+        for (Mana mana : manaOptions) {
+            //TODO: Make this work, it will never hit
+            if (mana instanceof ConditionalMana && !((ConditionalMana) mana).apply(ability, game, getId(), ability.getManaCosts())) {
+                continue;
+            }
+            int availableMana = mana.count() - ability.getManaCostsToPay().manaValue();
+
+            for (int x = min; x <= max; x++) {
+                if (variableManaCost.getXInstancesCount() * x <= availableMana) {
+                    possibleXValuesSet.add(x);
+                } else {
+                    break;
+                }
+            }
+        }
+
+        // Convert the Set to a List
+        List<Integer> possibleXValues = new ArrayList<>(possibleXValuesSet);
+
+        // TODO: Make this not a random choice
+        return possibleXValues.get(RandomUtil.nextInt(possibleXValues.size()));
     }
 
     @Override
