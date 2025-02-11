@@ -555,6 +555,7 @@ public abstract class AbilityImpl implements Ability {
             // At least one alternative cost is available.
             // We open a menu for the player to choose up to one.
             boolean mustChooseAlternative = !(allowedIdentifiers.contains(MageIdentifier.Default) || allowedIdentifiers.contains(getIdentifier()));
+            //TODO: I think this was a bad bandaid fix. Instead we need to not allow it to set invalid alternate choices?
             if(!((PlayerImpl)player).canPayMinimumManaCost(((Spell) sourceObject).getSpellAbility(),player.getManaAvailable(game),game)){
                 mustChooseAlternative = true;
             }
@@ -566,6 +567,7 @@ public abstract class AbilityImpl implements Ability {
             );
             Map<String, Integer> sort = new LinkedHashMap<>();
             int i;
+
             for (i = 0; i < possibleAlternatives.size(); i++) {
                 String key = Integer.toString(i + 1);
                 sort.put(key, i);

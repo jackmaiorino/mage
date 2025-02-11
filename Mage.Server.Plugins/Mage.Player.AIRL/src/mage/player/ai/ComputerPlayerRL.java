@@ -103,11 +103,27 @@ public class ComputerPlayerRL extends ComputerPlayer {
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         Modes availableModes = modes.copy();
+        for (Mode mode : modes.getAvailableModes(source, game)) {
+            if (!mode.getTargets().canChoose(source.getControllerId(), source, game)) {
+                availableModes.removeSelectedMode(mode.getId());
+                availableModes.remove(mode.getId());
+            }
+        }
 
-        INDArray qValues = genericChoose(availableModes.size() + 1, RLState.ActionType.SELECT_CHOICE, game, source);
+        int maxTargets = Math.min(modes.getMaxModes(game, source), availableModes.size());
+        int minTargets = modes.getMinModes();
+        boolean mustSelectExact = minTargets == maxTargets;
+        int numOptions;
+        if (mustSelectExact){
+            numOptions = availableModes.size();
+        }else{
+            numOptions = availableModes.size() + 1;
+        }
+
+        INDArray qValues = genericChoose(numOptions, RLState.ActionType.SELECT_CHOICE, game, source);
         // Create a list to store Q-values with their indices
         List<QValueWithIndex> qValueList = new ArrayList<>();
-        for (int i = 0; i < availableModes.size() + 1; i++) {
+        for (int i = 0; i < numOptions; i++) {
             qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
         }
 
@@ -120,20 +136,20 @@ public class ComputerPlayerRL extends ComputerPlayer {
         boolean stopChoosing = false;
         for (QValueWithIndex qValueWithIndex : qValueList) {
             // Stop if we've reached the maximum number of modes
-            if (selectedModes >= modes.getMaxModes(game, source) && modes.getMaxModes(game, source) > 0) {
+            if (selectedModes >= maxTargets && maxTargets > 0) {
                 break;
             }
 
             // Stop if we've reached minimum number of modes
-            if (stopChoosing && selectedModes >= modes.getMinModes()) {
+            if (stopChoosing && selectedModes >= minTargets) {
                 break;
             }
 
             // Stop if we've reached the minimum and the do nothing option is the best option
-            if (qValueWithIndex.index == availableModes.size()) {
+            if (!mustSelectExact && qValueWithIndex.index == availableModes.size()) {
                 //TODO: Good design to mark this as target?
                 currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
-                if (selectedModes >= modes.getMinModes()) {
+                if (selectedModes >= minTargets) {
                     break;
                 }else{
                     stopChoosing = true;
@@ -162,7 +178,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
     }
 
-    // TODO: Make this an AI decision
     @Override
     public int announceXMana(int min, int max, String message, Game game, Ability ability) {
         VariableManaCost variableManaCost = null;
@@ -186,8 +201,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
         // Use a Set to ensure unique X values
         Set<Integer> possibleXValuesSet = new HashSet<>();
+        possibleXValuesSet.add(0); // Always allow X=0
         for (Mana mana : manaOptions) {
-            //TODO: Make this work, it will never hit
             if (mana instanceof ConditionalMana && !((ConditionalMana) mana).apply(ability, game, getId(), ability.getManaCosts())) {
                 continue;
             }
@@ -457,13 +472,20 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
         int maxTargets = target.getMaxNumberOfTargets();
         int minTargets = target.getMinNumberOfTargets();
+        boolean mustSelectExact = minTargets == maxTargets;
+        int numOptions;
+        if (mustSelectExact){
+            numOptions = possibleTargetsList.size();
+        }else{
+            numOptions = possibleTargetsList.size() + 1;
+        }
 
         // +1 allows option to not select target or select fewer targets
-        INDArray qValues = genericChoose(possibleTargetsList.size()+1, RLState.ActionType.SELECT_TARGETS, game, source);
+        INDArray qValues = genericChoose(numOptions, RLState.ActionType.SELECT_TARGETS, game, source);
 
         // Create a list to store Q-values with their indices
         List<QValueWithIndex> qValueList = new ArrayList<>();
-        for (int i = 0; i < possibleTargetsList.size() + 1; i++) {
+        for (int i = 0; i < numOptions; i++) {
             qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
         }
 
@@ -486,7 +508,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             }
 
             // Stop if we've reached the minimum number of targets and the "do nothing" option is the best option
-            if (qValueWithIndex.index == possibleTargetsList.size()){
+            if (!mustSelectExact && qValueWithIndex.index == possibleTargetsList.size()){
                 //TODO: Good design to mark this as target?
                 currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
                 // Can we stop? Or do we need more targets?

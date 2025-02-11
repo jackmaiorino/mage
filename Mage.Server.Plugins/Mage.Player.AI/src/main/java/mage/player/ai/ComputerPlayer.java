@@ -1947,8 +1947,8 @@ public class ComputerPlayer extends PlayerImpl {
         }
         // Use a Set to ensure unique X values
         Set<Integer> possibleXValuesSet = new HashSet<>();
+        possibleXValuesSet.add(0);
         for (Mana mana : manaOptions) {
-            //TODO: Make this work, it will never hit
             if (mana instanceof ConditionalMana && !((ConditionalMana) mana).apply(ability, game, getId(), ability.getManaCosts())) {
                 continue;
             }
