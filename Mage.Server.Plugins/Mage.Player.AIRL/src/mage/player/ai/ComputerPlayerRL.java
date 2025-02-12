@@ -104,7 +104,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
     public Mode chooseMode(Modes modes, Ability source, Game game) {
         Modes availableModes = modes.copy();
         for (Mode mode : modes.getAvailableModes(source, game)) {
-            if (!mode.getTargets().canChoose(source.getControllerId(), source, game)) {
+            if ((mode.getTargets() != null && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
                 availableModes.removeSelectedMode(mode.getId());
                 availableModes.remove(mode.getId());
             }
@@ -119,6 +119,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }else{
             numOptions = availableModes.size() + 1;
         }
+        // TODO: Add check here if options == 1, just return that option or option == 0?
 
         INDArray qValues = genericChoose(numOptions, RLState.ActionType.SELECT_CHOICE, game, source);
         // Create a list to store Q-values with their indices
@@ -464,10 +465,20 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
 
         List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+        // Remove targets that can't be targeted
+        for (UUID possibleTarget : possibleTargetsList) {
+            if (!target.canTarget(abilityControllerId, possibleTarget, source, game)) {
+                possibleTargetsList.remove(possibleTarget);
+            }
+        }
 
         // If we can't choose any targets, pass
         if (possibleTargetsList.isEmpty()) {
             return false;
+        } else if (possibleTargetsList.size() == 1) {
+            // If there's only one target, choose it
+            target.add(possibleTargetsList.get(0), game);
+            return true;
         }
 
         int maxTargets = target.getMaxNumberOfTargets();
