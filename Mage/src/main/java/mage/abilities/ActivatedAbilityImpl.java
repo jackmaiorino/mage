@@ -1,23 +1,30 @@
 package mage.abilities;
 
+import java.util.Set;
+import java.util.UUID;
+
 import mage.ApprovingObject;
 import mage.MageIdentifier;
 import mage.MageObject;
+import mage.Mana;
 import mage.abilities.condition.Condition;
 import mage.abilities.costs.Cost;
+import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.effects.Effect;
 import mage.abilities.mana.ManaOptions;
 import mage.cards.Card;
-import mage.constants.*;
+import mage.constants.AbilityType;
+import mage.constants.AsThoughEffectType;
+import mage.constants.TargetController;
+import mage.constants.TimingRule;
+import mage.constants.Zone;
 import mage.game.Game;
 import mage.game.command.CommandObject;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
 import mage.players.Player;
+import mage.players.PlayerImpl;
 import mage.util.CardUtil;
-
-import java.util.Set;
-import java.util.UUID;
 
 /**
  * @author BetaSteward_at_googlemail.com

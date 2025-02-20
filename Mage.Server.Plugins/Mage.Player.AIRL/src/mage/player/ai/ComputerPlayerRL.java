@@ -1,25 +1,17 @@
 package mage.player.ai;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
+import mage.abilities.*;
+import mage.abilities.mana.ActivatedManaAbilityImpl;
+import mage.constants.Zone;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.VariableCost;
 import mage.abilities.costs.mana.GenericManaCost;
@@ -102,22 +94,24 @@ public class ComputerPlayerRL extends ComputerPlayer {
     // Stuff like sheoldred's edict, kozilek's command
     @Override
     public Mode chooseMode(Modes modes, Ability source, Game game) {
-        Modes availableModes = modes.copy();
-        for (Mode mode : modes.getAvailableModes(source, game)) {
-            if ((mode.getTargets() != null && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
-                availableModes.removeSelectedMode(mode.getId());
-                availableModes.remove(mode.getId());
+        //TODO: Testing if we can make this not a copy.
+        ArrayList<UUID> modeIds = new ArrayList<>(modes.values().stream().map(Mode::getId).collect(Collectors.toList()));
+        for (UUID modeId : modeIds) {
+            Mode mode = modes.get(modeId);
+            if ((!mode.getTargets().isEmpty() && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
+                modes.removeSelectedMode(modeId);
+                modes.remove(modeId);
             }
         }
 
-        int maxTargets = Math.min(modes.getMaxModes(game, source), availableModes.size());
+        int maxTargets = Math.min(modes.getMaxModes(game, source), modes.size());
         int minTargets = modes.getMinModes();
         boolean mustSelectExact = minTargets == maxTargets;
         int numOptions;
         if (mustSelectExact){
-            numOptions = availableModes.size();
+            numOptions = modes.size();
         }else{
-            numOptions = availableModes.size() + 1;
+            numOptions = modes.size() + 1;
         }
         // TODO: Add check here if options == 1, just return that option or option == 0?
 
@@ -147,7 +141,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             }
 
             // Stop if we've reached the minimum and the do nothing option is the best option
-            if (!mustSelectExact && qValueWithIndex.index == availableModes.size()) {
+            if (!mustSelectExact && qValueWithIndex.index == modes.size()) {
                 //TODO: Good design to mark this as target?
                 currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
                 if (selectedModes >= minTargets) {
@@ -170,11 +164,11 @@ public class ComputerPlayerRL extends ComputerPlayer {
         } else {
             // Add all selected modes except the last one
             for(int i = 0; i < selectedModesList.size() - 1; i++){
-                Mode mode = (Mode) availableModes.values().toArray()[selectedModesList.get(i)];
+                Mode mode = (Mode) modes.values().toArray()[selectedModesList.get(i)];
                 modes.addSelectedMode(mode.getId());
             }
             // Return the last selected mode to let outer loop handle it
-            return (Mode) availableModes.values().toArray()[selectedModesList.get(selectedModesList.size() - 1)];
+            return (Mode) modes.values().toArray()[selectedModesList.get(selectedModesList.size() - 1)];
         }
 
     }
@@ -287,16 +281,21 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
 
         // choose by RLModel
+        Ability source;
+        if (game.getStack().isEmpty()) {
+            source = currentAbility;
+        }else{
+            source = game.getStack().getFirst().getStackAbility();
+        }
         if (!choice.isChosen()) {
             if (choice.getKeyChoices() != null && !choice.getKeyChoices().isEmpty()) {
+                for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
+                    if (choice.getChoice() == null) {
+                        choice.setChoice(entry.getKey());
+                    }
+                }
                 //Keychoice
                 if(choice.getKeyChoices().size() > 1){
-                    Ability source;
-                    if (game.getStack().isEmpty()) {
-                        source = currentAbility;
-                    }else{
-                        source = game.getStack().getFirst().getStackAbility();
-                    }
                     INDArray qValues = genericChoose(choice.getKeyChoices().size(), RLState.ActionType.SELECT_CHOICE, game, source);
                     int bestChoice = 0;
                     double bestQVal = Double.NEGATIVE_INFINITY;
@@ -317,7 +316,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             } else if(choice.getChoices() != null && !choice.getChoices().isEmpty()) {
                 // Normal Choice
                 if (choice.getChoices().size() > 1) {
-                    INDArray qValues = genericChoose(choice.getChoices().size(), RLState.ActionType.SELECT_CHOICE, game, game.getStack().getFirst().getStackAbility());
+                    INDArray qValues = genericChoose(choice.getChoices().size(), RLState.ActionType.SELECT_CHOICE, game, source);
                     int bestChoice = 0;
                     double bestQVal = Double.NEGATIVE_INFINITY;
                     for (int i = 0; i < choice.getChoices().size(); i++) {
@@ -1007,30 +1006,34 @@ public class ComputerPlayerRL extends ComputerPlayer {
     }
 
     protected Ability calculateActions(Game game) {
-        Game sim = createSimulation(game);
-        SimulatedPlayer2 currentPlayer = (SimulatedPlayer2) sim.getPlayer(game.getPlayerList().get());
-        List<Ability> flattenedOptions = currentPlayer.simulatePriority(sim);
-        List<Ability> validOptions = new ArrayList<>();
-        for(Ability ability : flattenedOptions){
-            Game tmpGame = createSimulation(game);
-            SimulatedPlayer2 tmpPlayer = (SimulatedPlayer2) tmpGame.getPlayer(game.getPlayerList().get());
-            ActivatedAbility tmpAbility = (ActivatedAbility) ability.copy();
-            if (tmpPlayer.activateAbility(tmpAbility, tmpGame)){
-                validOptions.add(ability);
-            } else{
-                RLTrainer.threadLocalLogger.get().info("Invalid ability: " + ability);
-            }
-        }
+//        Game sim = createSimulation(game);
+//        SimulatedPlayer2 PlayerRLSim = (SimulatedPlayer2) sim.getPlayer(this.getId());
+//        List<Ability> flattenedOptions = PlayerRLSim.simulatePriority(sim);
+//
+//        List<Ability> validOptions = new ArrayList<>();
+//        for(Ability ability : flattenedOptions){
+//            Game tmpGame = createSimulation(game);
+//            SimulatedPlayer2 tmpPlayer = (SimulatedPlayer2) tmpGame.getPlayer(game.getPlayerList().get());
+//            ActivatedAbility tmpAbility = (ActivatedAbility) ability.copy();
+//            if (tmpPlayer.activateAbility(tmpAbility, tmpGame)){
+//                validOptions.add(ability);
+//            } else{
+//                RLTrainer.threadLocalLogger.get().info("Invalid ability: " + ability);
+//            }
+//        }
+//        flattenedOptions = validOptions;
 
-        flattenedOptions = validOptions;
+
+        List<ActivatedAbility> flattenedOptions = getPlayable(game, true);
+        flattenedOptions.add(new PassAbility());
 
         // Remove duplicate spell abilities with the same name
-        List<Ability> uniqueOptions = new ArrayList<>();
+        List<ActivatedAbility> uniqueOptions = new ArrayList<>();
         Set<String> seenNames = new HashSet<>();
 
         // Remove duplicate spell abilities with the same name
         // TODO: Investigate if this is what we want. I did this because despite "setting targets" during selection. we still get prompted for choices later anyway
-        for (Ability ability : flattenedOptions) {
+        for (ActivatedAbility ability : flattenedOptions) {
             String name = ability.toString();
             if (!seenNames.contains(name)) {
                 seenNames.add(name);

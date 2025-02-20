@@ -148,6 +148,7 @@ public class AbilitiesImpl<T extends Ability> extends ArrayList<T> implements Ab
                 .filter(ActivatedManaAbilityImpl.class::isInstance)
                 .filter(ability -> ability.getZone().match(zone))
                 .map(ActivatedManaAbilityImpl.class::cast)
+                .filter(ability -> ability.getManaCostsToPay().isEmpty())
                 .filter(ability -> ability.canActivate(playerId, game).canActivate())
                 .collect(Collectors.toCollection(AbilitiesImpl::new));
     }

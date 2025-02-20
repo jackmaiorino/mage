@@ -3565,6 +3565,10 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public ManaOptions getManaAvailable(Game originalGame) {
+        return getManaAvailable(originalGame, null);
+    }
+
+    public ManaOptions getManaAvailable(Game originalGame, MageObject toExclude) {
         // workaround to fix a triggers list modification bug (game must be immutable on playable calculations)
         Game game = originalGame.createSimulationForPlayableCalc();
 
@@ -3591,6 +3595,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
+            if (toExclude != null && permanent.getId().equals(toExclude.getId())) {
+                continue;
+            }
             Boolean canUse = null;
             boolean canAdd = false;
             boolean useLater = false; // sources with mana costs or mana pool dependency
@@ -4250,6 +4257,11 @@ public abstract class PlayerImpl implements Player, Serializable {
                 continue;
             }
 
+            // Check if we can pay for the ability
+            if (!canPayMinimumManaCost((ActivatedAbility) ability, availableMana, game)) {
+                continue;
+            }
+
             // direct mode (with original controller)
             ActivatedAbility playAbility = findActivatedAbilityFromPlayable(object, availableMana, ability, game);
             if (playAbility != null && !output.contains(playAbility)) {
@@ -4420,12 +4432,16 @@ public abstract class PlayerImpl implements Player, Serializable {
         Map<String, ActivatedAbility> activatedUnique = new HashMap<>();
         List<ActivatedAbility> activatedAll = new ArrayList<>();
 
+        // TODO: check if this is needed
+        // This is used to make sure we don't try to produce mana from the land we're trying to activate
+        ManaOptions excludedManaAvailable;
         // activated abilities from battlefield objects
         if (fromAll || fromZone == Zone.BATTLEFIELD) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
+                excludedManaAvailable = getManaAvailable(game,permanent.getBasicMageObject());
                 boolean canUseActivated = permanent.canUseActivatedAbilities(game);
                 List<ActivatedAbility> currentPlayable = new ArrayList<>();
-                getPlayableFromObjectAll(game, Zone.BATTLEFIELD, permanent, availableMana, currentPlayable);
+                getPlayableFromObjectAll(game, Zone.BATTLEFIELD, permanent, excludedManaAvailable, currentPlayable);
                 for (ActivatedAbility ability : currentPlayable) {
                     if (ability instanceof SpecialAction || canUseActivated) {
                         activatedUnique.putIfAbsent(ability.toString(), ability);

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="127886" Quantity="60" Sideboard="false" Name="Abstergo Entertainment" Annotation="0"/>
+</Deck>

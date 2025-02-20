@@ -1,13 +1,18 @@
 package mage.abilities.costs;
 
+import mage.ConditionalMana;
+import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.StaticAbility;
 import mage.abilities.costs.mana.ManaCost;
+import mage.abilities.costs.mana.ManaCosts;
 import mage.abilities.costs.mana.ManaCostsImpl;
+import mage.abilities.mana.ManaOptions;
 import mage.constants.AbilityType;
 import mage.constants.Zone;
 import mage.game.Game;
 import mage.players.Player;
+import mage.players.PlayerImpl;
 import mage.util.CardUtil;
 
 import java.util.Iterator;
@@ -55,7 +60,31 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
             return isActivated(ability, game);
         }
         Player player = game.getPlayer(ability.getControllerId());
-        return player != null && alternativeCost.canPay(ability, this, player.getId(), game);
+        boolean canPayAllCosts = false;
+        // TODO: There can likely be alternative costs that are not mana costs, so this will need to be updated
+        // TODO: alternative cost is actually a list and getCost returns the first cost, we just need to iterate over all costs
+        if (player != null) {
+            ManaOptions availableMana = ((PlayerImpl)player).getManaAvailable(game, ability.getSourceObject(game));
+            canPayAllCosts = false;
+            for (Mana mana : availableMana) {
+                if (!(alternativeCost.getCost() instanceof ManaCostsImpl)){
+                    throw new RuntimeException("Alternative cost is not a ManaCostsImpl");
+                }
+                if (((ManaCostsImpl) alternativeCost.getCost()).getMana().enough(mana)){
+                    if (mana instanceof ConditionalMana) {
+                        if (((ConditionalMana)mana).apply(ability,game,ability.getOriginalId(),alternativeCost.getCost())) {
+                            canPayAllCosts = true;
+                            break;
+                        }
+                    } else {
+                        canPayAllCosts = true;
+                        break;
+                    }
+                }
+            }
+
+        }
+        return ((ManaCostsImpl) alternativeCost.getCost()).isEmpty() || canPayAllCosts;
     }
 
     @Override

@@ -18,6 +18,8 @@ import mage.util.RandomUtil;
 import java.util.*;
 import java.util.stream.Stream;
 
+import static mage.util.ThreadUtils.sleep;
+
 /**
  * @author BetaSteward_at_googlemail.com
  */

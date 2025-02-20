@@ -265,7 +265,7 @@ public class RLTrainer {
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
- 
+
                     ComputerPlayer7 opponent = new ComputerPlayer7("Player7", RangeOfInfluence.ALL, 3);
                     game.addPlayer(opponent, opponentDeckThread);
                     match.addPlayer(opponent, opponentDeckThread);
