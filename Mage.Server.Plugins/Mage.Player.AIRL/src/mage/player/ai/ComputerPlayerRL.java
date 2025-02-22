@@ -97,6 +97,12 @@ public class ComputerPlayerRL extends ComputerPlayer {
         //TODO: Testing if we can make this not a copy.
         ArrayList<UUID> modeIds = new ArrayList<>(modes.values().stream().map(Mode::getId).collect(Collectors.toList()));
         for (UUID modeId : modeIds) {
+            // Need to do this so target validation is correct
+            source.getModes().setActiveMode(modeId);
+            if (!source.getAbilityType().isTriggeredAbility()) { // triggered abilities check this already in playerImpl.triggerAbility
+                source.adjustTargets(game);
+            }
+
             Mode mode = modes.get(modeId);
             if ((!mode.getTargets().isEmpty() && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
                 modes.removeSelectedMode(modeId);
@@ -914,116 +920,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
     }
 
-    protected List<ActivatedAbility> getPlayableAbilities(Game game) {
-        List<ActivatedAbility> playables = getPlayable(game, true);
-        playables.add(new PassAbility());
-        return playables;
-    }
-
-    public List<List<Ability>> getPlayableOptions(Game game) {
-        List<List<Ability>> allOptions = new ArrayList<>();
-        List<ActivatedAbility> playables = getPlayableAbilities(game);
-
-        for (ActivatedAbility ability : playables) {
-            List<Ability> options = game.getPlayer(playerId).getPlayableOptions(ability, game);
-            if (options.isEmpty()) {
-                if (!ability.getManaCosts().getVariableCosts().isEmpty()) {
-                    options = simulateVariableCosts(ability, game);
-                } else {
-                    options.add(ability);
-                }
-            } else {
-                List<Ability> expandedOptions = new ArrayList<>();
-                for (Ability option : options) {
-                    if (!option.getManaCosts().getVariableCosts().isEmpty()) {
-                        expandedOptions.addAll(simulateVariableCosts(option, game));
-                    } else {
-                        expandedOptions.add(option);
-                    }
-                }
-                options = expandedOptions;
-            }
-            allOptions.add(options);
-        }
-
-        // Ensure the list does not exceed RLModel.MAX_ACTIONS x RLModel.MAX_OPTIONS
-//        if (allOptions.size() > RLModel.MAX_ACTIONS) {
-//            RLTrainer.threadLocalLogger.get().error("ERROR: More actions than max actions, Model truncating");
-//            allOptions = allOptions.subList(0, RLModel.MAX_ACTIONS);
-//        }
-//        for (int i = 0; i < allOptions.size(); i++) {
-//            List<Ability> optionList = allOptions.get(i);
-//
-//
-//            if (optionList.size() > RLModel.MAX_OPTIONS) {
-//                RLTrainer.threadLocalLogger.get().error("ERROR: More options than max options, Model truncating");
-//                allOptions.set(i, optionList.subList(0, RLModel.MAX_OPTIONS));
-//            }
-//        }
-
-        return allOptions;
-    }
-
-    // TODO: This doesn't work for XX costs, i think it will suggest spending 1 mana on an XX
-    private List<Ability> simulateVariableCosts(Ability ability, Game game) {
-        List<Ability> options = new ArrayList<>();
-        // TODO: This is wrong. getavailproducers returns 1 if you have an ancient tomb which can produce mana values of 2
-        int numAvailable = getAvailableManaProducers(game).size() - ability.getManaCosts().manaValue();
-        int start = 0;
-        for (int i = 0; i < numAvailable; i++) {
-            Ability newAbility = ability.copy();
-            newAbility.addManaCostsToPay(new GenericManaCost(i));
-            options.add(newAbility);
-        }
-        return options;
-    }
-
-    //TODO: Add this to calc?
-        //     //Filter playables to remove tapping lands down.
-        // // I thought this was what was breaking some spells(manifold mouse) but it still doesn't work
-        // List<Ability> filtered = new ArrayList<Ability>();
-        // for(int i=0;i<playableOptions.size();i++){
-        //     MageObject source=playableOptions.get(i).getSourceObjectIfItStillExists(game);
-        //     if(source!=null && source instanceof Permanent && source.isLand()){
-        //         //Don't allow just tapping a land to be an action
-        //         //May break lands with activated abilities
-        //         continue;
-        //     }
-        //     filtered.add(playableOptions.get(i));
-        // }
-        // playableOptions=filtered;
-
-    protected Game createSimulation(Game game) {
-        Game sim = game.createSimulationForAI();
-        for (Player oldPlayer : sim.getState().getPlayers().values()) {
-            // replace original player by simulated player and find result (execute/resolve current action)
-            Player origPlayer = game.getState().getPlayers().get(oldPlayer.getId()).copy();
-            SimulatedPlayer2 simPlayer = new SimulatedPlayer2(oldPlayer, oldPlayer.getId().equals(playerId));
-            simPlayer.restore(origPlayer);
-            sim.getState().getPlayers().put(oldPlayer.getId(), simPlayer);
-        }
-        return sim;
-    }
-
     protected Ability calculateActions(Game game) {
-//        Game sim = createSimulation(game);
-//        SimulatedPlayer2 PlayerRLSim = (SimulatedPlayer2) sim.getPlayer(this.getId());
-//        List<Ability> flattenedOptions = PlayerRLSim.simulatePriority(sim);
-//
-//        List<Ability> validOptions = new ArrayList<>();
-//        for(Ability ability : flattenedOptions){
-//            Game tmpGame = createSimulation(game);
-//            SimulatedPlayer2 tmpPlayer = (SimulatedPlayer2) tmpGame.getPlayer(game.getPlayerList().get());
-//            ActivatedAbility tmpAbility = (ActivatedAbility) ability.copy();
-//            if (tmpPlayer.activateAbility(tmpAbility, tmpGame)){
-//                validOptions.add(ability);
-//            } else{
-//                RLTrainer.threadLocalLogger.get().info("Invalid ability: " + ability);
-//            }
-//        }
-//        flattenedOptions = validOptions;
-
-
         List<ActivatedAbility> flattenedOptions = getPlayable(game, true);
         flattenedOptions.add(new PassAbility());
 

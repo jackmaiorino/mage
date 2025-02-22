@@ -3959,6 +3959,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     && !allowedIdentifiers.contains(alternateSourceCostsAbility.getIdentifier())) {
                 continue;
             }
+            if (!((AlternativeSourceCosts) alternateSourceCostsAbility).canActivateAlternativeCostsNow(ability, game)) {
+                continue;
+            }
             ManaCostsImpl manaCosts = new ManaCostsImpl<>();
             for (Cost cost : alternateSourceCostsAbility.getCosts()) {
                 // AlternativeCost2 replaced by real cost on activate, so getPlayable need to extract that costs here
@@ -4101,7 +4104,11 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         } else if (ability instanceof AlternativeSourceCosts) {
             // alternative cost must be replaced by real play ability
-            return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
+            if (!((AlternativeSourceCosts) ability).canActivateAlternativeCostsNow(ability, game)) {
+                return null;
+            } else{
+                return findActivatedAbilityFromAlternativeSourceCost(object, manaFull, ability, game);
+            }
         } else if (ability instanceof ActivatedAbility) {
             // all other abilities (include PlayLandAbility & SpellAbility)
             if (canPlay((ActivatedAbility) ability, manaFull, object, game)) {
