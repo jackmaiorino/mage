@@ -97,17 +97,18 @@ public class ComputerPlayerRL extends ComputerPlayer {
         //TODO: Testing if we can make this not a copy.
         ArrayList<UUID> modeIds = new ArrayList<>(modes.values().stream().map(Mode::getId).collect(Collectors.toList()));
         for (UUID modeId : modeIds) {
+            Mode mode = modes.get(modeId);
             // Need to do this so target validation is correct
+            modes.addSelectedMode(mode.getId());
             source.getModes().setActiveMode(modeId);
-            if (!source.getAbilityType().isTriggeredAbility()) { // triggered abilities check this already in playerImpl.triggerAbility
+            if (!source.getAbilityType().isTriggeredAbility()) {
                 source.adjustTargets(game);
             }
 
-            Mode mode = modes.get(modeId);
             if ((!mode.getTargets().isEmpty() && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
-                modes.removeSelectedMode(modeId);
                 modes.remove(modeId);
             }
+            modes.removeSelectedMode(modeId);
         }
 
         int maxTargets = Math.min(modes.getMaxModes(game, source), modes.size());

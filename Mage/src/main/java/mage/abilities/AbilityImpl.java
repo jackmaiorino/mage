@@ -1,5 +1,6 @@
 package mage.abilities;
 
+import java.util.stream.Collectors;
 import mage.MageIdentifier;
 import mage.MageObject;
 import mage.Mana;

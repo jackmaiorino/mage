@@ -1,5 +1,6 @@
 package mage.abilities.costs.mana;
 
+import java.util.stream.Collectors;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.AbilityImpl;

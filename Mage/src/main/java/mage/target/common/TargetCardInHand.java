@@ -76,6 +76,12 @@ public class TargetCardInHand extends TargetCard {
         Player player = game.getPlayer(sourceControllerId);
         if (player != null) {
             for (Card card : player.getHand().getCards(filter, sourceControllerId, source, game)) {
+                // TODO: Are there any cards that that can target themself from hand?
+                // TODO: Do 2 force of wills share the same ID?
+                // Prevent Force of Will from considering itself as valid target
+                if (card.getId().equals(source.getSourceId())) {
+                    continue;
+                }
                 if (source == null || source.getSourceId() == null || isNotTarget() || !game.replaceEvent(new TargetEvent(card, source.getSourceId(), sourceControllerId))) {
                     possibleTargets++;
                     if (possibleTargets >= this.minNumberOfTargets) {

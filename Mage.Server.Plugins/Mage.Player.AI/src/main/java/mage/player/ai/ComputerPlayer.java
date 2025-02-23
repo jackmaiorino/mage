@@ -6,6 +6,7 @@ import mage.MageObject;
 import mage.Mana;
 import mage.abilities.*;
 import mage.abilities.costs.VariableCost;
+import mage.abilities.costs.common.TapSourceCost;
 import mage.abilities.costs.mana.*;
 import mage.abilities.effects.Effect;
 import mage.abilities.effects.common.DamageTargetEffect;
@@ -1581,6 +1582,12 @@ public class ComputerPlayer extends PlayerImpl {
             producers.addAll(this.getAvailableManaProducersWithCost(game));
         }
 
+        // TODO: Any mana producers get listed here if they don't need to tap to produce mana?
+        // If any of the costs is a tap cost, remove the source permanent from the list of available mana producers
+        if (ability.getCosts().stream().anyMatch(c -> c instanceof TapSourceCost)) {
+            producers.removeIf(producer -> producer.getId().equals(ability.getSourceId()));
+        }
+
         // use fully compatible colored mana producers first
         for (MageObject mageObject : producers) {
             ManaAbility:
@@ -1841,6 +1848,8 @@ public class ComputerPlayer extends PlayerImpl {
 
     private Abilities<ActivatedManaAbilityImpl> getManaAbilitiesSortedByManaCount(MageObject mageObject, final Game game) {
         Abilities<ActivatedManaAbilityImpl> manaAbilities = mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.BATTLEFIELD, playerId, game);
+        // TODO: Right now getPlayable will consider this "available mana" do we want things from hand to be considered? I added this here to be consistent
+        manaAbilities.addAll(mageObject.getAbilities().getAvailableActivatedManaAbilities(Zone.HAND, playerId, game));
         if (manaAbilities.size() > 1) {
             // Sort mana abilities by number of produced manas, to use ability first that produces most mana (maybe also conditional if possible)
             Collections.sort(manaAbilities, new Comparator<ActivatedManaAbilityImpl>() {

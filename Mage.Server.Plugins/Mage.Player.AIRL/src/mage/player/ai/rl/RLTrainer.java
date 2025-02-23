@@ -226,8 +226,7 @@ public class RLTrainer {
         Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
         Deck opponentDeck = loadDeck(opponentDeckPath.toString());
 
-        // TODO: Change this to i < NUM_THREADS
-        for (int i = 0; i < 1; i++) {
+        for (int i = 0; i < NUM_THREADS; i++) {
             Future<Integer> future = executor.submit(() -> {
                 boolean isFirst = false;
 
