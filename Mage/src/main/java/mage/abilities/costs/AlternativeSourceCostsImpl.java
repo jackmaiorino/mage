@@ -60,31 +60,33 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
             return isActivated(ability, game);
         }
         Player player = game.getPlayer(ability.getControllerId());
-        boolean canPayAllCosts = false;
-        // TODO: There can likely be alternative costs that are not mana costs, so this will need to be updated
-        // TODO: alternative cost is actually a list and getCost returns the first cost, we just need to iterate over all costs
         if (player != null) {
-            ManaOptions availableMana = ((PlayerImpl)player).getManaAvailable(game, ability.getSourceObject(game));
-            canPayAllCosts = false;
-            for (Mana mana : availableMana) {
-                if (!(alternativeCost.getCost() instanceof ManaCostsImpl)){
-                    throw new RuntimeException("Alternative cost is not a ManaCostsImpl");
-                }
-                if (((ManaCostsImpl) alternativeCost.getCost()).getMana().enough(mana)){
-                    if (mana instanceof ConditionalMana) {
-                        if (((ConditionalMana)mana).apply(ability,game,ability.getOriginalId(),alternativeCost.getCost())) {
-                            canPayAllCosts = true;
-                            break;
+            for (Iterator<Cost> it = ((Costs<Cost>) alternativeCost).iterator(); it.hasNext(); ) {
+                Cost currentCost = it.next();
+                // Is there current cost a manacost and is it nonempty?
+                if (currentCost instanceof ManaCostsImpl && !((ManaCostsImpl) currentCost).isEmpty()) {
+                    boolean canPayAllCosts = false;
+                    ManaOptions availableMana = ((PlayerImpl) player).getManaAvailable(game, ability.getSourceObject(game));
+                    for (Mana mana : availableMana) {
+                        if (((ManaCostsImpl) currentCost).getMana().enough(mana)) {
+                            if (mana instanceof ConditionalMana) {
+                                if (((ConditionalMana) mana).apply(ability, game, ability.getOriginalId(), currentCost)) {
+                                    canPayAllCosts = true;
+                                    break;
+                                }
+                            } else {
+                                canPayAllCosts = true;
+                                break;
+                            }
                         }
-                    } else {
-                        canPayAllCosts = true;
-                        break;
+                    }
+                    if (!canPayAllCosts) {
+                        return false;
                     }
                 }
             }
-
         }
-        return ((ManaCostsImpl) alternativeCost.getCost()).isEmpty() || canPayAllCosts;
+        return player != null && alternativeCost.canPay(ability, this, player.getId(), game);
     }
 
     @Override

@@ -3582,6 +3582,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
         for (Card card : getHand().getCards(game)) {
+            if (toExclude != null && card.getId().equals(toExclude.getId())) {
+                continue;
+            }
             Abilities<ActivatedManaAbilityImpl> manaAbilities
                     = card.getAbilities(game).getAvailableActivatedManaAbilities(Zone.HAND, playerId, game);
             for (ActivatedManaAbilityImpl ability : manaAbilities) {
@@ -4316,10 +4319,13 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         Game game = originalGame.createSimulationForPlayableCalc();
-        ManaOptions availableMana = getManaAvailable(game); // get available mana options (mana pool and conditional mana added (but conditional still lose condition))
+        ManaOptions availableMana = getManaAvailable(game);
+        // Needed to stop things like simian spirit guide paying for itself
+        ManaOptions excludedManaAvailable;
         boolean fromAll = fromZone.equals(Zone.ALL);
         if (hidden && (fromAll || fromZone == Zone.HAND)) {
             for (Card card : hand.getCards(game)) {
+                excludedManaAvailable = getManaAvailable(game, card);
                 for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
                     if (ability.getZone().match(Zone.HAND)) {
                         boolean isPlaySpell = (ability instanceof SpellAbility);
@@ -4348,7 +4354,7 @@ public abstract class PlayerImpl implements Player, Serializable {
                             continue;
                         }
 
-                        ActivatedAbility playAbility = findActivatedAbilityFromPlayable(card, availableMana, ability, game);
+                        ActivatedAbility playAbility = findActivatedAbilityFromPlayable(card, excludedManaAvailable, ability, game);
                         if (playAbility != null && !playable.contains(playAbility)) {
                             playable.add(playAbility);
                         }
@@ -4428,7 +4434,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                 if (player != null && !player.getHand().isEmpty()) {
                     for (Card card : player.getHand().getCards(game)) {
                         if (card != null) {
-                            getPlayableFromObjectAll(game, Zone.HAND, card, availableMana, playable);
+                            // DIDNT WOR?
+                            excludedManaAvailable = getManaAvailable(game, card);
+                            getPlayableFromObjectAll(game, Zone.HAND, card, excludedManaAvailable, playable);
                         }
                     }
                 }
@@ -4441,7 +4449,6 @@ public abstract class PlayerImpl implements Player, Serializable {
 
         // TODO: check if this is needed
         // This is used to make sure we don't try to produce mana from the land we're trying to activate
-        ManaOptions excludedManaAvailable;
         // activated abilities from battlefield objects
         if (fromAll || fromZone == Zone.BATTLEFIELD) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {

@@ -96,8 +96,14 @@ public class RLState {
         
         // Source Card (if applicable)
         if (sourceAbility != null) {
-            float[] sourceCardFeatures = convertCardToFeatureVector(game.getCard(sourceAbility.getSourceId()), ZoneType.REFERENCE, game);
-            System.arraycopy(sourceCardFeatures, 0, stateVector, index, sourceCardFeatures.length);
+            if (game.getCard(sourceAbility.getSourceId()) != null){
+                float[] sourceCardFeatures = convertCardToFeatureVector(game.getCard(sourceAbility.getSourceId()), ZoneType.REFERENCE, game);
+                System.arraycopy(sourceCardFeatures, 0, stateVector, index, sourceCardFeatures.length);
+            }else{
+                // TODO: This is a temporary fix. Need to handle this case properly
+                // Looks like this hits on tokens
+                System.out.println("Source Card is null");
+            }
         }
         index += EMBEDDING_SIZE;
 

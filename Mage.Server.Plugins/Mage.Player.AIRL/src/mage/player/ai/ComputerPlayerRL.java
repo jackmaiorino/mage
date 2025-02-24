@@ -449,6 +449,89 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return choose(outcome, target, source, game, null);
     }
 
+    // Examples: Choosing when searching library. Fetch lands
+    @Override
+    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+        if (cards == null || cards.isEmpty()) {
+            return target.isRequired(source);
+        }
+
+        // sometimes a target selection can be made from a player that does not control the ability
+        UUID abilityControllerId = playerId;
+        if (target.getTargetController() != null
+                && target.getAbilityController() != null) {
+            abilityControllerId = target.getAbilityController();
+        }
+
+        // we still use playerId when getting cards even if they don't control the search
+        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
+
+        // TODO: Fetchlands incorrectly state mintargets = 1 but you can "fail to find"
+        int maxTargets = target.getMaxNumberOfTargets();
+        int minTargets = target.getMinNumberOfTargets();
+        boolean mustSelectExact = minTargets == maxTargets;
+        int numOptions;
+        if (mustSelectExact){
+            numOptions = cardChoices.size();
+        }else{
+            numOptions = cardChoices.size() + 1;
+        }
+
+        INDArray qValues = genericChoose(numOptions, RLState.ActionType.SELECT_TARGETS, game, source);
+
+        // Create a list to store Q-values with their indices
+        List<QValueWithIndex> qValueList = new ArrayList<>();
+        for (int i = 0; i < numOptions; i++) {
+            qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
+        }
+
+        // Sort the list by Q-value in descending order
+        qValueList.sort((a, b) -> Float.compare(b.qValue, a.qValue));
+
+        int selectedTargets = 0;
+        List<UUID> selectedTargetsList = new ArrayList<>();
+        boolean stopChoosing = false;
+        for (QValueWithIndex qValueWithIndex : qValueList) {
+            // Stop if we've tried to stop choosing or we've reached the maximum number of targets
+            if (maxTargets != 0 && selectedTargets >= maxTargets) {
+                break;
+            }
+
+            // Stop if we've reached the minimum number of targets
+            if (stopChoosing && selectedTargets >= minTargets) {
+                break;
+            }
+
+            // Stop if we've reached the minimum number of targets and the "do nothing" option is the best option
+            if (!mustSelectExact && qValueWithIndex.index == cardChoices.size()){
+                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
+                // Can we stop? Or do we need more targets?
+                if (selectedTargets >= minTargets) {
+                    break;
+                }else{
+                    stopChoosing = true;
+                    continue;
+                }
+            }
+            // Access the original index and Q-value
+            int originalIndex = qValueWithIndex.index;
+            Card card = cardChoices.get(originalIndex);
+
+            // TODO: For some reason this always fails because the card zone is OUTSIDE
+            // Pretty important to fix this for computerPlayer because I think they always fail to find
+            // so they will be rly bad
+//            if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+            target.addTarget(card.getId(), source, game);
+            currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex));
+            selectedTargets++;
+//            }else {
+//                // When would this possibly hit?
+//                System.out.println("Can't target card: " + card.getName());
+//            }
+        }
+        return true;
+    }
+
     // Examples:
     // Discarding to hand size, Choosing to keep which legend for legend rule
     @Override
