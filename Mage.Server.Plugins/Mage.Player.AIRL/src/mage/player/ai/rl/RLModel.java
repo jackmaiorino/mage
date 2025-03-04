@@ -18,7 +18,7 @@ public class RLModel implements Serializable {
     public static final int MAX_ACTIONS = 25;
     public static final int MAX_OPTIONS = 15;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS) * (MAX_OPTIONS);
-    private static boolean IS_TRAINING = false;
+    private boolean IS_TRAINING = false;
 
     public RLModel(boolean training) {
         IS_TRAINING = training;
@@ -49,9 +49,9 @@ public class RLModel implements Serializable {
 
     public INDArray predictDistribution(RLState state, boolean isExploration) {
         if (IS_TRAINING) {
-            return network.predict(state, isExploration);
+            return network.predictBatch(state, isExploration);
         } else {
-            return network.predict(state, false);
+            return network.predictSingle(state, false);
         }
     }
 

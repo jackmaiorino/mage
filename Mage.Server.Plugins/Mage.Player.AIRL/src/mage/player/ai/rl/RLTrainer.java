@@ -41,7 +41,7 @@ public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
     private static final int NUM_EPISODES = 10000;
     private static final int NUM_EVAL_EPISODES = 5;
-    private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Legacy";
+    private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     public static final int NUM_GAME_RUNNERS = NUM_THREADS * 35;

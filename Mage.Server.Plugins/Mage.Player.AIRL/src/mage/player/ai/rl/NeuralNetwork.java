@@ -70,8 +70,68 @@ public class NeuralNetwork {
         network = new MultiLayerNetwork(conf);
         network.init();
     }
+
+    public INDArray predictSingle(RLState state, boolean isExploration) {
+        float[] stateVector = state.getStateVector();
+        if (state == null) {
+            RLTrainer.threadLocalLogger.get().error("State array is null");
+            throw new IllegalArgumentException("State array cannot be null");
+        }
+        // Epsilon-greedy exploration
+        if (Math.random() <= explorationRate && isExploration) {
+            RLTrainer.threadLocalLogger.get().info("Exploration!");
+            // Create a 2D array for the output
+            float[][] randomDist = new float[RLModel.MAX_ACTIONS][RLModel.MAX_OPTIONS];
+
+            // Generate random values
+            float totalSum = 0;
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for(int j = 0; j < state.exploreDimensions.get(i); j++) {
+                    randomDist[i][j] = (float) Math.random();
+                    totalSum += randomDist[i][j];
+                }
+            }
+
+            // Normalize all values to sum to 1
+            for (int i = 0; i < state.exploreDimensions.size(); i++) {
+                for(int j = 0; j < state.exploreDimensions.get(i); j++) {
+                    randomDist[i][j] = (randomDist[i][j]/totalSum);
+                }
+            }
+
+            state.output = Nd4j.create(randomDist);
+            return state.output;
+        }
+        INDArray input = Nd4j.create(stateVector);
+        INDArray output = network.output(input.reshape(1, stateVector.length));
+        // Convert output to 2D array for masking
+        float[][] outputArray = new float[RLModel.MAX_ACTIONS][RLModel.MAX_OPTIONS];
+        for (int i = 0; i < state.exploreDimensions.size(); i++) {
+            for (int j = 0; j < state.exploreDimensions.get(i); j++) {
+                outputArray[i][j] = output.getFloat(i * RLModel.MAX_OPTIONS + j);
+            }
+        }
+
+        // Mask values outside explore dimensions
+        float totalSum = 0;
+        for (int i = 0; i < state.exploreDimensions.size(); i++) {
+            for (int j = 0; j < state.exploreDimensions.get(i); j++) {
+                totalSum += outputArray[i][j];
+            }
+        }
+
+        // Normalize remaining values to sum to 1
+        for (int i = 0; i < state.exploreDimensions.size(); i++) {
+            for (int j = 0; j < state.exploreDimensions.get(i); j++) {
+                outputArray[i][j] = outputArray[i][j] / totalSum;
+            }
+        }
+
+        state.output = Nd4j.create(outputArray);
+        return state.output;
+    }
     
-    public INDArray predict(RLState state, boolean isExploration) {
+    public INDArray predictBatch(RLState state, boolean isExploration) {
         float[] stateVector = state.getStateVector();
         if (state == null) {
             RLTrainer.threadLocalLogger.get().error("State array is null");

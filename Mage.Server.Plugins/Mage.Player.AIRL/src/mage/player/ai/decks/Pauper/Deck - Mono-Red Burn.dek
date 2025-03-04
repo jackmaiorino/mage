@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="52912" Quantity="4" Sideboard="false" Name="Chain Lightning" Annotation="0"/>
+  <Cards CatID="130391" Quantity="4" Sideboard="false" Name="Clockwork Percussionist" Annotation="0"/>
+  <Cards CatID="94648" Quantity="2" Sideboard="false" Name="End the Festivities" Annotation="0"/>
+  <Cards CatID="97204" Quantity="4" Sideboard="false" Name="Experimental Synthesizer" Annotation="0"/>
+  <Cards CatID="107323" Quantity="1" Sideboard="false" Name="Fireblast" Annotation="0"/>
+  <Cards CatID="38203" Quantity="4" Sideboard="false" Name="Galvanic Blast" Annotation="0"/>
+  <Cards CatID="34388" Quantity="4" Sideboard="false" Name="Goblin Bushwhacker" Annotation="0"/>
+  <Cards CatID="118120" Quantity="4" Sideboard="false" Name="Goblin Tomb Raider" Annotation="0"/>
+  <Cards CatID="20021" Quantity="4" Sideboard="false" Name="Great Furnace" Annotation="0"/>
+  <Cards CatID="38043" Quantity="4" Sideboard="false" Name="Kuldotha Rebirth" Annotation="0"/>
+  <Cards CatID="37240" Quantity="4" Sideboard="false" Name="Lightning Bolt" Annotation="0"/>
+  <Cards CatID="79630" Quantity="13" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="124191" Quantity="4" Sideboard="false" Name="Reckless Lackey" Annotation="0"/>
+  <Cards CatID="94710" Quantity="4" Sideboard="false" Name="Voldaren Epicure" Annotation="0"/>
+  <Cards CatID="112146" Quantity="4" Sideboard="true" Name="Cast into the Fire" Annotation="0"/>
+  <Cards CatID="94648" Quantity="2" Sideboard="true" Name="End the Festivities" Annotation="0"/>
+  <Cards CatID="90983" Quantity="2" Sideboard="true" Name="Gorilla Shaman" Annotation="0"/>
+  <Cards CatID="60604" Quantity="3" Sideboard="true" Name="Relic of Progenitus" Annotation="0"/>
+  <Cards CatID="43610" Quantity="4" Sideboard="true" Name="Red Elemental Blast" Annotation="0"/>
+</Deck>

@@ -58,7 +58,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name);
     }
 
-    // The default constructor for ComputerPlayerRL needed by server to create
+    // The default constructor for ComputerPlayerRL used by server to create
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
         this(name, range, new RLModel(false));
     }
@@ -395,7 +395,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
             Card card = cardChoices.get(sortedIndices.get(currentIndex));
             if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
                 target.add(card.getId(), game);
-                cardChoices.remove((int)sortedIndices.get(currentIndex));
             }
             currentIndex++;
 
