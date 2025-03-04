@@ -56,9 +56,6 @@ public class NeuralNetwork {
         .layer(4, new DenseLayer.Builder()
             .nIn(1024)
             .nOut(256)
-
-
-            
             .activation(Activation.RELU)
             .build())
         .layer(5, new DropoutLayer(0.3))

@@ -18,9 +18,10 @@ public class RLModel implements Serializable {
     public static final int MAX_ACTIONS = 25;
     public static final int MAX_OPTIONS = 15;
     public static final int OUTPUT_SIZE = (MAX_ACTIONS) * (MAX_OPTIONS);
-    public static boolean IS_TRAINING = true;
+    private static boolean IS_TRAINING = false;
 
-    public RLModel() {
+    public RLModel(boolean training) {
+        IS_TRAINING = training;
         // TODO: This is a little silly, creating a network and then loading it. Make it better
         network = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, OUTPUT_SIZE, EXPLORATION_RATE);
         try {

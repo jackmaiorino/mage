@@ -242,7 +242,6 @@
         <module>Mage.Tests</module>
         <module>Mage.Verify</module>
         <module>Mage.Reports</module>
-        <module>Mage.Server.Plugins/Mage.Player.AIRL</module>
     </modules>
 
     <repositories>

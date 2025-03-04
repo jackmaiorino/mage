@@ -1,20 +1,27 @@
 package mage.player.ai;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
-import mage.abilities.*;
-import mage.abilities.mana.ActivatedManaAbilityImpl;
-import mage.constants.Zone;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.ConditionalMana;
 import mage.MageObject;
 import mage.Mana;
+import mage.abilities.Ability;
+import mage.abilities.ActivatedAbility;
+import mage.abilities.Mode;
+import mage.abilities.Modes;
+import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.GenericManaCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.abilities.costs.mana.VariableManaCost;
 import mage.abilities.mana.ManaOptions;
@@ -49,6 +56,11 @@ public class ComputerPlayerRL extends ComputerPlayer {
         this.model = model;
         this.stateBuffer = new ArrayList<>();
         RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name);
+    }
+
+    // The default constructor for ComputerPlayerRL needed by server to create
+    public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
+        this(name, range, new RLModel(false));
     }
 
     public ComputerPlayerRL(final ComputerPlayerRL player) {
@@ -874,6 +886,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return attackers;
     }
 
+    // TODO: Implement
     //    @Override
 //    public boolean chooseMulligan(Game game) {
 //        currentState = new RLState(game);

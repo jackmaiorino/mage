@@ -28,6 +28,7 @@
                 <include>org.mage:mage-tournament-boosterdraft</include>
                 <include>org.mage:mage-tournament-sealed</include>
                 <include>org.mage:mage-player-ai-draftbot</include>
+                <include>org.mage:mage-player-airl</include>
             </includes>
         </dependencySet>
         <dependencySet>
@@ -44,6 +45,7 @@
                 <exclude>org.mage:mage-tournament-boosterdraft</exclude>
                 <exclude>org.mage:mage-tournament-sealed</exclude>
                 <exclude>org.mage:mage-player-ai-draftbot</exclude>
+                <exclude>org.mage:mage-player-airl</exclude>
             </excludes>
         </dependencySet>
     </dependencySets>

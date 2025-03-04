@@ -44,16 +44,11 @@ public class RLTrainer {
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Legacy";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    // Seems like we are GPU Memory Bound
     public static final int NUM_GAME_RUNNERS = NUM_THREADS * 35;
     public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
-    // This is a CPU/Bound value. If we can speed up CPU processing, we can increase this value
-    // It is also technically a GPU bound value but cpu processing is the bottleneck
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
-
-    //public static final NeuralNetwork globalNetwork = new NeuralNetwork(RLState.STATE_VECTOR_SIZE, RLModel.OUTPUT_SIZE, RLModel.EXPLORATION_RATE);
-    public static final RLModel sharedModel = new RLModel();
+    public static final RLModel sharedModel = new RLModel(true);
 
     static {
         // Set default logging level for all loggers to WARN
@@ -210,9 +205,6 @@ public class RLTrainer {
         // TODO: Make ComputerPlayerRL not dependant on so much setup always
         // Create singleton instance
         BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
-
-        // Stop the model from exploring
-        RLModel.IS_TRAINING = false;
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
         final Object lock = new Object();
