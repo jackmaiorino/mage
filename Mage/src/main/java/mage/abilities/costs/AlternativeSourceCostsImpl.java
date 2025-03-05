@@ -66,7 +66,7 @@ public abstract class AlternativeSourceCostsImpl extends StaticAbility implement
                 // Is there current cost a manacost and is it nonempty?
                 if (currentCost instanceof ManaCostsImpl && !((ManaCostsImpl) currentCost).isEmpty()) {
                     boolean canPayAllCosts = false;
-                    ManaOptions availableMana = ((PlayerImpl) player).getManaAvailable(game, ability.getSourceObject(game));
+                    ManaOptions availableMana = ((PlayerImpl) player).getManaAvailable(game, ability.getSourceObject(game), ability);
                     for (Mana mana : availableMana) {
                         if (((ManaCostsImpl) currentCost).getMana().enough(mana)) {
                             if (mana instanceof ConditionalMana) {

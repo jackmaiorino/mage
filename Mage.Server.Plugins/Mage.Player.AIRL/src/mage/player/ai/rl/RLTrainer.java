@@ -128,7 +128,7 @@ public class RLTrainer {
 
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
                         batchPredictionRequest.incrementActiveGameRunners();
-                        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(7), 60, 20, 7);
+                        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(0), 60, 20, 7);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
@@ -346,7 +346,7 @@ public class RLTrainer {
         for (RLState state : opponentStates) {
             rewards.add(-reward);
         }
-        // Adjust the sublist to exclude the last element
+        // Adjust the sublist to exclude the last/first element respectively
         // TODO: rewards needs to be sublisted like states
         model.updateBatch(allStates.subList(0, allStates.size() - 1), rewards, allStates.subList(1, allStates.size()));
 
