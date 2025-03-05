@@ -437,16 +437,19 @@ public abstract class AbilityImpl implements Ability {
             activatorId = ((ActivatedAbilityImpl) this).getActivatorId();
         }
 
-        //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
-        if (!getManaCostsToPay().pay(this, game, this, activatorId, false, null)) {
-            return false; // cancel during mana payment
-        }
-
+        // I've switched the order of these because of an edge case
+        // Kuldotha rebirth saccing a treasure, then tapping the treasure for mana, no longer having an artifact and failing
         //20100716 - 601.2g
         if (!getCosts().pay(this, game, this, activatorId, noMana, null)) {
             logger.debug("activate failed - non mana costs");
             return false;
         }
+
+        //20100716 - 601.2f  (noMana is not used here, because mana costs were cleared for this ability before adding additional costs and applying cost modification effects)
+        if (!getManaCostsToPay().pay(this, game, this, activatorId, false, null)) {
+            return false; // cancel during mana payment
+        }
+
         // inform about x costs now, so canceled announcements are not shown in the log
         if ((announceString != null) && (!announceString.equals(""))) {
             game.informPlayers(announceString);

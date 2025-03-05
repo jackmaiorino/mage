@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import mage.abilities.SpellAbility;
+import mage.abilities.common.SimpleActivatedAbility;
+import mage.abilities.costs.AlternativeCostSourceAbility;
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -96,13 +99,11 @@ public class RLState {
         
         // Source Card (if applicable)
         if (sourceAbility != null) {
-            if (game.getCard(sourceAbility.getSourceId()) != null){
-                float[] sourceCardFeatures = convertCardToFeatureVector(game.getCard(sourceAbility.getSourceId()), ZoneType.REFERENCE, game);
+            if (sourceAbility.getSourceObject(game) != null){
+                float[] sourceCardFeatures = convertCardToFeatureVector((Card) sourceAbility.getSourceObject(game), ZoneType.REFERENCE, game);
                 System.arraycopy(sourceCardFeatures, 0, stateVector, index, sourceCardFeatures.length);
-            }else{
-                // TODO: This is a temporary fix. Need to handle this case properly
-                // Looks like this hits on tokens
-                System.out.println("Source Card is null");
+            } else{
+                System.out.println("Source Object is null");
             }
         }
         index += EMBEDDING_SIZE;
@@ -327,6 +328,85 @@ public class RLState {
 
         return featureVector;
     }
+
+//    public float[] convertTokenToFeatureVector(Ability ability, ZoneType zoneType, Game game) {
+//        float[] featureVector = new float[EMBEDDING_SIZE];
+//
+//        // One-hot encode the zone type
+//        int index = 0;
+//        featureVector[zoneType.ordinal()] = 1.0f;
+//        index += ZoneType.values().length;
+//        featureVector[index++] = ability.getControllerOrOwnerId().equals(game.getActivePlayerId()) ? 1.0f : 0.0f;
+//        featureVector[index++] = 0;
+//        featureVector[index++] = 0;
+//        featureVector[index++] = 0;
+//        // TODO: represent all possible mana costs
+//        // getMana returns all possible mana costs, this is just one for now
+//        // TODO: represent phyrexian mana
+//
+//        // if (card instanceof Spell) {
+//        //     // Mana it costs to cast
+//        //     currManaCost = card.getManaCost().get(0).getManaOptions().get(0);
+//        // } else {
+//        //      // This is for what mana it produces
+//        //      // TODO: some spell cards can produce mana, need to handle that
+//        //     currManaProduced = card.getMana().get(0);
+//        // }
+//        Mana currManaCost = new Mana();
+//        if (!card.getManaCost().isEmpty()) {
+//            for (ManaCost manaCost : card.getManaCost()) {
+//                Mana TempManaCost = manaCost.getMana();
+//                currManaCost.setWhite(TempManaCost.getWhite() + currManaCost.getWhite());
+//                currManaCost.setBlue(TempManaCost.getBlue() + currManaCost.getBlue());
+//                currManaCost.setGreen(TempManaCost.getGreen() + currManaCost.getGreen());
+//                currManaCost.setBlack(TempManaCost.getBlack() + currManaCost.getBlack());
+//                currManaCost.setRed(TempManaCost.getRed() + currManaCost.getRed());
+//                currManaCost.setColorless(TempManaCost.getColorless() + currManaCost.getColorless());
+//                currManaCost.setGeneric(TempManaCost.getGeneric() + currManaCost.getGeneric());
+//            }
+//        }else{
+//            currManaCost = null;
+//        }
+//        featureVector[index++] = currManaCost != null ? currManaCost.getWhite() : 0.0f;
+//        featureVector[index++] = currManaCost != null ? currManaCost.getBlue() : 0.0f;
+//        featureVector[index++] = currManaCost != null ? currManaCost.getGreen() : 0.0f;
+//        featureVector[index++] = currManaCost != null ? currManaCost.getBlack() : 0.0f;
+//        featureVector[index++] = currManaCost != null ? currManaCost.getRed() : 0.0f;
+//        featureVector[index++] = currManaCost != null ? currManaCost.getColorless() : 0.0f;
+//        featureVector[index++] = currManaCost != null ? currManaCost.getGeneric() : 0.0f;
+//
+//        featureVector[index++] = card.isCreature() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isArtifact() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isEnchantment() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isLand() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isPlaneswalker() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isPermanent() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isInstant() ? 1.0f : 0.0f;
+//        featureVector[index++] = card.isSorcery() ? 1.0f : 0.0f;
+//        // Is the card tapped?
+//        if (zoneType == ZoneType.BATTLEFIELD) {
+//            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isTapped() ? 1.0f : 0.0f : 0.0f;
+//            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isAttacking() ? 1.0f : 0.0f : 0.0f;
+//            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).isBlocked(game) ? 1.0f : 0.0f : 0.0f;
+//            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).hasSummoningSickness() ? 1.0f : 0.0f : 0.0f;
+//            featureVector[index++] = (card instanceof Permanent) ? ((Permanent)card).getDamage() : 0.0f;
+//        }else{
+//            featureVector[index++] = 0.0f;
+//            featureVector[index++] = 0.0f;
+//            featureVector[index++] = 0.0f;
+//            featureVector[index++] = 0.0f;
+//            featureVector[index++] = 0.0f;
+//        }
+//
+//        // Add the text embedding of the text
+//        // String cardAbilities = card.getAbilities().toString();
+//        String cardText = String.join(" ", card.getRules());
+//        float[] textEmbedding = EmbeddingManager.getEmbedding(cardText);
+//        System.arraycopy(textEmbedding, 0, featureVector, index, textEmbedding.length);
+//
+//        return featureVector;
+//    }
+
 
     // Might to break up permanent and spell into separate functions
     // protected void permanentToString(Permanent permanent) {

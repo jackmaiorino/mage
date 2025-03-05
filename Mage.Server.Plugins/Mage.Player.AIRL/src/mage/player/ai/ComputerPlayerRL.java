@@ -65,7 +65,12 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
     public ComputerPlayerRL(final ComputerPlayerRL player) {
         super(player);
+        // Intentional direct reference to model
+        this.model = player.model;
+        // Like the normal constructor this shouldn't need to be initialized
+//        this.currentState = player.currentState;
         this.stateBuffer = new ArrayList<>();
+        this.currentAbility = player.currentAbility;
     }
 
     @Override

@@ -20,6 +20,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import mage.abilities.*;
 import mage.abilities.mana.*;
 import org.apache.log4j.Logger;
 
@@ -31,17 +32,7 @@ import mage.MageIdentifier;
 import mage.MageItem;
 import mage.MageObject;
 import mage.Mana;
-import mage.abilities.Abilities;
-import mage.abilities.AbilitiesImpl;
-import mage.abilities.Ability;
-import mage.abilities.ActivatedAbility;
 import mage.abilities.ActivatedAbility.ActivationStatus;
-import mage.abilities.DelayedTriggeredAbility;
-import mage.abilities.Mode;
-import mage.abilities.PlayLandAbility;
-import mage.abilities.SpecialAction;
-import mage.abilities.SpellAbility;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
 import mage.abilities.common.PlayLandAsCommanderAbility;
 import mage.abilities.common.WhileSearchingPlayFromLibraryAbility;
@@ -3565,12 +3556,22 @@ public abstract class PlayerImpl implements Player, Serializable {
      */
     @Override
     public ManaOptions getManaAvailable(Game originalGame) {
-        return getManaAvailable(originalGame, null);
+        return getManaAvailable(originalGame, null, null);
     }
 
-    public ManaOptions getManaAvailable(Game originalGame, MageObject toExclude) {
+    public ManaOptions getManaAvailable(Game originalGame, MageObject objToExclude, Ability abilityToCheck) {
         // workaround to fix a triggers list modification bug (game must be immutable on playable calculations)
         Game game = originalGame.createSimulationForPlayableCalc();
+
+        // Here we are activating any additional costs for the ability, before checking mana.
+        // This is because of case where we would try to use a treasure as mana and artifact sac payment
+        if (abilityToCheck != null) {
+            UUID activatorId = this.getId();
+            if ((abilityToCheck instanceof ActivatedAbilityImpl) && ((ActivatedAbilityImpl) abilityToCheck).getActivatorId() != null) {
+                activatorId = ((ActivatedAbilityImpl) abilityToCheck).getActivatorId();
+            }
+            abilityToCheck.getCosts().pay(abilityToCheck, game, abilityToCheck, activatorId, false, null);
+        }
 
         ManaOptions availableMana = new ManaOptions();
         availableMana.addMana(manaPool.getMana());
@@ -3582,7 +3583,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithoutManaCosts = new ArrayList<>();
         List<Abilities<ActivatedManaAbilityImpl>> sourceWithCosts = new ArrayList<>();
         for (Card card : getHand().getCards(game)) {
-            if (toExclude != null && card.getId().equals(toExclude.getId())) {
+            if (objToExclude != null && card.getId().equals(objToExclude.getId())) {
                 continue;
             }
             Abilities<ActivatedManaAbilityImpl> manaAbilities
@@ -3598,7 +3599,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         for (Permanent permanent : game.getBattlefield().getActivePermanents(playerId, game)) { // Some permanents allow use of abilities from non controlling players. so check all permanents in range
-            if (toExclude != null && permanent.getId().equals(toExclude.getId())) {
+            if (objToExclude != null && permanent.getId().equals(objToExclude.getId())) {
                 continue;
             }
             Boolean canUse = null;
@@ -4325,9 +4326,9 @@ public abstract class PlayerImpl implements Player, Serializable {
         boolean fromAll = fromZone.equals(Zone.ALL);
         if (hidden && (fromAll || fromZone == Zone.HAND)) {
             for (Card card : hand.getCards(game)) {
-                excludedManaAvailable = getManaAvailable(game, card);
                 for (Ability ability : card.getAbilities(game)) { // gets this activated ability from hand? (Morph?)
                     if (ability.getZone().match(Zone.HAND)) {
+                        excludedManaAvailable = getManaAvailable(game, card, ability);
                         boolean isPlaySpell = (ability instanceof SpellAbility);
                         boolean isPlayLand = (ability instanceof PlayLandAbility);
 
@@ -4424,18 +4425,22 @@ public abstract class PlayerImpl implements Player, Serializable {
             }
         }
 
-        // check the hand zone (Sen Triplets)
+        // check the hand zone for other players (Sen Triplets)
         // TODO: remove direct hand check (reveal fix in Sen Triplets)?
+        // TODO: This should be as thorough as the hand check above
         // human games: cards from opponent's hand must be revealed before play
         // AI games: computer can see and play cards from opponent's hand without reveal
         if (fromAll || fromZone == Zone.HAND) {
             for (UUID playerInRangeId : game.getState().getPlayersInRange(getId(), game)) {
+                // skip checking our own hand again
+                if (playerInRangeId.equals(getId())) {
+                    continue;
+                }
                 Player player = game.getPlayer(playerInRangeId);
                 if (player != null && !player.getHand().isEmpty()) {
                     for (Card card : player.getHand().getCards(game)) {
                         if (card != null) {
-                            // DIDNT WOR?
-                            excludedManaAvailable = getManaAvailable(game, card);
+                            excludedManaAvailable = getManaAvailable(game, card,null);
                             getPlayableFromObjectAll(game, Zone.HAND, card, excludedManaAvailable, playable);
                         }
                     }
@@ -4452,7 +4457,7 @@ public abstract class PlayerImpl implements Player, Serializable {
         // activated abilities from battlefield objects
         if (fromAll || fromZone == Zone.BATTLEFIELD) {
             for (Permanent permanent : game.getBattlefield().getAllActivePermanents()) {
-                excludedManaAvailable = getManaAvailable(game,permanent.getBasicMageObject());
+                excludedManaAvailable = getManaAvailable(game,permanent.getBasicMageObject(), null);
                 boolean canUseActivated = permanent.canUseActivatedAbilities(game);
                 List<ActivatedAbility> currentPlayable = new ArrayList<>();
                 getPlayableFromObjectAll(game, Zone.BATTLEFIELD, permanent, excludedManaAvailable, currentPlayable);
