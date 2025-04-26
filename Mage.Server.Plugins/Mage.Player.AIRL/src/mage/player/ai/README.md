@@ -1,62 +1,45 @@
-# ComputerPlayerRL
+# Projects
 
-**ComputerPlayerRL** is an advanced AI player for the Mage game engine that integrates reinforcement learning (RL) to make in-game decisions. By extending the base `ComputerPlayer` class, this file leverages an RL model to evaluate game states and select optimal actions—from casting spells and activating abilities to choosing attackers, blockers, and targets.
+# Mage AI Reinforcement Learning
 
----
+### **Summary**
+This project began as a way for me to leverage my passion for Magic The Gathering(MTG) into learning about AI. It is an AI system for the Mage game client(a free open source MTG client), utilizing reinforcement learning (RL) techniques to make decisions. This was my first time working on an open source project, first time working with AI, and first time working with java at this scale. If you see something that you deem heinous to any of these practices, please let me know as this was a massive task to learn. At the time of writing this I have been working on the project for almost 6 months now with varried intensity when life allows.
+### **Game Engine Updates**
+Magic is an incredibly unforgiving game to code up due to the countless complex interactions. If you are unfamiliar with the game, I encourage you to just glance at the official rules here: [Magic: The Gathering Comprehensive Rules (2025)](https://media.wizards.com/2025/downloads/MagicCompRules%2020250207.pdf) to get a sense of the complexity. This meant that I ended up spending a lot of time improving the game runner itself to better legally mask the action space to my model. Any of my changes you see outside of the Mage.Player.AIRL dir are just game engine improvements.
 
-## Overview
+## Key Components
 
-- **RL Integration:**  
-  Uses an `RLModel` to predict Q-value distributions for various decision types. Decisions are based on the current game state, represented by an `RLState`, and the RL model’s output is used to select the best available option.
+### 1. **BatchPredictionRequest**
+This class manages batch processing of prediction requests using a neural network. It handles the queuing of requests and processes them in batches to optimize performance and resource utilization.
 
-- **State Buffering:**  
-  Maintains a buffer of RL states (`stateBuffer`) to store experience and assist in training the model over time.
+### 2. **ComputerPlayerRL**
+An AI player class that extends the capabilities of a standard computer player by integrating reinforcement learning models. It uses the `RLModel` to make decisions during gameplay.
 
-- **Simulation Support:**  
-  Simulates game states via the `createSimulation` method to test and validate potential actions before executing them.
+### 3. **RLModel**
+The core of the AI's decision-making process, this class encapsulates a neural network that predicts the best actions based on the current game state. It supports both training and inference modes, allowing the model to learn from past games and improve over time.
 
----
+### 4. **EmbeddingManager**
+Handles the creation and management of text embeddings for game elements, using OpenAI's API. This component is crucial for converting game text into a format that the neural network can process.
 
-## Key Functionalities
+### 5. **NeuralNetwork**
+Defines the architecture and configuration of the neural network used in the RLModel. It includes layers for batch normalization, dropout, and dense connections, optimized with the Adam optimizer.
 
-- **Generic Decision-Making:**
-    - `genericChoose(int numOptions, RLState.ActionType actionType, Game game, Ability source)`  
-      Creates an RL state for a given decision, sets exploration dimensions, and retrieves Q-value predictions from the model.
+### 6. **RLState**
+Represents the state of the game at any given time, including player stats, card features, and game actions. This class is essential for feeding data into the neural network for predictions.
 
-- **Ability & Action Selection:**
-    - `calculateActions(Game game)`  
-      Simulates playable options, filters valid abilities, and selects the best action based on predicted Q-values.
-    - `act(Game game, ActivatedAbility ability)`  
-      Activates the chosen ability, handling target selection and ensuring proper game events are fired.
+### 7. **RLTrainer**
+Manages the training process of the RLModel, coordinating multiple game simulations to refine the AI's strategies. It uses a multi-threaded approach to run numerous game instances in parallel, accelerating the learning process.
 
-- **Combat Decisions:**
-    - `selectAttackers(Game game, UUID attackingPlayerId)`  
-      Evaluates possible attackers and selects targets based on a matrix of Q-values.
-    - `selectBlockers(Ability source, Game game, UUID defendingPlayerId)`  
-      Filters eligible blockers and assigns them to attackers using RL-driven decisions.
+## Features
 
-- **Target & Mode Selection:**
-    - `chooseMode(Modes modes, Ability source, Game game)`  
-      Uses RL predictions to decide among different modes of an ability, filtering out invalid or non-payable options.
-    - `chooseTarget(...)` and overrides of `choose(Outcome, Choice, Game)`  
-      Handle various target and choice decisions (e.g., selecting cards, choosing replacement effects) by comparing Q-value outputs from the RL model.
+- **Reinforcement Learning**: The AI uses RL to continuously improve its gameplay strategies by learning from past experiences.
+- **Batch Processing**: Efficiently handles multiple prediction requests to optimize performance.
+- **Neural Network Integration**: Utilizes a sophisticated neural network architecture for decision-making.
+- **OpenAI Embeddings**: Leverages OpenAI's API for generating embeddings, enhancing the AI's understanding of game elements.
+- **Multi-threaded Training**: Accelerates the training process by running multiple game simulations concurrently.
 
-- **Variable Cost Decisions:**
-    - `announceXMana(int min, int max, String message, Game game, Ability ability)`  
-      Determines the optimal value for variable mana costs by comparing Q-values for each possible option.
+##  Win Rate Over Time
 
----
-
-## Helper Classes
-
-- **QValueWithIndex, AttackOption, BlockOption:**  
-  Lightweight classes that pair option indices with their corresponding Q-values. These are used to sort and select the best choices for modes, targets, attackers, and blockers.
-
----
-
-## Usage & Integration
-
-- **Instantiation:**  
-  Create an instance by providing a player name, range of influence, and an initialized `RLModel`:
-  ```java
-  ComputerPlayerRL rlPlayer = new ComputerPlayerRL("AI_Player", RangeOfInfluence.ALL, myRLModel);
+| Date       | Win Rate | Notes |
+|------------|---------|-------|
+| ??? | ?%   | ???? |

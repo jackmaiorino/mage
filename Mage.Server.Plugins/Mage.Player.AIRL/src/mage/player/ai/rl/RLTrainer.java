@@ -44,7 +44,7 @@ public class RLTrainer {
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS * 35;
+    public static final int NUM_GAME_RUNNERS = NUM_THREADS;
     public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
@@ -81,8 +81,8 @@ public class RLTrainer {
             // Create singleton instance
             BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
 
-            logger.info("Number of threads: " + NUM_THREADS);
-            logger.info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
+            RLTrainer.threadLocalLogger.get().info("Number of threads: " + NUM_THREADS);
+            RLTrainer.threadLocalLogger.get().info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
 
             // Record start time
             long startTime = System.nanoTime();

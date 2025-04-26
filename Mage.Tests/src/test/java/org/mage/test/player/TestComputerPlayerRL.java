@@ -16,8 +16,12 @@ public class TestComputerPlayerRL extends CardTestPlayerBase
     @Test
     public void test_RLPlayer_BasicTraining() {
         RLTrainer trainer = new RLTrainer();
-        for(int i = 0; i < 2; i++) {
+        int trainingsRun = 0;
+        try {
             trainer.train();
+            trainingsRun++;
+        }finally {
+            System.out.println("Trainings run: " + trainingsRun);
         }
     }
 

@@ -3642,28 +3642,29 @@ public abstract class PlayerImpl implements Player, Serializable {
         }
 
         for (Abilities<ActivatedManaAbilityImpl> manaAbilities : sourceWithoutManaCosts) {
-            if (manaAbilities.size() > 1){
-                System.out.println("huh,");
-            }
-            if (abilityToCheck != null) {
-                // This check exists to test, If we activate this mana ability, can we still activate the additional cost?
-                // For example, if we need to sac a treasure for red but also need to sac an artifact, this will reveal
-                // we can't actually cast the spell
-                ActivatedManaAbilityImpl currAbility = manaAbilities.get(0);
-                Game sim2 = game.createSimulationForPlayableCalc();
-                // Activate the mana ability
-                activateAbility(currAbility,sim2);
-                // Can we still activate other costs?
-                // Note: In the case where we have mana but can never activate the additional cost, there is no harm
-                // in having this always fail as the ability will be deemed uncastable one way or another?
-                if (abilityToCheck.getCosts().pay(abilityToCheck, sim2, abilityToCheck, abilityToCheck.getControllerId(), false, null)) {
-                    availableMana.addMana(manaAbilities, game);
-                }else {
-                    System.out.println("Activating this mana ability would remove an additional cost's possibility");
-                }
-            } else{
-                availableMana.addMana(manaAbilities, game);
-            }
+            availableMana.addMana(manaAbilities, game);
+            // TODO: Implement this
+//            if (abilityToCheck != null) {
+//                // This check exists to test, If we activate this mana ability, can we still activate the additional cost?
+//                // For example, if we need to sac a treasure for red but also need to sac an artifact, this will reveal
+//                // we can't actually cast the spell
+//                ActivatedManaAbilityImpl currAbility = manaAbilities.get(0);
+//                Game sim2 = game.createSimulationForPlayableCalc();
+//                Player simPlayer = sim2.getPlayer(this.getId());
+//                Ability simAbility = currAbility.copy();
+//                // Activate the mana ability
+//                simPlayer.activateAbility((ActivatedAbility) simAbility,sim2);
+//                // Can we still activate other costs?
+//                // Note: In the case where we have mana but can never activate the additional cost, there is no harm
+//                // in having this always fail as the ability will be deemed uncastable one way or another?
+//                if (simAbility.getCosts().pay(simAbility, sim2, simAbility, simPlayer.getId(), false, null)) {
+//                    availableMana.addMana(manaAbilities, game);
+//                }else {
+//                    System.out.println("Activating this mana ability would remove an additional cost's possibility");
+//                }
+//            } else{
+//                availableMana.addMana(manaAbilities, game);
+//            }
         }
 
         boolean anAbilityWasUsed = true;
@@ -4351,7 +4352,9 @@ public abstract class PlayerImpl implements Player, Serializable {
                     if (ability.getZone().match(Zone.HAND)) {
                         // Can we activate the additional costs anyway? if not, just skip this ability
                         Game sim2 = game.createSimulationForPlayableCalc();
-                        if (!ability.getCosts().pay(ability, sim2, ability, getId(), false, null)){
+                        Player simPlayer = sim2.getPlayer(this.getId());
+                        Ability simAbility = ability.copy();
+                        if (!simAbility.getCosts().pay(simAbility, sim2, simAbility, simPlayer.getId(), false, null)){
                             continue;
                         }
                         excludedManaAvailable = getManaAvailable(game, card, ability);
