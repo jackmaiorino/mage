@@ -8,157 +8,161 @@ import java.util.concurrent.TimeUnit;
 import org.apache.log4j.Logger;
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
+import org.nd4j.linalg.indexing.NDArrayIndex;
 
+/**
+ * BatchPredictionRequest for the new
+ * {@code <sequence, mask>} representation produced by
+ * {@link com.mtg.rl.StateSequenceBuilder}.  It batches variable‑length
+ * sequences by simple concatenation in the batch dimension; all sequences
+ * are already padded to the same {@code maxLen} when they enter.
+ */
 public class BatchPredictionRequest {
+
+    // ---------------------------------------------------------------------
+    // Singleton boiler‑plate ------------------------------------------------
+    // ---------------------------------------------------------------------
     private static BatchPredictionRequest instance;
 
-    public static synchronized BatchPredictionRequest getInstance(int activeGameRunners, long timeout, TimeUnit timeUnit) {
+    public static synchronized BatchPredictionRequest getInstance(int activeGameRunners,
+                                                                  long timeout,
+                                                                  TimeUnit unit) {
         if (instance == null) {
-            instance = new BatchPredictionRequest(activeGameRunners, timeout, timeUnit);
+            instance = new BatchPredictionRequest(activeGameRunners, timeout, unit);
         }
         return instance;
     }
 
-    private final BlockingQueue<Request> requestQueue;
-    private int activeGameRunners;
-    private final long timeout;
-    private final TimeUnit timeUnit;
-    private long lastProcessTime = System.currentTimeMillis();
-    private long totalPredictions = 0;
-    private long startTime = System.currentTimeMillis();
-    private final INDArray inputBatch;
-    private static final Logger logger = Logger.getLogger(BatchPredictionRequest.class);
+    // ---------------------------------------------------------------------
+    // Instance state -------------------------------------------------------
+    // ---------------------------------------------------------------------
+    private final BlockingQueue<Request> queue;
+    private int                          activeGameRunners;
+    private final long                   timeoutMs;
+    private final Logger                 log = Logger.getLogger(BatchPredictionRequest.class);
 
-    public BatchPredictionRequest(int activeGameRunners, long timeout, TimeUnit timeUnit) {
+    private long totalPredictions;
+    private long startWall;
+
+    private BatchPredictionRequest(int activeGameRunners, long timeout, TimeUnit unit) {
         this.activeGameRunners = activeGameRunners;
-        this.timeout = timeout;
-        this.timeUnit = timeUnit;
-        this.requestQueue = new LinkedBlockingQueue<>();
-        this.inputBatch = Nd4j.create(RLTrainer.BATCH_SIZE, RLState.STATE_VECTOR_SIZE, 'c').assign(0);
-        startBatchProcessor();
+        this.timeoutMs        = unit.toMillis(timeout);
+        this.queue            = new LinkedBlockingQueue<Request>();
+        this.startWall        = System.currentTimeMillis();
+        startBatchThread();
     }
 
-    public synchronized void decrementActiveGameRunners() {
-        this.activeGameRunners--;
+    // ---------------------------------------------------------------------
+    // Public API
+    // ---------------------------------------------------------------------
+    public void incrementActiveGameRunners() { synchronized (this) { activeGameRunners++; } }
+    public void decrementActiveGameRunners() { synchronized (this) { activeGameRunners--; } }
+
+    /**
+     * Enqueue a prediction request consisting of one padded sequence + mask.
+     */
+    public INDArray predict(INDArray sequence, INDArray mask) throws InterruptedException {
+        Request req = new Request(sequence, mask);
+        queue.put(req);
+        return req.await();
     }
 
-    public synchronized void incrementActiveGameRunners() {
-        this.activeGameRunners++;
-    }
-
-    public INDArray predict(INDArray state) throws InterruptedException {
-        Request request = new Request(state);
-        requestQueue.put(request);
-        return request.getPrediction();
-    }
-
-    private void startBatchProcessor() {
-        Thread batchProcessor = new Thread(() -> {
-            while (true) {
-                try {
-                    processBatch();
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                    break;
+    // ---------------------------------------------------------------------
+    // Internal batch loop --------------------------------------------------
+    // ---------------------------------------------------------------------
+    private void startBatchThread() {
+        Thread t = new Thread(new Runnable() {
+            public void run() {
+                while (!Thread.currentThread().isInterrupted()) {
+                    try { processBatch(); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
                 }
             }
-        });
-
-        batchProcessor.setName("BatchPredictManager");
-
-        batchProcessor.setPriority(Thread.MAX_PRIORITY);
-
-        batchProcessor.start();
+        }, "BatchPredictManager");
+        t.setPriority(Thread.MAX_PRIORITY);
+        t.start();
     }
 
     private void processBatch() throws InterruptedException {
-        if (activeGameRunners <= 0) {
-            // If activeGameRunners is 0, wait for the timeout duration before retrying
-            Thread.sleep(timeUnit.toMillis(1000));
+        if (activeGameRunners == 0) {
+            Thread.sleep(1000L);
             return;
         }
 
-        long currentTime = System.currentTimeMillis();
-        logger.info("Time since last processBatch: " + (currentTime - lastProcessTime) + " milliseconds");
-        lastProcessTime = currentTime;
+        int batchCap = Math.max(1, activeGameRunners / 2);
 
-        // This allows the CPU to work while GPU is working
-        int batchSize;
-        if (activeGameRunners == 1) {
-            batchSize = activeGameRunners;
-        } else{
-            batchSize = activeGameRunners / 2;
-        }
-        //int currentactiveGameRunners = Math.min(requestQueue.size(), RLTrainer.BATCH_SIZE);
-        Request[] batch = new Request[batchSize];
-        int count = 0;
-        long batchStartTime = System.currentTimeMillis();
-
-        while (count < batchSize && (System.currentTimeMillis() - batchStartTime) < timeUnit.toMillis(timeout)) {
-            Request request = requestQueue.poll(timeout, timeUnit);
-            if (request != null) {
-                batch[count++] = request;
-            }
+        Request[] batch = new Request[batchCap];
+        int filled = 0;
+        long startFill = System.currentTimeMillis();
+        while (filled < batchCap && (System.currentTimeMillis() - startFill) < timeoutMs) {
+            Request r = queue.poll(timeoutMs, TimeUnit.MILLISECONDS);
+            if (r != null) { batch[filled++] = r; }
         }
 
-        logger.info("Time to fill batch: " + (System.currentTimeMillis() - batchStartTime) + " milliseconds");
-        logger.info("Batch size: " + count);
+        if (filled == 0) return;
 
-        if (count > 0) {
-            totalPredictions += count;
-            INDArray[] states = new INDArray[count];
-            for (int i = 0; i < count; i++) {
-                states[i] = batch[i].state;
-            }
-            INDArray predictions = batchPredict(states);
-            
-            for (int i = 0; i < count; i++) {
-                batch[i].setPrediction(predictions.getRow(i, true));
-            }
+        // ------------------------------------------------------------------
+        // Build input tensors ---------------------------------------------
+        // ------------------------------------------------------------------
+        int D      = Math.toIntExact(batch[0].sequence.size(1)); // sequence shape [1, D, L]
+        int L      = Math.toIntExact(batch[0].sequence.size(2));
+        INDArray seqBatch  = Nd4j.create(new int[]{filled, D, L}, 'c');
+        INDArray maskBatch = Nd4j.create(new int[]{filled, L},   'c');
+
+        for (int i = 0; i < filled; i++) {
+            seqBatch.putSlice(i, batch[i].sequence.get(NDArrayIndex.point(0), NDArrayIndex.all(), NDArrayIndex.all()));
+            maskBatch.putRow(i, batch[i].mask);
         }
 
-        // Calculate and print average predictions per second
-        long totalTimeElapsed = System.currentTimeMillis() - startTime;
-        double averagePredictionsPerSecond = (totalPredictions * 1000.0) / totalTimeElapsed;
-        logger.warn("Average predictions per second: " + String.format("%.2f", averagePredictionsPerSecond));
+        // ------------------------------------------------------------------
+        // Forward pass -----------------------------------------------------
+        // ------------------------------------------------------------------
+        INDArray preds;
+        RLModel shared = RLTrainer.sharedModel;
+        if (shared == null) {
+            throw new IllegalStateException("SharedModel is null");
+        } else {
+            preds = shared.getNetwork().batchCastLogits(seqBatch, maskBatch);
+        }
+
+        // ------------------------------------------------------------------
+        // Fulfil promises ---------------------------------------------------
+        // ------------------------------------------------------------------
+        totalPredictions += filled;
+        for (int i = 0; i < filled; i++) {
+            batch[i].fulfil(preds.getRow(i, true));
+        }
+
+        // ------------------------------------------------------------------
+        // Throughput log ----------------------------------------------------
+        // ------------------------------------------------------------------
+        long elapsed = System.currentTimeMillis() - startWall;
+        if (elapsed > 0) {
+            double pps = (totalPredictions * 1000.0) / elapsed;
+            log.warn(String.format("Average predictions/sec: %.2f", pps));
+        }
     }
 
-    private INDArray batchPredict(INDArray[] states) {
-        // Create an input batch with the correct shape on the GPU
-        for (int i = 0; i < states.length; i++) {
-            inputBatch.putRow(i, states[i]);
+    // ---------------------------------------------------------------------
+    // Inner class ---------------------------------------------------------
+    // ---------------------------------------------------------------------
+    private static final class Request {
+        private final INDArray sequence;
+        private final INDArray mask;
+        private final CountDownLatch latch = new CountDownLatch(1);
+        private INDArray result;
+
+        Request(INDArray sequence, INDArray mask) {
+            this.sequence = sequence;
+            this.mask     = mask;
         }
 
-        // Start timing the prediction
-//        long predictionStartTime = System.currentTimeMillis();
-
-        // Get predictions from the neural network
-        INDArray predictions = RLTrainer.sharedModel.getNetwork().network.output(inputBatch);
-
-        // End timing the prediction
-//        long predictionEndTime = System.currentTimeMillis();
-//        logger.warn("Prediction time: " + (predictionEndTime - predictionStartTime) + " milliseconds");
-
-        return predictions;
-    }
-
-    private static class Request {
-        private final INDArray state;
-        private final CountDownLatch latch;
-        private INDArray prediction;
-
-        public Request(INDArray state) {
-            this.state = state;
-            this.latch = new CountDownLatch(1);
-        }
-
-        public INDArray getPrediction() throws InterruptedException {
+        INDArray await() throws InterruptedException {
             latch.await();
-            return prediction;
+            return result;
         }
 
-        public void setPrediction(INDArray prediction) {
-            this.prediction = prediction;
+        void fulfil(INDArray prediction) {
+            this.result = prediction;
             latch.countDown();
         }
     }

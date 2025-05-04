@@ -10,11 +10,11 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.j256.ormlite.stmt.query.In;
+import mage.constants.TurnPhase;
+import mage.player.ai.rl.*;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
 import mage.ConditionalMana;
-import mage.MageObject;
 import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
@@ -36,10 +36,6 @@ import mage.filter.StaticFilters;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
-import mage.player.ai.rl.QValueEntry;
-import mage.player.ai.rl.RLModel;
-import mage.player.ai.rl.RLState;
-import mage.player.ai.rl.RLTrainer;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
@@ -48,14 +44,14 @@ import mage.target.TargetCard;
 
 public class ComputerPlayerRL extends ComputerPlayer {
     public RLModel model;
-    protected RLState currentState;
-    private final List<RLState> stateBuffer;
+    protected StateSequenceBuilder.SequenceOutput currentState;
+    private final List<StateSequenceBuilder.SequenceOutput> stateBuffer;
     private Ability currentAbility;
 
     public ComputerPlayerRL(String name, RangeOfInfluence range, RLModel model) {
         super(name, range);
         this.model = model;
-        this.stateBuffer = new ArrayList<>();
+        this.stateBuffer = new ArrayList<StateSequenceBuilder.SequenceOutput>();
         RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name);
     }
 
@@ -70,7 +66,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         this.model = player.model;
         // Like the normal constructor this shouldn't need to be initialized
 //        this.currentState = player.currentState;
-        this.stateBuffer = new ArrayList<>();
+        this.stateBuffer = new ArrayList<StateSequenceBuilder.SequenceOutput>();
         this.currentAbility = player.currentAbility;
     }
 
@@ -87,7 +83,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
-    public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, RLState.ActionType actionType, Game game, Ability source) {
+    public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source) {
         boolean mustSelectExact = minTargets == maxTargets;
         int numOptions;
         if (mustSelectExact){
@@ -104,17 +100,14 @@ public class ComputerPlayerRL extends ComputerPlayer {
         } else if (numOptions == 0){
             return targetsToSet;
         }
-
-        currentState = new RLState(game, actionType, source);
-        int numRows = numOptions / RLModel.MAX_OPTIONS;
-        int remainingOptions = numOptions % RLModel.MAX_OPTIONS;
-        for(int i = 0; i < numRows; i++){
-            currentState.exploreDimensions.add(RLModel.MAX_OPTIONS);
+        TurnPhase turnPhase;
+        if (game.getPhase() == null){
+            //TODO: Is mulligan the only time this is null?
+            turnPhase = null;
+        }else{
+            turnPhase = game.getPhase().getType();
         }
-        if(remainingOptions > 0){
-            currentState.exploreDimensions.add(remainingOptions);
-        }
-
+        currentState = StateSequenceBuilder.build(game, actionType, turnPhase, StateSequenceBuilder.MAX_LEN);
         stateBuffer.add(currentState);
         INDArray qValues = model.predictDistribution(currentState, true);
 
@@ -142,7 +135,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
             // Stop if we've reached the minimum and the do nothing option is the best option
             if (!mustSelectExact && qValueWithIndex.index == possibleTargetsSize) {
-                currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, qValueWithIndex.index));
+                // no-op: learning backend records chosen index later
                 if (selectedTargets >= minTargets) {
                     break;
                 }else{
@@ -153,11 +146,15 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
             // Access the original index and Q-value
             int originalIndex = qValueWithIndex.index;
-            currentState.targetQValues.add(new QValueEntry(qValueWithIndex.qValue, originalIndex));
+            // no-op
             targetsToSet.add(originalIndex);
             selectedTargets++;
         }
 
+        // record the first chosen index (or -1 if none) into the last stored state
+        int chosen = targetsToSet.isEmpty() ? -1 : targetsToSet.get(0);
+        stateBuffer.set(stateBuffer.size() - 1,
+                new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, chosen));
         return targetsToSet;
     }
 
@@ -190,7 +187,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         int maxTargets = Math.min(modes.getMaxModes(game, source), modes.size());
         int minTargets = modes.getMinModes();
 
-        List<Integer> targetsToSet = genericChoose(modes.size(), maxTargets, minTargets, RLState.ActionType.SELECT_CHOICE, game, source);
+        List<Integer> targetsToSet = genericChoose(modes.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
         if (targetsToSet.size() == 1){
             return (Mode) modes.values().toArray()[0];
         } else if(targetsToSet.isEmpty()){
@@ -250,7 +247,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
         // Select the best X value using Q-values
         if (!possibleXValues.isEmpty() && possibleXValues.size() > 1) {
-            List<Integer> targetsToSet = genericChoose(possibleXValues.size(),1,1, RLState.ActionType.SELECT_CHOICE, game, ability);
+            List<Integer> targetsToSet = genericChoose(possibleXValues.size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, ability);
             return possibleXValues.get(targetsToSet.get(0));
         } else if (possibleXValues.size() == 1) {
             // No need to query model for only 1 option
@@ -320,7 +317,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 }
                 //Keychoice
                 if(choice.getKeyChoices().size() > 1){
-                    List<Integer> targetsToSet = genericChoose(choice.getKeyChoices().size(),1,1, RLState.ActionType.SELECT_CHOICE, game, source);
+                    List<Integer> targetsToSet = genericChoose(choice.getKeyChoices().size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
                     choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[targetsToSet.get(0)].toString());
                     return true;
                 } else {
@@ -331,7 +328,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             } else if(choice.getChoices() != null && !choice.getChoices().isEmpty()) {
                 // Normal Choice
                 if (choice.getChoices().size() > 1) {
-                    List<Integer> targetsToSet = genericChoose(choice.getChoices().size(),1,1, RLState.ActionType.SELECT_CHOICE, game, source);
+                    List<Integer> targetsToSet = genericChoose(choice.getChoices().size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
                     choice.setChoice(choice.getChoices().toArray()[targetsToSet.get(0)].toString());
                     return true;
                 } else {
@@ -363,7 +360,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         int maxTargets = Math.min(target.getMaxNumberOfTargets(), cardChoices.size());
         int minTargets = target.getMinNumberOfTargets();
 
-        List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, RLState.ActionType.SELECT_CARD, game, source);
+        List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CARD, game, source);
 
         for (int i = 0; i < targetsToSet.size(); i++) {
             target.add(cardChoices.get(targetsToSet.get(i)).getId(), game);
@@ -393,7 +390,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
             if (abilities.size() == 1) {
                 return abilities.get(0);
             }
-            List<Integer> targetsToSet = genericChoose(abilities.size(),1,1, RLState.ActionType.SELECT_TRIGGERED_ABILITY, game, null);
+            List<Integer> targetsToSet = genericChoose(abilities.size(),1,1, StateSequenceBuilder.ActionType.SELECT_TRIGGERED_ABILITY, game, null);
             return abilities.get(targetsToSet.get(0));
         }
         return null;
@@ -437,7 +434,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         int maxTargets = target.getMaxNumberOfTargets();
         int minTargets = target.getMinNumberOfTargets();
 
-        List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, RLState.ActionType.SELECT_TARGETS, game, source);
+        List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
 
         for (int i = 0; i < targetsToSet.size(); i++) {
             // TODO: For some reason this always fails because the card zone is OUTSIDE
@@ -479,7 +476,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         int maxTargets = Math.min(target.getMaxNumberOfTargets(), possibleTargetsList.size());
         int minTargets = target.getMinNumberOfTargets();
 
-        List<Integer> qValues = genericChoose(possibleTargetsList.size(), maxTargets, minTargets, RLState.ActionType.SELECT_TARGETS, game, source);
+        List<Integer> qValues = genericChoose(possibleTargetsList.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
 
         for (int i = 0; i < qValues.size(); i++) {
             target.add(possibleTargetsList.get(qValues.get(i)), game);
@@ -487,180 +484,169 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return true;
     }
 
-    @Override
-    public void selectAttackers(Game game, UUID attackingPlayerId) {
-        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, attackingPlayerId));
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))) {
-            // Generate list of possible attackers
-            List<Permanent> allAttackers = game.getBattlefield().getAllActivePermanents(
-                StaticFilters.FILTER_PERMANENT_CREATURE,
-                attackingPlayerId,
-                game
-            );
-            List<Permanent> possibleAttackers = new ArrayList<>();
+//    @Override
+//    public void selectAttackers(Game game, UUID attackingPlayerId) {
+//        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, attackingPlayerId));
+//        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_ATTACKERS, attackingPlayerId, attackingPlayerId))) {
+//            // Generate list of possible attackers
+//            List<Permanent> allAttackers = game.getBattlefield().getAllActivePermanents(
+//                StaticFilters.FILTER_PERMANENT_CREATURE,
+//                attackingPlayerId,
+//                game
+//            );
+//            List<Permanent> possibleAttackers = new ArrayList<>();
+//
+//            for (Permanent creature : allAttackers) {
+//                if (creature.canAttack(null, game)) {
+//                    possibleAttackers.add(creature);
+//                }
+//            }
+//
+//            if (possibleAttackers.isEmpty()) {
+//                return;
+//            }
+//
+//            currentState = StateSequenceBuilder.build(game,
+//                                                      StateSequenceBuilder.ActionType.DECLARE_ATTACKS,
+//                                                      game.getPhase().getType(),
+//                                                      StateSequenceBuilder.MAX_LEN);
+//            stateBuffer.add(currentState);
+//            // Generate list of attack targets (Player, planeswalkers, battles)
+//            List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
+//            if (possibleAttackers.size() > RLModel.MAX_ACTIONS) {
+//                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
+//            }
+//            if (possibleAttackTargets.size() > RLModel.MAX_OPTIONS - 1) {
+//                RLTrainer.threadLocalLogger.get().error("ERROR: More attack targets than max options, Model truncating");
+//            }
+//            int numAttackers = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
+//            // -1 to reserve the option to not attack
+//            int numAttackTargets = Math.min(RLModel.MAX_OPTIONS-1, possibleAttackTargets.size());
+//
+//            // predict logits once for the whole batch
+//            INDArray qValues = model.predictDistribution(currentState, true)
+//                                    .reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
+//
+//            // for each attacker we'll record its chosen index separately
+//            for (int attackerIndex = 0; attackerIndex < numAttackers; attackerIndex++) {
+//                Permanent attacker = possibleAttackers.get(attackerIndex);
+//
+//                // Create a list of defender indices with their Q-values for this attacker
+//                List<AttackOption> attackOptions = new ArrayList<>();
+//                for (int attackTargetIndex = 0; attackTargetIndex < RLModel.MAX_OPTIONS; attackTargetIndex++) {
+//                    float qValue = qValues.getFloat(attackerIndex, attackTargetIndex);
+//                    attackOptions.add(new AttackOption(attackTargetIndex, attackerIndex, qValue));
+//                }
+//
+//                // Sort attack options by Q-value in descending order
+//                attackOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
+//
+//                // Declare attacks based on sorted Q-values
+//                for (AttackOption option : attackOptions) {
+//                    if (option.attackTargetIndex >= numAttackTargets) {
+//                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
+//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
+//                        break; // Skip this attacker if the first choice is to not attack
+//                    }
+//                    UUID attackTargetId = possibleAttackTargets.get(option.attackTargetIndex);
+//                    if (attacker.canAttack(attackTargetId, game)) {
+//                        RLTrainer.threadLocalLogger.get().info("Declaring attacker: " + attacker.getName() + " for attack target: " + attackTargetId.toString());
+//                        this.declareAttacker(attacker.getId(), attackTargetId, game, false);
+//                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
+//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
+//                        break; // Once an attack is declared, move to the next attacker
+//                    }
+//                }
+//            }
+//        }
+//    }
 
-            for (Permanent creature : allAttackers) {
-                if (creature.canAttack(null, game)) {
-                    possibleAttackers.add(creature);
-                }
-            }
-
-            if (possibleAttackers.isEmpty()) {
-                return;
-            }
-
-            currentState = new RLState(game, RLState.ActionType.DECLARE_ATTACKS);
-            stateBuffer.add(currentState);
-            // Generate list of attack targets (Player, planeswalkers, battles)
-            List<UUID> possibleAttackTargets = new ArrayList<>(game.getCombat().getDefenders());
-            if (possibleAttackers.size() > RLModel.MAX_ACTIONS) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
-            }
-            if (possibleAttackTargets.size() > RLModel.MAX_OPTIONS - 1) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More attack targets than max options, Model truncating");
-            }
-            int numAttackers = Math.min(RLModel.MAX_ACTIONS, possibleAttackers.size());
-            // -1 to reserve the option to not attack
-            int numAttackTargets = Math.min(RLModel.MAX_OPTIONS-1, possibleAttackTargets.size());
-
-            for(int i = 0; i < numAttackers; i++){
-                // +1 to explore the option to not attack
-                currentState.exploreDimensions.add(numAttackTargets+1);
-            }
-
-            // Predict on game state
-            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
-
-            // For each attacker
-            // Attacker = X, Attack Target = Y
-            for (int attackerIndex = 0; attackerIndex < numAttackers; attackerIndex++) {
-                Permanent attacker = possibleAttackers.get(attackerIndex);
-
-                // Create a list of defender indices with their Q-values for this attacker
-                List<AttackOption> attackOptions = new ArrayList<>();
-                for (int attackTargetIndex = 0; attackTargetIndex < RLModel.MAX_OPTIONS; attackTargetIndex++) {
-                    float qValue = qValues.getFloat(attackerIndex, attackTargetIndex);
-                    attackOptions.add(new AttackOption(attackTargetIndex, attackerIndex, qValue));
-                }
-
-                // Sort attack options by Q-value in descending order
-                attackOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
-
-                // Declare attacks based on sorted Q-values
-                for (AttackOption option : attackOptions) {
-                    if (option.attackTargetIndex >= numAttackTargets) {
-                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
-                        break; // Skip this attacker if the first choice is to not attack
-
-                    }
-                    UUID attackTargetId = possibleAttackTargets.get(option.attackTargetIndex);
-                    if (attacker.canAttack(attackTargetId, game)) {
-                        RLTrainer.threadLocalLogger.get().info("Declaring attacker: " + attacker.getName() + " for attack target: " + attackTargetId.toString());
-                        this.declareAttacker(attacker.getId(), attackTargetId, game, false);
-                        int index = attackerIndex * (numAttackTargets + 1) + option.attackTargetIndex;
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
-                        break; // Once an attack is declared, move to the next attacker
-
-                    }
-                }
-            }
-            if (currentState.targetQValues.isEmpty()){
-                stateBuffer.remove(currentState);
-            }
-        }
-    }
-
-    // Don't need to override?
-    // TODO: Do we need to pass the action vector a reference for WHICH creature its declaring blocks?
-    @Override
-    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
-        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, defendingPlayerId));
-        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, defendingPlayerId, defendingPlayerId))) {
-            List<Permanent> attackers = getAttackers(game);
-            if (attackers == null) {
-                return;
-            }
-
-            List<Permanent> possibleBlockers = super.getAvailableBlockers(game);
-            possibleBlockers = filterOutNonblocking(game, attackers, possibleBlockers);
-            if (possibleBlockers.isEmpty()) {
-                return;
-            }
-
-            RLTrainer.threadLocalLogger.get().info("possibleBlockers: " + possibleBlockers);
-
-            attackers = filterOutUnblockable(game, attackers, possibleBlockers);
-            if (attackers.isEmpty()) {
-                return;
-            }
-
-            currentState = new RLState(game, RLState.ActionType.DECLARE_BLOCKS);
-            stateBuffer.add(currentState);
-            // -1 to reserve the option to not block nothing no a creature. Essentially an attacker that is "nothing"
-            int numAttackers = Math.min(RLModel.MAX_ACTIONS - 1, attackers.size());
-            int numBlockers = Math.min(RLModel.MAX_OPTIONS, possibleBlockers.size());
-            if (attackers.size() > RLModel.MAX_ACTIONS - 1) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
-            }
-            if (possibleBlockers.size() > RLModel.MAX_OPTIONS) {
-                RLTrainer.threadLocalLogger.get().error("ERROR: More blockers than max actions, Model truncating");
-            }
-
-            // Build exploration dimensions
-            // +1 to explore the option to not block
-            for(int i = 0; i < numAttackers + 1; i++){
-                currentState.exploreDimensions.add(numBlockers);
-            }
-            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
-
-            boolean blockerDeclared = false;
-
-            // Iterate over blockers first
-            // Attacker = X, Blockers = Y
-            for (int blockerIndex = 0; blockerIndex < numBlockers; blockerIndex++) {
-                Permanent blocker = possibleBlockers.get(blockerIndex);
-
-                // Create a list of blocker indices with their Q-values for this attacker
-                List<BlockOption> blockOptions = new ArrayList<>();
-                // We use the full MAX_OPTIONS because we need to reserve the option to not block
-                for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS; attackerIndex++) {
-                    float qValue = qValues.getFloat(attackerIndex, blockerIndex);
-                    blockOptions.add(new BlockOption(attackerIndex, blockerIndex, qValue));
-                }
-
-                // Sort block options by Q-value in descending order
-                blockOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
-
-                // Declare blocks based on sorted Q-values
-                for (BlockOption option : blockOptions) {
-                    if (option.attackerIndex >= numAttackers) {
-                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
-                        break; // Skip this blocker if the first choice is to not block
-                    }
-
-                    Permanent attacker = attackers.get(option.attackerIndex);
-                    if (blocker.canBlock(attacker.getId(), game)) {
-                        RLTrainer.threadLocalLogger.get().info("Declaring blocker: " + blocker.getName() + " for attacker: " + attacker.getName());
-                        this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
-                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
-                        currentState.targetQValues.add(new QValueEntry(option.qValue, index));
-                        blockerDeclared = true;
-                        // TODO: implement multiblock
-                        break;
-
-                    }
-                }
-            }
-            if (blockerDeclared) {
-                game.getPlayers().resetPassed();
-            }
-            if (currentState.targetQValues.isEmpty()){
-                stateBuffer.remove(currentState);
-            }
-        }
-    }
+//    @Override
+//    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
+//        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, defendingPlayerId));
+//        if (!game.replaceEvent(GameEvent.getEvent(GameEvent.EventType.DECLARING_BLOCKERS, defendingPlayerId, defendingPlayerId))) {
+//            List<Permanent> attackers = getAttackers(game);
+//            if (attackers == null) {
+//                return;
+//            }
+//
+//            List<Permanent> possibleBlockers = super.getAvailableBlockers(game);
+//            possibleBlockers = filterOutNonblocking(game, attackers, possibleBlockers);
+//            if (possibleBlockers.isEmpty()) {
+//                return;
+//            }
+//
+//            RLTrainer.threadLocalLogger.get().info("possibleBlockers: " + possibleBlockers);
+//
+//            attackers = filterOutUnblockable(game, attackers, possibleBlockers);
+//            if (attackers.isEmpty()) {
+//                return;
+//            }
+//
+//            currentState = StateSequenceBuilder.build(game,
+//                                                      StateSequenceBuilder.ActionType.DECLARE_BLOCKS,
+//                                                      game.getPhase().getType(),
+//                                                      StateSequenceBuilder.MAX_LEN);
+//            stateBuffer.add(currentState);
+//            // -1 to reserve the option to not block nothing no a creature. Essentially an attacker that is "nothing"
+//            int numAttackers = Math.min(RLModel.MAX_ACTIONS - 1, attackers.size());
+//            int numBlockers = Math.min(RLModel.MAX_OPTIONS, possibleBlockers.size());
+//            if (attackers.size() > RLModel.MAX_ACTIONS - 1) {
+//                RLTrainer.threadLocalLogger.get().error("ERROR: More attackers than max actions, Model truncating");
+//            }
+//            if (possibleBlockers.size() > RLModel.MAX_OPTIONS) {
+//                RLTrainer.threadLocalLogger.get().error("ERROR: More blockers than max actions, Model truncating");
+//            }
+//
+//            // Build exploration dimensions
+//            // +1 to explore the option to not block
+//            for(int i = 0; i < numAttackers + 1; i++){
+//                // exploration metadata skipped
+//            }
+//            INDArray qValues = model.predictDistribution(currentState, true).reshape(RLModel.MAX_ACTIONS, RLModel.MAX_OPTIONS);
+//
+//            boolean blockerDeclared = false;
+//
+//            // Iterate over blockers first
+//            // Attacker = X, Blockers = Y
+//            for (int blockerIndex = 0; blockerIndex < numBlockers; blockerIndex++) {
+//                Permanent blocker = possibleBlockers.get(blockerIndex);
+//
+//                // Create a list of blocker indices with their Q-values for this attacker
+//                List<BlockOption> blockOptions = new ArrayList<>();
+//                // We use the full MAX_OPTIONS because we need to reserve the option to not block
+//                for (int attackerIndex = 0; attackerIndex < RLModel.MAX_ACTIONS; attackerIndex++) {
+//                    float qValue = qValues.getFloat(attackerIndex, blockerIndex);
+//                    blockOptions.add(new BlockOption(attackerIndex, blockerIndex, qValue));
+//                }
+//
+//                // Sort block options by Q-value in descending order
+//                blockOptions.sort((a, b) -> Double.compare(b.qValue, a.qValue));
+//
+//                // Declare blocks based on sorted Q-values
+//                for (BlockOption option : blockOptions) {
+//                    if (option.attackerIndex >= numAttackers) {
+//                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
+//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
+//                        break; // Skip this blocker if the first choice is to not block
+//                    }
+//
+//                    Permanent attacker = attackers.get(option.attackerIndex);
+//                    if (blocker.canBlock(attacker.getId(), game)) {
+//                        RLTrainer.threadLocalLogger.get().info("Declaring blocker: " + blocker.getName() + " for attacker: " + attacker.getName());
+//                        this.declareBlocker(playerId, blocker.getId(), attacker.getId(), game);
+//                        int index = option.attackerIndex * numBlockers + option.blockerIndex;
+//                        stateBuffer.add(new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, index));
+//                        break; // Skip this blocker if the first choice is to not block
+//                    }
+//                }
+//            }
+//            if (blockerDeclared) {
+//                game.getPlayers().resetPassed();
+//            }
+//            // skip training metadata cleanup
+//        }
+//    }
 
     private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
         List<Permanent> blockersLeft = new ArrayList<>();
@@ -849,7 +835,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
         flattenedOptions = uniqueOptions;
 
-        List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, RLState.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);
+        List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);
 
         RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
 
@@ -857,7 +843,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return flattenedOptions.get(targetsToSet.get(0));
     }
 
-    public List<RLState> getStateBuffer() {
+    public List<StateSequenceBuilder.SequenceOutput> getStateBuffer() {
         return stateBuffer;
     }
 }
@@ -898,3 +884,5 @@ class QValueWithIndex {
         this.index = index;
     }
 }
+
+

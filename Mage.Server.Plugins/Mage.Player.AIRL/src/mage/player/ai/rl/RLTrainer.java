@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import org.nd4j.linalg.factory.Nd4j;
 
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -35,7 +36,6 @@ import mage.game.mulligan.LondonMulligan;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerRL;
 import mage.players.Player;
-import org.nd4j.linalg.factory.Nd4j;
 
 public class RLTrainer {
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
@@ -45,7 +45,7 @@ public class RLTrainer {
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     public static final int NUM_GAME_RUNNERS = NUM_THREADS;
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 4;
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
     public static final RLModel sharedModel = new RLModel(true);
@@ -78,7 +78,7 @@ public class RLTrainer {
 
             Random random = new Random();
             
-            // Create singleton instance
+            // Create singleton instance with initial active game runners
             BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
 
             RLTrainer.threadLocalLogger.get().info("Number of threads: " + NUM_THREADS);
@@ -106,25 +106,16 @@ public class RLTrainer {
             final boolean[] isFirstThread = {true}; // Flag to track the first thread
 
             for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
+                // Create a copy of the deck for this thread
+                Deck rlPlayerDeckThread = rlPlayerDeck.copy();
+                Deck opponentDeckThread = opponentDeck.copy();
+
                 Future<Void> future = executor.submit(() -> {
-                    boolean isFirst = false;
-
+                    boolean isFirst;
                     synchronized (lock) {
-                        if (isFirstThread[0]) {
-                            isFirst = true;
-                            isFirstThread[0] = false;
-                        }
+                        isFirst = isFirstThread[0];
+                        isFirstThread[0] = false;
                     }
-                    
-                    Logger currentLogger = threadLocalLogger.get();
-                    if (isFirst) {
-                        currentLogger.setLevel(Level.INFO);
-                    }  
-                    currentLogger.info("Starting Game Runner ");
-
-                    Thread.currentThread().setName("GAME");
-                    Deck rlPlayerDeckThread = rlPlayerDeck.copy();
-                    Deck opponentDeckThread = opponentDeck.copy();
 
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
                         batchPredictionRequest.incrementActiveGameRunners();
@@ -142,13 +133,15 @@ public class RLTrainer {
                         GameOptions options = new GameOptions();
                         game.setGameOptions(options);
 
+
+
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
 
-                        batchPredictionRequest.decrementActiveGameRunners();
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
                         Nd4j.getWorkspaceManager().destroyAllWorkspacesForCurrentThread();
+                        batchPredictionRequest.decrementActiveGameRunners();
                     }
                     return null;
                 });
@@ -206,7 +199,7 @@ public class RLTrainer {
         // Create singleton instance
         BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
 
-        ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
+        ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS);
         final Object lock = new Object();
         final boolean[] isFirstThread = {true};
 
@@ -218,7 +211,7 @@ public class RLTrainer {
         Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
         Deck opponentDeck = loadDeck(opponentDeckPath.toString());
 
-        for (int i = 0; i < NUM_THREADS; i++) {
+        for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
             Future<Integer> future = executor.submit(() -> {
                 boolean isFirst = false;
 
@@ -255,7 +248,6 @@ public class RLTrainer {
                     ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
-
 
                     ComputerPlayer7 opponent = new ComputerPlayer7("Player7", RangeOfInfluence.ALL, 3);
                     game.addPlayer(opponent, opponentDeckThread);
@@ -330,20 +322,20 @@ public class RLTrainer {
         double reward = rlPlayerWon ? 0.15 : -0.15;
 
         // Get states for both players
-        List<RLState> rlPlayerStates = rlPlayer.getStateBuffer();
-        List<RLState> opponentStates = opponent.getStateBuffer();
+        List<StateSequenceBuilder.SequenceOutput> rlPlayerStates = rlPlayer.getStateBuffer();
+        List<StateSequenceBuilder.SequenceOutput> opponentStates = opponent.getStateBuffer();
         
         // Add states for player
-        List<RLState> allStates = new ArrayList<>(rlPlayerStates);
+        List<StateSequenceBuilder.SequenceOutput> allStates = new ArrayList<>(rlPlayerStates);
         // Add states for opponent
         allStates.addAll(opponentStates);
         List<Double> rewards = new ArrayList<>();
         // Add rewards for RL player states
-        for (RLState ignored : rlPlayerStates) {
+        for (StateSequenceBuilder.SequenceOutput ignored : rlPlayerStates) {
             rewards.add(reward);
         }
         // Add rewards for opponent states
-        for (RLState state : opponentStates) {
+        for (StateSequenceBuilder.SequenceOutput state : opponentStates) {
             rewards.add(-reward);
         }
         // Adjust the sublist to exclude the last/first element respectively
