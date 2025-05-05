@@ -45,7 +45,7 @@ public class RLTrainer {
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     public static final int NUM_GAME_RUNNERS = NUM_THREADS;
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 4;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 2;
     public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
     public static final RLModel sharedModel = new RLModel(true);
@@ -79,7 +79,7 @@ public class RLTrainer {
             Random random = new Random();
             
             // Create singleton instance with initial active game runners
-            BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
+            BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(10000, TimeUnit.MILLISECONDS);
 
             RLTrainer.threadLocalLogger.get().info("Number of threads: " + NUM_THREADS);
             RLTrainer.threadLocalLogger.get().info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
@@ -106,9 +106,6 @@ public class RLTrainer {
             final boolean[] isFirstThread = {true}; // Flag to track the first thread
 
             for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
-                // Create a copy of the deck for this thread
-                Deck rlPlayerDeckThread = rlPlayerDeck.copy();
-                Deck opponentDeckThread = opponentDeck.copy();
 
                 Future<Void> future = executor.submit(() -> {
                     boolean isFirst;
@@ -116,6 +113,17 @@ public class RLTrainer {
                         isFirst = isFirstThread[0];
                         isFirstThread[0] = false;
                     }
+
+                    Logger currentLogger = threadLocalLogger.get();
+                    if (isFirst) {
+                        currentLogger.setLevel(Level.INFO);
+                    }  
+                    currentLogger.info("Starting Game Runner ");
+
+                    Thread.currentThread().setName("GAME");
+                    Deck rlPlayerDeckThread = rlPlayerDeck.copy();
+                    Deck opponentDeckThread = opponentDeck.copy();
+
 
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
                         batchPredictionRequest.incrementActiveGameRunners();
@@ -138,10 +146,9 @@ public class RLTrainer {
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
-
+                        batchPredictionRequest.decrementActiveGameRunners();
                         updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
                         Nd4j.getWorkspaceManager().destroyAllWorkspacesForCurrentThread();
-                        batchPredictionRequest.decrementActiveGameRunners();
                     }
                     return null;
                 });
@@ -197,7 +204,7 @@ public class RLTrainer {
 
         // TODO: Make ComputerPlayerRL not dependant on so much setup always
         // Create singleton instance
-        BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(0, 10000, TimeUnit.MILLISECONDS);
+        BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(10000, TimeUnit.MILLISECONDS);
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS);
         final Object lock = new Object();
@@ -338,9 +345,8 @@ public class RLTrainer {
         for (StateSequenceBuilder.SequenceOutput state : opponentStates) {
             rewards.add(-reward);
         }
-        // Adjust the sublist to exclude the last/first element respectively
-        // TODO: rewards needs to be sublisted like states
-        model.updateBatch(allStates.subList(0, allStates.size() - 1), rewards, allStates.subList(1, allStates.size()));
+        
+        model.updateBatch(allStates, rewards);
 
     }
 

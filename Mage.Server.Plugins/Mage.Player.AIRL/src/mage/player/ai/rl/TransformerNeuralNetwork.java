@@ -20,7 +20,6 @@ import org.nd4j.linalg.factory.Nd4j;
 import org.nd4j.linalg.learning.config.Adam;
 import org.nd4j.linalg.lossfunctions.LossFunctions;
 import org.nd4j.linalg.indexing.NDArrayIndex;
-import org.deeplearning4j.nn.conf.WeightInit;
 import org.deeplearning4j.nn.conf.inputs.InputType;
 
 /**
@@ -36,11 +35,16 @@ public final class TransformerNeuralNetwork {
     private static final Logger log = Logger.getLogger(TransformerNeuralNetwork.class);
 
     private final Random rnd = new Random();
-    private final double epsilon;
+    private double epsilon;
+    private final double initialEpsilon;
+    private final double finalEpsilon;
+    private final int decaySteps;
+    private int currentStep = 0;
     private final ComputationGraph net;
     private final int maxLen;  // Store maxLen as a class field
     private final int d;
     private final int[] headSizes;
+    private final int numLayers;  // Store number of transformer layers
 
     // output layer names – must match builder below
     private static final String CAST_OUT  = "castOut";
@@ -48,11 +52,15 @@ public final class TransformerNeuralNetwork {
     private static final String BLK_OUT   = "blkPtr";
 
 
-    public TransformerNeuralNetwork(int d, int maxLen, int[] headSizes, double epsilon) {
+    public TransformerNeuralNetwork(int d, int maxLen, int[] headSizes, double initialEpsilon) {
         this.d = d;
         this.maxLen = maxLen;
-        this.epsilon = epsilon;
+        this.initialEpsilon = initialEpsilon;
+        this.epsilon = initialEpsilon;
+        this.finalEpsilon = 0.01;  // Final epsilon value
+        this.decaySteps = 1000000;  // Number of steps to decay over
         this.headSizes = headSizes;
+        this.numLayers = 3;  // Set number of transformer layers
 
         // Increase feature dimension from 128 to 256
         int enhancedD = 256;
@@ -62,17 +70,14 @@ public final class TransformerNeuralNetwork {
         
         // Increase head size from 32 to 64
         int headSize = 64;
-        
-        // Add more transformer layers (from 1 to 3)
-        int numLayers = 3;
 
         // Create the network
         ComputationGraphConfiguration.GraphBuilder builder = new NeuralNetConfiguration.Builder()
                 .seed(12345)
                 .updater(new Adam(0.001))
                 .graphBuilder()
-                .addInputs("input_sequence", "input_mask")
-                .setInputTypes(InputType.recurrent(d, maxLen), InputType.recurrent(1, maxLen));
+                .addInputs("input_sequence")
+                .setInputTypes(InputType.recurrent(d, maxLen));
 
         // Add multiple transformer layers
         String lastLayer = "input_sequence";
@@ -86,52 +91,83 @@ public final class TransformerNeuralNetwork {
                             .headSize(headSize)
                             .projectInput(true)
                             .build(),
-                    lastLayer, "input_mask");
+                    lastLayer);
             lastLayer = layerName;
         }
+
+        // Add global pooling to reduce sequence dimension
+        builder.addLayer("pool",
+                new GlobalPoolingLayer.Builder()
+                        .poolingType(PoolingType.AVG)
+                        .build(),
+                lastLayer);
 
         // Enhanced feed-forward network with more layers and larger dimensions
         builder.addLayer("ff1",
                 new DenseLayer.Builder()
-                        .nIn(enhancedD)
-                        .nOut(enhancedD * 2)
+                        .nIn(d)  // Input size matches the feature dimension
+                        .nOut(d * 2)
                         .activation(Activation.RELU)
                         .build(),
-                lastLayer)
+                "pool")
                 .addLayer("ff2",
                         new DenseLayer.Builder()
-                                .nIn(enhancedD * 2)
-                                .nOut(enhancedD)
+                                .nIn(d * 2)
+                                .nOut(d)
                                 .activation(Activation.RELU)
                                 .build(),
                         "ff1");
 
-        // Output heads with increased capacity
+        // Output heads with increased capacity - using OutputLayer instead of DenseLayer
         builder.addLayer("cast_head",
-                new DenseLayer.Builder()
-                        .nIn(enhancedD)
+                new OutputLayer.Builder()
+                        .nIn(d)  // Input size matches the feature dimension
                         .nOut(headSizes[0])
                         .activation(Activation.SOFTMAX)
+                        .lossFunction(LossFunctions.LossFunction.MCXENT)
                         .build(),
                 "ff2")
                 .addLayer("atk_head",
-                        new DenseLayer.Builder()
-                                .nIn(enhancedD)
+                        new OutputLayer.Builder()
+                                .nIn(d)
                                 .nOut(headSizes[1])
                                 .activation(Activation.SOFTMAX)
+                                .lossFunction(LossFunctions.LossFunction.MCXENT)
                                 .build(),
                         "ff2")
                 .addLayer("blk_head",
-                        new DenseLayer.Builder()
-                                .nIn(enhancedD)
+                        new OutputLayer.Builder()
+                                .nIn(d)
                                 .nOut(headSizes[2])
                                 .activation(Activation.SOFTMAX)
+                                .lossFunction(LossFunctions.LossFunction.MCXENT)
                                 .build(),
                         "ff2")
                 .setOutputs("cast_head", "atk_head", "blk_head");
 
         net = new ComputationGraph(builder.build());
         net.init();
+    }
+
+    // -------------------------------------------------------------------------
+    // ε‑GREEDY PREDICT
+    // -------------------------------------------------------------------------
+    /**
+     * Update epsilon value based on current step
+     */
+    public void updateEpsilon() {
+        if (currentStep < decaySteps) {
+            // Linear decay
+            epsilon = initialEpsilon - (initialEpsilon - finalEpsilon) * ((double) currentStep / decaySteps);
+            currentStep++;
+            
+            // Log epsilon every 1000 steps
+            if (currentStep % 1000 == 0) {
+                RLTrainer.threadLocalLogger.get().info("Epsilon decay: step=" + currentStep + ", epsilon=" + epsilon);
+            }
+        } else {
+            epsilon = finalEpsilon;
+        }
     }
 
     // -------------------------------------------------------------------------
@@ -146,8 +182,14 @@ public final class TransformerNeuralNetwork {
             throw new IllegalArgumentException("SequenceOutput cannot be null");
         }
 
+        // Update epsilon if we're in exploration mode
+        if (exploration) {
+            updateEpsilon();
+        }
+
         // ε-greedy branch ----------------------------------------------------
         if (exploration && rnd.nextDouble() < epsilon) {
+            RLTrainer.threadLocalLogger.get().info("Random exploration with epsilon: " + epsilon);
             return randomOutput(ask);
         }
 
@@ -177,10 +219,8 @@ public final class TransformerNeuralNetwork {
             }
         }
 
-        // apply mask, run forward pass, then clear
-        net.setLayerMaskArrays(new INDArray[]{ mask }, null);
+        // No need to set mask arrays as the network handles masking internally
         Map<String, INDArray> outs = net.feedForward(new INDArray[]{ seq }, false);
-        net.clearLayerMaskArrays();
 
         switch (ask) {
             case CAST:   return outs.get("cast_head");
@@ -195,30 +235,30 @@ public final class TransformerNeuralNetwork {
     // ---------------------------------------------------------------------
     public void fit(INDArray seq, INDArray mask,
                     INDArray castTargets, INDArray atkTargets, INDArray blkTargets) {
-        // Log the actual shapes for debugging
-        System.out.println("Training sequence shape: " + Arrays.toString(seq.shape()));
-        System.out.println("Training mask shape: " + Arrays.toString(mask.shape()));
-        System.out.println("Cast targets shape: " + Arrays.toString(castTargets.shape()));
-        System.out.println("Attack targets shape: " + Arrays.toString(atkTargets.shape()));
-        System.out.println("Block targets shape: " + Arrays.toString(blkTargets.shape()));
+        // Log shapes for debugging
+        RLTrainer.threadLocalLogger.get().info("Input sequence shape: " + Arrays.toString(seq.shape()));
+        RLTrainer.threadLocalLogger.get().info("Cast targets shape: " + Arrays.toString(castTargets.shape()));
 
-        // Ensure input and target shapes match
-        if (seq.shape()[0] != castTargets.shape()[0]) {
-            // If we have more input samples than targets, truncate the input
-            long minSamples = Math.min(seq.shape()[0], castTargets.shape()[0]);
-            seq = seq.get(NDArrayIndex.interval(0, minSamples), NDArrayIndex.all());
-            mask = mask.get(NDArrayIndex.interval(0, minSamples), NDArrayIndex.all());
-            castTargets = castTargets.get(NDArrayIndex.interval(0, minSamples), NDArrayIndex.all());
-            atkTargets = atkTargets.get(NDArrayIndex.interval(0, minSamples), NDArrayIndex.all());
-            blkTargets = blkTargets.get(NDArrayIndex.interval(0, minSamples), NDArrayIndex.all());
+        // Ensure input shape is correct [batch_size, d, maxLen]
+        if (seq.rank() == 2) {
+            // Reshape to [batch_size, d, maxLen]
+            seq = seq.reshape(seq.shape()[0], d, maxLen);
         }
 
-        net.setLayerMaskArrays(new INDArray[]{ mask }, null);
+        // Ensure mask shape is correct [batch_size, maxLen]
+        if (mask.rank() == 2) {
+            if (mask.shape()[1] < maxLen) {
+                INDArray padded = Nd4j.zeros(mask.shape()[0], maxLen);
+                padded.get(NDArrayIndex.all(), NDArrayIndex.interval(0, mask.shape()[1]))
+                    .assign(mask);
+                mask = padded;
+            } else if (mask.shape()[1] > maxLen) {
+                mask = mask.get(NDArrayIndex.all(), NDArrayIndex.interval(0, maxLen));
+            }
+        }
+
+        // No need to set mask arrays as the network handles masking internally
         net.fit(new INDArray[]{ seq }, new INDArray[]{ castTargets, atkTargets, blkTargets });
-        net.clearLayerMaskArrays();
-        
-        // Reset network state after training
-        net.clear();
     }
 
     // ---------------------------------------------------------------------
@@ -237,16 +277,35 @@ public final class TransformerNeuralNetwork {
     // Batch inference helper (returns CAST logits for a batch)
     // ---------------------------------------------------------------------
     public INDArray batchCastLogits(INDArray seqBatch, INDArray maskBatch) {
-        net.setLayerMaskArrays(new INDArray[]{ maskBatch }, null);
+        // Ensure input shape is correct [batch_size, d, maxLen]
+        if (seqBatch.rank() == 2) {
+            // Reshape to [batch_size, d, maxLen]
+            seqBatch = seqBatch.reshape(seqBatch.shape()[0], d, maxLen);
+        }
+
+        // Ensure mask has correct shape [batch_size, maxLen]
+        if (maskBatch.rank() == 2) {
+            if (maskBatch.shape()[1] < maxLen) {
+                // Pad mask with zeros
+                INDArray padded = Nd4j.zeros(maskBatch.shape()[0], maxLen);
+                padded.get(NDArrayIndex.all(), NDArrayIndex.interval(0, maskBatch.shape()[1]))
+                    .assign(maskBatch);
+                maskBatch = padded;
+            } else if (maskBatch.shape()[1] > maxLen) {
+                // Truncate mask to maxLen
+                maskBatch = maskBatch.get(NDArrayIndex.all(), NDArrayIndex.interval(0, maxLen));
+            }
+        }
+
+        // No need to set mask arrays as the network handles masking internally
         INDArray[] outs = net.output(false, seqBatch);
-        net.clearLayerMaskArrays();
-        return outs[0]; // CAST_OUT is configured as first output
+        return outs[0]; // cast_head is configured as first output
     }
 
     // ---------------------------------------------------------------------
     // helper: produce random output for ε-greedy exploration
     // ---------------------------------------------------------------------
-    private INDArray randomOutput(AskType ask) {
+    public INDArray randomOutput(AskType ask) {
         String layer;
         switch (ask) {
             case CAST:   layer = "cast_head"; break;
@@ -258,6 +317,20 @@ public final class TransformerNeuralNetwork {
         long nOut = ((org.deeplearning4j.nn.conf.layers.FeedForwardLayer)
                 net.getLayer(layer).conf().getLayer()).getNOut();
 
-        return Nd4j.rand(1, (int) nOut);
+        // Generate random probabilities that sum to 1
+        INDArray random = Nd4j.rand(1, (int) nOut);
+        random = random.div(random.sumNumber());
+        return random.reshape(nOut);  // Reshape to 1D array
+    }
+
+    // ---------------------------------------------------------------------
+    // Getters for RLModel
+    // ---------------------------------------------------------------------
+    public Random getRandom() {
+        return rnd;
+    }
+
+    public double getEpsilon() {
+        return epsilon;
     }
 }

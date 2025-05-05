@@ -107,9 +107,10 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }else{
             turnPhase = game.getPhase().getType();
         }
-        currentState = StateSequenceBuilder.build(game, actionType, turnPhase, StateSequenceBuilder.MAX_LEN);
-        stateBuffer.add(currentState);
+        currentState = StateSequenceBuilder.build(game, actionType, turnPhase, StateSequenceBuilder.MAX_LEN, numOptions);
         INDArray qValues = model.predictDistribution(currentState, true);
+        currentState.currentQValues = qValues;  // Store current Q-values
+        stateBuffer.add(currentState);
 
         List<QValueWithIndex> qValueList = new ArrayList<>();
         for (int i = 0; i < numOptions; i++) {
@@ -151,10 +152,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
             selectedTargets++;
         }
 
-        // record the first chosen index (or -1 if none) into the last stored state
-        int chosen = targetsToSet.isEmpty() ? -1 : targetsToSet.get(0);
+        // record the chosen indices into the last stored state
         stateBuffer.set(stateBuffer.size() - 1,
-                new StateSequenceBuilder.SequenceOutput(currentState.sequence, currentState.mask, chosen));
+                new StateSequenceBuilder.SequenceOutput(currentState, targetsToSet));
         return targetsToSet;
     }
 

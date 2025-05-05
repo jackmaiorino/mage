@@ -75,9 +75,10 @@ public class StateSequenceBuilder {
      * @param actionType what decision the agent is being asked to make
      * @param phase      current phase of the game
      * @param maxLen     padding / truncation length (≤ {@link #MAX_LEN})
+     * @param numOptions number of available options
      * @return           sequence + mask
      */
-    public static SequenceOutput build(Game game, ActionType actionType, TurnPhase phase, int maxLen) {
+    public static SequenceOutput build(Game game, ActionType actionType, TurnPhase phase, int maxLen, int numOptions) {
         if (maxLen > MAX_LEN) {
             throw new IllegalArgumentException("maxLen exceeds hard cap: " + MAX_LEN);
         }
@@ -116,6 +117,7 @@ public class StateSequenceBuilder {
         mask.add(1);
         tokens.add(embedSpecial(ASK_BASE + actionType.ordinal()));
         mask.add(1);
+
         // (b) Player + opponent stats tokens -------------------------
         tokens.add(embedPlayerStats(player, game));
         mask.add(1);
@@ -193,7 +195,7 @@ public class StateSequenceBuilder {
         }
         INDArray maskArr = Nd4j.create(maskFloats).reshape(1, maxLen);
 
-        return new SequenceOutput(seq, maskArr);
+        return new SequenceOutput(seq, maskArr, new ArrayList<>(), numOptions, mapActionTypeToAskType(actionType));
     }
 
     /* === EMBEDDING HELPERS ============================================== */
@@ -334,20 +336,50 @@ public class StateSequenceBuilder {
         return v;
     }
 
+    private static TransformerNeuralNetwork.AskType mapActionTypeToAskType(ActionType actionType) {
+        switch (actionType) {
+            case ACTIVATE_ABILITY_OR_SPELL:
+            case SELECT_TARGETS:
+            case SELECT_CHOICE:
+            case SELECT_CARD:
+                return TransformerNeuralNetwork.AskType.CAST;
+            case DECLARE_ATTACKS:
+                return TransformerNeuralNetwork.AskType.ATTACK;
+            case DECLARE_BLOCKS:
+                return TransformerNeuralNetwork.AskType.BLOCK;
+            case MULLIGAN:
+            case SELECT_TRIGGERED_ABILITY:
+            default:
+                return TransformerNeuralNetwork.AskType.CAST;
+        }
+    }
+
     /* === SIMPLE CONTAINER (Java 8 version) =============================== */
     public static class SequenceOutput {
         public final INDArray sequence;
         public final INDArray mask;
-        public final int actionIndex;
+        public final List<Integer> targetIndices;
+        public final int numOptions;
+        public INDArray currentQValues;
+        public final TransformerNeuralNetwork.AskType askType;
 
-        public SequenceOutput(INDArray sequence, INDArray mask) {
-            this(sequence, mask, -1);
-        }
-
-        public SequenceOutput(INDArray sequence, INDArray mask, int actionIndex) {
+        public SequenceOutput(INDArray sequence, INDArray mask, List<Integer> targetIndices, int numOptions, TransformerNeuralNetwork.AskType askType) {
             this.sequence = sequence;
             this.mask = mask;
-            this.actionIndex = actionIndex;
+            this.targetIndices = targetIndices;
+            this.numOptions = numOptions;
+            this.currentQValues = null;
+            this.askType = askType;
+        }
+
+        // Copy constructor that preserves Q-values
+        public SequenceOutput(SequenceOutput original, List<Integer> newTargetIndices) {
+            this.sequence = original.sequence;
+            this.mask = original.mask;
+            this.targetIndices = newTargetIndices;
+            this.currentQValues = original.currentQValues;
+            this.numOptions = original.numOptions;
+            this.askType = original.askType;
         }
 
         public INDArray getSequence() {
@@ -358,8 +390,12 @@ public class StateSequenceBuilder {
             return mask;
         }
 
-        public int getActionIndex() {
-            return actionIndex;
+        public List<Integer> getTargetIndices() {
+            return targetIndices;
+        }
+
+        public int getNumOptions() {
+            return numOptions;
         }
     }
 }

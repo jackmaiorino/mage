@@ -24,11 +24,11 @@ public class BatchPredictionRequest {
     // ---------------------------------------------------------------------
     private static BatchPredictionRequest instance;
 
-    public static synchronized BatchPredictionRequest getInstance(int activeGameRunners,
-                                                                  long timeout,
-                                                                  TimeUnit unit) {
+    public static synchronized BatchPredictionRequest getInstance(
+                                                                long timeout,
+                                                                TimeUnit unit) {
         if (instance == null) {
-            instance = new BatchPredictionRequest(activeGameRunners, timeout, unit);
+            instance = new BatchPredictionRequest(timeout, unit);
         }
         return instance;
     }
@@ -44,8 +44,8 @@ public class BatchPredictionRequest {
     private long totalPredictions;
     private long startWall;
 
-    private BatchPredictionRequest(int activeGameRunners, long timeout, TimeUnit unit) {
-        this.activeGameRunners = activeGameRunners;
+    private BatchPredictionRequest(long timeout, TimeUnit unit) {
+        this.activeGameRunners = 0;
         this.timeoutMs        = unit.toMillis(timeout);
         this.queue            = new LinkedBlockingQueue<Request>();
         this.startWall        = System.currentTimeMillis();
@@ -100,45 +100,57 @@ public class BatchPredictionRequest {
 
         if (filled == 0) return;
 
-        // ------------------------------------------------------------------
-        // Build input tensors ---------------------------------------------
-        // ------------------------------------------------------------------
-        int D      = Math.toIntExact(batch[0].sequence.size(1)); // sequence shape [1, D, L]
-        int L      = Math.toIntExact(batch[0].sequence.size(2));
-        INDArray seqBatch  = Nd4j.create(new int[]{filled, D, L}, 'c');
-        INDArray maskBatch = Nd4j.create(new int[]{filled, L},   'c');
+        // Get shared model
+        RLModel shared = RLTrainer.sharedModel;
+        if (shared == null) {
+            throw new IllegalStateException("SharedModel is null");
+        }
+
+        // Build batched input
+        int D = Math.toIntExact(batch[0].sequence.size(1)); // sequence shape [1, D, L]
+        int L = Math.toIntExact(batch[0].sequence.size(2));
+        INDArray seqBatch = Nd4j.create(new int[]{filled, D, L}, 'c');
+        INDArray maskBatch = Nd4j.create(new int[]{filled, L}, 'c');
 
         for (int i = 0; i < filled; i++) {
             seqBatch.putSlice(i, batch[i].sequence.get(NDArrayIndex.point(0), NDArrayIndex.all(), NDArrayIndex.all()));
             maskBatch.putRow(i, batch[i].mask);
         }
 
-        // ------------------------------------------------------------------
-        // Forward pass -----------------------------------------------------
-        // ------------------------------------------------------------------
-        INDArray preds;
-        RLModel shared = RLTrainer.sharedModel;
-        if (shared == null) {
-            throw new IllegalStateException("SharedModel is null");
-        } else {
-            preds = shared.getNetwork().batchCastLogits(seqBatch, maskBatch);
-        }
-
-        // ------------------------------------------------------------------
-        // Fulfil promises ---------------------------------------------------
-        // ------------------------------------------------------------------
-        totalPredictions += filled;
-        for (int i = 0; i < filled; i++) {
-            batch[i].fulfil(preds.getRow(i, true));
-        }
-
-        // ------------------------------------------------------------------
-        // Throughput log ----------------------------------------------------
-        // ------------------------------------------------------------------
-        long elapsed = System.currentTimeMillis() - startWall;
-        if (elapsed > 0) {
-            double pps = (totalPredictions * 1000.0) / elapsed;
-            log.warn(String.format("Average predictions/sec: %.2f", pps));
+        // Do batch prediction using the specialized batch method
+        try {
+            System.out.println("Num gamerunners: " + activeGameRunners);
+            INDArray preds = shared.getNetwork().batchCastLogits(seqBatch, maskBatch);
+            
+            // Apply masking based on number of available options
+            for (int i = 0; i < filled; i++) {
+                // Get the number of available options from the state
+                int numOptions = 0;
+                // Extract numOptions from the sequence (it's encoded in the first element of the options token)
+                if (seqBatch.size(1) > 0) {  // Check if we have at least one feature
+                    numOptions = (int)(seqBatch.getDouble(i, 0, 0) * RLModel.CAST_OPTIONS);
+                }
+                
+                // Create mask for valid options
+                INDArray optionMask = Nd4j.zeros(RLModel.CAST_OPTIONS);
+                for (int j = 0; j < Math.min(numOptions, RLModel.CAST_OPTIONS); j++) {
+                    optionMask.putScalar(j, 1.0);
+                }
+                
+                // Apply mask to predictions for this entry
+                INDArray maskedPredictions = preds.getRow(i).mul(optionMask);
+                
+                // Normalize the masked predictions
+                double sum = maskedPredictions.sumNumber().doubleValue();
+                if (sum > 0) {
+                    maskedPredictions = maskedPredictions.div(sum);
+                }
+                
+                // Store the masked and normalized predictions
+                batch[i].fulfil(maskedPredictions);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Error during batch prediction", e);
         }
     }
 
