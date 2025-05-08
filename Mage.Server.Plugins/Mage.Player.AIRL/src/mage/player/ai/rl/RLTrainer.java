@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.nd4j.linalg.factory.Nd4j;
 
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
@@ -46,9 +45,8 @@ public class RLTrainer {
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     public static final int NUM_GAME_RUNNERS = NUM_THREADS;
     public static final int NUM_EPISODES_PER_GAME_RUNNER = 2;
-    public static final int BATCH_SIZE = (int) (NUM_GAME_RUNNERS/2);
 
-    public static final RLModel sharedModel = new RLModel(true);
+    public static final PythonMLBridge sharedModel = new PythonMLBridge();
 
     static {
         // Set default logging level for all loggers to WARN
@@ -67,7 +65,8 @@ public class RLTrainer {
     });
 
     public RLTrainer() {
-        // No need to create a model here
+        // Initialize the Python ML model
+        sharedModel.initialize();
     }
 
     public void train() {
@@ -78,19 +77,14 @@ public class RLTrainer {
 
             Random random = new Random();
             
-            // Create singleton instance with initial active game runners
-            BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(10000, TimeUnit.MILLISECONDS);
-
             RLTrainer.threadLocalLogger.get().info("Number of threads: " + NUM_THREADS);
             RLTrainer.threadLocalLogger.get().info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
 
             // Record start time
             long startTime = System.nanoTime();
-            long gamesRun = 0;
 
             ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS, runnable -> {
                 Thread thread = new Thread(runnable);
-                // One less prio than BatchPredictManager
                 thread.setPriority(Thread.MAX_PRIORITY - 1);
                 return thread;
             });
@@ -106,7 +100,6 @@ public class RLTrainer {
             final boolean[] isFirstThread = {true}; // Flag to track the first thread
 
             for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
-
                 Future<Void> future = executor.submit(() -> {
                     boolean isFirst;
                     synchronized (lock) {
@@ -118,15 +111,13 @@ public class RLTrainer {
                     if (isFirst) {
                         currentLogger.setLevel(Level.INFO);
                     }  
-                    currentLogger.info("Starting Game Runner ");
+                    currentLogger.info("Starting Game Runner");
 
                     Thread.currentThread().setName("GAME");
                     Deck rlPlayerDeckThread = rlPlayerDeck.copy();
                     Deck opponentDeckThread = opponentDeck.copy();
 
-
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
-                        batchPredictionRequest.incrementActiveGameRunners();
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(0), 60, 20, 7);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
@@ -141,14 +132,10 @@ public class RLTrainer {
                         GameOptions options = new GameOptions();
                         game.setGameOptions(options);
 
-
-
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
-                        batchPredictionRequest.decrementActiveGameRunners();
-                        updateModelBasedOnOutcome(game, rlPlayer, opponent, sharedModel);
-                        Nd4j.getWorkspaceManager().destroyAllWorkspacesForCurrentThread();
+                        updateModelBasedOnOutcome(game, rlPlayer, opponent);
                     }
                     return null;
                 });
@@ -167,22 +154,20 @@ public class RLTrainer {
                 }
             }
 
-            //TODO: Clean up end loggin
-            // Record end time
+            // Record end time and log statistics
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
-            double averageTimePerEpisode = (double) totalTime / NUM_EPISODES / 1_000_000_000.0; // Convert to seconds
-            double averageTimePerEpisodePerThread = (double) totalTime / NUM_EPISODES_PER_GAME_RUNNER / 1_000_000_000.0;
-            logger.info("Average time per episode: " + averageTimePerEpisode + " seconds");
-            logger.info("Average time per episode per thread: " + averageTimePerEpisodePerThread + " seconds");
-            sharedModel.saveModel(MODEL_FILE_PATH);
-
-            // Calculate and log the games run per minute
-            double totalTimeInMinutes = (endTime - startTime) / 1_000_000_000.0 / 60.0;
+            double totalTimeInMinutes = totalTime / 1_000_000_000.0 / 60.0;
             double gamesRunPerMinute = NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER / totalTimeInMinutes;
+            
+            logger.info("Training completed:");
+            logger.info("Total Games Run: " + NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER);
             logger.info("Games Run Per Minute: " + gamesRunPerMinute);
-            System.out.println("Total Games Run: " + NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER);
-            System.out.println("Games Run Per Minute: " + gamesRunPerMinute);
+            logger.info("Total Training Time: " + (totalTime / 1_000_000_000.0) + " seconds");
+            
+            // Save the trained model
+            sharedModel.saveModel(MODEL_FILE_PATH);
+            
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
         }
@@ -196,15 +181,8 @@ public class RLTrainer {
                              .collect(Collectors.toList());
         } catch (IOException e) {
             logger.error("Error during evaluation", e);
-        }
-        if (deckFiles == null) {
-            logger.error("No deck files found");
             return;
         }
-
-        // TODO: Make ComputerPlayerRL not dependant on so much setup always
-        // Create singleton instance
-        BatchPredictionRequest batchPredictionRequest = BatchPredictionRequest.getInstance(10000, TimeUnit.MILLISECONDS);
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS);
         final Object lock = new Object();
@@ -220,35 +198,28 @@ public class RLTrainer {
 
         for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
             Future<Integer> future = executor.submit(() -> {
-                boolean isFirst = false;
-
+                boolean isFirst;
                 synchronized (lock) {
-                    if (isFirstThread[0]) {
-                        isFirst = true;
-                        isFirstThread[0] = false;
-                    }
+                    isFirst = isFirstThread[0];
+                    isFirstThread[0] = false;
                 }
 
                 Logger currentLogger = threadLocalLogger.get();
-
-                //Temp set all to log
                 if (isFirst) {
                     currentLogger.setLevel(Level.INFO);
                 }
 
                 int localWinsAgainstComputerPlayer7 = 0;
-
-                Thread.currentThread().setName("GAME");
                 Deck rlPlayerDeckThread = rlPlayerDeck.copy();
                 Deck opponentDeckThread = opponentDeck.copy();
 
                 for (int evalEpisode = 0; evalEpisode < numEpisodesPerThread; evalEpisode++) {
-                    batchPredictionRequest.incrementActiveGameRunners();
                     TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
                     try {
                         match.startGame();
                     } catch (GameException e) {
-                        e.printStackTrace();
+                        logger.error("Error starting game", e);
+                        continue;
                     }
                     Game game = match.getGames().get(0);
 
@@ -275,7 +246,6 @@ public class RLTrainer {
                     if (game.getWinner().contains(rlPlayer.getName())) {
                         localWinsAgainstComputerPlayer7++;
                     }
-                    batchPredictionRequest.decrementActiveGameRunners();
                 }
                 return localWinsAgainstComputerPlayer7;
             });
@@ -299,7 +269,7 @@ public class RLTrainer {
             }
         }).sum();
 
-        double winRate = (double) totalWinsAgainstComputerPlayer7 / (numEpisodesPerThread*NUM_THREADS);
+        double winRate = (double) totalWinsAgainstComputerPlayer7 / (numEpisodesPerThread * NUM_THREADS);
         logger.setLevel(Level.INFO);
         logger.info("Win rate against ComputerPlayer7: " + (winRate * 100) + "%");
     }
@@ -319,39 +289,25 @@ public class RLTrainer {
             DeckCardLists deckCardLists = DeckImporter.importDeckFromFile(filePath, false);
             return Deck.load(deckCardLists, false, false, null);
         } catch (GameException e) {
-            e.printStackTrace();
+            logger.error("Error loading deck: " + filePath, e);
             return null;
         }
     }
 
-    private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent, RLModel model) {
+    private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
         double reward = rlPlayerWon ? 0.15 : -0.15;
 
-        // Get states for both players
-        List<StateSequenceBuilder.SequenceOutput> rlPlayerStates = rlPlayer.getStateBuffer();
-        List<StateSequenceBuilder.SequenceOutput> opponentStates = opponent.getStateBuffer();
+        // Get training data for both players
+        List<StateSequenceBuilder.TrainingData> rlPlayerTrainingData = rlPlayer.getTrainingBuffer();
+        List<StateSequenceBuilder.TrainingData> opponentTrainingData = opponent.getTrainingBuffer();
         
-        // Add states for player
-        List<StateSequenceBuilder.SequenceOutput> allStates = new ArrayList<>(rlPlayerStates);
-        // Add states for opponent
-        allStates.addAll(opponentStates);
-        List<Double> rewards = new ArrayList<>();
-        // Add rewards for RL player states
-        for (StateSequenceBuilder.SequenceOutput ignored : rlPlayerStates) {
-            rewards.add(reward);
-        }
-        // Add rewards for opponent states
-        for (StateSequenceBuilder.SequenceOutput state : opponentStates) {
-            rewards.add(-reward);
-        }
-        
-        model.updateBatch(allStates, rewards);
-
+        // Update the model with all states and rewards
+        sharedModel.train(rlPlayerTrainingData, reward);
+        sharedModel.train(opponentTrainingData, -reward); // Opposite reward for opponent
     }
 
-    public static RLModel getSharedModel() {
+    public static PythonMLBridge getSharedModel() {
         return sharedModel;
     }
-
 } 

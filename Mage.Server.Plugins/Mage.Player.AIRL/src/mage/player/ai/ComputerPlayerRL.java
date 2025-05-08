@@ -1,72 +1,52 @@
 package mage.player.ai;
 
-import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import mage.constants.TurnPhase;
-import mage.player.ai.rl.*;
 import org.nd4j.linalg.api.ndarray.INDArray;
 
-import mage.ConditionalMana;
-import mage.Mana;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
-import mage.abilities.Mode;
-import mage.abilities.Modes;
-import mage.abilities.TriggeredAbility;
 import mage.abilities.common.PassAbility;
-import mage.abilities.costs.VariableCost;
-import mage.abilities.costs.mana.ManaCost;
-import mage.abilities.costs.mana.VariableManaCost;
-import mage.abilities.mana.ManaOptions;
-import mage.cards.Card;
-import mage.cards.Cards;
-import mage.choices.Choice;
-import mage.constants.ColoredManaSymbol;
-import mage.constants.Outcome;
 import mage.constants.RangeOfInfluence;
-import mage.filter.StaticFilters;
+import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.player.ai.rl.PythonMLBridge;
+import mage.player.ai.rl.RLTrainer;
+import mage.player.ai.rl.StateSequenceBuilder;
 import mage.player.ai.util.CombatUtil;
 import mage.players.Player;
 import mage.target.Target;
-import mage.target.TargetAmount;
-import mage.target.TargetCard;
 
 public class ComputerPlayerRL extends ComputerPlayer {
-    public RLModel model;
+    private PythonMLBridge model;
     protected StateSequenceBuilder.SequenceOutput currentState;
-    private final List<StateSequenceBuilder.SequenceOutput> stateBuffer;
+    private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private Ability currentAbility;
 
-    public ComputerPlayerRL(String name, RangeOfInfluence range, RLModel model) {
+    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonMLBridge model) {
         super(name, range);
         this.model = model;
-        this.stateBuffer = new ArrayList<StateSequenceBuilder.SequenceOutput>();
+        this.trainingBuffer = new ArrayList<>();
         RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name);
     }
 
     // The default constructor for ComputerPlayerRL used by server to create
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
-        this(name, range, new RLModel(false));
+        this(name, range, new PythonMLBridge());
     }
 
     public ComputerPlayerRL(final ComputerPlayerRL player) {
         super(player);
-        // Intentional direct reference to model
         this.model = player.model;
-        // Like the normal constructor this shouldn't need to be initialized
-//        this.currentState = player.currentState;
-        this.stateBuffer = new ArrayList<StateSequenceBuilder.SequenceOutput>();
+        this.trainingBuffer = new ArrayList<>();
         this.currentAbility = player.currentAbility;
     }
 
@@ -84,78 +64,100 @@ public class ComputerPlayerRL extends ComputerPlayer {
     }
 
     public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source) {
-        boolean mustSelectExact = minTargets == maxTargets;
-        int numOptions;
-        if (mustSelectExact){
-            numOptions = possibleTargetsSize;
-        }else{
-            numOptions = possibleTargetsSize + 1;
-        }
-
-        List<Integer> targetsToSet = new ArrayList<>();
         // Don't query the model if only one/no option
-        if (numOptions == 1){
-            targetsToSet.add(0);
-            return targetsToSet;
-        } else if (numOptions == 0){
-            return targetsToSet;
-        }
-        TurnPhase turnPhase;
-        if (game.getPhase() == null){
-            //TODO: Is mulligan the only time this is null?
-            turnPhase = null;
-        }else{
-            turnPhase = game.getPhase().getType();
-        }
-        currentState = StateSequenceBuilder.build(game, actionType, turnPhase, StateSequenceBuilder.MAX_LEN, numOptions);
-        INDArray qValues = model.predictDistribution(currentState, true);
-        currentState.currentQValues = qValues;  // Store current Q-values
-        stateBuffer.add(currentState);
-
-        List<QValueWithIndex> qValueList = new ArrayList<>();
-        for (int i = 0; i < numOptions; i++) {
-            qValueList.add(new QValueWithIndex(qValues.getFloat(i), i));
+        if (possibleTargetsSize == 1) {
+            return Arrays.asList(0);
+        } else if (possibleTargetsSize == 0) {
+            return Arrays.asList();
         }
 
-        // Sort the list by Q-value in descending order
-        qValueList.sort((a, b) -> Float.compare(b.qValue, a.qValue));
+        // Get current phase
+        TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
 
-        // Use the sorted Q-values and their indices as needed
-        int selectedTargets = 0;
-        boolean stopChoosing = false;
-        for (QValueWithIndex qValueWithIndex : qValueList) {
-            // Stop if we've reached the maximum number of cards
-            if (selectedTargets >= maxTargets && maxTargets > 0) {
-                break;
+        // Build base state once
+        StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+        
+        // Store best action combination and its scores
+        double bestPolicyScore = Double.NEGATIVE_INFINITY;
+        List<Integer> bestActionCombo = null;
+        double bestValueScore = 0;
+        StateSequenceBuilder.SequenceOutput bestStateActionPair = null;
+
+        // Generate all valid action combinations
+        List<List<Integer>> validCombos = new ArrayList<>();
+        
+        // For single-target actions (like CAST), just evaluate each target individually
+        if (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) {
+            for (int i = 0; i < possibleTargetsSize; i++) {
+                validCombos.add(Arrays.asList(i));
             }
-
-            // Stop if we've reached minimum number of cards
-            if (stopChoosing && selectedTargets >= minTargets) {
-                break;
-            }
-
-            // Stop if we've reached the minimum and the do nothing option is the best option
-            if (!mustSelectExact && qValueWithIndex.index == possibleTargetsSize) {
-                // no-op: learning backend records chosen index later
-                if (selectedTargets >= minTargets) {
-                    break;
-                }else{
-                    stopChoosing = true;
-                    continue;
-                }
-            }
-
-            // Access the original index and Q-value
-            int originalIndex = qValueWithIndex.index;
-            // no-op
-            targetsToSet.add(originalIndex);
-            selectedTargets++;
+            //TODO: ADD CUSTOM LOGIC FOR EACH ACTION TYPE, BLOCK, ATTACK, etc.
+        } else {
+            // For multi-target actions, generate all valid combinations
+            generateCombinations(validCombos, new ArrayList<>(), 0, possibleTargetsSize, minTargets, maxTargets);
         }
 
-        // record the chosen indices into the last stored state
-        stateBuffer.set(stateBuffer.size() - 1,
-                new StateSequenceBuilder.SequenceOutput(currentState, targetsToSet));
-        return targetsToSet;
+        // Create all state-action pairs first
+        List<StateSequenceBuilder.SequenceOutput> stateActionPairs = new ArrayList<>();
+        for (List<Integer> actionCombo : validCombos) {
+            stateActionPairs.add(StateSequenceBuilder.prependAction(baseState, actionType, actionCombo));
+        }
+
+        // Get predictions for all state-action pairs at once using batch prediction
+        INDArray[] allPredictions = model.predictBatch(stateActionPairs);
+        INDArray policyScores = allPredictions[0];
+        INDArray valueScores = allPredictions[1];
+
+        // Evaluate each action combination using the predictions
+        for (int i = 0; i < validCombos.size(); i++) {
+            List<Integer> actionCombo = validCombos.get(i);
+            StateSequenceBuilder.SequenceOutput stateActionPair = stateActionPairs.get(i);
+            
+            // Get scores for this combination
+            double policyScore = policyScores.getDouble(i);
+            double valueScore = valueScores.getDouble(i);
+            
+            // Update best if this action combination has higher policy score
+            if (policyScore > bestPolicyScore) {
+                bestPolicyScore = policyScore;
+                bestActionCombo = actionCombo;
+                bestValueScore = valueScore;
+                bestStateActionPair = stateActionPair;
+            }
+        }
+
+        // Only store training data for the selected action combination
+        if (bestStateActionPair != null) {
+            trainingBuffer.add(new StateSequenceBuilder.TrainingData(
+                bestStateActionPair,
+                bestPolicyScore,
+                bestValueScore,
+                bestActionCombo,
+                actionType
+            ));
+        }
+
+        return bestActionCombo != null ? bestActionCombo : Arrays.asList();
+    }
+
+    // Helper method to generate all valid combinations of targets
+    private void generateCombinations(List<List<Integer>> result, List<Integer> current, int start, int n, int minSize, int maxSize) {
+        // If current combination is valid size, add it
+        if (current.size() >= minSize && current.size() <= maxSize) {
+            result.add(new ArrayList<>(current));
+        }
+        
+        // If we've reached max size, stop
+        if (current.size() >= maxSize) {
+            return;
+        }
+        
+        // Try adding each remaining number
+        for (int i = start; i < n; i++) {
+            current.add(i);
+            generateCombinations(result, current, i + 1, n, minSize, maxSize);
+            current.remove(current.size() - 1);
+        }
     }
 
     // Stuff like Opp agent? Investigate further how to handle. Just choosing how to handle multiple replacement effects?
@@ -165,208 +167,208 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //        log.debug("chooseReplacementEffect");
 
     // Stuff like sheoldred's edict, kozilek's command
-    @Override
-    public Mode chooseMode(Modes modes, Ability source, Game game) {
-        //TODO: Testing if we can make this not a copy.
-        ArrayList<UUID> modeIds = new ArrayList<>(modes.values().stream().map(Mode::getId).collect(Collectors.toList()));
-        for (UUID modeId : modeIds) {
-            Mode mode = modes.get(modeId);
-            // Need to do this so target validation is correct
-            modes.addSelectedMode(mode.getId());
-            source.getModes().setActiveMode(modeId);
-            if (!source.getAbilityType().isTriggeredAbility()) {
-                source.adjustTargets(game);
-            }
+    // @Override
+    // public Mode chooseMode(Modes modes, Ability source, Game game) {
+    //     //TODO: Testing if we can make this not a copy.
+    //     ArrayList<UUID> modeIds = new ArrayList<>(modes.values().stream().map(Mode::getId).collect(Collectors.toList()));
+    //     for (UUID modeId : modeIds) {
+    //         Mode mode = modes.get(modeId);
+    //         // Need to do this so target validation is correct
+    //         modes.addSelectedMode(mode.getId());
+    //         source.getModes().setActiveMode(modeId);
+    //         if (!source.getAbilityType().isTriggeredAbility()) {
+    //             source.adjustTargets(game);
+    //         }
 
-            if ((!mode.getTargets().isEmpty() && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
-                modes.remove(modeId);
-            }
-            modes.removeSelectedMode(modeId);
-        }
+    //         if ((!mode.getTargets().isEmpty() && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
+    //             modes.remove(modeId);
+    //         }
+    //         modes.removeSelectedMode(modeId);
+    //     }
 
-        int maxTargets = Math.min(modes.getMaxModes(game, source), modes.size());
-        int minTargets = modes.getMinModes();
+    //     int maxTargets = Math.min(modes.getMaxModes(game, source), modes.size());
+    //     int minTargets = modes.getMinModes();
 
-        List<Integer> targetsToSet = genericChoose(modes.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
-        if (targetsToSet.size() == 1){
-            return (Mode) modes.values().toArray()[0];
-        } else if(targetsToSet.isEmpty()){
-            return null;
-        }else {
-            // Add all selected modes except the last one
-            for(int i = 0; i < targetsToSet.size() - 1; i++){
-                Mode mode = (Mode) modes.values().toArray()[targetsToSet.get(i)];
-                modes.addSelectedMode(mode.getId());
-            }
-            // Return the last selected mode to let outer loop handle it
-            return (Mode) modes.values().toArray()[targetsToSet.get(targetsToSet.size() - 1)];
-        }
-    }
+    //     List<Integer> targetsToSet = genericChoose(modes.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
+    //     if (targetsToSet.size() == 1){
+    //         return (Mode) modes.values().toArray()[0];
+    //     } else if(targetsToSet.isEmpty()){
+    //         return null;
+    //     }else {
+    //         // Add all selected modes except the last one
+    //         for(int i = 0; i < targetsToSet.size() - 1; i++){
+    //             Mode mode = (Mode) modes.values().toArray()[targetsToSet.get(i)];
+    //             modes.addSelectedMode(mode.getId());
+    //         }
+    //         // Return the last selected mode to let outer loop handle it
+    //         return (Mode) modes.values().toArray()[targetsToSet.get(targetsToSet.size() - 1)];
+    //     }
+    // }
 
-    @Override
-    public int announceXMana(int min, int max, String message, Game game, Ability ability) {
-        VariableManaCost variableManaCost = null;
-        for (ManaCost cost : ability.getManaCostsToPay()) {
-            if (cost instanceof VariableManaCost) {
-                if (variableManaCost == null) {
-                    variableManaCost = (VariableManaCost) cost;
-                } else {
-                    throw new RuntimeException("More than one VariableManaCost in spell");
-                }
-            }
-        }
-        if (variableManaCost == null) {
-            throw new RuntimeException("No VariableManaCost in spell");
-        }
+    // @Override
+    // public int announceXMana(int min, int max, String message, Game game, Ability ability) {
+    //     VariableManaCost variableManaCost = null;
+    //     for (ManaCost cost : ability.getManaCostsToPay()) {
+    //         if (cost instanceof VariableManaCost) {
+    //             if (variableManaCost == null) {
+    //                 variableManaCost = (VariableManaCost) cost;
+    //             } else {
+    //                 throw new RuntimeException("More than one VariableManaCost in spell");
+    //             }
+    //         }
+    //     }
+    //     if (variableManaCost == null) {
+    //         throw new RuntimeException("No VariableManaCost in spell");
+    //     }
 
-        // Get all possible mana combinations
-        ManaOptions manaOptions = getManaAvailable(game);
-        if (manaOptions.isEmpty() && min == 0) {
-            return 0;
-        }
-        // Use a Set to ensure unique X values
-        Set<Integer> possibleXValuesSet = new HashSet<>();
-        possibleXValuesSet.add(0); // Always allow X=0
-        for (Mana mana : manaOptions) {
-            if (mana instanceof ConditionalMana && !((ConditionalMana) mana).apply(ability, game, getId(), ability.getManaCosts())) {
-                continue;
-            }
-            int availableMana = mana.count() - ability.getManaCostsToPay().manaValue();
+    //     // Get all possible mana combinations
+    //     ManaOptions manaOptions = getManaAvailable(game);
+    //     if (manaOptions.isEmpty() && min == 0) {
+    //         return 0;
+    //     }
+    //     // Use a Set to ensure unique X values
+    //     Set<Integer> possibleXValuesSet = new HashSet<>();
+    //     possibleXValuesSet.add(0); // Always allow X=0
+    //     for (Mana mana : manaOptions) {
+    //         if (mana instanceof ConditionalMana && !((ConditionalMana) mana).apply(ability, game, getId(), ability.getManaCosts())) {
+    //             continue;
+    //         }
+    //         int availableMana = mana.count() - ability.getManaCostsToPay().manaValue();
 
-            for (int x = min; x <= max; x++) {
-                if (variableManaCost.getXInstancesCount() * x <= availableMana) {
-                    possibleXValuesSet.add(x);
-                } else {
-                    break;
-                }
-            }
-        }
+    //         for (int x = min; x <= max; x++) {
+    //             if (variableManaCost.getXInstancesCount() * x <= availableMana) {
+    //                 possibleXValuesSet.add(x);
+    //             } else {
+    //                 break;
+    //             }
+    //         }
+    //     }
 
-        // Convert the Set to a List
-        List<Integer> possibleXValues = new ArrayList<>(possibleXValuesSet);
+    //     // Convert the Set to a List
+    //     List<Integer> possibleXValues = new ArrayList<>(possibleXValuesSet);
 
-        // Select the best X value using Q-values
-        if (!possibleXValues.isEmpty() && possibleXValues.size() > 1) {
-            List<Integer> targetsToSet = genericChoose(possibleXValues.size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, ability);
-            return possibleXValues.get(targetsToSet.get(0));
-        } else if (possibleXValues.size() == 1) {
-            // No need to query model for only 1 option
-            return possibleXValues.get(0);
-        }
+    //     // Select the best X value using Q-values
+    //     if (!possibleXValues.isEmpty() && possibleXValues.size() > 1) {
+    //         List<Integer> targetsToSet = genericChoose(possibleXValues.size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, ability);
+    //         return possibleXValues.get(targetsToSet.get(0));
+    //     } else if (possibleXValues.size() == 1) {
+    //         // No need to query model for only 1 option
+    //         return possibleXValues.get(0);
+    //     }
 
-        return 0; // Default to 0 if no valid options are found
-    }
+    //     return 0; // Default to 0 if no valid options are found
+    // }
 
-    //TODO: Implement
-    //TODO: I don't know when this is used?
-    @Override
-    public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
-        return super.announceXCost(min, max, message, game, ability, variableCost);
-    }
+    // //TODO: Implement
+    // //TODO: I don't know when this is used?
+    // @Override
+    // public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
+    //     return super.announceXCost(min, max, message, game, ability, variableCost);
+    // }
 
-    // Deciding to use FOW alt cast, choosing creaturetype for cavern of souls
-    // TODO: Implement
-    @Override
-    public boolean choose(Outcome outcome, Choice choice, Game game) {
-        // TODO: Allow RLModel to handle this logic
-        // choose the correct color to pay a spell (use last unpaid ability for color hint)
-        ManaCost unpaid = null;
-        if (!getLastUnpaidMana().isEmpty()) {
-            unpaid = new ArrayList<>(getLastUnpaidMana().values()).get(getLastUnpaidMana().size() - 1);
-        }
-        if (outcome == Outcome.PutManaInPool && unpaid != null && choice.isManaColorChoice()) {
-            if (unpaid.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
-                choice.setChoice("White");
-                return true;
-            }
-            if (unpaid.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
-                choice.setChoice("Red");
-                return true;
-            }
-            if (unpaid.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
-                choice.setChoice("Green");
-                return true;
-            }
-            if (unpaid.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
-                choice.setChoice("Blue");
-                return true;
-            }
-            if (unpaid.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
-                choice.setChoice("Black");
-                return true;
-            }
-            if (unpaid.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
-                choice.setChoice("Colorless");
-                return true;
-            }
-        }
+    // // Deciding to use FOW alt cast, choosing creaturetype for cavern of souls
+    // // TODO: Implement
+    // @Override
+    // public boolean choose(Outcome outcome, Choice choice, Game game) {
+    //     // TODO: Allow RLModel to handle this logic
+    //     // choose the correct color to pay a spell (use last unpaid ability for color hint)
+    //     ManaCost unpaid = null;
+    //     if (!getLastUnpaidMana().isEmpty()) {
+    //         unpaid = new ArrayList<>(getLastUnpaidMana().values()).get(getLastUnpaidMana().size() - 1);
+    //     }
+    //     if (outcome == Outcome.PutManaInPool && unpaid != null && choice.isManaColorChoice()) {
+    //         if (unpaid.containsColor(ColoredManaSymbol.W) && choice.getChoices().contains("White")) {
+    //             choice.setChoice("White");
+    //             return true;
+    //         }
+    //         if (unpaid.containsColor(ColoredManaSymbol.R) && choice.getChoices().contains("Red")) {
+    //             choice.setChoice("Red");
+    //             return true;
+    //         }
+    //         if (unpaid.containsColor(ColoredManaSymbol.G) && choice.getChoices().contains("Green")) {
+    //             choice.setChoice("Green");
+    //             return true;
+    //         }
+    //         if (unpaid.containsColor(ColoredManaSymbol.U) && choice.getChoices().contains("Blue")) {
+    //             choice.setChoice("Blue");
+    //             return true;
+    //         }
+    //         if (unpaid.containsColor(ColoredManaSymbol.B) && choice.getChoices().contains("Black")) {
+    //             choice.setChoice("Black");
+    //             return true;
+    //         }
+    //         if (unpaid.getMana().getColorless() > 0 && choice.getChoices().contains("Colorless")) {
+    //             choice.setChoice("Colorless");
+    //             return true;
+    //         }
+    //     }
 
-        // choose by RLModel
-        Ability source;
-        if (game.getStack().isEmpty()) {
-            source = currentAbility;
-        }else{
-            source = game.getStack().getFirst().getStackAbility();
-        }
-        if (!choice.isChosen()) {
-            if (choice.getKeyChoices() != null && !choice.getKeyChoices().isEmpty()) {
-                for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
-                    if (choice.getChoice() == null) {
-                        choice.setChoice(entry.getKey());
-                    }
-                }
-                //Keychoice
-                if(choice.getKeyChoices().size() > 1){
-                    List<Integer> targetsToSet = genericChoose(choice.getKeyChoices().size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
-                    choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[targetsToSet.get(0)].toString());
-                    return true;
-                } else {
-                    // Only one choice
-                    choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[0].toString());
-                    return true;
-                }
-            } else if(choice.getChoices() != null && !choice.getChoices().isEmpty()) {
-                // Normal Choice
-                if (choice.getChoices().size() > 1) {
-                    List<Integer> targetsToSet = genericChoose(choice.getChoices().size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
-                    choice.setChoice(choice.getChoices().toArray()[targetsToSet.get(0)].toString());
-                    return true;
-                } else {
-                    choice.setChoice(choice.getChoices().toArray()[0].toString());
-                    return true;
-                }
-            }
-        }
-        throw new RuntimeException("No choice made");
-    }
+    //     // choose by RLModel
+    //     Ability source;
+    //     if (game.getStack().isEmpty()) {
+    //         source = currentAbility;
+    //     }else{
+    //         source = game.getStack().getFirst().getStackAbility();
+    //     }
+    //     if (!choice.isChosen()) {
+    //         if (choice.getKeyChoices() != null && !choice.getKeyChoices().isEmpty()) {
+    //             for (Map.Entry<String, String> entry : choice.getKeyChoices().entrySet()) {
+    //                 if (choice.getChoice() == null) {
+    //                     choice.setChoice(entry.getKey());
+    //                 }
+    //             }
+    //             //Keychoice
+    //             if(choice.getKeyChoices().size() > 1){
+    //                 List<Integer> targetsToSet = genericChoose(choice.getKeyChoices().size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
+    //                 choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[targetsToSet.get(0)].toString());
+    //                 return true;
+    //             } else {
+    //                 // Only one choice
+    //                 choice.setChoiceByKey(choice.getKeyChoices().keySet().toArray()[0].toString());
+    //                 return true;
+    //             }
+    //         } else if(choice.getChoices() != null && !choice.getChoices().isEmpty()) {
+    //             // Normal Choice
+    //             if (choice.getChoices().size() > 1) {
+    //                 List<Integer> targetsToSet = genericChoose(choice.getChoices().size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
+    //                 choice.setChoice(choice.getChoices().toArray()[targetsToSet.get(0)].toString());
+    //                 return true;
+    //             } else {
+    //                 choice.setChoice(choice.getChoices().toArray()[0].toString());
+    //                 return true;
+    //             }
+    //         }
+    //     }
+    //     throw new RuntimeException("No choice made");
+    // }
 
     // Deciding ponder cards, exile card from opponent's hand
     //Choose2
-    @Override
-    public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (cards == null || cards.isEmpty()) {
-            return true;
-        }
+    // @Override
+    // public boolean choose(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+    //     if (cards == null || cards.isEmpty()) {
+    //         return true;
+    //     }
 
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+    //     // sometimes a target selection can be made from a player that does not control the ability
+    //     UUID abilityControllerId = playerId;
+    //     if (target.getTargetController() != null
+    //             && target.getAbilityController() != null) {
+    //         abilityControllerId = target.getAbilityController();
+    //     }
 
-        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
+    //     List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
 
-        int maxTargets = Math.min(target.getMaxNumberOfTargets(), cardChoices.size());
-        int minTargets = target.getMinNumberOfTargets();
+    //     int maxTargets = Math.min(target.getMaxNumberOfTargets(), cardChoices.size());
+    //     int minTargets = target.getMinNumberOfTargets();
 
-        List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CARD, game, source);
+    //     List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CARD, game, source);
 
-        for (int i = 0; i < targetsToSet.size(); i++) {
-            target.add(cardChoices.get(targetsToSet.get(i)).getId(), game);
-        }
-        return true;
-    }
+    //     for (int i = 0; i < targetsToSet.size(); i++) {
+    //         target.add(cardChoices.get(targetsToSet.get(i)).getId(), game);
+    //     }
+    //     return true;
+    // }
 
     // TODO
 //    @Override
@@ -384,105 +386,105 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //    }
 
     // Choosing which stack ability from the stack you want to resolve
-    @Override
-    public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
-        if (!abilities.isEmpty()) {
-            if (abilities.size() == 1) {
-                return abilities.get(0);
-            }
-            List<Integer> targetsToSet = genericChoose(abilities.size(),1,1, StateSequenceBuilder.ActionType.SELECT_TRIGGERED_ABILITY, game, null);
-            return abilities.get(targetsToSet.get(0));
-        }
-        return null;
-    }
+    // @Override
+    // public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
+    //     if (!abilities.isEmpty()) {
+    //         if (abilities.size() == 1) {
+    //             return abilities.get(0);
+    //         }
+    //         List<Integer> targetsToSet = genericChoose(abilities.size(),1,1, StateSequenceBuilder.ActionType.SELECT_TRIGGERED_ABILITY, game, null);
+    //         return abilities.get(targetsToSet.get(0));
+    //     }
+    //     return null;
+    // }
 
     // Examples:
     // Damage assignment from fury
     // ((TargetCreatureOrPlaneswalkerAmount) target).getAmountRemaining()
-    @Override
-    public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
-        // TODO: Investigate what calls this
-        return super.chooseTargetAmount(outcome, target, source, game);
-        //return choose(outcome, target, source, game, null);
-    }
+    // @Override
+    // public boolean chooseTargetAmount(Outcome outcome, TargetAmount target, Ability source, Game game) {
+    //     // TODO: Investigate what calls this
+    //     return super.chooseTargetAmount(outcome, target, source, game);
+    //     //return choose(outcome, target, source, game, null);
+    // }
 
     // TODO: This breaks on mulligans? Because there is no active player?
     // Examples: Return card from graveyard to hand,
-    @Override
-    public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
-        return choose(outcome, target, source, game, null);
-    }
+    // @Override
+    // public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+    //     return choose(outcome, target, source, game, null);
+    // }
 
     // Examples: Choosing when searching library. Fetch lands
-    @Override
-    public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
-        if (cards == null || cards.isEmpty()) {
-            return target.isRequired(source);
-        }
+//     @Override
+//     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
+//         if (cards == null || cards.isEmpty()) {
+//             return target.isRequired(source);
+//         }
 
-        // sometimes a target selection can be made from a player that does not control the ability
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null
-                && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+//         // sometimes a target selection can be made from a player that does not control the ability
+//         UUID abilityControllerId = playerId;
+//         if (target.getTargetController() != null
+//                 && target.getAbilityController() != null) {
+//             abilityControllerId = target.getAbilityController();
+//         }
 
-        // we still use playerId when getting cards even if they don't control the search
-        List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
+//         // we still use playerId when getting cards even if they don't control the search
+//         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
 
-        // TODO: Fetchlands incorrectly state mintargets = 1 but you can "fail to find"
-        int maxTargets = target.getMaxNumberOfTargets();
-        int minTargets = target.getMinNumberOfTargets();
+//         // TODO: Fetchlands incorrectly state mintargets = 1 but you can "fail to find"
+//         int maxTargets = target.getMaxNumberOfTargets();
+//         int minTargets = target.getMinNumberOfTargets();
 
-        List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
+//         List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
 
-        for (int i = 0; i < targetsToSet.size(); i++) {
-            // TODO: For some reason this always fails because the card zone is OUTSIDE
-            // Pretty important to fix this for computerPlayer because I think they always fail to find
-            // so they will be rly bad, could just be with how I'm setting the game up?
-//            if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
-            target.add(cardChoices.get(targetsToSet.get(i)).getId(), game);
-        }
-        return true;
-    }
+//         for (int i = 0; i < targetsToSet.size(); i++) {
+//             // TODO: For some reason this always fails because the card zone is OUTSIDE
+//             // Pretty important to fix this for computerPlayer because I think they always fail to find
+//             // so they will be rly bad, could just be with how I'm setting the game up?
+// //            if (target.canTarget(abilityControllerId, card.getId(), source, game)) {
+//             target.add(cardChoices.get(targetsToSet.get(i)).getId(), game);
+//         }
+//         return true;
+//     }
 
     // Examples:
     // Discarding to hand size, Choosing to keep which legend for legend rule
-    @Override
-    public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
-        return choose(outcome, target, source, game, null);
-    }
+    // @Override
+    // public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
+    //     return choose(outcome, target, source, game, null);
+    // }
 
-    @Override
-    public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
-        UUID abilityControllerId = playerId;
-        if (target.getTargetController() != null && target.getAbilityController() != null) {
-            abilityControllerId = target.getAbilityController();
-        }
+    // @Override
+    // public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
+    //     UUID abilityControllerId = playerId;
+    //     if (target.getTargetController() != null && target.getAbilityController() != null) {
+    //         abilityControllerId = target.getAbilityController();
+    //     }
 
-        // TODO: I guess we can make this an ai decision?
-        if (Objects.equals(target.getTargetName(), "starting player")) {
-            return super.choose(outcome, target, source, game, null);
-        }
+    //     // TODO: I guess we can make this an ai decision?
+    //     if (Objects.equals(target.getTargetName(), "starting player")) {
+    //         return super.choose(outcome, target, source, game, null);
+    //     }
 
-        List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
-        // Remove targets that can't be targeted
-        for (UUID possibleTarget : possibleTargetsList) {
-            if (!target.canTarget(abilityControllerId, possibleTarget, source, game)) {
-                possibleTargetsList.remove(possibleTarget);
-            }
-        }
+    //     List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
+    //     // Remove targets that can't be targeted
+    //     for (UUID possibleTarget : possibleTargetsList) {
+    //         if (!target.canTarget(abilityControllerId, possibleTarget, source, game)) {
+    //             possibleTargetsList.remove(possibleTarget);
+    //         }
+    //     }
 
-        int maxTargets = Math.min(target.getMaxNumberOfTargets(), possibleTargetsList.size());
-        int minTargets = target.getMinNumberOfTargets();
+    //     int maxTargets = Math.min(target.getMaxNumberOfTargets(), possibleTargetsList.size());
+    //     int minTargets = target.getMinNumberOfTargets();
 
-        List<Integer> qValues = genericChoose(possibleTargetsList.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
+    //     List<Integer> qValues = genericChoose(possibleTargetsList.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
 
-        for (int i = 0; i < qValues.size(); i++) {
-            target.add(possibleTargetsList.get(qValues.get(i)), game);
-        }
-        return true;
-    }
+    //     for (int i = 0; i < qValues.size(); i++) {
+    //         target.add(possibleTargetsList.get(qValues.get(i)), game);
+    //     }
+    //     return true;
+    // }
 
 //    @Override
 //    public void selectAttackers(Game game, UUID attackingPlayerId) {
@@ -843,8 +845,12 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return flattenedOptions.get(targetsToSet.get(0));
     }
 
-    public List<StateSequenceBuilder.SequenceOutput> getStateBuffer() {
-        return stateBuffer;
+    public List<StateSequenceBuilder.TrainingData> getTrainingBuffer() {
+        return new ArrayList<>(trainingBuffer);
+    }
+
+    public PythonMLBridge getModel() {
+        return model;
     }
 }
 

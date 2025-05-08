@@ -4,10 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
-import org.nd4j.linalg.indexing.NDArrayIndex;
-
 import mage.Mana;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
@@ -20,15 +16,8 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- * Java‑8‑compatible helper that converts a {@link Game} snapshot into a padded
- * token sequence + attention mask for a Transformer encoder.
- * <p>
- * <ul>
- * <li>Each token = {@code float[D]} feature vector.</li>
- * <li>{@code sequence} tensor shape: {@code [1, D, maxLen]} (DL4J format).</li>
- * <li>{@code mask} tensor shape: {@code [1, maxLen]} &nbsp;(&#x201C;1&#x201D;
- * =&nbsp;real, &#x201C;0&#x201D; =&nbsp;padding).</li>
- * </ul>
+ * Helper that converts a {@link Game} snapshot into a padded token sequence + attention mask
+ * for a Transformer encoder. Can also prepend action tokens to the sequence for prediction.
  */
 public class StateSequenceBuilder {
 
@@ -42,7 +31,7 @@ public class StateSequenceBuilder {
     // special‑token IDs (for simple one‑hot placeholder embedding)
     private static final int CLS_ID = 0;
     private static final int PHASE_BASE = 10; // + phase.ordinal()
-    private static final int ASK_BASE = 30; // + actionType.ordinal()
+    private static final int ACTION_BASE = 30; // + actionType.ordinal()
 
     public enum ZoneType {
         HAND,
@@ -51,7 +40,6 @@ public class StateSequenceBuilder {
         EXILE,
         LIBRARY,
         STACK,
-        // This is a special case for the source card
         REFERENCE
     }
 
@@ -69,16 +57,14 @@ public class StateSequenceBuilder {
     /* === PUBLIC API ===================================================== */
 
     /**
-     * Build sequence + mask for the given game state.
+     * Build base sequence + mask for the given game state.
      *
      * @param game       current game
-     * @param actionType what decision the agent is being asked to make
      * @param phase      current phase of the game
      * @param maxLen     padding / truncation length (≤ {@link #MAX_LEN})
-     * @param numOptions number of available options
      * @return           sequence + mask
      */
-    public static SequenceOutput build(Game game, ActionType actionType, TurnPhase phase, int maxLen, int numOptions) {
+    public static SequenceOutput buildBaseState(Game game, TurnPhase phase, int maxLen) {
         if (maxLen > MAX_LEN) {
             throw new IllegalArgumentException("maxLen exceeds hard cap: " + MAX_LEN);
         }
@@ -115,8 +101,6 @@ public class StateSequenceBuilder {
             tokens.add(embedSpecial(PHASE_BASE + TurnPhase.values().length + 1));
         }
         mask.add(1);
-        tokens.add(embedSpecial(ASK_BASE + actionType.ordinal()));
-        mask.add(1);
 
         // (b) Player + opponent stats tokens -------------------------
         tokens.add(embedPlayerStats(player, game));
@@ -136,8 +120,7 @@ public class StateSequenceBuilder {
         addCardList(tokens, mask, player.getLibrary().getCards(game), Zone.LIBRARY, game);
 
         // Opponent perms
-        addPermList(tokens, mask, game.getBattlefield().getAllActivePermanents(opponent.getId()), Zone.BATTLEFIELD,
-                game);
+        addPermList(tokens, mask, game.getBattlefield().getAllActivePermanents(opponent.getId()), Zone.BATTLEFIELD, game);
         addCardList(tokens, mask, opponent.getGraveyard().getCards(game), Zone.GRAVEYARD, game);
 
         for (ExileZone ez : game.getExile().getExileZones()) {
@@ -163,39 +146,44 @@ public class StateSequenceBuilder {
             mask = mask.subList(0, maxLen);
         }
 
-        /*
-         * ------------------------------------------------------------
-         * 4. Convert to NDArrays (DL4J expects [B, D, L])
-         * ----------------------------------------------------------
-         */
-        float[][] seq2d = new float[tokens.size()][DIM_PER_TOKEN];
-        for (int i = 0; i < tokens.size(); i++) {
-            seq2d[i] = tokens.get(i);
-        }
-        INDArray seq = Nd4j.create(seq2d).transpose(); // [D, L]
-        seq = seq.reshape(1, DIM_PER_TOKEN, maxLen); // batch dim =1
+        return new SequenceOutput(tokens, mask);
+    }
 
-        // Ensure the sequence is padded to maxLen
-        if (tokens.size() < maxLen) {
-            INDArray padded = Nd4j.zeros(1, DIM_PER_TOKEN, maxLen);
-            padded.putSlice(0, seq);
-            seq = padded;
-        } else if (tokens.size() > maxLen) {
-            System.out.println("Truncating sequence from " + tokens.size() + " to " + maxLen);
-            seq = seq.get(NDArrayIndex.point(0), NDArrayIndex.all(), NDArrayIndex.interval(0, maxLen));
+    /**
+     * Create a new sequence with an action token prepended to the base state sequence.
+     * 
+     * @param baseState The base state sequence
+     * @param actionType The action to prepend
+     * @param actionCombo The specific combination of actions being considered
+     * @return A new sequence with the action prepended
+     */
+    public static SequenceOutput prependAction(SequenceOutput baseState, ActionType actionType, List<Integer> actionCombo) {
+        // Create new lists for the result
+        List<float[]> tokens = new ArrayList<>(baseState.tokens);
+        List<Integer> mask = new ArrayList<>(baseState.mask);
+        
+        // Create action token
+        float[] actionToken = embedSpecial(ACTION_BASE + actionType.ordinal());
+        
+        // Create action combo token
+        float[] comboToken = new float[DIM_PER_TOKEN];
+        for (int i = 0; i < actionCombo.size() && i < DIM_PER_TOKEN; i++) {
+            comboToken[i] = actionCombo.get(i) / 100.0f; // Normalize to [0,1] range
         }
-
-        float[] maskFloats = new float[maxLen]; // Always use maxLen for mask
-        for (int i = 0; i < mask.size(); i++) {
-            maskFloats[i] = mask.get(i);
+        
+        // Prepend action tokens
+        tokens.add(0, comboToken);
+        tokens.add(0, actionToken);
+        mask.add(0, 1);
+        mask.add(0, 1);
+        
+        // Truncate to MAX_LEN if needed
+        if (tokens.size() > MAX_LEN) {
+            tokens = tokens.subList(0, MAX_LEN);
+            mask = mask.subList(0, MAX_LEN);
         }
-        // Pad the rest with zeros
-        for (int i = mask.size(); i < maxLen; i++) {
-            maskFloats[i] = 0;
-        }
-        INDArray maskArr = Nd4j.create(maskFloats).reshape(1, maxLen);
-
-        return new SequenceOutput(seq, maskArr, new ArrayList<>(), numOptions, mapActionTypeToAskType(actionType));
+        
+        return new SequenceOutput(tokens, mask);
     }
 
     /* === EMBEDDING HELPERS ============================================== */
@@ -336,66 +324,39 @@ public class StateSequenceBuilder {
         return v;
     }
 
-    private static TransformerNeuralNetwork.AskType mapActionTypeToAskType(ActionType actionType) {
-        switch (actionType) {
-            case ACTIVATE_ABILITY_OR_SPELL:
-            case SELECT_TARGETS:
-            case SELECT_CHOICE:
-            case SELECT_CARD:
-                return TransformerNeuralNetwork.AskType.CAST;
-            case DECLARE_ATTACKS:
-                return TransformerNeuralNetwork.AskType.ATTACK;
-            case DECLARE_BLOCKS:
-                return TransformerNeuralNetwork.AskType.BLOCK;
-            case MULLIGAN:
-            case SELECT_TRIGGERED_ABILITY:
-            default:
-                return TransformerNeuralNetwork.AskType.CAST;
+    /* === SIMPLE CONTAINER ============================================== */
+    public static class SequenceOutput {
+        public final List<float[]> tokens;
+        public final List<Integer> mask;
+
+        public SequenceOutput(List<float[]> tokens, List<Integer> mask) {
+            this.tokens = tokens;
+            this.mask = mask;
+        }
+
+        public List<float[]> getSequence() {
+            return this.tokens;
+        }
+
+        public List<Integer> getMask() {
+            return this.mask;
         }
     }
 
-    /* === SIMPLE CONTAINER (Java 8 version) =============================== */
-    public static class SequenceOutput {
-        public final INDArray sequence;
-        public final INDArray mask;
-        public final List<Integer> targetIndices;
-        public final int numOptions;
-        public INDArray currentQValues;
-        public final TransformerNeuralNetwork.AskType askType;
+    public static class TrainingData {
+        public final SequenceOutput stateActionPair;
+        public final double policyScore;
+        public final double valueScore;
+        public final List<Integer> actionCombo;
+        public final ActionType actionType;
 
-        public SequenceOutput(INDArray sequence, INDArray mask, List<Integer> targetIndices, int numOptions, TransformerNeuralNetwork.AskType askType) {
-            this.sequence = sequence;
-            this.mask = mask;
-            this.targetIndices = targetIndices;
-            this.numOptions = numOptions;
-            this.currentQValues = null;
-            this.askType = askType;
-        }
-
-        // Copy constructor that preserves Q-values
-        public SequenceOutput(SequenceOutput original, List<Integer> newTargetIndices) {
-            this.sequence = original.sequence;
-            this.mask = original.mask;
-            this.targetIndices = newTargetIndices;
-            this.currentQValues = original.currentQValues;
-            this.numOptions = original.numOptions;
-            this.askType = original.askType;
-        }
-
-        public INDArray getSequence() {
-            return sequence;
-        }
-
-        public INDArray getMask() {
-            return mask;
-        }
-
-        public List<Integer> getTargetIndices() {
-            return targetIndices;
-        }
-
-        public int getNumOptions() {
-            return numOptions;
+        public TrainingData(SequenceOutput stateActionPair, double policyScore, double valueScore, 
+                          List<Integer> actionCombo, ActionType actionType) {
+            this.stateActionPair = stateActionPair;
+            this.policyScore = policyScore;
+            this.valueScore = valueScore;
+            this.actionCombo = actionCombo;
+            this.actionType = actionType;
         }
     }
 }
