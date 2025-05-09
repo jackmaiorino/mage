@@ -1,51 +1,45 @@
 package mage.player.ai.rl;
 
 /**
- * Entry point class for Py4J to interface with Python code.
- * This class defines the methods that will be called from Python.
+ * Interface for Python ML model entry point.
+ * This interface defines the methods that will be called from Java to Python.
  */
-public class PythonEntryPoint {
-    private Object model; // Will be set to the Python model instance
-    private boolean isInitialized = false;
+public interface PythonEntryPoint {
+    /**
+     * Initialize the Python ML model
+     */
+    void initializeModel();
 
-    public PythonEntryPoint() {
-        // Python will initialize the model
-    }
+    /**
+     * Make batch predictions using the Python ML model
+     * @param sequences Batch of state sequences [batch_size, seq_len, d_model]
+     * @param masks Attention masks [batch_size, seq_len]
+     * @return Tuple of (policy_scores, value_scores) as float arrays
+     */
+    float[][] predictBatch(float[][][] sequences, float[][] masks);
 
-    public void initializeModel() {
-        if (!isInitialized) {
-            // The actual model initialization will happen in Python
-            isInitialized = true;
-        }
-    }
+    /**
+     * Train the model with a batch of data
+     * @param sequences Batch of state sequences [batch_size, seq_len, d_model]
+     * @param masks Attention masks [batch_size, seq_len]
+     * @param policyScores Target policy scores [batch_size]
+     * @param valueScores Target value scores [batch_size]
+     * @param actionTypes Action type indices [batch_size]
+     * @param actionCombos Action combinations [batch_size, max_actions]
+     * @param reward Reward signal
+     */
+    void train(float[][][] sequences, float[][] masks, float[] policyScores, 
+              float[] valueScores, int[] actionTypes, int[][] actionCombos, float reward);
 
-    public float[][] predictBatch(float[][][] sequences, float[][] masks) {
-        if (!isInitialized) {
-            throw new IllegalStateException("Model not initialized");
-        }
-        // This method will be implemented in Python
-        return new float[][]{new float[0], new float[0]}; // Placeholder return
-    }
+    /**
+     * Save the current model state
+     * @param path Path to save the model
+     */
+    void saveModel(String path);
 
-    public void train(float[][][] sequences, float[][] masks, float[] policyScores, 
-                     float[] valueScores, int[] actionTypes, int[][] actionCombos, float reward) {
-        if (!isInitialized) {
-            throw new IllegalStateException("Model not initialized");
-        }
-        // This method will be implemented in Python
-    }
-
-    public void saveModel(String path) {
-        if (!isInitialized) {
-            throw new IllegalStateException("Model not initialized");
-        }
-        // This method will be implemented in Python
-    }
-
-    public void loadModel(String path) {
-        if (!isInitialized) {
-            throw new IllegalStateException("Model not initialized");
-        }
-        // This method will be implemented in Python
-    }
+    /**
+     * Load a saved model state
+     * @param path Path to load the model from
+     */
+    void loadModel(String path);
 } 

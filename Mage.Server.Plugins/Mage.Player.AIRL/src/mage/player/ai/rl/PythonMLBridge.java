@@ -5,13 +5,13 @@ import java.io.File;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
+import java.util.concurrent.TimeUnit;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
 
-import py4j.GatewayServer;
+import py4j.ClientServer;
 import py4j.Py4JException;
 
 /**
@@ -20,68 +20,60 @@ import py4j.Py4JException;
  */
 public class PythonMLBridge {
     private static final Logger logger = Logger.getLogger(PythonMLBridge.class.getName());
-    private static final int DEFAULT_PORT = 25333;
-    private GatewayServer gateway;
+    private static final int DEFAULT_PORT = 25334;
+    private ClientServer clientServer;
     private PythonEntryPoint entryPoint;
-    private boolean isInitialized = false;
     private Process pythonProcess;
+    private boolean isInitialized = false;
 
     public PythonMLBridge() {
         try {
-            // Create the entry point that Python will call
-            entryPoint = new PythonEntryPoint();
+            // Get the workspace root directory
+            String workspaceRoot = System.getProperty("user.dir");
+            logger.info("Workspace root: " + workspaceRoot);
             
-            // Start the Py4J gateway server
-            gateway = new GatewayServer(entryPoint, DEFAULT_PORT);
-            gateway.start();
+            // Start the Python process with the correct path
+            // Go up two directories from Mage.Tests to reach the root, then add 'mage'
+            String projectRoot = new File(workspaceRoot).getParentFile().getParentFile().getAbsolutePath();
+            projectRoot = new File(projectRoot, "mage").getAbsolutePath();
+            logger.info("Project root: " + projectRoot);
             
-            // Start the Python process
-            String pythonScript = new File("Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/py4j_entry_point.py").getAbsolutePath();
-            logger.info("Attempting to start Python process with script: " + pythonScript);
+            // Construct the path to the Python script
+            String pythonScript = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/py4j_entry_point.py").getAbsolutePath();
+            logger.info("Starting Python process with script: " + pythonScript);
             
-            // Check if Python is available
-            ProcessBuilder checkPython = new ProcessBuilder("python", "--version");
-            Process checkProcess = checkPython.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(checkProcess.getInputStream()));
-            String pythonVersion = reader.readLine();
-            logger.info("Python version: " + pythonVersion);
+            // Verify the file exists
+            File scriptFile = new File(pythonScript);
+            if (!scriptFile.exists()) {
+                throw new RuntimeException("Python script not found at: " + pythonScript);
+            }
             
-            // Start the actual Python process
             ProcessBuilder pb = new ProcessBuilder("python", pythonScript);
-            
-            // Set up environment variables
-            Map<String, String> env = pb.environment();
-            env.put("PYTHONPATH", new File("Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode").getAbsolutePath());
-            
-            // Redirect both standard output and error
             pb.redirectErrorStream(true);
             pythonProcess = pb.start();
             
-            // Read and log the Python process output
-            reader = new BufferedReader(new InputStreamReader(pythonProcess.getInputStream()));
-            StringBuilder output = new StringBuilder();
-            String line;
-            while ((line = reader.readLine()) != null) {
-                output.append(line).append("\n");
-                logger.info("Python output: " + line);
-            }
+            // Read and log Python output in a separate thread
+            new Thread(() -> {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(pythonProcess.getInputStream()))) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        logger.info("[PYTHON] " + line);
+                    }
+                } catch (Exception e) {
+                    logger.severe("Error reading Python output: " + e.getMessage());
+                }
+            }).start();
             
-            // Check if process is still alive
-            if (!pythonProcess.isAlive()) {
-                int exitCode = pythonProcess.exitValue();
-                logger.severe("Python process exited with code: " + exitCode);
-                logger.severe("Python process output: " + output.toString());
-                throw new RuntimeException("Python process failed to start. Exit code: " + exitCode + "\nOutput: " + output.toString());
-            }
+            // Wait for Python process to start up
+            Thread.sleep(3000);
             
-            // Wait a bit for Python to start up
-            Thread.sleep(2000);
+            // Connect to the Python process
+            clientServer = new ClientServer(null);
+            entryPoint = (PythonEntryPoint) clientServer.getPythonServerEntryPoint(new Class[] { PythonEntryPoint.class });
             
-            logger.info("Python ML Bridge started on port " + DEFAULT_PORT);
-            logger.info("Gateway server address: " + gateway.getAddress());
-            logger.info("Gateway server port: " + gateway.getPort());
-            
+            logger.info("Connected to Python ML Bridge on port " + DEFAULT_PORT);
             isInitialized = true;
+            
         } catch (Exception e) {
             logger.severe("Failed to initialize Python ML Bridge: " + e.getMessage());
             e.printStackTrace();
@@ -252,17 +244,38 @@ public class PythonMLBridge {
      * Clean up resources
      */
     public void shutdown() {
-        if (pythonProcess != null) {
-            pythonProcess.destroy();
-        }
-        if (gateway != null) {
+        if (clientServer != null) {
             try {
-                gateway.shutdown();
+                clientServer.shutdown();
                 isInitialized = false;
                 logger.info("Python ML Bridge shutdown complete");
             } catch (Exception e) {
                 logger.severe("Error during shutdown: " + e.getMessage());
             }
         }
+        if (pythonProcess != null) {
+            try {
+                // First try graceful shutdown
+                pythonProcess.destroy();
+                // Wait a bit for the process to terminate
+                if (!pythonProcess.waitFor(5, TimeUnit.SECONDS)) {
+                    // If it's still running, force kill it
+                    pythonProcess.destroyForcibly();
+                    logger.info("Python process force terminated");
+                } else {
+                    logger.info("Python process terminated gracefully");
+                }
+            } catch (InterruptedException e) {
+                logger.severe("Error waiting for Python process to terminate: " + e.getMessage());
+                // Force kill if interrupted
+                pythonProcess.destroyForcibly();
+            }
+        }
+    }
+
+    @Override
+    protected void finalize() throws Throwable {
+        shutdown();
+        super.finalize();
     }
 } 
