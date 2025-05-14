@@ -43,7 +43,7 @@ public class RLTrainer {
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS;
+    public static final int NUM_GAME_RUNNERS = 1;
     public static final int NUM_EPISODES_PER_GAME_RUNNER = 2;
 
     public static final PythonMLBridge sharedModel = new PythonMLBridge();

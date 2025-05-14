@@ -14,9 +14,9 @@ public interface PythonEntryPoint {
      * Make batch predictions using the Python ML model
      * @param sequences Batch of state sequences [batch_size, seq_len, d_model]
      * @param masks Attention masks [batch_size, seq_len]
-     * @return Tuple of (policy_scores, value_scores) as float arrays
+     * @return Concatenated array of policy_scores and value_scores [batch_size * 2]
      */
-    float[][] predictBatch(float[][][] sequences, float[][] masks);
+    float[] predictBatch(float[][][] sequences, float[][] masks);
 
     /**
      * Train the model with a batch of data
