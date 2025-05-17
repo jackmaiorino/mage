@@ -7,6 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.concurrent.TimeUnit;
+import java.io.DataInputStream;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -305,44 +309,79 @@ public class PythonMLBridge {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
 
+        long startTime = System.nanoTime();
         try {
             // Convert states to format expected by Python
-            float[][][] sequences = new float[states.size()][][];
-            float[][] masks = new float[states.size()][];
+            long convertStart = System.nanoTime();
+            int batchSize = states.size();
+            int seqLen = states.get(0).getSequence().size();
+            int dModel = states.get(0).getSequence().get(0).length;
 
-            for (int i = 0; i < states.size(); i++) {
-                StateSequenceBuilder.SequenceOutput state = states.get(i);
+            // Create flat arrays for faster transfer
+            float[] sequencesFlat = new float[batchSize * seqLen * dModel];
+            float[] masksFlat = new float[batchSize * seqLen];
+
+            // Fill arrays in a single pass
+            int seqIdx = 0;
+            int maskIdx = 0;
+            for (StateSequenceBuilder.SequenceOutput state : states) {
                 List<float[]> tokens = state.getSequence();
                 List<Integer> mask = state.getMask();
 
-                // Convert tokens to 2D array
-                sequences[i] = new float[tokens.size()][];
-                for (int j = 0; j < tokens.size(); j++) {
-                    sequences[i][j] = tokens.get(j);
-                }
-
-                // Convert mask to float array
-                masks[i] = new float[mask.size()];
-                for (int j = 0; j < mask.size(); j++) {
-                    masks[i][j] = mask.get(j);
+                for (int j = 0; j < seqLen; j++) {
+                    float[] token = tokens.get(j);
+                    System.arraycopy(token, 0, sequencesFlat, seqIdx, dModel);
+                    seqIdx += dModel;
+                    masksFlat[maskIdx++] = mask.get(j);
                 }
             }
 
-            // Get predictions from Python through Py4J
-            float[] predictions = entryPoint.predictBatch(sequences, masks);
+            // Convert float arrays to byte arrays
+            byte[] sequencesBytes = new byte[sequencesFlat.length * 4];  // 4 bytes per float
+            byte[] masksBytes = new byte[masksFlat.length * 4];
 
-            // Split the concatenated array back into policy and value scores
-            int batchSize = states.size();
+            // Use ByteBuffer for efficient conversion with LITTLE_ENDIAN to match Python
+            java.nio.ByteBuffer.wrap(sequencesBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .put(sequencesFlat);
+            java.nio.ByteBuffer.wrap(masksBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .put(masksFlat);
+
+            long convertTime = System.nanoTime() - convertStart;
+            logger.info(String.format("Java array conversion took %.3f seconds", convertTime / 1e9));
+
+            // Get predictions from Python through Py4J
+            long predictStart = System.nanoTime();
+            byte[] predictionsBytes = entryPoint.predictBatchFlat(sequencesBytes, masksBytes, batchSize, seqLen, dModel);
+            long predictTime = System.nanoTime() - predictStart;
+            logger.info(String.format("Py4J prediction call took %.3f seconds", predictTime / 1e9));
+
+            // Convert predictions to INDArrays
+            long splitStart = System.nanoTime();
+            float[] predictions = new float[predictionsBytes.length / 4];
+            java.nio.ByteBuffer.wrap(predictionsBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .get(predictions);
+
             float[] policyScores = new float[batchSize];
             float[] valueScores = new float[batchSize];
 
-            // Extract policy and value scores from the concatenated array
+            // Extract policy and value scores from the predictions array
             System.arraycopy(predictions, 0, policyScores, 0, batchSize);
             System.arraycopy(predictions, batchSize, valueScores, 0, batchSize);
 
             // Convert to INDArrays
             INDArray policyScoresArray = Nd4j.create(policyScores);
             INDArray valueScoresArray = Nd4j.create(valueScores);
+            long splitTime = System.nanoTime() - splitStart;
+            logger.info(String.format("Score splitting and INDArray conversion took %.3f seconds", splitTime / 1e9));
+
+            long totalTime = System.nanoTime() - startTime;
+            logger.info(String.format("Total predictBatch operation took %.3f seconds", totalTime / 1e9));
 
             return new INDArray[]{policyScoresArray, valueScoresArray};
         } catch (Py4JException e) {
@@ -363,39 +402,91 @@ public class PythonMLBridge {
         }
 
         try {
+            long startTime = System.nanoTime();
             // Convert training data to format expected by Python
-            float[][][] sequences = new float[trainingData.size()][][];
-            float[][] masks = new float[trainingData.size()][];
-            float[] policyScores = new float[trainingData.size()];
-            float[] valueScores = new float[trainingData.size()];
-            int[] actionTypes = new int[trainingData.size()];
-            int[][] actionCombos = new int[trainingData.size()][];
+            int batchSize = trainingData.size();
+            int seqLen = trainingData.get(0).stateActionPair.getSequence().size();
+            int dModel = trainingData.get(0).stateActionPair.getSequence().get(0).length;
+            int maxActions = trainingData.get(0).actionCombo.size();
 
-            for (int i = 0; i < trainingData.size(); i++) {
+            // Create flat arrays for faster transfer
+            float[] sequencesFlat = new float[batchSize * seqLen * dModel];
+            float[] masksFlat = new float[batchSize * seqLen];
+            float[] policyScoresFlat = new float[batchSize];
+            float[] valueScoresFlat = new float[batchSize];
+            int[] actionTypesFlat = new int[batchSize];
+            int[] actionCombosFlat = new int[batchSize * maxActions];
+
+            // Fill arrays in a single pass
+            int seqIdx = 0;
+            int maskIdx = 0;
+            int comboIdx = 0;
+            for (int i = 0; i < batchSize; i++) {
                 StateSequenceBuilder.TrainingData data = trainingData.get(i);
                 List<float[]> tokens = data.stateActionPair.getSequence();
                 List<Integer> mask = data.stateActionPair.getMask();
 
-                // Convert tokens to 2D array
-                sequences[i] = new float[tokens.size()][];
-                for (int j = 0; j < tokens.size(); j++) {
-                    sequences[i][j] = tokens.get(j);
+                // Fill sequences and masks
+                for (int j = 0; j < seqLen; j++) {
+                    float[] token = tokens.get(j);
+                    System.arraycopy(token, 0, sequencesFlat, seqIdx, dModel);
+                    seqIdx += dModel;
+                    masksFlat[maskIdx++] = mask.get(j);
                 }
 
-                // Convert mask to float array
-                masks[i] = new float[mask.size()];
-                for (int j = 0; j < mask.size(); j++) {
-                    masks[i][j] = mask.get(j);
+                // Fill other arrays
+                policyScoresFlat[i] = (float) data.policyScore;
+                valueScoresFlat[i] = (float) data.valueScore;
+                actionTypesFlat[i] = data.actionType.ordinal();
+                for (int j = 0; j < maxActions; j++) {
+                    actionCombosFlat[comboIdx++] = data.actionCombo.get(j);
                 }
-
-                policyScores[i] = (float) data.policyScore;
-                valueScores[i] = (float) data.valueScore;
-                actionTypes[i] = data.actionType.ordinal();
-                actionCombos[i] = data.actionCombo.stream().mapToInt(Integer::intValue).toArray();
             }
 
+            // Convert float arrays to byte arrays
+            byte[] sequencesBytes = new byte[sequencesFlat.length * 4];
+            byte[] masksBytes = new byte[masksFlat.length * 4];
+            byte[] policyScoresBytes = new byte[policyScoresFlat.length * 4];
+            byte[] valueScoresBytes = new byte[valueScoresFlat.length * 4];
+            byte[] actionTypesBytes = new byte[actionTypesFlat.length * 4];
+            byte[] actionCombosBytes = new byte[actionCombosFlat.length * 4];
+
+            // Use ByteBuffer for efficient conversion with LITTLE_ENDIAN to match Python
+            java.nio.ByteBuffer.wrap(sequencesBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .put(sequencesFlat);
+            java.nio.ByteBuffer.wrap(masksBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .put(masksFlat);
+            java.nio.ByteBuffer.wrap(policyScoresBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .put(policyScoresFlat);
+            java.nio.ByteBuffer.wrap(valueScoresBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asFloatBuffer()
+                    .put(valueScoresFlat);
+            java.nio.ByteBuffer.wrap(actionTypesBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asIntBuffer()
+                    .put(actionTypesFlat);
+            java.nio.ByteBuffer.wrap(actionCombosBytes)
+                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
+                    .asIntBuffer()
+                    .put(actionCombosFlat);
+
+            long convertTime = System.nanoTime() - startTime;
+            logger.info(String.format("Java array conversion took %.3f seconds", convertTime / 1e9));
+
             // Send training data to Python through Py4J
-            entryPoint.train(sequences, masks, policyScores, valueScores, actionTypes, actionCombos, (float) reward);
+            long trainStart = System.nanoTime();
+            entryPoint.trainFlat(sequencesBytes, masksBytes, policyScoresBytes, valueScoresBytes,
+                    actionTypesBytes, actionCombosBytes, batchSize, seqLen, dModel, maxActions, (float) reward);
+            long trainTime = System.nanoTime() - trainStart;
+            logger.info(String.format("Py4J training call took %.3f seconds", trainTime / 1e9));
+
         } catch (Py4JException e) {
             logger.severe("Py4J error during training: " + e.getMessage());
             throw new RuntimeException("Failed to train Python model", e);
