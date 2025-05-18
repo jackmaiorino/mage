@@ -26,6 +26,7 @@ import mage.players.Player;
 import mage.target.Target;
 
 public class ComputerPlayerRL extends ComputerPlayer {
+
     private PythonMLBridge model;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
@@ -63,7 +64,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
-    public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source) {
+    public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source, List<float[]> abilityEncodings) {
         // Don't query the model if only one/no option
         if (possibleTargetsSize == 1) {
             return Arrays.asList(0);
@@ -76,7 +77,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
         // Build base state once
         StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
-        
+
         // Store best action combination and its scores
         double bestPolicyScore = Double.NEGATIVE_INFINITY;
         List<Integer> bestActionCombo = null;
@@ -85,7 +86,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
         // Generate all valid action combinations
         List<List<Integer>> validCombos = new ArrayList<>();
-        
+
         // For single-target actions (like CAST), just evaluate each target individually
         if (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) {
             for (int i = 0; i < possibleTargetsSize; i++) {
@@ -94,13 +95,22 @@ public class ComputerPlayerRL extends ComputerPlayer {
             //TODO: ADD CUSTOM LOGIC FOR EACH ACTION TYPE, BLOCK, ATTACK, etc.
         } else {
             // For multi-target actions, generate all valid combinations
-            generateCombinations(validCombos, new ArrayList<>(), 0, possibleTargetsSize, minTargets, maxTargets);
+            // TODO: Implement combination generation later
+            // generateCombinations(validCombos, new ArrayList<>(), 0, possibleTargetsSize, minTargets, maxTargets);
+            // For now, just add single actions
+            for (int i = 0; i < possibleTargetsSize; i++) {
+                validCombos.add(Arrays.asList(i));
+            }
         }
 
-        // Create all state-action pairs first
+        // Create state-action pairs for each action
         List<StateSequenceBuilder.SequenceOutput> stateActionPairs = new ArrayList<>();
-        for (List<Integer> actionCombo : validCombos) {
-            stateActionPairs.add(StateSequenceBuilder.prependAction(baseState, actionType, actionCombo));
+        for (int i = 0; i < possibleTargetsSize; i++) {
+            // Log the ability encoding for this action
+            float[] abilityEncoding = abilityEncodings.get(i);
+            RLTrainer.threadLocalLogger.get().info("Action " + i + " ability encoding: " + Arrays.toString(abilityEncoding));
+
+            stateActionPairs.add(StateSequenceBuilder.prependAction(baseState, actionType, abilityEncoding));
         }
 
         // Get predictions for all state-action pairs at once using batch prediction
@@ -108,15 +118,28 @@ public class ComputerPlayerRL extends ComputerPlayer {
         INDArray policyScores = allPredictions[0];
         INDArray valueScores = allPredictions[1];
 
+        // Debug log the predictions
+        RLTrainer.threadLocalLogger.get().info("Policy scores: " + policyScores);
+        RLTrainer.threadLocalLogger.get().info("Value scores: " + valueScores);
+
         // Evaluate each action combination using the predictions
         for (int i = 0; i < validCombos.size(); i++) {
             List<Integer> actionCombo = validCombos.get(i);
             StateSequenceBuilder.SequenceOutput stateActionPair = stateActionPairs.get(i);
-            
+
             // Get scores for this combination
             double policyScore = policyScores.getDouble(i);
             double valueScore = valueScores.getDouble(i);
-            
+
+            // Log policy and value scores for each action combo
+            RLTrainer.threadLocalLogger.get().info(String.format(
+                    "[PolicyScoreLog] actionType=%s, actionCombo=%s, policyScore=%.6f, valueScore=%.6f",
+                    actionType,
+                    actionCombo,
+                    policyScore,
+                    valueScore
+            ));
+
             // Update best if this action combination has higher policy score
             if (policyScore > bestPolicyScore) {
                 bestPolicyScore = policyScore;
@@ -129,12 +152,18 @@ public class ComputerPlayerRL extends ComputerPlayer {
         // Only store training data for the selected action combination
         if (bestStateActionPair != null) {
             trainingBuffer.add(new StateSequenceBuilder.TrainingData(
-                bestStateActionPair,
-                bestPolicyScore,
-                bestValueScore,
-                bestActionCombo,
-                actionType
+                    bestStateActionPair,
+                    bestPolicyScore,
+                    bestValueScore,
+                    bestActionCombo,
+                    actionType
             ));
+        } else {
+            // This should never happen in a valid scenario
+            RLTrainer.threadLocalLogger.get().error(String.format(
+                    "Invalid state detected: bestStateActionPair is null for actionType=%s, validCombos.size=%d, possibleTargetsSize=%d",
+                    actionType, validCombos.size(), possibleTargetsSize));
+            throw new IllegalStateException("bestStateActionPair is null - this indicates a problem with action selection or model predictions");
         }
 
         return bestActionCombo != null ? bestActionCombo : Arrays.asList();
@@ -146,12 +175,12 @@ public class ComputerPlayerRL extends ComputerPlayer {
         if (current.size() >= minSize && current.size() <= maxSize) {
             result.add(new ArrayList<>(current));
         }
-        
+
         // If we've reached max size, stop
         if (current.size() >= maxSize) {
             return;
         }
-        
+
         // Try adding each remaining number
         for (int i = start; i < n; i++) {
             current.add(i);
@@ -165,7 +194,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //    @Override
 //    public int chooseReplacementEffect(Map<String, String> effectsMap, Map<String, MageObject> objectsMap, Game game) {
 //        log.debug("chooseReplacementEffect");
-
     // Stuff like sheoldred's edict, kozilek's command
     // @Override
     // public Mode chooseMode(Modes modes, Ability source, Game game) {
@@ -179,16 +207,13 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //         if (!source.getAbilityType().isTriggeredAbility()) {
     //             source.adjustTargets(game);
     //         }
-
     //         if ((!mode.getTargets().isEmpty() && !mode.getTargets().canChoose(source.getControllerId(), source, game)) || (mode.getCost() != null && !mode.getCost().canPay(source, source, playerId, game))) {
     //             modes.remove(modeId);
     //         }
     //         modes.removeSelectedMode(modeId);
     //     }
-
     //     int maxTargets = Math.min(modes.getMaxModes(game, source), modes.size());
     //     int minTargets = modes.getMinModes();
-
     //     List<Integer> targetsToSet = genericChoose(modes.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, source);
     //     if (targetsToSet.size() == 1){
     //         return (Mode) modes.values().toArray()[0];
@@ -204,7 +229,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //         return (Mode) modes.values().toArray()[targetsToSet.get(targetsToSet.size() - 1)];
     //     }
     // }
-
     // @Override
     // public int announceXMana(int min, int max, String message, Game game, Ability ability) {
     //     VariableManaCost variableManaCost = null;
@@ -220,7 +244,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //     if (variableManaCost == null) {
     //         throw new RuntimeException("No VariableManaCost in spell");
     //     }
-
     //     // Get all possible mana combinations
     //     ManaOptions manaOptions = getManaAvailable(game);
     //     if (manaOptions.isEmpty() && min == 0) {
@@ -234,7 +257,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //             continue;
     //         }
     //         int availableMana = mana.count() - ability.getManaCostsToPay().manaValue();
-
     //         for (int x = min; x <= max; x++) {
     //             if (variableManaCost.getXInstancesCount() * x <= availableMana) {
     //                 possibleXValuesSet.add(x);
@@ -243,10 +265,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //             }
     //         }
     //     }
-
     //     // Convert the Set to a List
     //     List<Integer> possibleXValues = new ArrayList<>(possibleXValuesSet);
-
     //     // Select the best X value using Q-values
     //     if (!possibleXValues.isEmpty() && possibleXValues.size() > 1) {
     //         List<Integer> targetsToSet = genericChoose(possibleXValues.size(),1,1, StateSequenceBuilder.ActionType.SELECT_CHOICE, game, ability);
@@ -255,17 +275,14 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //         // No need to query model for only 1 option
     //         return possibleXValues.get(0);
     //     }
-
     //     return 0; // Default to 0 if no valid options are found
     // }
-
     // //TODO: Implement
     // //TODO: I don't know when this is used?
     // @Override
     // public int announceXCost(int min, int max, String message, Game game, Ability ability, VariableCost variableCost) {
     //     return super.announceXCost(min, max, message, game, ability, variableCost);
     // }
-
     // // Deciding to use FOW alt cast, choosing creaturetype for cavern of souls
     // // TODO: Implement
     // @Override
@@ -302,7 +319,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //             return true;
     //         }
     //     }
-
     //     // choose by RLModel
     //     Ability source;
     //     if (game.getStack().isEmpty()) {
@@ -341,7 +357,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //     }
     //     throw new RuntimeException("No choice made");
     // }
-
     // Deciding ponder cards, exile card from opponent's hand
     //Choose2
     // @Override
@@ -349,27 +364,21 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //     if (cards == null || cards.isEmpty()) {
     //         return true;
     //     }
-
     //     // sometimes a target selection can be made from a player that does not control the ability
     //     UUID abilityControllerId = playerId;
     //     if (target.getTargetController() != null
     //             && target.getAbilityController() != null) {
     //         abilityControllerId = target.getAbilityController();
     //     }
-
     //     List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), abilityControllerId, source, game));
-
     //     int maxTargets = Math.min(target.getMaxNumberOfTargets(), cardChoices.size());
     //     int minTargets = target.getMinNumberOfTargets();
-
     //     List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_CARD, game, source);
-
     //     for (int i = 0; i < targetsToSet.size(); i++) {
     //         target.add(cardChoices.get(targetsToSet.get(i)).getId(), game);
     //     }
     //     return true;
     // }
-
     // TODO
 //    @Override
 //    public boolean chooseMulligan(Game game) {
@@ -384,7 +393,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //        return lands.size() < 2
 //                || lands.size() > hand.size() - 2;
 //    }
-
     // Choosing which stack ability from the stack you want to resolve
     // @Override
     // public TriggeredAbility chooseTriggeredAbility(List<TriggeredAbility> abilities, Game game) {
@@ -397,7 +405,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //     }
     //     return null;
     // }
-
     // Examples:
     // Damage assignment from fury
     // ((TargetCreatureOrPlaneswalkerAmount) target).getAmountRemaining()
@@ -407,37 +414,30 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //     return super.chooseTargetAmount(outcome, target, source, game);
     //     //return choose(outcome, target, source, game, null);
     // }
-
     // TODO: This breaks on mulligans? Because there is no active player?
     // Examples: Return card from graveyard to hand,
     // @Override
     // public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
     //     return choose(outcome, target, source, game, null);
     // }
-
     // Examples: Choosing when searching library. Fetch lands
 //     @Override
 //     public boolean chooseTarget(Outcome outcome, Cards cards, TargetCard target, Ability source, Game game) {
 //         if (cards == null || cards.isEmpty()) {
 //             return target.isRequired(source);
 //         }
-
 //         // sometimes a target selection can be made from a player that does not control the ability
 //         UUID abilityControllerId = playerId;
 //         if (target.getTargetController() != null
 //                 && target.getAbilityController() != null) {
 //             abilityControllerId = target.getAbilityController();
 //         }
-
 //         // we still use playerId when getting cards even if they don't control the search
 //         List<Card> cardChoices = new ArrayList<>(cards.getCards(target.getFilter(), playerId, source, game));
-
 //         // TODO: Fetchlands incorrectly state mintargets = 1 but you can "fail to find"
 //         int maxTargets = target.getMaxNumberOfTargets();
 //         int minTargets = target.getMinNumberOfTargets();
-
 //         List<Integer> targetsToSet = genericChoose(cardChoices.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
-
 //         for (int i = 0; i < targetsToSet.size(); i++) {
 //             // TODO: For some reason this always fails because the card zone is OUTSIDE
 //             // Pretty important to fix this for computerPlayer because I think they always fail to find
@@ -447,26 +447,22 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //         }
 //         return true;
 //     }
-
     // Examples:
     // Discarding to hand size, Choosing to keep which legend for legend rule
     // @Override
     // public boolean choose(Outcome outcome, Target target, Ability source, Game game) {
     //     return choose(outcome, target, source, game, null);
     // }
-
     // @Override
     // public boolean choose(Outcome outcome, Target target, Ability source, Game game, Map<String, Serializable> options) {
     //     UUID abilityControllerId = playerId;
     //     if (target.getTargetController() != null && target.getAbilityController() != null) {
     //         abilityControllerId = target.getAbilityController();
     //     }
-
     //     // TODO: I guess we can make this an ai decision?
     //     if (Objects.equals(target.getTargetName(), "starting player")) {
     //         return super.choose(outcome, target, source, game, null);
     //     }
-
     //     List<UUID> possibleTargetsList = new ArrayList<>(target.possibleTargets(abilityControllerId, source, game));
     //     // Remove targets that can't be targeted
     //     for (UUID possibleTarget : possibleTargetsList) {
@@ -474,18 +470,14 @@ public class ComputerPlayerRL extends ComputerPlayer {
     //             possibleTargetsList.remove(possibleTarget);
     //         }
     //     }
-
     //     int maxTargets = Math.min(target.getMaxNumberOfTargets(), possibleTargetsList.size());
     //     int minTargets = target.getMinNumberOfTargets();
-
     //     List<Integer> qValues = genericChoose(possibleTargetsList.size(), maxTargets, minTargets, StateSequenceBuilder.ActionType.SELECT_TARGETS, game, source);
-
     //     for (int i = 0; i < qValues.size(); i++) {
     //         target.add(possibleTargetsList.get(qValues.get(i)), game);
     //     }
     //     return true;
     // }
-
 //    @Override
 //    public void selectAttackers(Game game, UUID attackingPlayerId) {
 //        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_ATTACKERS_STEP_PRE, null, null, attackingPlayerId));
@@ -562,7 +554,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //            }
 //        }
 //    }
-
 //    @Override
 //    public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
 //        game.fireEvent(new GameEvent(GameEvent.EventType.DECLARE_BLOCKERS_STEP_PRE, null, null, defendingPlayerId));
@@ -649,7 +640,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //            // skip training metadata cleanup
 //        }
 //    }
-
     private List<Permanent> filterOutNonblocking(Game game, List<Permanent> attackers, List<Permanent> blockers) {
         List<Permanent> blockersLeft = new ArrayList<>();
         for (Permanent blocker : blockers) {
@@ -694,7 +684,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
 //        RLAction action = model.getAction(currentState);
 //        return action != null && action.getType() == RLAction.ActionType.MULLIGAN;
 //    }
-
     protected boolean priorityPlay(Game game) {
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);
@@ -734,7 +723,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 currentAbility = calculateActions(game);
                 act(game, (ActivatedAbility) currentAbility);
                 return true;
-            case END_TURN:  
+            case END_TURN:
             case CLEANUP:
                 pass(game);
                 return false;
@@ -777,9 +766,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
         String ownPermanentsInfo = game.getBattlefield().getAllPermanents().stream()
                 .filter(p -> p.isOwnedBy(player.getId()))
                 .map(p -> p.getName()
-                        + (p.isTapped() ? ",tapped" : "")
-                        + (p.isAttacking() ? ",attacking" : "")
-                        + (p.getBlocking() > 0 ? ",blocking" : ""))
+                + (p.isTapped() ? ",tapped" : "")
+                + (p.isAttacking() ? ",attacking" : "")
+                + (p.getBlocking() > 0 ? ",blocking" : ""))
                 .collect(Collectors.joining("; "));
         sb.append("-> Permanents: [").append(ownPermanentsInfo).append("]");
         System.out.println(sb.toString());
@@ -807,12 +796,12 @@ public class ComputerPlayerRL extends ComputerPlayer {
                     }
                 }
             }
-            if (!this.activateAbility(ability, game)){
+            if (!this.activateAbility(ability, game)) {
                 //TODO: if we are here it is because the ComputerPlayerRL chose an invalid subaction (choose likely)
                 throw new RuntimeException("Failed to activate ability: " + ability);
             }
             //TODO: Implement holding priority for abilities that don't use the stack
-            if (ability.isUsesStack()){
+            if (ability.isUsesStack()) {
                 pass(game);
             }
         }
@@ -837,7 +826,21 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
         flattenedOptions = uniqueOptions;
 
-        List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);
+        // Encode each ability
+        List<float[]> abilityEncodings = new ArrayList<>();
+        for (ActivatedAbility ability : flattenedOptions) {
+            if (ability instanceof PassAbility) {
+                // For PassAbility, use a zero vector
+                abilityEncodings.add(new float[StateSequenceBuilder.DIM_PER_TOKEN]);
+            } else {
+                // For other abilities, encode them
+                Permanent source = game.getPermanent(ability.getSourceId());
+                abilityEncodings.add(StateSequenceBuilder.encodeActivatedAbility(ability, source, game));
+            }
+        }
+
+        // Get model's choice of actions
+        List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null, abilityEncodings);
 
         RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
 
@@ -856,6 +859,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
 // Helper class to store block options
 class BlockOption {
+
     int attackerIndex;
     int blockerIndex;
     float qValue;
@@ -869,6 +873,7 @@ class BlockOption {
 
 // Helper class to store attack options
 class AttackOption {
+
     int attackTargetIndex;
     int attackerIndex;
     float qValue;
@@ -882,6 +887,7 @@ class AttackOption {
 
 // Helper class to store Q-value with its index
 class QValueWithIndex {
+
     float qValue;
     int index;
 
@@ -890,5 +896,3 @@ class QValueWithIndex {
         this.index = index;
     }
 }
-
-

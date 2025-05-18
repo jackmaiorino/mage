@@ -181,6 +181,20 @@ public class PythonMLBridge {
         // Use Python from virtual environment
         String pythonPath = new File(venvPath, "Scripts/python").getAbsolutePath();
         ProcessBuilder pb = new ProcessBuilder(pythonPath, pythonScriptPath);
+
+        // Set model path environment variable to a specific model file
+        String modelPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt").getAbsolutePath();
+        File modelDir = new File(modelPath).getParentFile();
+        if (!modelDir.exists()) {
+            logger.info("Creating models directory at: " + modelDir.getAbsolutePath());
+            if (!modelDir.mkdirs()) {
+                throw new RuntimeException("Failed to create models directory at: " + modelDir.getAbsolutePath());
+            }
+        }
+
+        pb.environment().put("MTG_MODEL_PATH", modelPath);
+        logger.info("Set MTG_MODEL_PATH to: " + modelPath);
+
         pb.redirectErrorStream(true);
         pythonProcess = pb.start();
 

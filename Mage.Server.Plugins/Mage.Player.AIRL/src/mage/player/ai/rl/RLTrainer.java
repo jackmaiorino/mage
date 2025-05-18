@@ -37,14 +37,15 @@ import mage.player.ai.ComputerPlayerRL;
 import mage.players.Player;
 
 public class RLTrainer {
+
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
     private static final int NUM_EPISODES = 10000;
     private static final int NUM_EVAL_EPISODES = 5;
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
-    public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/network.ser";
+    public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = 1;
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 2;
+    public static final int NUM_GAME_RUNNERS = 2;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
 
     public static final PythonMLBridge sharedModel = new PythonMLBridge();
 
@@ -72,11 +73,11 @@ public class RLTrainer {
     public void train() {
         try {
             List<Path> deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
-                                        .filter(Files::isRegularFile)
-                                        .collect(Collectors.toList());
+                    .filter(Files::isRegularFile)
+                    .collect(Collectors.toList());
 
             Random random = new Random();
-            
+
             RLTrainer.threadLocalLogger.get().info("Number of threads: " + NUM_THREADS);
             RLTrainer.threadLocalLogger.get().info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
 
@@ -110,7 +111,7 @@ public class RLTrainer {
                     Logger currentLogger = threadLocalLogger.get();
                     if (isFirst) {
                         currentLogger.setLevel(Level.INFO);
-                    }  
+                    }
                     currentLogger.info("Starting Game Runner");
 
                     Thread.currentThread().setName("GAME");
@@ -159,15 +160,15 @@ public class RLTrainer {
             long totalTime = endTime - startTime;
             double totalTimeInMinutes = totalTime / 1_000_000_000.0 / 60.0;
             double gamesRunPerMinute = NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER / totalTimeInMinutes;
-            
+
             logger.info("Training completed:");
             logger.info("Total Games Run: " + NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER);
             logger.info("Games Run Per Minute: " + gamesRunPerMinute);
             logger.info("Total Training Time: " + (totalTime / 1_000_000_000.0) + " seconds");
-            
+
             // Save the trained model
             sharedModel.saveModel(MODEL_FILE_PATH);
-            
+
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
         }
@@ -177,8 +178,8 @@ public class RLTrainer {
         List<Path> deckFiles = null;
         try {
             deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
-                             .filter(Files::isRegularFile)
-                             .collect(Collectors.toList());
+                    .filter(Files::isRegularFile)
+                    .collect(Collectors.toList());
         } catch (IOException e) {
             logger.error("Error during evaluation", e);
             return;
@@ -301,13 +302,18 @@ public class RLTrainer {
         // Get training data for both players
         List<StateSequenceBuilder.TrainingData> rlPlayerTrainingData = rlPlayer.getTrainingBuffer();
         List<StateSequenceBuilder.TrainingData> opponentTrainingData = opponent.getTrainingBuffer();
-        
+
         // Update the model with all states and rewards
-        sharedModel.train(rlPlayerTrainingData, reward);
-        sharedModel.train(opponentTrainingData, -reward); // Opposite reward for opponent
+        // Technically these can be empty (if they keep a no lander. Might be worth logging though)
+        if (!rlPlayerTrainingData.isEmpty()) {
+            sharedModel.train(rlPlayerTrainingData, reward);
+        }
+        if (!opponentTrainingData.isEmpty()) {
+            sharedModel.train(opponentTrainingData, -reward); // Opposite reward for opponent
+        }
     }
 
     public static PythonMLBridge getSharedModel() {
         return sharedModel;
     }
-} 
+}

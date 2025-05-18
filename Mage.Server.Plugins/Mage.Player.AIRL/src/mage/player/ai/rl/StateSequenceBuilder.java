@@ -1,10 +1,13 @@
 package mage.player.ai.rl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
 import mage.Mana;
+import mage.abilities.LoyaltyAbility;
+import mage.abilities.costs.common.PayLoyaltyCost;
 import mage.abilities.costs.mana.ManaCost;
 import mage.cards.Card;
 import mage.constants.TurnPhase;
@@ -16,15 +19,15 @@ import mage.game.stack.StackObject;
 import mage.players.Player;
 
 /**
- * Helper that converts a {@link Game} snapshot into a padded token sequence + attention mask
- * for a Transformer encoder. Can also prepend action tokens to the sequence for prediction.
+ * Helper that converts a {@link Game} snapshot into a padded token sequence +
+ * attention mask for a Transformer encoder. Can also prepend action tokens to
+ * the sequence for prediction.
  */
 public class StateSequenceBuilder {
 
     private static final Logger logger = Logger.getLogger(StateSequenceBuilder.class.getName());
 
     /* === CONFIGURATION ================================================= */
-
     public static final int DIM_PER_TOKEN = 128; // feature dim per token
     public static final int MAX_LEN = 256; // hard cap for sequence length
 
@@ -45,6 +48,9 @@ public class StateSequenceBuilder {
 
     public enum ActionType {
         ACTIVATE_ABILITY_OR_SPELL,
+        ACTIVATE_MANA_ABILITY,
+        ACTIVATE_LOYALTY_ABILITY,
+        CAST_SPELL,
         SELECT_TARGETS,
         DECLARE_ATTACKS,
         DECLARE_BLOCKS,
@@ -55,14 +61,13 @@ public class StateSequenceBuilder {
     }
 
     /* === PUBLIC API ===================================================== */
-
     /**
      * Build base sequence + mask for the given game state.
      *
-     * @param game       current game
-     * @param phase      current phase of the game
-     * @param maxLen     padding / truncation length (≤ {@link #MAX_LEN})
-     * @return           sequence + mask
+     * @param game current game
+     * @param phase current phase of the game
+     * @param maxLen padding / truncation length (≤ {@link #MAX_LEN})
+     * @return sequence + mask
      */
     public static SequenceOutput buildBaseState(Game game, TurnPhase phase, int maxLen) {
         if (maxLen > MAX_LEN) {
@@ -93,25 +98,25 @@ public class StateSequenceBuilder {
 
         // (a) Special tokens -----------------------------------------
         tokens.add(embedSpecial(CLS_ID));
-        mask.add(1);
-        if (phase != null){
+        mask.add(0);  // Don't mask CLS token
+        if (phase != null) {
             tokens.add(embedSpecial(PHASE_BASE + phase.ordinal()));
         } else {
             // Special case for mulligan
             tokens.add(embedSpecial(PHASE_BASE + TurnPhase.values().length + 1));
         }
-        mask.add(1);
+        mask.add(0);  // Don't mask phase token
 
         // (b) Player + opponent stats tokens -------------------------
         tokens.add(embedPlayerStats(player, game));
-        mask.add(1);
+        mask.add(0);  // Don't mask player stats
         Player opponent = game.getPlayer(game.getOpponents(player.getId()).iterator().next());
         if (opponent == null) {
             logger.severe("No opponent found in game " + game.getId());
             throw new IllegalStateException("Cannot build state sequence: no opponent");
         }
         tokens.add(embedPlayerStats(opponent, game));
-        mask.add(1);
+        mask.add(0);  // Don't mask opponent stats
 
         // (c) Variable-length entity tokens --------------------------
         addCardList(tokens, mask, player.getHand().getCards(game), Zone.HAND, game);
@@ -139,7 +144,7 @@ public class StateSequenceBuilder {
          */
         while (tokens.size() < maxLen) {
             tokens.add(new float[DIM_PER_TOKEN]); // zero padding token
-            mask.add(0);
+            mask.add(1);  // Only mask padding tokens
         }
         if (tokens.size() > maxLen) {
             tokens = tokens.subList(0, maxLen);
@@ -150,44 +155,33 @@ public class StateSequenceBuilder {
     }
 
     /**
-     * Create a new sequence with an action token prepended to the base state sequence.
-     * 
+     * Create a new sequence with an action token prepended to the base state
+     * sequence.
+     *
      * @param baseState The base state sequence
      * @param actionType The action to prepend
-     * @param actionCombo The specific combination of actions being considered
+     * @param abilityEncoding The encoded ability to prepend
      * @return A new sequence with the action prepended
      */
-    public static SequenceOutput prependAction(SequenceOutput baseState, ActionType actionType, List<Integer> actionCombo) {
-        // Create new lists for the result
-        List<float[]> tokens = new ArrayList<>(baseState.tokens);
-        List<Integer> mask = new ArrayList<>(baseState.mask);
-        
-        // Create action token
-        float[] actionToken = embedSpecial(ACTION_BASE + actionType.ordinal());
-        
-        // Create action combo token
-        float[] comboToken = new float[DIM_PER_TOKEN];
-        for (int i = 0; i < actionCombo.size() && i < DIM_PER_TOKEN; i++) {
-            comboToken[i] = actionCombo.get(i) / 100.0f; // Normalize to [0,1] range
-        }
-        
+    public static SequenceOutput prependAction(SequenceOutput baseState, ActionType actionType, float[] abilityEncoding) {
+        // Create new sequence with action token prepended
+        List<float[]> tokens = new ArrayList<>();
+        List<Integer> mask = new ArrayList<>();
+
         // Prepend action tokens
-        tokens.add(0, comboToken);
-        tokens.add(0, actionToken);
-        mask.add(0, 1);
-        mask.add(0, 1);
-        
-        // Truncate to MAX_LEN if needed
-        if (tokens.size() > MAX_LEN) {
-            tokens = tokens.subList(0, MAX_LEN);
-            mask = mask.subList(0, MAX_LEN);
-        }
-        
+        tokens.add(0, abilityEncoding);
+        tokens.add(0, embedSpecial(ACTION_BASE + actionType.ordinal()));
+        mask.add(0, 0);  // Don't mask ability encoding
+        mask.add(0, 0);  // Don't mask action token
+
+        // Add base state tokens
+        tokens.addAll(baseState.tokens);
+        mask.addAll(baseState.mask);
+
         return new SequenceOutput(tokens, mask);
     }
 
     /* === EMBEDDING HELPERS ============================================== */
-
     private static float[] embedSpecial(int tokenId) {
         float[] v = new float[DIM_PER_TOKEN];
         v[tokenId % DIM_PER_TOKEN] = 1.0f; // simple one‑hot placeholder
@@ -215,14 +209,14 @@ public class StateSequenceBuilder {
             List<? extends Permanent> perms, Zone z, Game g) {
         for (Permanent p : perms) {
             t.add(embedCard(p, z, g));
-            m.add(1);
+            m.add(0);  // Don't mask permanent tokens
         }
     }
 
     private static void addCard(List<float[]> t, List<Integer> m,
             Card c, Zone z, Game g) {
         t.add(embedCard(c, z, g));
-        m.add(1);
+        m.add(0);  // Don't mask card tokens
     }
 
     private static float[] embedCard(Card card, Zone zone, Game game) {
@@ -264,23 +258,23 @@ public class StateSequenceBuilder {
         } else {
             total = null;
         }
-        float[] manaFields = new float[] {
-                total != null ? total.getWhite()      : 0.0f,
-                total != null ? total.getBlue()       : 0.0f,
-                total != null ? total.getGreen()      : 0.0f,
-                total != null ? total.getBlack()      : 0.0f,
-                total != null ? total.getRed()        : 0.0f,
-                total != null ? total.getColorless()  : 0.0f,
-                total != null ? total.getGeneric()    : 0.0f
+        float[] manaFields = new float[]{
+            total != null ? total.getWhite() : 0.0f,
+            total != null ? total.getBlue() : 0.0f,
+            total != null ? total.getGreen() : 0.0f,
+            total != null ? total.getBlack() : 0.0f,
+            total != null ? total.getRed() : 0.0f,
+            total != null ? total.getColorless() : 0.0f,
+            total != null ? total.getGeneric() : 0.0f
         };
         for (int i = 0; i < manaFields.length && index < DIM_PER_TOKEN; i++) {
             v[index++] = manaFields[i];
         }
 
         // --- 5. Card type flags ---------------------------------
-        boolean[] flags = new boolean[] {
-                card.isCreature(), card.isArtifact(), card.isEnchantment(), card.isLand(),
-                card.isPlaneswalker(), card.isPermanent(), card.isInstant(), card.isSorcery()
+        boolean[] flags = new boolean[]{
+            card.isCreature(), card.isArtifact(), card.isEnchantment(), card.isLand(),
+            card.isPlaneswalker(), card.isPermanent(), card.isInstant(), card.isSorcery()
         };
         for (int i = 0; i < flags.length && index < DIM_PER_TOKEN; i++) {
             v[index++] = flags[i] ? 1.0f : 0.0f;
@@ -289,12 +283,12 @@ public class StateSequenceBuilder {
         // --- 6. Battlefield‑only properties ---------------------
         if (zone == Zone.BATTLEFIELD && card instanceof Permanent) {
             Permanent p = (Permanent) card;
-            float[] bf = new float[] {
-                    p.isTapped() ? 1.0f : 0.0f,
-                    p.isAttacking() ? 1.0f : 0.0f,
-                    p.isBlocked(game) ? 1.0f : 0.0f,
-                    p.hasSummoningSickness() ? 1.0f : 0.0f,
-                    (float) p.getDamage()
+            float[] bf = new float[]{
+                p.isTapped() ? 1.0f : 0.0f,
+                p.isAttacking() ? 1.0f : 0.0f,
+                p.isBlocked(game) ? 1.0f : 0.0f,
+                p.hasSummoningSickness() ? 1.0f : 0.0f,
+                (float) p.getDamage()
             };
             for (int i = 0; i < bf.length && index < DIM_PER_TOKEN; i++) {
                 v[index++] = bf[i];
@@ -324,8 +318,97 @@ public class StateSequenceBuilder {
         return v;
     }
 
+    /**
+     * Encodes an activated ability into a vector representation. The encoding
+     * includes: - Source type (permanent, card, etc.) - Ability type (mana,
+     * loyalty, etc.) - Cost information - Effect information
+     *
+     * @param ability The ability to encode
+     * @param source The source of the ability
+     * @param game The current game state
+     * @return A float array encoding the ability
+     */
+    public static float[] encodeActivatedAbility(mage.abilities.Ability ability, mage.game.permanent.Permanent source, Game game) {
+        float[] encoding = new float[DIM_PER_TOKEN];
+
+        // Log ability details
+        logger.info("Encoding ability: " + ability.toString());
+        if (source != null) {
+            logger.info("Source: " + source.getName() + " (" + source.getCardType().toString() + ")");
+        }
+
+        // Source type encoding (first 10 dimensions)
+        if (source != null) {
+            encoding[0] = 1.0f; // Is permanent
+            encoding[1] = source.isCreature() ? 1.0f : 0.0f;
+            encoding[2] = source.isArtifact() ? 1.0f : 0.0f;
+            encoding[3] = source.isEnchantment() ? 1.0f : 0.0f;
+            encoding[4] = source.isPlaneswalker() ? 1.0f : 0.0f;
+            encoding[5] = source.isLand() ? 1.0f : 0.0f;
+            logger.info("Source type encoding: " + Arrays.toString(Arrays.copyOfRange(encoding, 0, 6)));
+        }
+
+        // Ability type encoding (next 10 dimensions)
+        if (ability instanceof mage.abilities.mana.ManaAbility) {
+            encoding[10] = 1.0f; // Is mana ability
+            logger.info("Ability type: Mana ability");
+        } else if (ability instanceof LoyaltyAbility) {
+            encoding[11] = 1.0f; // Is loyalty ability
+            logger.info("Ability type: Loyalty ability");
+            // Get loyalty cost from PayLoyaltyCost
+            for (mage.abilities.costs.Cost cost : ability.getCosts()) {
+                if (cost instanceof PayLoyaltyCost) {
+                    encoding[12] = ((PayLoyaltyCost) cost).getAmount() / 10.0f; // Normalize loyalty cost
+                    logger.info("Loyalty cost: " + ((PayLoyaltyCost) cost).getAmount());
+                    break;
+                }
+            }
+        } else {
+            encoding[13] = 1.0f; // Is regular activated ability
+            logger.info("Ability type: Regular activated ability");
+        }
+
+        // Cost encoding (next 20 dimensions)
+        int costIndex = 20;
+        for (mage.abilities.costs.Cost cost : ability.getCosts()) {
+            if (cost instanceof mage.abilities.costs.mana.ManaCost) {
+                ManaCost manaCost = (ManaCost) cost;
+                encoding[costIndex] = manaCost.getMana().getGeneric() / 10.0f;
+                encoding[costIndex + 1] = manaCost.getMana().getWhite() / 10.0f;
+                encoding[costIndex + 2] = manaCost.getMana().getBlue() / 10.0f;
+                encoding[costIndex + 3] = manaCost.getMana().getBlack() / 10.0f;
+                encoding[costIndex + 4] = manaCost.getMana().getRed() / 10.0f;
+                encoding[costIndex + 5] = manaCost.getMana().getGreen() / 10.0f;
+                logger.info("Mana cost: " + manaCost.getMana().toString());
+                costIndex += 6;
+            } else if (cost instanceof mage.abilities.costs.common.TapSourceCost) {
+                encoding[costIndex] = 1.0f;
+                logger.info("Cost: Tap source");
+                costIndex++;
+            } else if (cost instanceof mage.abilities.costs.common.SacrificeSourceCost) {
+                encoding[costIndex + 1] = 1.0f;
+                logger.info("Cost: Sacrifice source");
+                costIndex++;
+            }
+        }
+
+        // Effect encoding (remaining dimensions)
+        String abilityText = ability.toString();
+        if (abilityText != null) {
+            float[] textEmb = EmbeddingManager.getEmbedding(abilityText);
+            // Copy the embedding into the remaining dimensions
+            for (int i = 0; i < textEmb.length && (40 + i) < DIM_PER_TOKEN; i++) {
+                encoding[40 + i] = textEmb[i];
+            }
+            logger.info("Ability text: " + abilityText);
+        }
+
+        return encoding;
+    }
+
     /* === SIMPLE CONTAINER ============================================== */
     public static class SequenceOutput {
+
         public final List<float[]> tokens;
         public final List<Integer> mask;
 
@@ -344,14 +427,15 @@ public class StateSequenceBuilder {
     }
 
     public static class TrainingData {
+
         public final SequenceOutput stateActionPair;
         public final double policyScore;
         public final double valueScore;
         public final List<Integer> actionCombo;
         public final ActionType actionType;
 
-        public TrainingData(SequenceOutput stateActionPair, double policyScore, double valueScore, 
-                          List<Integer> actionCombo, ActionType actionType) {
+        public TrainingData(SequenceOutput stateActionPair, double policyScore, double valueScore,
+                List<Integer> actionCombo, ActionType actionType) {
             this.stateActionPair = stateActionPair;
             this.policyScore = policyScore;
             this.valueScore = valueScore;
