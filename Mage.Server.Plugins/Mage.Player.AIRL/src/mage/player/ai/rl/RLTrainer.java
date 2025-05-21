@@ -44,10 +44,10 @@ public class RLTrainer {
     private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = 2;
+    public static final int NUM_GAME_RUNNERS = 4;
     public static final int NUM_EPISODES_PER_GAME_RUNNER = 1;
 
-    public static final PythonMLBridge sharedModel = new PythonMLBridge();
+    public static final PythonMLBridge sharedModel = PythonMLBridge.getInstance();
 
     static {
         // Set default logging level for all loggers to WARN
@@ -66,8 +66,7 @@ public class RLTrainer {
     });
 
     public RLTrainer() {
-        // Initialize the Python ML model
-        sharedModel.initialize();
+        // No need to initialize here as PythonMLBridge handles initialization in its constructor
     }
 
     public void train() {

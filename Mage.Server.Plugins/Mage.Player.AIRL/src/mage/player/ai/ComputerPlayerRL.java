@@ -41,7 +41,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
     // The default constructor for ComputerPlayerRL used by server to create
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
-        this(name, range, new PythonMLBridge());
+        this(name, range, PythonMLBridge.getInstance());
     }
 
     public ComputerPlayerRL(final ComputerPlayerRL player) {

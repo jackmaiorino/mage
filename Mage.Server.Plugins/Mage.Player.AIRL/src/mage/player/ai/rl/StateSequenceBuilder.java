@@ -1,7 +1,6 @@
 package mage.player.ai.rl;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -331,12 +330,6 @@ public class StateSequenceBuilder {
     public static float[] encodeActivatedAbility(mage.abilities.Ability ability, mage.game.permanent.Permanent source, Game game) {
         float[] encoding = new float[DIM_PER_TOKEN];
 
-        // Log ability details
-        logger.info("Encoding ability: " + ability.toString());
-        if (source != null) {
-            logger.info("Source: " + source.getName() + " (" + source.getCardType().toString() + ")");
-        }
-
         // Source type encoding (first 10 dimensions)
         if (source != null) {
             encoding[0] = 1.0f; // Is permanent
@@ -345,27 +338,22 @@ public class StateSequenceBuilder {
             encoding[3] = source.isEnchantment() ? 1.0f : 0.0f;
             encoding[4] = source.isPlaneswalker() ? 1.0f : 0.0f;
             encoding[5] = source.isLand() ? 1.0f : 0.0f;
-            logger.info("Source type encoding: " + Arrays.toString(Arrays.copyOfRange(encoding, 0, 6)));
         }
 
         // Ability type encoding (next 10 dimensions)
         if (ability instanceof mage.abilities.mana.ManaAbility) {
             encoding[10] = 1.0f; // Is mana ability
-            logger.info("Ability type: Mana ability");
         } else if (ability instanceof LoyaltyAbility) {
             encoding[11] = 1.0f; // Is loyalty ability
-            logger.info("Ability type: Loyalty ability");
             // Get loyalty cost from PayLoyaltyCost
             for (mage.abilities.costs.Cost cost : ability.getCosts()) {
                 if (cost instanceof PayLoyaltyCost) {
                     encoding[12] = ((PayLoyaltyCost) cost).getAmount() / 10.0f; // Normalize loyalty cost
-                    logger.info("Loyalty cost: " + ((PayLoyaltyCost) cost).getAmount());
                     break;
                 }
             }
         } else {
             encoding[13] = 1.0f; // Is regular activated ability
-            logger.info("Ability type: Regular activated ability");
         }
 
         // Cost encoding (next 20 dimensions)
@@ -379,15 +367,12 @@ public class StateSequenceBuilder {
                 encoding[costIndex + 3] = manaCost.getMana().getBlack() / 10.0f;
                 encoding[costIndex + 4] = manaCost.getMana().getRed() / 10.0f;
                 encoding[costIndex + 5] = manaCost.getMana().getGreen() / 10.0f;
-                logger.info("Mana cost: " + manaCost.getMana().toString());
                 costIndex += 6;
             } else if (cost instanceof mage.abilities.costs.common.TapSourceCost) {
                 encoding[costIndex] = 1.0f;
-                logger.info("Cost: Tap source");
                 costIndex++;
             } else if (cost instanceof mage.abilities.costs.common.SacrificeSourceCost) {
                 encoding[costIndex + 1] = 1.0f;
-                logger.info("Cost: Sacrifice source");
                 costIndex++;
             }
         }
@@ -400,7 +385,6 @@ public class StateSequenceBuilder {
             for (int i = 0; i < textEmb.length && (40 + i) < DIM_PER_TOKEN; i++) {
                 encoding[40 + i] = textEmb[i];
             }
-            logger.info("Ability text: " + abilityText);
         }
 
         return encoding;

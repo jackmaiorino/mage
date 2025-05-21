@@ -11,6 +11,7 @@ import java.io.DataInputStream;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.concurrent.CompletableFuture;
 
 import org.nd4j.linalg.api.ndarray.INDArray;
 import org.nd4j.linalg.factory.Nd4j;
@@ -20,15 +21,24 @@ import py4j.GatewayServer;
 import py4j.Py4JException;
 
 /**
- * Bridge class to interface with Python ML implementation using Py4J. Handles
- * conversion between Java and Python tensors and manages the Py4J gateway.
+ * Singleton bridge class to interface with Python ML implementation using Py4J.
+ * Handles conversion between Java and Python tensors and manages the Py4J
+ * gateway.
  */
 public class PythonMLBridge {
 
     private static final Logger logger = Logger.getLogger(PythonMLBridge.class.getName());
     private static final int DEFAULT_PORT = 25334;
-    private static final int PYTHON_STARTUP_WAIT_MS = 3000;
+    private static final int PYTHON_STARTUP_WAIT_MS = 10000;
     private static final int PROCESS_KILL_WAIT_MS = 2000;
+    private static final int MAX_INIT_RETRIES = 3;
+    private static final int INIT_RETRY_DELAY_MS = 1000;
+    private static final int MAX_CONNECTION_RETRIES = 5;
+    private static final int CONNECTION_RETRY_DELAY_MS = 2000;
+
+    // Singleton instance with volatile for thread safety
+    private static volatile PythonMLBridge instance;
+    private static final Object lock = new Object();
 
     private final String projectRoot = new File(new File(System.getProperty("user.dir")).getParentFile().getParentFile(), "mage").getAbsolutePath();
     private final String venvPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/venv").getAbsolutePath();
@@ -40,10 +50,9 @@ public class PythonMLBridge {
     private boolean isInitialized = false;
 
     /**
-     * Constructs a new PythonMLBridge instance. Initializes the Python
-     * environment and starts the Py4J gateway.
+     * Private constructor to prevent direct instantiation
      */
-    public PythonMLBridge() {
+    private PythonMLBridge() {
         try {
             cleanupExistingPythonProcesses();
             setupPaths();
@@ -51,11 +60,43 @@ public class PythonMLBridge {
             installDependencies();
             startPythonProcess();
             connectToPythonGateway();
+            initializeModel();
             isInitialized = true;
         } catch (Exception e) {
             logger.severe("Failed to initialize Python ML Bridge: " + e.getMessage());
             e.printStackTrace();
             throw new RuntimeException("Failed to initialize Python ML Bridge", e);
+        }
+    }
+
+    /**
+     * Get the singleton instance of PythonMLBridge
+     *
+     * @return The singleton instance
+     */
+    public static PythonMLBridge getInstance() {
+        if (instance == null) {
+            synchronized (lock) {
+                if (instance == null) {
+                    instance = new PythonMLBridge();
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * Reset the singleton instance (useful for testing)
+     *
+     * @return The new singleton instance
+     */
+    public static PythonMLBridge resetInstance() {
+        synchronized (lock) {
+            if (instance != null) {
+                instance.shutdown();
+            }
+            instance = new PythonMLBridge();
+            return instance;
         }
     }
 
@@ -121,49 +162,117 @@ public class PythonMLBridge {
     }
 
     /**
+     * Checks if a Python package is installed.
+     */
+    private boolean isPackageInstalled(String pipPath, String packageName) throws Exception {
+        try {
+            // First try pip list
+            ProcessBuilder checkBuilder = new ProcessBuilder(pipPath, "list", "--format=json");
+            checkBuilder.redirectErrorStream(true);
+            Process checkProcess = checkBuilder.start();
+
+            StringBuilder output = new StringBuilder();
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(checkProcess.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    output.append(line);
+                }
+            }
+
+            int checkExitCode = checkProcess.waitFor();
+            if (checkExitCode == 0) {
+                // Parse JSON output to check for package
+                String jsonOutput = output.toString();
+                return jsonOutput.contains("\"name\":\"" + packageName + "\"");
+            }
+
+            // If pip list fails, try a direct import check
+            logger.info("pip list failed, trying direct import check for " + packageName);
+            String pythonPath = new File(venvPath, "Scripts/python").getAbsolutePath();
+            ProcessBuilder importBuilder = new ProcessBuilder(pythonPath, "-c",
+                    "try:\n"
+                    + "    import " + packageName + "\n"
+                    + "    print('INSTALLED')\n"
+                    + "except ImportError:\n"
+                    + "    print('NOT_INSTALLED')");
+
+            importBuilder.redirectErrorStream(true);
+            Process importProcess = importBuilder.start();
+
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(importProcess.getInputStream()))) {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    if (line.equals("INSTALLED")) {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        } catch (Exception e) {
+            logger.warning("Error checking package installation: " + e.getMessage());
+            // If we can't check, assume not installed to be safe
+            return false;
+        }
+    }
+
+    /**
      * Installs PyTorch with CUDA support.
      */
     private void installPyTorch(String pipPath) throws Exception {
-        logger.info("Installing PyTorch with CUDA support");
-        ProcessBuilder torchBuilder = new ProcessBuilder(pipPath, "install", "--upgrade",
-                "--index-url", "https://download.pytorch.org/whl/cu121",
-                "torch>=2.2.0");
-        torchBuilder.redirectErrorStream(true);
-        Process torchProcess = torchBuilder.start();
+        logger.info("Checking PyTorch installation");
 
-        readProcessOutput(torchProcess, "[PIP]");
+        if (!isPackageInstalled(pipPath, "torch")) {
+            logger.info("PyTorch not found, installing with CUDA support");
+            ProcessBuilder torchBuilder = new ProcessBuilder(pipPath, "install",
+                    "--index-url", "https://download.pytorch.org/whl/cu121",
+                    "torch>=2.2.0");
+            torchBuilder.redirectErrorStream(true);
+            Process torchProcess = torchBuilder.start();
 
-        int torchExitCode = torchProcess.waitFor();
-        if (torchExitCode != 0) {
-            throw new RuntimeException("Failed to install PyTorch, exit code: " + torchExitCode);
+            readProcessOutput(torchProcess, "[PIP]");
+
+            int torchExitCode = torchProcess.waitFor();
+            if (torchExitCode != 0) {
+                throw new RuntimeException("Failed to install PyTorch, exit code: " + torchExitCode);
+            }
+            logger.info("PyTorch installed successfully");
+        } else {
+            logger.info("PyTorch already installed, skipping installation");
         }
-        logger.info("PyTorch installed successfully");
     }
 
     /**
      * Installs a single Python package.
      */
     private void installPackage(String pipPath, String pkgName, String... args) throws Exception {
-        logger.info("Installing package: " + pkgName);
-        List<String> command = new ArrayList<>();
-        command.add(pipPath);
-        command.add("install");
-        for (String arg : args) {
-            command.add(arg);
+        String basePackageName = pkgName.split(">=")[0];
+        logger.info("Checking package: " + basePackageName);
+
+        if (!isPackageInstalled(pipPath, basePackageName)) {
+            logger.info("Installing package: " + pkgName);
+            List<String> command = new ArrayList<>();
+            command.add(pipPath);
+            command.add("install");
+            for (String arg : args) {
+                command.add(arg);
+            }
+            command.add(pkgName);
+
+            ProcessBuilder packageBuilder = new ProcessBuilder(command);
+            packageBuilder.redirectErrorStream(true);
+            Process packageProcess = packageBuilder.start();
+
+            readProcessOutput(packageProcess, "[PIP]");
+
+            int packageExitCode = packageProcess.waitFor();
+            if (packageExitCode != 0) {
+                throw new RuntimeException("Failed to install package " + pkgName + ", exit code: " + packageExitCode);
+            }
+            logger.info("Package " + pkgName + " installed successfully");
+        } else {
+            logger.info("Package " + pkgName + " already installed, skipping installation");
         }
-        command.add(pkgName);
-
-        ProcessBuilder packageBuilder = new ProcessBuilder(command);
-        packageBuilder.redirectErrorStream(true);
-        Process packageProcess = packageBuilder.start();
-
-        readProcessOutput(packageProcess, "[PIP]");
-
-        int packageExitCode = packageProcess.waitFor();
-        if (packageExitCode != 0) {
-            throw new RuntimeException("Failed to install package " + pkgName + ", exit code: " + packageExitCode);
-        }
-        logger.info("Package " + pkgName + " installed successfully");
     }
 
     /**
@@ -199,7 +308,7 @@ public class PythonMLBridge {
         pythonProcess = pb.start();
 
         // Read and log Python output in a separate thread
-        new Thread(() -> {
+        Thread outputThread = new Thread(() -> {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(pythonProcess.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -208,19 +317,72 @@ public class PythonMLBridge {
             } catch (Exception e) {
                 logger.severe("Error reading Python output: " + e.getMessage());
             }
-        }).start();
+        });
+        outputThread.setDaemon(true);
+        outputThread.start();
 
-        // Wait for Python process to start up
-        Thread.sleep(PYTHON_STARTUP_WAIT_MS);
+        // Wait for Python process to start up and verify it's running
+        long startTime = System.currentTimeMillis();
+        while (System.currentTimeMillis() - startTime < PYTHON_STARTUP_WAIT_MS) {
+            try {
+                // Check if process is still running
+                int exitValue = pythonProcess.exitValue();
+                throw new RuntimeException("Python process exited unexpectedly with code: " + exitValue);
+            } catch (IllegalThreadStateException e) {
+                // Process is still running, which is good
+                Thread.sleep(100);
+            }
+        }
+
+        // Verify process is still running after wait
+        try {
+            int exitValue = pythonProcess.exitValue();
+            throw new RuntimeException("Python process exited unexpectedly with code: " + exitValue);
+        } catch (IllegalThreadStateException e) {
+            // Process is still running, which is good
+            logger.info("Python process started successfully");
+        }
     }
 
     /**
      * Connects to the Python Py4J gateway.
      */
     private void connectToPythonGateway() throws Exception {
-        clientServer = new ClientServer(null);
-        entryPoint = (PythonEntryPoint) clientServer.getPythonServerEntryPoint(new Class[]{PythonEntryPoint.class});
-        logger.info("Connected to Python ML Bridge on port " + DEFAULT_PORT);
+        int retries = 0;
+        Exception lastException = null;
+
+        while (retries < MAX_CONNECTION_RETRIES) {
+            try {
+                clientServer = new ClientServer(null);
+                entryPoint = (PythonEntryPoint) clientServer.getPythonServerEntryPoint(new Class[]{PythonEntryPoint.class});
+
+                // Test the connection by calling a simple method
+                entryPoint.initializeModel();
+
+                logger.info("Connected to Python ML Bridge on port " + DEFAULT_PORT);
+                return;
+            } catch (Exception e) {
+                lastException = e;
+                logger.warning("Failed to connect to Python gateway (attempt " + (retries + 1) + "): " + e.getMessage());
+                retries++;
+
+                // Clean up failed connection
+                if (clientServer != null) {
+                    try {
+                        clientServer.shutdown();
+                    } catch (Exception ex) {
+                        logger.warning("Error shutting down failed connection: " + ex.getMessage());
+                    }
+                    clientServer = null;
+                }
+
+                if (retries < MAX_CONNECTION_RETRIES) {
+                    Thread.sleep(CONNECTION_RETRY_DELAY_MS);
+                }
+            }
+        }
+
+        throw new RuntimeException("Failed to connect to Python gateway after " + MAX_CONNECTION_RETRIES + " attempts", lastException);
     }
 
     /**
@@ -300,22 +462,55 @@ public class PythonMLBridge {
         if (!isInitialized) {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
-        try {
-            entryPoint.initializeModel();
-            logger.info("Python ML model initialized successfully");
-        } catch (Exception e) {
-            logger.severe("Failed to initialize Python ML model: " + e.getMessage());
-            throw new RuntimeException("Failed to initialize Python ML model", e);
+        initializeModel();
+    }
+
+    /**
+     * Internal method to initialize the model
+     */
+    private void initializeModel() {
+        int retries = 0;
+        Exception lastException = null;
+
+        while (retries < MAX_INIT_RETRIES) {
+            try {
+                entryPoint.initializeModel();
+                logger.info("Python ML model initialized successfully");
+                return;
+            } catch (Exception e) {
+                lastException = e;
+                logger.warning("Failed to initialize Python ML model (attempt " + (retries + 1) + "): " + e.getMessage());
+                retries++;
+                if (retries < MAX_INIT_RETRIES) {
+                    try {
+                        Thread.sleep(INIT_RETRY_DELAY_MS);
+                    } catch (InterruptedException ie) {
+                        Thread.currentThread().interrupt();
+                        throw new RuntimeException("Interrupted while waiting to retry initialization", ie);
+                    }
+                }
+            }
         }
+
+        logger.severe("Failed to initialize Python ML model after " + MAX_INIT_RETRIES + " attempts");
+        throw new RuntimeException("Failed to initialize Python ML model", lastException);
     }
 
     /**
      * Make predictions using the Python ML model
      */
     public INDArray[] predict(StateSequenceBuilder.SequenceOutput state) {
-        List<StateSequenceBuilder.SequenceOutput> states = new ArrayList<>();
-        states.add(state);
-        return predictBatch(states);
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+
+        try {
+            PythonMLBatchManager.PredictionResult result = PythonMLBatchManager.getInstance(entryPoint).predict(state).get();
+            return new INDArray[]{result.policyScores, result.valueScores};
+        } catch (Exception e) {
+            logger.severe("Error during prediction: " + e.getMessage());
+            throw new RuntimeException("Failed to get predictions from Python model", e);
+        }
     }
 
     public INDArray[] predictBatch(List<StateSequenceBuilder.SequenceOutput> states) {
@@ -323,86 +518,36 @@ public class PythonMLBridge {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
 
-        long startTime = System.nanoTime();
         try {
-            // Convert states to format expected by Python
-            long convertStart = System.nanoTime();
-            int batchSize = states.size();
-            int seqLen = states.get(0).getSequence().size();
-            int dModel = states.get(0).getSequence().get(0).length;
+            // Create a list of futures to track all predictions
+            List<CompletableFuture<PythonMLBatchManager.PredictionResult>> futures = new ArrayList<>();
 
-            // Create flat arrays for faster transfer
-            float[] sequencesFlat = new float[batchSize * seqLen * dModel];
-            float[] masksFlat = new float[batchSize * seqLen];
-
-            // Fill arrays in a single pass
-            int seqIdx = 0;
-            int maskIdx = 0;
+            // Submit each state to the batch manager
             for (StateSequenceBuilder.SequenceOutput state : states) {
-                List<float[]> tokens = state.getSequence();
-                List<Integer> mask = state.getMask();
-
-                for (int j = 0; j < seqLen; j++) {
-                    float[] token = tokens.get(j);
-                    System.arraycopy(token, 0, sequencesFlat, seqIdx, dModel);
-                    seqIdx += dModel;
-                    masksFlat[maskIdx++] = mask.get(j);
-                }
+                futures.add(PythonMLBatchManager.getInstance(entryPoint).predict(state));
             }
 
-            // Convert float arrays to byte arrays
-            byte[] sequencesBytes = new byte[sequencesFlat.length * 4];  // 4 bytes per float
-            byte[] masksBytes = new byte[masksFlat.length * 4];
+            // Wait for all predictions to complete
+            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
 
-            // Use ByteBuffer for efficient conversion with LITTLE_ENDIAN to match Python
-            java.nio.ByteBuffer.wrap(sequencesBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .put(sequencesFlat);
-            java.nio.ByteBuffer.wrap(masksBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .put(masksFlat);
+            // Collect results
+            INDArray[] policyScores = new INDArray[states.size()];
+            INDArray[] valueScores = new INDArray[states.size()];
 
-            long convertTime = System.nanoTime() - convertStart;
-            logger.info(String.format("Java array conversion took %.3f seconds", convertTime / 1e9));
+            for (int i = 0; i < futures.size(); i++) {
+                PythonMLBatchManager.PredictionResult result = futures.get(i).get();
+                policyScores[i] = result.policyScores;
+                valueScores[i] = result.valueScores;
+            }
 
-            // Get predictions from Python through Py4J
-            long predictStart = System.nanoTime();
-            byte[] predictionsBytes = entryPoint.predictBatchFlat(sequencesBytes, masksBytes, batchSize, seqLen, dModel);
-            long predictTime = System.nanoTime() - predictStart;
-            logger.info(String.format("Py4J prediction call took %.3f seconds", predictTime / 1e9));
+            // Combine results into single arrays
+            INDArray combinedPolicyScores = Nd4j.vstack(policyScores);
+            INDArray combinedValueScores = Nd4j.vstack(valueScores);
 
-            // Convert predictions to INDArrays
-            long splitStart = System.nanoTime();
-            float[] predictions = new float[predictionsBytes.length / 4];
-            java.nio.ByteBuffer.wrap(predictionsBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .get(predictions);
-
-            float[] policyScores = new float[batchSize];
-            float[] valueScores = new float[batchSize];
-
-            // Extract policy and value scores from the predictions array
-            System.arraycopy(predictions, 0, policyScores, 0, batchSize);
-            System.arraycopy(predictions, batchSize, valueScores, 0, batchSize);
-
-            // Convert to INDArrays
-            INDArray policyScoresArray = Nd4j.create(policyScores);
-            INDArray valueScoresArray = Nd4j.create(valueScores);
-            long splitTime = System.nanoTime() - splitStart;
-            logger.info(String.format("Score splitting and INDArray conversion took %.3f seconds", splitTime / 1e9));
-
-            long totalTime = System.nanoTime() - startTime;
-            logger.info(String.format("Total predictBatch operation took %.3f seconds", totalTime / 1e9));
-
-            return new INDArray[]{policyScoresArray, valueScoresArray};
-        } catch (Py4JException e) {
-            logger.severe("Py4J error during batch prediction: " + e.getMessage());
-            throw new RuntimeException("Failed to get predictions from Python model", e);
+            return new INDArray[]{combinedPolicyScores, combinedValueScores};
         } catch (Exception e) {
             logger.severe("Error during batch prediction: " + e.getMessage());
+            e.printStackTrace(); // Add stack trace for better debugging
             throw new RuntimeException("Failed to get predictions from Python model", e);
         }
     }
@@ -416,94 +561,7 @@ public class PythonMLBridge {
         }
 
         try {
-            long startTime = System.nanoTime();
-            // Convert training data to format expected by Python
-            int batchSize = trainingData.size();
-            int seqLen = trainingData.get(0).stateActionPair.getSequence().size();
-            int dModel = trainingData.get(0).stateActionPair.getSequence().get(0).length;
-            int maxActions = trainingData.get(0).actionCombo.size();
-
-            // Create flat arrays for faster transfer
-            float[] sequencesFlat = new float[batchSize * seqLen * dModel];
-            float[] masksFlat = new float[batchSize * seqLen];
-            float[] policyScoresFlat = new float[batchSize];
-            float[] valueScoresFlat = new float[batchSize];
-            int[] actionTypesFlat = new int[batchSize];
-            int[] actionCombosFlat = new int[batchSize * maxActions];
-
-            // Fill arrays in a single pass
-            int seqIdx = 0;
-            int maskIdx = 0;
-            int comboIdx = 0;
-            for (int i = 0; i < batchSize; i++) {
-                StateSequenceBuilder.TrainingData data = trainingData.get(i);
-                List<float[]> tokens = data.stateActionPair.getSequence();
-                List<Integer> mask = data.stateActionPair.getMask();
-
-                // Fill sequences and masks
-                for (int j = 0; j < seqLen; j++) {
-                    float[] token = tokens.get(j);
-                    System.arraycopy(token, 0, sequencesFlat, seqIdx, dModel);
-                    seqIdx += dModel;
-                    masksFlat[maskIdx++] = mask.get(j);
-                }
-
-                // Fill other arrays
-                policyScoresFlat[i] = (float) data.policyScore;
-                valueScoresFlat[i] = (float) data.valueScore;
-                actionTypesFlat[i] = data.actionType.ordinal();
-                for (int j = 0; j < maxActions; j++) {
-                    actionCombosFlat[comboIdx++] = data.actionCombo.get(j);
-                }
-            }
-
-            // Convert float arrays to byte arrays
-            byte[] sequencesBytes = new byte[sequencesFlat.length * 4];
-            byte[] masksBytes = new byte[masksFlat.length * 4];
-            byte[] policyScoresBytes = new byte[policyScoresFlat.length * 4];
-            byte[] valueScoresBytes = new byte[valueScoresFlat.length * 4];
-            byte[] actionTypesBytes = new byte[actionTypesFlat.length * 4];
-            byte[] actionCombosBytes = new byte[actionCombosFlat.length * 4];
-
-            // Use ByteBuffer for efficient conversion with LITTLE_ENDIAN to match Python
-            java.nio.ByteBuffer.wrap(sequencesBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .put(sequencesFlat);
-            java.nio.ByteBuffer.wrap(masksBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .put(masksFlat);
-            java.nio.ByteBuffer.wrap(policyScoresBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .put(policyScoresFlat);
-            java.nio.ByteBuffer.wrap(valueScoresBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asFloatBuffer()
-                    .put(valueScoresFlat);
-            java.nio.ByteBuffer.wrap(actionTypesBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asIntBuffer()
-                    .put(actionTypesFlat);
-            java.nio.ByteBuffer.wrap(actionCombosBytes)
-                    .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-                    .asIntBuffer()
-                    .put(actionCombosFlat);
-
-            long convertTime = System.nanoTime() - startTime;
-            logger.info(String.format("Java array conversion took %.3f seconds", convertTime / 1e9));
-
-            // Send training data to Python through Py4J
-            long trainStart = System.nanoTime();
-            entryPoint.trainFlat(sequencesBytes, masksBytes, policyScoresBytes, valueScoresBytes,
-                    actionTypesBytes, actionCombosBytes, batchSize, seqLen, dModel, maxActions, (float) reward);
-            long trainTime = System.nanoTime() - trainStart;
-            logger.info(String.format("Py4J training call took %.3f seconds", trainTime / 1e9));
-
-        } catch (Py4JException e) {
-            logger.severe("Py4J error during training: " + e.getMessage());
-            throw new RuntimeException("Failed to train Python model", e);
+            PythonMLBatchManager.getInstance(entryPoint).train(trainingData.get(0), reward).get();
         } catch (Exception e) {
             logger.severe("Error during training: " + e.getMessage());
             throw new RuntimeException("Failed to train Python model", e);
