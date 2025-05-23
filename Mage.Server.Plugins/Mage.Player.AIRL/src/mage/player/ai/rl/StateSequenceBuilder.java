@@ -150,6 +150,17 @@ public class StateSequenceBuilder {
             mask = mask.subList(0, maxLen);
         }
 
+        // Validate final sequence for NaN or Inf values
+        for (int i = 0; i < tokens.size(); i++) {
+            float[] token = tokens.get(i);
+            for (int j = 0; j < token.length; j++) {
+                if (Float.isNaN(token[j]) || Float.isInfinite(token[j])) {
+                    logger.severe(String.format("Invalid value detected in final sequence at token %d, index %d: %f", i, j, token[j]));
+                    token[j] = 0.0f; // Replace NaN/Inf with 0
+                }
+            }
+        }
+
         return new SequenceOutput(tokens, mask);
     }
 
@@ -189,11 +200,29 @@ public class StateSequenceBuilder {
 
     private static float[] embedPlayerStats(Player p, Game g) {
         float[] v = new float[DIM_PER_TOKEN];
-        v[0] = (float) p.getLife() / g.getStartingLife();
-        v[1] = (float) p.getHand().size() / 7f;
-        v[2] = (float) p.getLibrary().size() / 60f;
-        v[3] = (float) p.getGraveyard().size() / 10f;
-        v[4] = (float) p.getLandsPlayed() / 10f;
+
+        // Add validation for player stats
+        float startingLife = Math.max(1, g.getStartingLife());
+        float handSize = Math.max(1, p.getHand().size());
+        float librarySize = Math.max(1, p.getLibrary().size());
+        float graveyardSize = Math.max(1, p.getGraveyard().size());
+        float landsPlayed = Math.max(1, p.getLandsPlayed());
+
+        // Normalize with validation
+        v[0] = (float) p.getLife() / startingLife;
+        v[1] = (float) p.getHand().size() / handSize;
+        v[2] = (float) p.getLibrary().size() / librarySize;
+        v[3] = (float) p.getGraveyard().size() / graveyardSize;
+        v[4] = (float) p.getLandsPlayed() / landsPlayed;
+
+        // Validate normalized values
+        for (int i = 0; i < 5; i++) {
+            if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
+                logger.severe(String.format("Invalid normalized value at index %d: %f", i, v[i]));
+                v[i] = 0.0f; // Replace NaN/Inf with 0
+            }
+        }
+
         return v;
     }
 
@@ -233,41 +262,50 @@ public class StateSequenceBuilder {
 
         // --- 3. Basic stats -------------------------------------
         if (index + 3 < DIM_PER_TOKEN) {
-            v[index++] = (float) card.getPower().getValue();
-            v[index++] = (float) card.getToughness().getValue();
-            v[index++] = (float) card.getManaValue();
+            // Add validation for power/toughness
+            int power = card.getPower().getValue();
+            int toughness = card.getToughness().getValue();
+            int manaValue = card.getManaValue();
+
+            // Ensure values are non-negative
+            power = Math.max(0, power);
+            toughness = Math.max(0, toughness);
+            manaValue = Math.max(0, manaValue);
+
+            v[index++] = (float) power;
+            v[index++] = (float) toughness;
+            v[index++] = (float) manaValue;
+
+            // Validate values
+            for (int i = index - 3; i < index; i++) {
+                if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
+                    logger.severe(String.format("Invalid card stat value at index %d: %f", i, v[i]));
+                    v[i] = 0.0f; // Replace NaN/Inf with 0
+                }
+            }
         }
 
         // --- 4. Mana cost breakdown -----------------------------
         Mana total = new Mana();
-        if (!card.getManaCost().isEmpty()) {
-            for (Object obj : card.getManaCost()) {
-                if (obj instanceof ManaCost) {
-                    ManaCost mc = (ManaCost) obj;
-                    Mana m = mc.getMana();
-                    total.setWhite(total.getWhite() + m.getWhite());
-                    total.setBlue(total.getBlue() + m.getBlue());
-                    total.setGreen(total.getGreen() + m.getGreen());
-                    total.setBlack(total.getBlack() + m.getBlack());
-                    total.setRed(total.getRed() + m.getRed());
-                    total.setColorless(total.getColorless() + m.getColorless());
-                    total.setGeneric(total.getGeneric() + m.getGeneric());
+        for (ManaCost cost : card.getManaCost()) {
+            total.add(cost.getMana());
+        }
+
+        // Add validation for mana values
+        if (index + 5 < DIM_PER_TOKEN) {
+            v[index++] = Math.max(0, total.getWhite());
+            v[index++] = Math.max(0, total.getBlue());
+            v[index++] = Math.max(0, total.getBlack());
+            v[index++] = Math.max(0, total.getRed());
+            v[index++] = Math.max(0, total.getGreen());
+
+            // Validate mana values
+            for (int i = index - 5; i < index; i++) {
+                if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
+                    logger.severe(String.format("Invalid mana value at index %d: %f", i, v[i]));
+                    v[i] = 0.0f; // Replace NaN/Inf with 0
                 }
             }
-        } else {
-            total = null;
-        }
-        float[] manaFields = new float[]{
-            total != null ? total.getWhite() : 0.0f,
-            total != null ? total.getBlue() : 0.0f,
-            total != null ? total.getGreen() : 0.0f,
-            total != null ? total.getBlack() : 0.0f,
-            total != null ? total.getRed() : 0.0f,
-            total != null ? total.getColorless() : 0.0f,
-            total != null ? total.getGeneric() : 0.0f
-        };
-        for (int i = 0; i < manaFields.length && index < DIM_PER_TOKEN; i++) {
-            v[index++] = manaFields[i];
         }
 
         // --- 5. Card type flags ---------------------------------
@@ -305,15 +343,27 @@ public class StateSequenceBuilder {
             try {
                 cardText = org.apache.commons.lang3.StringUtils.join(card.getRules(), ' ');
             } catch (Exception e) {
-                // ignore
+                logger.warning("Error getting card text for " + card.getName() + ": " + e.getMessage());
             }
             float[] textEmb = EmbeddingManager.getEmbedding(cardText);
             for (int i = 0; i < textEmb.length && index < DIM_PER_TOKEN; i++) {
+                if (Float.isNaN(textEmb[i]) || Float.isInfinite(textEmb[i])) {
+                    throw new IllegalStateException(String.format("Invalid text embedding value for card %s at index %d: %f",
+                            card.getName(), index, textEmb[i]));
+                }
                 v[index++] = textEmb[i];
             }
         }
 
-        // any remaining slots are already 0 by default
+        // Validate final vector
+        for (int i = 0; i < v.length; i++) {
+            if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
+                logger.severe(String.format("Invalid value in final vector for card %s at index %d: %f",
+                        card.getName(), i, v[i]));
+                v[i] = 0.0f; // Replace NaN/Inf with 0
+            }
+        }
+
         return v;
     }
 
@@ -348,7 +398,9 @@ public class StateSequenceBuilder {
             // Get loyalty cost from PayLoyaltyCost
             for (mage.abilities.costs.Cost cost : ability.getCosts()) {
                 if (cost instanceof PayLoyaltyCost) {
-                    encoding[12] = ((PayLoyaltyCost) cost).getAmount() / 10.0f; // Normalize loyalty cost
+                    // Add validation for loyalty cost
+                    int loyaltyCost = ((PayLoyaltyCost) cost).getAmount();
+                    encoding[12] = Math.max(0, loyaltyCost) / 10.0f; // Normalize loyalty cost
                     break;
                 }
             }
@@ -359,21 +411,15 @@ public class StateSequenceBuilder {
         // Cost encoding (next 20 dimensions)
         int costIndex = 20;
         for (mage.abilities.costs.Cost cost : ability.getCosts()) {
-            if (cost instanceof mage.abilities.costs.mana.ManaCost) {
-                ManaCost manaCost = (ManaCost) cost;
-                encoding[costIndex] = manaCost.getMana().getGeneric() / 10.0f;
-                encoding[costIndex + 1] = manaCost.getMana().getWhite() / 10.0f;
-                encoding[costIndex + 2] = manaCost.getMana().getBlue() / 10.0f;
-                encoding[costIndex + 3] = manaCost.getMana().getBlack() / 10.0f;
-                encoding[costIndex + 4] = manaCost.getMana().getRed() / 10.0f;
-                encoding[costIndex + 5] = manaCost.getMana().getGreen() / 10.0f;
-                costIndex += 6;
-            } else if (cost instanceof mage.abilities.costs.common.TapSourceCost) {
-                encoding[costIndex] = 1.0f;
-                costIndex++;
-            } else if (cost instanceof mage.abilities.costs.common.SacrificeSourceCost) {
-                encoding[costIndex + 1] = 1.0f;
-                costIndex++;
+            if (cost instanceof ManaCost) {
+                Mana mana = ((ManaCost) cost).getMana();
+                // Add validation for mana values
+                encoding[costIndex++] = Math.max(0, mana.getWhite());
+                encoding[costIndex++] = Math.max(0, mana.getBlue());
+                encoding[costIndex++] = Math.max(0, mana.getBlack());
+                encoding[costIndex++] = Math.max(0, mana.getRed());
+                encoding[costIndex++] = Math.max(0, mana.getGreen());
+                encoding[costIndex++] = Math.max(0, mana.getColorless());
             }
         }
 
@@ -384,6 +430,14 @@ public class StateSequenceBuilder {
             // Copy the embedding into the remaining dimensions
             for (int i = 0; i < textEmb.length && (40 + i) < DIM_PER_TOKEN; i++) {
                 encoding[40 + i] = textEmb[i];
+            }
+        }
+
+        // Validate final vector
+        for (int i = 0; i < encoding.length; i++) {
+            if (Float.isNaN(encoding[i]) || Float.isInfinite(encoding[i])) {
+                logger.severe(String.format("Invalid value in ability encoding at index %d: %f", i, encoding[i]));
+                encoding[i] = 0.0f; // Replace NaN/Inf with 0
             }
         }
 
@@ -425,6 +479,14 @@ public class StateSequenceBuilder {
             this.valueScore = valueScore;
             this.actionCombo = actionCombo;
             this.actionType = actionType;
+        }
+
+        public double getPolicyScore() {
+            return policyScore;
+        }
+
+        public double getValueScore() {
+            return valueScore;
         }
     }
 }

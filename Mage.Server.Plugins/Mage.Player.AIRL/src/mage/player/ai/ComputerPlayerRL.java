@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -64,7 +65,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         return result;
     }
 
-    public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source, List<float[]> abilityEncodings) {
+    public List<Integer> genericChoose(int possibleTargetsSize, int maxTargets, int minTargets, StateSequenceBuilder.ActionType actionType, Game game, Ability source) {
         // Don't query the model if only one/no option
         if (possibleTargetsSize == 1) {
             return Arrays.asList(0);
@@ -75,98 +76,102 @@ public class ComputerPlayerRL extends ComputerPlayer {
         // Get current phase
         TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
 
-        // Build base state once
+        // Build base state
         StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
 
-        // Store best action combination and its scores
-        double bestPolicyScore = Double.NEGATIVE_INFINITY;
-        List<Integer> bestActionCombo = null;
-        double bestValueScore = 0;
-        StateSequenceBuilder.SequenceOutput bestStateActionPair = null;
-
-        // Generate all valid action combinations
-        List<List<Integer>> validCombos = new ArrayList<>();
-
-        // For single-target actions (like CAST), just evaluate each target individually
-        if (actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL) {
-            for (int i = 0; i < possibleTargetsSize; i++) {
-                validCombos.add(Arrays.asList(i));
-            }
-            //TODO: ADD CUSTOM LOGIC FOR EACH ACTION TYPE, BLOCK, ATTACK, etc.
-        } else {
-            // For multi-target actions, generate all valid combinations
-            // TODO: Implement combination generation later
-            // generateCombinations(validCombos, new ArrayList<>(), 0, possibleTargetsSize, minTargets, maxTargets);
-            // For now, just add single actions
-            for (int i = 0; i < possibleTargetsSize; i++) {
-                validCombos.add(Arrays.asList(i));
-            }
-        }
-
-        // Create state-action pairs for each action
-        List<StateSequenceBuilder.SequenceOutput> stateActionPairs = new ArrayList<>();
+        // Create action mask - 1 for valid actions (up to possibleTargetsSize), 0 for invalid
+        float[] actionMask = new float[15]; // Using 15 as the fixed number of actions
         for (int i = 0; i < possibleTargetsSize; i++) {
-            // Log the ability encoding for this action
-            float[] abilityEncoding = abilityEncodings.get(i);
-            RLTrainer.threadLocalLogger.get().info("Action " + i + " ability encoding: " + Arrays.toString(abilityEncoding));
-
-            stateActionPairs.add(StateSequenceBuilder.prependAction(baseState, actionType, abilityEncoding));
+            actionMask[i] = 1.0f;
         }
 
-        // Get predictions for all state-action pairs at once using batch prediction
-        INDArray[] allPredictions = model.predictBatch(stateActionPairs);
-        INDArray policyScores = allPredictions[0];
-        INDArray valueScores = allPredictions[1];
+        // Get model predictions
+        INDArray[] predictions = model.predict(baseState);
+        INDArray actionProbs = predictions[0];
+        INDArray valueScore = predictions[1];
 
-        // Debug log the predictions
-        RLTrainer.threadLocalLogger.get().info("Policy scores: " + policyScores);
-        RLTrainer.threadLocalLogger.get().info("Value scores: " + valueScores);
+        // Convert action probabilities to Java array and apply mask
+        float[] maskedProbs = new float[possibleTargetsSize];
+        float maxProb = Float.NEGATIVE_INFINITY;
 
-        // Evaluate each action combination using the predictions
-        for (int i = 0; i < validCombos.size(); i++) {
-            List<Integer> actionCombo = validCombos.get(i);
-            StateSequenceBuilder.SequenceOutput stateActionPair = stateActionPairs.get(i);
+        // First pass: apply mask and find max for numerical stability
+        for (int i = 0; i < possibleTargetsSize; i++) {
+            float prob = actionProbs.getFloat(i);
+            // Handle numerical stability issues
+            if (Float.isNaN(prob) || Float.isInfinite(prob)) {
+                prob = 0.0f;
+            }
+            maskedProbs[i] = prob * actionMask[i];
+            maxProb = Math.max(maxProb, maskedProbs[i]);
+        }
 
-            // Get scores for this combination
-            double policyScore = policyScores.getDouble(i);
-            double valueScore = valueScores.getDouble(i);
+        // Second pass: subtract max and apply softmax for numerical stability
+        float sum = 0.0f;
+        for (int i = 0; i < possibleTargetsSize; i++) {
+            maskedProbs[i] = (float) Math.exp(maskedProbs[i] - maxProb);
+            sum += maskedProbs[i];
+        }
 
-            // Log policy and value scores for each action combo
-            RLTrainer.threadLocalLogger.get().info(String.format(
-                    "[PolicyScoreLog] actionType=%s, actionCombo=%s, policyScore=%.6f, valueScore=%.6f",
-                    actionType,
-                    actionCombo,
-                    policyScore,
-                    valueScore
-            ));
-
-            // Update best if this action combination has higher policy score
-            if (policyScore > bestPolicyScore) {
-                bestPolicyScore = policyScore;
-                bestActionCombo = actionCombo;
-                bestValueScore = valueScore;
-                bestStateActionPair = stateActionPair;
+        // Normalize probabilities
+        if (sum > 0) {
+            for (int i = 0; i < possibleTargetsSize; i++) {
+                maskedProbs[i] /= sum;
+            }
+        } else {
+            // If all probabilities are 0, use uniform distribution
+            float uniformProb = 1.0f / possibleTargetsSize;
+            for (int i = 0; i < possibleTargetsSize; i++) {
+                maskedProbs[i] = uniformProb;
             }
         }
 
-        // Only store training data for the selected action combination
-        if (bestStateActionPair != null) {
-            trainingBuffer.add(new StateSequenceBuilder.TrainingData(
-                    bestStateActionPair,
-                    bestPolicyScore,
-                    bestValueScore,
-                    bestActionCombo,
-                    actionType
-            ));
-        } else {
-            // This should never happen in a valid scenario
-            RLTrainer.threadLocalLogger.get().error(String.format(
-                    "Invalid state detected: bestStateActionPair is null for actionType=%s, validCombos.size=%d, possibleTargetsSize=%d",
-                    actionType, validCombos.size(), possibleTargetsSize));
-            throw new IllegalStateException("bestStateActionPair is null - this indicates a problem with action selection or model predictions");
+        RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
+        RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore.toString());
+
+        // Sample from the probability distribution
+        List<Integer> selectedIndices = new ArrayList<>();
+        float[] cumulativeProbs = new float[possibleTargetsSize];
+        cumulativeProbs[0] = maskedProbs[0];
+        for (int i = 1; i < possibleTargetsSize; i++) {
+            cumulativeProbs[i] = cumulativeProbs[i - 1] + maskedProbs[i];
         }
 
-        return bestActionCombo != null ? bestActionCombo : Arrays.asList();
+        // Select indices based on probabilities
+        Random random = new Random();
+        while (selectedIndices.size() < maxTargets) {
+            float r = random.nextFloat();
+            for (int i = 0; i < cumulativeProbs.length; i++) {
+                if (r <= cumulativeProbs[i]) {
+                    if (!selectedIndices.contains(i)) {
+                        selectedIndices.add(i);
+                    }
+                    break;
+                }
+            }
+        }
+
+        // Ensure we have at least minTargets
+        while (selectedIndices.size() < minTargets) {
+            int remaining = possibleTargetsSize - selectedIndices.size();
+            if (remaining <= 0) {
+                break;
+            }
+
+            // Find indices not yet selected
+            List<Integer> available = new ArrayList<>();
+            for (int i = 0; i < possibleTargetsSize; i++) {
+                if (!selectedIndices.contains(i)) {
+                    available.add(i);
+                }
+            }
+
+            // Randomly select from remaining indices
+            if (!available.isEmpty()) {
+                selectedIndices.add(available.get(random.nextInt(available.size())));
+            }
+        }
+
+        return selectedIndices;
     }
 
     // Helper method to generate all valid combinations of targets
@@ -826,21 +831,8 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
         flattenedOptions = uniqueOptions;
 
-        // Encode each ability
-        List<float[]> abilityEncodings = new ArrayList<>();
-        for (ActivatedAbility ability : flattenedOptions) {
-            if (ability instanceof PassAbility) {
-                // For PassAbility, use a zero vector
-                abilityEncodings.add(new float[StateSequenceBuilder.DIM_PER_TOKEN]);
-            } else {
-                // For other abilities, encode them
-                Permanent source = game.getPermanent(ability.getSourceId());
-                abilityEncodings.add(StateSequenceBuilder.encodeActivatedAbility(ability, source, game));
-            }
-        }
-
         // Get model's choice of actions
-        List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null, abilityEncodings);
+        List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);
 
         RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
 

@@ -21,20 +21,22 @@ public interface PythonEntryPoint {
      * @param batchSize Number of sequences in the batch
      * @param seqLen Length of each sequence
      * @param dModel Dimension of the model
-     * @return Raw byte array of predictions (policy_scores followed by
+     * @return Raw byte array of predictions (action_probs followed by
      * value_scores)
      */
-    byte[] predictBatchFlat(byte[] sequencesBytes, byte[] masksBytes, int batchSize, int seqLen, int dModel);
+    byte[] predictBatchFlat(byte[] sequencesBytes, byte[] masksBytes,
+            int batchSize, int seqLen, int dModel);
 
     /**
      * Make batch predictions using the Python ML model
      *
      * @param sequences Batch of state sequences [batch_size, seq_len, d_model]
      * @param masks Attention masks [batch_size, seq_len]
-     * @return Concatenated array of policy_scores and value_scores [batch_size
-     * * 2]
+     * @param actionMasks Masks for valid actions [batch_size, num_actions]
+     * @return Concatenated array of action_probs and value_scores [batch_size *
+     * (num_actions + 1)]
      */
-    float[] predictBatch(float[][][] sequences, float[][] masks);
+    float[] predictBatch(float[][][] sequences, float[][] masks, float[][] actionMasks);
 
     /**
      * Train the model with a batch of data using direct byte array conversion
@@ -42,20 +44,19 @@ public interface PythonEntryPoint {
      * @param sequencesBytes Raw byte array of sequences [batch_size * seq_len *
      * d_model * 4]
      * @param masksBytes Raw byte array of masks [batch_size * seq_len * 4]
-     * @param policyScoresBytes Raw byte array of policy scores [batch_size * 4]
+     * @param actionProbsBytes Raw byte array of action probabilities
+     * [batch_size * num_actions * 4]
      * @param valueScoresBytes Raw byte array of value scores [batch_size * 4]
-     * @param actionTypesBytes Raw byte array of action types [batch_size * 4]
-     * @param actionCombosBytes Raw byte array of action combinations
-     * [batch_size * max_actions * 4]
+     * @param actionMasksBytes Raw byte array of action masks [batch_size *
+     * num_actions * 4]
      * @param batchSize Number of sequences in the batch
      * @param seqLen Length of each sequence
      * @param dModel Dimension of the model
-     * @param maxActions Maximum number of actions
      * @param reward Reward signal
      */
-    void trainFlat(byte[] sequencesBytes, byte[] masksBytes, byte[] policyScoresBytes,
-            byte[] valueScoresBytes, byte[] actionTypesBytes, byte[] actionCombosBytes,
-            int batchSize, int seqLen, int dModel, int maxActions, float reward);
+    void trainFlat(byte[] sequencesBytes, byte[] masksBytes, byte[] actionProbsBytes,
+            byte[] valueScoresBytes, byte[] actionMasksBytes,
+            int batchSize, int seqLen, int dModel, float reward);
 
     /**
      * Save the current model state
