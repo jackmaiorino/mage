@@ -561,7 +561,7 @@ public class PythonMLBridge {
         }
 
         try {
-            PythonMLBatchManager.getInstance(entryPoint).train(trainingData.get(0), reward).get();
+            PythonMLBatchManager.getInstance(entryPoint).train(trainingData, reward).get();
         } catch (Exception e) {
             logger.severe("Error during training: " + e.getMessage());
             throw new RuntimeException("Failed to train Python model", e);

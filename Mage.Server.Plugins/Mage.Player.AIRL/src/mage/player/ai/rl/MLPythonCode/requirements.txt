@@ -1,0 +1,4 @@
+numpy>=1.21.0
+py4j>=0.10.9
+transformers>=4.30.0
+tensorboard>=2.12.0 

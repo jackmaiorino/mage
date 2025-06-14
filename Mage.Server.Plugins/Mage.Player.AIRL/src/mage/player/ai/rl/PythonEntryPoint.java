@@ -44,19 +44,22 @@ public interface PythonEntryPoint {
      * @param sequencesBytes Raw byte array of sequences [batch_size * seq_len *
      * d_model * 4]
      * @param masksBytes Raw byte array of masks [batch_size * seq_len * 4]
-     * @param actionProbsBytes Raw byte array of action probabilities
-     * [batch_size * num_actions * 4]
+     * @param policyScoresBytes Raw byte array of policy scores [batch_size *
+     * num_actions * 4]
      * @param valueScoresBytes Raw byte array of value scores [batch_size * 4]
-     * @param actionMasksBytes Raw byte array of action masks [batch_size *
+     * @param actionTypesBytes Raw byte array of action types [batch_size *
+     * num_actions * 4]
+     * @param actionCombosBytes Raw byte array of action combos [batch_size *
      * num_actions * 4]
      * @param batchSize Number of sequences in the batch
      * @param seqLen Length of each sequence
      * @param dModel Dimension of the model
+     * @param maxActions Maximum number of actions
      * @param reward Reward signal
      */
-    void trainFlat(byte[] sequencesBytes, byte[] masksBytes, byte[] actionProbsBytes,
-            byte[] valueScoresBytes, byte[] actionMasksBytes,
-            int batchSize, int seqLen, int dModel, float reward);
+    void trainFlat(byte[] sequencesBytes, byte[] masksBytes, byte[] policyScoresBytes,
+            byte[] valueScoresBytes, byte[] actionTypesBytes, byte[] actionCombosBytes,
+            int batchSize, int seqLen, int dModel, int maxActions, float reward);
 
     /**
      * Save the current model state
