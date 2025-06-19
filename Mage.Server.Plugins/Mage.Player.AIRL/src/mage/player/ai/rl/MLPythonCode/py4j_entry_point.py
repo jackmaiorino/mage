@@ -1,4 +1,4 @@
-from py4j.java_gateway import JavaGateway, CallbackServerParameters
+from py4j.clientserver import ClientServer, JavaParameters, PythonParameters
 from mtg_transformer import MTGTransformerModel
 import numpy as np
 import torch
@@ -65,6 +65,18 @@ class CategoryAdapter(logging.LoggerAdapter):
     """Thin wrapper around LoggerAdapter that accepts (category, msg) style."""
 
     def _log_with_category(self, level, category, msg, *args, **kwargs):
+        """Centralised category-aware logging.
+
+        • If *category* is a boolean flag (as used in ``LogCategory``) and is
+          ``False``, the call is a no-op—effectively silencing that log line.
+        • Otherwise, we attach the category to *extra* so the formatter can
+          display it.
+        """
+
+        # Fast-skip if the caller explicitly disabled this category.
+        if isinstance(category, bool) and category is False:
+            return
+
         extra = kwargs.pop('extra', {})
         extra['category'] = category
         self.logger.log(level, msg, *args, extra=extra, **kwargs)
@@ -89,7 +101,10 @@ class CategoryAdapter(logging.LoggerAdapter):
 
 # Configure base logging first
 base_logger = logging.getLogger('mtg_ai')
-base_logger.setLevel(logging.INFO)
+
+# Default to WARNING to reduce verbosity; override via MTG_AI_LOG_LEVEL env var.
+log_level = os.getenv("MTG_AI_LOG_LEVEL", "WARNING").upper()
+base_logger.setLevel(getattr(logging, log_level, logging.WARNING))
 
 # Create formatters
 formatter = CategoryFormatter(
@@ -192,11 +207,15 @@ class SimpleBatcher:
     def _bytes_to_tensor(buf: bytes, shape, dtype=torch.float32, device=None, big_endian=False):
         np_dtype = ">f4" if big_endian else "<f4"
         arr = np.frombuffer(buf, dtype=np_dtype)
-        # Convert type if requested
+
+        # Cast according to requested dtype
         if dtype == torch.bool:
             arr = arr.astype(np.bool_)
+        elif dtype == torch.long:
+            arr = arr.astype(np.int64)
         else:
             arr = arr.astype(np.float32)
+
         arr = arr.reshape(*shape)
         return torch.tensor(arr, dtype=dtype, device=device)
 
@@ -229,12 +248,72 @@ class SimpleBatcher:
         tgt_val = self._bytes_to_tensor(
             value_scores_bytes, (batch_size, 1), device=self.device)
 
+        # Target action indices (long)
+        tgt_idx = self._bytes_to_tensor(
+            policy_scores_bytes, (batch_size,), dtype=torch.long, device=self.device)
+
         self.model.train()
         self.optimizer.zero_grad()
-        _, _, pred_val = self.model(seq, mask)
-        loss = F.mse_loss(pred_val, tgt_val)
+        logits, pred_policy, pred_val = self.model(seq, mask)
+
+        # Value regression loss
+        loss_value = F.mse_loss(pred_val, tgt_val)
+
+        # Policy supervised loss (cross entropy)
+        # logits shape: [B, num_actions] ; tgt_idx shape: [B]
+        if logits.shape[1] != max_actions:
+            # Pad/trim logits to max_actions
+            if logits.shape[1] < max_actions:
+                pad = torch.zeros(batch_size, max_actions -
+                                  logits.shape[1], device=self.device)
+                logits_padded = torch.cat([logits, pad], dim=1)
+            else:
+                logits_padded = logits[:, :max_actions]
+        else:
+            logits_padded = logits
+
+        # Sanity-check target indices and clamp to valid range
+        with torch.no_grad():
+            bad_mask = (tgt_idx < 0) | (tgt_idx >= max_actions)
+            if bad_mask.any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "Found %d out-of-range target indices; clamping.",
+                               bad_mask.sum().item())
+                tgt_idx = torch.clamp(tgt_idx, 0, max_actions - 1)
+
+        # Clamp logits to a safe numeric interval and remove NaN/Inf again
+        logits_padded = torch.nan_to_num(
+            logits_padded, nan=0.0, posinf=20.0, neginf=-20.0)
+        logits_padded = torch.clamp(logits_padded, -20.0, 20.0)
+
+        loss_policy = F.cross_entropy(logits_padded, tgt_idx)
+
+        loss = loss_value + loss_policy
+
+        # Compute policy entropy for monitoring (with small epsilon for log)
+        with torch.no_grad():
+            entropy = -(pred_policy * torch.log(pred_policy + 1e-9)
+                        ).sum(dim=-1).mean()
+
         loss.backward()
+        # Gradient clipping to mitigate exploding gradients
+        torch.nn.utils.clip_grad_norm_(
+            self.model.parameters(), self.model.max_grad_norm)
         self.optimizer.step()
+
+        # Log training metrics
+        logger.info(
+            LogCategory.MODEL_TRAIN,
+            "Train step — loss_value: %.4f, loss_policy: %.4f, entropy: %.4f",
+            loss_value.item(), loss_policy.item(), entropy.item()
+        )
+
+        # Free unused GPU memory
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
+            logger.info(LogCategory.GPU_CLEANUP,
+                        "Cleared CUDA cache after training step")
+
         return True
 
 
@@ -302,6 +381,12 @@ class PythonEntryPoint:
             # Log GPU memory after prediction
             log_gpu_memory()
 
+            # Proactively clear unused GPU cache to avoid fragmentation
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+                logger.info(LogCategory.GPU_CLEANUP,
+                            "Cleared CUDA cache after prediction")
+
             total_time = time.time() - start_time
             logger.info(
                 LogCategory.GPU_MEMORY, f"Total predictBatch operation took {total_time:.3f} seconds")
@@ -321,6 +406,17 @@ class PythonEntryPoint:
     def trainFlat(self, sequences_bytes, masks_bytes, policy_scores_bytes, value_scores_bytes,
                   action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions, reward):
         """Batch training using direct byte array conversion"""
+        # Trace entry so Java side can verify training invocations
+        logger.info(LogCategory.MODEL_TRAIN,
+                    "trainFlat called — batch_size=%d, max_actions=%d, reward=%.3f",
+                    batch_size, max_actions, reward)
+
+        # Skip update if no actions provided (e.g., bookkeeping rows)
+        if max_actions <= 0:
+            logger.warning(LogCategory.MODEL_TRAIN,
+                           "max_actions == 0, skipping gradient step")
+            return True
+
         try:
             start_time = time.time()
             if self.model is None:
@@ -335,6 +431,12 @@ class PythonEntryPoint:
 
             # Log GPU memory after training
             log_gpu_memory()
+
+            # Free unused GPU memory
+            if torch.cuda.is_available():
+                torch.cuda.empty_cache()
+                logger.info(LogCategory.GPU_CLEANUP,
+                            "Cleared CUDA cache after training step")
 
             total_time = time.time() - start_time
             logger.info(
@@ -391,8 +493,9 @@ if __name__ == "__main__":
             try:
                 logger.info(LogCategory.SYSTEM_INIT,
                             f"Attempting to start Py4J gateway (attempt {attempt + 1}/{max_retries})")
-                gateway = JavaGateway(
-                    callback_server_parameters=CallbackServerParameters(),
+                gateway = ClientServer(
+                    java_parameters=JavaParameters(),
+                    python_parameters=PythonParameters(),
                     python_server_entry_point=PythonEntryPoint()
                 )
                 logger.info(LogCategory.SYSTEM_INIT,
@@ -422,8 +525,9 @@ if __name__ == "__main__":
                         logger.error(LogCategory.SYSTEM_ERROR,
                                      "Py4J gateway connection lost (gateway is None), attempting to reconnect...")
                         try:
-                            gateway = JavaGateway(
-                                callback_server_parameters=CallbackServerParameters(),
+                            gateway = ClientServer(
+                                java_parameters=JavaParameters(),
+                                python_parameters=PythonParameters(),
                                 python_server_entry_point=PythonEntryPoint()
                             )
                             logger.info(LogCategory.SYSTEM_INIT,

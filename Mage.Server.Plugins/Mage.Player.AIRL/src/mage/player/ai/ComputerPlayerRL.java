@@ -76,8 +76,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
         // Get current phase
         TurnPhase turnPhase = game.getPhase() != null ? game.getPhase().getType() : null;
 
-        // Build base state
+        // Build base state and cache as current
         StateSequenceBuilder.SequenceOutput baseState = StateSequenceBuilder.buildBaseState(game, turnPhase, StateSequenceBuilder.MAX_LEN);
+        this.currentState = baseState;
 
         // Create action mask - 1 for valid actions (up to possibleTargetsSize), 0 for invalid
         float[] actionMask = new float[15]; // Using 15 as the fixed number of actions
@@ -88,7 +89,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         // Get model predictions
         INDArray[] predictions = model.predict(baseState);
         INDArray actionProbs = predictions[0];
-        INDArray valueScore = predictions[1];
+        INDArray valueScores = predictions[1];
 
         // Convert action probabilities to Java array and apply mask
         float[] maskedProbs = new float[possibleTargetsSize];
@@ -126,7 +127,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
 
         RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
-        RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore.toString());
+        RLTrainer.threadLocalLogger.get().info("Value scores: " + valueScores.toString());
 
         // Sample from the probability distribution
         List<Integer> selectedIndices = new ArrayList<>();
@@ -170,6 +171,16 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 selectedIndices.add(available.get(random.nextInt(available.size())));
             }
         }
+
+        // after you compute logits/probs and make a choice
+        StateSequenceBuilder.SequenceOutput state = baseState; // guaranteed non-null
+        double policyScore = maskedProbs[selectedIndices.get(0)];         // from model
+        double valueScore = valueScores.getDouble(0);  // critic outputs one scalar
+        StateSequenceBuilder.ActionType type = actionType;
+        List<Integer> combo = selectedIndices;
+
+        trainingBuffer.add(new StateSequenceBuilder.TrainingData(
+                state, policyScore, valueScore, combo, type));
 
         return selectedIndices;
     }

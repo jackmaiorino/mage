@@ -29,11 +29,11 @@ public class PythonMLBridge {
 
     private static final Logger logger = Logger.getLogger(PythonMLBridge.class.getName());
     private static final int DEFAULT_PORT = 25334;
-    private static final int PYTHON_STARTUP_WAIT_MS = 10000;
+    private static final int PYTHON_STARTUP_WAIT_MS = 30000;
     private static final int PROCESS_KILL_WAIT_MS = 2000;
     private static final int MAX_INIT_RETRIES = 3;
     private static final int INIT_RETRY_DELAY_MS = 1000;
-    private static final int MAX_CONNECTION_RETRIES = 5;
+    private static final int MAX_CONNECTION_RETRIES = 15;
     private static final int CONNECTION_RETRY_DELAY_MS = 2000;
 
     // Singleton instance with volatile for thread safety
@@ -302,6 +302,8 @@ public class PythonMLBridge {
         }
 
         pb.environment().put("MTG_MODEL_PATH", modelPath);
+        // Ensure Python logs INFO-level metrics
+        pb.environment().put("MTG_AI_LOG_LEVEL", "INFO");
         logger.info("Set MTG_MODEL_PATH to: " + modelPath);
 
         pb.redirectErrorStream(true);

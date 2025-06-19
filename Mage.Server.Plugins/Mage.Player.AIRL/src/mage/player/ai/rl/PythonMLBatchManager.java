@@ -22,69 +22,143 @@ public class PythonMLBatchManager {
 
     private static final Logger logger = Logger.getLogger(PythonMLBatchManager.class.getName());
     private static final int MAX_TRAJECTORY_LENGTH = 100;
-    private static final int MAX_BATCH_SIZE = 8;
+    private static final int MAX_BATCH_SIZE = 8;          // hard cap per flush
+    private static final int BATCH_TIMEOUT_MS = 3;        // flush window (ms)
 
     private final PythonEntryPoint entryPoint;
     private final Map<UUID, CompletableFuture<PredictionResult>> pendingPredictions;
     private final Map<UUID, CompletableFuture<Boolean>> pendingTraining;
     private final Map<UUID, List<TrainingStep>> trajectoryBuffer;
-    private final Object lock = new Object();
+    private final Object lock;
+    private final List<PredictRequest> predictionQueue;
+    private final java.util.concurrent.ScheduledExecutorService scheduler;
+
+    private static volatile PythonMLBatchManager instance;
+
+    public static PythonMLBatchManager getInstance(PythonEntryPoint entryPoint) {
+        if (instance == null) {
+            synchronized (PythonMLBatchManager.class) {
+                if (instance == null) {
+                    instance = new PythonMLBatchManager(entryPoint);
+                }
+            }
+        }
+        return instance;
+    }
 
     private PythonMLBatchManager(PythonEntryPoint entryPoint) {
         this.entryPoint = entryPoint;
         this.pendingPredictions = new ConcurrentHashMap<>();
         this.pendingTraining = new ConcurrentHashMap<>();
         this.trajectoryBuffer = new ConcurrentHashMap<>();
+        this.lock = new Object();
+        this.predictionQueue = new java.util.ArrayList<>();
+        this.scheduler = java.util.concurrent.Executors.newSingleThreadScheduledExecutor(r -> {
+            Thread t = new Thread(r, "PyBatchFlush");
+            t.setDaemon(true);
+            return t;
+        });
+
+        // Ensure resources freed on JVM shutdown
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> scheduler.shutdown()));
     }
 
-    public static PythonMLBatchManager getInstance(PythonEntryPoint entryPoint) {
-        return new PythonMLBatchManager(entryPoint);
+    // Thin holder for pending prediction
+    private static class PredictRequest {
+
+        final java.util.UUID id;
+        final StateSequenceBuilder.SequenceOutput state;
+        final java.util.concurrent.CompletableFuture<PredictionResult> future;
+
+        PredictRequest(java.util.UUID id, StateSequenceBuilder.SequenceOutput state,
+                java.util.concurrent.CompletableFuture<PredictionResult> future) {
+            this.id = id;
+            this.state = state;
+            this.future = future;
+        }
     }
 
-    public CompletableFuture<PredictionResult> predict(StateSequenceBuilder.SequenceOutput state) {
-        UUID id = UUID.randomUUID();
-        CompletableFuture<PredictionResult> future = new CompletableFuture<>();
+    public java.util.concurrent.CompletableFuture<PredictionResult> predict(StateSequenceBuilder.SequenceOutput state) {
+        java.util.UUID id = java.util.UUID.randomUUID();
+        java.util.concurrent.CompletableFuture<PredictionResult> future = new java.util.concurrent.CompletableFuture<>();
         pendingPredictions.put(id, future);
 
-        try {
-            // Convert state to byte arrays
-            byte[] sequences = convertFloatArraysToBytes(state.getSequence());
-            byte[] masks = convertIntegersToBytes(state.getMask());
+        synchronized (lock) {
+            predictionQueue.add(new PredictRequest(id, state, future));
 
-            // Get dimensions
-            int batchSize = 1;
-            int seqLen = state.getSequence().size();
-            int dModel = state.getSequence().get(0).length;
-
-            // Call Python and get results as byte array
-            byte[] resultsBytes = entryPoint.predictBatchFlat(sequences, masks, batchSize, seqLen, dModel);
-
-            // Parse the byte array into policy and value scores
-            // Each float is 4 bytes, and we have 15 policy scores + 1 value score per batch item
-            float[] policyScoresArray = new float[15];
-            float[] valueScoresArray = new float[1];
-
-            ByteBuffer resBuf = ByteBuffer.wrap(resultsBytes).order(ByteOrder.LITTLE_ENDIAN);
-            for (int i = 0; i < 15; i++) {
-                policyScoresArray[i] = resBuf.getFloat();
+            if (predictionQueue.size() >= MAX_BATCH_SIZE) {
+                flushQueue();
+            } else if (predictionQueue.size() == 1) {
+                // first item – schedule timed flush
+                scheduler.schedule(this::safeFlush, BATCH_TIMEOUT_MS, java.util.concurrent.TimeUnit.MILLISECONDS);
             }
-            valueScoresArray[0] = resBuf.getFloat();
-
-            // Convert to INDArray
-            INDArray policyScores = Nd4j.create(policyScoresArray);
-            INDArray valueScores = Nd4j.create(valueScoresArray);
-
-            // Complete future
-            future.complete(new PredictionResult(policyScores, valueScores));
-            pendingPredictions.remove(id);
-
-        } catch (Exception e) {
-            logger.severe("Error during prediction: " + e.getMessage());
-            future.completeExceptionally(e);
-            pendingPredictions.remove(id);
         }
 
         return future;
+    }
+
+    // Called by scheduler – must handle race with manual flush
+    private void safeFlush() {
+        synchronized (lock) {
+            if (!predictionQueue.isEmpty()) {
+                flushQueue();
+            }
+        }
+    }
+
+    private void flushQueue() {
+        // Copy & clear queue under lock
+        List<PredictRequest> batch = new java.util.ArrayList<>(predictionQueue);
+        predictionQueue.clear();
+
+        try {
+            // Build flat tensors
+            int batchSize = batch.size();
+            int seqLen = batch.get(0).state.getSequence().size();
+            int dModel = batch.get(0).state.getSequence().get(0).length;
+
+            List<float[]> allSeq = new java.util.ArrayList<>(batchSize * seqLen);
+            List<Integer> allMask = new java.util.ArrayList<>(batchSize * seqLen);
+
+            for (PredictRequest req : batch) {
+                allSeq.addAll(req.state.getSequence());
+                allMask.addAll(req.state.getMask());
+            }
+
+            byte[] seqBytes = convertFloatArraysToBytes(allSeq);
+            byte[] maskBytes = convertIntegersToBytes(allMask);
+
+            byte[] resultsBytes;
+            // Call Python once for the batch
+            synchronized (lock) { // ensure exclusive channel
+                resultsBytes = entryPoint.predictBatchFlat(seqBytes, maskBytes, batchSize, seqLen, dModel);
+            }
+
+            java.nio.ByteBuffer resBuf = java.nio.ByteBuffer.wrap(resultsBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            int floatsPerItem = 16; // 15 policy + 1 value
+
+            for (int bi = 0; bi < batchSize; bi++) {
+                float[] policy = new float[15];
+                for (int i = 0; i < 15; i++) {
+                    policy[i] = resBuf.getFloat();
+                }
+                float value = resBuf.getFloat();
+
+                INDArray policyArr = Nd4j.create(policy);
+                INDArray valueArr = Nd4j.create(new float[]{value});
+
+                PredictRequest req = batch.get(bi);
+                req.future.complete(new PredictionResult(policyArr, valueArr));
+                pendingPredictions.remove(req.id);
+            }
+
+        } catch (Exception e) {
+            logger.severe("Error during batch prediction: " + e.getMessage());
+            for (PredictRequest req : batch) {
+                req.future.completeExceptionally(e);
+                pendingPredictions.remove(req.id);
+            }
+        }
     }
 
     public CompletableFuture<Boolean> train(List<StateSequenceBuilder.TrainingData> trainingData, double reward) {
@@ -102,8 +176,8 @@ public class PythonMLBatchManager {
                     .map(d -> d.stateActionPair.getMask())
                     .flatMap(List::stream)
                     .collect(Collectors.toList()));
-            byte[] policyScores = convertDoublesToBytes(trainingData.stream()
-                    .map(d -> d.policyScore)
+            byte[] policyIndices = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> Math.floorMod(d.actionCombo.get(0), 15))
                     .collect(Collectors.toList()));
             byte[] valueScores = convertDoublesToBytes(trainingData.stream()
                     .map(d -> d.valueScore)
@@ -120,14 +194,14 @@ public class PythonMLBatchManager {
             int batchSize = trainingData.size();
             int seqLen = trainingData.get(0).stateActionPair.getSequence().size();
             int dModel = trainingData.get(0).stateActionPair.getSequence().get(0).length;
-            int maxActions = trainingData.stream()
-                    .mapToInt(d -> d.actionCombo.size())
-                    .max()
-                    .orElse(0);
+            int maxActions = 15; // fixed action space size
 
             // Call Python
-            entryPoint.trainFlat(sequences, masks, policyScores, valueScores,
-                    actionTypes, actionCombos, batchSize, seqLen, dModel, maxActions, (float) reward);
+            synchronized (lock) {
+                logger.info("Invoking trainFlat: batchSize=" + batchSize + ", maxActions=" + maxActions);
+                entryPoint.trainFlat(sequences, masks, policyIndices, valueScores,
+                        actionTypes, actionCombos, batchSize, seqLen, dModel, maxActions, (float) reward);
+            }
 
             // Complete future with success
             future.complete(true);
@@ -144,7 +218,7 @@ public class PythonMLBatchManager {
 
     private byte[] convertFloatArraysToBytes(List<float[]> data) {
         ByteBuffer buffer = ByteBuffer.allocate(data.size() * data.get(0).length * 4);
-        buffer.order(ByteOrder.BIG_ENDIAN);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
         for (float[] array : data) {
             for (float value : array) {
                 buffer.putFloat(value);
@@ -155,16 +229,16 @@ public class PythonMLBatchManager {
 
     private byte[] convertIntegersToBytes(List<Integer> data) {
         ByteBuffer buffer = ByteBuffer.allocate(data.size() * 4);
-        buffer.order(ByteOrder.BIG_ENDIAN);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
         for (Integer value : data) {
-            buffer.putFloat(value.floatValue());
+            buffer.putInt(value);
         }
         return buffer.array();
     }
 
     private byte[] convertDoublesToBytes(List<Double> data) {
         ByteBuffer buffer = ByteBuffer.allocate(data.size() * 4);
-        buffer.order(ByteOrder.BIG_ENDIAN);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
         for (Double value : data) {
             buffer.putFloat(value.floatValue());
         }

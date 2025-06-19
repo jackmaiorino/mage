@@ -71,7 +71,8 @@ class MTGTransformerModel(nn.Module):
 
         # Learnable scaling factors
         self.value_scale = nn.Parameter(torch.tensor(0.1))
-        self.temperature = nn.Parameter(torch.tensor(1.0))
+        # Start with a higher temperature so initial logits are small → soft probabilities
+        self.temperature = nn.Parameter(torch.tensor(5.0))
 
         # Initialize weights
         self._init_weights()
@@ -86,17 +87,16 @@ class MTGTransformerModel(nn.Module):
         """Initialize weights with small values for stability"""
         for m in self.modules():
             if isinstance(m, nn.Linear):
-                # Use small gain for initialization
-                nn.init.xavier_uniform_(m.weight, gain=0.01)
+                # Use smaller gain to avoid large initial activations
+                nn.init.xavier_uniform_(m.weight, gain=0.005)
                 if m.bias is not None:
                     nn.init.zeros_(m.bias)
             elif isinstance(m, nn.LayerNorm):
                 nn.init.ones_(m.weight)
                 nn.init.zeros_(m.bias)
             elif isinstance(m, ScaledMultiheadAttention):
-                # Re-init the wrapped MultiheadAttention weights with small gain
-                attn = m.inner_attn
-                for param in attn.parameters():
+                # Re-initialize attention weights with small gain
+                for param in m.parameters():
                     if param.dim() > 1:  # weight tensors
                         nn.init.xavier_uniform_(param, gain=0.01)
                     else:
@@ -219,6 +219,8 @@ class MTGTransformerModel(nn.Module):
 
         # Second projection → logits
         logits = self.actor_proj2(x)
+        # Replace NaN/Inf in logits to avoid invalid softmax
+        logits = torch.nan_to_num(logits, nan=0.0, posinf=50.0, neginf=-50.0)
 
         # Temperature scaling (learnable)
         temp = torch.clamp(self.temperature, min=0.1)
@@ -228,6 +230,10 @@ class MTGTransformerModel(nn.Module):
         if action_masks is not None:
             action_masks = action_masks.float()
             logits = logits.masked_fill(~action_masks.bool(), -1e9)
+
+        # Final NaN/Inf guard and numeric clamp before softmax
+        logits = torch.nan_to_num(logits, nan=0.0, posinf=20.0, neginf=-20.0)
+        logits = torch.clamp(logits, -20.0, 20.0)
 
         return logits
 
@@ -260,13 +266,24 @@ class MTGTransformerModel(nn.Module):
         # Second projection → scalar
         value = self.critic_proj2(x)
 
-        # Bound output to [-1,1]
-        value = torch.tanh(value)
-        value = value * torch.sigmoid(self.value_scale)
+        # Pre-activation clamp to avoid extreme values that could produce NaNs/Inf
+        value = torch.nan_to_num(value, nan=0.0, posinf=50.0, neginf=-50.0)
+        value = torch.clamp(value, -50.0, 50.0)
 
-        # Clamp numerical issues
+        # Bound output to [-1, 1]
+        value = torch.tanh(value)
+
+        # Sanitize and apply learnable scaling factor
+        safe_scale = torch.nan_to_num(
+            self.value_scale, nan=0.0, posinf=5.0, neginf=-5.0)
+        # Keep scale in a reasonable range to avoid extreme shrink/expand
+        safe_scale = torch.clamp(safe_scale, -5.0, 5.0)
+        value = value * torch.sigmoid(safe_scale)
+
+        # Final safety clamp
         if torch.isnan(value).any() or torch.isinf(value).any():
-            logger.error("NaN/Inf in value head – clamping to finite range")
+            logger.error(
+                "NaN/Inf in value head – clamping to finite range after tanh")
             value = torch.nan_to_num(value, nan=0.0, posinf=1.0, neginf=-1.0)
 
         return torch.clamp(value, -1.0, 1.0)
@@ -304,63 +321,42 @@ class MTGTransformerModel(nn.Module):
                     dropout=self.transformer_layers[0].dropout.p, num_actions=self.num_actions)
 
 
-class ScaledMultiheadAttention(nn.Module):
-    """Custom multihead attention with scaled dot products and proper normalization"""
+class ScaledMultiheadAttention(nn.MultiheadAttention):
+    """Multi-head attention with a learnable pre-scaling of queries & keys.
 
-    def __init__(self, embed_dim, num_heads, dropout=0.0, batch_first=False):
-        super().__init__()
-        self.embed_dim = embed_dim
-        self.num_heads = num_heads
-        self.dropout = dropout
-        self.batch_first = batch_first
-        self.head_dim = embed_dim // num_heads
-        assert self.head_dim * \
-            num_heads == self.embed_dim, "embed_dim must be divisible by num_heads"
+    Subclassing ``nn.MultiheadAttention`` means we automatically present the
+    full public API (e.g. ``in_proj_weight``, ``_qkv_same_embed_dim``) expected
+    by upstream PyTorch components such as ``nn.TransformerEncoderLayer``. The
+    only behavioural change is a learnable scalar factor applied to *Q* and *K*
+    before the dot-product attention is computed.
+    """
 
-        # Learnable scale applied to Q and K before built-in attention
+    def __init__(self, embed_dim: int, num_heads: int, dropout: float = 0.0, batch_first: bool = False):
+        super().__init__(embed_dim=embed_dim, num_heads=num_heads,
+                         dropout=dropout, batch_first=batch_first)
+
+        # Learnable scale shared across heads.
         self.scale = nn.Parameter(torch.ones(1) * 0.1)
 
-        # Delegate actual attention computation to PyTorch's implementation
-        self.inner_attn = nn.MultiheadAttention(
-            embed_dim=embed_dim,
-            num_heads=num_heads,
-            dropout=dropout,
-            batch_first=batch_first,
-        )
+    # ------------------------------------------------------------------
+    # Override forward to inject scaling, then delegate to super().forward
+    # ------------------------------------------------------------------
 
     def forward(self, query, key, value, key_padding_mask=None, need_weights=True, attn_mask=None, is_causal=False):
-        # Apply learnable scaling then call built-in MultiheadAttention
+        # Apply learnable scaling to queries and keys
         q = query * self.scale
         k = key * self.scale
-        v = value
 
-        # PyTorch MHA handles broadcasting / masking internally.
-        # is_causal argument is supported from PyTorch 2.0; pass when available.
-        mha_kwargs = {
-            'attn_mask': attn_mask,
+        # Handle the optional is_causal argument depending on torch version
+        forward_kwargs = {
             'key_padding_mask': key_padding_mask,
             'need_weights': need_weights,
+            'attn_mask': attn_mask,
         }
-        if 'is_causal' in self.inner_attn.forward.__code__.co_varnames:
-            mha_kwargs['is_causal'] = is_causal
+        if 'is_causal' in super().forward.__code__.co_varnames:
+            forward_kwargs['is_causal'] = is_causal
 
-        attn_output, attn_weights = self.inner_attn(q, k, v, **mha_kwargs)
-
-        if need_weights:
-            return attn_output, attn_weights
-        return attn_output
+        return super().forward(q, k, value, **forward_kwargs)
 
     def _get_name(self):
         return 'ScaledMultiheadAttention'
-
-    # ------------------------------------------------------------------
-    # Expose attributes expected by TransformerEncoderLayer (e.g. in_proj_bias)
-    # by forwarding to the wrapped nn.MultiheadAttention instance.
-    # ------------------------------------------------------------------
-
-    def __getattr__(self, item):
-        # If attribute is not found in this wrapper, delegate to inner_attn.
-        try:
-            return super().__getattr__(item)
-        except AttributeError:
-            return getattr(self.inner_attn, item)
