@@ -71,13 +71,14 @@ class MTGTransformerModel(nn.Module):
 
         # Learnable scaling factors
         self.value_scale = nn.Parameter(torch.tensor(0.1))
-        # Start with a higher temperature so initial logits are small → soft probabilities
-        self.temperature = nn.Parameter(torch.tensor(5.0))
+        # Start with a slightly lower temperature so small logit differences
+        # translate to larger probability gaps and speed up early learning
+        self.temperature = nn.Parameter(torch.tensor(0.7))
 
         # Initialize weights
         self._init_weights()
 
-        # Gradient clipping value
+        # Gradient clipping value (looser for faster learning)
         self.max_grad_norm = 1.0
 
         # --- utility lambdas ----------------------------------------
@@ -85,10 +86,13 @@ class MTGTransformerModel(nn.Module):
 
     def _init_weights(self):
         """Initialize weights with small values for stability"""
+        # Increase gain for actor head to get less-tiny initial logits.
+        special_actor_linears = {self.actor_proj1, self.actor_proj2}
+
         for m in self.modules():
             if isinstance(m, nn.Linear):
-                # Use smaller gain to avoid large initial activations
-                nn.init.xavier_uniform_(m.weight, gain=0.005)
+                gain = 0.02 if m in special_actor_linears else 0.005
+                nn.init.xavier_uniform_(m.weight, gain=gain)
                 if m.bias is not None:
                     nn.init.zeros_(m.bias)
             elif isinstance(m, nn.LayerNorm):

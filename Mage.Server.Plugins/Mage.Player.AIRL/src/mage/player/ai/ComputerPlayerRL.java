@@ -33,16 +33,28 @@ public class ComputerPlayerRL extends ComputerPlayer {
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private Ability currentAbility;
 
+    /**
+     * If true, the agent will act greedily (arg-max) instead of sampling.
+     * Useful for evaluation where we want a deterministic policy.
+     */
+    private final boolean greedyMode;
+
     public ComputerPlayerRL(String name, RangeOfInfluence range, PythonMLBridge model) {
+        this(name, range, model, false);
+    }
+
+    // Convenience ctor with greedy flag
+    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonMLBridge model, boolean greedy) {
         super(name, range);
         this.model = model;
         this.trainingBuffer = new ArrayList<>();
-        RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name);
+        this.greedyMode = greedy;
+        RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name + (greedy ? " [GREEDY]" : ""));
     }
 
     // The default constructor for ComputerPlayerRL used by server to create
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
-        this(name, range, PythonMLBridge.getInstance());
+        this(name, range, PythonMLBridge.getInstance(), false);
     }
 
     public ComputerPlayerRL(final ComputerPlayerRL player) {
@@ -50,6 +62,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
         this.model = player.model;
         this.trainingBuffer = new ArrayList<>();
         this.currentAbility = player.currentAbility;
+        this.greedyMode = player.greedyMode;
     }
 
     @Override
@@ -87,15 +100,15 @@ public class ComputerPlayerRL extends ComputerPlayer {
         }
 
         // Get model predictions
-        INDArray[] predictions = model.predict(baseState);
+        INDArray[] predictions = model.predict(baseState, possibleTargetsSize);
         INDArray actionProbs = predictions[0];
         INDArray valueScores = predictions[1];
 
         // Convert action probabilities to Java array and apply mask
         float[] maskedProbs = new float[possibleTargetsSize];
-        float maxProb = Float.NEGATIVE_INFINITY;
 
-        // First pass: apply mask and find max for numerical stability
+        // Apply mask and sum up probabilities
+        float sum = 0.0f;
         for (int i = 0; i < possibleTargetsSize; i++) {
             float prob = actionProbs.getFloat(i);
             // Handle numerical stability issues
@@ -103,13 +116,6 @@ public class ComputerPlayerRL extends ComputerPlayer {
                 prob = 0.0f;
             }
             maskedProbs[i] = prob * actionMask[i];
-            maxProb = Math.max(maxProb, maskedProbs[i]);
-        }
-
-        // Second pass: subtract max and apply softmax for numerical stability
-        float sum = 0.0f;
-        for (int i = 0; i < possibleTargetsSize; i++) {
-            maskedProbs[i] = (float) Math.exp(maskedProbs[i] - maxProb);
             sum += maskedProbs[i];
         }
 
@@ -129,24 +135,37 @@ public class ComputerPlayerRL extends ComputerPlayer {
         RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
         RLTrainer.threadLocalLogger.get().info("Value scores: " + valueScores.toString());
 
-        // Sample from the probability distribution
+        // Choose indices ---------------------------------------------
         List<Integer> selectedIndices = new ArrayList<>();
-        float[] cumulativeProbs = new float[possibleTargetsSize];
-        cumulativeProbs[0] = maskedProbs[0];
-        for (int i = 1; i < possibleTargetsSize; i++) {
-            cumulativeProbs[i] = cumulativeProbs[i - 1] + maskedProbs[i];
-        }
-
-        // Select indices based on probabilities
         Random random = new Random();
-        while (selectedIndices.size() < maxTargets) {
-            float r = random.nextFloat();
-            for (int i = 0; i < cumulativeProbs.length; i++) {
-                if (r <= cumulativeProbs[i]) {
-                    if (!selectedIndices.contains(i)) {
-                        selectedIndices.add(i);
+        if (greedyMode) {
+            // Deterministic arg-max
+            int bestIdx = 0;
+            float bestProb = maskedProbs[0];
+            for (int i = 1; i < possibleTargetsSize; i++) {
+                if (maskedProbs[i] > bestProb) {
+                    bestProb = maskedProbs[i];
+                    bestIdx = i;
+                }
+            }
+            selectedIndices.add(bestIdx);
+        } else {
+            // Stochastic sampling as before
+            float[] cumulativeProbs = new float[possibleTargetsSize];
+            cumulativeProbs[0] = maskedProbs[0];
+            for (int i = 1; i < possibleTargetsSize; i++) {
+                cumulativeProbs[i] = cumulativeProbs[i - 1] + maskedProbs[i];
+            }
+
+            while (selectedIndices.size() < maxTargets) {
+                float r = random.nextFloat();
+                for (int i = 0; i < cumulativeProbs.length; i++) {
+                    if (r <= cumulativeProbs[i]) {
+                        if (!selectedIndices.contains(i)) {
+                            selectedIndices.add(i);
+                        }
+                        break;
                     }
-                    break;
                 }
             }
         }
@@ -825,7 +844,7 @@ public class ComputerPlayerRL extends ComputerPlayer {
 
     protected Ability calculateActions(Game game) {
         List<ActivatedAbility> flattenedOptions = getPlayable(game, true);
-        flattenedOptions.add(new PassAbility());
+        // (PassAbility will be added later after duplicate removal)
 
         // Remove duplicate spell abilities with the same name
         List<ActivatedAbility> uniqueOptions = new ArrayList<>();
@@ -841,6 +860,9 @@ public class ComputerPlayerRL extends ComputerPlayer {
             }
         }
         flattenedOptions = uniqueOptions;
+
+        // Finally, ensure PassAbility maps to index 0
+        flattenedOptions.add(0, new PassAbility());
 
         // Get model's choice of actions
         List<Integer> targetsToSet = genericChoose(flattenedOptions.size(), 1, 1, StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL, game, null);

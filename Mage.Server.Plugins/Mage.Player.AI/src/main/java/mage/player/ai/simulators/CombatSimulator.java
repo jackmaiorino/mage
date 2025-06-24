@@ -26,6 +26,9 @@ public class CombatSimulator implements Serializable {
     public static CombatSimulator load(Game game) {
         CombatSimulator simCombat = new CombatSimulator();
         for (CombatGroup group: game.getCombat().getGroups()) {
+            if (group.getAttackers().isEmpty()) {
+                continue; // no attackers, skip this group
+            }
             simCombat.groups.add(new CombatGroupSimulator(group.getDefenderId(), group.getAttackers(), group.getBlockers(), game));
         }
         for (UUID defenderId: game.getCombat().getDefenders()) {

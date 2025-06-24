@@ -68,23 +68,25 @@ public class PythonMLBatchManager {
 
         final java.util.UUID id;
         final StateSequenceBuilder.SequenceOutput state;
+        final int validActions;
         final java.util.concurrent.CompletableFuture<PredictionResult> future;
 
-        PredictRequest(java.util.UUID id, StateSequenceBuilder.SequenceOutput state,
+        PredictRequest(java.util.UUID id, StateSequenceBuilder.SequenceOutput state, int validActions,
                 java.util.concurrent.CompletableFuture<PredictionResult> future) {
             this.id = id;
             this.state = state;
+            this.validActions = validActions;
             this.future = future;
         }
     }
 
-    public java.util.concurrent.CompletableFuture<PredictionResult> predict(StateSequenceBuilder.SequenceOutput state) {
+    public java.util.concurrent.CompletableFuture<PredictionResult> predict(StateSequenceBuilder.SequenceOutput state, int validActions) {
         java.util.UUID id = java.util.UUID.randomUUID();
         java.util.concurrent.CompletableFuture<PredictionResult> future = new java.util.concurrent.CompletableFuture<>();
         pendingPredictions.put(id, future);
 
         synchronized (lock) {
-            predictionQueue.add(new PredictRequest(id, state, future));
+            predictionQueue.add(new PredictRequest(id, state, validActions, future));
 
             if (predictionQueue.size() >= MAX_BATCH_SIZE) {
                 flushQueue();
@@ -116,22 +118,30 @@ public class PythonMLBatchManager {
             int batchSize = batch.size();
             int seqLen = batch.get(0).state.getSequence().size();
             int dModel = batch.get(0).state.getSequence().get(0).length;
+            int maxActions = 15; // fixed
 
             List<float[]> allSeq = new java.util.ArrayList<>(batchSize * seqLen);
             List<Integer> allMask = new java.util.ArrayList<>(batchSize * seqLen);
+            List<Integer> allActionMask = new java.util.ArrayList<>(batchSize * maxActions);
 
             for (PredictRequest req : batch) {
                 allSeq.addAll(req.state.getSequence());
                 allMask.addAll(req.state.getMask());
+
+                // Build action mask row
+                for (int i = 0; i < maxActions; i++) {
+                    allActionMask.add(i < req.validActions ? 1 : 0);
+                }
             }
 
             byte[] seqBytes = convertFloatArraysToBytes(allSeq);
             byte[] maskBytes = convertIntegersToBytes(allMask);
+            byte[] actionMaskBytes = convertIntegersToBytes(allActionMask);
 
             byte[] resultsBytes;
             // Call Python once for the batch
             synchronized (lock) { // ensure exclusive channel
-                resultsBytes = entryPoint.predictBatchFlat(seqBytes, maskBytes, batchSize, seqLen, dModel);
+                resultsBytes = entryPoint.predictBatchFlat(seqBytes, maskBytes, actionMaskBytes, batchSize, seqLen, dModel, maxActions);
             }
 
             java.nio.ByteBuffer resBuf = java.nio.ByteBuffer.wrap(resultsBytes).order(java.nio.ByteOrder.LITTLE_ENDIAN);
@@ -161,7 +171,7 @@ public class PythonMLBatchManager {
         }
     }
 
-    public CompletableFuture<Boolean> train(List<StateSequenceBuilder.TrainingData> trainingData, double reward) {
+    public CompletableFuture<Boolean> train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> discountedReturns) {
         UUID id = UUID.randomUUID();
         CompletableFuture<Boolean> future = new CompletableFuture<>();
         pendingTraining.put(id, future);
@@ -179,9 +189,11 @@ public class PythonMLBatchManager {
             byte[] policyIndices = convertIntegersToBytes(trainingData.stream()
                     .map(d -> Math.floorMod(d.actionCombo.get(0), 15))
                     .collect(Collectors.toList()));
-            byte[] valueScores = convertDoublesToBytes(trainingData.stream()
-                    .map(d -> d.valueScore)
-                    .collect(Collectors.toList()));
+
+            // This is the main change: we now pass the calculated discounted returns
+            // to be used as the target for the value function.
+            byte[] discountedReturnsBytes = convertDoublesToBytes(discountedReturns);
+
             byte[] actionTypes = convertIntegersToBytes(trainingData.stream()
                     .map(d -> d.actionType.ordinal())
                     .collect(Collectors.toList()));
@@ -196,11 +208,11 @@ public class PythonMLBatchManager {
             int dModel = trainingData.get(0).stateActionPair.getSequence().get(0).length;
             int maxActions = 15; // fixed action space size
 
-            // Call Python
+            // Call Python - note the signature change (no final reward param)
             synchronized (lock) {
                 logger.info("Invoking trainFlat: batchSize=" + batchSize + ", maxActions=" + maxActions);
-                entryPoint.trainFlat(sequences, masks, policyIndices, valueScores,
-                        actionTypes, actionCombos, batchSize, seqLen, dModel, maxActions, (float) reward);
+                entryPoint.trainFlat(sequences, masks, policyIndices, discountedReturnsBytes,
+                        actionTypes, actionCombos, batchSize, seqLen, dModel, maxActions);
             }
 
             // Complete future with success

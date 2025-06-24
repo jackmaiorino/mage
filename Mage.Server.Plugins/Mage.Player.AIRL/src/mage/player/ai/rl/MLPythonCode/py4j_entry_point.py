@@ -27,7 +27,7 @@ class LogCategory:
 
     GPU_MEMORY = False  # Enable GPU memory logging
     GPU_BATCH = True  # Enable batch processing logging
-    GPU_CLEANUP = True
+    GPU_CLEANUP = False
 
     SYSTEM_INIT = True  # Enable system initialization logging
     SYSTEM_CLEANUP = True
@@ -204,65 +204,65 @@ class SimpleBatcher:
 
     # -------------------------- byte helpers ---------------------------
     @staticmethod
-    def _bytes_to_tensor(buf: bytes, shape, dtype=torch.float32, device=None, big_endian=False):
-        np_dtype = ">f4" if big_endian else "<f4"
-        arr = np.frombuffer(buf, dtype=np_dtype)
-
-        # Cast according to requested dtype
-        if dtype == torch.bool:
-            arr = arr.astype(np.bool_)
-        elif dtype == torch.long:
-            arr = arr.astype(np.int64)
-        else:
-            arr = arr.astype(np.float32)
-
-        arr = arr.reshape(*shape)
-        return torch.tensor(arr, dtype=dtype, device=device)
+    def _bytes_to_tensor(buf: bytes, shape, np_dtype: str, torch_dtype, device=None):
+        """Converts a byte buffer to a torch.Tensor, specifying the numpy and torch data types."""
+        arr = np.frombuffer(buf, dtype=np_dtype).reshape(*shape)
+        return torch.tensor(arr, dtype=torch_dtype, device=device)
 
     # ------------------------------ API -------------------------------
-    def predict(self, sequences_bytes, masks_bytes, batch_size, seq_len, d_model):
+    def predict(self, sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions):
         seq = self._bytes_to_tensor(
-            sequences_bytes, (batch_size, seq_len, d_model), device=self.device)
+            sequences_bytes, (batch_size, seq_len, d_model), '<f4', torch.float32, device=self.device)
         mask = self._bytes_to_tensor(
-            masks_bytes, (batch_size, seq_len), dtype=torch.bool, device=self.device)
+            masks_bytes, (batch_size, seq_len), '<i4', torch.bool, device=self.device)
+
+        # Convert action masks
+        act_mask = self._bytes_to_tensor(
+            action_masks_bytes, (batch_size, max_actions), '<i4', torch.bool, device=self.device)
 
         self.model.eval()
         with torch.no_grad():
-            _, policy_probs, value_scores = self.model(seq, mask)
+            _, policy_probs, value_scores = self.model(seq, mask, act_mask)
 
-        # Flatten to byte array: policy_probs then value_scores
-        return policy_probs.cpu().numpy().tobytes() + value_scores.cpu().numpy().tobytes()
+        # Interleave policy and value scores for Java-side unpacking
+        policy_np = policy_probs.cpu().numpy()
+        value_np = value_scores.cpu().numpy()
 
-    def train(self, sequences_bytes, masks_bytes, policy_scores_bytes, value_scores_bytes,
-              action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions, reward):
-        """Very simple supervised-like update: minimise MSE on value head.
-        Real PPO logic was in old ModelBatcher; keeping a placeholder so the
-        Java side doesn't break. Returns True synchronously.
-        """
+        # Combine them into a new array of shape [batch_size, num_actions + 1]
+        interleaved_results = np.concatenate((policy_np, value_np), axis=1)
+
+        # Flatten to a single byte array in the format Java expects
+        return interleaved_results.tobytes()
+
+    def train(self, sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
+              action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions):
+        """Trains the model using discounted returns as value targets."""
         seq = self._bytes_to_tensor(
-            sequences_bytes, (batch_size, seq_len, d_model), device=self.device)
+            sequences_bytes, (batch_size, seq_len, d_model), '<f4', torch.float32, device=self.device)
         mask = self._bytes_to_tensor(
-            masks_bytes, (batch_size, seq_len), dtype=torch.bool, device=self.device)
-
-        # Target value tensor (float32)
-        tgt_val = self._bytes_to_tensor(
-            value_scores_bytes, (batch_size, 1), device=self.device)
+            masks_bytes, (batch_size, seq_len), '<i4', torch.bool, device=self.device)
 
         # Target action indices (long)
         tgt_idx = self._bytes_to_tensor(
-            policy_scores_bytes, (batch_size,), dtype=torch.long, device=self.device)
+            policy_scores_bytes, (batch_size,), '<i4', torch.long, device=self.device)
+
+        # Target for the value function is the discounted return calculated in Java
+        reward_tensor = self._bytes_to_tensor(
+            discounted_returns_bytes, (batch_size, 1), '<f4', torch.float32, device=self.device)
 
         self.model.train()
         self.optimizer.zero_grad()
         logits, pred_policy, pred_val = self.model(seq, mask)
 
-        # Value regression loss
-        loss_value = F.mse_loss(pred_val, tgt_val)
+        # ---------------- Actor-Critic losses ----------------
+        # 1) Value loss: fit to the discounted return
+        # We scale the value loss by a coefficient, a standard practice in A2C.
+        value_loss_coeff = 0.5
+        loss_value = value_loss_coeff * F.mse_loss(pred_val, reward_tensor)
 
-        # Policy supervised loss (cross entropy)
-        # logits shape: [B, num_actions] ; tgt_idx shape: [B]
+        # 2) Policy loss: −log π(a|s) * advantage  (REINFORCE / A2C style)
+        # Pad/trim logits to max_actions so indices remain valid
         if logits.shape[1] != max_actions:
-            # Pad/trim logits to max_actions
             if logits.shape[1] < max_actions:
                 pad = torch.zeros(batch_size, max_actions -
                                   logits.shape[1], device=self.device)
@@ -272,28 +272,31 @@ class SimpleBatcher:
         else:
             logits_padded = logits
 
-        # Sanity-check target indices and clamp to valid range
-        with torch.no_grad():
-            bad_mask = (tgt_idx < 0) | (tgt_idx >= max_actions)
-            if bad_mask.any():
-                logger.warning(LogCategory.MODEL_TRAIN,
-                               "Found %d out-of-range target indices; clamping.",
-                               bad_mask.sum().item())
-                tgt_idx = torch.clamp(tgt_idx, 0, max_actions - 1)
-
-        # Clamp logits to a safe numeric interval and remove NaN/Inf again
+        # Numerical safety on logits
         logits_padded = torch.nan_to_num(
             logits_padded, nan=0.0, posinf=20.0, neginf=-20.0)
         logits_padded = torch.clamp(logits_padded, -20.0, 20.0)
 
-        loss_policy = F.cross_entropy(logits_padded, tgt_idx)
+        log_probs = F.log_softmax(logits_padded, dim=-1)
+        selected_log_probs = log_probs.gather(
+            1, tgt_idx.unsqueeze(1)).squeeze(1)  # [B]
 
-        loss = loss_value + loss_policy
-
-        # Compute policy entropy for monitoring (with small epsilon for log)
+        # Advantage: Use the critic's estimate as a baseline against the calculated return
         with torch.no_grad():
-            entropy = -(pred_policy * torch.log(pred_policy + 1e-9)
-                        ).sum(dim=-1).mean()
+            advantage = (reward_tensor - pred_val).squeeze(1)
+            advantage = torch.clamp(advantage, -1.0, 1.0)
+
+        loss_policy = -(selected_log_probs * advantage).mean()
+
+        # Entropy bonus to encourage exploration and prevent policy collapse
+        entropy = -(pred_policy * torch.log(pred_policy + 1e-9)
+                    ).sum(dim=-1).mean()
+        # Increased entropy bonus to fight policy collapse more aggressively.
+        entropy_coeff = -0.05
+        loss_entropy = entropy_coeff * entropy
+
+        # Total loss
+        loss = loss_policy + loss_value + loss_entropy
 
         loss.backward()
         # Gradient clipping to mitigate exploding gradients
@@ -304,9 +307,21 @@ class SimpleBatcher:
         # Log training metrics
         logger.info(
             LogCategory.MODEL_TRAIN,
-            "Train step — loss_value: %.4f, loss_policy: %.4f, entropy: %.4f",
-            loss_value.item(), loss_policy.item(), entropy.item()
+            "Train step — loss_value: %.4f, loss_policy: %.4f, loss_entropy: %.4f",
+            loss_value.item(), loss_policy.item(), loss_entropy.item()
         )
+
+        # -----------------------------------------------------
+        #  High-precision logging of policy logits (first item)
+        # -----------------------------------------------------
+        try:
+            sample_logits = logits[0].detach().cpu().numpy()
+            logger.info(LogCategory.MODEL_TRAIN,
+                        "Policy logits sample (precise): %s",
+                        np.array2string(sample_logits, precision=8, suppress_small=False))
+        except Exception as e:
+            logger.warning(LogCategory.MODEL_TRAIN,
+                           "Failed to log policy logits: %s", str(e))
 
         # Free unused GPU memory
         if torch.cuda.is_available():
@@ -326,6 +341,10 @@ class PythonEntryPoint:
         self.batcher = None
         # Get model path from environment variable
         self.model_path = os.getenv('MTG_MODEL_PATH')
+        # ---------------------------------------------------------------
+        # Training step counter for periodic checkpointing
+        # ---------------------------------------------------------------
+        self.train_step_counter = 0  # counts successful trainFlat calls
         logger.info(
             LogCategory.GPU_MEMORY,
             "Using device: %s", self.device
@@ -346,7 +365,25 @@ class PythonEntryPoint:
         logger.info(LogCategory.GPU_MEMORY, "Initializing model")
         if self.model is None:
             self.model = MTGTransformerModel().to(self.device)
-            self.optimizer = torch.optim.Adam(self.model.parameters(), lr=1e-4)
+
+            # Separate higher LR for actor head to help logits move early
+            actor_param_names = [
+                'actor_proj1', 'actor_proj2', 'actor_norm', 'actor_norm1'
+            ]
+            actor_params = []
+            other_params = []
+            for name, param in self.model.named_parameters():
+                if any(apn in name for apn in actor_param_names):
+                    actor_params.append(param)
+                else:
+                    other_params.append(param)
+
+            # ----------------- LR Tuning ---------------------------
+            # Slower, more stable learning rates to prevent policy collapse.
+            self.optimizer = torch.optim.Adam([
+                {'params': actor_params, 'lr': 1e-4},
+                {'params': other_params, 'lr': 5e-5}
+            ])
             self.batcher = SimpleBatcher(
                 self.model, self.device, self.optimizer)
 
@@ -365,7 +402,7 @@ class PythonEntryPoint:
             logger.info(LogCategory.GPU_MEMORY,
                         "Model initialized successfully")
 
-    def predictBatchFlat(self, sequences_bytes, masks_bytes, batch_size, seq_len, d_model):
+    def predictBatchFlat(self, sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions):
         try:
             start_time = time.time()
             if self.model is None:
@@ -376,7 +413,7 @@ class PythonEntryPoint:
 
             # Use the batcher for prediction
             result = self.batcher.predict(
-                sequences_bytes, masks_bytes, batch_size, seq_len, d_model)
+                sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions)
 
             # Log GPU memory after prediction
             log_gpu_memory()
@@ -403,13 +440,13 @@ class PythonEntryPoint:
                 LogCategory.GPU_MEMORY, f"Input shapes at error - batch_size: {batch_size}, seq_len: {seq_len}, d_model: {d_model}")
             raise
 
-    def trainFlat(self, sequences_bytes, masks_bytes, policy_scores_bytes, value_scores_bytes,
-                  action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions, reward):
+    def trainFlat(self, sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
+                  action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions):
         """Batch training using direct byte array conversion"""
         # Trace entry so Java side can verify training invocations
         logger.info(LogCategory.MODEL_TRAIN,
-                    "trainFlat called — batch_size=%d, max_actions=%d, reward=%.3f",
-                    batch_size, max_actions, reward)
+                    "trainFlat called — batch_size=%d, max_actions=%d",
+                    batch_size, max_actions)
 
         # Skip update if no actions provided (e.g., bookkeeping rows)
         if max_actions <= 0:
@@ -425,9 +462,9 @@ class PythonEntryPoint:
             # Log GPU memory before training
             log_gpu_memory()
 
-            # Use the batcher for training
-            result = self.batcher.train(sequences_bytes, masks_bytes, policy_scores_bytes, value_scores_bytes,
-                                        action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions, reward)
+            # Use the batcher for training - note the signature change
+            result = self.batcher.train(sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
+                                        action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions)
 
             # Log GPU memory after training
             log_gpu_memory()
@@ -441,6 +478,23 @@ class PythonEntryPoint:
             total_time = time.time() - start_time
             logger.info(
                 LogCategory.GPU_MEMORY, f"Total trainFlat operation took {total_time:.3f} seconds")
+
+            # -------------------------------------------------------
+            #  Increment counter & checkpoint every 100 updates
+            # -------------------------------------------------------
+            self.train_step_counter += 1
+            if self.train_step_counter % 100 == 0:
+                ckpt_path = self.model_path or os.path.join(
+                    TEMP_DIR, f"checkpoint_step_{self.train_step_counter}.pt")
+                try:
+                    self.saveModel(ckpt_path)
+                    logger.info(LogCategory.MODEL_SAVE,
+                                "Checkpoint saved at step %d -> %s",
+                                self.train_step_counter, ckpt_path)
+                except Exception as e:
+                    logger.error(LogCategory.MODEL_SAVE,
+                                 "Failed to save checkpoint at step %d: %s",
+                                 self.train_step_counter, str(e))
 
             return result
 

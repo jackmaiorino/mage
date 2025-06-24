@@ -501,18 +501,23 @@ public class PythonMLBridge {
     /**
      * Make predictions using the Python ML model
      */
-    public INDArray[] predict(StateSequenceBuilder.SequenceOutput state) {
+    public INDArray[] predict(StateSequenceBuilder.SequenceOutput state, int validActions) {
         if (!isInitialized) {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
 
         try {
-            PythonMLBatchManager.PredictionResult result = PythonMLBatchManager.getInstance(entryPoint).predict(state).get();
+            PythonMLBatchManager.PredictionResult result = PythonMLBatchManager.getInstance(entryPoint).predict(state, validActions).get();
             return new INDArray[]{result.policyScores, result.valueScores};
         } catch (Exception e) {
             logger.severe("Error during prediction: " + e.getMessage());
             throw new RuntimeException("Failed to get predictions from Python model", e);
         }
+    }
+
+    // existing overload signature kept for compatibility
+    public INDArray[] predict(StateSequenceBuilder.SequenceOutput state) {
+        return predict(state, 15); // assume all actions valid if not specified
     }
 
     public INDArray[] predictBatch(List<StateSequenceBuilder.SequenceOutput> states) {
@@ -526,7 +531,7 @@ public class PythonMLBridge {
 
             // Submit each state to the batch manager
             for (StateSequenceBuilder.SequenceOutput state : states) {
-                futures.add(PythonMLBatchManager.getInstance(entryPoint).predict(state));
+                futures.add(PythonMLBatchManager.getInstance(entryPoint).predict(state, 15));
             }
 
             // Wait for all predictions to complete
@@ -557,13 +562,13 @@ public class PythonMLBridge {
     /**
      * Train the model with a batch of data
      */
-    public void train(List<StateSequenceBuilder.TrainingData> trainingData, double reward) {
+    public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> discountedReturns) {
         if (!isInitialized) {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
 
         try {
-            PythonMLBatchManager.getInstance(entryPoint).train(trainingData, reward).get();
+            PythonMLBatchManager.getInstance(entryPoint).train(trainingData, discountedReturns).get();
         } catch (Exception e) {
             logger.severe("Error during training: " + e.getMessage());
             throw new RuntimeException("Failed to train Python model", e);

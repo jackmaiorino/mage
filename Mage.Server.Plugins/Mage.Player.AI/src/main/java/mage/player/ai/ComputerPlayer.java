@@ -2218,12 +2218,16 @@ public class ComputerPlayer extends PlayerImpl {
     public void selectBlockers(Ability source, Game game, UUID defendingPlayerId) {
         log.debug("selectBlockers");
 
+        List<Permanent> attackers = getAvailableAttackers(game);
         List<Permanent> blockers = getAvailableBlockers(game);
+        if (attackers.isEmpty() || blockers.isEmpty()) {
+            return; // no blockers or attackers
+        }
 
         CombatSimulator sim = simulateBlock(CombatSimulator.load(game), blockers, game);
 
         List<CombatGroup> groups = game.getCombat().getGroups();
-        for (int i = 0; i < groups.size(); i++) {
+        for (int i = 0; i < sim.groups.size(); i++) {
             for (CreatureSimulator creature : sim.groups.get(i).blockers) {
                 groups.get(i).addBlocker(creature.id, playerId, game);
             }

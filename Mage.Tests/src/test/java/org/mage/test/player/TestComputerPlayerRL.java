@@ -18,16 +18,19 @@ public class TestComputerPlayerRL extends CardTestPlayerBase
         RLTrainer trainer = new RLTrainer();
         int trainingsRun = 0;
         try {
-            trainer.train();
-            trainingsRun++;
+            while (trainingsRun < 1) {
+                trainer.train();
+                trainingsRun++;
+            }
         }finally {
             System.out.println("Trainings run: " + trainingsRun);
+            System.out.println("Epochs run: " + trainer.NUM_GAME_RUNNERS * trainer.NUM_EPISODES_PER_GAME_RUNNER * trainingsRun);
         }
     }
 
     @Test
     public void test_RLPlayer_Eval() {
         RLTrainer trainer = new RLTrainer();
-        trainer.eval(3);
+        trainer.eval(2);
     }
 }

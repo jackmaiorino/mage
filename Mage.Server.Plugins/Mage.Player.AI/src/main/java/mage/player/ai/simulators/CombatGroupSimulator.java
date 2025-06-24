@@ -31,7 +31,7 @@ public class CombatGroupSimulator implements Serializable {
             this.blockers.add(new CreatureSimulator(permanent));
         }
         //NOTE:  assumes no banding
-        attacker = this.attackers.get(0);
+        this.attacker = this.attackers.get(0);
     }
 
     private boolean hasFirstOrDoubleStrike() {

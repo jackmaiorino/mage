@@ -14,6 +14,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import org.apache.log4j.Level;
@@ -45,9 +46,12 @@ public class RLTrainer {
     public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt";
     public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
     public static final int NUM_GAME_RUNNERS = NUM_THREADS;
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 35;
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = 500;
 
     public static final PythonMLBridge sharedModel = PythonMLBridge.getInstance();
+
+    // Global episode counter to track total episodes across all threads
+    private static final AtomicInteger EPISODE_COUNTER = new AtomicInteger(0);
 
     static {
         // Set default logging level for all loggers to WARN
@@ -118,6 +122,7 @@ public class RLTrainer {
                     Deck opponentDeckThread = opponentDeck.copy();
 
                     for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
+                        long episodeStartNanos = System.nanoTime();
                         Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(0), 60, 20, 7);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
@@ -136,6 +141,12 @@ public class RLTrainer {
 
                         logGameResult(game, rlPlayer);
                         updateModelBasedOnOutcome(game, rlPlayer, opponent);
+
+                        // -------- Episode duration & counter logging --------
+                        int epNumber = EPISODE_COUNTER.incrementAndGet();
+                        long episodeDurationNanos = System.nanoTime() - episodeStartNanos;
+                        double episodeSeconds = episodeDurationNanos / 1_000_000_000.0;
+                        RLTrainer.threadLocalLogger.get().info(String.format("Episode %d completed in %.2f seconds", epNumber, episodeSeconds));
                     }
                     return null;
                 });
@@ -210,6 +221,8 @@ public class RLTrainer {
                 }
 
                 int localWinsAgainstComputerPlayer7 = 0;
+
+                Thread.currentThread().setName("GAME");
                 Deck rlPlayerDeckThread = rlPlayerDeck.copy();
                 Deck opponentDeckThread = opponentDeck.copy();
 
@@ -223,7 +236,8 @@ public class RLTrainer {
                     }
                     Game game = match.getGames().get(0);
 
-                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
+                    // Greedy evaluation: use deterministic arg-max player
+                    ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
@@ -296,20 +310,78 @@ public class RLTrainer {
 
     private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
-        double reward = rlPlayerWon ? 0.15 : -0.15;
+
+        // ------------------------------------------------------------------
+        // 1.  Terminal win / loss reward (ground-truth)
+        // ------------------------------------------------------------------
+        double finalReward = rlPlayerWon ? 1.0 : -1.0;
+
+        // ------------------------------------------------------------------
+        // 2.  Potential-based shaping term  ψ = α (Φ(s′) – Φ(s))
+        // ------------------------------------------------------------------
+        final double ALPHA = 0.05;
+        int rlLife = Math.max(0, rlPlayer.getLife());
+        UUID oppId = game.getOpponents(rlPlayer.getId()).iterator().next();
+        Player opp = game.getPlayer(oppId);
+        int oppLife = Math.max(0, (opp != null ? opp.getLife() : 20));
+        double phiFinal = Math.signum(Math.log(rlLife + 1.0) - Math.log(oppLife + 1.0));
+        finalReward += ALPHA * phiFinal;
+
+        if (Double.isNaN(finalReward) || Double.isInfinite(finalReward)) {
+            finalReward = rlPlayerWon ? 1.0 : -1.0;
+            logger.warn("Reward was NaN/Inf – reverted to ±1 fallback");
+        }
 
         // Get training data for both players
         List<StateSequenceBuilder.TrainingData> rlPlayerTrainingData = rlPlayer.getTrainingBuffer();
         List<StateSequenceBuilder.TrainingData> opponentTrainingData = opponent.getTrainingBuffer();
 
+        // --- Calculate discounted returns for each player ---
+        final double GAMMA = 0.99; // Discount factor for future rewards
+
+        List<Double> rlPlayerReturns = calculateDiscountedReturns(rlPlayerTrainingData, finalReward, GAMMA);
+        List<Double> opponentReturns = calculateDiscountedReturns(opponentTrainingData, -finalReward, GAMMA); // Opposite reward for opponent
+
         // Update the model with all states and rewards
-        // Technically these can be empty (if they keep a no lander. Might be worth logging though)
         if (!rlPlayerTrainingData.isEmpty()) {
-            sharedModel.train(rlPlayerTrainingData, reward);
+            sharedModel.train(rlPlayerTrainingData, rlPlayerReturns);
         }
         if (!opponentTrainingData.isEmpty()) {
-            sharedModel.train(opponentTrainingData, -reward); // Opposite reward for opponent
+            sharedModel.train(opponentTrainingData, opponentReturns); // Opposite reward for opponent
         }
+    }
+
+    private List<Double> calculateDiscountedReturns(List<StateSequenceBuilder.TrainingData> trajectory, double finalReward, double gamma) {
+        if (trajectory.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Double> discountedReturns = new ArrayList<>(Collections.nCopies(trajectory.size(), 0.0));
+        double cumulativeReturn = 0.0;
+
+        // The reward is only applied at the terminal state.
+        // We iterate backwards from the end of the game.
+        for (int i = trajectory.size() - 1; i >= 0; i--) {
+            // The immediate reward for the last step is the final game outcome.
+            // For all other steps, the immediate reward is 0.
+            double immediateReward = (i == trajectory.size() - 1) ? finalReward : 0.0;
+
+            // By adding a small penalty for each step, we incentivize shorter games.
+            final double STEP_PENALTY = -0.01;
+            cumulativeReturn = (immediateReward + STEP_PENALTY) + gamma * cumulativeReturn;
+            discountedReturns.set(i, cumulativeReturn);
+        }
+
+        // Normalize returns for stability (optional but good practice)
+        double mean = discountedReturns.stream().mapToDouble(d -> d).average().orElse(0.0);
+        double std = Math.sqrt(discountedReturns.stream().mapToDouble(d -> Math.pow(d - mean, 2)).average().orElse(0.0));
+        if (std > 1e-6) { // Avoid division by zero
+            for (int i = 0; i < discountedReturns.size(); i++) {
+                discountedReturns.set(i, (discountedReturns.get(i) - mean) / std);
+            }
+        }
+
+        return discountedReturns;
     }
 
     public static PythonMLBridge getSharedModel() {
