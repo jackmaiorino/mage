@@ -250,56 +250,68 @@ class SimpleBatcher:
         reward_tensor = self._bytes_to_tensor(
             discounted_returns_bytes, (batch_size, 1), '<f4', torch.float32, device=self.device)
 
+        # -------------- MICRO-BATCH GRADIENT ACCUMULATION ----------------
+        MICRO_BATCHES = 4  # tune if needed; must divide batch_size
+        if batch_size % MICRO_BATCHES != 0:
+            MICRO_BATCHES = 1  # fallback – no accumulation
+
+        micro_bs = batch_size // MICRO_BATCHES
+
         self.model.train()
         self.optimizer.zero_grad()
-        logits, pred_policy, pred_val = self.model(seq, mask)
 
-        # ---------------- Actor-Critic losses ----------------
-        # 1) Value loss: fit to the discounted return
-        # We scale the value loss by a coefficient, a standard practice in A2C.
-        value_loss_coeff = 0.5
-        loss_value = value_loss_coeff * F.mse_loss(pred_val, reward_tensor)
+        for mb in range(MICRO_BATCHES):
+            mb_slice = slice(mb * micro_bs, (mb + 1) * micro_bs)
 
-        # 2) Policy loss: −log π(a|s) * advantage  (REINFORCE / A2C style)
-        # Pad/trim logits to max_actions so indices remain valid
-        if logits.shape[1] != max_actions:
-            if logits.shape[1] < max_actions:
-                pad = torch.zeros(batch_size, max_actions -
-                                  logits.shape[1], device=self.device)
-                logits_padded = torch.cat([logits, pad], dim=1)
+            mb_seq = seq[mb_slice]
+            mb_mask = mask[mb_slice]
+            mb_tgt_idx = tgt_idx[mb_slice]
+            mb_reward = reward_tensor[mb_slice]
+
+            logits, pred_policy, pred_val = self.model(mb_seq, mb_mask)
+
+            # --- losses (same as before) ---
+            value_loss_coeff = 0.5
+            loss_value = value_loss_coeff * F.mse_loss(pred_val, mb_reward)
+
+            # pad/trim logits
+            if logits.shape[1] != max_actions:
+                if logits.shape[1] < max_actions:
+                    pad = torch.zeros(micro_bs, max_actions -
+                                      logits.shape[1], device=self.device)
+                    logits_padded = torch.cat([logits, pad], dim=1)
+                else:
+                    logits_padded = logits[:, :max_actions]
             else:
-                logits_padded = logits[:, :max_actions]
-        else:
-            logits_padded = logits
+                logits_padded = logits
 
-        # Numerical safety on logits
-        logits_padded = torch.nan_to_num(
-            logits_padded, nan=0.0, posinf=20.0, neginf=-20.0)
-        logits_padded = torch.clamp(logits_padded, -20.0, 20.0)
+            logits_padded = torch.nan_to_num(
+                logits_padded, nan=0.0, posinf=20.0, neginf=-20.0)
+            logits_padded = torch.clamp(logits_padded, -20.0, 20.0)
 
-        log_probs = F.log_softmax(logits_padded, dim=-1)
-        selected_log_probs = log_probs.gather(
-            1, tgt_idx.unsqueeze(1)).squeeze(1)  # [B]
+            log_probs = F.log_softmax(logits_padded, dim=-1)
+            selected_log_probs = log_probs.gather(
+                1, mb_tgt_idx.unsqueeze(1)).squeeze(1)
 
-        # Advantage: Use the critic's estimate as a baseline against the calculated return
-        with torch.no_grad():
-            advantage = (reward_tensor - pred_val).squeeze(1)
-            advantage = torch.clamp(advantage, -1.0, 1.0)
+            with torch.no_grad():
+                advantage = (mb_reward - pred_val).squeeze(1)
+                advantage = torch.clamp(advantage, -1.0, 1.0)
 
-        loss_policy = -(selected_log_probs * advantage).mean()
+            loss_policy = -(selected_log_probs * advantage).mean()
 
-        # Entropy bonus to encourage exploration and prevent policy collapse
-        entropy = -(pred_policy * torch.log(pred_policy + 1e-9)
-                    ).sum(dim=-1).mean()
-        # Increased entropy bonus to fight policy collapse more aggressively.
-        entropy_coeff = -0.05
-        loss_entropy = entropy_coeff * entropy
+            entropy = -(pred_policy * torch.log(pred_policy + 1e-9)
+                        ).sum(dim=-1).mean()
+            entropy_coeff = -0.05
+            loss_entropy = entropy_coeff * entropy
 
-        # Total loss
-        loss = loss_policy + loss_value + loss_entropy
+            loss = loss_policy + loss_value + loss_entropy
 
-        loss.backward()
-        # Gradient clipping to mitigate exploding gradients
+            # Scale loss by 1/M to keep gradient magnitude constant across accumulation
+            loss = loss / MICRO_BATCHES
+
+            loss.backward()
+
+        # After accumulation – clip and step
         torch.nn.utils.clip_grad_norm_(
             self.model.parameters(), self.model.max_grad_norm)
         self.optimizer.step()
@@ -534,6 +546,27 @@ class PythonEntryPoint:
             logger.error(LogCategory.GPU_MEMORY,
                          f"Error loading model: {str(e)}")
             raise
+
+    def shutdown(self):
+        """Allows Java to cleanly shut down the Python gateway."""
+        logger.info(LogCategory.SYSTEM_CLEANUP,
+                    "Received shutdown request from Java.")
+        cleanup_temp_files()
+
+        # We must use a separate thread to shut down the gateway,
+        # otherwise the call will deadlock as it's waiting for a response.
+        def _shutdown():
+            time.sleep(1)  # Give Java a moment to receive the response
+            # Note that gateway.shutdown() is not enough since the script would
+            # still be running, just without an active gateway.
+            os._exit(0)
+
+        threading.Thread(target=_shutdown).start()
+        # Immediately return to Java so it doesn't block
+        return "OK"
+
+    class Java:
+        implements = ["mage.player.ai.rl.PythonBatchService"]
 
 
 if __name__ == "__main__":

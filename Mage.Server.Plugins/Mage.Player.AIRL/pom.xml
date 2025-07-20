@@ -41,56 +41,14 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.deeplearning4j</groupId>
-            <artifactId>deeplearning4j-core</artifactId>
-            <version>1.0.0-M2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-cuda-11.4</artifactId>
-            <version>1.0.0-M2.1</version>
-        </dependency>
-        <!--        Needed for CudNN-->
-        <dependency>
-            <groupId>org.nd4j</groupId>
-            <artifactId>nd4j-cuda-11.4</artifactId>
-            <version>1.0.0-M2.1</version>
-            <classifier>windows-x86_64-cudnn</classifier>
-        </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.nd4j</groupId>-->
-        <!--            <artifactId>nd4j-native-platform</artifactId>-->
-        <!--            <version>1.0.0-M2.1</version>-->
-        <!--        </dependency>-->
-        <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>mage-game-twoplayerduel</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>mage-player-ai-mcts</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>${project.groupId}</groupId>
             <artifactId>mage-player-ai-ma</artifactId>
             <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>ai.djl</groupId>
-            <artifactId>model-zoo</artifactId>
-            <version>0.31.0</version>
-        </dependency>
-        <dependency>
-            <groupId>ai.djl.tensorflow</groupId>
-            <artifactId>tensorflow-model-zoo</artifactId>
-            <version>0.31.0</version>
-        </dependency>
-        <dependency>
-            <groupId>ai.djl</groupId>
-            <artifactId>api</artifactId>
-            <version>0.31.0</version>
         </dependency>
         <dependency>
             <groupId>com.openai</groupId>
@@ -102,16 +60,19 @@
             <artifactId>py4j</artifactId>
             <version>0.10.9</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.bytedeco</groupId>-->
-        <!--            <artifactId>javacpp</artifactId>-->
-        <!--            <version>1.5.6</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.bytedeco</groupId>-->
-        <!--            <artifactId>cuda</artifactId>-->
-        <!--            <version>11.4-8.2-1.5.6</version>-->
-        <!--        </dependency>-->
+        <!-- Jackson dependencies - explicit versions to resolve OpenAI client compatibility -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -12,9 +12,11 @@ import java.io.BufferedInputStream;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
+import com.google.gson.Gson;
 
 import py4j.ClientServer;
 import py4j.GatewayServer;
@@ -25,7 +27,7 @@ import py4j.Py4JException;
  * Handles conversion between Java and Python tensors and manages the Py4J
  * gateway.
  */
-public class PythonMLBridge {
+public class PythonMLBridge implements AutoCloseable {
 
     private static final Logger logger = Logger.getLogger(PythonMLBridge.class.getName());
     private static final int DEFAULT_PORT = 25334;
@@ -40,7 +42,7 @@ public class PythonMLBridge {
     private static volatile PythonMLBridge instance;
     private static final Object lock = new Object();
 
-    private final String projectRoot = new File(new File(System.getProperty("user.dir")).getParentFile().getParentFile(), "mage").getAbsolutePath();
+    private final String projectRoot = new File(System.getProperty("user.dir")).getAbsolutePath();
     private final String venvPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/venv").getAbsolutePath();
     private final String pythonScriptPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/py4j_entry_point.py").getAbsolutePath();
 
@@ -130,6 +132,23 @@ public class PythonMLBridge {
                 throw new RuntimeException("Failed to create virtual environment, exit code: " + venvExitCode);
             }
             logger.info("Virtual environment created successfully");
+
+            // On Unix-like systems the executables live under "bin" instead of "Scripts".
+            // The rest of this class expects the Windows-style "Scripts" path, so we
+            // create a symlink to keep the existing logic unchanged.
+            try {
+                String os = System.getProperty("os.name").toLowerCase();
+                if (!os.contains("win")) {
+                    java.nio.file.Path binDir = java.nio.file.Paths.get(venvPath, "bin");
+                    java.nio.file.Path scriptsDir = java.nio.file.Paths.get(venvPath, "Scripts");
+                    if (java.nio.file.Files.exists(binDir) && !java.nio.file.Files.exists(scriptsDir)) {
+                        java.nio.file.Files.createSymbolicLink(scriptsDir, binDir);
+                        logger.info("Created symlink: " + scriptsDir + " -> " + binDir);
+                    }
+                }
+            } catch (Exception e) {
+                logger.warning("Failed to create Scripts symlink: " + e.getMessage());
+            }
         } else {
             logger.info("Virtual environment already exists at: " + venvPath);
         }
@@ -499,68 +518,24 @@ public class PythonMLBridge {
     }
 
     /**
-     * Make predictions using the Python ML model
+     * Predicts policy and value for a single state.
      */
-    public INDArray[] predict(StateSequenceBuilder.SequenceOutput state, int validActions) {
-        if (!isInitialized) {
-            throw new IllegalStateException("Python ML Bridge not initialized");
-        }
-
+    public float[] predict(StateSequenceBuilder.SequenceOutput state, int validActions) {
+        CompletableFuture<PythonMLBatchManager.PredictionResult> future = PythonMLBatchManager.getInstance(entryPoint).predict(state, validActions);
         try {
-            PythonMLBatchManager.PredictionResult result = PythonMLBatchManager.getInstance(entryPoint).predict(state, validActions).get();
-            return new INDArray[]{result.policyScores, result.valueScores};
-        } catch (Exception e) {
-            logger.severe("Error during prediction: " + e.getMessage());
-            throw new RuntimeException("Failed to get predictions from Python model", e);
+            PythonMLBatchManager.PredictionResult result = future.get();
+            return result.policyScores;
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Prediction failed", e);
         }
     }
 
-    // existing overload signature kept for compatibility
-    public INDArray[] predict(StateSequenceBuilder.SequenceOutput state) {
-        return predict(state, 15); // assume all actions valid if not specified
-    }
-
-    public INDArray[] predictBatch(List<StateSequenceBuilder.SequenceOutput> states) {
-        if (!isInitialized) {
-            throw new IllegalStateException("Python ML Bridge not initialized");
-        }
-
-        try {
-            // Create a list of futures to track all predictions
-            List<CompletableFuture<PythonMLBatchManager.PredictionResult>> futures = new ArrayList<>();
-
-            // Submit each state to the batch manager
-            for (StateSequenceBuilder.SequenceOutput state : states) {
-                futures.add(PythonMLBatchManager.getInstance(entryPoint).predict(state, 15));
-            }
-
-            // Wait for all predictions to complete
-            CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
-
-            // Collect results
-            INDArray[] policyScores = new INDArray[states.size()];
-            INDArray[] valueScores = new INDArray[states.size()];
-
-            for (int i = 0; i < futures.size(); i++) {
-                PythonMLBatchManager.PredictionResult result = futures.get(i).get();
-                policyScores[i] = result.policyScores;
-                valueScores[i] = result.valueScores;
-            }
-
-            // Combine results into single arrays
-            INDArray combinedPolicyScores = Nd4j.vstack(policyScores);
-            INDArray combinedValueScores = Nd4j.vstack(valueScores);
-
-            return new INDArray[]{combinedPolicyScores, combinedValueScores};
-        } catch (Exception e) {
-            logger.severe("Error during batch prediction: " + e.getMessage());
-            e.printStackTrace(); // Add stack trace for better debugging
-            throw new RuntimeException("Failed to get predictions from Python model", e);
-        }
+    public float[] predict(StateSequenceBuilder.SequenceOutput state) {
+        return predict(state, -1);
     }
 
     /**
-     * Train the model with a batch of data
+     * Train the model with a batch of states and discounted returns.
      */
     public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> discountedReturns) {
         if (!isInitialized) {
@@ -650,5 +625,10 @@ public class PythonMLBridge {
     protected void finalize() throws Throwable {
         shutdown();
         super.finalize();
+    }
+
+    @Override
+    public void close() {
+        shutdown();
     }
 }

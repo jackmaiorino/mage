@@ -1,0 +1,35 @@
+# Ignore VCS
+.git
+.hg
+.svn
+
+# IDE / editor files
+.idea
+# Ignore Maven build output directories at module root, but keep source packages like mage/target
+/target/
+*/target/
+*.iml
+
+# Local virtual environments, caches, models
+.mage_ai_venv/
+**/__pycache__/
+**/venv/
+*.pt
+
+# Build artefacts, outputs
+**/out/
+**/build/
+
+# Keep Client module (needed for Maven aggregator) but strip its heavy release artefacts
+Mage.Client/release/
+Mage.Client/src/main/resources/**/sounds/
+Mage.Client/src/main/resources/**/backgrounds/
+Mage.Server/release/
+
+# Large release/resource folders
+**/release/
+
+# Logs and temporary files
+*.log
+*.tmp
+*.temp 

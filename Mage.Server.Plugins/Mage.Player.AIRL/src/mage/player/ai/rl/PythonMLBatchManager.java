@@ -10,20 +10,13 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import org.nd4j.linalg.api.ndarray.INDArray;
-import org.nd4j.linalg.factory.Nd4j;
-
-/**
- * Singleton class that manages batching of requests to the Python ML server to
- * ensure single-threaded communication. This helps prevent race conditions and
- * improves performance by batching requests.
- */
 public class PythonMLBatchManager {
 
     private static final Logger logger = Logger.getLogger(PythonMLBatchManager.class.getName());
     private static final int MAX_TRAJECTORY_LENGTH = 100;
-    private static final int MAX_BATCH_SIZE = 8;          // hard cap per flush
-    private static final int BATCH_TIMEOUT_MS = 3;        // flush window (ms)
+    // Increase batch size to better utilise GPU; shorter timeout keeps latency low
+    private static final int MAX_BATCH_SIZE = 32;         // hard cap per flush
+    private static final int BATCH_TIMEOUT_MS = 4;        // flush window (ms)
 
     private final PythonEntryPoint entryPoint;
     private final Map<UUID, CompletableFuture<PredictionResult>> pendingPredictions;
@@ -154,11 +147,8 @@ public class PythonMLBatchManager {
                 }
                 float value = resBuf.getFloat();
 
-                INDArray policyArr = Nd4j.create(policy);
-                INDArray valueArr = Nd4j.create(new float[]{value});
-
                 PredictRequest req = batch.get(bi);
-                req.future.complete(new PredictionResult(policyArr, valueArr));
+                req.future.complete(new PredictionResult(policy, value));
                 pendingPredictions.remove(req.id);
             }
 
@@ -259,10 +249,10 @@ public class PythonMLBatchManager {
 
     public static class PredictionResult {
 
-        public final INDArray policyScores;
-        public final INDArray valueScores;
+        public final float[] policyScores;
+        public final float valueScores;
 
-        public PredictionResult(INDArray policyScores, INDArray valueScores) {
+        public PredictionResult(float[] policyScores, float valueScores) {
             this.policyScores = policyScores;
             this.valueScores = valueScores;
         }

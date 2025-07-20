@@ -22,7 +22,10 @@ import com.openai.models.EmbeddingModel;
 public class EmbeddingManager {
 
     private static final Logger logger = Logger.getLogger(EmbeddingManager.class);
-    private static final String MAPPING_FILE = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json";
+    private static final String MAPPING_FILE = System.getenv().getOrDefault(
+            "EMBEDDING_MAPPING_PATH",
+            "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json"
+    );
     private static Map<String, float[]> embeddings;
     private static OpenAIClient openAIClient;
     public static final int EMBEDDING_SIZE = 100;
@@ -72,8 +75,7 @@ public class EmbeddingManager {
         }
 
         // Log the raw text being sent for embedding
-        logger.info("Getting embedding for text: " + text);
-
+        //logger.info("Getting embedding for text: " + text);
         embeddings = getEmbeddings();
         if (embeddings.containsKey(text)) {
             float[] cachedEmbedding = embeddings.get(text);

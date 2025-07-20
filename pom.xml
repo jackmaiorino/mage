@@ -165,7 +165,7 @@
                             <disable>true</disable>
                         </consoleOutputReporter>
                         <statelessTestsetInfoReporter
-                                implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
+                            implementation="org.apache.maven.plugin.surefire.extensions.junit5.JUnit5StatelessTestsetInfoTreeReporter">
                             <theme>ASCII</theme>
                             <printStacktraceOnError>true</printStacktraceOnError>
                             <printStacktraceOnFailure>true</printStacktraceOnFailure>
@@ -316,23 +316,29 @@
         <!-- OTHER dependencies - you must add it to child modules manually (copy groupId and artifactId without scope and version) -->
         <!-- write shared libs from all childs here to version control -->
         <dependencies>
+            <!--
+                OpenAI client requires jackson 2.15.2+
+                Force compatible versions here to resolve conflict with older versions from other dependencies.
+            -->
             <dependency>
-                <groupId>javax.xml.bind</groupId>
-                <artifactId>jaxb-api</artifactId>
-                <version>2.3.1</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>2.15.2</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>com.sun.xml.bind</groupId>
-                <artifactId>jaxb-impl</artifactId>
-                <version>2.3.1</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>2.15.2</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
-                <groupId>org.glassfish.jaxb</groupId>
-                <artifactId>jaxb-core</artifactId>
-                <version>3.0.2</version>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>2.15.2</version>
+                <scope>runtime</scope>
             </dependency>
             <dependency>
-                <!-- junit compatible dependencies (xmage uses junit 5 platform for all v4 and v5 tests) -->
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>5.8.1</version>
@@ -374,6 +380,21 @@
                 <groupId>org.jsoup</groupId>
                 <artifactId>jsoup</artifactId>
                 <version>1.14.3</version>
+            </dependency>
+            <dependency>
+                <groupId>javax.xml.bind</groupId>
+                <artifactId>jaxb-api</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.xml.bind</groupId>
+                <artifactId>jaxb-impl</artifactId>
+                <version>2.3.1</version>
+            </dependency>
+            <dependency>
+                <groupId>org.glassfish.jaxb</groupId>
+                <artifactId>jaxb-core</artifactId>
+                <version>3.0.2</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

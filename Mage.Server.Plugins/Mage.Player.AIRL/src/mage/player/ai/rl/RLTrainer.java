@@ -1,6 +1,7 @@
 package mage.player.ai.rl;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -24,15 +25,12 @@ import org.apache.log4j.Logger;
 import mage.cards.decks.Deck;
 import mage.cards.decks.DeckCardLists;
 import mage.cards.decks.importer.DeckImporter;
-import mage.constants.MultiplayerAttackOption;
 import mage.constants.RangeOfInfluence;
 import mage.game.Game;
 import mage.game.GameException;
 import mage.game.GameOptions;
-import mage.game.TwoPlayerDuel;
 import mage.game.TwoPlayerMatch;
 import mage.game.match.MatchOptions;
-import mage.game.mulligan.LondonMulligan;
 import mage.player.ai.ComputerPlayer7;
 import mage.player.ai.ComputerPlayerRL;
 import mage.players.Player;
@@ -40,13 +38,39 @@ import mage.players.Player;
 public class RLTrainer {
 
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
-    private static final int NUM_EPISODES = 10000;
-    private static final int NUM_EVAL_EPISODES = 5;
-    private static final String DECKS_DIRECTORY = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper";
-    public static final String MODEL_FILE_PATH = "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt";
-    public static final int NUM_THREADS = Runtime.getRuntime().availableProcessors();
-    public static final int NUM_GAME_RUNNERS = NUM_THREADS;
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = 500;
+
+    /* ================================================================
+     *  Configurable parameters (env-vars override defaults)
+     * ============================================================ */
+    private static String env(String key, String def) {
+        return System.getenv().getOrDefault(key, def);
+    }
+
+    private static int envInt(String key, int def) {
+        try {
+            return Integer.parseInt(env(key, String.valueOf(def)));
+        } catch (NumberFormatException e) {
+            return def;
+        }
+    }
+
+    // Local training command:
+    // $env:TOTAL_EPISODES='1'; $env:DECKS_DIR='src/mage/player/ai/decks/Pauper'; mvn -q compile exec:java "-Dexec.mainClass=mage.player.ai.rl.RLTrainer" "-Dexec.args=train"
+    private static final int NUM_EPISODES = envInt("TOTAL_EPISODES", 10000);
+    private static final int NUM_EVAL_EPISODES = envInt("EVAL_EPISODES", 5);
+
+    public static final String DECKS_DIRECTORY = env("DECKS_DIR", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper");
+
+    public static final String MODEL_FILE_PATH = env("MODEL_PATH", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt");
+    // Episode-level statistics will be appended here (CSV)
+    public static final String STATS_FILE_PATH = env("STATS_PATH", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/training_stats.csv");
+    // Path that stores the cumulative number of episodes trained so far (persisted across runs)
+    public static final String EPISODE_COUNT_PATH = env("EPISODE_COUNTER_PATH", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
+    // Auto-detect optimal number of threads based on CPU cores
+    private static final int DEFAULT_GAME_RUNNERS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
+    public static final int NUM_THREADS = envInt("NUM_THREADS", DEFAULT_GAME_RUNNERS);
+    public static final int NUM_GAME_RUNNERS = envInt("NUM_GAME_RUNNERS", DEFAULT_GAME_RUNNERS);
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = envInt("EPISODES_PER_WORKER", 500);
 
     public static final PythonMLBridge sharedModel = PythonMLBridge.getInstance();
 
@@ -58,14 +82,14 @@ public class RLTrainer {
         List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
         loggers.add(LogManager.getRootLogger());
         for (Logger logger : loggers) {
-            logger.setLevel(Level.WARN);
+            logger.setLevel(Level.INFO);
         }
     }
 
     // ThreadLocal logger
     public static final ThreadLocal<Logger> threadLocalLogger = ThreadLocal.withInitial(() -> {
         Logger threadLogger = Logger.getLogger("Thread-" + Thread.currentThread().getId());
-        threadLogger.setLevel(Level.WARN); // Default level
+        threadLogger.setLevel(Level.INFO); // Default level
         return threadLogger;
     });
 
@@ -73,16 +97,79 @@ public class RLTrainer {
         // No need to initialize here as PythonMLBridge handles initialization in its constructor
     }
 
+    /* ================================================================
+     *  Simple CLI entry point: java RLTrainer train|eval
+     * ============================================================ */
+    public static void main(String[] args) {
+        String mode = args.length > 0 ? args[0] : env("MODE", "train");
+        if ("learner".equalsIgnoreCase(mode)) {
+            try {
+                Path dir = Paths.get(System.getenv().getOrDefault("TRAJ_DIR", "./trajectories"));
+                int batch = envInt("BATCH_EPISODES", 10);
+                int poll = envInt("POLL_SECONDS", 60);
+                int ckpt = envInt("CHECKPOINT_EVERY", 100);
+                new Learner(dir, batch, poll, ckpt).run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("worker".equalsIgnoreCase(mode)) {
+            try {
+                int eps = envInt("EPISODES_PER_WORKER", 100);
+                Path dir = Paths.get(System.getenv().getOrDefault("TRAJ_DIR", "./trajectories"));
+                new GameWorker(eps, dir).run();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if ("eval".equalsIgnoreCase(mode)) {
+            new RLTrainer().eval(NUM_EVAL_EPISODES);
+        } else {
+            new RLTrainer().train();
+        }
+    }
+
     public void train() {
+        System.out.println("DEBUG: Starting train() method");
+        System.out.println("DEBUG: DECKS_DIRECTORY = " + DECKS_DIRECTORY);
+        System.out.println("DEBUG: Working directory = " + System.getProperty("user.dir"));
+
+        // Initialize the card database - this is crucial for deck loading to work
+        System.out.println("DEBUG: Initializing card database...");
+        mage.cards.repository.CardScanner.scan();
+        System.out.println("DEBUG: Card database initialized");
+
         try {
             List<Path> deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
                     .filter(Files::isRegularFile)
                     .collect(Collectors.toList());
+            System.out.println("DEBUG: Found " + deckFiles.size() + " deck files in " + DECKS_DIRECTORY);
 
             Random random = new Random();
 
-            RLTrainer.threadLocalLogger.get().info("Number of threads: " + NUM_THREADS);
-            RLTrainer.threadLocalLogger.get().info("Episodes per game runner: " + NUM_EPISODES_PER_GAME_RUNNER);
+            // ------------------ 1.  Load persisted episode count ------------------
+            int initialEpisodeCount = 0;
+            try {
+                Path epPath = Paths.get(EPISODE_COUNT_PATH);
+                if (Files.exists(epPath)) {
+                    String content = new String(Files.readAllBytes(epPath), StandardCharsets.UTF_8).trim();
+                    int persisted = Integer.parseInt(content);
+                    EPISODE_COUNTER.set(persisted);
+                    initialEpisodeCount = persisted;
+                    logger.info("Loaded episode counter from file: " + persisted);
+                }
+            } catch (Exception e) {
+                logger.warn("Failed to read episode counter, starting from 0", e);
+            }
+
+            // Log system resource utilization
+            int cpuCores = Runtime.getRuntime().availableProcessors();
+            long maxMemory = Runtime.getRuntime().maxMemory() / 1024 / 1024; // MB
+            RLTrainer.threadLocalLogger.get().info("=== SYSTEM RESOURCES ===");
+            RLTrainer.threadLocalLogger.get().info("CPU Cores Available: " + cpuCores);
+            RLTrainer.threadLocalLogger.get().info("Max JVM Memory: " + maxMemory + " MB");
+            RLTrainer.threadLocalLogger.get().info("Game Runners: " + NUM_GAME_RUNNERS + " (using " + (NUM_GAME_RUNNERS * 100.0 / cpuCores) + "% of CPU cores)");
+            RLTrainer.threadLocalLogger.get().info("Episodes per runner: " + NUM_EPISODES_PER_GAME_RUNNER);
+            RLTrainer.threadLocalLogger.get().info("Total episodes target: " + NUM_EPISODES);
+            RLTrainer.threadLocalLogger.get().info("========================");
 
             // Record start time
             long startTime = System.nanoTime();
@@ -98,6 +185,8 @@ public class RLTrainer {
             Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
             Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
             Deck opponentDeck = loadDeck(opponentDeckPath.toString());
+            logger.info("Decks loaded. RL player deck size: " + rlPlayerDeck.getCards().size() + ", Opponent deck size: " + opponentDeck.getCards().size());
+            System.out.println("DEBUG: Decks loaded. RL player deck size: " + rlPlayerDeck.getCards().size() + ", Opponent deck size: " + opponentDeck.getCards().size());
 
             List<Future<Void>> futures = new ArrayList<>();
             final Object lock = new Object(); // Lock object for synchronization
@@ -112,41 +201,87 @@ public class RLTrainer {
                     }
 
                     Logger currentLogger = threadLocalLogger.get();
-                    if (isFirst) {
-                        currentLogger.setLevel(Level.INFO);
-                    }
+                    // All threads will now log at INFO level by default
                     currentLogger.info("Starting Game Runner");
 
                     Thread.currentThread().setName("GAME");
                     Deck rlPlayerDeckThread = rlPlayerDeck.copy();
                     Deck opponentDeckThread = opponentDeck.copy();
 
-                    for (int episode = 0; episode < NUM_EPISODES_PER_GAME_RUNNER; episode++) {
+                    while (EPISODE_COUNTER.get() < NUM_EPISODES) {
+                        int epNumber = EPISODE_COUNTER.incrementAndGet();
+                        if (epNumber > NUM_EPISODES) {
+                            break; // Another thread reached the target
+                        }
                         long episodeStartNanos = System.nanoTime();
-                        Game game = new TwoPlayerDuel(MultiplayerAttackOption.LEFT, RangeOfInfluence.ALL, new LondonMulligan(0), 60, 20, 7);
+                        // ------------------ Build a full Match so players have MatchPlayer objects ------------------
+                        TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
+
+                        // Start an empty game so we can attach players
+                        match.startGame();
+                        Game game = match.getGames().get(0);
+
+                        Random threadRand = new Random();
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
+                        match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
-                        ComputerPlayerRL opponent = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, sharedModel);
-                        game.addPlayer(opponent, opponentDeckThread);
+                        // Decide opponent type based on global episode schedule
+                        boolean vsHeuristic = shouldUseHeuristicOpponent(EPISODE_COUNTER.get(), threadRand);
+                        Player opponentPlayer;
+                        if (vsHeuristic) {
+                            opponentPlayer = new ComputerPlayer7("HeuristicBot", RangeOfInfluence.ALL, 3);
+                        } else {
+                            opponentPlayer = new ComputerPlayerRL("PlayerRL2", RangeOfInfluence.ALL, sharedModel);
+                        }
+                        game.addPlayer(opponentPlayer, opponentDeckThread);
+                        match.addPlayer(opponentPlayer, opponentDeckThread);
+
+                        logger.info("Players added to game. RL player library size: " + rlPlayer.getLibrary().size() + ", Opponent library size: " + opponentPlayer.getLibrary().size());
+                        System.out.println("DEBUG: Players added to game. RL player library size: " + rlPlayer.getLibrary().size() + ", Opponent library size: " + opponentPlayer.getLibrary().size());
 
                         game.loadCards(rlPlayerDeckThread.getCards(), rlPlayer.getId());
-                        game.loadCards(opponentDeckThread.getCards(), opponent.getId());
+                        game.loadCards(opponentDeckThread.getCards(), opponentPlayer.getId());
 
                         GameOptions options = new GameOptions();
                         game.setGameOptions(options);
 
+                        // Restart game now that players are added
                         game.start(rlPlayer.getId());
 
                         logGameResult(game, rlPlayer);
-                        updateModelBasedOnOutcome(game, rlPlayer, opponent);
+                        double finalReward = updateModelBasedOnOutcome(game, rlPlayer, opponentPlayer);
 
+                        // Defer statistics writing until after we compute episodeSeconds below
                         // -------- Episode duration & counter logging --------
-                        int epNumber = EPISODE_COUNTER.incrementAndGet();
                         long episodeDurationNanos = System.nanoTime() - episodeStartNanos;
                         double episodeSeconds = episodeDurationNanos / 1_000_000_000.0;
                         RLTrainer.threadLocalLogger.get().info(String.format("Episode %d completed in %.2f seconds", epNumber, episodeSeconds));
+
+                        // ------------------ Statistics ------------------
+                        List<StateSequenceBuilder.TrainingData> td = rlPlayer.getTrainingBuffer();
+                        long passCnt = td.stream().filter(t -> t.actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL && !t.actionCombo.isEmpty() && t.actionCombo.get(0) == 0).count();
+                        double passRate = td.isEmpty() ? 0.0 : (double) passCnt / td.size();
+                        int turns = game.getTurnNum();
+                        boolean usedHeuristic = opponentPlayer instanceof ComputerPlayer7;
+
+                        try {
+                            Path statsPath = Paths.get(STATS_FILE_PATH);
+                            boolean writeHeader = !Files.exists(statsPath);
+                            StringBuilder sb = new StringBuilder();
+                            if (writeHeader) {
+                                sb.append("episode,turns,pass_rate,final_reward,vs_heuristic,episode_seconds\n");
+                            }
+                            sb.append(epNumber).append(',').append(turns).append(',')
+                                    .append(String.format("%.4f", passRate)).append(',')
+                                    .append(String.format("%.3f", finalReward)).append(',')
+                                    .append(usedHeuristic).append(',')
+                                    .append(String.format("%.2f", episodeSeconds)).append('\n');
+                            Files.write(statsPath, sb.toString().getBytes(StandardCharsets.UTF_8), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+                        } catch (IOException e) {
+                            logger.warn("Failed to write stats CSV", e);
+                        }
                     }
                     return null;
                 });
@@ -169,15 +304,23 @@ public class RLTrainer {
             long endTime = System.nanoTime();
             long totalTime = endTime - startTime;
             double totalTimeInMinutes = totalTime / 1_000_000_000.0 / 60.0;
-            double gamesRunPerMinute = NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER / totalTimeInMinutes;
+            int episodesRun = EPISODE_COUNTER.get() - initialEpisodeCount;
+            double gamesRunPerMinute = totalTimeInMinutes > 0 ? episodesRun / totalTimeInMinutes : 0;
 
             logger.info("Training completed:");
-            logger.info("Total Games Run: " + NUM_GAME_RUNNERS * NUM_EPISODES_PER_GAME_RUNNER);
+            logger.info("Total Games Run: " + episodesRun);
             logger.info("Games Run Per Minute: " + gamesRunPerMinute);
             logger.info("Total Training Time: " + (totalTime / 1_000_000_000.0) + " seconds");
 
             // Save the trained model
             sharedModel.saveModel(MODEL_FILE_PATH);
+            sharedModel.shutdown();
+            // ------------------ 2.  Persist updated episode counter ------------------
+            try {
+                Files.write(Paths.get(EPISODE_COUNT_PATH), String.valueOf(EPISODE_COUNTER.get()).getBytes(StandardCharsets.UTF_8));
+            } catch (IOException e) {
+                logger.error("Failed to persist episode counter", e);
+            }
 
         } catch (IOException | InterruptedException e) {
             logger.error("Error during training", e);
@@ -298,7 +441,7 @@ public class RLTrainer {
         logger.info("[" + opponent.getName() + "]: " + opponent.getLife());
     }
 
-    private Deck loadDeck(String filePath) {
+    public Deck loadDeck(String filePath) {
         try {
             DeckCardLists deckCardLists = DeckImporter.importDeckFromFile(filePath, false);
             return Deck.load(deckCardLists, false, false, null);
@@ -308,7 +451,7 @@ public class RLTrainer {
         }
     }
 
-    private void updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, ComputerPlayerRL opponent) {
+    private double updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
 
         // ------------------------------------------------------------------
@@ -332,9 +475,13 @@ public class RLTrainer {
             logger.warn("Reward was NaN/Inf – reverted to ±1 fallback");
         }
 
-        // Get training data for both players
+        // Get training data for RL player
         List<StateSequenceBuilder.TrainingData> rlPlayerTrainingData = rlPlayer.getTrainingBuffer();
-        List<StateSequenceBuilder.TrainingData> opponentTrainingData = opponent.getTrainingBuffer();
+
+        List<StateSequenceBuilder.TrainingData> opponentTrainingData = new ArrayList<>();
+        if (opponentPlayer instanceof ComputerPlayerRL) {
+            opponentTrainingData = ((ComputerPlayerRL) opponentPlayer).getTrainingBuffer();
+        }
 
         // --- Calculate discounted returns for each player ---
         final double GAMMA = 0.99; // Discount factor for future rewards
@@ -349,9 +496,10 @@ public class RLTrainer {
         if (!opponentTrainingData.isEmpty()) {
             sharedModel.train(opponentTrainingData, opponentReturns); // Opposite reward for opponent
         }
+        return finalReward;
     }
 
-    private List<Double> calculateDiscountedReturns(List<StateSequenceBuilder.TrainingData> trajectory, double finalReward, double gamma) {
+    public static List<Double> calculateDiscountedReturns(List<StateSequenceBuilder.TrainingData> trajectory, double finalReward, double gamma) {
         if (trajectory.isEmpty()) {
             return new ArrayList<>();
         }
@@ -386,5 +534,21 @@ public class RLTrainer {
 
     public static PythonMLBridge getSharedModel() {
         return sharedModel;
+    }
+
+    /**
+     * Determines whether the current episode should pit the learning agent
+     * against the heuristic ComputerPlayer7. The schedule is: – Episodes < 5000
+     * → always heuristic – 5000 ≤ ep < 15000 → 50% chance heuristic – ≥ 15000 →
+     * pure self-play
+     */
+    private boolean shouldUseHeuristicOpponent(int episodeIdx, Random rand) {
+        if (episodeIdx < 5000) {
+            return true;
+        } else if (episodeIdx < 15000) {
+            return rand.nextDouble() < 0.5;
+        } else {
+            return false;
+        }
     }
 }

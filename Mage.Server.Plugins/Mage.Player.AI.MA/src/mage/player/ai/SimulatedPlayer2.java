@@ -34,13 +34,13 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
     private static final Logger logger = Logger.getLogger(SimulatedPlayer2.class);
 
     private static final boolean AI_SIMULATE_ALL_BAD_AND_GOOD_TARGETS = false; // TODO: enable and do performance test
-                                                                               // (it's increase calculations by x2, but
-                                                                               // is it useful?)
+    // (it's increase calculations by x2, but
+    // is it useful?)
 
     // warning, simulated player do not restore own data by game rollback
     private final boolean isSimulatedPlayer;
     private transient ConcurrentLinkedQueue<Ability> allActions; // all possible abilities to play (copies with already
-                                                                 // selected targets)
+    // selected targets)
     private final Player originalPlayer; // copy of the original player, source of choices/results in tests
 
     public SimulatedPlayer2(Player originalPlayer, boolean isSimulatedPlayer) {
@@ -64,8 +64,8 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
         if (!originalPlayer.getClass().equals(player.getClass())) {
             throw new IllegalArgumentException(
                     "Wrong code usage: simulated player must use same player class all the time. Need "
-                            + originalPlayer.getClass().getSimpleName() + ", but try to restore "
-                            + player.getClass().getSimpleName());
+                    + originalPlayer.getClass().getSimpleName() + ", but try to restore "
+                    + player.getClass().getSimpleName());
         }
 
         super.restore(player.getRealPlayer());
@@ -256,7 +256,7 @@ public final class SimulatedPlayer2 extends ComputerPlayer {
             for (int j = 0; j < attackersList.size(); j++) {
                 if (binary.charAt(j) == '1') {
                     setStoredBookmark(sim.bookmarkState()); // makes it possible to UNDO a declared attacker with costs
-                                                            // from e.g. Propaganda
+                    // from e.g. Propaganda
                     if (!sim.getCombat().declareAttacker(attackersList.get(j).getId(), defenderId, playerId, sim)) {
                         sim.undo(playerId);
                     }

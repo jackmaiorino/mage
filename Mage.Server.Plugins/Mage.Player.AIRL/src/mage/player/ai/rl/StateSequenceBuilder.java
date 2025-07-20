@@ -341,7 +341,7 @@ public class StateSequenceBuilder {
         if (index < DIM_PER_TOKEN) {
             String cardText = "";
             try {
-                cardText = org.apache.commons.lang3.StringUtils.join(card.getRules(), ' ');
+                cardText = String.join(" ", card.getRules());
             } catch (Exception e) {
                 logger.warning("Error getting card text for " + card.getName() + ": " + e.getMessage());
             }
