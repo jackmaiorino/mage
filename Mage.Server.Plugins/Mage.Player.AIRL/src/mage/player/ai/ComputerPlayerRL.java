@@ -114,9 +114,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             actionMask[i] = 1.0f;
         }
 
-        // Get model predictions
-        float[] actionProbs = model.predict(baseState, cappedSize);
-        float[] valueScores = model.predict(baseState, cappedSize);
+        // Get model predictions - single call for both policy and value
+        RLTrainer.threadLocalLogger.get().info("About to call model.predictComplete() with cappedSize: " + cappedSize);
+        mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction = model.predictComplete(baseState, cappedSize);
+        RLTrainer.threadLocalLogger.get().info("Successfully received prediction result");
+        float[] actionProbs = prediction.policyScores;
+        float valueScore = prediction.valueScores;
 
         // Convert action probabilities to Java array and apply mask
         float[] maskedProbs = new float[cappedSize];
@@ -147,7 +150,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
-        RLTrainer.threadLocalLogger.get().info("Value scores: " + Arrays.toString(valueScores));
+        RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore);
 
         // Choose indices ---------------------------------------------
         List<Integer> selectedIndices = new ArrayList<>();
@@ -208,12 +211,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // after you compute logits/probs and make a choice
         StateSequenceBuilder.SequenceOutput state = baseState; // guaranteed non-null
         double policyScore = maskedProbs[selectedIndices.get(0)];         // from model
-        double valueScore = valueScores[0];  // critic outputs one scalar
+        double valuePrediction = valueScore;  // critic outputs one scalar
         StateSequenceBuilder.ActionType type = actionType;
         List<Integer> combo = selectedIndices;
 
         trainingBuffer.add(new StateSequenceBuilder.TrainingData(
-                state, policyScore, valueScore, combo, type));
+                state, policyScore, valuePrediction, combo, type));
 
         return selectedIndices;
     }

@@ -1,5 +1,6 @@
 package mage.player.ai.rl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -178,15 +179,19 @@ public class StateSequenceBuilder {
         List<float[]> tokens = new ArrayList<>();
         List<Integer> mask = new ArrayList<>();
 
-        // Prepend action tokens
-        tokens.add(0, abilityEncoding);
-        tokens.add(0, embedSpecial(ACTION_BASE + actionType.ordinal()));
-        mask.add(0, 0);  // Don't mask ability encoding
-        mask.add(0, 0);  // Don't mask action token
+        // Prepend action tokens (add at beginning)
+        tokens.add(embedSpecial(ACTION_BASE + actionType.ordinal()));
+        tokens.add(abilityEncoding);
+        mask.add(0);  // Don't mask action token
+        mask.add(0);  // Don't mask ability encoding
 
         // Add base state tokens
-        tokens.addAll(baseState.tokens);
-        mask.addAll(baseState.mask);
+        for (float[] token : baseState.tokens) {
+            tokens.add(token);
+        }
+        for (int maskValue : baseState.mask) {
+            mask.add(maskValue);
+        }
 
         return new SequenceOutput(tokens, mask);
     }
@@ -445,26 +450,32 @@ public class StateSequenceBuilder {
     }
 
     /* === SIMPLE CONTAINER ============================================== */
-    public static class SequenceOutput {
+    public static class SequenceOutput implements Serializable {
 
-        public final List<float[]> tokens;
-        public final List<Integer> mask;
+        private static final long serialVersionUID = 1L;
 
-        public SequenceOutput(List<float[]> tokens, List<Integer> mask) {
-            this.tokens = tokens;
-            this.mask = mask;
+        public final float[][] tokens;
+        public final int[] mask;
+
+        public SequenceOutput(List<float[]> tokenList, List<Integer> maskList) {
+            // Convert List<float[]> to float[][]
+            this.tokens = tokenList.toArray(new float[tokenList.size()][]);
+            // Convert List<Integer> to int[]
+            this.mask = maskList.stream().mapToInt(Integer::intValue).toArray();
         }
 
-        public List<float[]> getSequence() {
+        public float[][] getSequence() {
             return this.tokens;
         }
 
-        public List<Integer> getMask() {
+        public int[] getMask() {
             return this.mask;
         }
     }
 
-    public static class TrainingData {
+    public static class TrainingData implements Serializable {
+
+        private static final long serialVersionUID = 1L;
 
         public final SequenceOutput stateActionPair;
         public final double policyScore;

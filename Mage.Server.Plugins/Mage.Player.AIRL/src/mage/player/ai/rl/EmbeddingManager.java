@@ -7,6 +7,8 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.apache.log4j.Logger;
 
@@ -26,33 +28,46 @@ public class EmbeddingManager {
             "EMBEDDING_MAPPING_PATH",
             "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json"
     );
-    private static Map<String, float[]> embeddings;
-    private static OpenAIClient openAIClient;
+    private static volatile Map<String, float[]> embeddings;
+    private static volatile OpenAIClient openAIClient;
     public static final int EMBEDDING_SIZE = 100;
 
-    public static synchronized OpenAIClient getOpenAIClient() {
+    // Track unsaved embeddings to batch saves
+    private static final AtomicInteger unsavedCount = new AtomicInteger(0);
+    private static final int SAVE_BATCH_SIZE = 10; // Save every 10 new embeddings
+    private static final Object saveLock = new Object();
+
+    public static OpenAIClient getOpenAIClient() {
         if (openAIClient == null) {
-            String apiKey = System.getenv("OPENAI_API_KEY");
-            if (apiKey == null) {
-                throw new IllegalStateException("Environment variable OPENAI_API_KEY is not set.");
+            synchronized (EmbeddingManager.class) {
+                if (openAIClient == null) {
+                    String apiKey = System.getenv("OPENAI_API_KEY");
+                    if (apiKey == null) {
+                        throw new IllegalStateException("Environment variable OPENAI_API_KEY is not set.");
+                    }
+                    System.out.println("Using API Key: " + apiKey); // Avoid logging sensitive info in production!
+                    // TODO: Why doesn't FromEnv work here anymore?!
+                    openAIClient = OpenAIOkHttpClient.builder()
+                            .apiKey(apiKey)
+                            .build();
+                }
             }
-            System.out.println("Using API Key: " + apiKey); // Avoid logging sensitive info in production!
-            // TODO: Why doesn't FromEnv work here anymore?!
-            openAIClient = OpenAIOkHttpClient.builder()
-                    .apiKey(apiKey)
-                    .build();
         }
         return openAIClient;
     }
 
-    public static synchronized Map<String, float[]> getEmbeddings() {
+    public static Map<String, float[]> getEmbeddings() {
         if (embeddings == null) {
-            embeddings = loadEmbeddings();
+            synchronized (EmbeddingManager.class) {
+                if (embeddings == null) {
+                    embeddings = new ConcurrentHashMap<>(loadEmbeddings());
+                }
+            }
         }
         return embeddings;
     }
 
-    private static synchronized Map<String, float[]> loadEmbeddings() {
+    private static Map<String, float[]> loadEmbeddings() {
         try (FileReader reader = new FileReader(MAPPING_FILE)) {
             Type type = new TypeToken<HashMap<String, float[]>>() {
             }.getType();
@@ -76,9 +91,10 @@ public class EmbeddingManager {
 
         // Log the raw text being sent for embedding
         //logger.info("Getting embedding for text: " + text);
-        embeddings = getEmbeddings();
-        if (embeddings.containsKey(text)) {
-            float[] cachedEmbedding = embeddings.get(text);
+        Map<String, float[]> embeddingMap = getEmbeddings();
+
+        float[] cachedEmbedding = embeddingMap.get(text);
+        if (cachedEmbedding != null) {
             // Validate cached embedding
             for (int i = 0; i < cachedEmbedding.length; i++) {
                 if (Float.isNaN(cachedEmbedding[i]) || Float.isInfinite(cachedEmbedding[i])) {
@@ -100,8 +116,16 @@ public class EmbeddingManager {
                 }
             }
 
-            embeddings.put(text, embedding);
-            saveEmbeddings();
+            embeddingMap.put(text, embedding);
+
+            // Batch saves instead of saving after every embedding
+            int currentUnsaved = unsavedCount.incrementAndGet();
+            if (currentUnsaved >= SAVE_BATCH_SIZE) {
+                // Use separate lock for saving to avoid blocking embedding access
+                if (unsavedCount.compareAndSet(currentUnsaved, 0)) {
+                    new Thread(() -> saveEmbeddingsAsync()).start();
+                }
+            }
 
             // Log the first few values of the embedding
             StringBuilder sb = new StringBuilder("First 5 embedding values: ");
@@ -135,7 +159,7 @@ public class EmbeddingManager {
         return cardText;
     }
 
-    private static synchronized float[] queryOpenAIForEmbedding(String text) {
+    private static float[] queryOpenAIForEmbedding(String text) {
         try {
             EmbeddingCreateParams params = new EmbeddingCreateParams.Builder()
                     .model(EmbeddingModel.TEXT_EMBEDDING_3_SMALL)
@@ -170,11 +194,21 @@ public class EmbeddingManager {
         }
     }
 
-    public static synchronized void saveEmbeddings() {
-        try (FileWriter writer = new FileWriter(MAPPING_FILE)) {
-            new Gson().toJson(getEmbeddings(), writer);
-        } catch (IOException e) {
-            e.printStackTrace();
+    // Asynchronous save to avoid blocking
+    private static void saveEmbeddingsAsync() {
+        synchronized (saveLock) {
+            try (FileWriter writer = new FileWriter(MAPPING_FILE)) {
+                new Gson().toJson(getEmbeddings(), writer);
+                logger.info("Saved embeddings to " + MAPPING_FILE);
+            } catch (IOException e) {
+                logger.error("Error saving embeddings", e);
+            }
         }
+    }
+
+    // Keep original method for compatibility, but make it less frequent
+    public static void saveEmbeddings() {
+        unsavedCount.set(SAVE_BATCH_SIZE); // Force a save
+        saveEmbeddingsAsync();
     }
 }

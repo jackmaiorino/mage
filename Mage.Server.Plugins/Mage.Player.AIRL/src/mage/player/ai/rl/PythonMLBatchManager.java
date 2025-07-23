@@ -2,6 +2,7 @@ package mage.player.ai.rl;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -16,7 +17,7 @@ public class PythonMLBatchManager {
     private static final int MAX_TRAJECTORY_LENGTH = 100;
     // Increase batch size to better utilise GPU; shorter timeout keeps latency low
     private static final int MAX_BATCH_SIZE = 32;         // hard cap per flush
-    private static final int BATCH_TIMEOUT_MS = 4;        // flush window (ms)
+    private static final int BATCH_TIMEOUT_MS = 100;      // flush window (ms) - increased for reliability
 
     private final PythonEntryPoint entryPoint;
     private final Map<UUID, CompletableFuture<PredictionResult>> pendingPredictions;
@@ -78,17 +79,23 @@ public class PythonMLBatchManager {
         java.util.concurrent.CompletableFuture<PredictionResult> future = new java.util.concurrent.CompletableFuture<>();
         pendingPredictions.put(id, future);
 
+        logger.info("PythonMLBatchManager.predict() called with id: " + id + ", validActions: " + validActions);
+
         synchronized (lock) {
             predictionQueue.add(new PredictRequest(id, state, validActions, future));
+            logger.info("Added request to queue. Queue size: " + predictionQueue.size() + ", MAX_BATCH_SIZE: " + MAX_BATCH_SIZE);
 
             if (predictionQueue.size() >= MAX_BATCH_SIZE) {
+                logger.info("Queue full, flushing immediately");
                 flushQueue();
             } else if (predictionQueue.size() == 1) {
                 // first item – schedule timed flush
+                logger.info("First item in queue, scheduling timed flush in " + BATCH_TIMEOUT_MS + "ms");
                 scheduler.schedule(this::safeFlush, BATCH_TIMEOUT_MS, java.util.concurrent.TimeUnit.MILLISECONDS);
             }
         }
 
+        logger.info("Returning future for id: " + id);
         return future;
     }
 
@@ -109,8 +116,8 @@ public class PythonMLBatchManager {
         try {
             // Build flat tensors
             int batchSize = batch.size();
-            int seqLen = batch.get(0).state.getSequence().size();
-            int dModel = batch.get(0).state.getSequence().get(0).length;
+            int seqLen = batch.get(0).state.getSequence().length;
+            int dModel = batch.get(0).state.getSequence()[0].length;
             int maxActions = 15; // fixed
 
             List<float[]> allSeq = new java.util.ArrayList<>(batchSize * seqLen);
@@ -118,8 +125,8 @@ public class PythonMLBatchManager {
             List<Integer> allActionMask = new java.util.ArrayList<>(batchSize * maxActions);
 
             for (PredictRequest req : batch) {
-                allSeq.addAll(req.state.getSequence());
-                allMask.addAll(req.state.getMask());
+                allSeq.addAll(Arrays.asList(req.state.getSequence()));
+                allMask.addAll(Arrays.stream(req.state.getMask()).boxed().collect(Collectors.toList()));
 
                 // Build action mask row
                 for (int i = 0; i < maxActions; i++) {
@@ -169,11 +176,11 @@ public class PythonMLBatchManager {
         try {
             // Convert training data to byte arrays
             byte[] sequences = convertFloatArraysToBytes(trainingData.stream()
-                    .map(d -> d.stateActionPair.getSequence())
+                    .map(d -> Arrays.asList(d.stateActionPair.getSequence()))
                     .flatMap(List::stream)
                     .collect(Collectors.toList()));
             byte[] masks = convertIntegersToBytes(trainingData.stream()
-                    .map(d -> d.stateActionPair.getMask())
+                    .map(d -> Arrays.stream(d.stateActionPair.getMask()).boxed().collect(Collectors.toList()))
                     .flatMap(List::stream)
                     .collect(Collectors.toList()));
             byte[] policyIndices = convertIntegersToBytes(trainingData.stream()
@@ -194,8 +201,8 @@ public class PythonMLBatchManager {
 
             // Get dimensions
             int batchSize = trainingData.size();
-            int seqLen = trainingData.get(0).stateActionPair.getSequence().size();
-            int dModel = trainingData.get(0).stateActionPair.getSequence().get(0).length;
+            int seqLen = trainingData.get(0).stateActionPair.getSequence().length;
+            int dModel = trainingData.get(0).stateActionPair.getSequence()[0].length;
             int maxActions = 15; // fixed action space size
 
             // Call Python - note the signature change (no final reward param)

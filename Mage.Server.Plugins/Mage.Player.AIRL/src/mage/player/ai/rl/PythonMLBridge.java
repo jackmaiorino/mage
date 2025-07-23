@@ -535,6 +535,23 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
+     * Predicts both policy and value for a single state - returns the full
+     * result.
+     */
+    public PythonMLBatchManager.PredictionResult predictComplete(StateSequenceBuilder.SequenceOutput state, int validActions) {
+        CompletableFuture<PythonMLBatchManager.PredictionResult> future = PythonMLBatchManager.getInstance(entryPoint).predict(state, validActions);
+        try {
+            return future.get();
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException("Prediction failed", e);
+        }
+    }
+
+    public PythonMLBatchManager.PredictionResult predictComplete(StateSequenceBuilder.SequenceOutput state) {
+        return predictComplete(state, -1);
+    }
+
+    /**
      * Train the model with a batch of states and discounted returns.
      */
     public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> discountedReturns) {
