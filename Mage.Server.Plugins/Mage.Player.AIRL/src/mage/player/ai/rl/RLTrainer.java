@@ -71,6 +71,7 @@ public class RLTrainer {
     public static final int NUM_THREADS = envInt("NUM_THREADS", DEFAULT_GAME_RUNNERS);
     public static final int NUM_GAME_RUNNERS = envInt("NUM_GAME_RUNNERS", DEFAULT_GAME_RUNNERS);
     public static final int NUM_EPISODES_PER_GAME_RUNNER = envInt("EPISODES_PER_WORKER", 500);
+    public static final int EVAL_EVERY = envInt("EVAL_EVERY", 100);
 
     public static final PythonMLBridge sharedModel = PythonMLBridge.getInstance();
 
@@ -121,7 +122,7 @@ public class RLTrainer {
                 e.printStackTrace();
             }
         } else if ("eval".equalsIgnoreCase(mode)) {
-            new RLTrainer().eval(NUM_EVAL_EPISODES);
+            runEvaluation(NUM_EVAL_EPISODES);
         } else {
             new RLTrainer().train();
         }
@@ -328,6 +329,10 @@ public class RLTrainer {
     }
 
     public void eval(int numEpisodesPerThread) {
+        runEvaluation(numEpisodesPerThread);
+    }
+
+    public static double runEvaluation(int numEpisodesPerThread) {
         List<Path> deckFiles = null;
         try {
             deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
@@ -335,7 +340,7 @@ public class RLTrainer {
                     .collect(Collectors.toList());
         } catch (IOException e) {
             logger.error("Error during evaluation", e);
-            return;
+            return 0.0;
         }
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_GAME_RUNNERS);
@@ -346,9 +351,9 @@ public class RLTrainer {
 
         Random random = new Random();
         Path rlPlayerDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-        Deck rlPlayerDeck = loadDeck(rlPlayerDeckPath.toString());
+        Deck rlPlayerDeck = new RLTrainer().loadDeck(rlPlayerDeckPath.toString());
         Path opponentDeckPath = deckFiles.get(random.nextInt(deckFiles.size()));
-        Deck opponentDeck = loadDeck(opponentDeckPath.toString());
+        Deck opponentDeck = new RLTrainer().loadDeck(opponentDeckPath.toString());
 
         for (int i = 0; i < NUM_GAME_RUNNERS; i++) {
             Future<Integer> future = executor.submit(() -> {
@@ -397,7 +402,7 @@ public class RLTrainer {
                     game.start(rlPlayer.getId());
 
                     if (isFirst) {
-                        logGameResult(game, rlPlayer);
+                        logStaticGameResult(game, rlPlayer);
                     }
 
                     if (game.getWinner().contains(rlPlayer.getName())) {
@@ -417,28 +422,44 @@ public class RLTrainer {
             Thread.currentThread().interrupt();
         }
 
-        int totalWinsAgainstComputerPlayer7 = futures.stream().mapToInt(future -> {
+        int totalWins = 0;
+        for (Future<Integer> future : futures) {
             try {
-                return future.get();
+                totalWins += future.get();
             } catch (InterruptedException | ExecutionException e) {
-                logger.error("Error in thread execution", e.getCause());
-                return 0;
+                logger.error("Error getting evaluation results", e);
             }
-        }).sum();
+        }
+        double winRate = (double) totalWins / (numEpisodesPerThread * NUM_GAME_RUNNERS);
+        logger.info("Evaluation win rate: " + winRate);
+        return winRate;
+    }
 
-        double winRate = (double) totalWinsAgainstComputerPlayer7 / (numEpisodesPerThread * NUM_THREADS);
-        logger.setLevel(Level.INFO);
-        logger.info("Win rate against ComputerPlayer7: " + (winRate * 100) + "%");
+    private static void logEvaluationResult(int updateStep, double winRate) {
+        try {
+            Path statsPath = Paths.get(STATS_FILE_PATH.replace("training_stats.csv", "evaluation_stats.csv"));
+            boolean writeHeader = !Files.exists(statsPath);
+            StringBuilder sb = new StringBuilder();
+            if (writeHeader) {
+                sb.append("update_step,win_rate\n");
+            }
+            sb.append(updateStep).append(',').append(String.format("%.4f", winRate)).append('\n');
+            Files.write(statsPath, sb.toString().getBytes(StandardCharsets.UTF_8), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            logger.warn("Failed to write evaluation stats CSV", e);
+        }
     }
 
     private void logGameResult(Game game, ComputerPlayerRL rlPlayer) {
-        logger.info("Game finished - Winner: " + game.getWinner());
-        logger.info("Final life totals:");
-        logger.info("[" + rlPlayer.getName() + "]: " + rlPlayer.getLife());
+        logStaticGameResult(game, rlPlayer);
+    }
 
-        UUID opponentId = game.getOpponents(rlPlayer.getId()).iterator().next();
-        Player opponent = game.getPlayer(opponentId);
-        logger.info("[" + opponent.getName() + "]: " + opponent.getLife());
+    private static void logStaticGameResult(Game game, ComputerPlayerRL rlPlayer) {
+        if (game.getWinner().contains(rlPlayer.getName())) {
+            logger.info("Game finished. Winner: " + rlPlayer.getName());
+        } else {
+            logger.info("Game finished. Loser: " + rlPlayer.getName());
+        }
     }
 
     public Deck loadDeck(String filePath) {

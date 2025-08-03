@@ -1,35 +1,60 @@
-# Ignore VCS
-.git
-.hg
-.svn
+# Smart exclusions - keep module structure but exclude large content
 
-# IDE / editor files
-.idea
-# Ignore Maven build output directories at module root, but keep source packages like mage/target
-/target/
-*/target/
-*.iml
-
-# Local virtual environments, caches, models
+# ===== BIGGEST SPACE HOGS =====
+# Python virtual environments (multiple copies, ~6GB total)
 .mage_ai_venv/
-**/__pycache__/
 **/venv/
-*.pt
+**/*venv*/
+**/MLPythonCode/venv/
 
-# Build artefacts, outputs
-**/out/
-**/build/
+# GUI client assets (images, sounds, etc.) but keep structure
+Mage.Client/release/backgrounds/
+Mage.Client/release/sample-decks/
+Mage.Client/sounds/
+Mage.Client/splash.jpg
 
-# Keep Client module (needed for Maven aggregator) but strip its heavy release artefacts
-Mage.Client/release/
-Mage.Client/src/main/resources/**/sounds/
-Mage.Client/src/main/resources/**/backgrounds/
-Mage.Server/release/
+# Large test data but keep structure
+Mage.Tests/src/test/data/
+Mage.Tests/piperDecks/
+Mage.Tests/*.dck
+Mage.Tests/*.txt
 
-# Large release/resource folders
-**/release/
-
-# Logs and temporary files
+# Development files
+.git/
+.idea/
+.vscode/
 *.log
 *.tmp
-*.temp 
+*.temp
+
+# Build artifacts that regenerate
+target/
+*.class
+*.pyc
+*.pyo
+
+# Large binary files (but keep JARs for dependencies)
+*.zip
+*.tar.gz
+*.db
+*.wav
+*.jpg
+*.png
+
+# Exclude specific large JAR patterns but keep essential ones
+# !**/*.jar (keep all JARs for now)
+
+# Documentation
+*.md
+README*
+
+# Local development
+local-training/
+shared-data/
+models/
+
+# But KEEP essential structure:
+# - All pom.xml files
+# - All src/ directories  
+# - All Java source files
+# - Module directories

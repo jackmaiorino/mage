@@ -113,6 +113,14 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
+     * Get the path to Python executables in the Linux container Always uses
+     * venv/bin/ since Docker containers are Linux-based
+     */
+    private String getPythonExecutablePath(String executable) {
+        return new File(venvPath, "bin" + File.separator + executable).getAbsolutePath();
+    }
+
+    /**
      * Sets up the Python virtual environment if it doesn't exist.
      */
     private void setupVirtualEnvironment() throws Exception {
@@ -132,23 +140,6 @@ public class PythonMLBridge implements AutoCloseable {
                 throw new RuntimeException("Failed to create virtual environment, exit code: " + venvExitCode);
             }
             logger.info("Virtual environment created successfully");
-
-            // On Unix-like systems the executables live under "bin" instead of "Scripts".
-            // The rest of this class expects the Windows-style "Scripts" path, so we
-            // create a symlink to keep the existing logic unchanged.
-            try {
-                String os = System.getProperty("os.name").toLowerCase();
-                if (!os.contains("win")) {
-                    java.nio.file.Path binDir = java.nio.file.Paths.get(venvPath, "bin");
-                    java.nio.file.Path scriptsDir = java.nio.file.Paths.get(venvPath, "Scripts");
-                    if (java.nio.file.Files.exists(binDir) && !java.nio.file.Files.exists(scriptsDir)) {
-                        java.nio.file.Files.createSymbolicLink(scriptsDir, binDir);
-                        logger.info("Created symlink: " + scriptsDir + " -> " + binDir);
-                    }
-                }
-            } catch (Exception e) {
-                logger.warning("Failed to create Scripts symlink: " + e.getMessage());
-            }
         } else {
             logger.info("Virtual environment already exists at: " + venvPath);
         }
@@ -158,13 +149,11 @@ public class PythonMLBridge implements AutoCloseable {
      * Installs required Python dependencies.
      */
     private void installDependencies() throws Exception {
-        String pipPath = new File(venvPath, "Scripts/pip").getAbsolutePath();
-
         // Install py4j
-        installPackage(pipPath, "py4j", "--upgrade");
+        installPackage("py4j", "--upgrade");
 
         // Install PyTorch with CUDA support
-        installPyTorch(pipPath);
+        installPyTorch();
 
         // Install other packages
         String[] packages = {
@@ -174,7 +163,7 @@ public class PythonMLBridge implements AutoCloseable {
         };
 
         for (String pkg : packages) {
-            installPackage(pipPath, pkg, "--upgrade");
+            installPackage(pkg, "--upgrade");
         }
 
         logger.info("All requirements installed/updated successfully");
@@ -183,9 +172,10 @@ public class PythonMLBridge implements AutoCloseable {
     /**
      * Checks if a Python package is installed.
      */
-    private boolean isPackageInstalled(String pipPath, String packageName) throws Exception {
+    private boolean isPackageInstalled(String packageName) throws Exception {
         try {
             // First try pip list
+            String pipPath = getPythonExecutablePath("pip");
             ProcessBuilder checkBuilder = new ProcessBuilder(pipPath, "list", "--format=json");
             checkBuilder.redirectErrorStream(true);
             Process checkProcess = checkBuilder.start();
@@ -207,7 +197,7 @@ public class PythonMLBridge implements AutoCloseable {
 
             // If pip list fails, try a direct import check
             logger.info("pip list failed, trying direct import check for " + packageName);
-            String pythonPath = new File(venvPath, "Scripts/python").getAbsolutePath();
+            String pythonPath = getPythonExecutablePath("python");
             ProcessBuilder importBuilder = new ProcessBuilder(pythonPath, "-c",
                     "try:\n"
                     + "    import " + packageName + "\n"
@@ -238,11 +228,12 @@ public class PythonMLBridge implements AutoCloseable {
     /**
      * Installs PyTorch with CUDA support.
      */
-    private void installPyTorch(String pipPath) throws Exception {
+    private void installPyTorch() throws Exception {
         logger.info("Checking PyTorch installation");
 
-        if (!isPackageInstalled(pipPath, "torch")) {
+        if (!isPackageInstalled("torch")) {
             logger.info("PyTorch not found, installing with CUDA support");
+            String pipPath = getPythonExecutablePath("pip");
             ProcessBuilder torchBuilder = new ProcessBuilder(pipPath, "install",
                     "--index-url", "https://download.pytorch.org/whl/cu121",
                     "torch>=2.2.0");
@@ -264,12 +255,13 @@ public class PythonMLBridge implements AutoCloseable {
     /**
      * Installs a single Python package.
      */
-    private void installPackage(String pipPath, String pkgName, String... args) throws Exception {
+    private void installPackage(String pkgName, String... args) throws Exception {
         String basePackageName = pkgName.split(">=")[0];
         logger.info("Checking package: " + basePackageName);
 
-        if (!isPackageInstalled(pipPath, basePackageName)) {
+        if (!isPackageInstalled(basePackageName)) {
             logger.info("Installing package: " + pkgName);
+            String pipPath = getPythonExecutablePath("pip");
             List<String> command = new ArrayList<>();
             command.add(pipPath);
             command.add("install");
@@ -307,7 +299,7 @@ public class PythonMLBridge implements AutoCloseable {
         }
 
         // Use Python from virtual environment
-        String pythonPath = new File(venvPath, "Scripts/python").getAbsolutePath();
+        String pythonPath = getPythonExecutablePath("python");
         ProcessBuilder pb = new ProcessBuilder(pythonPath, pythonScriptPath);
 
         // Set model path environment variable to a specific model file
@@ -419,60 +411,23 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Cleans up any existing Python processes.
+     * Cleans up any existing Python processes in Linux container.
      */
     private void cleanupExistingPythonProcesses() {
         try {
-            // First try to kill by script name
+            // Use pkill to kill Python processes running our script
             String scriptName = "py4j_entry_point.py";
-            ProcessBuilder pb = new ProcessBuilder("wmic", "process", "where",
-                    "commandline like '%" + scriptName + "%'", "get", "processid");
+            ProcessBuilder pb = new ProcessBuilder("pkill", "-f", scriptName);
             Process process = pb.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            String line;
-            boolean foundProcess = false;
-
-            // Skip header line
-            reader.readLine();
-
-            while ((line = reader.readLine()) != null) {
-                line = line.trim();
-                if (!line.isEmpty()) {
-                    try {
-                        int pid = Integer.parseInt(line);
-                        logger.info("Found Python process with PID: " + pid + ", attempting to kill it");
-                        Runtime.getRuntime().exec("taskkill /F /PID " + pid);
-                        foundProcess = true;
-                    } catch (NumberFormatException e) {
-                        // Skip non-numeric lines
-                    }
-                }
+            int exitCode = process.waitFor();
+            if (exitCode == 0) {
+                logger.info("Successfully killed Python processes with script: " + scriptName);
+            } else {
+                logger.info("No Python processes found running script: " + scriptName);
             }
-
-            if (!foundProcess) {
-                // If no specific process found, try killing all Python processes
-                logger.info("No specific Python process found, attempting to kill all Python processes");
-                Runtime.getRuntime().exec("taskkill /F /IM python.exe");
-            }
-
-            // Wait and verify processes are killed
             Thread.sleep(PROCESS_KILL_WAIT_MS);
-
-            // Verify no Python processes are running
-            pb = new ProcessBuilder("tasklist", "/FI", "IMAGENAME eq python.exe");
-            process = pb.start();
-            reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            while ((line = reader.readLine()) != null) {
-                if (line.contains("python.exe")) {
-                    logger.warning("Python process still running after kill attempt: " + line);
-                    // One final attempt with a more forceful kill
-                    Runtime.getRuntime().exec("taskkill /F /IM python.exe /T");
-                    Thread.sleep(1000);
-                }
-            }
-
         } catch (Exception e) {
-            logger.warning("Error while cleaning up Python processes: " + e.getMessage());
+            logger.info("Error with pkill (normal if no processes found): " + e.getMessage());
         }
     }
 
