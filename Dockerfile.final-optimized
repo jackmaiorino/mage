@@ -1,0 +1,78 @@
+# syntax=docker/dockerfile:1
+
+###########################
+# 1. Build stage          #
+###########################
+FROM maven:3.9.6-eclipse-temurin-11 AS build
+
+WORKDIR /workspace
+
+# Copy source (let .dockerignore handle exclusions)
+COPY . .
+
+# Build everything
+RUN mvn -q -T 1C -Dmaven.test.skip=true install \
+    && mvn -q dependency:copy-dependencies -DincludeScope=runtime -DoutputDirectory=/workspace/deps -DincludeTypes=jar
+
+###########################
+# 2. Runtime stage        #
+###########################
+FROM eclipse-temurin:17-jre-jammy AS runtime
+
+# Python setup
+ARG TORCH_CHANNEL=cpu
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends python3 python3-pip python3-venv python-is-python3 \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+RUN --mount=type=cache,target=/root/.cache/pip \
+    if [ "${TORCH_CHANNEL}" = "gpu" ]; then \
+    pip3 install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cu118 torch torchvision torchaudio; \
+    else \
+    pip3 install --no-cache-dir --index-url https://download.pytorch.org/whl/cpu torch torchvision torchaudio; \
+    fi && \
+    pip3 install --no-cache-dir py4j
+
+# User setup
+RUN useradd -ms /bin/bash mage && mkdir -p /app && chown -R mage:mage /app
+USER mage
+WORKDIR /app
+
+# SELECTIVE COPY: Only essential components based on our 902MB analysis
+# Core modules (required)
+COPY --chown=mage:mage --from=build /workspace/pom.xml /app/
+COPY --chown=mage:mage --from=build /workspace/Mage/ /app/Mage/
+COPY --chown=mage:mage --from=build /workspace/Mage.Common/ /app/Mage.Common/
+COPY --chown=mage:mage --from=build /workspace/Mage.Server/ /app/Mage.Server/
+COPY --chown=mage:mage --from=build /workspace/Mage.Sets/ /app/Mage.Sets/
+COPY --chown=mage:mage --from=build /workspace/deps/ /app/deps/
+
+# Server plugins (selective)
+COPY --chown=mage:mage --from=build /workspace/Mage.Server.Plugins/pom.xml /app/Mage.Server.Plugins/
+COPY --chown=mage:mage --from=build /workspace/Mage.Server.Plugins/Mage.Player.AIRL/ /app/Mage.Server.Plugins/Mage.Player.AIRL/
+COPY --chown=mage:mage --from=build /workspace/Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/ /app/Mage.Server.Plugins/Mage.Game.TwoPlayerDuel/
+COPY --chown=mage:mage --from=build /workspace/Mage.Server.Plugins/Mage.Player.Human/ /app/Mage.Server.Plugins/Mage.Player.Human/
+
+# Skip optional modules - we'll create stub directories instead
+
+# Create missing directories that Maven expects
+RUN mkdir -p /app/Mage.Client /app/Mage.Tests /app/Mage.Server.Console /app/Mage.Verify \
+    && mkdir -p /app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage \
+    && echo "{}" > /app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json
+
+# Environment
+ENV MODE=train \
+    TOTAL_EPISODES=100 \
+    DECKS_DIR=/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper \
+    MODEL_PATH=/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt \
+    STATS_PATH=/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/training_stats.csv \
+    EPISODE_COUNTER_PATH=/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt \
+    EMBEDDING_MAPPING_PATH=/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/Storage/mapping.json
+
+# Working classpath approach (from original Dockerfile)
+RUN printf '%s:' $(find . -type f \( -name "*.jar" -o -path "*/target/classes" \) ) > /tmp/classpath && \
+    sed -i 's/:$//' /tmp/classpath
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=60s --retries=3 CMD pgrep -f RLTrainer || exit 1
+
+ENTRYPOINT ["bash","-c","java -cp $(cat /tmp/classpath) mage.player.ai.rl.RLTrainer $MODE"]

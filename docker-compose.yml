@@ -1,0 +1,101 @@
+# Multi-node RL training setup
+version: '3.8'
+
+services:
+  # Shared storage for trajectories
+  nfs-server:
+    image: itsthenetwork/nfs-server-alpine:latest
+    ports:
+      - "2049:2049"
+    volumes:
+      - ./shared-data:/nfsshare
+    environment:
+      - SHARED_DIRECTORY=/nfsshare
+    privileged: true
+
+  # Single learner process (GPU node)
+  learner:
+    build:
+      context: .
+      args:
+        TORCH_CHANNEL: gpu
+    image: mage-rl:latest
+    environment:
+      - MODE=learner
+      - TRAJ_DIR=/shared/trajectories
+      - BATCH_EPISODES=50
+      - POLL_SECONDS=30
+      - CHECKPOINT_EVERY=100
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - CUDA_VISIBLE_DEVICES=0
+    volumes:
+      - nfs-volume:/shared
+    depends_on:
+      - nfs-server
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+
+  # Multiple worker processes (CPU nodes)
+  worker-1:
+    build: .
+    image: mage-rl:latest
+    environment:
+      - MODE=worker
+      - TRAJ_DIR=/shared/trajectories
+      - EPISODES_PER_WORKER=1000
+      - WORKER_ID=1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - nfs-volume:/shared
+    depends_on:
+      - nfs-server
+
+  worker-2:
+    build: .
+    image: mage-rl:latest
+    environment:
+      - MODE=worker
+      - TRAJ_DIR=/shared/trajectories
+      - EPISODES_PER_WORKER=1000
+      - WORKER_ID=2
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - nfs-volume:/shared
+    depends_on:
+      - nfs-server
+
+  worker-3:
+    build: .
+    image: mage-rl:latest
+    environment:
+      - MODE=worker
+      - TRAJ_DIR=/shared/trajectories
+      - EPISODES_PER_WORKER=1000
+      - WORKER_ID=3
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - nfs-volume:/shared
+    depends_on:
+      - nfs-server
+
+  # Monitoring and metrics
+  metrics:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  nfs-volume:
+    driver: local
+    driver_opts:
+      type: nfs
+      o: addr=nfs-server,rw
+      device: ":/nfsshare"
+  grafana-storage:

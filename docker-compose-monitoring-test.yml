@@ -1,0 +1,95 @@
+# Local monitoring test setup - includes AI training + full monitoring stack
+version: '3.8'
+
+services:
+  # AI Training Components
+  worker:
+    image: mage-rl:gpu-vram-optimized
+    ports:
+      - "9091:9090" # Metrics port for worker
+    labels:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9090"
+      prometheus.io/path: "/metrics"
+      app: "mage-worker"
+      gpu_enabled: "false"
+    environment:
+      - MODE=worker
+      - TRAJ_DIR=/shared/trajectories
+      - EPISODES_PER_WORKER=500 # Increased from 23 for longer test
+      # Remove explicit NUM_GAME_RUNNERS to use 1.25x cores default in code
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - BATCH_SIZE=1
+      - JAVA_OPTS=-Xmx4g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+      - METRICS_PORT=9090
+    volumes:
+      - ./shared-data:/shared
+    restart: unless-stopped
+
+  learner:
+    image: mage-rl:gpu-vram-optimized
+    ports:
+      - "9092:9090" # Metrics port for learner
+    labels:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9090"
+      prometheus.io/path: "/metrics"
+      app: "mage-learner"
+      gpu_enabled: "true"
+    environment:
+      - MODE=learner
+      - TRAJ_DIR=/shared/trajectories
+      - BATCH_EPISODES=1
+      - MAX_SAMPLES_PER_BATCH=50000
+      - POLL_SECONDS=15 # More frequent polling for local testing
+      - CHECKPOINT_EVERY=50 # More frequent checkpoints for testing
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - USE_GPU=true
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+      - JAVA_OPTS=-Xmx4g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+      - METRICS_PORT=9090
+    volumes:
+      - ./shared-data:/shared
+      - ./models:/models
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    restart: unless-stopped
+
+  # Monitoring Stack
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=7d'
+      - '--web.enable-lifecycle'
+    restart: unless-stopped
+
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana/provisioning:/etc/grafana/provisioning
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  grafana-data:

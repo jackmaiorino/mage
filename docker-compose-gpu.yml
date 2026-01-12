@@ -1,0 +1,70 @@
+# GPU-enabled version for better performance
+version: '3.8'
+
+services:
+  worker:
+    image: mage-rl:gpu-vram-optimized
+    ports:
+      - "9091:9090" # Metrics port for worker
+    labels:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9090"
+      prometheus.io/path: "/metrics"
+      app: "mage-worker"
+      gpu_enabled: "false"
+    environment:
+      - MODE=worker # Use enhanced multi-threaded GameWorker
+      - TRAJ_DIR=/shared/trajectories
+      - EPISODES_PER_WORKER=23 # Run 23 episodes total across all threads (1 per core)
+      # NUM_GAME_RUNNERS not set - will auto-detect CPU cores - 1
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - BATCH_SIZE=1 # Minimal for GPU memory constraints
+      - JAVA_OPTS=-Xmx6g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+    volumes:
+      - ./shared-data:/shared
+    restart: unless-stopped
+
+  # GPU-accelerated learner
+  learner:
+    image: mage-rl:gpu-vram-optimized
+    ports:
+      - "9092:9090" # Metrics port for learner
+    labels:
+      prometheus.io/scrape: "true"
+      prometheus.io/port: "9090"
+      prometheus.io/path: "/metrics"
+      app: "mage-learner"
+      gpu_enabled: "true"
+    environment:
+      - MODE=learner
+      - TRAJ_DIR=/shared/trajectories
+      - BATCH_EPISODES=1 # Minimal for GPU memory constraints
+      - MAX_SAMPLES_PER_BATCH=50000 # Fallback if VRAM detection fails
+      - POLL_SECONDS=30 # More frequent with faster training
+      - CHECKPOINT_EVERY=100
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - USE_GPU=true # Enable GPU training
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=compute,utility
+      - PYTORCH_CUDA_ALLOC_CONF=max_split_size_mb:512
+      - JAVA_OPTS=-Xmx4g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
+    volumes:
+      - ./shared-data:/shared
+      - ./models:/models
+    # GPU runtime support
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [ gpu ]
+    restart: unless-stopped
+
+  stats:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./shared-data/stats:/usr/share/nginx/html:ro
+    restart: unless-stopped
