@@ -26,6 +26,7 @@ services:
       - BATCH_EPISODES=50
       - POLL_SECONDS=30
       - CHECKPOINT_EVERY=100
+      - DECK_LIST_FILE=${DECK_LIST_FILE}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - CUDA_VISIBLE_DEVICES=0
     volumes:
@@ -49,6 +50,7 @@ services:
       - TRAJ_DIR=/shared/trajectories
       - EPISODES_PER_WORKER=1000
       - WORKER_ID=1
+      - DECK_LIST_FILE=${DECK_LIST_FILE}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - nfs-volume:/shared
@@ -63,6 +65,7 @@ services:
       - TRAJ_DIR=/shared/trajectories
       - EPISODES_PER_WORKER=1000
       - WORKER_ID=2
+      - DECK_LIST_FILE=${DECK_LIST_FILE}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - nfs-volume:/shared
@@ -77,6 +80,7 @@ services:
       - TRAJ_DIR=/shared/trajectories
       - EPISODES_PER_WORKER=1000
       - WORKER_ID=3
+      - DECK_LIST_FILE=${DECK_LIST_FILE}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
     volumes:
       - nfs-volume:/shared

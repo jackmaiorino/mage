@@ -153,7 +153,7 @@ public class GameWorker {
      */
     private void runSingleEpisode(int episodeIndex, Logger currentLogger) throws IOException, GameException {
         // Build match & game skeleton
-        TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
+        TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false));
         match.startGame();
         Game game = match.getGames().get(0);
 
@@ -200,17 +200,11 @@ public class GameWorker {
     }
 
     private Deck loadRandomDeck() throws IOException {
-        Path deckDir = Paths.get(System.getenv().getOrDefault("DECKS_DIR", RLTrainer.DECKS_DIRECTORY));
-        try (DirectoryStream<Path> ds = Files.newDirectoryStream(deckDir, "*.{dck,dek}")) {
-            List<Path> files = new java.util.ArrayList<>();
-            for (Path p : ds) {
-                files.add(p);
-            }
-            if (files.isEmpty()) {
-                throw new IOException("No deck files in " + deckDir);
-            }
-            Path pick = files.get(new Random().nextInt(files.size()));
-            return new RLTrainer().loadDeck(pick.toString());
+        List<Path> files = RLTrainer.loadDeckPool();
+        if (files.isEmpty()) {
+            throw new IOException("No deck files in deck pool");
         }
+        Path pick = files.get(new Random().nextInt(files.size()));
+        return new RLTrainer().loadDeck(pick.toString());
     }
 }

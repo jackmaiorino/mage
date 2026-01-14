@@ -84,4 +84,52 @@ public interface PythonEntryPoint {
      * @return optimal number of samples per batch for current GPU
      */
     int getOptimalBatchSize();
+
+    /**
+     * Return a short diagnostic string about runtime device placement.
+     * Useful for confirming CUDA vs CPU at runtime.
+     */
+    String getDeviceInfo();
+
+    /**
+     * Score a fixed-size padded candidate set for each state.
+     * <p>
+     * Return format: for each batch item, {@code maxCandidates} float32 policy
+     * probabilities followed by 1 float32 value estimate.
+     */
+    byte[] scoreCandidatesFlat(
+            byte[] sequencesBytes,
+            byte[] masksBytes,
+            byte[] tokenIdsBytes,
+            byte[] candidateFeaturesBytes,
+            byte[] candidateIdsBytes,
+            byte[] candidateMaskBytes,
+            int batchSize,
+            int seqLen,
+            int dModel,
+            int maxCandidates,
+            int candFeatDim
+    );
+
+    /**
+     * Train on a batch of padded candidate decision steps.
+     *
+     * @param chosenIndexBytes int32[batchSize] chosen candidate index
+     * @param discountedReturnsBytes float32[batchSize] value target
+     */
+    void trainCandidatesFlat(
+            byte[] sequencesBytes,
+            byte[] masksBytes,
+            byte[] tokenIdsBytes,
+            byte[] candidateFeaturesBytes,
+            byte[] candidateIdsBytes,
+            byte[] candidateMaskBytes,
+            byte[] chosenIndexBytes,
+            byte[] discountedReturnsBytes,
+            int batchSize,
+            int seqLen,
+            int dModel,
+            int maxCandidates,
+            int candFeatDim
+    );
 }

@@ -528,6 +528,154 @@ class PythonEntryPoint:
                 LogCategory.GPU_MEMORY, f"Input shapes at error - batch_size: {batch_size}, seq_len: {seq_len}, d_model: {d_model}")
             raise
 
+    def scoreCandidatesFlat(self,
+                            sequences_bytes,
+                            masks_bytes,
+                            token_ids_bytes,
+                            candidate_features_bytes,
+                            candidate_ids_bytes,
+                            candidate_mask_bytes,
+                            batch_size,
+                            seq_len,
+                            d_model,
+                            max_candidates,
+                            cand_feat_dim):
+        """Score padded candidates for each state (policy over candidates + value)."""
+        try:
+            if self.model is None:
+                raise RuntimeError("Model not initialized")
+
+            device = self.device
+
+            seq = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
+                batch_size, seq_len, d_model)
+            mask = np.frombuffer(masks_bytes, dtype='<i4').reshape(
+                batch_size, seq_len)
+            tok_ids = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(
+                batch_size, seq_len)
+
+            cand_feat = np.frombuffer(candidate_features_bytes, dtype='<f4').reshape(
+                batch_size, max_candidates, cand_feat_dim)
+            cand_ids = np.frombuffer(candidate_ids_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)
+            cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)
+
+            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
+            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
+            tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
+            cand_feat_t = torch.tensor(
+                cand_feat, dtype=torch.float32, device=device)
+            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
+            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
+
+            self.model.eval()
+            with torch.no_grad():
+                probs, value = self.model.score_candidates(
+                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+
+            probs_np = probs.detach().cpu().numpy()
+            value_np = value.detach().cpu().numpy()
+
+            out = np.concatenate((probs_np, value_np), axis=1)
+            return out.astype('<f4').tobytes()
+
+        except Exception as e:
+            logger.error(LogCategory.SYSTEM_ERROR,
+                         "Error in scoreCandidatesFlat: %s", str(e))
+            raise
+
+    def trainCandidatesFlat(self,
+                            sequences_bytes,
+                            masks_bytes,
+                            token_ids_bytes,
+                            candidate_features_bytes,
+                            candidate_ids_bytes,
+                            candidate_mask_bytes,
+                            chosen_index_bytes,
+                            discounted_returns_bytes,
+                            batch_size,
+                            seq_len,
+                            d_model,
+                            max_candidates,
+                            cand_feat_dim):
+        """Train on padded candidate decision steps."""
+        try:
+            if self.model is None or self.optimizer is None:
+                raise RuntimeError("Model not initialized")
+
+            device = self.device
+
+            seq = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
+                batch_size, seq_len, d_model)
+            mask = np.frombuffer(masks_bytes, dtype='<i4').reshape(
+                batch_size, seq_len)
+            tok_ids = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(
+                batch_size, seq_len)
+
+            cand_feat = np.frombuffer(candidate_features_bytes, dtype='<f4').reshape(
+                batch_size, max_candidates, cand_feat_dim)
+            cand_ids = np.frombuffer(candidate_ids_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)
+            cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)
+
+            chosen = np.frombuffer(chosen_index_bytes, dtype='<i4').reshape(
+                batch_size)
+            returns = np.frombuffer(discounted_returns_bytes, dtype='<f4').reshape(
+                batch_size, 1)
+
+            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
+            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
+            tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
+            cand_feat_t = torch.tensor(
+                cand_feat, dtype=torch.float32, device=device)
+            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
+            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
+            chosen_t = torch.tensor(chosen, dtype=torch.long, device=device)
+            returns_t = torch.tensor(returns, dtype=torch.float32, device=device)
+
+            self.model.train()
+            self.optimizer.zero_grad()
+
+            probs, value = self.model.score_candidates(
+                seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+
+            # Policy loss: REINFORCE with baseline (advantage)
+            log_probs = torch.log(probs + 1e-9)
+            selected = log_probs.gather(
+                1, chosen_t.unsqueeze(1)).squeeze(1)
+
+            with torch.no_grad():
+                advantage = (returns_t - value).squeeze(1)
+                advantage = torch.clamp(advantage, -1.0, 1.0)
+
+            loss_policy = -(selected * advantage).mean()
+
+            # Value loss
+            loss_value = 0.5 * F.mse_loss(value, returns_t)
+
+            # Entropy bonus (encourage exploration)
+            entropy = -(probs * log_probs).sum(dim=-1).mean()
+            loss_entropy = -0.01 * entropy
+
+            loss = loss_policy + loss_value + loss_entropy
+            loss.backward()
+
+            torch.nn.utils.clip_grad_norm_(
+                self.model.parameters(), self.model.max_grad_norm)
+            self.optimizer.step()
+
+            logger.info(LogCategory.MODEL_TRAIN,
+                        "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f",
+                        loss.item(), loss_policy.item(), loss_value.item(), entropy.item())
+            return True
+
+        except Exception as e:
+            logger.error(LogCategory.SYSTEM_ERROR,
+                         "Error in trainCandidatesFlat: %s", str(e))
+            raise
+
     def trainFlat(self, sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
                   action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions):
         """Batch training using direct byte array conversion"""
@@ -649,6 +797,27 @@ class PythonEntryPoint:
             logger.error(LogCategory.GPU_MEMORY,
                          "Error in getOptimalBatchSize: %s", str(e))
             return 10000  # Safe fallback
+
+    def getDeviceInfo(self):
+        """Return a short diagnostic string about CUDA/device placement (callable from Java)."""
+        try:
+            import torch
+            cuda_ok = torch.cuda.is_available()
+            dev = str(self.device) if hasattr(self, "device") else "unknown"
+            name = ""
+            if cuda_ok:
+                try:
+                    name = torch.cuda.get_device_name(0)
+                except Exception:
+                    name = ""
+            opt = None
+            try:
+                opt = calculate_optimal_batch_size()
+            except Exception:
+                opt = None
+            return f"device={dev} cuda_available={cuda_ok} gpu={name} optimal_batch={opt}"
+        except Exception as e:
+            return f"device_info_error={e}"
 
     class Java:
         implements = ["mage.player.ai.rl.PythonBatchService"]

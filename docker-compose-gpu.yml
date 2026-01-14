@@ -17,6 +17,7 @@ services:
       - TRAJ_DIR=/shared/trajectories
       - EPISODES_PER_WORKER=23 # Run 23 episodes total across all threads (1 per core)
       # NUM_GAME_RUNNERS not set - will auto-detect CPU cores - 1
+      - DECK_LIST_FILE=${DECK_LIST_FILE}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - BATCH_SIZE=1 # Minimal for GPU memory constraints
       - JAVA_OPTS=-Xmx6g -XX:+UseG1GC -XX:MaxGCPauseMillis=200
@@ -42,6 +43,7 @@ services:
       - MAX_SAMPLES_PER_BATCH=50000 # Fallback if VRAM detection fails
       - POLL_SECONDS=30 # More frequent with faster training
       - CHECKPOINT_EVERY=100
+      - DECK_LIST_FILE=${DECK_LIST_FILE}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - USE_GPU=true # Enable GPU training
       - NVIDIA_VISIBLE_DEVICES=all

@@ -17,6 +17,9 @@ import java.util.LinkedList;
 public class ComputerPlayer7 extends ComputerPlayer6 {
 
     private static final Logger logger = Logger.getLogger(ComputerPlayer7.class);
+    private static final boolean VERBOSE_SIM =
+            "1".equals(System.getenv().getOrDefault("AI_VERBOSE_SIM", "0")) ||
+            "true".equalsIgnoreCase(System.getenv().getOrDefault("AI_VERBOSE_SIM", "0"));
 
     private boolean allowBadMoves;
 
@@ -54,7 +57,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 // 09.03.2020:
                 // in old version it passes opponent's pre-combat step (game.isActivePlayer(playerId) -> pass(game))
                 // why?!
-                printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
+                if (VERBOSE_SIM) {
+                    printBattlefieldScore(game, "Sim PRIORITY on MAIN 1");
+                }
                 if (actions.isEmpty()) {
                     calculateActions(game);
                 } else {
@@ -67,7 +72,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case DECLARE_ATTACKERS:
-                printBattlefieldScore(game, "Sim PRIORITY on DECLARE ATTACKERS");
+                if (VERBOSE_SIM) {
+                    printBattlefieldScore(game, "Sim PRIORITY on DECLARE ATTACKERS");
+                }
                 if (actions.isEmpty()) {
                     calculateActions(game);
                 } else {
@@ -77,7 +84,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 act(game);
                 return true;
             case DECLARE_BLOCKERS:
-                printBattlefieldScore(game, "Sim PRIORITY on DECLARE BLOCKERS");
+                if (VERBOSE_SIM) {
+                    printBattlefieldScore(game, "Sim PRIORITY on DECLARE BLOCKERS");
+                }
                 if (actions.isEmpty()) {
                     calculateActions(game);
                 } else {
@@ -92,7 +101,9 @@ public class ComputerPlayer7 extends ComputerPlayer6 {
                 pass(game);
                 return false;
             case POSTCOMBAT_MAIN:
-                printBattlefieldScore(game, "Sim PRIORITY on MAIN 2");
+                if (VERBOSE_SIM) {
+                    printBattlefieldScore(game, "Sim PRIORITY on MAIN 2");
+                }
                 if (actions.isEmpty()) {
                     calculateActions(game);
                 } else {

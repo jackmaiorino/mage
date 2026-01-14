@@ -1,0 +1,83 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.mage</groupId>
+        <artifactId>mage-server-plugins</artifactId>
+        <version>1.4.58</version>
+    </parent>
+
+    <artifactId>mage-player-airl</artifactId>
+    <packaging>jar</packaging>
+    <name>Mage Player AI (reinforcement learning)</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-player-ai</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-player-ai-ma</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>mage-game-twoplayerduel</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.sf.py4j</groupId>
+            <artifactId>py4j</artifactId>
+            <version>0.10.9.9</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <!-- XMage plugins often keep sources under src/ -->
+        <sourceDirectory>src</sourceDirectory>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <!-- Enable exec:java for this module when invoked from root -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <skip>${exec.skip}</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+
+        <finalName>mage-player-airl</finalName>
+    </build>
+
+    <properties>
+        <root.dir>${project.basedir}/../..</root.dir>
+        <!-- Allow exec:java to run for this module when invoked from the root reactor -->
+        <exec.skip>false</exec.skip>
+    </properties>
+
+</project>
+

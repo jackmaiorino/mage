@@ -24,6 +24,9 @@
         <!-- build: logs settings for maven tests and travis ci builds -->
         <xmage.build.tests.treeViewRunnerShowAllLogs>false</xmage.build.tests.treeViewRunnerShowAllLogs>
 
+        <!-- dev: exec-maven-plugin should be disabled by default in multi-module builds -->
+        <exec.skip>true</exec.skip>
+
         <!--
             report: code coverage tools (disabled by default)
 
@@ -56,6 +59,20 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+
+            <!--
+              Root project is an aggregator. When running `mvn ... exec:java` in a reactor build,
+              Maven will attempt to execute the goal for the root as well. We disable it here.
+              Child modules that want exec:java must explicitly set <exec.skip>false</exec.skip>.
+            -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.0.0</version>
+                <configuration>
+                    <skip>${exec.skip}</skip>
+                </configuration>
             </plugin>
 
             <plugin>
@@ -203,6 +220,9 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>3.0.0</version>
+                    <configuration>
+                        <skip>${exec.skip}</skip>
+                    </configuration>
                 </plugin>
 
                 <!-- generate readable readme file for releases -->

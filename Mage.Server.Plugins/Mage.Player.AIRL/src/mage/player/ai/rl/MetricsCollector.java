@@ -44,7 +44,12 @@ public class MetricsCollector {
 
     // HTTP server for metrics endpoint
     private HttpServer server;
-    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+    private final ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor(r -> {
+        Thread t = new Thread(r, "METRICS-SCHED");
+        t.setDaemon(true);
+        return t;
+    });
+    private java.util.concurrent.ExecutorService httpExecutor;
 
     private MetricsCollector() {
         // Initialize component counters
@@ -66,7 +71,13 @@ public class MetricsCollector {
             server = HttpServer.create(new InetSocketAddress(port), 0);
             server.createContext("/metrics", new MetricsHandler());
             server.createContext("/health", new HealthHandler());
-            server.setExecutor(null);
+            // Use daemon threads so CLI runs can exit cleanly even if caller forgets to stop().
+            httpExecutor = Executors.newCachedThreadPool(r -> {
+                Thread t = new Thread(r, "METRICS-HTTP");
+                t.setDaemon(true);
+                return t;
+            });
+            server.setExecutor(httpExecutor);
             server.start();
 
             logger.info("Metrics server started on port " + port);
@@ -87,6 +98,9 @@ public class MetricsCollector {
             server.stop(0);
         }
         scheduler.shutdown();
+        if (httpExecutor != null) {
+            httpExecutor.shutdownNow();
+        }
     }
 
     // Metric recording methods

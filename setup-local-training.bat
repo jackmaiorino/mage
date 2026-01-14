@@ -13,28 +13,29 @@ REM Create environment file
 if not exist .env (
     echo Creating environment file...
     (
-    echo # OpenAI API Key (required for card embeddings^)
-    echo OPENAI_API_KEY=your_openai_api_key_here
+    echo # Local-only training defaults (no external API required^)
     echo.
-    echo # Optional: Reduce API usage by caching embeddings
-    echo CACHE_EMBEDDINGS=true
-    echo MAX_API_CALLS_PER_HOUR=1000
+    echo # Optional: If you later re-enable text embeddings
+    echo # OPENAI_API_KEY=your_openai_api_key_here
+    echo.
+    echo # Use a fixed deck pool for the Pauper subset milestone
+    echo # Paths are resolved relative to the container working directory if running in Docker.
+    echo DECK_LIST_FILE=Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt
     ) > .env
-    echo WARNING: Please edit .env file and add your OpenAI API key
+    echo INFO: Created .env with local-only defaults
 )
 
 echo.
 echo Local training setup complete!
 echo.
 echo Next Steps:
-echo   1. Edit .env file with your OpenAI API key
-echo   2. Run: docker-compose -f docker-compose-minimal.yml up
-echo   3. Monitor: http://localhost:8080
+echo   1. (Optional) Edit .env and adjust DECK_LIST_FILE
+echo   2. Run training (CPU worker + GPU learner): docker-compose -f docker-compose-gpu.yml up
+echo   3. Run a quick benchmark: set MODE=benchmark and GAMES_PER_MATCHUP=20
 echo.
 echo Estimated Costs:
 echo   - Hardware: $0 (uses your existing computer)
 echo   - Electricity: ~$1-3/day
-echo   - OpenAI API: ~$0.50-2/day (with caching)
-echo   - Total: ~$1.50-5/day (96%% cheaper than cloud!)
+echo   - Total: ~$1-3/day
 
 pause 

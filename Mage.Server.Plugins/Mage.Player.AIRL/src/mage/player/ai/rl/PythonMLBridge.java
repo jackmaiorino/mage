@@ -3,23 +3,21 @@ package mage.player.ai.rl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.logging.Level;
 import java.util.concurrent.TimeUnit;
-import java.io.DataInputStream;
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
-
-import com.google.gson.Gson;
+import java.net.InetAddress;
+import javax.net.ServerSocketFactory;
+import javax.net.SocketFactory;
 
 import py4j.ClientServer;
-import py4j.GatewayServer;
 import py4j.Py4JException;
 
 /**
@@ -30,6 +28,9 @@ import py4j.Py4JException;
 public class PythonMLBridge implements AutoCloseable {
 
     private static final Logger logger = Logger.getLogger(PythonMLBridge.class.getName());
+    private static final boolean VERBOSE_SUBPROCESS_LOGS
+            = "1".equals(System.getenv().getOrDefault("PY_BRIDGE_VERBOSE", "0"))
+            || "true".equalsIgnoreCase(System.getenv().getOrDefault("PY_BRIDGE_VERBOSE", "0"));
     private static final int DEFAULT_PORT = 25334;
     private static final int PYTHON_STARTUP_WAIT_MS = 30000;
     private static final int PROCESS_KILL_WAIT_MS = 2000;
@@ -42,8 +43,9 @@ public class PythonMLBridge implements AutoCloseable {
     private static volatile PythonMLBridge instance;
     private static final Object lock = new Object();
 
-    private final String projectRoot = new File(System.getProperty("user.dir")).getAbsolutePath();
-    private final String venvPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/venv").getAbsolutePath();
+    private final String projectRoot = resolveRepoRoot(new File(System.getProperty("user.dir")).getAbsolutePath());
+    // NOTE: On Windows, long paths can break pip installs. Default to a short venv path at repo root.
+    private final String venvPath = resolveVenvPath(projectRoot);
     private final String pythonScriptPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/py4j_entry_point.py").getAbsolutePath();
 
     private ClientServer clientServer;
@@ -56,6 +58,7 @@ public class PythonMLBridge implements AutoCloseable {
      */
     private PythonMLBridge() {
         try {
+            configureLogging();
             cleanupExistingPythonProcesses();
             setupPaths();
             setupVirtualEnvironment();
@@ -68,6 +71,25 @@ public class PythonMLBridge implements AutoCloseable {
             logger.severe("Failed to initialize Python ML Bridge: " + e.getMessage());
             e.printStackTrace();
             throw new RuntimeException("Failed to initialize Python ML Bridge", e);
+        }
+    }
+
+    /**
+     * Keep bridge logs quiet by default. Override with PY_BRIDGE_LOG_LEVEL=INFO
+     * (or FINE) when debugging.
+     */
+    private void configureLogging() {
+        try {
+            String lvl = System.getenv().getOrDefault("PY_BRIDGE_LOG_LEVEL", "WARNING").toUpperCase();
+            Level level;
+            try {
+                level = Level.parse(lvl);
+            } catch (Exception ignored) {
+                level = Level.WARNING;
+            }
+            logger.setLevel(level);
+        } catch (Exception ignored) {
+            // ignore
         }
     }
 
@@ -107,17 +129,56 @@ public class PythonMLBridge implements AutoCloseable {
      * script.
      */
     private void setupPaths() {
-        logger.info("Project root: " + projectRoot);
-        logger.info("Virtual environment path: " + venvPath);
-        logger.info("Python script path: " + pythonScriptPath);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Project root: " + projectRoot);
+            logger.info("Virtual environment path: " + venvPath);
+            logger.info("Python script path: " + pythonScriptPath);
+        }
     }
 
     /**
-     * Get the path to Python executables in the Linux container Always uses
-     * venv/bin/ since Docker containers are Linux-based
+     * Get the path to Python executables in the venv. Uses venv/Scripts on
+     * Windows and venv/bin on Unix.
      */
     private String getPythonExecutablePath(String executable) {
-        return new File(venvPath, "bin" + File.separator + executable).getAbsolutePath();
+        boolean isWindows = System.getProperty("os.name").toLowerCase().contains("win");
+        String dir = isWindows ? "Scripts" : "bin";
+        String exe = executable;
+        if (isWindows && !executable.endsWith(".exe")) {
+            exe = executable + ".exe";
+        }
+        return new File(venvPath, dir + File.separator + exe).getAbsolutePath();
+    }
+
+    private static String resolveRepoRoot(String startDir) {
+        try {
+            Path cur = Paths.get(startDir).toAbsolutePath();
+            Path bestPom = null;
+            for (int i = 0; i < 8 && cur != null; i++) {
+                // prefer ".git" if present
+                if (Files.exists(cur.resolve(".git")) || Files.exists(cur.resolve(".git").resolve("HEAD"))) {
+                    return cur.toString();
+                }
+                // record the HIGHEST pom.xml seen, but keep walking upward to find .git
+                if (Files.exists(cur.resolve("pom.xml")) && Files.isRegularFile(cur.resolve("pom.xml"))) {
+                    bestPom = cur;
+                }
+                cur = cur.getParent();
+            }
+            if (bestPom != null) {
+                return bestPom.toString();
+            }
+        } catch (Exception ignored) {
+        }
+        return startDir;
+    }
+
+    private static String resolveVenvPath(String repoRoot) {
+        String override = System.getenv("MTG_VENV_PATH");
+        if (override != null && !override.trim().isEmpty()) {
+            return Paths.get(override).toAbsolutePath().toString();
+        }
+        return new File(repoRoot, ".mtgrl_venv").getAbsolutePath();
     }
 
     /**
@@ -125,10 +186,14 @@ public class PythonMLBridge implements AutoCloseable {
      */
     private void setupVirtualEnvironment() throws Exception {
         File venvDir = new File(venvPath);
-        logger.info("Checking virtual environment at: " + venvPath);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Checking virtual environment at: " + venvPath);
+        }
 
         if (!venvDir.exists()) {
-            logger.info("Virtual environment does not exist, creating it...");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Virtual environment does not exist, creating it...");
+            }
             ProcessBuilder venvBuilder = new ProcessBuilder("python", "-m", "venv", venvPath);
             venvBuilder.redirectErrorStream(true);
             Process venvProcess = venvBuilder.start();
@@ -139,9 +204,13 @@ public class PythonMLBridge implements AutoCloseable {
             if (venvExitCode != 0) {
                 throw new RuntimeException("Failed to create virtual environment, exit code: " + venvExitCode);
             }
-            logger.info("Virtual environment created successfully");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Virtual environment created successfully");
+            }
         } else {
-            logger.info("Virtual environment already exists at: " + venvPath);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Virtual environment already exists at: " + venvPath);
+            }
         }
     }
 
@@ -166,7 +235,9 @@ public class PythonMLBridge implements AutoCloseable {
             installPackage(pkg, "--upgrade");
         }
 
-        logger.info("All requirements installed/updated successfully");
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("All requirements installed/updated successfully");
+        }
     }
 
     /**
@@ -196,7 +267,9 @@ public class PythonMLBridge implements AutoCloseable {
             }
 
             // If pip list fails, try a direct import check
-            logger.info("pip list failed, trying direct import check for " + packageName);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("pip list failed, trying direct import check for " + packageName);
+            }
             String pythonPath = getPythonExecutablePath("python");
             ProcessBuilder importBuilder = new ProcessBuilder(pythonPath, "-c",
                     "try:\n"
@@ -229,10 +302,14 @@ public class PythonMLBridge implements AutoCloseable {
      * Installs PyTorch with CUDA support.
      */
     private void installPyTorch() throws Exception {
-        logger.info("Checking PyTorch installation");
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Checking PyTorch installation");
+        }
 
         if (!isPackageInstalled("torch")) {
-            logger.info("PyTorch not found, installing with CUDA support");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("PyTorch not found, installing with CUDA support");
+            }
             String pipPath = getPythonExecutablePath("pip");
             ProcessBuilder torchBuilder = new ProcessBuilder(pipPath, "install",
                     "--index-url", "https://download.pytorch.org/whl/cu121",
@@ -246,9 +323,13 @@ public class PythonMLBridge implements AutoCloseable {
             if (torchExitCode != 0) {
                 throw new RuntimeException("Failed to install PyTorch, exit code: " + torchExitCode);
             }
-            logger.info("PyTorch installed successfully");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("PyTorch installed successfully");
+            }
         } else {
-            logger.info("PyTorch already installed, skipping installation");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("PyTorch already installed, skipping installation");
+            }
         }
     }
 
@@ -257,10 +338,14 @@ public class PythonMLBridge implements AutoCloseable {
      */
     private void installPackage(String pkgName, String... args) throws Exception {
         String basePackageName = pkgName.split(">=")[0];
-        logger.info("Checking package: " + basePackageName);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Checking package: " + basePackageName);
+        }
 
         if (!isPackageInstalled(basePackageName)) {
-            logger.info("Installing package: " + pkgName);
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Installing package: " + pkgName);
+            }
             String pipPath = getPythonExecutablePath("pip");
             List<String> command = new ArrayList<>();
             command.add(pipPath);
@@ -280,9 +365,13 @@ public class PythonMLBridge implements AutoCloseable {
             if (packageExitCode != 0) {
                 throw new RuntimeException("Failed to install package " + pkgName + ", exit code: " + packageExitCode);
             }
-            logger.info("Package " + pkgName + " installed successfully");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Package " + pkgName + " installed successfully");
+            }
         } else {
-            logger.info("Package " + pkgName + " already installed, skipping installation");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Package " + pkgName + " already installed, skipping installation");
+            }
         }
     }
 
@@ -290,7 +379,9 @@ public class PythonMLBridge implements AutoCloseable {
      * Starts the Python process running the Py4J entry point.
      */
     private void startPythonProcess() throws Exception {
-        logger.info("Starting Python process with script: " + pythonScriptPath);
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Starting Python process with script: " + pythonScriptPath);
+        }
 
         // Verify the file exists
         File scriptFile = new File(pythonScriptPath);
@@ -306,16 +397,20 @@ public class PythonMLBridge implements AutoCloseable {
         String modelPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt").getAbsolutePath();
         File modelDir = new File(modelPath).getParentFile();
         if (!modelDir.exists()) {
-            logger.info("Creating models directory at: " + modelDir.getAbsolutePath());
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Creating models directory at: " + modelDir.getAbsolutePath());
+            }
             if (!modelDir.mkdirs()) {
                 throw new RuntimeException("Failed to create models directory at: " + modelDir.getAbsolutePath());
             }
         }
 
         pb.environment().put("MTG_MODEL_PATH", modelPath);
-        // Ensure Python logs INFO-level metrics
-        pb.environment().put("MTG_AI_LOG_LEVEL", "INFO");
-        logger.info("Set MTG_MODEL_PATH to: " + modelPath);
+        // Keep Python console output quiet by default. Override via MTG_AI_LOG_LEVEL if desired.
+        pb.environment().put("MTG_AI_LOG_LEVEL", System.getenv().getOrDefault("MTG_AI_LOG_LEVEL", "WARNING"));
+        if (logger.isLoggable(Level.INFO)) {
+            logger.info("Set MTG_MODEL_PATH to: " + modelPath);
+        }
 
         pb.redirectErrorStream(true);
         pythonProcess = pb.start();
@@ -325,7 +420,9 @@ public class PythonMLBridge implements AutoCloseable {
             try (BufferedReader reader = new BufferedReader(new InputStreamReader(pythonProcess.getInputStream()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    logger.info("[PYTHON] " + line);
+                    if (VERBOSE_SUBPROCESS_LOGS && logger.isLoggable(Level.INFO)) {
+                        logger.info("[PYTHON] " + line);
+                    }
                 }
             } catch (Exception e) {
                 logger.severe("Error reading Python output: " + e.getMessage());
@@ -353,7 +450,9 @@ public class PythonMLBridge implements AutoCloseable {
             throw new RuntimeException("Python process exited unexpectedly with code: " + exitValue);
         } catch (IllegalThreadStateException e) {
             // Process is still running, which is good
-            logger.info("Python process started successfully");
+            if (logger.isLoggable(Level.INFO)) {
+                logger.info("Python process started successfully");
+            }
         }
     }
 
@@ -366,7 +465,24 @@ public class PythonMLBridge implements AutoCloseable {
 
         while (retries < MAX_CONNECTION_RETRIES) {
             try {
-                clientServer = new ClientServer(null);
+                // IMPORTANT (Windows): avoid binding a Java callback server on a fixed port (25333),
+                // which frequently gets stuck "in use" after aborted runs.
+                //
+                // We don't rely on Python -> Java callbacks, so we disable auto-start of the Java server.
+                clientServer = new ClientServer(
+                        0,
+                        InetAddress.getByName("127.0.0.1"),
+                        DEFAULT_PORT,
+                        InetAddress.getByName("127.0.0.1"),
+                        0,
+                        0,
+                        ServerSocketFactory.getDefault(),
+                        SocketFactory.getDefault(),
+                        null,
+                        false,
+                        true
+                );
+                clientServer.startServer();
                 entryPoint = (PythonEntryPoint) clientServer.getPythonServerEntryPoint(new Class[]{PythonEntryPoint.class});
 
                 // Test the connection by calling a simple method
@@ -405,7 +521,10 @@ public class PythonMLBridge implements AutoCloseable {
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                logger.info(prefix + " " + line);
+                // Always drain stdout to avoid blocking, but only print when explicitly requested.
+                if (VERBOSE_SUBPROCESS_LOGS && logger.isLoggable(Level.INFO)) {
+                    logger.info(prefix + " " + line);
+                }
             }
         }
     }
@@ -415,6 +534,35 @@ public class PythonMLBridge implements AutoCloseable {
      */
     private void cleanupExistingPythonProcesses() {
         try {
+            // On Windows we don't have pkill; skip cleanup.
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                // Kill only processes running our script (best-effort).
+                // This avoids "callback server port already in use" failures.
+                String cmd =
+                        // 1) Kill lingering Python entrypoints
+                        "Get-CimInstance Win32_Process | "
+                                + "Where-Object { $_.CommandLine -like '*py4j_entry_point.py*' } | "
+                                + "ForEach-Object { Stop-Process -Id $_.ProcessId -Force } ; "
+                                // 2) Free Py4J callback/gateway ports if a previous Java run is stuck
+                                + "$ports = @(25333,25334); "
+                                + "foreach ($p in $ports) { "
+                                + "  $conns = Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue; "
+                                + "  foreach ($c in $conns) { "
+                                + "    $pid = $c.OwningProcess; "
+                                + "    $proc = Get-CimInstance Win32_Process -Filter \"ProcessId=$pid\" -ErrorAction SilentlyContinue; "
+                                + "    if ($proc -and $proc.Name -eq 'java.exe') { "
+                                + "      Stop-Process -Id $pid -Force "
+                                + "    } "
+                                + "  } "
+                                + "} ";
+                ProcessBuilder pb = new ProcessBuilder("powershell", "-NoProfile", "-Command", cmd);
+                pb.redirectErrorStream(true);
+                Process process = pb.start();
+                readProcessOutput(process, "[WIN-KILL]");
+                process.waitFor();
+                Thread.sleep(PROCESS_KILL_WAIT_MS);
+                return;
+            }
             // Use pkill to kill Python processes running our script
             String scriptName = "py4j_entry_point.py";
             ProcessBuilder pb = new ProcessBuilder("pkill", "-f", scriptName);
@@ -473,37 +621,34 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Predicts policy and value for a single state.
+     * Candidate-based policy/value prediction.
      */
-    public float[] predict(StateSequenceBuilder.SequenceOutput state, int validActions) {
-        CompletableFuture<PythonMLBatchManager.PredictionResult> future = PythonMLBatchManager.getInstance(entryPoint).predict(state, validActions);
-        try {
-            PythonMLBatchManager.PredictionResult result = future.get();
-            return result.policyScores;
-        } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("Prediction failed", e);
-        }
-    }
-
-    public float[] predict(StateSequenceBuilder.SequenceOutput state) {
-        return predict(state, -1);
-    }
-
-    /**
-     * Predicts both policy and value for a single state - returns the full
-     * result.
-     */
-    public PythonMLBatchManager.PredictionResult predictComplete(StateSequenceBuilder.SequenceOutput state, int validActions) {
-        CompletableFuture<PythonMLBatchManager.PredictionResult> future = PythonMLBatchManager.getInstance(entryPoint).predict(state, validActions);
+    public PythonMLBatchManager.PredictionResult scoreCandidates(
+            StateSequenceBuilder.SequenceOutput state,
+            int[] candidateActionIds,
+            float[][] candidateFeatures,
+            int[] candidateMask) {
+        CompletableFuture<PythonMLBatchManager.PredictionResult> future
+                = PythonMLBatchManager.getInstance(entryPoint).scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask);
         try {
             return future.get();
         } catch (InterruptedException | ExecutionException e) {
-            throw new RuntimeException("Prediction failed", e);
+            throw new RuntimeException("Candidate scoring failed", e);
         }
     }
 
-    public PythonMLBatchManager.PredictionResult predictComplete(StateSequenceBuilder.SequenceOutput state) {
-        return predictComplete(state, -1);
+    /**
+     * Legacy fixed-action prediction is no longer supported. Use
+     * {@link #scoreCandidates(StateSequenceBuilder.SequenceOutput, int[], float[][], int[])}.
+     */
+    @Deprecated
+    public float[] predict(StateSequenceBuilder.SequenceOutput state, int validActions) {
+        throw new UnsupportedOperationException("Use candidate-based scoring instead of fixed-action prediction");
+    }
+
+    @Deprecated
+    public PythonMLBatchManager.PredictionResult predictComplete(StateSequenceBuilder.SequenceOutput state, int validActions) {
+        throw new UnsupportedOperationException("Use candidate-based scoring instead of fixed-action prediction");
     }
 
     /**
@@ -611,6 +756,20 @@ public class PythonMLBridge implements AutoCloseable {
         } catch (Exception e) {
             logger.warning("Failed to get optimal batch size from Python: " + e.getMessage());
             return 10000; // Safe fallback
+        }
+    }
+
+    /**
+     * One-line diagnostic for CUDA/device placement from Python.
+     */
+    public String getDeviceInfo() {
+        if (!isInitialized || entryPoint == null) {
+            return "device=unknown cuda_available=false gpu= optimal_batch=null";
+        }
+        try {
+            return entryPoint.getDeviceInfo();
+        } catch (Exception e) {
+            return "device_info_error=" + e.getMessage();
         }
     }
 

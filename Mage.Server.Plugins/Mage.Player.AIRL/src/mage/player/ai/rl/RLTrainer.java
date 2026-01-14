@@ -10,14 +10,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -59,13 +62,16 @@ public class RLTrainer {
     private static final int NUM_EPISODES = envInt("TOTAL_EPISODES", 10000);
     private static final int NUM_EVAL_EPISODES = envInt("EVAL_EPISODES", 5);
 
-    public static final String DECKS_DIRECTORY = env("DECKS_DIR", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper");
+    // Defaults assume running from repo root. Override via DECKS_DIR if needed.
+    public static final String DECKS_DIRECTORY = env("DECKS_DIR", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper");
+    // Optional: explicit deck list file (one path per line, relative to CWD unless absolute)
+    public static final String DECK_LIST_FILE = env("DECK_LIST_FILE", "");
 
-    public static final String MODEL_FILE_PATH = env("MODEL_PATH", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt");
+    public static final String MODEL_FILE_PATH = env("MODEL_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt");
     // Episode-level statistics will be appended here (CSV)
-    public static final String STATS_FILE_PATH = env("STATS_PATH", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/training_stats.csv");
+    public static final String STATS_FILE_PATH = env("STATS_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/training_stats.csv");
     // Path that stores the cumulative number of episodes trained so far (persisted across runs)
-    public static final String EPISODE_COUNT_PATH = env("EPISODE_COUNTER_PATH", "../Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
+    public static final String EPISODE_COUNT_PATH = env("EPISODE_COUNTER_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
     // Auto-detect optimal number of threads based on CPU cores
     private static final int DEFAULT_GAME_RUNNERS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
     public static final int NUM_THREADS = envInt("NUM_THREADS", DEFAULT_GAME_RUNNERS);
@@ -80,18 +86,39 @@ public class RLTrainer {
     private static final AtomicInteger EPISODE_COUNTER = new AtomicInteger(0);
 
     static {
-        // Set default logging level for all loggers to WARN
-        List<Logger> loggers = Collections.<Logger>list(LogManager.getCurrentLoggers());
-        loggers.add(LogManager.getRootLogger());
-        for (Logger logger : loggers) {
-            logger.setLevel(Level.INFO);
+        // Ensure we have at least a console appender so INFO logs are visible
+        try {
+            if (!LogManager.getRootLogger().getAllAppenders().hasMoreElements()) {
+                BasicConfigurator.configure();
+            }
+        } catch (Exception ignored) {
+            // ignore
         }
+
+        // Keep console output readable:
+        // - default to WARN everywhere (XMage can be very chatty),
+        // - explicitly allow our benchmark/training progress at INFO.
+        Logger root = LogManager.getRootLogger();
+        root.setLevel(Level.WARN);
+
+        // Our own components: allow INFO progress output.
+        Logger.getLogger(RLTrainer.class).setLevel(Level.INFO);
+        Logger.getLogger(MetricsCollector.class).setLevel(Level.INFO);
+
+        // Noisy engine components: keep to ERROR unless user opts into verbose logs.
+        Logger.getLogger("mage.game").setLevel(Level.ERROR);
+        Logger.getLogger("mage.game.GameImpl").setLevel(Level.ERROR);
+        Logger.getLogger("mage.server").setLevel(Level.ERROR);
     }
 
     // ThreadLocal logger
     public static final ThreadLocal<Logger> threadLocalLogger = ThreadLocal.withInitial(() -> {
         Logger threadLogger = Logger.getLogger("Thread-" + Thread.currentThread().getId());
-        threadLogger.setLevel(Level.INFO); // Default level
+        // Per-decision logging is extremely verbose; keep it off by default.
+        // Enable with RL_VERBOSE_DECISIONS=1.
+        boolean verboseDecisions = "1".equals(System.getenv().getOrDefault("RL_VERBOSE_DECISIONS", "0"))
+                || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_VERBOSE_DECISIONS", "0"));
+        threadLogger.setLevel(verboseDecisions ? Level.INFO : Level.WARN);
         return threadLogger;
     });
 
@@ -109,28 +136,37 @@ public class RLTrainer {
         int metricsPort = envInt("METRICS_PORT", 9090);
         metrics.startMetricsServer(metricsPort);
         logger.info("Metrics server started on port " + metricsPort);
-        if ("learner".equalsIgnoreCase(mode)) {
-            try {
+        try {
+            if ("learner".equalsIgnoreCase(mode)) {
                 Path dir = Paths.get(System.getenv().getOrDefault("TRAJ_DIR", "./trajectories"));
                 int maxSamples = envInt("MAX_SAMPLES_PER_BATCH", 50000); // ~500MB for RTX 4070
                 int poll = envInt("POLL_SECONDS", 60);
                 int ckpt = envInt("CHECKPOINT_EVERY", 100);
                 new Learner(dir, maxSamples, poll, ckpt).run();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else if ("worker".equalsIgnoreCase(mode)) {
-            try {
+            } else if ("worker".equalsIgnoreCase(mode)) {
                 int eps = envInt("EPISODES_PER_WORKER", 100);
                 Path dir = Paths.get(System.getenv().getOrDefault("TRAJ_DIR", "./trajectories"));
                 new GameWorker(eps, dir).run();
-            } catch (Exception e) {
-                e.printStackTrace();
+            } else if ("eval".equalsIgnoreCase(mode)) {
+                runEvaluation(NUM_EVAL_EPISODES);
+            } else if ("benchmark".equalsIgnoreCase(mode)) {
+                int gamesPerMatchup = envInt("GAMES_PER_MATCHUP", 20);
+                new RLTrainer().runBenchmark(gamesPerMatchup);
+            } else {
+                new RLTrainer().train();
             }
-        } else if ("eval".equalsIgnoreCase(mode)) {
-            runEvaluation(NUM_EVAL_EPISODES);
-        } else {
-            new RLTrainer().train();
+        } catch (Exception e) {
+            logger.error("RLTrainer main failed", e);
+        } finally {
+            // Ensure CLI invocations exit cleanly (no lingering metrics scheduler / py4j ports).
+            try {
+                metrics.stop();
+            } catch (Exception ignored) {
+            }
+            try {
+                sharedModel.shutdown();
+            } catch (Exception ignored) {
+            }
         }
     }
 
@@ -145,10 +181,8 @@ public class RLTrainer {
         System.out.println("DEBUG: Card database initialized");
 
         try {
-            List<Path> deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
-                    .filter(Files::isRegularFile)
-                    .collect(Collectors.toList());
-            System.out.println("DEBUG: Found " + deckFiles.size() + " deck files in " + DECKS_DIRECTORY);
+            List<Path> deckFiles = loadDeckPool();
+            System.out.println("DEBUG: Found " + deckFiles.size() + " deck files in deck pool");
 
             Random random = new Random();
 
@@ -222,7 +256,7 @@ public class RLTrainer {
                         }
                         long episodeStartNanos = System.nanoTime();
                         // ------------------ Build a full Match so players have MatchPlayer objects ------------------
-                        TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
+                        TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false));
 
                         // Start an empty game so we can attach players
                         match.startGame();
@@ -267,21 +301,20 @@ public class RLTrainer {
                         RLTrainer.threadLocalLogger.get().info(String.format("Episode %d completed in %.2f seconds", epNumber, episodeSeconds));
 
                         // ------------------ Statistics ------------------
-                        List<StateSequenceBuilder.TrainingData> td = rlPlayer.getTrainingBuffer();
-                        long passCnt = td.stream().filter(t -> t.actionType == StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL && !t.actionCombo.isEmpty() && t.actionCombo.get(0) == 0).count();
-                        double passRate = td.isEmpty() ? 0.0 : (double) passCnt / td.size();
                         int turns = game.getTurnNum();
                         boolean usedHeuristic = opponentPlayer instanceof ComputerPlayer7;
 
                         try {
                             Path statsPath = Paths.get(STATS_FILE_PATH);
+                            if (statsPath.getParent() != null) {
+                                Files.createDirectories(statsPath.getParent());
+                            }
                             boolean writeHeader = !Files.exists(statsPath);
                             StringBuilder sb = new StringBuilder();
                             if (writeHeader) {
-                                sb.append("episode,turns,pass_rate,final_reward,vs_heuristic,episode_seconds\n");
+                                sb.append("episode,turns,final_reward,vs_heuristic,episode_seconds\n");
                             }
                             sb.append(epNumber).append(',').append(turns).append(',')
-                                    .append(String.format("%.4f", passRate)).append(',')
                                     .append(String.format("%.3f", finalReward)).append(',')
                                     .append(usedHeuristic).append(',')
                                     .append(String.format("%.2f", episodeSeconds)).append('\n');
@@ -339,12 +372,10 @@ public class RLTrainer {
     }
 
     public static double runEvaluation(int numEpisodesPerThread) {
-        List<Path> deckFiles = null;
+        List<Path> deckFiles;
         try {
-            deckFiles = Files.list(Paths.get(DECKS_DIRECTORY))
-                    .filter(Files::isRegularFile)
-                    .collect(Collectors.toList());
-        } catch (IOException e) {
+            deckFiles = loadDeckPool();
+        } catch (Exception e) {
             logger.error("Error during evaluation", e);
             return 0.0;
         }
@@ -381,7 +412,7 @@ public class RLTrainer {
                 Deck opponentDeckThread = opponentDeck.copy();
 
                 for (int evalEpisode = 0; evalEpisode < numEpisodesPerThread; evalEpisode++) {
-                    TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false, 2));
+                    TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false));
                     try {
                         match.startGame();
                     } catch (GameException e) {
@@ -441,9 +472,260 @@ public class RLTrainer {
         return winRate;
     }
 
+    /**
+     * Benchmark: round-robin RL-vs-ComputerPlayer7 over an explicit deck pool.
+     * Writes a simple CSV to the trajectories dir if configured, otherwise
+     * logs.
+     */
+    public void runBenchmark(int gamesPerMatchup) {
+        try {
+            mage.cards.repository.CardScanner.scan();
+            List<Path> decks = loadDeckPool();
+            if (decks.size() < 2) {
+                logger.warn("Benchmark requires at least 2 decks in the deck pool; found " + decks.size());
+                return;
+            }
+
+            final int benchThreads = envInt("BENCHMARK_THREADS", Math.max(1, Runtime.getRuntime().availableProcessors() - 1));
+            final int logEvery = envInt("BENCHMARK_LOG_EVERY", 5);
+            final int heartbeatSec = envInt("BENCHMARK_HEARTBEAT_SEC", 30);
+            final int gameTimeoutSec = envInt("BENCHMARK_GAME_TIMEOUT_SEC", 900);
+            final int totalPlannedGames = decks.size() * (decks.size() - 1) * gamesPerMatchup;
+
+            final AtomicLong completed = new AtomicLong(0);
+            final AtomicLong started = new AtomicLong(0);
+            final AtomicLong winsTotal = new AtomicLong(0);
+            final long startMs = System.currentTimeMillis();
+
+            final ConcurrentHashMap<String, AtomicLong> matchupWins = new ConcurrentHashMap<>();
+            final ConcurrentHashMap<String, AtomicLong> matchupGames = new ConcurrentHashMap<>();
+
+            ExecutorService exec = Executors.newFixedThreadPool(benchThreads, r -> {
+                Thread t = new Thread(r);
+                // XMage requires game code to run in threads named with GAME prefix
+                t.setName("GAME-BENCH");
+                t.setPriority(Thread.NORM_PRIORITY);
+                return t;
+            });
+
+            List<Future<Void>> futures = new ArrayList<>();
+
+            logger.info(String.format(
+                    "Benchmark started: decks=%d, gamesPerMatchup=%d, plannedGames=%d, threads=%d (logEvery=%d, heartbeat=%ds)",
+                    decks.size(), gamesPerMatchup, totalPlannedGames, benchThreads, logEvery, heartbeatSec
+            ));
+            logger.info("Python device info: " + sharedModel.getDeviceInfo());
+
+            // Heartbeat so users aren't staring at a blank console while the first games warm up.
+            // (ETA requires at least 1 completed game.)
+            java.util.concurrent.ScheduledExecutorService heartbeat = null;
+            if (heartbeatSec > 0) {
+                heartbeat = java.util.concurrent.Executors.newSingleThreadScheduledExecutor(r -> {
+                    Thread t = new Thread(r, "BENCH-HEARTBEAT");
+                    t.setDaemon(true);
+                    return t;
+                });
+                final java.util.concurrent.ScheduledExecutorService hbRef = heartbeat;
+                heartbeat.scheduleAtFixedRate(() -> {
+                    long done = completed.get();
+                    if (done >= totalPlannedGames) {
+                        hbRef.shutdown();
+                        return;
+                    }
+                    if (done == 0) {
+                        logger.info(String.format(
+                                "Benchmark heartbeat: %d/%d games done (started=%d; warming up; ETA after first completion)",
+                                done, totalPlannedGames, started.get()));
+                    } else {
+                        long elapsedMs = Math.max(1, System.currentTimeMillis() - startMs);
+                        double gamesPerSec = done / (elapsedMs / 1000.0);
+                        long remaining = Math.max(0, totalPlannedGames - done);
+                        long etaSec = gamesPerSec > 0 ? (long) (remaining / gamesPerSec) : -1;
+                        logger.info(String.format(
+                                "Benchmark heartbeat: %d/%d games done (started=%d; %.2f games/s), ETA %ds",
+                                done, totalPlannedGames, started.get(), gamesPerSec, etaSec));
+                    }
+                }, heartbeatSec, heartbeatSec, java.util.concurrent.TimeUnit.SECONDS);
+            }
+
+            for (int i = 0; i < decks.size(); i++) {
+                for (int j = 0; j < decks.size(); j++) {
+                    if (i == j) {
+                        continue;
+                    }
+                    final Path p1 = decks.get(i);
+                    final Path p2 = decks.get(j);
+                    final String matchupKey = p1.getFileName() + " vs " + p2.getFileName();
+
+                    matchupWins.putIfAbsent(matchupKey, new AtomicLong(0));
+                    matchupGames.putIfAbsent(matchupKey, new AtomicLong(0));
+
+                    for (int g = 0; g < gamesPerMatchup; g++) {
+                        futures.add(exec.submit(() -> {
+                            Thread.currentThread().setName("GAME-BENCH");
+                            long s = started.incrementAndGet();
+                            if (s % logEvery == 0 || s == totalPlannedGames) {
+                                logger.info(String.format("Benchmark started games: %d/%d", s, totalPlannedGames));
+                            }
+
+                            boolean win = runSingleBenchmarkGame(p1, p2, gameTimeoutSec);
+                            matchupGames.get(matchupKey).incrementAndGet();
+                            if (win) {
+                                matchupWins.get(matchupKey).incrementAndGet();
+                                winsTotal.incrementAndGet();
+                            }
+
+                            long done = completed.incrementAndGet();
+                            if (done % logEvery == 0 || done == totalPlannedGames) {
+                                long elapsedMs = Math.max(1, System.currentTimeMillis() - startMs);
+                                double gamesPerSec = done / (elapsedMs / 1000.0);
+                                long remaining = Math.max(0, totalPlannedGames - done);
+                                long etaSec = gamesPerSec > 0 ? (long) (remaining / gamesPerSec) : -1;
+                                logger.info(String.format(
+                                        "Benchmark progress: %d/%d games done (%.2f games/s), ETA %ds",
+                                        done, totalPlannedGames, gamesPerSec, etaSec
+                                ));
+                            }
+                            return null;
+                        }));
+                    }
+                }
+            }
+
+            exec.shutdown();
+            exec.awaitTermination(Long.MAX_VALUE, TimeUnit.NANOSECONDS);
+            for (Future<Void> f : futures) {
+                try {
+                    f.get();
+                } catch (Exception e) {
+                    logger.warn("Benchmark game task failed", e);
+                }
+            }
+            if (heartbeat != null) {
+                heartbeat.shutdownNow();
+            }
+
+            // Per-matchup summary
+            for (String matchupKey : matchupGames.keySet()) {
+                long games = matchupGames.get(matchupKey).get();
+                long wins = matchupWins.get(matchupKey).get();
+                double wr = games > 0 ? (double) wins / games : 0.0;
+                logger.info("Benchmark matchup: " + matchupKey + " winRate=" + String.format("%.3f", wr)
+                        + " (" + wins + "/" + games + ")");
+            }
+
+            long totalGames = completed.get();
+            long totalWins = winsTotal.get();
+            double overall = totalGames > 0 ? (double) totalWins / totalGames : 0.0;
+            logger.info("Benchmark overall win rate vs heuristic across pool: " + String.format("%.3f", overall)
+                    + " (" + totalWins + "/" + totalGames + ")");
+        } catch (Exception e) {
+            logger.error("Benchmark failed", e);
+        }
+    }
+
+    private boolean runSingleBenchmarkGame(Path rlDeckPath, Path oppDeckPath, int gameTimeoutSec) {
+        Deck d1 = loadDeck(rlDeckPath.toString());
+        Deck d2 = loadDeck(oppDeckPath.toString());
+        if (d1 == null || d2 == null) {
+            return false;
+        }
+
+        TwoPlayerMatch match = new TwoPlayerMatch(new MatchOptions("TwoPlayerMatch", "TwoPlayerMatch", false));
+        try {
+            match.startGame();
+        } catch (GameException e) {
+            logger.error("Error starting benchmark game", e);
+            return false;
+        }
+        Game game = match.getGames().get(0);
+
+        ComputerPlayerRL rlPlayer = new ComputerPlayerRL("RL", RangeOfInfluence.ALL, sharedModel, true);
+        Player opponent = new ComputerPlayer7("Heuristic", RangeOfInfluence.ALL, 3);
+
+        Deck rlDeck = d1.copy();
+        Deck oppDeck = d2.copy();
+
+        game.addPlayer(rlPlayer, rlDeck);
+        match.addPlayer(rlPlayer, rlDeck);
+        game.addPlayer(opponent, oppDeck);
+        match.addPlayer(opponent, oppDeck);
+
+        game.loadCards(rlDeck.getCards(), rlPlayer.getId());
+        game.loadCards(oppDeck.getCards(), opponent.getId());
+        game.setGameOptions(new GameOptions());
+        // Watchdog: end runaway/stuck games so benchmark doesn't stall forever.
+        final Thread watchdog = new Thread(() -> {
+            try {
+                Thread.sleep(Math.max(1, gameTimeoutSec) * 1000L);
+                if (game.getState() != null && !game.getState().isGameOver()) {
+                    logger.warn("Benchmark game timed out after " + gameTimeoutSec + "s; forcing end: "
+                            + rlDeckPath.getFileName() + " vs " + oppDeckPath.getFileName());
+                    try {
+                        game.end();
+                    } catch (Exception e) {
+                        logger.warn("Failed to force-end timed out game", e);
+                    }
+                }
+            } catch (InterruptedException ignored) {
+                // normal
+            } catch (Exception e) {
+                logger.warn("Benchmark watchdog error", e);
+            }
+        }, "BENCH-WATCHDOG");
+        watchdog.setDaemon(true);
+        watchdog.start();
+
+        game.start(rlPlayer.getId());
+        watchdog.interrupt();
+
+        return game.getWinner().contains(rlPlayer.getName());
+    }
+
+    public static List<Path> loadDeckPool() throws IOException {
+        // If explicit list is provided, use it
+        if (DECK_LIST_FILE != null && !DECK_LIST_FILE.trim().isEmpty()) {
+            Path listPath = Paths.get(DECK_LIST_FILE);
+            Path base = listPath.toAbsolutePath().getParent();
+            if (base == null) {
+                base = Paths.get(System.getProperty("user.dir"));
+            }
+            List<String> lines = Files.readAllLines(listPath, StandardCharsets.UTF_8);
+            List<Path> decks = new ArrayList<>();
+            for (String raw : lines) {
+                String line = raw.trim();
+                if (line.isEmpty() || line.startsWith("#")) {
+                    continue;
+                }
+                Path p = Paths.get(line);
+                if (!p.isAbsolute()) {
+                    p = base.resolve(p).normalize();
+                }
+                if (Files.exists(p) && Files.isRegularFile(p)) {
+                    decks.add(p);
+                } else {
+                    logger.warn("Deck list entry not found: " + p);
+                }
+            }
+            return decks;
+        }
+
+        // Fallback: scan directory
+        return Files.list(Paths.get(DECKS_DIRECTORY))
+                .filter(Files::isRegularFile)
+                .filter(p -> {
+                    String name = p.getFileName().toString().toLowerCase();
+                    return name.endsWith(".dek") || name.endsWith(".dck");
+                })
+                .collect(Collectors.toList());
+    }
+
     private static void logEvaluationResult(int updateStep, double winRate) {
         try {
             Path statsPath = Paths.get(STATS_FILE_PATH.replace("training_stats.csv", "evaluation_stats.csv"));
+            if (statsPath.getParent() != null) {
+                Files.createDirectories(statsPath.getParent());
+            }
             boolean writeHeader = !Files.exists(statsPath);
             StringBuilder sb = new StringBuilder();
             if (writeHeader) {
@@ -470,8 +752,25 @@ public class RLTrainer {
 
     public Deck loadDeck(String filePath) {
         try {
-            DeckCardLists deckCardLists = DeckImporter.importDeckFromFile(filePath, false);
-            return Deck.load(deckCardLists, false, false, null);
+            StringBuilder importWarnings = new StringBuilder();
+            DeckCardLists deckCardLists = DeckImporter.importDeckFromFile(filePath, importWarnings, false);
+
+            if (importWarnings.length() > 0) {
+                // Most common reason for <60 cards: DeckImporter couldn't find some card names in this XMage build,
+                // so those entries are dropped during import.
+                logger.warn("Deck import warnings for " + filePath + ":\n" + importWarnings);
+            }
+
+            Deck deck = Deck.load(deckCardLists, false, false, null);
+            if (deck != null) {
+                int mainCount = deck.getCards().size();
+                int sideCount = deck.getSideboard().size();
+                if (mainCount != 60) {
+                    logger.warn("Deck mainboard size is " + mainCount + " (expected 60) for: " + filePath
+                            + " (sideboard=" + sideCount + ")");
+                }
+            }
+            return deck;
         } catch (GameException e) {
             logger.error("Error loading deck: " + filePath, e);
             return null;
