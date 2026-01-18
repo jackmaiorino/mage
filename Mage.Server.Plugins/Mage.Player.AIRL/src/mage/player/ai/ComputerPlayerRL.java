@@ -3,6 +3,7 @@ package mage.player.ai;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,9 @@ import java.util.stream.Collectors;
 import mage.MageObject;
 import mage.abilities.Ability;
 import mage.abilities.ActivatedAbility;
+import mage.abilities.mana.ManaAbility;
+import mage.abilities.PlayLandAbility;
+import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
 import mage.cards.Cards;
 import mage.choices.Choice;
@@ -33,6 +37,25 @@ import mage.target.TargetAmount;
 import mage.target.TargetCard;
 
 public class ComputerPlayerRL extends ComputerPlayer7 {
+
+    private static final double LAND_PLAY_REWARD = 0.02;
+    private static final double SPELL_CAST_REWARD = 0.01;
+    private static final boolean ACTIVATION_DIAG = "1".equals(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"))
+            || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"));
+    private static final boolean USE_ENGINE_CHOICES = "1".equals(System.getenv().getOrDefault("RL_ENGINE_CHOICES", "1"))
+            || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ENGINE_CHOICES", "1"));
+
+    // Track RL player activation failures (these pollute training signal)
+    private static final java.util.concurrent.atomic.AtomicInteger RL_ACTIVATION_FAILURES = new java.util.concurrent.atomic.AtomicInteger(0);
+
+    // Track valid alternative cost choices discovered during simulation
+    // Key: source card UUID, Value: set of valid choice indices (e.g., "1" for option 1, "2" for option 2)
+    private final Map<UUID, Set<String>> validAlternativeCosts = new HashMap<>();
+
+    // ThreadLocal to force a specific alternative cost choice during simulation testing
+    private static final ThreadLocal<String> forcedAlternativeChoice = new ThreadLocal<>();
+    // ThreadLocal to track which choice was made and what options were available
+    private static final ThreadLocal<ChoiceTrackingData> choiceTrackingData = new ThreadLocal<>();
 
     private PythonMLBridge model;
     protected StateSequenceBuilder.SequenceOutput currentState;
@@ -238,6 +261,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // Record training only for simple single-choice decisions for now.
         if (minTargets == 1 && maxTargets == 1 && !selectedIndices.isEmpty()) {
             int chosen = selectedIndices.get(0);
+            double stepReward = computeStepReward(actionType, candidates.get(chosen));
             trainingBuffer.add(new StateSequenceBuilder.TrainingData(
                     baseState,
                     candidateCount,
@@ -245,7 +269,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     candidateFeatures,
                     candidateMask,
                     chosen,
-                    actionType));
+                    actionType,
+                    stepReward));
         }
 
         return selectedIndices;
@@ -341,6 +366,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             // leave zeros
         }
         return f;
+    }
+
+    private double computeStepReward(StateSequenceBuilder.ActionType actionType, Object candidate) {
+        if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL || candidate == null) {
+            return 0.0;
+        }
+        if (candidate instanceof PlayLandAbility) {
+            return LAND_PLAY_REWARD;
+        }
+        if (candidate instanceof SpellAbility) {
+            return SPELL_CAST_REWARD;
+        }
+        return 0.0;
     }
 
     // Helper method to generate all valid combinations of targets
@@ -629,6 +667,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // }
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        if (USE_ENGINE_CHOICES) {
+            boolean result = super.chooseTarget(outcome, target, source, game);
+            if (result && !target.getTargets().isEmpty()) {
+                for (UUID targetId : target.getTargets()) {
+                    String targetName = describeTargetWithOwner(targetId, game);
+                    RLTrainer.threadLocalLogger.get().info(
+                            "Player " + getName() + " chose target (engine): " + targetName + " (" + targetId + ")"
+                            + " for ability: " + (source != null ? source.toString() : "null source")
+                    );
+                }
+            }
+            return result;
+        }
         // Mulligan and some game setup flows call chooseTarget with a null source;
         // defer to base implementation until we add RL support for those cases.
         if (source == null) {
@@ -718,7 +769,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             for (UUID targetId : target.getTargets()) {
                 String targetName = describeTargetWithOwner(targetId, game);
                 RLTrainer.threadLocalLogger.get().info(
-                        "Player " + getName() + " chose target (from choose): " + targetName + " (" + targetId + ")"
+                        "Player " + getName() + " chose target: " + targetName + " (" + targetId + ")"
                         + " for ability: " + (source != null ? source.toString() : "null source")
                 );
             }
@@ -743,10 +794,132 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
     @Override
     public boolean choose(Outcome outcome, Choice choice, Game game) {
+        // ALWAYS log when choose() is called, regardless of conditions
+        if (ACTIVATION_DIAG) {
+            String choiceInfo;
+            if (choice != null) {
+                boolean isKeyChoice = choice.isKeyChoice();
+                int choiceCount = isKeyChoice ? choice.getKeyChoices().size() : choice.getChoices().size();
+                choiceInfo = " isKeyChoice=" + isKeyChoice + " count=" + choiceCount;
+                if (isKeyChoice && choiceCount > 0) {
+                    choiceInfo += " keys=" + choice.getKeyChoices().keySet();
+                } else if (!isKeyChoice && choiceCount > 0) {
+                    choiceInfo += " choices=" + choice.getChoices();
+                }
+            } else {
+                choiceInfo = " (null choice)";
+            }
+            RLTrainer.threadLocalLogger.get().info(
+                    "CHOOSE: ENTRY - outcome=" + outcome + choiceInfo
+            );
+        }
+
+        if (ACTIVATION_DIAG && choice != null && choice.getChoices() != null && choice.getChoices().size() > 1) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "CHOOSE: Called with " + choice.getChoices().size() + " options: " + choice.getChoices()
+            );
+        }
+
+        // Detect alternative cost choices (they use KEY-based choices!)
+        if (choice != null && choice.isKeyChoice() && choice.getKeyChoices() != null && choice.getKeyChoices().size() > 1) {
+            // Check if any of the key choice VALUES contain "alternative cost"
+            boolean hasAlternativeCost = false;
+            for (String choiceValue : choice.getKeyChoices().values()) {
+                if (choiceValue != null && choiceValue.contains("alternative cost")) {
+                    hasAlternativeCost = true;
+                    break;
+                }
+            }
+
+            if (hasAlternativeCost) {
+                if (ACTIVATION_DIAG) {
+                    RLTrainer.threadLocalLogger.get().info(
+                            "CHOOSE: Alternative cost detected, currentAbility=" + currentAbility
+                            + ", forcedChoice=" + forcedAlternativeChoice.get()
+                            + ", trackingData=" + choiceTrackingData.get()
+                    );
+                }
+
+                // Track available options for simulation testing (using KEYS)
+                if (choiceTrackingData.get() == null) {
+                    ChoiceTrackingData tracking = new ChoiceTrackingData();
+                    tracking.availableOptions = new HashSet<>(choice.getKeyChoices().keySet());
+                    choiceTrackingData.set(tracking);
+                    if (ACTIVATION_DIAG) {
+                        RLTrainer.threadLocalLogger.get().info(
+                                "CHOOSE: Created new tracking data with key options: " + tracking.availableOptions
+                        );
+                    }
+                }
+
+                // Check if we're forcing a specific choice (during testing)
+                String forced = forcedAlternativeChoice.get();
+                if (forced != null) {
+                    if (choice.getKeyChoices().containsKey(forced)) {
+                        choice.setChoiceByKey(forced);
+                        ChoiceTrackingData tracking = choiceTrackingData.get();
+                        if (tracking != null) {
+                            tracking.choiceMade = forced;
+                        }
+                        if (ACTIVATION_DIAG) {
+                            RLTrainer.threadLocalLogger.get().info(
+                                    "CHOOSE: Forced choice key " + forced + " -> " + choice.getChoice()
+                            );
+                        }
+                        return true;
+                    }
+                }
+
+                // During real activation, constrain to only valid choices
+                if (currentAbility != null) {
+                    Set<String> validChoices = validAlternativeCosts.get(currentAbility.getSourceId());
+                    if (validChoices != null && !validChoices.isEmpty()) {
+                        // Pick the first valid choice key
+                        for (String key : choice.getKeyChoices().keySet()) {
+                            if (validChoices.contains(key)) {
+                                choice.setChoiceByKey(key);
+                                if (ACTIVATION_DIAG) {
+                                    RLTrainer.threadLocalLogger.get().info(
+                                            "Player " + getName() + " chose (validated alternative) key=" + key
+                                            + " -> " + choice.getChoice() + " (from " + validChoices.size()
+                                            + " valid options, sourceId=" + currentAbility.getSourceId() + ")"
+                                    );
+                                }
+                                return true;
+                            }
+                        }
+                    }
+                }
+
+                // Default: use parent class logic (random)
+                boolean result = super.choose(outcome, choice, game);
+                if (result && choice.isChosen()) {
+                    // Track which KEY was chosen
+                    String chosenKey = choice.getChoiceKey();
+                    ChoiceTrackingData tracking = choiceTrackingData.get();
+                    if (tracking != null) {
+                        tracking.choiceMade = chosenKey;
+                        if (ACTIVATION_DIAG) {
+                            RLTrainer.threadLocalLogger.get().info(
+                                    "CHOOSE: Tracked choice key=" + chosenKey + " -> " + choice.getChoice()
+                            );
+                        }
+                    } else {
+                        if (ACTIVATION_DIAG) {
+                            RLTrainer.threadLocalLogger.get().info(
+                                    "CHOOSE: WARNING - tracking is null after parent.choose()!"
+                            );
+                        }
+                    }
+                }
+                return result;
+            }
+        }
+
         boolean result = super.choose(outcome, choice, game);
         if (result && choice.isChosen()) {
             RLTrainer.threadLocalLogger.get().info(
-                    "Player " + getName() + " chose (from Choice): " + choice.getChoiceKey() + " -> " + choice.getChoice()
+                    "Player " + getName() + " chose: " + choice.getChoiceKey() + " -> " + choice.getChoice()
             );
         }
         return result;
@@ -775,7 +948,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             for (UUID targetId : target.getTargets()) {
                 String targetName = describeTargetWithOwner(targetId, game);
                 RLTrainer.threadLocalLogger.get().info(
-                        "Player " + getName() + " chose target (from choose with options): " + targetName + " (" + targetId + ")"
+                        "Player " + getName() + " chose target with options: " + targetName + " (" + targetId + ")"
                         + " for ability: " + (source != null ? source.toString() : "null source")
                 );
             }
@@ -1115,6 +1288,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             pass(game);
         } else {
             RLTrainer.threadLocalLogger.get().info(String.format("===> SELECTED ACTION for %s: %s", getName(), ability));
+
+            // Double-check canActivate status right before activation
+            if (ACTIVATION_DIAG) {
+                ActivatedAbility.ActivationStatus preActivateStatus = ability.canActivate(this.getId(), game);
+                MageObject sourceObj = game.getObject(ability.getSourceId());
+                String sourceName = sourceObj != null ? sourceObj.getName() : "unknown";
+                RLTrainer.threadLocalLogger.get().info(String.format(
+                        "PRE-ACTIVATE: canActivate=%s, approvingObjects=%d, card=%s",
+                        preActivateStatus != null && preActivateStatus.canActivate(),
+                        preActivateStatus != null ? preActivateStatus.getApprovingObjects().size() : 0,
+                        sourceName
+                ));
+            }
+
             //TODO: Need to look into target selection. 
             if (!ability.getTargets().isEmpty()) {
                 for (Target target : ability.getTargets()) {
@@ -1126,14 +1313,35 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     }
                 }
             }
+            // Track current ability for choice filtering
+            currentAbility = ability;
+
             if (!this.activateAbility(ability, game)) {
                 // If we are here it is because the RL player chose an action that isn't actually executable
                 // (often due to hidden costs/choices not captured in our candidate features).
                 // Treat this as a forced pass rather than crashing the engine.
-                RLTrainer.threadLocalLogger.get().warn("Failed to activate ability; forcing pass: " + ability);
+                int failureCount = RL_ACTIVATION_FAILURES.incrementAndGet();
+
+                // CRITICAL ERROR - Use both logger AND System.err to ensure visibility
+                String errorMsg = "\n!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+                        + "!!! RL PLAYER ACTIVATION FAILED - THIS HURTS TRAINING !!!\n"
+                        + "!!! TOTAL RL ACTIVATION FAILURES THIS RUN: " + failureCount + " !!!\n"
+                        + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n"
+                        + "RL Player: " + getName() + " | Thread: " + Thread.currentThread().getName() + "\n"
+                        + "Failed ability: " + ability + "\n";
+
+                System.err.println(errorMsg);
+                RLTrainer.threadLocalLogger.get().error(errorMsg);
+                logActivationFailure(ability, game);
+                System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
+                RLTrainer.threadLocalLogger.get().error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
                 pass(game);
+                currentAbility = null; // Clear after failure
                 return;
             }
+
+            currentAbility = null; // Clear after successful activation
 
             // Log all resolved targets for the ability (covers auto-chosen single targets)
             logAbilityTargets(ability, game);
@@ -1191,9 +1399,185 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
+    private void logActivationFailure(ActivatedAbility ability, Game game) {
+        if (!ACTIVATION_DIAG || ability == null || game == null) {
+            return;
+        }
+        try {
+            ActivatedAbility.ActivationStatus status = ability.canActivate(this.getId(), game);
+            boolean canChooseTarget = ability.canChooseTarget(game, this.getId());
+            boolean canPlayLandNow = !(ability instanceof PlayLandAbility) || this.canPlayLand();
+            MageObject sourceObj = game.getObject(ability.getSourceId());
+            String sourceName = sourceObj != null ? sourceObj.getName() : "unknown";
+            String sourceZone = sourceObj != null ? String.valueOf(game.getState().getZone(sourceObj.getId())) : "unknown";
+            int approvingCount = status != null ? status.getApprovingObjects().size() : 0;
+
+            RLTrainer.threadLocalLogger.get().error(String.format(
+                    "RL ACTIVATION DIAGNOSTICS: player=%s abilityType=%s usesStack=%s canActivate=%s canChooseTarget=%s canPlayLand=%s approvingObjects=%d source=%s zone=%s",
+                    getName(),
+                    ability.getAbilityType(),
+                    ability.isUsesStack(),
+                    status != null && status.canActivate(),
+                    canChooseTarget,
+                    canPlayLandNow,
+                    approvingCount,
+                    sourceName,
+                    sourceZone
+            ));
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().error("RL ACTIVATION DIAGNOSTICS: error while gathering details", e);
+        }
+    }
+
+    /**
+     * Test all alternative cost options for an ability in simulation. Returns a
+     * set of choice keys (e.g., "1", "2") that successfully activated.
+     *
+     * For abilities without alternative costs, tests once and returns either
+     * empty set (failed) or set with "0" (succeeded).
+     */
+    private Set<String> testAllAlternativeCosts(ActivatedAbility ability, Game game) {
+        Set<String> validChoices = new HashSet<>();
+
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "ALTCOST-TEST: Testing ability " + ability + " (sourceId=" + ability.getSourceId() + ")"
+            );
+        }
+
+        // Test with default choice first (no forcing)
+        forcedAlternativeChoice.remove();
+        choiceTrackingData.remove();
+
+        Game sim = game.createSimulationForAI();
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "ALTCOST-TEST: Created simulation, about to activate..."
+            );
+        }
+        boolean defaultWorks = sim.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim);
+
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "ALTCOST-TEST: activateAbility() returned " + defaultWorks + ", now checking tracking..."
+            );
+        }
+
+        ChoiceTrackingData tracking = choiceTrackingData.get();
+
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "ALTCOST-TEST: Default test " + (defaultWorks ? "PASSED" : "FAILED")
+                    + ", tracking=" + (tracking != null ? "present" : "null")
+                    + (tracking != null ? ", choiceMade=" + tracking.choiceMade + ", availableOptions=" + tracking.availableOptions : "")
+            );
+        }
+
+        if (defaultWorks) {
+            if (tracking != null && tracking.choiceMade != null) {
+                // An alternative cost choice was made
+                validChoices.add(tracking.choiceMade);
+            } else {
+                // No alternative cost choice (normal ability)
+                validChoices.add("0");
+                choiceTrackingData.remove();
+                return validChoices; // No alternatives to test
+            }
+        }
+
+        // If we detected alternatives, test all other options
+        if (tracking != null && tracking.availableOptions != null) {
+            for (String option : tracking.availableOptions) {
+                if (validChoices.contains(option)) {
+                    continue; // Already tested this one
+                }
+
+                if (ACTIVATION_DIAG) {
+                    RLTrainer.threadLocalLogger.get().info(
+                            "ALTCOST-TEST: Testing option " + option + "..."
+                    );
+                }
+
+                // Force this specific choice and test
+                forcedAlternativeChoice.set(option);
+                choiceTrackingData.remove();
+
+                Game sim2 = game.createSimulationForAI();
+                boolean works = sim2.getPlayer(this.getId()).activateAbility((ActivatedAbility) ability.copy(), sim2);
+                if (works) {
+                    validChoices.add(option);
+                    if (ACTIVATION_DIAG) {
+                        RLTrainer.threadLocalLogger.get().info(
+                                "ALTCOST-TEST: Option " + option + " PASSED"
+                        );
+                    }
+                } else {
+                    if (ACTIVATION_DIAG) {
+                        RLTrainer.threadLocalLogger.get().info(
+                                "ALTCOST-TEST: Option " + option + " FAILED"
+                        );
+                    }
+                }
+            }
+        }
+
+        // Clean up ThreadLocals
+        forcedAlternativeChoice.remove();
+        choiceTrackingData.remove();
+
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "ALTCOST-TEST: Final result for " + ability + " -> validChoices=" + validChoices
+            );
+        }
+
+        return validChoices;
+    }
+
     protected Ability calculateRLAction(Game game) {
         List<ActivatedAbility> flattenedOptions = getPlayable(game, true);
         // (PassAbility will be added later after duplicate removal)
+
+        // Filter out mana abilities
+        flattenedOptions = flattenedOptions.stream()
+                .filter(ability -> !(ability instanceof ManaAbility))
+                .collect(java.util.stream.Collectors.toList());
+
+        // Filter by testing activation in a simulation (like ComputerPlayer6 does)
+        // For abilities with alternative costs, test ALL alternatives and track which ones work
+        List<ActivatedAbility> validOptions = new ArrayList<>();
+        int filteredCount = 0;
+        validAlternativeCosts.clear(); // Clear previous tracking
+
+        for (ActivatedAbility ability : flattenedOptions) {
+            Set<String> validChoices = testAllAlternativeCosts(ability, game);
+
+            if (!validChoices.isEmpty()) {
+                // At least one alternative worked
+                validOptions.add(ability);
+                // Always track if there were alternatives tested (even if only one is valid)
+                // We detect alternatives by checking if the set contains anything other than just "0"
+                boolean hasAlternatives = !(validChoices.size() == 1 && validChoices.contains("0"));
+                if (hasAlternatives) {
+                    validAlternativeCosts.put(ability.getSourceId(), validChoices);
+                    if (ACTIVATION_DIAG) {
+                        RLTrainer.threadLocalLogger.get().info(
+                                "SIM-FILTER: Ability has alternatives, storing validated choices: "
+                                + ability + " (sourceId=" + ability.getSourceId() + ") -> " + validChoices
+                        );
+                    }
+                }
+            } else {
+                filteredCount++;
+                if (ACTIVATION_DIAG) {
+                    RLTrainer.threadLocalLogger.get().info("SIM-FILTER: Rejected ability in simulation: " + ability);
+                }
+            }
+        }
+        if (ACTIVATION_DIAG && filteredCount > 0) {
+            RLTrainer.threadLocalLogger.get().info("SIM-FILTER: Filtered out " + filteredCount + " abilities that failed simulation test");
+        }
+        flattenedOptions = validOptions;
 
         // Remove duplicate spell abilities with the same name
         List<ActivatedAbility> uniqueOptions = new ArrayList<>();
@@ -1233,7 +1617,23 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // Disables engine auto-targeting heuristics by forcing strict choose mode
     @Override
     public boolean getStrictChooseMode() {
-        return true;
+        return !USE_ENGINE_CHOICES;
+    }
+
+    /**
+     * Get total number of RL activation failures since process start. These
+     * failures pollute the training signal and should be zero ideally.
+     */
+    public static int getRLActivationFailureCount() {
+        return RL_ACTIVATION_FAILURES.get();
+    }
+
+    /**
+     * Reset the RL activation failure counter (useful for tracking
+     * per-training-run).
+     */
+    public static void resetRLActivationFailureCount() {
+        RL_ACTIVATION_FAILURES.set(0);
     }
 
     private String describeTargetWithOwner(UUID targetId, Game game) {
@@ -1281,6 +1681,15 @@ class BlockOption {
         this.blockerIndex = blockerIndex;
         this.qValue = qValue;
     }
+}
+
+/**
+ * Helper class to track choice information during simulation testing
+ */
+class ChoiceTrackingData {
+
+    String choiceMade = null;
+    Set<String> availableOptions = null;
 }
 
 // Helper class to store attack options

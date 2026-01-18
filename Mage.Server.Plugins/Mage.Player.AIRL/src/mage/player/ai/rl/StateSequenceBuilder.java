@@ -528,6 +528,7 @@ public class StateSequenceBuilder {
         public final int[] candidateMask;          // [MAX_CANDIDATES] 1=valid,0=pad
         public final int chosenIndex;              // 0..MAX_CANDIDATES-1 (must be valid)
         public final ActionType actionType;
+        public final double stepReward;
 
         public TrainingData(SequenceOutput state,
                 int candidateCount,
@@ -535,7 +536,8 @@ public class StateSequenceBuilder {
                 float[][] candidateFeatures,
                 int[] candidateMask,
                 int chosenIndex,
-                ActionType actionType) {
+                ActionType actionType,
+                double stepReward) {
             this.state = state;
             this.candidateCount = candidateCount;
             this.candidateActionIds = candidateActionIds;
@@ -543,6 +545,7 @@ public class StateSequenceBuilder {
             this.candidateMask = candidateMask;
             this.chosenIndex = chosenIndex;
             this.actionType = actionType;
+            this.stepReward = stepReward;
         }
     }
 }
