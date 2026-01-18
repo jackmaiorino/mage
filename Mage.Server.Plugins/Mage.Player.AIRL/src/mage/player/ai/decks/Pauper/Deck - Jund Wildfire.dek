@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="126484" Quantity="4" Sideboard="false" Name="Twisted Landscape" Annotation="0"/>
+  <Cards CatID="118014" Quantity="4" Sideboard="false" Name="Fanatical Offering" Annotation="0"/>
+  <Cards CatID="82556" Quantity="3" Sideboard="false" Name="Ichor Wellspring" Annotation="0"/>
+  <Cards CatID="94506" Quantity="1" Sideboard="false" Name="Blood Fountain" Annotation="0"/>
+  <Cards CatID="90873" Quantity="4" Sideboard="false" Name="Drossforge Bridge" Annotation="0"/>
+  <Cards CatID="90893" Quantity="4" Sideboard="false" Name="Slagwoods Bridge" Annotation="0"/>
+  <Cards CatID="126435" Quantity="4" Sideboard="false" Name="Writhing Chrysalis" Annotation="0"/>
+  <Cards CatID="126346" Quantity="1" Sideboard="false" Name="Nyxborn Hydra" Annotation="0"/>
+  <Cards CatID="20019" Quantity="1" Sideboard="false" Name="Vault of Whispers" Annotation="0"/>
+  <Cards CatID="83247" Quantity="4" Sideboard="false" Name="Cleansing Wildfire" Annotation="0"/>
+  <Cards CatID="112396" Quantity="3" Sideboard="false" Name="Lembas" Annotation="0"/>
+  <Cards CatID="65318" Quantity="1" Sideboard="false" Name="Makeshift Munitions" Annotation="0"/>
+  <Cards CatID="67627" Quantity="4" Sideboard="false" Name="Cast Down" Annotation="0"/>
+  <Cards CatID="38315" Quantity="4" Sideboard="false" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="79628" Quantity="3" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="79630" Quantity="2" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="79632" Quantity="2" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="126227" Quantity="4" Sideboard="false" Name="Refurbished Familiar" Annotation="0"/>
+  <Cards CatID="19717" Quantity="3" Sideboard="false" Name="Krark-Clan Shaman" Annotation="0"/>
+  <Cards CatID="126203" Quantity="1" Sideboard="false" Name="Eviscerator's Insight" Annotation="0"/>
+  <Cards CatID="121692" Quantity="2" Sideboard="false" Name="Toxin Analysis" Annotation="0"/>
+  <Cards CatID="73277" Quantity="1" Sideboard="false" Name="Pulse of Murasa" Annotation="0"/>
+  <Cards CatID="72754" Quantity="4" Sideboard="true" Name="Weather the Storm" Annotation="0"/>
+  <Cards CatID="100352" Quantity="2" Sideboard="true" Name="Breath Weapon" Annotation="0"/>
+  <Cards CatID="69981" Quantity="3" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="116730" Quantity="2" Sideboard="true" Name="Troublemaker Ouphe" Annotation="0"/>
+  <Cards CatID="37277" Quantity="3" Sideboard="true" Name="Duress" Annotation="0"/>
+  <Cards CatID="121646" Quantity="1" Sideboard="true" Name="Extract a Confession" Annotation="0"/>
+</Deck>

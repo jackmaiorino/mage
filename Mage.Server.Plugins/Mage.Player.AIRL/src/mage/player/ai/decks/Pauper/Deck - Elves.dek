@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="85238" Quantity="3" Sideboard="false" Name="Fyndhorn Elves" Annotation="0"/>
+  <Cards CatID="80335" Quantity="4" Sideboard="false" Name="Lead the Stampede" Annotation="0"/>
+  <Cards CatID="51539" Quantity="4" Sideboard="false" Name="Elvish Mystic" Annotation="0"/>
+  <Cards CatID="18641" Quantity="4" Sideboard="false" Name="Timberwatch Elf" Annotation="0"/>
+  <Cards CatID="125983" Quantity="4" Sideboard="false" Name="Priest of Titania" Annotation="0"/>
+  <Cards CatID="90993" Quantity="4" Sideboard="false" Name="Quirion Ranger" Annotation="0"/>
+  <Cards CatID="72758" Quantity="4" Sideboard="false" Name="Winding Way" Annotation="0"/>
+  <Cards CatID="27697" Quantity="2" Sideboard="false" Name="Llanowar Elves" Annotation="0"/>
+  <Cards CatID="126346" Quantity="4" Sideboard="false" Name="Nyxborn Hydra" Annotation="0"/>
+  <Cards CatID="87919" Quantity="13" Sideboard="false" Name="Snow-Covered Forest" Annotation="0"/>
+  <Cards CatID="112248" Quantity="4" Sideboard="false" Name="Generous Ent" Annotation="0"/>
+  <Cards CatID="100458" Quantity="4" Sideboard="false" Name="Avenging Hunter" Annotation="0"/>
+  <Cards CatID="87711" Quantity="4" Sideboard="false" Name="Masked Vandal" Annotation="0"/>
+  <Cards CatID="18119" Quantity="2" Sideboard="false" Name="Wellwisher" Annotation="0"/>
+  <Cards CatID="121842" Quantity="4" Sideboard="true" Name="Vitu-Ghazi Inspector" Annotation="0"/>
+  <Cards CatID="130513" Quantity="4" Sideboard="true" Name="Monstrous Emergence" Annotation="0"/>
+  <Cards CatID="124277" Quantity="3" Sideboard="true" Name="Spinewoods Paladin" Annotation="0"/>
+  <Cards CatID="78636" Quantity="1" Sideboard="true" Name="Gingerbread Cabin" Annotation="0"/>
+  <Cards CatID="73277" Quantity="3" Sideboard="true" Name="Pulse of Murasa" Annotation="0"/>
+</Deck>

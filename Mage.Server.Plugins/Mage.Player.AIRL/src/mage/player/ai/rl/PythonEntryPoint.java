@@ -112,6 +112,14 @@ public interface PythonEntryPoint {
     );
 
     /**
+     * Predict mulligan decision from hand features.
+     * 
+     * @param features Mulligan feature vector (32-dim float array)
+     * @return Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
+     */
+    float predictMulligan(float[] features);
+
+    /**
      * Train on a batch of padded candidate decision steps.
      *
      * @param chosenIndexBytes int32[batchSize] chosen candidate index

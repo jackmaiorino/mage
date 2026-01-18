@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="52958" Quantity="2" Sideboard="false" Name="Mesmeric Fiend" Annotation="0"/>
+  <Cards CatID="36602" Quantity="4" Sideboard="false" Name="Overgrown Battlement" Annotation="0"/>
+  <Cards CatID="71278" Quantity="4" Sideboard="false" Name="Saruli Caretaker" Annotation="0"/>
+  <Cards CatID="46348" Quantity="3" Sideboard="false" Name="Gatecreeper Vine" Annotation="0"/>
+  <Cards CatID="139776" Quantity="4" Sideboard="false" Name="Sagu Wildling" Annotation="0"/>
+  <Cards CatID="112248" Quantity="4" Sideboard="false" Name="Generous Ent" Annotation="0"/>
+  <Cards CatID="80335" Quantity="4" Sideboard="false" Name="Lead the Stampede" Annotation="0"/>
+  <Cards CatID="72758" Quantity="4" Sideboard="false" Name="Winding Way" Annotation="0"/>
+  <Cards CatID="13057" Quantity="4" Sideboard="false" Name="Land Grant" Annotation="0"/>
+  <Cards CatID="101621" Quantity="4" Sideboard="false" Name="Balustrade Spy" Annotation="0"/>
+  <Cards CatID="69521" Quantity="2" Sideboard="false" Name="Lotleth Giant" Annotation="0"/>
+  <Cards CatID="113692" Quantity="2" Sideboard="false" Name="Dread Return" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="79632" Quantity="3" Sideboard="false" Name="Forest" Annotation="0"/>
+  <Cards CatID="35115" Quantity="3" Sideboard="false" Name="Wall of Roots" Annotation="0"/>
+  <Cards CatID="87711" Quantity="3" Sideboard="false" Name="Masked Vandal" Annotation="0"/>
+  <Cards CatID="90993" Quantity="2" Sideboard="false" Name="Quirion Ranger" Annotation="0"/>
+  <Cards CatID="112132" Quantity="1" Sideboard="false" Name="Troll of Khazad-dum" Annotation="0"/>
+  <Cards CatID="134376" Quantity="2" Sideboard="false" Name="Lotus Petal" Annotation="0"/>
+  <Cards CatID="62483" Quantity="2" Sideboard="false" Name="Tinder Wall" Annotation="0"/>
+  <Cards CatID="23100" Quantity="2" Sideboard="false" Name="Elves of Deep Shadow" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="true" Name="Swamp" Annotation="0"/>
+  <Cards CatID="29647" Quantity="2" Sideboard="true" Name="Faerie Macabre" Annotation="0"/>
+  <Cards CatID="73251" Quantity="4" Sideboard="true" Name="Healer of the Glade" Annotation="0"/>
+  <Cards CatID="52958" Quantity="2" Sideboard="true" Name="Mesmeric Fiend" Annotation="0"/>
+  <Cards CatID="87711" Quantity="1" Sideboard="true" Name="Masked Vandal" Annotation="0"/>
+  <Cards CatID="17516" Quantity="1" Sideboard="true" Name="Flaring Pain" Annotation="0"/>
+  <Cards CatID="38450" Quantity="2" Sideboard="true" Name="Fume Spitter" Annotation="0"/>
+  <Cards CatID="121842" Quantity="2" Sideboard="true" Name="Vitu-Ghazi Inspector" Annotation="0"/>
+</Deck>

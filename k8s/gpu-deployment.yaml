@@ -1,0 +1,186 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-rl-gpu-learner
+  namespace: mage-rl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mage-rl-gpu-learner
+  template:
+    metadata:
+      labels:
+        app: mage-rl-gpu-learner
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: "/metrics"
+    spec:
+      terminationGracePeriodSeconds: 90
+      containers:
+      - name: learner
+        image: 915449292132.dkr.ecr.us-east-1.amazonaws.com/mage-rl-gpu:latest
+        ports:
+        - containerPort: 9090
+          name: metrics
+        env:
+        - name: MODE
+          value: "learner"
+        - name: USE_GPU
+          value: "true"
+        - name: TRAJ_DIR
+          value: "/shared/trajectories"
+        - name: DECKS_DIR
+          value: "/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"
+        - name: METRICS_PORT
+          value: "9090"
+        - name: NVIDIA_VISIBLE_DEVICES
+          value: "all"
+        - name: NVIDIA_DRIVER_CAPABILITIES
+          value: "compute,utility"
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mage-rl-secrets
+              key: OPENAI_API_KEY
+        - name: JAVA_TOOL_OPTIONS
+          value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75 -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
+        - name: BATCH_SAMPLE_MB
+          value: "14"
+        - name: BATCH_SAFETY_FRACTION
+          value: "0.45"
+        - name: BATCH_MAX_SAMPLES
+          value: "250000"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9090
+          initialDelaySeconds: 40
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 9090
+          initialDelaySeconds: 20
+          periodSeconds: 10
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          runAsUser: 1000
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2000m"
+            nvidia.com/gpu: 1  # Request 1 GPU
+          limits:
+            memory: "8Gi" 
+            cpu: "4000m"
+            nvidia.com/gpu: 1  # Limit to 1 GPU
+        volumeMounts:
+        - name: shared-data
+          mountPath: /shared
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: efs-pvc
+      nodeSelector:
+        accelerator: nvidia-tesla-t4  # Schedule on GPU nodes only
+      tolerations:
+      - key: nvidia.com/gpu
+        operator: Exists
+        effect: NoSchedule
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: mage-rl-learner-pdb
+  namespace: mage-rl
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: mage-rl-gpu-learner
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-rl-gpu-workers
+  namespace: mage-rl
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: mage-rl-gpu-workers
+  template:
+    metadata:
+      labels:
+        app: mage-rl-gpu-workers
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: "/metrics"
+    spec:
+      terminationGracePeriodSeconds: 90
+      containers:
+      - name: worker
+        image: 915449292132.dkr.ecr.us-east-1.amazonaws.com/mage-rl-gpu:latest
+        ports:
+        - containerPort: 9090
+          name: metrics
+        env:
+        - name: MODE
+          value: "worker"
+        - name: USE_GPU
+          value: "false"  # Workers can run on CPU
+        - name: TRAJ_DIR
+          value: "/shared/trajectories"
+        - name: DECKS_DIR
+          value: "/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"
+        - name: METRICS_PORT
+          value: "9090"
+        - name: JAVA_TOOL_OPTIONS
+          value: "-XX:+UseContainerSupport -XX:MaxRAMPercentage=75 -XX:+UseG1GC -XX:MaxGCPauseMillis=200"
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mage-rl-secrets
+              key: OPENAI_API_KEY
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 9090
+          initialDelaySeconds: 30
+          periodSeconds: 15
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 9090
+          initialDelaySeconds: 15
+          periodSeconds: 10
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          runAsUser: 1000
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: shared-data
+          mountPath: /shared
+      volumes:
+      - name: shared-data
+        persistentVolumeClaim:
+          claimName: efs-pvc
+      # Workers can run on either GPU or CPU nodes
+      tolerations:
+      - key: "spot"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"

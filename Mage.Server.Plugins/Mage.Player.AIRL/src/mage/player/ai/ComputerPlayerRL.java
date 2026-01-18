@@ -19,6 +19,7 @@ import mage.abilities.mana.ManaAbility;
 import mage.abilities.PlayLandAbility;
 import mage.abilities.SpellAbility;
 import mage.abilities.common.PassAbility;
+import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.Outcome;
@@ -27,6 +28,8 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.player.ai.rl.MulliganLogger;
+import mage.player.ai.rl.MulliganModel;
 import mage.player.ai.rl.PythonMLBridge;
 import mage.player.ai.rl.RLTrainer;
 import mage.player.ai.rl.StateSequenceBuilder;
@@ -58,9 +61,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private static final ThreadLocal<ChoiceTrackingData> choiceTrackingData = new ThreadLocal<>();
 
     private PythonMLBridge model;
+    private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private Ability currentAbility;
+    private int mulliganCount = 0;
+    private int currentEpisode = -1; // For mulligan logging
+
+    // Track mulligan decisions for training (card-level)
+    private final List<Integer> mulliganNums = new ArrayList<>();
+    private final List<int[]> mulliganHandIds = new ArrayList<>();
+    private final List<int[]> mulliganDeckIds = new ArrayList<>();
+    private final List<Float> mulliganDecisions = new ArrayList<>(); // 1.0=keep, 0.0=mulligan
+    private MulliganModel.MulliganDecision pendingMulliganDecision = null; // Pending mulligan to log after drawing new 7
+    private int lastLoggedMulliganCount = -1; // Track last logged mulligan to prevent duplicates
+    private StateSequenceBuilder.TrainingData pendingLondonMulliganTraining = null; // Only commit if we KEEP
 
     /**
      * If true, the agent will act greedily (arg-max) instead of sampling.
@@ -76,6 +91,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public ComputerPlayerRL(String name, RangeOfInfluence range, PythonMLBridge model, boolean greedy) {
         super(name, range, 10);
         this.model = model;
+        this.mulliganModel = new MulliganModel(model);
         this.trainingBuffer = new ArrayList<>();
         this.greedyMode = greedy;
         // Auto-targeting disabled via getStrictChooseMode override
@@ -90,8 +106,12 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     public ComputerPlayerRL(final ComputerPlayerRL player) {
         super(player);
         this.model = player.model;
+        this.mulliganModel = player.mulliganModel;
         this.trainingBuffer = new ArrayList<>();
         this.currentAbility = player.currentAbility;
+        this.mulliganCount = player.mulliganCount;
+        this.lastLoggedMulliganCount = player.lastLoggedMulliganCount; // Prevent duplicates in copied instances
+        this.pendingLondonMulliganTraining = null; // Don't copy pending training data to simulated copies
         this.greedyMode = player.greedyMode;
         // strict choose mode enforced via method override
     }
@@ -258,19 +278,37 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
 
         // after you compute logits/probs and make a choice
-        // Record training only for simple single-choice decisions for now.
-        if (minTargets == 1 && maxTargets == 1 && !selectedIndices.isEmpty()) {
-            int chosen = selectedIndices.get(0);
-            double stepReward = computeStepReward(actionType, candidates.get(chosen));
-            trainingBuffer.add(new StateSequenceBuilder.TrainingData(
-                    baseState,
-                    candidateCount,
-                    candidateActionIds,
-                    candidateFeatures,
-                    candidateMask,
-                    chosen,
-                    actionType,
-                    stepReward));
+        // Record training data for decisions
+        if (!selectedIndices.isEmpty()) {
+            if (minTargets == 1 && maxTargets == 1) {
+                // Single-choice decision: log the chosen option
+                int chosen = selectedIndices.get(0);
+                double stepReward = computeStepReward(actionType, candidates.get(chosen));
+                trainingBuffer.add(new StateSequenceBuilder.TrainingData(
+                        baseState,
+                        candidateCount,
+                        candidateActionIds,
+                        candidateFeatures,
+                        candidateMask,
+                        chosen,
+                        actionType,
+                        stepReward));
+            } else if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
+                // Multi-choice ranking decision (London mulligan): store temporarily
+                // Only commit to training buffer if we KEEP the resulting hand
+                // (If we mulligan again, these cards get shuffled back and have no impact)
+                int bestKeptIndex = selectedIndices.get(0);
+                double stepReward = computeStepReward(actionType, candidates.get(bestKeptIndex));
+                pendingLondonMulliganTraining = new StateSequenceBuilder.TrainingData(
+                        baseState,
+                        candidateCount,
+                        candidateActionIds,
+                        candidateFeatures,
+                        candidateMask,
+                        bestKeptIndex,
+                        actionType,
+                        stepReward);
+            }
         }
 
         return selectedIndices;
@@ -667,6 +705,11 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // }
     @Override
     public boolean chooseTarget(Outcome outcome, Target target, Ability source, Game game) {
+        // Special case: London mulligan card selection
+        if (source == null && outcome == Outcome.Discard && target instanceof mage.target.common.TargetCardInHand) {
+            return chooseLondonMulliganCards(target, game);
+        }
+
         if (USE_ENGINE_CHOICES) {
             boolean result = super.chooseTarget(outcome, target, source, game);
             if (result && !target.getTargets().isEmpty()) {
@@ -680,7 +723,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
             return result;
         }
-        // Mulligan and some game setup flows call chooseTarget with a null source;
+        // Other game setup flows with null source:
         // defer to base implementation until we add RL support for those cases.
         if (source == null) {
             return super.chooseTarget(outcome, target, source, game);
@@ -1180,13 +1223,275 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return attackers;
     }
 
-    // TODO: Implement
-    //    @Override
-//    public boolean chooseMulligan(Game game) {
-//        currentState = new RLState(game);
-//        RLAction action = model.getAction(currentState);
-//        return action != null && action.getType() == RLAction.ActionType.MULLIGAN;
-//    }
+    @Override
+    public boolean chooseMulligan(Game game) {
+        try {
+            // Guard against duplicate calls from game engine
+            if (lastLoggedMulliganCount == mulliganCount) {
+                RLTrainer.threadLocalLogger.get().debug(
+                    String.format("chooseMulligan called again for mulliganCount=%d, skipping duplicate", mulliganCount)
+                );
+                // Return the same decision we made before
+                return pendingMulliganDecision != null;
+            }
+            
+            MulliganModel.MulliganDecision decision = mulliganModel.shouldMulliganWithFeatures(this, game, mulliganCount, currentEpisode);
+
+            // Log the decision to console
+            int landCount = 0;
+            for (Card card : getHand().getCards(game)) {
+                if (card.isLand(game)) {
+                    landCount++;
+                }
+            }
+
+            RLTrainer.threadLocalLogger.get().info(
+                    String.format("Mulligan decision for %s: mulliganNum=%d, handSize=%d, lands=%d, decision=%s (keepProb=%.3f)",
+                            getName(), mulliganCount, getHand().size(), landCount,
+                            decision.shouldMulligan ? "MULLIGAN" : "KEEP", decision.keepProbability)
+            );
+
+            if (decision.shouldMulligan) {
+                // Don't log yet - wait for chooseLondonMulliganCards to see the new 7 cards
+                pendingMulliganDecision = decision;
+                
+                // Discard any pending London mulligan training data from previous mulligan
+                // (those cards got shuffled back and had no impact on the game)
+                pendingLondonMulliganTraining = null;
+            } else {
+                // KEEP decision - log immediately since no London mulligan will happen
+                // Store card IDs and decision for training
+                mulliganNums.add(decision.mulliganNum);
+                mulliganHandIds.add(decision.handCardIds);
+                mulliganDeckIds.add(decision.deckCardIds);
+                mulliganDecisions.add(1.0f); // 1.0=keep
+                
+                // Commit pending London mulligan training data (if any)
+                // This is the LAST mulligan, so those card choices actually affected the game
+                if (pendingLondonMulliganTraining != null) {
+                    trainingBuffer.add(pendingLondonMulliganTraining);
+                    pendingLondonMulliganTraining = null;
+                }
+                
+                // Log to CSV
+                List<Card> hand = new ArrayList<>(getHand().getCards(game));
+                StringBuilder cardNames = new StringBuilder();
+                for (int i = 0; i < hand.size(); i++) {
+                    if (i > 0) cardNames.append("; ");
+                    cardNames.append(hand.get(i).getName());
+                }
+                
+                MulliganLogger.getInstance().logDecision(
+                    currentEpisode,
+                    getName(),
+                    decision.mulliganNum,
+                    hand.size(),
+                    "KEEP",
+                    decision.keepProbability,
+                    cardNames.toString(),
+                    "", // No London mulligan for KEEP
+                    "" // No London mulligan for KEEP
+                );
+                pendingMulliganDecision = null; // Clear any pending
+            }
+
+            lastLoggedMulliganCount = mulliganCount; // Mark this mulligan as logged
+            mulliganCount++; // Increment for next mulligan decision
+            return decision.shouldMulligan;
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().warn("Error in mulligan model, using fallback: " + e.getMessage());
+            // Fallback: mulligan only if 0-1 lands or 6+ lands
+            int landCount = 0;
+            for (Card card : getHand().getCards(game)) {
+                if (card.isLand(game)) {
+                    landCount++;
+                }
+            }
+            mulliganCount++;
+            return landCount <= 1 || landCount >= 6;
+        }
+    }
+
+    /**
+     * London mulligan: Choose which cards to put on the bottom of library. Uses
+     * the main RL model to rank cards by value.
+     * 
+     * This is called AFTER drawing 7 new cards (post-mulligan), so we log the
+     * pending mulligan decision here with the full 7-card hand visible.
+     */
+    private boolean chooseLondonMulliganCards(Target target, Game game) {
+        try {
+            // Guard: Only process if we have a pending mulligan decision
+            // The game engine calls this method twice:
+            // 1. Once with the OLD hand (before drawing new cards) - we skip this
+            // 2. Once with the NEW hand (after drawing) - we process this
+            if (pendingMulliganDecision == null) {
+                RLTrainer.threadLocalLogger.get().debug("chooseLondonMulliganCards called but no pending decision, skipping");
+                return super.chooseTarget(Outcome.Discard, target, null, game);
+            }
+            
+            List<Card> hand = new ArrayList<>(getHand().getCards(game));
+            if (hand.isEmpty()) {
+                return false;
+            }
+
+            // Number of cards to put back = minTargets (set by London mulligan rule)
+            int numToPutBack = target.getMinNumberOfTargets();
+            
+            // Extract card IDs from the NEW 7-card hand (after drawing but before bottoming)
+            int[] handCardIds = mulliganModel.extractHandCardIds(this, game);
+            int[] deckCardIds = mulliganModel.extractDeckCardIds(this, game);
+            
+            // Store for training (using the NEW 7 cards, not the old hand)
+            mulliganNums.add(pendingMulliganDecision.mulliganNum);
+            mulliganHandIds.add(handCardIds);
+            mulliganDeckIds.add(deckCardIds);
+            mulliganDecisions.add(0.0f); // 0.0=mulligan (we know it was a mulligan)
+            
+            if (numToPutBack >= hand.size()) {
+                // Put back all cards
+                for (Card card : hand) {
+                    target.addTarget(card.getId(), null, game);
+                }
+                RLTrainer.threadLocalLogger.get().info(
+                        String.format("London mulligan: Putting back all %d cards", numToPutBack)
+                );
+                
+                // Log to CSV (all cards bottomed, none kept)
+                float keepProb = pendingMulliganDecision != null ? pendingMulliganDecision.keepProbability : 0.0f;
+                int mulliganNum = pendingMulliganDecision != null ? pendingMulliganDecision.mulliganNum : mulliganCount - 1;
+                
+                StringBuilder allCards = new StringBuilder();
+                for (int i = 0; i < hand.size(); i++) {
+                    if (i > 0) allCards.append("; ");
+                    allCards.append(hand.get(i).getName());
+                }
+                
+                MulliganLogger.getInstance().logDecision(
+                    currentEpisode,
+                    getName(),
+                    mulliganNum,
+                    hand.size(),
+                    "MULLIGAN",
+                    keepProb,
+                    allCards.toString(),
+                    "", // No cards kept (all bottomed)
+                    allCards.toString() // All cards bottomed
+                );
+                lastLoggedMulliganCount = mulliganNum; // Mark as logged
+                pendingMulliganDecision = null; // Clear pending
+                return true;
+            }
+
+            // Use main RL model to rank all cards in hand
+            List<Integer> rankedIndices = genericChoose(
+                    hand,
+                    hand.size(), // maxTargets: rank all cards
+                    hand.size(), // minTargets: rank all cards
+                    StateSequenceBuilder.ActionType.LONDON_MULLIGAN,
+                    game,
+                    null // No source for mulligan
+            );
+
+            // The model returns cards in order of preference (best first)
+            // We want to put the WORST cards on bottom, so take the last N
+            List<UUID> cardsToBottom = new ArrayList<>();
+            for (int i = hand.size() - numToPutBack; i < hand.size(); i++) {
+                int cardIndex = rankedIndices.get(i);
+                cardsToBottom.add(hand.get(cardIndex).getId());
+                target.addTarget(hand.get(cardIndex).getId(), null, game);
+            }
+
+            // Build kept and bottomed card lists
+            StringBuilder keptCards = new StringBuilder();
+            StringBuilder bottomedCards = new StringBuilder();
+            for (int i = 0; i < hand.size(); i++) {
+                Card card = hand.get(rankedIndices.get(i));
+                if (i < hand.size() - numToPutBack) {
+                    if (keptCards.length() > 0) {
+                        keptCards.append("; ");
+                    }
+                    keptCards.append(card.getName());
+                } else {
+                    if (bottomedCards.length() > 0) {
+                        bottomedCards.append("; ");
+                    }
+                    bottomedCards.append(card.getName());
+                }
+            }
+
+            RLTrainer.threadLocalLogger.get().info(
+                    String.format("London mulligan: Keeping [%s], Bottoming [%s]",
+                            keptCards.toString(), bottomedCards.toString())
+            );
+
+            // Log to CSV with kept/bottomed cards
+            float keepProb = pendingMulliganDecision != null ? pendingMulliganDecision.keepProbability : 0.0f;
+            int mulliganNum = pendingMulliganDecision != null ? pendingMulliganDecision.mulliganNum : mulliganCount - 1;
+            
+            // Build full card list
+            StringBuilder allCards = new StringBuilder();
+            for (int i = 0; i < hand.size(); i++) {
+                if (i > 0) allCards.append("; ");
+                allCards.append(hand.get(rankedIndices.get(i)).getName());
+            }
+            
+            MulliganLogger.getInstance().logDecision(
+                currentEpisode,
+                getName(),
+                mulliganNum,
+                hand.size(),
+                "MULLIGAN",
+                keepProb,
+                allCards.toString(),
+                keptCards.toString(),
+                bottomedCards.toString()
+            );
+            lastLoggedMulliganCount = mulliganNum; // Mark as logged
+            pendingMulliganDecision = null; // Clear pending
+
+            return true;
+
+        } catch (Exception e) {
+            RLTrainer.threadLocalLogger.get().warn("Error in London mulligan card selection, using fallback: " + e.getMessage());
+            // Fallback: use parent implementation (random or heuristic)
+            return super.chooseTarget(Outcome.Discard, target, null, game);
+        }
+    }
+
+    /**
+     * Get mulligan training data and clear buffer.
+     */
+    public List<Integer> getMulliganNums() {
+        return new ArrayList<>(mulliganNums);
+    }
+
+    public List<int[]> getMulliganHandIds() {
+        return new ArrayList<>(mulliganHandIds);
+    }
+
+    public List<int[]> getMulliganDeckIds() {
+        return new ArrayList<>(mulliganDeckIds);
+    }
+
+    public List<Float> getMulliganDecisions() {
+        return new ArrayList<>(mulliganDecisions);
+    }
+
+    public void clearMulliganData() {
+        mulliganNums.clear();
+        mulliganHandIds.clear();
+        mulliganDeckIds.clear();
+        mulliganDecisions.clear();
+    }
+
+    /**
+     * Set the current episode number for logging purposes.
+     */
+    public void setCurrentEpisode(int episodeNum) {
+        this.currentEpisode = episodeNum;
+    }
+
     protected boolean priorityPlay(Game game) {
         game.getState().setPriorityPlayerId(playerId);
         game.firePriorityEvent(playerId);

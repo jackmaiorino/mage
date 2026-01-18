@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mage-rl-config
+  namespace: mage-rl
+data:
+  TRAJ_DIR: "/shared/trajectories"
+  BATCH_EPISODES: "100"
+  POLL_SECONDS: "30"
+  CHECKPOINT_EVERY: "500"
+  EPISODES_PER_WORKER: "5000"
+  DECKS_DIR: "/app/Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: mage-rl-secrets
+  namespace: mage-rl
+type: Opaque
+stringData:
+  OPENAI_API_KEY: "YOUR_OPENAI_API_KEY_HERE"  # Replace with actual key 

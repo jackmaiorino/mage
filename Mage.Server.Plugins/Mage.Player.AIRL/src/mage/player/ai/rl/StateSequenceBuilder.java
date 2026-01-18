@@ -64,6 +64,7 @@ public class StateSequenceBuilder {
         DECLARE_ATTACKS,
         DECLARE_BLOCKS,
         MULLIGAN,
+        LONDON_MULLIGAN,  // Choosing which cards to put on bottom after mulligan
         SELECT_CHOICE,
         SELECT_TRIGGERED_ABILITY,
         SELECT_CARD

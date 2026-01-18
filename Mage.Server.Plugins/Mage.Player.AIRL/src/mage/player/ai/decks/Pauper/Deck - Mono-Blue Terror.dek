@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="102620" Quantity="4" Sideboard="false" Name="Tolarian Terror" Annotation="0"/>
+  <Cards CatID="53117" Quantity="4" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="107579" Quantity="4" Sideboard="false" Name="Counterspell" Annotation="0"/>
+  <Cards CatID="112030" Quantity="4" Sideboard="false" Name="Lorien Revealed" Annotation="0"/>
+  <Cards CatID="79626" Quantity="16" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="63698" Quantity="4" Sideboard="false" Name="Cryptic Serpent" Annotation="0"/>
+  <Cards CatID="101615" Quantity="4" Sideboard="false" Name="Thought Scour" Annotation="0"/>
+  <Cards CatID="79257" Quantity="2" Sideboard="false" Name="Sleep of the Dead" Annotation="0"/>
+  <Cards CatID="17450" Quantity="4" Sideboard="false" Name="Mental Note" Annotation="0"/>
+  <Cards CatID="126132" Quantity="4" Sideboard="false" Name="Deem Inferior" Annotation="0"/>
+  <Cards CatID="52954" Quantity="2" Sideboard="false" Name="Deep Analysis" Annotation="0"/>
+  <Cards CatID="28339" Quantity="4" Sideboard="false" Name="Ponder" Annotation="0"/>
+  <Cards CatID="69463" Quantity="2" Sideboard="false" Name="Murmuring Mystic" Annotation="0"/>
+  <Cards CatID="58363" Quantity="2" Sideboard="false" Name="Dispel" Annotation="0"/>
+  <Cards CatID="69979" Quantity="4" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="142705" Quantity="4" Sideboard="true" Name="Annul" Annotation="0"/>
+  <Cards CatID="57328" Quantity="4" Sideboard="true" Name="Gut Shot" Annotation="0"/>
+  <Cards CatID="17452" Quantity="1" Sideboard="true" Name="Envelop" Annotation="0"/>
+  <Cards CatID="35925" Quantity="1" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="26337" Quantity="1" Sideboard="true" Name="Piracy Charm" Annotation="0"/>
+</Deck>

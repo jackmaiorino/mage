@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="65318" Quantity="1" Sideboard="false" Name="Makeshift Munitions" Annotation="0"/>
+  <Cards CatID="126227" Quantity="4" Sideboard="false" Name="Refurbished Familiar" Annotation="0"/>
+  <Cards CatID="82556" Quantity="4" Sideboard="false" Name="Ichor Wellspring" Annotation="0"/>
+  <Cards CatID="38315" Quantity="3" Sideboard="false" Name="Nihil Spellbomb" Annotation="0"/>
+  <Cards CatID="118014" Quantity="1" Sideboard="false" Name="Fanatical Offering" Annotation="0"/>
+  <Cards CatID="90873" Quantity="4" Sideboard="false" Name="Drossforge Bridge" Annotation="0"/>
+  <Cards CatID="90891" Quantity="2" Sideboard="false" Name="Silverbluff Bridge" Annotation="0"/>
+  <Cards CatID="90879" Quantity="4" Sideboard="false" Name="Mistvault Bridge" Annotation="0"/>
+  <Cards CatID="38203" Quantity="4" Sideboard="false" Name="Galvanic Blast" Annotation="0"/>
+  <Cards CatID="20019" Quantity="3" Sideboard="false" Name="Vault of Whispers" Annotation="0"/>
+  <Cards CatID="79628" Quantity="1" Sideboard="false" Name="Swamp" Annotation="0"/>
+  <Cards CatID="94506" Quantity="2" Sideboard="false" Name="Blood Fountain" Annotation="0"/>
+  <Cards CatID="57370" Quantity="4" Sideboard="false" Name="Myr Enforcer" Annotation="0"/>
+  <Cards CatID="20021" Quantity="3" Sideboard="false" Name="Great Furnace" Annotation="0"/>
+  <Cards CatID="97166" Quantity="4" Sideboard="false" Name="Reckoner's Bargain" Annotation="0"/>
+  <Cards CatID="57360" Quantity="4" Sideboard="false" Name="Thoughtcast" Annotation="0"/>
+  <Cards CatID="19717" Quantity="3" Sideboard="false" Name="Krark-Clan Shaman" Annotation="0"/>
+  <Cards CatID="118350" Quantity="1" Sideboard="false" Name="Hunter's Blowgun" Annotation="0"/>
+  <Cards CatID="20017" Quantity="2" Sideboard="false" Name="Seat of the Synod" Annotation="0"/>
+  <Cards CatID="121692" Quantity="2" Sideboard="false" Name="Toxin Analysis" Annotation="0"/>
+  <Cards CatID="141109" Quantity="3" Sideboard="false" Name="Black Mage's Rod" Annotation="0"/>
+  <Cards CatID="142717" Quantity="1" Sideboard="false" Name="Cryogen Relic" Annotation="0"/>
+  <Cards CatID="43610" Quantity="1" Sideboard="true" Name="Red Elemental Blast" Annotation="0"/>
+  <Cards CatID="19717" Quantity="1" Sideboard="true" Name="Krark-Clan Shaman" Annotation="0"/>
+  <Cards CatID="80213" Quantity="1" Sideboard="true" Name="Unexpected Fangs" Annotation="0"/>
+  <Cards CatID="90983" Quantity="1" Sideboard="true" Name="Gorilla Shaman" Annotation="0"/>
+  <Cards CatID="35925" Quantity="2" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="100352" Quantity="1" Sideboard="true" Name="Breath Weapon" Annotation="0"/>
+  <Cards CatID="69981" Quantity="4" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="69979" Quantity="4" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+</Deck>

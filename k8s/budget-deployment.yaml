@@ -1,0 +1,210 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mage-rl-budget-config
+  namespace: mage-rl
+data:
+  TRAJ_DIR: "/shared/trajectories"
+  BATCH_EPISODES: "5"           # Very small batches
+  POLL_SECONDS: "120"           # Poll less frequently
+  CHECKPOINT_EVERY: "25"        # Save more frequently (smaller checkpoints)
+  EPISODES_PER_WORKER: "50"     # Fewer episodes per worker
+  USE_CPU_ONLY: "true"          # No GPU required
+  TRAINING_SCHEDULE: "0800-1800" # Only train during specific hours
+---
+# Ultra-minimal worker deployment (spot instances)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-rl-budget-workers
+  namespace: mage-rl
+  labels:
+    app: mage-rl-budget-workers
+spec:
+  replicas: 2  # Start with just 2 workers
+  selector:
+    matchLabels:
+      app: mage-rl-budget-workers
+  template:
+    metadata:
+      labels:
+        app: mage-rl-budget-workers
+    spec:
+      tolerations:
+      - key: "node.kubernetes.io/instance-type"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
+      nodeSelector:
+        node.kubernetes.io/instance-type: "spot"  # Use spot instances
+      containers:
+      - name: worker
+        image: mage-rl:latest
+        command: ["java", "-Xmx2g", "-jar", "/app/Mage.Server.Plugins/Mage.Player.AIRL/target/mage-airl.jar"]  # Limit RAM
+        args: ["worker"]
+        env:
+        - name: MODE
+          value: "worker"
+        - name: TRAJ_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: TRAJ_DIR
+        - name: EPISODES_PER_WORKER
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: EPISODES_PER_WORKER
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mage-rl-secrets
+              key: OPENAI_API_KEY
+        - name: WORKER_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        resources:
+          requests:
+            memory: "1Gi"      # Minimal memory
+            cpu: "500m"        # Half a CPU core
+          limits:
+            memory: "2Gi"      # Cap at 2GB
+            cpu: "1"           # Max 1 CPU core
+        volumeMounts:
+        - name: shared-trajectories
+          mountPath: /shared
+      volumes:
+      - name: shared-trajectories
+        persistentVolumeClaim:
+          claimName: shared-trajectories
+---
+# CPU-only learner (no GPU required)
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-rl-budget-learner
+  namespace: mage-rl
+  labels:
+    app: mage-rl-budget-learner
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mage-rl-budget-learner
+  template:
+    metadata:
+      labels:
+        app: mage-rl-budget-learner
+    spec:
+      tolerations:
+      - key: "node.kubernetes.io/instance-type"
+        operator: "Equal"
+        value: "spot"
+        effect: "NoSchedule"
+      nodeSelector:
+        node.kubernetes.io/instance-type: "spot"  # Use spot instances
+      containers:
+      - name: learner
+        image: mage-rl:latest
+        command: ["java", "-Xmx3g", "-jar", "/app/Mage.Server.Plugins/Mage.Player.AIRL/target/mage-airl.jar"]  # Limit RAM
+        args: ["learner"]
+        env:
+        - name: MODE
+          value: "learner"
+        - name: TRAJ_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: TRAJ_DIR
+        - name: BATCH_EPISODES
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: BATCH_EPISODES
+        - name: POLL_SECONDS
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: POLL_SECONDS
+        - name: CHECKPOINT_EVERY
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: CHECKPOINT_EVERY
+        - name: USE_CPU_ONLY
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-budget-config
+              key: USE_CPU_ONLY
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mage-rl-secrets
+              key: OPENAI_API_KEY
+        resources:
+          requests:
+            memory: "2Gi"      # 2GB for learner
+            cpu: "1"           # 1 CPU core
+          limits:
+            memory: "4Gi"      # Cap at 4GB
+            cpu: "2"           # Max 2 CPU cores
+        volumeMounts:
+        - name: shared-trajectories
+          mountPath: /shared
+        - name: model-storage
+          mountPath: /models
+      volumes:
+      - name: shared-trajectories
+        persistentVolumeClaim:
+          claimName: shared-trajectories
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage
+---
+# Scheduled auto-scaler to scale down during off-hours
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-down-workers
+  namespace: mage-rl
+spec:
+  schedule: "0 18 * * *"  # 6 PM daily
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: scaler
+            image: bitnami/kubectl:latest
+            command:
+            - kubectl
+            - scale
+            - deployment/mage-rl-budget-workers
+            - --replicas=0
+            - -n
+            - mage-rl
+          restartPolicy: OnFailure
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: scale-up-workers
+  namespace: mage-rl
+spec:
+  schedule: "0 8 * * *"   # 8 AM daily
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: scaler
+            image: bitnami/kubectl:latest
+            command:
+            - kubectl
+            - scale
+            - deployment/mage-rl-budget-workers
+            - --replicas=2
+            - -n
+            - mage-rl
+          restartPolicy: OnFailure 

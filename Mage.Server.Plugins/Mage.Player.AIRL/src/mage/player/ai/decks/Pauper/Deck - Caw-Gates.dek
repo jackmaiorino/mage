@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="100736" Quantity="4" Sideboard="false" Name="Citadel Gate" Annotation="0"/>
+  <Cards CatID="107579" Quantity="4" Sideboard="false" Name="Counterspell" Annotation="0"/>
+  <Cards CatID="100746" Quantity="2" Sideboard="false" Name="Heap Gate" Annotation="0"/>
+  <Cards CatID="102974" Quantity="1" Sideboard="false" Name="Idyllic Beachfront" Annotation="0"/>
+  <Cards CatID="53117" Quantity="3" Sideboard="false" Name="Brainstorm" Annotation="0"/>
+  <Cards CatID="34390" Quantity="4" Sideboard="false" Name="Journey to Nowhere" Annotation="0"/>
+  <Cards CatID="112030" Quantity="3" Sideboard="false" Name="Lorien Revealed" Annotation="0"/>
+  <Cards CatID="123957" Quantity="2" Sideboard="false" Name="Outlaw Medic" Annotation="0"/>
+  <Cards CatID="100730" Quantity="4" Sideboard="false" Name="Basilisk Gate" Annotation="0"/>
+  <Cards CatID="63656" Quantity="4" Sideboard="false" Name="Sacred Cat" Annotation="0"/>
+  <Cards CatID="100756" Quantity="4" Sideboard="false" Name="Sea Gate" Annotation="0"/>
+  <Cards CatID="48385" Quantity="2" Sideboard="false" Name="Azorius Guildgate" Annotation="0"/>
+  <Cards CatID="97050" Quantity="4" Sideboard="false" Name="The Modern Age" Annotation="0"/>
+  <Cards CatID="126107" Quantity="2" Sideboard="false" Name="Thraben Charm" Annotation="0"/>
+  <Cards CatID="79626" Quantity="1" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="17391" Quantity="4" Sideboard="false" Name="Prismatic Strands" Annotation="0"/>
+  <Cards CatID="66983" Quantity="4" Sideboard="false" Name="Squadron Hawk" Annotation="0"/>
+  <Cards CatID="136251" Quantity="2" Sideboard="false" Name="Spell Pierce" Annotation="0"/>
+  <Cards CatID="37388" Quantity="2" Sideboard="false" Name="Preordain" Annotation="0"/>
+  <Cards CatID="24303" Quantity="1" Sideboard="false" Name="Guardian of the Guildpact" Annotation="0"/>
+  <Cards CatID="17452" Quantity="2" Sideboard="true" Name="Envelop" Annotation="0"/>
+  <Cards CatID="69979" Quantity="2" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="58363" Quantity="2" Sideboard="true" Name="Dispel" Annotation="0"/>
+  <Cards CatID="35925" Quantity="3" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="69981" Quantity="3" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="27955" Quantity="3" Sideboard="true" Name="Dust to Dust" Annotation="0"/>
+</Deck>

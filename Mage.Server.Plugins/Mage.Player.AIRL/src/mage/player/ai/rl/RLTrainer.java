@@ -364,6 +364,7 @@ public class RLTrainer {
                         Game game = match.getGames().get(0);
 
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
+                        rlPlayer.setCurrentEpisode(epNumber); // Set episode for mulligan logging
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
                         match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
@@ -386,9 +387,15 @@ public class RLTrainer {
                         game.start(rlPlayer.getId());
                         long endGameNanos = System.nanoTime();
 
-                        // Record outcome for adaptive curriculum
+                        // Record outcome for adaptive curriculum - returns snapshot to avoid race condition
                         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
-                        recordGameOutcome(rlPlayerWon);
+                        double[] outcomeSnapshot = recordGameOutcome(rlPlayerWon);
+                        double snapshotWinrate = outcomeSnapshot[0];
+                        int snapshotSampleSize = (int) outcomeSnapshot[1];
+
+                        // Train mulligan model from this game's decisions
+                        trainMulliganModel(rlPlayer, rlPlayerWon);
+                        maybeSaveMulliganModel();
 
                         logGameResult(game, rlPlayer);
                         long rewardStartNanos = System.nanoTime();
@@ -439,11 +446,9 @@ public class RLTrainer {
                         } else if (opponentPlayer instanceof mage.player.ai.ComputerPlayer) {
                             opponentType = "CP_WEAK";
                         }
-                        double currentWinrate = getCurrentWinrate();
-                        int winrateSampleSize = recentWins.size();
 
                         logger.info(String.format("Episode %d summary: turns=%d, reward=%.3f, opponent=%s, winrate=%.3f (%d games)",
-                                epNumber, turns, finalReward, opponentType, currentWinrate, winrateSampleSize));
+                                epNumber, turns, finalReward, opponentType, snapshotWinrate, snapshotSampleSize));
 
                         try {
                             Path statsPath = Paths.get(STATS_FILE_PATH);
@@ -458,7 +463,7 @@ public class RLTrainer {
                             sb.append(epNumber).append(',').append(turns).append(',')
                                     .append(String.format("%.3f", finalReward)).append(',')
                                     .append(opponentType).append(',')
-                                    .append(String.format("%.3f", currentWinrate)).append(',')
+                                    .append(String.format("%.3f", snapshotWinrate)).append(',')
                                     .append(String.format("%.2f", episodeSeconds)).append('\n');
                             Files.write(statsPath, sb.toString().getBytes(StandardCharsets.UTF_8), java.nio.file.StandardOpenOption.CREATE, java.nio.file.StandardOpenOption.APPEND);
                         } catch (IOException e) {
@@ -579,8 +584,12 @@ public class RLTrainer {
                     }
                     Game game = match.getGames().get(0);
 
+                    // Increment counter first to get unique episode number (avoid race condition in parallel execution)
+                    int currentEvalGame = evalCounter.incrementAndGet();
+
                     // Greedy evaluation: use deterministic arg-max player
                     ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
+                    rlPlayer.setCurrentEpisode(-currentEvalGame); // Negative for eval = deterministic mulligan
                     game.addPlayer(rlPlayer, rlPlayerDeckThread);
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
@@ -598,15 +607,20 @@ public class RLTrainer {
 
                     game.start(rlPlayer.getId());
 
+                    boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
+
+                    // Train mulligan model during evaluation too
+                    trainMulliganModel(rlPlayer, rlPlayerWon);
+
                     if (isFirst) {
                         logStaticGameResult(game, rlPlayer);
                     }
 
-                    if (game.getWinner().contains(rlPlayer.getName())) {
+                    if (rlPlayerWon) {
                         localWinsAgainstComputerPlayer7++;
                     }
 
-                    int done = evalCounter.incrementAndGet();
+                    int done = currentEvalGame; // Already incremented before game started
                     if (evalLogEvery > 0 && done % evalLogEvery == 0) {
                         int prev = lastLoggedEval.get();
                         if (done > prev && lastLoggedEval.compareAndSet(prev, done)) {
@@ -817,6 +831,7 @@ public class RLTrainer {
         Game game = match.getGames().get(0);
 
         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("RL", RangeOfInfluence.ALL, sharedModel, true);
+        rlPlayer.setCurrentEpisode(-1); // -1 indicates benchmark game
         // Use strong opponent for benchmarking
         int benchSkill = envInt("BENCHMARK_OPPONENT_SKILL", 6);
         Player opponent = new ComputerPlayer7("Benchmark", RangeOfInfluence.ALL, benchSkill);
@@ -1044,8 +1059,10 @@ public class RLTrainer {
     /**
      * Records a game outcome and updates rolling winrate. Thread-safe for
      * concurrent training.
+     * 
+     * @return Array [winrate, sampleSize] at the moment this outcome was recorded
      */
-    private static void recordGameOutcome(boolean rlPlayerWon) {
+    private static double[] recordGameOutcome(boolean rlPlayerWon) {
         // Add to queue
         recentWins.add(rlPlayerWon);
         if (rlPlayerWon) {
@@ -1062,6 +1079,11 @@ public class RLTrainer {
                 winCount.decrementAndGet();
             }
         }
+        
+        // Return snapshot at this exact moment (avoids race condition in logging)
+        int size = recentWins.size();
+        double winrate = size == 0 ? 0.0 : winCount.get() / (double) size;
+        return new double[] {winrate, size};
     }
 
     /**
@@ -1073,6 +1095,95 @@ public class RLTrainer {
             return 0.0;
         }
         return winCount.get() / (double) size;
+    }
+
+    /**
+     * Train mulligan model from a completed game.
+     *
+     * @param rlPlayer The RL player whose mulligans to train on
+     * @param won Whether the player won the game
+     */
+    private static void trainMulliganModel(ComputerPlayerRL rlPlayer, boolean won) {
+        try {
+            List<Integer> mulliganNums = rlPlayer.getMulliganNums();
+            List<int[]> handIds = rlPlayer.getMulliganHandIds();
+            List<int[]> deckIds = rlPlayer.getMulliganDeckIds();
+            List<Float> decisions = rlPlayer.getMulliganDecisions();
+
+            if (mulliganNums.isEmpty()) {
+                return; // No mulligan decisions this game
+            }
+
+            int batchSize = mulliganNums.size();
+            float outcome = won ? 1.0f : 0.0f;
+            int MAX_HAND_SIZE = 7;
+            int MAX_DECK_SIZE = 60;
+
+            // Pack features: [mulliganNum, handIds[7], deckIds[60]] for each sample
+            int featureSize = 1 + MAX_HAND_SIZE + MAX_DECK_SIZE;
+            java.nio.ByteBuffer featuresBuf = java.nio.ByteBuffer.allocate(batchSize * featureSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+
+            for (int i = 0; i < batchSize; i++) {
+                // Mulligan number
+                featuresBuf.putFloat(mulliganNums.get(i).floatValue());
+
+                // Hand card IDs (7 cards, padded with 0s)
+                int[] hand = handIds.get(i);
+                for (int j = 0; j < MAX_HAND_SIZE; j++) {
+                    featuresBuf.putFloat(j < hand.length ? hand[j] : 0);
+                }
+
+                // Deck card IDs (60 cards, padded with 0s)
+                int[] deck = deckIds.get(i);
+                for (int j = 0; j < MAX_DECK_SIZE; j++) {
+                    featuresBuf.putFloat(j < deck.length ? deck[j] : 0);
+                }
+            }
+
+            // Pack decisions
+            java.nio.ByteBuffer decisionsBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            for (Float decision : decisions) {
+                decisionsBuf.putFloat(decision);
+            }
+
+            // Pack outcomes (same outcome for all decisions in this game)
+            java.nio.ByteBuffer outcomesBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            for (int i = 0; i < batchSize; i++) {
+                outcomesBuf.putFloat(outcome);
+            }
+
+            // Train the model
+            sharedModel.getEntryPoint().trainMulligan(
+                    featuresBuf.array(),
+                    decisionsBuf.array(),
+                    outcomesBuf.array(),
+                    batchSize
+            );
+
+            // Clear player's mulligan buffer
+            rlPlayer.clearMulliganData();
+
+        } catch (Exception e) {
+            logger.error("Error training mulligan model: " + e.getMessage(), e);
+        }
+    }
+
+    // Mulligan model save counter
+    private static final AtomicInteger mulliganTrainCount = new AtomicInteger(0);
+    private static final int MULLIGAN_SAVE_INTERVAL = envInt("MULLIGAN_SAVE_INTERVAL", 100);
+
+    /**
+     * Periodically save mulligan model.
+     */
+    private static void maybeSaveMulliganModel() {
+        if (mulliganTrainCount.incrementAndGet() % MULLIGAN_SAVE_INTERVAL == 0) {
+            try {
+                sharedModel.getEntryPoint().saveMulliganModel();
+                logger.info("Mulligan model saved (after " + mulliganTrainCount.get() + " training updates)");
+            } catch (Exception e) {
+                logger.error("Failed to save mulligan model: " + e.getMessage(), e);
+            }
+        }
     }
 
     /**

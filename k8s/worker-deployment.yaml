@@ -1,0 +1,89 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-rl-workers
+  namespace: mage-rl
+  labels:
+    app: mage-rl-workers
+spec:
+  replicas: 10  # Start with 10 workers, can scale up
+  selector:
+    matchLabels:
+      app: mage-rl-workers
+  template:
+    metadata:
+      labels:
+        app: mage-rl-workers
+    spec:
+      containers:
+      - name: worker
+        image: mage-rl:latest
+        command: ["java", "-jar", "/app/Mage.Server.Plugins/Mage.Player.AIRL/target/mage-airl.jar"]
+        args: ["worker"]
+        env:
+        - name: MODE
+          value: "worker"
+        - name: TRAJ_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-config
+              key: TRAJ_DIR
+        - name: EPISODES_PER_WORKER
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-config
+              key: EPISODES_PER_WORKER
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mage-rl-secrets
+              key: OPENAI_API_KEY
+        - name: WORKER_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+          limits:
+            memory: "8Gi"
+            cpu: "4"
+        volumeMounts:
+        - name: shared-trajectories
+          mountPath: /shared
+        - name: model-storage
+          mountPath: /models
+      volumes:
+      - name: shared-trajectories
+        persistentVolumeClaim:
+          claimName: shared-trajectories
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: mage-rl-workers-hpa
+  namespace: mage-rl
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: mage-rl-workers
+  minReplicas: 5
+  maxReplicas: 100
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80 

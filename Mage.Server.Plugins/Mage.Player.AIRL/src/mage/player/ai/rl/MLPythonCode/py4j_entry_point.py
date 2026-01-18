@@ -420,6 +420,74 @@ class SimpleBatcher:
         return True
 
 
+class MulliganNet(torch.nn.Module):
+    """
+    Pure RL neural network for mulligan decisions.
+    No heuristics - learns entirely from game outcomes.
+    
+    Input: [mulligan_num, hand_card_ids[7], deck_card_ids[60]]
+    - mulligan_num: scalar (0-7)
+    - hand_card_ids: 7 card IDs (token vocab)
+    - deck_card_ids: 60 card IDs (token vocab)
+    
+    Architecture:
+    1. Embed each card ID
+    2. Pool hand and deck embeddings separately
+    3. Combine with mulligan number
+    4. MLP to output keep probability
+    """
+    def __init__(self, vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60):
+        super(MulliganNet, self).__init__()
+        
+        self.max_hand = max_hand
+        self.max_deck = max_deck
+        
+        # Card embedding (shared for hand and deck)
+        self.card_embed = torch.nn.Embedding(vocab_size, embed_dim, padding_idx=0)
+        
+        # Separate processing for hand and deck
+        self.hand_fc = torch.nn.Linear(embed_dim, 32)
+        self.deck_fc = torch.nn.Linear(embed_dim, 32)
+        
+        # Combine everything: [mulligan_num(1), hand_pool(32), deck_pool(32)] = 65
+        self.fc1 = torch.nn.Linear(1 + 32 + 32, 64)
+        self.fc2 = torch.nn.Linear(64, 32)
+        self.output = torch.nn.Linear(32, 1)
+        
+    def forward(self, x):
+        # x shape: [batch_size, 68] = [mulligan_num(1), hand_ids(7), deck_ids(60)]
+        
+        # Extract components
+        mulligan_num = x[:, 0:1]  # [batch, 1]
+        hand_ids = x[:, 1:1+self.max_hand].long()  # [batch, 7]
+        deck_ids = x[:, 1+self.max_hand:1+self.max_hand+self.max_deck].long()  # [batch, 60]
+        
+        # Embed cards
+        hand_embeds = self.card_embed(hand_ids)  # [batch, 7, embed_dim]
+        deck_embeds = self.card_embed(deck_ids)  # [batch, 60, embed_dim]
+        
+        # Pool: mean over cards (ignoring padding=0)
+        hand_mask = (hand_ids != 0).float().unsqueeze(-1)  # [batch, 7, 1]
+        deck_mask = (deck_ids != 0).float().unsqueeze(-1)  # [batch, 60, 1]
+        
+        hand_pool = (hand_embeds * hand_mask).sum(dim=1) / (hand_mask.sum(dim=1) + 1e-8)  # [batch, embed_dim]
+        deck_pool = (deck_embeds * deck_mask).sum(dim=1) / (deck_mask.sum(dim=1) + 1e-8)  # [batch, embed_dim]
+        
+        # Process hand and deck
+        hand_feat = F.relu(self.hand_fc(hand_pool))  # [batch, 32]
+        deck_feat = F.relu(self.deck_fc(deck_pool))  # [batch, 32]
+        
+        # Combine all features
+        combined = torch.cat([mulligan_num, hand_feat, deck_feat], dim=1)  # [batch, 65]
+        
+        # MLP
+        x = F.relu(self.fc1(combined))
+        x = F.relu(self.fc2(x))
+        
+        # Sigmoid: output probability of keeping (0.0 = mulligan, 1.0 = keep)
+        return torch.sigmoid(self.output(x))
+
+
 class PythonEntryPoint:
     def __init__(self):
         self.model = None
@@ -429,6 +497,14 @@ class PythonEntryPoint:
         self.batcher = None
         # Get model path from environment variable
         self.model_path = os.getenv('MTG_MODEL_PATH')
+        
+        # Mulligan model (separate from main model)
+        self.mulligan_model = None
+        self.mulligan_optimizer = None
+        self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH', 
+                                              'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_model.pt')
+        self.mulligan_lock = threading.Lock()  # Prevent concurrent mulligan training
+        
         # ---------------------------------------------------------------
         # Training step counter for periodic checkpointing
         # ---------------------------------------------------------------
@@ -437,6 +513,10 @@ class PythonEntryPoint:
             LogCategory.GPU_MEMORY,
             "Using device: %s", self.device
         )
+        
+        # Initialize mulligan model
+        self.initializeMulliganModel()
+        
         if self.model_path:
             logger.info(LogCategory.GPU_MEMORY,
                         f"Model path configured: {self.model_path}")
@@ -489,6 +569,31 @@ class PythonEntryPoint:
 
             logger.info(LogCategory.GPU_MEMORY,
                         "Model initialized successfully")
+
+    def initializeMulliganModel(self):
+        """Initialize the mulligan model (separate from main model)"""
+        logger.info(LogCategory.MODEL_INIT, "Initializing card-level mulligan model")
+        
+        # vocab_size=65536 (same as main model), embed_dim=32, max_hand=7, max_deck=60
+        self.mulligan_model = MulliganNet(vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60).to(self.device)
+        self.mulligan_optimizer = torch.optim.Adam(self.mulligan_model.parameters(), lr=1e-3)
+        
+        # Try to load existing mulligan model
+        if os.path.exists(self.mulligan_model_path):
+            try:
+                checkpoint = torch.load(self.mulligan_model_path, map_location=self.device)
+                self.mulligan_model.load_state_dict(checkpoint['model_state_dict'])
+                self.mulligan_optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
+                logger.info(LogCategory.MODEL_LOAD, 
+                           f"Loaded existing mulligan model from {self.mulligan_model_path}")
+            except Exception as e:
+                logger.warning(LogCategory.MODEL_LOAD,
+                              f"Failed to load mulligan model, starting fresh: {e}")
+        else:
+            logger.info(LogCategory.MODEL_INIT, 
+                       "No existing mulligan model found, starting with random initialization")
+        
+        logger.info(LogCategory.MODEL_INIT, "Mulligan model initialized")
 
     def predictBatchFlat(self, sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions):
         try:
@@ -584,6 +689,37 @@ class PythonEntryPoint:
             logger.error(LogCategory.SYSTEM_ERROR,
                          "Error in scoreCandidatesFlat: %s", str(e))
             raise
+
+    def predictMulligan(self, features):
+        """
+        Predict mulligan decision using pure RL neural network (NO heuristics).
+        
+        Args:
+            features: List/array of mulligan features (68-dim vector)
+                Format: [mulligan_num(1), hand_card_ids(7), deck_card_ids(60)]
+            
+        Returns:
+            float: Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
+        """
+        try:
+            if self.mulligan_model is None:
+                self.initializeMulliganModel()
+            
+            # Convert to tensor - should be 68 dims: 1 + 7 + 60
+            features_tensor = torch.tensor(features, dtype=torch.float32, device=self.device).unsqueeze(0)
+            
+            # Forward pass (no gradient needed for inference)
+            self.mulligan_model.eval()
+            with torch.no_grad():
+                keep_prob = self.mulligan_model(features_tensor)
+            
+            return float(keep_prob.item())
+            
+        except Exception as e:
+            logger.error(LogCategory.SYSTEM_ERROR,
+                         "Error in predictMulligan: %s", str(e))
+            # On error, default to 50/50
+            return 0.5
 
     def trainCandidatesFlat(self,
                             sequences_bytes,
@@ -770,6 +906,99 @@ class PythonEntryPoint:
             logger.error(LogCategory.GPU_MEMORY,
                          f"Error loading model: {str(e)}")
             raise
+
+    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, batch_size):
+        """
+        Train mulligan model from game outcomes.
+        
+        Args:
+            features_bytes: Raw bytes of mulligan features [batch_size * 68 * 4]
+                Format: [mulligan_num(1), hand_ids(7), deck_ids(60)] per sample
+            decisions_bytes: Raw bytes of decisions (0=mulligan, 1=keep) [batch_size * 4]  
+            outcomes_bytes: Raw bytes of game outcomes (1=win, 0=loss) [batch_size * 4]
+            batch_size: Number of samples
+        """
+        # Use lock to prevent concurrent training (avoids gradient conflicts)
+        with self.mulligan_lock:
+            try:
+                if self.mulligan_model is None:
+                    self.initializeMulliganModel()
+            
+                # Parse inputs: 1 + 7 + 60 = 68 features per sample
+                features = np.frombuffer(features_bytes, dtype='<f4').reshape(batch_size, 68)
+                decisions = np.frombuffer(decisions_bytes, dtype='<f4').reshape(batch_size)
+                outcomes = np.frombuffer(outcomes_bytes, dtype='<f4').reshape(batch_size)
+                
+                # Convert to tensors
+                features_t = torch.tensor(features, dtype=torch.float32, device=self.device)
+                decisions_t = torch.tensor(decisions, dtype=torch.float32, device=self.device)
+                outcomes_t = torch.tensor(outcomes, dtype=torch.float32, device=self.device)
+                
+                # Training mode
+                self.mulligan_model.train()
+                self.mulligan_optimizer.zero_grad()
+                
+                # Forward pass - squeeze only last dimension to preserve batch dimension
+                keep_probs = self.mulligan_model(features_t).squeeze(-1)
+                
+                # Loss: Binary cross-entropy
+                # Target: 1.0 if (kept and won), 0.0 if (kept and lost)
+                # For mulliganed hands, we don't have direct signal, so we skip them
+                kept_mask = decisions_t > 0.5
+                
+                if kept_mask.sum() > 0:
+                    kept_probs_filtered = keep_probs[kept_mask]
+                    kept_outcomes_filtered = outcomes_t[kept_mask]
+                    
+                    # BCE loss: encourage keeping winning hands, mulliganing losing hands
+                    loss = F.binary_cross_entropy(kept_probs_filtered, kept_outcomes_filtered)
+                    
+                    # Backprop
+                    loss.backward()
+                    torch.nn.utils.clip_grad_norm_(self.mulligan_model.parameters(), 1.0)
+                    self.mulligan_optimizer.step()
+                    
+                    # Clear gradients and set to eval mode to prevent stale references
+                    self.mulligan_optimizer.zero_grad()
+                    self.mulligan_model.eval()
+                    
+                    logger.info(LogCategory.MODEL_TRAIN,
+                               f"Mulligan model trained - loss={loss.item():.4f}, samples={kept_mask.sum().item()}")
+                else:
+                    logger.info(LogCategory.MODEL_TRAIN,
+                               "No kept hands in batch, skipping mulligan training")
+                    self.mulligan_model.eval()
+                
+                # Clear CUDA cache to free stale references
+                if torch.cuda.is_available():
+                    torch.cuda.empty_cache()
+                
+                return True
+                
+            except Exception as e:
+                logger.error(LogCategory.SYSTEM_ERROR,
+                            f"Error in trainMulligan: {str(e)}")
+                raise
+
+    def saveMulliganModel(self):
+        """Save mulligan model separately"""
+        try:
+            if self.mulligan_model is None:
+                logger.warning(LogCategory.MODEL_SAVE, "Mulligan model not initialized, nothing to save")
+                return
+            
+            checkpoint = {
+                'model_state_dict': self.mulligan_model.state_dict(),
+                'optimizer_state_dict': self.mulligan_optimizer.state_dict(),
+            }
+            
+            # Ensure directory exists
+            os.makedirs(os.path.dirname(self.mulligan_model_path), exist_ok=True)
+            torch.save(checkpoint, self.mulligan_model_path)
+            logger.info(LogCategory.MODEL_SAVE, f"Mulligan model saved to {self.mulligan_model_path}")
+            
+        except Exception as e:
+            logger.error(LogCategory.MODEL_SAVE, f"Failed to save mulligan model: {e}")
 
     def shutdown(self):
         """Allows Java to cleanly shut down the Python gateway."""

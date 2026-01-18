@@ -1,0 +1,38 @@
+# Local Prometheus configuration for Mage AI training monitoring
+global:
+  scrape_interval: 10s
+  evaluation_interval: 10s
+
+rule_files:
+  - "mage_rules.yml"
+
+scrape_configs:
+  # Mage Worker - CPU-based episode generation
+  - job_name: 'mage-worker'
+    static_configs:
+      - targets: ['worker:9090']
+    scrape_interval: 5s
+    metrics_path: '/metrics'
+    
+  # Mage Learner - GPU-based training
+  - job_name: 'mage-learner'
+    static_configs:
+      - targets: ['learner:9090']
+    scrape_interval: 5s
+    metrics_path: '/metrics'
+    
+  # Prometheus itself
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+      
+  # Grafana
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+
+  # Docker containers (if docker metrics are available)
+  - job_name: 'docker'
+    static_configs:
+      - targets: ['host.docker.internal:9323']
+    scrape_interval: 15s

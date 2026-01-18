@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mage-rl-learner
+  namespace: mage-rl
+  labels:
+    app: mage-rl-learner
+spec:
+  replicas: 1  # Single learner node
+  selector:
+    matchLabels:
+      app: mage-rl-learner
+  template:
+    metadata:
+      labels:
+        app: mage-rl-learner
+    spec:
+      containers:
+      - name: learner
+        image: mage-rl:latest
+        command: ["java", "-jar", "/app/Mage.Server.Plugins/Mage.Player.AIRL/target/mage-airl.jar"]
+        args: ["learner"]
+        env:
+        - name: MODE
+          value: "learner"
+        - name: TRAJ_DIR
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-config
+              key: TRAJ_DIR
+        - name: BATCH_EPISODES
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-config
+              key: BATCH_EPISODES
+        - name: POLL_SECONDS
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-config
+              key: POLL_SECONDS
+        - name: CHECKPOINT_EVERY
+          valueFrom:
+            configMapKeyRef:
+              name: mage-rl-config
+              key: CHECKPOINT_EVERY
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: mage-rl-secrets
+              key: OPENAI_API_KEY
+        - name: CUDA_VISIBLE_DEVICES
+          value: "0"
+        resources:
+          requests:
+            nvidia.com/gpu: 1
+            memory: "8Gi"
+            cpu: "4"
+          limits:
+            nvidia.com/gpu: 1
+            memory: "16Gi"
+            cpu: "8"
+        volumeMounts:
+        - name: shared-trajectories
+          mountPath: /shared
+        - name: model-storage
+          mountPath: /models
+      volumes:
+      - name: shared-trajectories
+        persistentVolumeClaim:
+          claimName: shared-trajectories
+      - name: model-storage
+        persistentVolumeClaim:
+          claimName: model-storage
+      nodeSelector:
+        accelerator: nvidia-tesla-k80  # Adjust based on cloud provider 

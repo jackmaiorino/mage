@@ -1,0 +1,41 @@
+Bench sweep summary (warm-up then 10s sampling)
+
+Config: runners=8, batch=384
+- CPU avg: 22.0% (peak 47.0%)
+- GPU: 9% usage, VRAM 3.1 / 12.3 GB
+- Memory: 19.4%
+
+Config: runners=12, batch=384
+- CPU avg: 41.1% (peak 67.2%)
+- GPU: 9% usage, VRAM 9.7 / 12.3 GB
+- Memory: 25.8%
+
+Config: runners=12, batch=768
+- CPU avg: 20.9% (peak 27.7%)
+- GPU: 11% usage, VRAM 12.1 / 12.3 GB
+- Memory: 35.6%
+
+Config: runners=16, batch=768
+- Invalid run: failed early with NullPointerException in CardScanner
+
+Config: runners=16, batch=384
+- CPU avg: 41.7% (peak 65.2%)
+- GPU: 20% usage, VRAM 2.1 / 12.3 GB
+- Memory: 22.1%
+
+$env:DECK_LIST_FILE="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"
+$env:RESET_EPISODE_COUNTER="1"
+$env:PY_BATCH_MAX_SIZE="768"
+$env:PY_BATCH_TIMEOUT_MS="50"
+$env:METRICS_PORT="9091"
+$env:RL_ACTIVATION_DIAG="1"
+powershell -NoProfile -ExecutionPolicy Bypass -File "scripts\rl-train.ps1" -TotalEpisodes 2000 -NumGameRunners 16 -MetricsPort 9091
+
+$env:MODE="eval"                                                                                          
+$env:EVAL_EPISODES="10"
+$env:DECK_LIST_FILE="Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"
+mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests compile exec:java `
+"-Dexec.mainClass=mage.player.ai.rl.RLTrainer" `
+"-Dexec.args=eval"
+
+mvn -q -pl Mage.Server.Plugins/Mage.Player.AIRL -am -DskipTests clean compile

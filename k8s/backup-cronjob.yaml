@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: checkpoints-backup
+  namespace: mage-rl
+spec:
+  schedule: "0 */6 * * *" # every 6 hours
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 2
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: s3-backup-sa
+          restartPolicy: OnFailure
+          containers:
+          - name: s3-sync
+            image: amazon/aws-cli:2.15.35
+            env:
+            - name: AWS_REGION
+              value: "us-east-1"  # set your region
+            command:
+            - /bin/sh
+            - -c
+            - |
+              set -e
+              echo "Syncing checkpoints to S3..."
+              # model checkpoints and stats under /shared/models and /shared/trajectories
+              aws s3 sync /shared/models s3://REPLACE_BUCKET_NAME/models --delete
+              aws s3 sync /shared/trajectories s3://REPLACE_BUCKET_NAME/trajectories --exclude "*" --include "*checkpoint*"
+            volumeMounts:
+            - name: shared-data
+              mountPath: /shared
+          volumes:
+          - name: shared-data
+            persistentVolumeClaim:
+              claimName: efs-pvc
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: s3-backup-sa
+  namespace: mage-rl
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::REPLACE_ACCOUNT_ID:role/REPLACE_IAM_ROLE_FOR_S3
+

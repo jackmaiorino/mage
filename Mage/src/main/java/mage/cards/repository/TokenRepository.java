@@ -51,38 +51,53 @@ public enum TokenRepository {
     private ArrayList<TokenInfo> allTokens = new ArrayList<>();
     private final Map<String, List<TokenInfo>> indexByClassName = new HashMap<>();
     private final Map<TokenType, List<TokenInfo>> indexByType = new HashMap<>();
+    private volatile boolean initialized = false;
 
     TokenRepository() {
     }
 
     public void init() {
-        if (!allTokens.isEmpty()) {
+        if (initialized) {
             return;
         }
 
-        // tokens
-        allTokens = loadMtgTokens();
-        allTokens.addAll(loadXmageTokens());
-
-        // index
-        allTokens.forEach(token -> {
-            // by class
-            String needClass = token.getFullClassFileName();
-            List<TokenInfo> list = indexByClassName.getOrDefault(needClass, null);
-            if (list == null) {
-                list = new ArrayList<>();
-                indexByClassName.put(needClass, list);
+        synchronized (this) {
+            if (initialized) {
+                return;
             }
-            list.add(token);
 
-            // by type
-            list = indexByType.getOrDefault(token.getTokenType(), null);
-            if (list == null) {
-                list = new ArrayList<>();
-                indexByType.put(token.getTokenType(), list);
-            }
-            list.add(token);
-        });
+            ArrayList<TokenInfo> tokens = loadMtgTokens();
+            tokens.addAll(loadXmageTokens());
+
+            Map<String, List<TokenInfo>> byClassName = new HashMap<>();
+            Map<TokenType, List<TokenInfo>> byType = new HashMap<>();
+
+            tokens.forEach(token -> {
+                // by class
+                String needClass = token.getFullClassFileName();
+                List<TokenInfo> list = byClassName.getOrDefault(needClass, null);
+                if (list == null) {
+                    list = new ArrayList<>();
+                    byClassName.put(needClass, list);
+                }
+                list.add(token);
+
+                // by type
+                list = byType.getOrDefault(token.getTokenType(), null);
+                if (list == null) {
+                    list = new ArrayList<>();
+                    byType.put(token.getTokenType(), list);
+                }
+                list.add(token);
+            });
+
+            allTokens = tokens;
+            indexByClassName.clear();
+            indexByClassName.putAll(byClassName);
+            indexByType.clear();
+            indexByType.putAll(byType);
+            initialized = true;
+        }
     }
 
     public List<TokenInfo> getAll() {

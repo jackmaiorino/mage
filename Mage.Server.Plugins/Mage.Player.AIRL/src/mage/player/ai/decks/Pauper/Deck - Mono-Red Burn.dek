@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="126429" Quantity="4" Sideboard="false" Name="Sneaky Snacker" Annotation="0"/>
+  <Cards CatID="60739" Quantity="2" Sideboard="false" Name="Faithless Looting" Annotation="0"/>
+  <Cards CatID="124169" Quantity="4" Sideboard="false" Name="Highway Robbery" Annotation="0"/>
+  <Cards CatID="144116" Quantity="4" Sideboard="false" Name="Masked Meower" Annotation="0"/>
+  <Cards CatID="32859" Quantity="4" Sideboard="false" Name="Lightning Bolt" Annotation="0"/>
+  <Cards CatID="79630" Quantity="18" Sideboard="false" Name="Mountain" Annotation="0"/>
+  <Cards CatID="130407" Quantity="4" Sideboard="false" Name="Grab the Prize" Annotation="0"/>
+  <Cards CatID="53071" Quantity="4" Sideboard="false" Name="Fireblast" Annotation="0"/>
+  <Cards CatID="68451" Quantity="4" Sideboard="false" Name="Guttersnipe" Annotation="0"/>
+  <Cards CatID="62217" Quantity="4" Sideboard="false" Name="Fiery Temper" Annotation="0"/>
+  <Cards CatID="94710" Quantity="4" Sideboard="false" Name="Voldaren Epicure" Annotation="0"/>
+  <Cards CatID="72640" Quantity="4" Sideboard="false" Name="Lava Dart" Annotation="0"/>
+  <Cards CatID="43610" Quantity="3" Sideboard="true" Name="Red Elemental Blast" Annotation="0"/>
+  <Cards CatID="35559" Quantity="4" Sideboard="true" Name="Searing Blaze" Annotation="0"/>
+  <Cards CatID="69981" Quantity="4" Sideboard="true" Name="Pyroblast" Annotation="0"/>
+  <Cards CatID="30895" Quantity="4" Sideboard="true" Name="Relic of Progenitus" Annotation="0"/>
+</Deck>

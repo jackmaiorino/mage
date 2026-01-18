@@ -1,0 +1,6 @@
+# Pauper subset deck pool for local RL experiments.
+# One path per line. Paths are resolved relative to this file.
+#
+# Auto-generated from ../Pauper/*.dek
+
+../Pauper/Deck - Spy Combo.dek

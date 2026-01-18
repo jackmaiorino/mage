@@ -1,0 +1,14 @@
+# Pauper subset deck pool for local RL experiments.
+# One path per line. Paths are resolved relative to this file.
+#
+# Auto-generated from ../Pauper/*.dek
+
+../Pauper/Deck - Caw-Gates.dek
+../Pauper/Deck - Elves.dek
+../Pauper/Deck - Grixis Affinity.dek
+../Pauper/Deck - Jund Wildfire.dek
+../Pauper/Deck - Mono Red Rally.dek
+../Pauper/Deck - Mono-Blue Faeries.dek
+../Pauper/Deck - Mono-Blue Terror.dek
+../Pauper/Deck - Mono-Red Burn.dek
+../Pauper/Deck - Spy Combo.dek

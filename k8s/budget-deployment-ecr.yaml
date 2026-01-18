@@ -1,0 +1,70 @@
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: mage-rl-budget-learner 
+  namespace: mage-rl 
+spec: 
+  replicas: 1 
+  selector: 
+    matchLabels: 
+      app: mage-rl-budget-learner 
+  template: 
+    metadata: 
+      labels: 
+        app: mage-rl-budget-learner 
+    spec: 
+      containers: 
+      - name: learner 
+        image: 915449292132.dkr.ecr.us-east-1.amazonaws.com/mage-rl:latest 
+        command: ["java"] 
+        args: ["-cp", "/workspace/Mage.Server.Plugins/Mage.Player.AIRL/target/mage-player-airl-*-jar-with-dependencies.jar", "mage.player.ai.rl.RLTrainer", "learner"] 
+        resources: 
+          requests: 
+            memory: "2Gi" 
+            cpu: "1000m" 
+        volumeMounts: 
+        - name: shared-data 
+          mountPath: /app/shared-data 
+      volumes: 
+      - name: shared-data 
+        persistentVolumeClaim: 
+          claimName: efs-pvc 
+      nodeSelector: 
+        node-type: standard 
+--- 
+apiVersion: apps/v1 
+kind: Deployment 
+metadata: 
+  name: mage-rl-budget-workers 
+  namespace: mage-rl 
+spec: 
+  replicas: 2 
+  selector: 
+    matchLabels: 
+      app: mage-rl-budget-workers 
+  template: 
+    metadata: 
+      labels: 
+        app: mage-rl-budget-workers 
+    spec: 
+      containers: 
+      - name: worker 
+        image: 915449292132.dkr.ecr.us-east-1.amazonaws.com/mage-rl:latest 
+        command: ["java"] 
+        args: ["-cp", "/workspace/Mage.Server.Plugins/Mage.Player.AIRL/target/mage-player-airl-*-jar-with-dependencies.jar", "mage.player.ai.rl.RLTrainer", "worker"] 
+        resources: 
+          requests: 
+            memory: "1Gi" 
+            cpu: "500m" 
+        volumeMounts: 
+        - name: shared-data 
+          mountPath: /app/shared-data 
+      volumes: 
+      - name: shared-data 
+        persistentVolumeClaim: 
+          claimName: efs-pvc 
+      tolerations: 
+      - key: "spot" 
+        operator: "Equal" 
+        value: "true" 
+        effect: "NoSchedule" 

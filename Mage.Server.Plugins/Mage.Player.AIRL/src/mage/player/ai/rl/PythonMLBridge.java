@@ -652,6 +652,39 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
+     * Predict mulligan decision for a given hand.
+     * 
+     * @param features Mulligan feature vector (hand + context)
+     * @return Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
+     */
+    public float predictMulligan(float[] features) {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+
+        try {
+            // Call Python mulligan model
+            // Returns a single float: probability of keeping
+            Object result = entryPoint.predictMulligan(features);
+            
+            if (result instanceof Double) {
+                return ((Double) result).floatValue();
+            } else if (result instanceof Float) {
+                return (Float) result;
+            } else {
+                logger.warning("Unexpected mulligan prediction type: " + result.getClass());
+                return 0.5f; // Default: 50/50
+            }
+        } catch (Py4JException e) {
+            logger.severe("Py4J error during mulligan prediction: " + e.getMessage());
+            throw new RuntimeException("Failed to predict mulligan", e);
+        } catch (Exception e) {
+            logger.severe("Error during mulligan prediction: " + e.getMessage());
+            throw new RuntimeException("Failed to predict mulligan", e);
+        }
+    }
+
+    /**
      * Train the model with a batch of states and discounted returns.
      */
     public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> discountedReturns) {

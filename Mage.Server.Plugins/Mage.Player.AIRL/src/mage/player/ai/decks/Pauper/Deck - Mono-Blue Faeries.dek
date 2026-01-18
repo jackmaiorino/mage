@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="62441" Quantity="3" Sideboard="false" Name="Snap" Annotation="0"/>
+  <Cards CatID="72474" Quantity="4" Sideboard="false" Name="Faerie Seer" Annotation="0"/>
+  <Cards CatID="79626" Quantity="18" Sideboard="false" Name="Island" Annotation="0"/>
+  <Cards CatID="97054" Quantity="4" Sideboard="false" Name="Moon-Circuit Hacker" Annotation="0"/>
+  <Cards CatID="21827" Quantity="4" Sideboard="false" Name="Ninja of the Deep Hours" Annotation="0"/>
+  <Cards CatID="80129" Quantity="4" Sideboard="false" Name="Of One Mind" Annotation="0"/>
+  <Cards CatID="107579" Quantity="4" Sideboard="false" Name="Counterspell" Annotation="0"/>
+  <Cards CatID="58363" Quantity="2" Sideboard="false" Name="Dispel" Annotation="0"/>
+  <Cards CatID="48678" Quantity="4" Sideboard="false" Name="Spellstutter Sprite" Annotation="0"/>
+  <Cards CatID="124015" Quantity="2" Sideboard="false" Name="Harrier Strix" Annotation="0"/>
+  <Cards CatID="139043" Quantity="4" Sideboard="false" Name="Humbling Elder" Annotation="0"/>
+  <Cards CatID="109980" Quantity="1" Sideboard="false" Name="Saiba Cryptomancer" Annotation="0"/>
+  <Cards CatID="73015" Quantity="4" Sideboard="false" Name="Faerie Miscreant" Annotation="0"/>
+  <Cards CatID="15530" Quantity="2" Sideboard="false" Name="Force Spike" Annotation="0"/>
+  <Cards CatID="35925" Quantity="4" Sideboard="true" Name="Blue Elemental Blast" Annotation="0"/>
+  <Cards CatID="142705" Quantity="3" Sideboard="true" Name="Annul" Annotation="0"/>
+  <Cards CatID="69979" Quantity="2" Sideboard="true" Name="Hydroblast" Annotation="0"/>
+  <Cards CatID="87421" Quantity="3" Sideboard="true" Name="Bind the Monster" Annotation="0"/>
+  <Cards CatID="58363" Quantity="1" Sideboard="true" Name="Dispel" Annotation="0"/>
+  <Cards CatID="39324" Quantity="2" Sideboard="true" Name="Steel Sabotage" Annotation="0"/>
+</Deck>

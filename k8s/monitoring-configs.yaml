@@ -1,0 +1,276 @@
+# Configuration for Grafana and Fluent Bit
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: grafana-provisioning
+  namespace: mage-monitoring
+data:
+  datasources.yml: |
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      access: proxy
+      url: http://prometheus:9090
+      isDefault: true
+      editable: true
+  
+  dashboards.yml: |
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /etc/grafana/provisioning/dashboards
+  
+  mage-training-dashboard.json: |
+    {
+      "dashboard": {
+        "id": null,
+        "title": "Mage AI Training Dashboard",
+        "tags": ["mage", "ai", "training"],
+        "timezone": "browser",
+        "panels": [
+          {
+            "id": 1,
+            "title": "Episode Generation Rate",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "rate(mage_episodes_completed_total[5m])",
+                "legendFormat": "{{pod}}"
+              }
+            ],
+            "fieldConfig": {
+              "defaults": {
+                "unit": "eps",
+                "thresholds": {
+                  "steps": [
+                    {"color": "red", "value": 0},
+                    {"color": "yellow", "value": 0.1},
+                    {"color": "green", "value": 0.5}
+                  ]
+                }
+              }
+            },
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0}
+          },
+          {
+            "id": 2,
+            "title": "Training Loss",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "mage_training_loss",
+                "legendFormat": "Loss - {{pod}}"
+              }
+            ],
+            "yAxes": [
+              {"label": "Loss", "logBase": 1},
+              {"show": false}
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0}
+          },
+          {
+            "id": 3,
+            "title": "GPU Memory Usage",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "nvidia_gpu_memory_used_bytes / nvidia_gpu_memory_total_bytes * 100",
+                "legendFormat": "GPU Memory % - {{pod}}"
+              }
+            ],
+            "yAxes": [
+              {"label": "Percentage", "max": 100, "min": 0},
+              {"show": false}
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8}
+          },
+          {
+            "id": 4,
+            "title": "Batch Size Optimization",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "mage_optimal_batch_size",
+                "legendFormat": "Optimal Batch Size - {{pod}}"
+              },
+              {
+                "expr": "mage_actual_batch_size",
+                "legendFormat": "Actual Batch Size - {{pod}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8}
+          },
+          {
+            "id": 5,
+            "title": "Pod Resource Usage",
+            "type": "graph",
+            "targets": [
+              {
+                "expr": "rate(container_cpu_usage_seconds_total{pod=~\"mage-.*\"}[5m]) * 100",
+                "legendFormat": "CPU % - {{pod}}"
+              },
+              {
+                "expr": "container_memory_usage_bytes{pod=~\"mage-.*\"} / container_spec_memory_limit_bytes * 100",
+                "legendFormat": "Memory % - {{pod}}"
+              }
+            ],
+            "gridPos": {"h": 8, "w": 24, "x": 0, "y": 16}
+          },
+          {
+            "id": 6,
+            "title": "Training Throughput",
+            "type": "table",
+            "targets": [
+              {
+                "expr": "mage_episodes_completed_total",
+                "legendFormat": "{{pod}}",
+                "instant": true
+              }
+            ],
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24}
+          },
+          {
+            "id": 7,
+            "title": "Error Rate",
+            "type": "stat",
+            "targets": [
+              {
+                "expr": "rate(mage_errors_total[5m])",
+                "legendFormat": "Errors/sec"
+              }
+            ],
+            "fieldConfig": {
+              "defaults": {
+                "thresholds": {
+                  "steps": [
+                    {"color": "green", "value": 0},
+                    {"color": "yellow", "value": 0.01},
+                    {"color": "red", "value": 0.1}
+                  ]
+                }
+              }
+            },
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 24}
+          }
+        ],
+        "time": {
+          "from": "now-1h",
+          "to": "now"
+        },
+        "refresh": "10s"
+      }
+    }
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: fluent-bit-config
+  namespace: mage-monitoring
+data:
+  fluent-bit.conf: |
+    [SERVICE]
+        Flush         1
+        Log_Level     info
+        Daemon        off
+        Parsers_File  parsers.conf
+    
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*mage*.log
+        Parser            docker
+        Tag               mage.*
+        Refresh_Interval  5
+        Skip_Long_Lines   On
+        Skip_Empty_Lines  On
+    
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*worker*.log
+        Parser            docker
+        Tag               mage.worker.*
+        Refresh_Interval  5
+    
+    [INPUT]
+        Name              tail
+        Path              /var/log/containers/*learner*.log
+        Parser            docker
+        Tag               mage.learner.*
+        Refresh_Interval  5
+    
+    [FILTER]
+        Name                kubernetes
+        Match               mage.*
+        Kube_URL            https://kubernetes.default.svc:443
+        Kube_CA_File        /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+        Kube_Token_File     /var/run/secrets/kubernetes.io/serviceaccount/token
+        Merge_Log           On
+        K8S-Logging.Parser  On
+        K8S-Logging.Exclude Off
+    
+    [FILTER]
+        Name    grep
+        Match   mage.*
+        Regex   log (Episode|Training|GPU|Dynamic batch|Error|CUDA|OutOfMemory)
+    
+    [OUTPUT]
+        Name  prometheus_exporter
+        Match mage.*
+        Host  0.0.0.0
+        Port  2021
+        
+    [OUTPUT]
+        Name  stdout
+        Match mage.*
+        Format json_lines
+  
+  parsers.conf: |
+    [PARSER]
+        Name        docker
+        Format      json
+        Time_Key    time
+        Time_Format %Y-%m-%dT%H:%M:%S.%L
+        Time_Keep   On
+        
+    [PARSER]
+        Name        mage-log
+        Format      regex
+        Regex       ^(?<time>[^ ]*) (?<level>[^ ]*) (?<message>.*)$
+        Time_Key    time
+        Time_Format %Y-%m-%d %H:%M:%S,%L
+---
+# ServiceAccount and RBAC for Fluent Bit
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: fluent-bit
+  namespace: mage-monitoring
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: fluent-bit
+rules:
+- apiGroups: [""]
+  resources: ["pods", "namespaces"]
+  verbs: ["get", "list", "watch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: fluent-bit
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: fluent-bit
+subjects:
+- kind: ServiceAccount
+  name: fluent-bit
+  namespace: mage-monitoring
