@@ -62,3 +62,9 @@ Utils/*implemented.txt
 # build tools
 mage-bundle.zip
 .env
+
+# Python virtual environments
+.mtgrl_venv/
+.mage_ai_venv/
+*.pyc
+__pycache__/
