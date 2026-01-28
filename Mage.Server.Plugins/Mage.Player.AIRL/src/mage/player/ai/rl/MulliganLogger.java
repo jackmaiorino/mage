@@ -11,28 +11,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Thread-safe logger for mulligan decisions.
- * Logs to CSV for later analysis and training a better mulligan model.
+ * Thread-safe logger for mulligan decisions. Logs to CSV for later analysis and
+ * training a better mulligan model.
  */
 public class MulliganLogger {
+
     private static final Logger logger = LoggerFactory.getLogger(MulliganLogger.class);
-    
+
     private static final String DEFAULT_LOG_PATH = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_stats.csv";
     private static final ReentrantLock fileLock = new ReentrantLock();
-    
+
     private final String logPath;
     private boolean headerWritten = false;
-    
+
     public MulliganLogger() {
         this(DEFAULT_LOG_PATH);
     }
-    
+
     public MulliganLogger(String logPath) {
         this.logPath = logPath;
         ensureDirectoryExists();
         ensureHeaderExists();
     }
-    
+
     private void ensureDirectoryExists() {
         try {
             Path path = Paths.get(logPath);
@@ -43,7 +44,7 @@ public class MulliganLogger {
             logger.error("Failed to create mulligan log directory", e);
         }
     }
-    
+
     private void ensureHeaderExists() {
         fileLock.lock();
         try {
@@ -51,31 +52,49 @@ public class MulliganLogger {
             if (!Files.exists(path)) {
                 // Write header
                 try (BufferedWriter writer = new BufferedWriter(new FileWriter(logPath, true))) {
-                    writer.write("timestamp,episode,player,mulligan_num,hand_size,decision,keep_probability,cards,cards_kept,cards_bottomed\n");
+                    writer.write("timestamp,episode,player,mulligan_num,hand_size,decision,q_keep,q_mull,q_gap,cards,cards_kept,cards_bottomed\n");
                     headerWritten = true;
                 } catch (IOException e) {
                     logger.error("Failed to write mulligan log header", e);
                 }
             } else {
+                // If an old-format file exists, rotate it once and start a fresh CSV with the new header.
+                try (java.io.BufferedReader reader = Files.newBufferedReader(path)) {
+                    String first = reader.readLine();
+                    if (first != null && !first.contains("q_keep")) {
+                        String legacyPath = logPath.replaceAll("\\.csv$", "")
+                                + ".legacy." + System.currentTimeMillis() + ".csv";
+                        Files.move(path, Paths.get(legacyPath));
+                        try (BufferedWriter writer = new BufferedWriter(new FileWriter(logPath, true))) {
+                            writer.write("timestamp,episode,player,mulligan_num,hand_size,decision,q_keep,q_mull,q_gap,cards,cards_kept,cards_bottomed\n");
+                        }
+                    }
+                } catch (IOException e) {
+                    logger.error("Failed to validate/rotate mulligan log header", e);
+                }
                 headerWritten = true;
             }
         } finally {
             fileLock.unlock();
         }
     }
-    
+
     /**
      * Log a mulligan decision to CSV.
-     * 
+     *
      * @param episodeNum Current episode number
      * @param playerName Player making the decision
-     * @param mulliganNum Which mulligan (0 = opening hand, 1 = first mulligan, etc.)
+     * @param mulliganNum Which mulligan (0 = opening hand, 1 = first mulligan,
+     * etc.)
      * @param handSize Current hand size
      * @param decision "KEEP" or "MULLIGAN"
-     * @param keepProbability Model's probability of keeping (0.0-1.0)
+     * @param qKeep Model score for KEEP (Q_keep)
+     * @param qMull Model score for MULL (Q_mull)
      * @param cards List of card names in hand (semicolon-separated)
-     * @param cardsKept Cards kept after London mulligan (semicolon-separated, empty if full mulligan)
-     * @param cardsBottomed Cards put on bottom after London mulligan (semicolon-separated, empty if full mulligan)
+     * @param cardsKept Cards kept after London mulligan (semicolon-separated,
+     * empty if full mulligan)
+     * @param cardsBottomed Cards put on bottom after London mulligan
+     * (semicolon-separated, empty if full mulligan)
      */
     public void logDecision(
             int episodeNum,
@@ -83,11 +102,12 @@ public class MulliganLogger {
             int mulliganNum,
             int handSize,
             String decision,
-            float keepProbability,
+            float qKeep,
+            float qMull,
             String cards,
             String cardsKept,
             String cardsBottomed) {
-        
+
         fileLock.lock();
         try {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(logPath, true))) {
@@ -96,18 +116,21 @@ public class MulliganLogger {
                 String escapedCards = "\"" + cards.replace("\"", "\"\"") + "\"";
                 String escapedKept = "\"" + cardsKept.replace("\"", "\"\"") + "\"";
                 String escapedBottomed = "\"" + cardsBottomed.replace("\"", "\"\"") + "\"";
-                
-                String line = String.format("%d,%d,%s,%d,%d,%s,%.4f,%s,%s,%s\n",
-                    timestamp,
-                    episodeNum,
-                    playerName,
-                    mulliganNum,
-                    handSize,
-                    decision,
-                    keepProbability,
-                    escapedCards,
-                    escapedKept,
-                    escapedBottomed
+
+                float qGap = qKeep - qMull;
+                String line = String.format("%d,%d,%s,%d,%d,%s,%.6f,%.6f,%.6f,%s,%s,%s\n",
+                        timestamp,
+                        episodeNum,
+                        playerName,
+                        mulliganNum,
+                        handSize,
+                        decision,
+                        qKeep,
+                        qMull,
+                        qGap,
+                        escapedCards,
+                        escapedKept,
+                        escapedBottomed
                 );
                 writer.write(line);
             }
@@ -117,13 +140,13 @@ public class MulliganLogger {
             fileLock.unlock();
         }
     }
-    
+
     /**
      * Get singleton instance (lazy-initialized).
      */
     private static volatile MulliganLogger instance;
     private static final Object instanceLock = new Object();
-    
+
     public static MulliganLogger getInstance() {
         if (instance == null) {
             synchronized (instanceLock) {

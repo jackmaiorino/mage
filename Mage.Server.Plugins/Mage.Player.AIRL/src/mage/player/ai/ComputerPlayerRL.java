@@ -23,14 +23,16 @@ import mage.cards.Card;
 import mage.cards.Cards;
 import mage.choices.Choice;
 import mage.constants.Outcome;
+import mage.filter.common.FilterLandCard;
 import mage.constants.RangeOfInfluence;
 import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.player.ai.rl.GameLogger;
 import mage.player.ai.rl.MulliganLogger;
 import mage.player.ai.rl.MulliganModel;
-import mage.player.ai.rl.PythonMLBridge;
+import mage.player.ai.rl.PythonModel;
 import mage.player.ai.rl.RLTrainer;
 import mage.player.ai.rl.StateSequenceBuilder;
 import mage.player.ai.util.CombatUtil;
@@ -41,12 +43,18 @@ import mage.target.TargetCard;
 
 public class ComputerPlayerRL extends ComputerPlayer7 {
 
-    private static final double LAND_PLAY_REWARD = 0.02;
-    private static final double SPELL_CAST_REWARD = 0.01;
+    // Denser reward shaping to help credit assignment with sparse terminal rewards
+    // These provide gradient signal for actions that are generally good in MTG
+    private static final double LAND_PLAY_REWARD = 0.05;   // Playing lands is almost always good
+    private static final double SPELL_CAST_REWARD = 0.02;  // Casting spells advances the game (was 0)
+    private static final double ATTACK_REWARD = 0.01;      // Attacking pressures opponent
+    private static final double BLOCK_REWARD = 0.005;      // Blocking prevents damage
     private static final boolean ACTIVATION_DIAG = "1".equals(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ACTIVATION_DIAG", "0"));
     private static final boolean USE_ENGINE_CHOICES = "1".equals(System.getenv().getOrDefault("RL_ENGINE_CHOICES", "1"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("RL_ENGINE_CHOICES", "1"));
+    private static final boolean USE_HEURISTIC_MULLIGAN = "1".equals(System.getenv().getOrDefault("USE_HEURISTIC_MULLIGAN", "0"))
+            || "true".equalsIgnoreCase(System.getenv().getOrDefault("USE_HEURISTIC_MULLIGAN", "0"));
 
     // Track RL player activation failures (these pollute training signal)
     private static final java.util.concurrent.atomic.AtomicInteger RL_ACTIVATION_FAILURES = new java.util.concurrent.atomic.AtomicInteger(0);
@@ -60,19 +68,21 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     // ThreadLocal to track which choice was made and what options were available
     private static final ThreadLocal<ChoiceTrackingData> choiceTrackingData = new ThreadLocal<>();
 
-    private PythonMLBridge model;
+    private PythonModel model;
     private MulliganModel mulliganModel;
     protected StateSequenceBuilder.SequenceOutput currentState;
     private final List<StateSequenceBuilder.TrainingData> trainingBuffer;
     private Ability currentAbility;
     private int mulliganCount = 0;
     private int currentEpisode = -1; // For mulligan logging
+    private int lastLoggedTurn = -1; // Track turn changes for game logging
 
     // Track mulligan decisions for training (card-level)
     private final List<Integer> mulliganNums = new ArrayList<>();
     private final List<int[]> mulliganHandIds = new ArrayList<>();
     private final List<int[]> mulliganDeckIds = new ArrayList<>();
     private final List<Float> mulliganDecisions = new ArrayList<>(); // 1.0=keep, 0.0=mulligan
+    private final List<Integer> mulliganLandCounts = new ArrayList<>(); // Land counts for heuristic
     private MulliganModel.MulliganDecision pendingMulliganDecision = null; // Pending mulligan to log after drawing new 7
     private int lastLoggedMulliganCount = -1; // Track last logged mulligan to prevent duplicates
     private StateSequenceBuilder.TrainingData pendingLondonMulliganTraining = null; // Only commit if we KEEP
@@ -83,24 +93,39 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      */
     private final boolean greedyMode;
 
-    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonMLBridge model) {
-        this(name, range, model, false);
+    // Which policy to use on the Python side ("train" or "snap:<id>")
+    private final String policyKey;
+
+    // Whether to record training data from decisions made by this player
+    private final boolean trainingEnabled;
+
+    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonModel model) {
+        this(name, range, model, false, true, "train");
     }
 
     // Convenience ctor with greedy flag
-    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonMLBridge model, boolean greedy) {
+    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonModel model, boolean greedy) {
+        this(name, range, model, greedy, true, "train");
+    }
+
+    public ComputerPlayerRL(String name, RangeOfInfluence range, PythonModel model, boolean greedy, boolean trainingEnabled, String policyKey) {
         super(name, range, 10);
         this.model = model;
         this.mulliganModel = new MulliganModel(model);
         this.trainingBuffer = new ArrayList<>();
         this.greedyMode = greedy;
+        this.trainingEnabled = trainingEnabled;
+        this.policyKey = (policyKey == null || policyKey.trim().isEmpty()) ? "train" : policyKey;
         // Auto-targeting disabled via getStrictChooseMode override
-        RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name + (greedy ? " [GREEDY]" : ""));
+        RLTrainer.threadLocalLogger.get().info("ComputerPlayerRL initialized for " + name
+                + (greedy ? " [GREEDY]" : "")
+                + (this.trainingEnabled ? "" : " [NO-TRAIN]")
+                + ("train".equals(this.policyKey) ? "" : " [" + this.policyKey + "]"));
     }
 
     // The default constructor for ComputerPlayerRL used by server to create
     public ComputerPlayerRL(String name, RangeOfInfluence range, int skill) {
-        this(name, range, PythonMLBridge.getInstance(), false);
+        this(name, range, RLTrainer.getSharedModel(), false, true, "train");
     }
 
     public ComputerPlayerRL(final ComputerPlayerRL player) {
@@ -109,10 +134,14 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.mulliganModel = player.mulliganModel;
         this.trainingBuffer = new ArrayList<>();
         this.currentAbility = player.currentAbility;
+        this.abilitySourceToExcludeFromMana = null; // Don't copy - each activation sets its own
+        this.tapTargetCostReservations = new HashSet<>(); // Don't copy - each activation sets its own
         this.mulliganCount = player.mulliganCount;
         this.lastLoggedMulliganCount = player.lastLoggedMulliganCount; // Prevent duplicates in copied instances
         this.pendingLondonMulliganTraining = null; // Don't copy pending training data to simulated copies
         this.greedyMode = player.greedyMode;
+        this.policyKey = player.policyKey;
+        this.trainingEnabled = player.trainingEnabled;
         // strict choose mode enforced via method override
     }
 
@@ -185,7 +214,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         // Get model predictions - single call for both policy and value
         RLTrainer.threadLocalLogger.get().info("About to call model.scoreCandidates() with candidateCount: " + candidateCount);
         mage.player.ai.rl.PythonMLBatchManager.PredictionResult prediction
-                = model.scoreCandidates(baseState, candidateActionIds, candidateFeatures, candidateMask);
+                = model.scoreCandidates(baseState, candidateActionIds, candidateFeatures, candidateMask, policyKey);
         RLTrainer.threadLocalLogger.get().info("Successfully received candidate scoring result");
         float[] actionProbs = prediction.policyScores; // length = maxCandidates
         float valueScore = prediction.valueScores;
@@ -220,6 +249,10 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         RLTrainer.threadLocalLogger.get().info("Action probabilities: " + Arrays.toString(maskedProbs));
         RLTrainer.threadLocalLogger.get().info("Value score: " + valueScore);
+
+        // Store for game logging
+        this.lastActionProbs = maskedProbs.clone();
+        this.lastValueScore = valueScore;
 
         // Choose indices ---------------------------------------------
         List<Integer> selectedIndices = new ArrayList<>();
@@ -279,7 +312,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         // after you compute logits/probs and make a choice
         // Record training data for decisions
-        if (!selectedIndices.isEmpty()) {
+        if (trainingEnabled && !selectedIndices.isEmpty()) {
             if (minTargets == 1 && maxTargets == 1) {
                 // Single-choice decision: log the chosen option
                 int chosen = selectedIndices.get(0);
@@ -407,15 +440,33 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     }
 
     private double computeStepReward(StateSequenceBuilder.ActionType actionType, Object candidate) {
+        // Denser reward shaping for better credit assignment
+        // Terminal reward (+1/-1) is too sparse for long games
+        
+        if (actionType == StateSequenceBuilder.ActionType.DECLARE_ATTACKS) {
+            // Attacking is generally good - pressures opponent
+            return ATTACK_REWARD;
+        }
+        
+        if (actionType == StateSequenceBuilder.ActionType.DECLARE_BLOCKS) {
+            // Blocking prevents damage (small reward since sometimes not blocking is better)
+            return BLOCK_REWARD;
+        }
+        
         if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL || candidate == null) {
             return 0.0;
         }
+        
         if (candidate instanceof PlayLandAbility) {
             return LAND_PLAY_REWARD;
         }
+        
         if (candidate instanceof SpellAbility) {
+            // NOTE: Can't check if creature without Game object
+            // Treat all spells equally for now
             return SPELL_CAST_REWARD;
         }
+        
         return 0.0;
     }
 
@@ -1226,15 +1277,20 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     @Override
     public boolean chooseMulligan(Game game) {
         try {
+            // Use simple heuristic mulligan if flag is set (for isolating in-game play quality)
+            if (USE_HEURISTIC_MULLIGAN) {
+                return heuristicMulligan(game);
+            }
+
             // Guard against duplicate calls from game engine
             if (lastLoggedMulliganCount == mulliganCount) {
                 RLTrainer.threadLocalLogger.get().debug(
-                    String.format("chooseMulligan called again for mulliganCount=%d, skipping duplicate", mulliganCount)
+                        String.format("chooseMulligan called again for mulliganCount=%d, skipping duplicate", mulliganCount)
                 );
                 // Return the same decision we made before
                 return pendingMulliganDecision != null;
             }
-            
+
             MulliganModel.MulliganDecision decision = mulliganModel.shouldMulliganWithFeatures(this, game, mulliganCount, currentEpisode);
 
             // Log the decision to console
@@ -1246,15 +1302,15 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             }
 
             RLTrainer.threadLocalLogger.get().info(
-                    String.format("Mulligan decision for %s: mulliganNum=%d, handSize=%d, lands=%d, decision=%s (keepProb=%.3f)",
+                    String.format("Mulligan decision for %s: mulliganNum=%d, handSize=%d, lands=%d, decision=%s (Q_keep=%.3f Q_mull=%.3f)",
                             getName(), mulliganCount, getHand().size(), landCount,
-                            decision.shouldMulligan ? "MULLIGAN" : "KEEP", decision.keepProbability)
+                            decision.shouldMulligan ? "MULLIGAN" : "KEEP", decision.qKeep, decision.qMull)
             );
 
             if (decision.shouldMulligan) {
                 // Don't log yet - wait for chooseLondonMulliganCards to see the new 7 cards
                 pendingMulliganDecision = decision;
-                
+
                 // Discard any pending London mulligan training data from previous mulligan
                 // (those cards got shuffled back and had no impact on the game)
                 pendingLondonMulliganTraining = null;
@@ -1265,32 +1321,36 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 mulliganHandIds.add(decision.handCardIds);
                 mulliganDeckIds.add(decision.deckCardIds);
                 mulliganDecisions.add(1.0f); // 1.0=keep
-                
+                mulliganLandCounts.add(countLandsInHand(game)); // For heuristic
+
                 // Commit pending London mulligan training data (if any)
                 // This is the LAST mulligan, so those card choices actually affected the game
-                if (pendingLondonMulliganTraining != null) {
+                if (trainingEnabled && pendingLondonMulliganTraining != null) {
                     trainingBuffer.add(pendingLondonMulliganTraining);
                     pendingLondonMulliganTraining = null;
                 }
-                
+
                 // Log to CSV
                 List<Card> hand = new ArrayList<>(getHand().getCards(game));
                 StringBuilder cardNames = new StringBuilder();
                 for (int i = 0; i < hand.size(); i++) {
-                    if (i > 0) cardNames.append("; ");
+                    if (i > 0) {
+                        cardNames.append("; ");
+                    }
                     cardNames.append(hand.get(i).getName());
                 }
-                
+
                 MulliganLogger.getInstance().logDecision(
-                    currentEpisode,
-                    getName(),
-                    decision.mulliganNum,
-                    hand.size(),
-                    "KEEP",
-                    decision.keepProbability,
-                    cardNames.toString(),
-                    "", // No London mulligan for KEEP
-                    "" // No London mulligan for KEEP
+                        currentEpisode,
+                        getName(),
+                        decision.mulliganNum,
+                        hand.size(),
+                        "KEEP",
+                        decision.qKeep,
+                        decision.qMull,
+                        cardNames.toString(),
+                        "", // No London mulligan for KEEP
+                        "" // No London mulligan for KEEP
                 );
                 pendingMulliganDecision = null; // Clear any pending
             }
@@ -1315,12 +1375,136 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     /**
      * London mulligan: Choose which cards to put on the bottom of library. Uses
      * the main RL model to rank cards by value.
-     * 
+     *
      * This is called AFTER drawing 7 new cards (post-mulligan), so we log the
      * pending mulligan decision here with the full 7-card hand visible.
      */
+    /**
+     * Simple heuristic mulligan logic (same as ComputerPlayer). Mulligan if
+     * lands < 2 OR lands > (hand.size() - 2)
+     */
+    private boolean heuristicMulligan(Game game) {
+        if (hand.size() < 6 || game.getClass().getName().contains("Momir")) {
+            mulliganCount++;
+            return false;
+        }
+        Set<Card> lands = hand.getCards(new FilterLandCard(), game);
+        boolean shouldMulligan = lands.size() < 2 || lands.size() > hand.size() - 2;
+
+        RLTrainer.threadLocalLogger.get().info(
+                String.format("Heuristic mulligan for %s: mulliganNum=%d, handSize=%d, lands=%d, decision=%s",
+                        getName(), mulliganCount, getHand().size(), lands.size(),
+                        shouldMulligan ? "MULLIGAN" : "KEEP")
+        );
+
+        mulliganCount++;
+        return shouldMulligan;
+    }
+
+    /**
+     * Simple heuristic for London mulligan bottom cards. If too many lands
+     * (>4), bottom excess lands. If too few lands (<2), bottom non-lands.
+     * Otherwise, bottom highest CMC non-lands.
+     */
+    private boolean heuristicLondonMulligan(Target target, Game game) {
+        List<Card> hand = new ArrayList<>(getHand().getCards(game));
+        if (hand.isEmpty()) {
+            return false;
+        }
+
+        int numToPutBack = target.getMinNumberOfTargets();
+        if (numToPutBack >= hand.size()) {
+            // Put back all cards
+            for (Card card : hand) {
+                target.addTarget(card.getId(), null, game);
+            }
+            RLTrainer.threadLocalLogger.get().info(
+                    String.format("Heuristic London mulligan: Putting back all %d cards", numToPutBack)
+            );
+            return true;
+        }
+
+        List<Card> lands = new ArrayList<>();
+        List<Card> nonLands = new ArrayList<>();
+        for (Card card : hand) {
+            if (card.isLand(game)) {
+                lands.add(card);
+            } else {
+                nonLands.add(card);
+            }
+        }
+
+        List<Card> toBottom = new ArrayList<>();
+
+        if (lands.size() > 4) {
+            // Too many lands - bottom excess lands first
+            for (int i = 0; i < Math.min(numToPutBack, lands.size() - 3); i++) {
+                toBottom.add(lands.get(i));
+            }
+            // If still need more, bottom highest CMC non-lands
+            nonLands.sort((a, b) -> Integer.compare(b.getManaValue(), a.getManaValue()));
+            for (Card card : nonLands) {
+                if (toBottom.size() >= numToPutBack) {
+                    break;
+                }
+                toBottom.add(card);
+            }
+        } else if (lands.size() < 2) {
+            // Too few lands - bottom non-lands, keeping lowest CMC
+            nonLands.sort((a, b) -> Integer.compare(b.getManaValue(), a.getManaValue()));
+            for (Card card : nonLands) {
+                if (toBottom.size() >= numToPutBack) {
+                    break;
+                }
+                toBottom.add(card);
+            }
+            // If still need more, bottom some lands
+            for (Card land : lands) {
+                if (toBottom.size() >= numToPutBack) {
+                    break;
+                }
+                toBottom.add(land);
+            }
+        } else {
+            // Reasonable land count - bottom highest CMC cards
+            hand.sort((a, b) -> Integer.compare(b.getManaValue(), a.getManaValue()));
+            for (int i = 0; i < numToPutBack; i++) {
+                toBottom.add(hand.get(i));
+            }
+        }
+
+        StringBuilder keptCards = new StringBuilder();
+        StringBuilder bottomedCards = new StringBuilder();
+        for (Card card : hand) {
+            if (toBottom.contains(card)) {
+                if (bottomedCards.length() > 0) {
+                    bottomedCards.append("; ");
+                }
+                bottomedCards.append(card.getName());
+                target.addTarget(card.getId(), null, game);
+            } else {
+                if (keptCards.length() > 0) {
+                    keptCards.append("; ");
+                }
+                keptCards.append(card.getName());
+            }
+        }
+
+        RLTrainer.threadLocalLogger.get().info(
+                String.format("Heuristic London mulligan: Keeping [%s], Bottoming [%s]",
+                        keptCards.toString(), bottomedCards.toString())
+        );
+
+        return true;
+    }
+
     private boolean chooseLondonMulliganCards(Target target, Game game) {
         try {
+            // Use simple heuristic if flag is set
+            if (USE_HEURISTIC_MULLIGAN) {
+                return heuristicLondonMulligan(target, game);
+            }
+
             // Guard: Only process if we have a pending mulligan decision
             // The game engine calls this method twice:
             // 1. Once with the OLD hand (before drawing new cards) - we skip this
@@ -1329,25 +1513,32 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 RLTrainer.threadLocalLogger.get().debug("chooseLondonMulliganCards called but no pending decision, skipping");
                 return super.chooseTarget(Outcome.Discard, target, null, game);
             }
-            
+
             List<Card> hand = new ArrayList<>(getHand().getCards(game));
             if (hand.isEmpty()) {
                 return false;
             }
 
-            // Number of cards to put back = minTargets (set by London mulligan rule)
+            // CRITICAL: Only process if this is the NEW hand (should have ~7 cards after drawing)
+            // If hand is too small, this is likely the OLD hand before drawing, so skip
             int numToPutBack = target.getMinNumberOfTargets();
-            
+            if (hand.size() < 7 && hand.size() < numToPutBack) {
+                RLTrainer.threadLocalLogger.get().debug(
+                        String.format("chooseLondonMulliganCards called with %d cards (need to bottom %d), "
+                                + "likely OLD hand, skipping", hand.size(), numToPutBack));
+                return super.chooseTarget(Outcome.Discard, target, null, game);
+            }
+
             // Extract card IDs from the NEW 7-card hand (after drawing but before bottoming)
             int[] handCardIds = mulliganModel.extractHandCardIds(this, game);
             int[] deckCardIds = mulliganModel.extractDeckCardIds(this, game);
-            
+
             // Store for training (using the NEW 7 cards, not the old hand)
             mulliganNums.add(pendingMulliganDecision.mulliganNum);
             mulliganHandIds.add(handCardIds);
             mulliganDeckIds.add(deckCardIds);
             mulliganDecisions.add(0.0f); // 0.0=mulligan (we know it was a mulligan)
-            
+            mulliganLandCounts.add(countLandsInHand(game)); // For heuristic
             if (numToPutBack >= hand.size()) {
                 // Put back all cards
                 for (Card card : hand) {
@@ -1356,27 +1547,31 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 RLTrainer.threadLocalLogger.get().info(
                         String.format("London mulligan: Putting back all %d cards", numToPutBack)
                 );
-                
+
                 // Log to CSV (all cards bottomed, none kept)
-                float keepProb = pendingMulliganDecision != null ? pendingMulliganDecision.keepProbability : 0.0f;
+                float qKeep = pendingMulliganDecision != null ? pendingMulliganDecision.qKeep : 0.0f;
+                float qMull = pendingMulliganDecision != null ? pendingMulliganDecision.qMull : 0.0f;
                 int mulliganNum = pendingMulliganDecision != null ? pendingMulliganDecision.mulliganNum : mulliganCount - 1;
-                
+
                 StringBuilder allCards = new StringBuilder();
                 for (int i = 0; i < hand.size(); i++) {
-                    if (i > 0) allCards.append("; ");
+                    if (i > 0) {
+                        allCards.append("; ");
+                    }
                     allCards.append(hand.get(i).getName());
                 }
-                
+
                 MulliganLogger.getInstance().logDecision(
-                    currentEpisode,
-                    getName(),
-                    mulliganNum,
-                    hand.size(),
-                    "MULLIGAN",
-                    keepProb,
-                    allCards.toString(),
-                    "", // No cards kept (all bottomed)
-                    allCards.toString() // All cards bottomed
+                        currentEpisode,
+                        getName(),
+                        mulliganNum,
+                        hand.size(),
+                        "MULLIGAN",
+                        qKeep,
+                        qMull,
+                        allCards.toString(),
+                        "", // No cards kept (all bottomed)
+                        allCards.toString() // All cards bottomed
                 );
                 lastLoggedMulliganCount = mulliganNum; // Mark as logged
                 pendingMulliganDecision = null; // Clear pending
@@ -1426,26 +1621,30 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
             );
 
             // Log to CSV with kept/bottomed cards
-            float keepProb = pendingMulliganDecision != null ? pendingMulliganDecision.keepProbability : 0.0f;
+            float qKeep = pendingMulliganDecision != null ? pendingMulliganDecision.qKeep : 0.0f;
+            float qMull = pendingMulliganDecision != null ? pendingMulliganDecision.qMull : 0.0f;
             int mulliganNum = pendingMulliganDecision != null ? pendingMulliganDecision.mulliganNum : mulliganCount - 1;
-            
+
             // Build full card list
             StringBuilder allCards = new StringBuilder();
             for (int i = 0; i < hand.size(); i++) {
-                if (i > 0) allCards.append("; ");
+                if (i > 0) {
+                    allCards.append("; ");
+                }
                 allCards.append(hand.get(rankedIndices.get(i)).getName());
             }
-            
+
             MulliganLogger.getInstance().logDecision(
-                currentEpisode,
-                getName(),
-                mulliganNum,
-                hand.size(),
-                "MULLIGAN",
-                keepProb,
-                allCards.toString(),
-                keptCards.toString(),
-                bottomedCards.toString()
+                    currentEpisode,
+                    getName(),
+                    mulliganNum,
+                    hand.size(),
+                    "MULLIGAN",
+                    qKeep,
+                    qMull,
+                    allCards.toString(),
+                    keptCards.toString(),
+                    bottomedCards.toString()
             );
             lastLoggedMulliganCount = mulliganNum; // Mark as logged
             pendingMulliganDecision = null; // Clear pending
@@ -1478,11 +1677,29 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         return new ArrayList<>(mulliganDecisions);
     }
 
+    public List<Integer> getMulliganLandCounts() {
+        return new ArrayList<>(mulliganLandCounts);
+    }
+
     public void clearMulliganData() {
         mulliganNums.clear();
         mulliganHandIds.clear();
         mulliganDeckIds.clear();
         mulliganDecisions.clear();
+        mulliganLandCounts.clear();
+    }
+
+    /**
+     * Count lands in current hand for mulligan heuristic.
+     */
+    private int countLandsInHand(Game game) {
+        int landCount = 0;
+        for (Card card : getHand().getCards(game)) {
+            if (card.isLand(game)) {
+                landCount++;
+            }
+        }
+        return landCount;
     }
 
     /**
@@ -1490,6 +1707,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      */
     public void setCurrentEpisode(int episodeNum) {
         this.currentEpisode = episodeNum;
+        this.lastLoggedTurn = -1; // Reset turn tracking for new game
     }
 
     protected boolean priorityPlay(Game game) {
@@ -1582,6 +1800,48 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         System.out.println(sb.toString());
     }
 
+    /**
+     * Format game state as a string for logging.
+     */
+    protected String formatGameState(Game game) {
+        StringBuilder sb = new StringBuilder();
+
+        // Stack
+        sb.append("[Stack]: ").append(game.getStack().size()).append(" items\n");
+
+        // Players
+        for (UUID pid : game.getState().getPlayersInRange(this.playerId, game)) {
+            Player player = game.getPlayer(pid);
+            if (player == null) {
+                continue;
+            }
+
+            sb.append("[").append(player.getName()).append("], life = ").append(player.getLife()).append("\n");
+
+            // Hand (only show for RL player)
+            if (player.getId().equals(this.playerId)) {
+                String cardsInfo = player.getHand().getCards(game).stream()
+                        .map(card -> card.getName())
+                        .collect(Collectors.joining("; "));
+                sb.append("-> Hand: [").append(cardsInfo).append("]\n");
+            } else {
+                sb.append("-> Hand: ").append(player.getHand().size()).append(" cards\n");
+            }
+
+            // Battlefield
+            String permanentsInfo = game.getBattlefield().getAllPermanents().stream()
+                    .filter(p -> p.isOwnedBy(player.getId()))
+                    .map(p -> p.getName()
+                    + (p.isTapped() ? ",tapped" : "")
+                    + (p.isAttacking() ? ",attacking" : "")
+                    + (p.getBlocking() > 0 ? ",blocking" : ""))
+                    .collect(Collectors.joining("; "));
+            sb.append("-> Permanents: [").append(permanentsInfo).append("]\n");
+        }
+
+        return sb.toString();
+    }
+
     // I'm changing the design here to not use an actions queue.
     // Instead, I'm passing the ability to the act method.
     // We don't calculate lists of actions, but instead just one action at a time.
@@ -1607,21 +1867,160 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 ));
             }
 
-            //TODO: Need to look into target selection. 
-            if (!ability.getTargets().isEmpty()) {
-                for (Target target : ability.getTargets()) {
-                    for (UUID id : target.getTargets()) {
-                        target.updateTarget(id, game);
-                        if (!target.isNotTarget()) {
-                            game.addSimultaneousEvent(GameEvent.getEvent(GameEvent.EventType.TARGETED, id, ability, ability.getControllerId()));
+            // CRITICAL FIX: getPlayable() returns abilities from a COPIED game (createSimulationForPlayableCalc)
+            // We need to get a fresh ability from the REAL game's object to avoid stale state issues
+            ActivatedAbility freshAbility = ability;
+            mage.game.permanent.Permanent sourcePerm = game.getPermanent(ability.getSourceId());
+            if (sourcePerm != null) {
+                // Find the matching ability on the real permanent
+                for (Ability permAbility : sourcePerm.getAbilities(game)) {
+                    if (permAbility instanceof ActivatedAbility
+                            && permAbility.getRule().equals(ability.getRule())) {
+                        freshAbility = (ActivatedAbility) permAbility;
+                        if (ACTIVATION_DIAG) {
+                            RLTrainer.threadLocalLogger.get().info(
+                                    "FRESH-ABILITY: Got fresh ability from real game's permanent");
+                        }
+                        break;
+                    }
+                }
+            } else {
+                // Check if it's a card (spell from hand/graveyard/etc)
+                Card sourceCard = game.getCard(ability.getSourceId());
+                if (sourceCard != null) {
+                    for (Ability cardAbility : sourceCard.getAbilities(game)) {
+                        if (cardAbility instanceof ActivatedAbility
+                                && cardAbility.getRule().equals(ability.getRule())) {
+                            freshAbility = (ActivatedAbility) cardAbility;
+                            if (ACTIVATION_DIAG) {
+                                RLTrainer.threadLocalLogger.get().info(
+                                        "FRESH-ABILITY: Got fresh ability from real game's card");
+                            }
+                            break;
                         }
                     }
                 }
             }
-            // Track current ability for choice filtering
-            currentAbility = ability;
 
-            if (!this.activateAbility(ability, game)) {
+            // Track current ability for choice filtering  
+            currentAbility = freshAbility;
+
+            // Log BEFORE attempting activation to capture pre-activation state
+            if (ACTIVATION_DIAG) {
+                MageObject sourceObj = game.getObject(freshAbility.getSourceId());
+                String sourceName = sourceObj != null ? sourceObj.getName() : "unknown";
+                boolean sourceIsTapped = sourceObj instanceof mage.game.permanent.Permanent
+                        && ((mage.game.permanent.Permanent) sourceObj).isTapped();
+
+                RLTrainer.threadLocalLogger.get().info(String.format(
+                        "ATTEMPTING ACTIVATION: ability=%s, source=%s, sourceTapped=%s, sourceId=%s, permanentFound=%s, usingFresh=%s",
+                        freshAbility.getRule(),
+                        sourceName,
+                        sourceIsTapped,
+                        freshAbility.getSourceId(),
+                        (sourcePerm != null),
+                        (freshAbility != ability)
+                ));
+            }
+
+            // CRITICAL FIX: If ability has tap costs, exclude those permanents from mana producers
+            // This prevents the AI from tapping them for mana when it needs to tap them for the ability
+            tapTargetCostReservations.clear();
+            for (mage.abilities.costs.Cost cost : freshAbility.getCosts()) {
+                if (cost instanceof mage.abilities.costs.common.TapSourceCost) {
+                    abilitySourceToExcludeFromMana = freshAbility.getSourceId();
+                    if (ACTIVATION_DIAG) {
+                        RLTrainer.threadLocalLogger.get().info(
+                                "TAP-SOURCE-COST: Will exclude source " + freshAbility.getSourceId() + " from mana producers");
+                    }
+                } else if (cost instanceof mage.abilities.costs.common.TapTargetCost) {
+                    // Reserve permanents for TapTargetCost (e.g., "Tap an untapped Gate you control")
+                    mage.abilities.costs.common.TapTargetCost tapTargetCost = (mage.abilities.costs.common.TapTargetCost) cost;
+                    mage.target.common.TargetControlledPermanent target = tapTargetCost.getTarget();
+                    int numNeeded = target.getMinNumberOfTargets();
+
+                    // Find permanents that can satisfy this TapTargetCost
+                    List<mage.game.permanent.Permanent> candidates = new ArrayList<>();
+                    for (mage.game.permanent.Permanent perm : game.getBattlefield().getAllActivePermanents(this.getId())) {
+                        if (!perm.isTapped() && target.canTarget(this.getId(), perm.getId(), freshAbility, game)) {
+                            candidates.add(perm);
+                        }
+                    }
+
+                    // Reserve the first N candidates (prioritize non-mana-producers if possible, but for simplicity just take first N)
+                    int reserved = 0;
+                    for (mage.game.permanent.Permanent perm : candidates) {
+                        if (reserved >= numNeeded) {
+                            break;
+                        }
+                        // Don't reserve the source (already handled by TapSourceCost)
+                        if (!perm.getId().equals(freshAbility.getSourceId())) {
+                            tapTargetCostReservations.add(perm.getId());
+                            reserved++;
+                            if (ACTIVATION_DIAG) {
+                                RLTrainer.threadLocalLogger.get().info(
+                                        "TAP-TARGET-COST: Reserved " + perm.getName() + " (" + perm.getId() + ") for TapTargetCost");
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Activate using the fresh ability from the real game
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info(
+                        "CALLING: super.activateAbility() for " + freshAbility.getClass().getSimpleName());
+            }
+
+            boolean activationResult;
+            Exception activationException = null;
+            try {
+                activationResult = super.activateAbility(freshAbility, game);
+            } catch (Exception e) {
+                activationResult = false;
+                activationException = e;
+                RLTrainer.threadLocalLogger.get().error(
+                        "ACTIVATION THREW EXCEPTION: " + e.getClass().getName() + ": " + e.getMessage());
+                e.printStackTrace();
+            }
+
+            if (ACTIVATION_DIAG && !activationResult) {
+                // Try to understand WHY it failed - check source state AFTER failure
+                mage.game.permanent.Permanent sourcePermAfter = game.getPermanent(freshAbility.getSourceId());
+                RLTrainer.threadLocalLogger.get().error(
+                        "ACTIVATION FAILED INTERNALLY - checking state after failure:");
+                RLTrainer.threadLocalLogger.get().error(
+                        "  Source permanent found: " + (sourcePermAfter != null));
+                if (sourcePermAfter != null) {
+                    RLTrainer.threadLocalLogger.get().error(
+                            "  Source permanent tapped (AFTER): " + sourcePermAfter.isTapped());
+                }
+                RLTrainer.threadLocalLogger.get().error(
+                        "  FreshAbility targets: " + (!freshAbility.getTargets().isEmpty() ? freshAbility.getTargets().get(0).getTargets().size() : 0));
+                RLTrainer.threadLocalLogger.get().error(
+                        "  FreshAbility costs paid: " + freshAbility.getManaCostsToPay());
+
+                // Re-check canActivate after failure
+                mage.abilities.ActivatedAbility.ActivationStatus postFailStatus
+                        = freshAbility.canActivate(this.getId(), game);
+                RLTrainer.threadLocalLogger.get().error(
+                        "  POST-FAIL canActivate: " + (postFailStatus != null && postFailStatus.canActivate()));
+                RLTrainer.threadLocalLogger.get().error(
+                        "  Used fresh ability from permanent: " + (freshAbility != ability));
+
+                if (activationException != null) {
+                    RLTrainer.threadLocalLogger.get().error(
+                            "  Exception was thrown: " + activationException);
+                }
+            }
+
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info(String.format(
+                        "ACTIVATION RESULT: %s", activationResult
+                ));
+            }
+
+            if (!activationResult) {
                 // If we are here it is because the RL player chose an action that isn't actually executable
                 // (often due to hidden costs/choices not captured in our candidate features).
                 // Treat this as a forced pass rather than crashing the engine.
@@ -1641,12 +2040,19 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                 System.err.println("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!\n");
                 RLTrainer.threadLocalLogger.get().error("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 
+                // Pause game on activation failure for debugging (controlled by env var)
+                pauseOnActivationFailure();
+
                 pass(game);
                 currentAbility = null; // Clear after failure
+                abilitySourceToExcludeFromMana = null; // Clear mana exclusions
+                tapTargetCostReservations.clear();
                 return;
             }
 
             currentAbility = null; // Clear after successful activation
+            abilitySourceToExcludeFromMana = null; // Clear mana exclusions
+            tapTargetCostReservations.clear();
 
             // Log all resolved targets for the ability (covers auto-chosen single targets)
             logAbilityTargets(ability, game);
@@ -1729,6 +2135,32 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     sourceName,
                     sourceZone
             ));
+
+            // Log detailed mana and cost information
+            RLTrainer.threadLocalLogger.get().error("=== MANA & COST DIAGNOSTICS ===");
+            RLTrainer.threadLocalLogger.get().error(String.format("Available mana: %s", getManaAvailable(game)));
+            RLTrainer.threadLocalLogger.get().error(String.format("Ability costs: %s", ability.getManaCostsToPay()));
+
+            // Log all untapped lands
+            StringBuilder untappedLands = new StringBuilder("Untapped lands: ");
+            game.getBattlefield().getAllActivePermanents(this.getId()).stream()
+                    .filter(p -> p.isLand(game) && !p.isTapped())
+                    .forEach(p -> untappedLands.append(p.getName()).append(", "));
+            RLTrainer.threadLocalLogger.get().error(untappedLands.toString());
+
+            // Check if source permanent is tapped (for abilities with tap cost)
+            if (sourceObj != null && sourceObj instanceof mage.game.permanent.Permanent) {
+                mage.game.permanent.Permanent sourcePerm = (mage.game.permanent.Permanent) sourceObj;
+                RLTrainer.threadLocalLogger.get().error(String.format("Source permanent '%s' tapped status: %s",
+                        sourceName, sourcePerm.isTapped()));
+
+                // Check if ability has tap cost
+                boolean hasTapCost = ability.getCosts().stream()
+                        .anyMatch(cost -> cost instanceof mage.abilities.costs.common.TapSourceCost);
+                RLTrainer.threadLocalLogger.get().error(String.format("Ability has tap cost: %s", hasTapCost));
+            }
+
+            RLTrainer.threadLocalLogger.get().error("=== END MANA & COST DIAGNOSTICS ===");
         } catch (Exception e) {
             RLTrainer.threadLocalLogger.get().error("RL ACTIVATION DIAGNOSTICS: error while gathering details", e);
         }
@@ -1907,16 +2339,129 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
 
         RLTrainer.threadLocalLogger.get().info("Playable options: " + flattenedOptions);
 
+        // Log to detailed game logger if enabled
+        GameLogger gameLogger = RLTrainer.threadLocalGameLogger.get();
+        if (gameLogger.isEnabled() && lastActionProbs != null) {
+            // Get phase info and turn
+            String phase = game.getStep().getType().toString();
+            int turn = game.getTurnNum();
+
+            // Log turn start if turn changed (shows full game state including opponent actions)
+            if (turn != lastLoggedTurn) {
+                String activePlayerName = game.getActivePlayerId() != null
+                        ? game.getPlayer(game.getActivePlayerId()).getName()
+                        : "Unknown";
+                gameLogger.logTurnStart(turn, activePlayerName, formatGameState(game));
+                lastLoggedTurn = turn;
+            }
+
+            // Convert options to string list
+            List<String> optionNames = flattenedOptions.stream()
+                    .map(ability -> ability.toString())
+                    .collect(Collectors.toList());
+
+            // Get selected action
+            int selectedIndex = targetsToSet.get(0);
+            String selectedAction = flattenedOptions.get(selectedIndex).toString();
+
+            // Get game state
+            String gameState = formatGameState(game);
+
+            // Log decision
+            gameLogger.logDecision(
+                    this.getName(),
+                    phase,
+                    turn,
+                    gameState,
+                    optionNames,
+                    lastActionProbs,
+                    lastValueScore,
+                    selectedAction
+            );
+        }
+
         // Return the ability corresponding to the best index
         return flattenedOptions.get(targetsToSet.get(0));
     }
 
     public List<StateSequenceBuilder.TrainingData> getTrainingBuffer() {
+        if (!trainingEnabled) {
+            return new ArrayList<>();
+        }
         return new ArrayList<>(trainingBuffer);
     }
 
-    public PythonMLBridge getModel() {
+    public PythonModel getModel() {
         return model;
+    }
+
+    public String getPolicyKey() {
+        return policyKey;
+    }
+
+    public boolean isTrainingEnabled() {
+        return trainingEnabled;
+    }
+
+    // Track permanents to exclude from mana producers when ability has tap costs
+    private UUID abilitySourceToExcludeFromMana = null;
+    private Set<UUID> tapTargetCostReservations = new HashSet<>(); // Permanents reserved for TapTargetCost
+
+    // Store last decision info for game logging
+    private float[] lastActionProbs = null;
+    private float lastValueScore = 0.0f;
+
+    /**
+     * Get the most recent value head prediction. Used for tracking value head
+     * quality metrics.
+     */
+    public float getLastValueScore() {
+        return lastValueScore;
+    }
+
+    // Trace mana payment for debugging activation failures
+    @Override
+    public boolean playMana(Ability ability, mage.abilities.costs.mana.ManaCost unpaid, String promptText, Game game) {
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "PLAYMANA: Called for unpaid=" + unpaid.getText()
+                    + ", ability=" + (ability != null ? ability.getRule() : "null")
+                    + ", excludingSource=" + abilitySourceToExcludeFromMana);
+        }
+        boolean result = super.playMana(ability, unpaid, promptText, game);
+        if (ACTIVATION_DIAG) {
+            RLTrainer.threadLocalLogger.get().info(
+                    "PLAYMANA: Result=" + result + ", unpaid remaining=" + unpaid.getText());
+        }
+        return result;
+    }
+
+    // CRITICAL FIX: Exclude permanents from mana producers when they're needed for tap costs
+    // This prevents the AI from tapping Basilisk Gate for mana when it needs to tap it for the ability,
+    // and prevents tapping Gates needed for TapTargetCost (like Heap Gate's "tap another Gate")
+    @Override
+    public List<MageObject> getAvailableManaProducers(Game game) {
+        List<MageObject> producers = super.getAvailableManaProducers(game);
+
+        // Remove the source permanent if we're paying for an ability that needs to tap it
+        if (abilitySourceToExcludeFromMana != null) {
+            producers.removeIf(obj -> obj.getId().equals(abilitySourceToExcludeFromMana));
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info(
+                        "MANA-EXCLUDE: Excluded source " + abilitySourceToExcludeFromMana + " from mana producers");
+            }
+        }
+
+        // Remove permanents reserved for TapTargetCost
+        if (!tapTargetCostReservations.isEmpty()) {
+            producers.removeIf(obj -> tapTargetCostReservations.contains(obj.getId()));
+            if (ACTIVATION_DIAG) {
+                RLTrainer.threadLocalLogger.get().info(
+                        "MANA-EXCLUDE: Excluded " + tapTargetCostReservations.size() + " permanents reserved for TapTargetCost");
+            }
+        }
+
+        return producers;
     }
 
     // Disables engine auto-targeting heuristics by forcing strict choose mode
@@ -1939,6 +2484,34 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
      */
     public static void resetRLActivationFailureCount() {
         RL_ACTIVATION_FAILURES.set(0);
+    }
+
+    /**
+     * Pause game execution when activation failure occurs (for debugging).
+     * Controlled by PAUSE_ON_ACTIVATION_FAILURE env var (seconds to pause,
+     * 0=disabled).
+     */
+    private void pauseOnActivationFailure() {
+        String pauseEnv = System.getenv("PAUSE_ON_ACTIVATION_FAILURE");
+        if (pauseEnv == null || pauseEnv.isEmpty()) {
+            return; // No pause by default
+        }
+
+        try {
+            int pauseSeconds = Integer.parseInt(pauseEnv);
+            if (pauseSeconds > 0) {
+                System.err.println("\n=== PAUSING FOR " + pauseSeconds + " SECONDS FOR INSPECTION ===");
+                RLTrainer.threadLocalLogger.get().error("PAUSING FOR " + pauseSeconds + " SECONDS FOR INSPECTION");
+                Thread.sleep(pauseSeconds * 1000L);
+                System.err.println("=== RESUMING AFTER PAUSE ===\n");
+                RLTrainer.threadLocalLogger.get().error("RESUMING AFTER PAUSE");
+            }
+        } catch (NumberFormatException e) {
+            RLTrainer.threadLocalLogger.get().warn("Invalid PAUSE_ON_ACTIVATION_FAILURE value: " + pauseEnv);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            RLTrainer.threadLocalLogger.get().warn("Pause interrupted");
+        }
     }
 
     private String describeTargetWithOwner(UUID targetId, Game game) {

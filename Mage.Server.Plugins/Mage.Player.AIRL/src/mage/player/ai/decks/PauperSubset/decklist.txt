@@ -11,4 +11,3 @@
 ../Pauper/Deck - Mono-Blue Faeries.dek
 ../Pauper/Deck - Mono-Blue Terror.dek
 ../Pauper/Deck - Mono-Red Burn.dek
-../Pauper/Deck - Spy Combo.dek

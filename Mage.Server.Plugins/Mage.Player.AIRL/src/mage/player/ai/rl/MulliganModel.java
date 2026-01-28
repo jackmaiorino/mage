@@ -1,7 +1,6 @@
 package mage.player.ai.rl;
 
 import mage.cards.Card;
-import mage.constants.CardType;
 import mage.game.Game;
 import mage.players.Player;
 import org.slf4j.Logger;
@@ -21,7 +20,7 @@ public class MulliganModel {
 
     private static final Logger logger = LoggerFactory.getLogger(MulliganModel.class);
 
-    private final PythonMLBridge pythonBridge;
+    private final PythonModel pythonBridge;
     private static final int MAX_HAND_SIZE = 7;
     private static final int MAX_DECK_SIZE = 60;
     private static final int TOKEN_ID_VOCAB = 65536; // Same as StateSequenceBuilder
@@ -31,7 +30,11 @@ public class MulliganModel {
     private static final double EPSILON_END = 0.05;     // Minimum exploration rate (5%)
     private static final double EPSILON_DECAY = 0.995;  // Decay per episode
 
-    public MulliganModel(PythonMLBridge pythonBridge) {
+    // Optional keep floor early in training to avoid always-mull collapse
+    private static final int KEEP_FLOOR_EPISODES = EnvConfig.i32("MULLIGAN_KEEP_FLOOR_EPISODES", 200);
+    private static final double KEEP_FLOOR_P = EnvConfig.f64("MULLIGAN_KEEP_FLOOR_P", 0.7);
+
+    public MulliganModel(PythonModel pythonBridge) {
         this.pythonBridge = pythonBridge;
     }
 
@@ -53,15 +56,17 @@ public class MulliganModel {
         public final int mulliganNum;
         public final int[] handCardIds;
         public final int[] deckCardIds;
-        public final float keepProbability;
+        public final float qKeep;
+        public final float qMull;
 
         public MulliganDecision(boolean shouldMulligan, int mulliganNum, int[] handCardIds,
-                int[] deckCardIds, float keepProbability) {
+                int[] deckCardIds, float qKeep, float qMull) {
             this.shouldMulligan = shouldMulligan;
             this.mulliganNum = mulliganNum;
             this.handCardIds = handCardIds;
             this.deckCardIds = deckCardIds;
-            this.keepProbability = keepProbability;
+            this.qKeep = qKeep;
+            this.qMull = qMull;
         }
     }
 
@@ -96,12 +101,14 @@ public class MulliganModel {
             features[1 + MAX_HAND_SIZE + i] = deckCardIds[i];
         }
 
-        float keepProbability = pythonBridge.predictMulligan(features);
+        float[] scores = pythonBridge.predictMulliganScores(features);
+        float qKeep = scores != null && scores.length > 0 ? scores[0] : 0.0f;
+        float qMull = scores != null && scores.length > 1 ? scores[1] : 0.0f;
         boolean shouldMulligan;
 
         if (episodeNum < 0) {
-            // Evaluation/benchmark: fully deterministic (hard threshold)
-            shouldMulligan = keepProbability < 0.5f;
+            // Evaluation/benchmark: fully deterministic argmax
+            shouldMulligan = qKeep < qMull;
         } else {
             // Training: epsilon-greedy exploration with stochastic sampling
             double epsilon = calculateEpsilon(episodeNum);
@@ -110,14 +117,31 @@ public class MulliganModel {
                 // Explore: random action
                 shouldMulligan = ThreadLocalRandom.current().nextBoolean();
             } else {
-                // Exploit: sample from model probability
-                shouldMulligan = ThreadLocalRandom.current().nextFloat() > keepProbability;
+                // Exploit: deterministic argmax
+                shouldMulligan = qKeep < qMull;
+            }
+
+            // Early training keep-floor (only for opening hand, and only for "reasonable" land counts)
+            if (KEEP_FLOOR_EPISODES > 0 && episodeNum < KEEP_FLOOR_EPISODES && mulliganCount == 0 && shouldMulligan) {
+                int landCount = 0;
+                for (Card card : player.getHand().getCards(game)) {
+                    if (card != null && card.isLand(game)) {
+                        landCount++;
+                    }
+                }
+                if (landCount >= 2 && landCount <= 4) {
+                    double t = Math.max(0.0, Math.min(1.0, episodeNum / (double) KEEP_FLOOR_EPISODES));
+                    double p = KEEP_FLOOR_P * (1.0 - t);
+                    if (ThreadLocalRandom.current().nextDouble() < p) {
+                        shouldMulligan = false;
+                    }
+                }
             }
         }
 
         // Logging is now handled in ComputerPlayerRL.chooseMulligan() and chooseLondonMulliganCards()
         
-        return new MulliganDecision(shouldMulligan, mulliganCount, handCardIds, deckCardIds, keepProbability);
+        return new MulliganDecision(shouldMulligan, mulliganCount, handCardIds, deckCardIds, qKeep, qMull);
     }
 
     /**
@@ -146,12 +170,14 @@ public class MulliganModel {
                 features[1 + MAX_HAND_SIZE + i] = deckCardIds[i];
             }
 
-            float keepProbability = pythonBridge.predictMulligan(features);
+            float[] scores = pythonBridge.predictMulliganScores(features);
+            float qKeep = scores != null && scores.length > 0 ? scores[0] : 0.0f;
+            float qMull = scores != null && scores.length > 1 ? scores[1] : 0.0f;
             boolean shouldMulligan;
 
             if (episodeNum < 0) {
-                // Evaluation/benchmark: fully deterministic (hard threshold)
-                shouldMulligan = keepProbability < 0.5f;
+                // Evaluation/benchmark: fully deterministic argmax
+                shouldMulligan = qKeep < qMull;
             } else {
                 // Training: epsilon-greedy exploration with stochastic sampling
                 double epsilon = calculateEpsilon(episodeNum);
@@ -160,8 +186,25 @@ public class MulliganModel {
                     // Explore: random action
                     shouldMulligan = ThreadLocalRandom.current().nextBoolean();
                 } else {
-                    // Exploit: sample from model probability
-                    shouldMulligan = ThreadLocalRandom.current().nextFloat() > keepProbability;
+                    // Exploit: deterministic argmax
+                    shouldMulligan = qKeep < qMull;
+                }
+
+                // Early training keep-floor (only for opening hand, and only for "reasonable" land counts)
+                if (KEEP_FLOOR_EPISODES > 0 && episodeNum < KEEP_FLOOR_EPISODES && mulliganCount == 0 && shouldMulligan) {
+                    int landCount = 0;
+                    for (Card card : player.getHand().getCards(game)) {
+                        if (card != null && card.isLand(game)) {
+                            landCount++;
+                        }
+                    }
+                    if (landCount >= 2 && landCount <= 4) {
+                        double t = Math.max(0.0, Math.min(1.0, episodeNum / (double) KEEP_FLOOR_EPISODES));
+                        double p = KEEP_FLOOR_P * (1.0 - t);
+                        if (ThreadLocalRandom.current().nextDouble() < p) {
+                            shouldMulligan = false;
+                        }
+                    }
                 }
             }
 
@@ -171,7 +214,7 @@ public class MulliganModel {
 
         } catch (Exception e) {
             logger.error("Error in mulligan model, defaulting to keep", e);
-            return getDefaultMulliganDecision(player, mulliganCount);
+            return getDefaultMulliganDecision(player);
         }
     }
 
@@ -228,7 +271,7 @@ public class MulliganModel {
     /**
      * Fallback heuristic if model fails
      */
-    private boolean getDefaultMulliganDecision(Player player, int mulliganCount) {
+    private boolean getDefaultMulliganDecision(Player player) {
         int handSize = player.getHand().size();
 
         // Always keep if we're down to 5 or fewer cards

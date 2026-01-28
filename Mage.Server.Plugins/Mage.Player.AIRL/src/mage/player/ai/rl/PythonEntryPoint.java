@@ -12,59 +12,6 @@ public interface PythonEntryPoint {
     void initializeModel();
 
     /**
-     * Make predictions for a batch of state sequences using direct byte array
-     * conversion
-     *
-     * @param sequencesBytes Raw byte array of sequences [batch_size * seq_len *
-     * d_model * 4]
-     * @param masksBytes Raw byte array of masks [batch_size * seq_len * 4]
-     * @param actionMasksBytes Raw byte array of action masks [batch_size *
-     * seq_len * 4]
-     * @param batchSize Number of sequences in the batch
-     * @param seqLen Length of each sequence
-     * @param dModel Dimension of the model
-     * @param maxActions Maximum number of actions
-     * @return Raw byte array of predictions (action_probs followed by
-     * value_scores)
-     */
-    byte[] predictBatchFlat(byte[] sequencesBytes, byte[] masksBytes, byte[] actionMasksBytes,
-            int batchSize, int seqLen, int dModel, int maxActions);
-
-    /**
-     * Make batch predictions using the Python ML model
-     *
-     * @param sequences Batch of state sequences [batch_size, seq_len, d_model]
-     * @param masks Attention masks [batch_size, seq_len]
-     * @param actionMasks Masks for valid actions [batch_size, num_actions]
-     * @return Concatenated array of action_probs and value_scores [batch_size *
-     * (num_actions + 1)]
-     */
-    float[] predictBatch(float[][][] sequences, float[][] masks, float[][] actionMasks);
-
-    /**
-     * Train the model with a batch of data using direct byte array conversion
-     *
-     * @param sequencesBytes Raw byte array of sequences [batch_size * seq_len *
-     * d_model * 4]
-     * @param masksBytes Raw byte array of masks [batch_size * seq_len * 4]
-     * @param policyScoresBytes Raw byte array of policy scores [batch_size *
-     * num_actions * 4]
-     * @param discountedReturnsBytes Raw byte array of the discounted returns
-     * for each state [batch_size * 4]
-     * @param actionTypesBytes Raw byte array of action types [batch_size *
-     * num_actions * 4]
-     * @param actionCombosBytes Raw byte array of action combos [batch_size *
-     * num_actions * 4]
-     * @param batchSize Number of sequences in the batch
-     * @param seqLen Length of each sequence
-     * @param dModel Dimension of the model
-     * @param maxActions Maximum number of actions
-     */
-    void trainFlat(byte[] sequencesBytes, byte[] masksBytes, byte[] policyScoresBytes,
-            byte[] discountedReturnsBytes, byte[] actionTypesBytes, byte[] actionCombosBytes,
-            int batchSize, int seqLen, int dModel, int maxActions);
-
-    /**
      * Save the current model state
      *
      * @param path Path to save the model
@@ -79,6 +26,22 @@ public interface PythonEntryPoint {
     void loadModel(String path);
 
     /**
+     * Atomically save a 'latest weights' file (tmp -> replace).
+     *
+     * @param path Path to save latest weights to
+     * @return true if saved
+     */
+    boolean saveLatestModelAtomic(String path);
+
+    /**
+     * Reload latest weights if the file exists and is newer than the currently loaded one.
+     *
+     * @param path Path to latest weights file
+     * @return true if reloaded
+     */
+    boolean reloadLatestModelIfNewer(String path);
+
+    /**
      * Calculate optimal batch size based on available GPU memory
      *
      * @return optimal number of samples per batch for current GPU
@@ -86,8 +49,8 @@ public interface PythonEntryPoint {
     int getOptimalBatchSize();
 
     /**
-     * Return a short diagnostic string about runtime device placement.
-     * Useful for confirming CUDA vs CPU at runtime.
+     * Return a short diagnostic string about runtime device placement. Useful
+     * for confirming CUDA vs CPU at runtime.
      */
     String getDeviceInfo();
 
@@ -112,12 +75,58 @@ public interface PythonEntryPoint {
     );
 
     /**
+     * Score candidates using a specific policy key.
+     * <p>
+     * policyKey:
+     * - "train" (current training model)
+     * - "snap:&lt;id&gt;" (snapshot opponent policy)
+     */
+    byte[] scoreCandidatesPolicyFlat(
+            byte[] sequencesBytes,
+            byte[] masksBytes,
+            byte[] tokenIdsBytes,
+            byte[] candidateFeaturesBytes,
+            byte[] candidateIdsBytes,
+            byte[] candidateMaskBytes,
+            String policyKey,
+            int batchSize,
+            int seqLen,
+            int dModel,
+            int maxCandidates,
+            int candFeatDim
+    );
+
+    /**
      * Predict mulligan decision from hand features.
-     * 
+     *
      * @param features Mulligan feature vector (32-dim float array)
      * @return Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
      */
     float predictMulligan(float[] features);
+
+    /**
+     * Return raw two-headed mulligan scores (Q_keep, Q_mull) as little-endian float32 bytes.
+     *
+     * @param features Mulligan feature vector (68-dim float array)
+     * @return byte[8] containing 2 float32 values: [Q_keep, Q_mull]
+     */
+    byte[] predictMulliganScores(float[] features);
+
+    /**
+     * Train the mulligan model with a batch of training data.
+     *
+     * @param features Batch of mulligan features
+     * @param decisions Batch of mulligan decisions (1=keep, 0=mulligan)
+     * @param outcomes Batch of game outcomes (win/loss)
+     * @param landCounts Batch of land counts for heuristic (int32 array)
+     * @param batchSize Size of the batch
+     */
+    void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] landCounts, int batchSize);
+
+    /**
+     * Save the mulligan model to disk.
+     */
+    void saveMulliganModel();
 
     /**
      * Train on a batch of padded candidate decision steps.
@@ -140,4 +149,79 @@ public interface PythonEntryPoint {
             int maxCandidates,
             int candFeatDim
     );
+
+    /**
+     * Train on a batch containing multiple episodes concatenated together.
+     * The dones array marks terminal steps (1 at end-of-episode, else 0) so that
+     * GAE/returns are computed per-episode without leaking across boundaries.
+     *
+     * @param donesBytes int32[batchSize] 1=end-of-episode, 0=continuation
+     * @param rewardsBytes float32[batchSize] immediate rewards
+     */
+    void trainCandidatesMultiFlat(
+            byte[] sequencesBytes,
+            byte[] masksBytes,
+            byte[] tokenIdsBytes,
+            byte[] candidateFeaturesBytes,
+            byte[] candidateIdsBytes,
+            byte[] candidateMaskBytes,
+            byte[] chosenIndexBytes,
+            byte[] rewardsBytes,
+            byte[] donesBytes,
+            int batchSize,
+            int seqLen,
+            int dModel,
+            int maxCandidates,
+            int candFeatDim
+    );
+
+    /**
+     * Get main model training statistics.
+     * Returns a map with 'train_steps' (int) and 'train_samples' (int).
+     */
+    java.util.Map<String, Integer> getMainModelTrainingStats();
+
+    /**
+     * Get mulligan model training statistics.
+     * Returns a map with 'train_steps' (int) and 'train_samples' (int).
+     */
+    java.util.Map<String, Integer> getMulliganModelTrainingStats();
+
+    /**
+     * Record game result for value head quality tracking and auto-GAE.
+     * This is called after each game ends to track whether the value head
+     * correctly predicts wins (positive) vs losses (negative).
+     *
+     * @param lastValuePrediction The final value prediction from the model
+     * @param won True if the RL player won the game
+     */
+    void recordGameResult(float lastValuePrediction, boolean won);
+
+    /**
+     * Get current value head quality metrics.
+     * Returns a map with 'accuracy', 'avg_win', 'avg_loss', 'samples', 'use_gae'.
+     */
+    java.util.Map<String, Object> getValueHeadMetrics();
+
+    /**
+     * Get auto-batching telemetry (caps/splits/headroom) for Grafana/Prometheus.
+     * Returns a map with keys like:
+     * - worker, role
+     * - infer_safe_max, train_safe_max_episodes
+     * - infer_mb_per_sample, train_mb_per_step
+     * - free_mb, total_mb, desired_free_mb
+     * - infer_splits_cap/paging/oom, train_splits_cap/paging/oom
+     */
+    java.util.Map<String, Object> getAutoBatchMetrics();
+
+    /**
+     * Acquire GPU lock (called by Java before learner training burst).
+     * Learner will hold this lock while draining the training queue.
+     */
+    void acquireGPULock();
+
+    /**
+     * Release GPU lock (called by Java after learner training burst).
+     */
+    void releaseGPULock();
 }

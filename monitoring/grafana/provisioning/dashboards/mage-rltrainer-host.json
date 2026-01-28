@@ -1,0 +1,317 @@
+{
+  "id": null,
+  "title": "Mage RLTrainer - Host Metrics",
+  "tags": [
+    "mage",
+    "rl",
+    "trainer",
+    "host"
+  ],
+  "timezone": "browser",
+  "refresh": "5s",
+  "time": {
+    "from": "now-30m",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Episodes/sec",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(mage_episodes_completed_total[1m])",
+          "legendFormat": "eps",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "eps" } },
+      "gridPos": { "h": 7, "w": 4, "x": 0, "y": 0 }
+    },
+    {
+      "id": 2,
+      "title": "Active episodes",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_active_episodes",
+          "legendFormat": "active",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "gridPos": { "h": 7, "w": 4, "x": 4, "y": 0 }
+    },
+    {
+      "id": 3,
+      "title": "Inference avg latency (ms)",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_infer_latency_avg_ms",
+          "legendFormat": "avg_ms",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ms" } },
+      "gridPos": { "h": 7, "w": 4, "x": 8, "y": 0 }
+    },
+    {
+      "id": 4,
+      "title": "Inference timeouts/sec",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "rate(mage_infer_timeouts_total[1m])",
+          "legendFormat": "timeouts/s",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ops" } },
+      "gridPos": { "h": 7, "w": 4, "x": 12, "y": 0 }
+    },
+    {
+      "id": 5,
+      "title": "Inference batch avg size",
+      "type": "stat",
+      "targets": [
+        {
+          "expr": "mage_infer_batch_avg_size",
+          "legendFormat": "avg_batch",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "gridPos": { "h": 7, "w": 4, "x": 16, "y": 0 }
+    },
+    {
+      "id": 6,
+      "title": "Inference flushes/sec (full vs timeout)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(mage_infer_flushes_full_total[1m])",
+          "legendFormat": "full",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(mage_infer_flushes_timeout_total[1m])",
+          "legendFormat": "timeout",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ops" } },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 7 }
+    },
+    {
+      "id": 7,
+      "title": "Train queue depth",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_train_queue_depth",
+          "legendFormat": "depth",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 7 }
+    },
+    {
+      "id": 8,
+      "title": "Dropped train episodes/sec",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(mage_train_queue_dropped_total[1m])",
+          "legendFormat": "dropped/s",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ops" } },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 16 }
+    },
+    {
+      "id": 9,
+      "title": "GPU memory %",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "100 * mage_gpu_memory_used_bytes / mage_gpu_memory_total_bytes",
+          "legendFormat": "gpu_mem_pct",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "percent" } },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 16 }
+    },
+    {
+      "id": 10,
+      "title": "Learner batch avg (episodes / steps)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_train_batch_avg_episodes",
+          "legendFormat": "avg_episodes",
+          "refId": "A"
+        },
+        {
+          "expr": "mage_train_batch_avg_steps",
+          "legendFormat": "avg_steps",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 25 }
+    },
+    {
+      "id": 11,
+      "title": "Learner train() latency (avg / max ms)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_train_latency_avg_ms",
+          "legendFormat": "avg_ms",
+          "refId": "A"
+        },
+        {
+          "expr": "mage_train_latency_max_ms",
+          "legendFormat": "max_ms",
+          "refId": "B"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ms" } },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 25 }
+    },
+    {
+      "id": 12,
+      "title": "Python operation time (ms, EMA)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "mage_train_time_ms",
+          "legendFormat": "train",
+          "refId": "A"
+        },
+        {
+          "expr": "mage_infer_time_ms",
+          "legendFormat": "infer",
+          "refId": "B"
+        },
+        {
+          "expr": "mage_mulligan_time_ms",
+          "legendFormat": "mulligan",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ms" } },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 34 }
+    },
+    {
+      "id": 16,
+      "title": "Learner flushes/sec (and capped/sec)",
+      "type": "timeseries",
+      "targets": [
+        {
+          "expr": "rate(mage_train_flushes_total[1m])",
+          "legendFormat": "flushes/s",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(mage_train_flushes_capped_by_steps_total[1m])",
+          "legendFormat": "capped_by_steps/s",
+          "refId": "B"
+        },
+        {
+          "expr": "rate(mage_train_flushes_capped_by_episodes_total[1m])",
+          "legendFormat": "capped_by_episodes/s",
+          "refId": "C"
+        }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ops" } },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 43 }
+    },
+    {
+      "id": 13,
+      "title": "Auto-batch splits/sec (infer + train)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "rate(mage_autobatch_infer_splits_paging_total[1m])", "legendFormat": "infer_paging/s", "refId": "A" },
+        { "expr": "rate(mage_autobatch_infer_splits_oom_total[1m])", "legendFormat": "infer_oom/s", "refId": "B" },
+        { "expr": "rate(mage_autobatch_infer_splits_cap_total[1m])", "legendFormat": "infer_cap/s", "refId": "C" },
+        { "expr": "rate(mage_autobatch_train_splits_paging_total[1m])", "legendFormat": "train_paging/s", "refId": "D" },
+        { "expr": "rate(mage_autobatch_train_splits_oom_total[1m])", "legendFormat": "train_oom/s", "refId": "E" },
+        { "expr": "rate(mage_autobatch_train_splits_cap_total[1m])", "legendFormat": "train_cap/s", "refId": "F" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "ops" } },
+      "gridPos": { "h": 9, "w": 12, "x": 0, "y": 52 }
+    },
+    {
+      "id": 14,
+      "title": "Auto-batch VRAM headroom (MB)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "mage_autobatch_free_mb", "legendFormat": "free_mb", "refId": "A" },
+        { "expr": "mage_autobatch_desired_free_mb", "legendFormat": "desired_free_mb", "refId": "B" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "mbytes" } },
+      "gridPos": { "h": 9, "w": 12, "x": 12, "y": 52 }
+    },
+    {
+      "id": 15,
+      "title": "Auto-batch learned caps (infer / train)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "mage_autobatch_infer_safe_max", "legendFormat": "infer_safe_max", "refId": "A" },
+        { "expr": "mage_autobatch_train_safe_max_episodes", "legendFormat": "train_safe_max_eps", "refId": "B" }
+      ],
+      "fieldConfig": { "defaults": { "unit": "short" } },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 61 }
+    },
+    {
+      "id": 17,
+      "title": "Inference batch size distribution (last 1000 batches)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "mage_infer_batch_size_p50", "legendFormat": "p50 (median)", "refId": "A" },
+        { "expr": "mage_infer_batch_size_p90", "legendFormat": "p90", "refId": "B" },
+        { "expr": "mage_infer_batch_size_p95", "legendFormat": "p95", "refId": "C" },
+        { "expr": "mage_infer_batch_size_p99", "legendFormat": "p99", "refId": "D" },
+        { "expr": "mage_infer_batch_avg_size", "legendFormat": "avg", "refId": "E" },
+        { "expr": "mage_infer_batch_max_size", "legendFormat": "max", "refId": "F" },
+        { "expr": "mage_config_py_batch_max_size", "legendFormat": "configured_max", "refId": "G" }
+      ],
+      "fieldConfig": { 
+        "defaults": { 
+          "unit": "short",
+          "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10 }
+        } 
+      },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 70 }
+    },
+    {
+      "id": 18,
+      "title": "Training batch step size distribution (last 1000 batches)",
+      "type": "timeseries",
+      "targets": [
+        { "expr": "mage_train_batch_steps_p50", "legendFormat": "p50 (median)", "refId": "A" },
+        { "expr": "mage_train_batch_steps_p90", "legendFormat": "p90", "refId": "B" },
+        { "expr": "mage_train_batch_steps_p95", "legendFormat": "p95", "refId": "C" },
+        { "expr": "mage_train_batch_steps_p99", "legendFormat": "p99", "refId": "D" },
+        { "expr": "mage_train_batch_avg_steps", "legendFormat": "avg", "refId": "E" },
+        { "expr": "mage_train_batch_steps_recent_max", "legendFormat": "recent_max (last 100)", "refId": "F" },
+        { "expr": "mage_train_batch_max_steps", "legendFormat": "all_time_max", "refId": "G" }
+      ],
+      "fieldConfig": { 
+        "defaults": { 
+          "unit": "short",
+          "custom": { "drawStyle": "line", "lineInterpolation": "smooth", "fillOpacity": 10 }
+        } 
+      },
+      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 79 }
+    }
+  ],
+  "schemaVersion": 38,
+  "version": 1
+}
+

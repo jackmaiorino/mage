@@ -3,4 +3,4 @@
 #
 # Auto-generated from ../Pauper/*.dek
 
-../Pauper/Deck - Spy Combo.dek
+../Pauper/Deck - Caw-Gates.dek

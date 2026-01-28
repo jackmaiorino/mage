@@ -46,80 +46,72 @@ public class RLTrainer {
 
     private static final Logger logger = Logger.getLogger(RLTrainer.class);
 
-    /* ================================================================
-     *  Configurable parameters (env-vars override defaults)
-     * ============================================================ */
-    private static String env(String key, String def) {
-        return System.getenv().getOrDefault(key, def);
-    }
-
-    private static int envInt(String key, int def) {
-        try {
-            return Integer.parseInt(env(key, String.valueOf(def)));
-        } catch (NumberFormatException e) {
-            return def;
-        }
-    }
-
     // Local training command:
     // $env:TOTAL_EPISODES='1'; $env:DECKS_DIR='src/mage/player/ai/decks/Pauper'; mvn -q compile exec:java "-Dexec.mainClass=mage.player.ai.rl.RLTrainer" "-Dexec.args=train"
-    private static final int NUM_EPISODES = envInt("TOTAL_EPISODES", 10000);
-    private static final int NUM_EVAL_EPISODES = envInt("EVAL_EPISODES", 5);
+    private static final int NUM_EPISODES = EnvConfig.i32("TOTAL_EPISODES", 10000);
+    private static final int NUM_EVAL_EPISODES = EnvConfig.i32("EVAL_EPISODES", 5);
 
     // Defaults assume running from repo root. Override via DECKS_DIR if needed.
-    public static final String DECKS_DIRECTORY = env("DECKS_DIR", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper");
+    public static final String DECKS_DIRECTORY = EnvConfig.str("DECKS_DIR",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/Pauper");
     // Optional: explicit deck list file (one path per line, relative to CWD unless absolute)
-    public static final String DECK_LIST_FILE = env("DECK_LIST_FILE", "");
+    public static final String DECK_LIST_FILE = EnvConfig.str("DECK_LIST_FILE", "");
 
-    public static final String MODEL_FILE_PATH = env("MODEL_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt");
+    // Prefer MTG_MODEL_PATH (Python-side convention), but keep MODEL_PATH for backward compatibility.
+    public static final String MODEL_FILE_PATH = EnvConfig.str("MTG_MODEL_PATH",
+            EnvConfig.str("MODEL_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"));
     // Episode-level statistics will be appended here (CSV)
-    public static final String STATS_FILE_PATH = env("STATS_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/training_stats.csv");
+    public static final String STATS_FILE_PATH = EnvConfig.str("STATS_PATH",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/training_stats.csv");
     // Path that stores the cumulative number of episodes trained so far (persisted across runs)
-    public static final String EPISODE_COUNT_PATH = env("EPISODE_COUNTER_PATH", "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
+    public static final String EPISODE_COUNT_PATH = EnvConfig.str("EPISODE_COUNTER_PATH",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/episodes.txt");
     // Auto-detect optimal number of threads based on CPU cores
     private static final int DEFAULT_GAME_RUNNERS = Math.max(1, Runtime.getRuntime().availableProcessors() - 1);
-    public static final int NUM_THREADS = envInt("NUM_THREADS", DEFAULT_GAME_RUNNERS);
-    public static final int NUM_GAME_RUNNERS = envInt("NUM_GAME_RUNNERS", DEFAULT_GAME_RUNNERS);
-    public static final int NUM_EPISODES_PER_GAME_RUNNER = envInt("EPISODES_PER_WORKER", 500);
-    public static final int EVAL_EVERY = envInt("EVAL_EVERY", 100);
+    public static final int NUM_THREADS = EnvConfig.i32("NUM_THREADS", DEFAULT_GAME_RUNNERS);
+    public static final int NUM_GAME_RUNNERS = EnvConfig.i32("NUM_GAME_RUNNERS", DEFAULT_GAME_RUNNERS);
+    public static final int NUM_EPISODES_PER_GAME_RUNNER = EnvConfig.i32("EPISODES_PER_WORKER", 500);
+    public static final int EVAL_EVERY = EnvConfig.i32("EVAL_EVERY", 100);
 
-    public static final PythonMLBridge sharedModel = PythonMLBridge.getInstance();
+    public static final PythonModel sharedModel = PythonMLService.getInstance();
     public static final MetricsCollector metrics = MetricsCollector.getInstance();
 
     // Global episode counter to track total episodes across all threads
     private static final AtomicInteger EPISODE_COUNTER = new AtomicInteger(0);
     private static final AtomicInteger ACTIVE_EPISODES = new AtomicInteger(0);
-    private static final boolean TRAIN_DIAG = "1".equals(env("TRAIN_DIAG", "0"))
-            || "true".equalsIgnoreCase(env("TRAIN_DIAG", "0"));
-    private static final int TRAIN_DIAG_EVERY = envInt("TRAIN_DIAG_EVERY", 50);
+    private static final boolean TRAIN_DIAG = EnvConfig.bool("TRAIN_DIAG", false);
+    private static final int TRAIN_DIAG_EVERY = EnvConfig.i32("TRAIN_DIAG_EVERY", 50);
 
     // ============================================================
     // Adaptive Curriculum Learning Configuration
     // ============================================================
-    private static final boolean ADAPTIVE_CURRICULUM = "1".equals(env("ADAPTIVE_CURRICULUM", "1"))
-            || "true".equalsIgnoreCase(env("ADAPTIVE_CURRICULUM", "1"));
-    private static final int WINRATE_WINDOW = envInt("WINRATE_WINDOW", 100);
+    private static final boolean ADAPTIVE_CURRICULUM = EnvConfig.bool("ADAPTIVE_CURRICULUM", true);
+
+    // Game logging: log every N episodes (0 = disabled, includes episode 0)
+    private static final int GAME_LOG_FREQUENCY = EnvConfig.i32("GAME_LOG_FREQUENCY", 200);
+    private static final int WINRATE_WINDOW = EnvConfig.i32("WINRATE_WINDOW", 100);
 
     // Minimum games at current difficulty before allowing level change
     // Prevents premature promotion/demotion based on mixed difficulty data
-    private static final int MIN_GAMES_PER_DIFFICULTY = envInt("MIN_GAMES_PER_DIFFICULTY", 100);
+    private static final int MIN_GAMES_PER_DIFFICULTY = EnvConfig.i32("MIN_GAMES_PER_DIFFICULTY", 100);
 
     // Opponent difficulty thresholds with hysteresis to prevent oscillation
+    // Updated: removed useless ComputerPlayer, start at CP7 skill=1
     // Upgrade thresholds (need this winrate to move up)
-    private static final double WEAK_TO_MEDIUM_THRESHOLD = Double.parseDouble(env("THRESHOLD_WEAK_MEDIUM", "0.40"));
-    private static final double MEDIUM_TO_STRONG_THRESHOLD = Double.parseDouble(env("THRESHOLD_MEDIUM_STRONG", "0.55"));
-    private static final double STRONG_TO_SELFPLAY_THRESHOLD = Double.parseDouble(env("THRESHOLD_STRONG_SELFPLAY", "0.65"));
+    private static final double WEAK_TO_MEDIUM_THRESHOLD = EnvConfig.f64("THRESHOLD_WEAK_MEDIUM", 0.50);
+    private static final double MEDIUM_TO_STRONG_THRESHOLD = EnvConfig.f64("THRESHOLD_MEDIUM_STRONG", 0.55);
+    private static final double STRONG_TO_SELFPLAY_THRESHOLD = EnvConfig.f64("THRESHOLD_STRONG_SELFPLAY", 0.60);
 
     // Downgrade thresholds (need to drop below this to move down)
     // Default: 5% gap to prevent oscillation at boundaries
-    private static final double MEDIUM_TO_WEAK_THRESHOLD = Double.parseDouble(env("THRESHOLD_MEDIUM_WEAK", "0.35"));
-    private static final double STRONG_TO_MEDIUM_THRESHOLD = Double.parseDouble(env("THRESHOLD_STRONG_MEDIUM", "0.50"));
-    private static final double SELFPLAY_TO_STRONG_THRESHOLD = Double.parseDouble(env("THRESHOLD_SELFPLAY_STRONG", "0.60"));
+    private static final double MEDIUM_TO_WEAK_THRESHOLD = EnvConfig.f64("THRESHOLD_MEDIUM_WEAK", 0.45);
+    private static final double STRONG_TO_MEDIUM_THRESHOLD = EnvConfig.f64("THRESHOLD_STRONG_MEDIUM", 0.50);
+    private static final double SELFPLAY_TO_STRONG_THRESHOLD = EnvConfig.f64("THRESHOLD_SELFPLAY_STRONG", 0.55);
 
     // Episode boundaries for fixed curriculum (if not using adaptive)
-    private static final int FIXED_WEAK_UNTIL = envInt("FIXED_WEAK_UNTIL", 500);
-    private static final int FIXED_MEDIUM_UNTIL = envInt("FIXED_MEDIUM_UNTIL", 3000);
-    private static final int FIXED_STRONG_UNTIL = envInt("FIXED_STRONG_UNTIL", 8000);
+    private static final int FIXED_WEAK_UNTIL = EnvConfig.i32("FIXED_WEAK_UNTIL", 500);
+    private static final int FIXED_MEDIUM_UNTIL = EnvConfig.i32("FIXED_MEDIUM_UNTIL", 3000);
+    private static final int FIXED_STRONG_UNTIL = EnvConfig.i32("FIXED_STRONG_UNTIL", 8000);
 
     // Thread-safe circular buffer for tracking recent wins
     private static final ConcurrentLinkedQueue<Boolean> recentWins = new ConcurrentLinkedQueue<>();
@@ -134,6 +126,24 @@ public class RLTrainer {
 
     // Track games played at current difficulty level
     private static final AtomicInteger gamesAtCurrentLevel = new AtomicInteger(0);
+
+    // ============================================================
+    // League-style opponent sampling (bots never go to zero)
+    // ============================================================
+    private static final String OPPONENT_SAMPLER = EnvConfig.str("OPPONENT_SAMPLER", "league"); // league|adaptive|fixed
+
+    // Self-play probability ramps from START->END over RAMP_EPISODES, but is capped to (1 - BOT_FLOOR).
+    private static final double BOT_FLOOR_P = EnvConfig.f64("BOT_FLOOR", 0.25);
+    private static final double SELFPLAY_START_P = EnvConfig.f64("SELFPLAY_START_P", 0.20);
+    private static final double SELFPLAY_END_P = EnvConfig.f64("SELFPLAY_END_P", 0.80);
+    private static final int SELFPLAY_RAMP_EPISODES = EnvConfig.i32("SELFPLAY_RAMP_EPISODES", 10000);
+    // Bot mix among CP7(skill=1/2/3). Format: "w1,w2,w3"
+    private static final String BOT_MIX = EnvConfig.str("BOT_MIX", "0.25,0.35,0.40");
+
+    private static final String SNAPSHOT_DIR = EnvConfig.str("SNAPSHOT_DIR",
+            "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/snapshots");
+    private static final double SNAPSHOT_OPPONENT_PROB = EnvConfig.f64("SNAPSHOT_OPPONENT_PROB", 0.20);
+    private static final int SNAPSHOT_START_EPISODE = EnvConfig.i32("SNAPSHOT_START_EPISODE", 2000);
 
     static {
         // Ensure we have at least a console appender so INFO logs are visible
@@ -159,6 +169,9 @@ public class RLTrainer {
         Logger.getLogger("mage.game").setLevel(Level.ERROR);
         Logger.getLogger("mage.game.GameImpl").setLevel(Level.ERROR);
         Logger.getLogger("mage.server").setLevel(Level.ERROR);
+
+        // Suppress "AI player thinks too long" warnings from opponent AIs during training
+        Logger.getLogger("mage.player.ai.ComputerPlayer6").setLevel(Level.ERROR);
     }
 
     // ThreadLocal logger
@@ -172,35 +185,30 @@ public class RLTrainer {
         return threadLogger;
     });
 
+    // ThreadLocal game logger for detailed analysis of eval games
+    // Enable with GAME_LOGGING=1
+    public static final ThreadLocal<GameLogger> threadLocalGameLogger = ThreadLocal.withInitial(
+            () -> GameLogger.create(false) // Default: disabled
+    );
+
     public RLTrainer() {
-        // No need to initialize here as PythonMLBridge handles initialization in its constructor
     }
 
     /* ================================================================
      *  Simple CLI entry point: java RLTrainer train|eval
      * ============================================================ */
     public static void main(String[] args) {
-        String mode = args.length > 0 ? args[0] : env("MODE", "train");
+        String mode = args.length > 0 ? args[0] : EnvConfig.str("MODE", "train");
 
         // Start metrics collection server
-        int metricsPort = envInt("METRICS_PORT", 9090);
+        int metricsPort = EnvConfig.i32("METRICS_PORT", 9090);
         metrics.startMetricsServer(metricsPort);
         logger.info("Metrics server started on port " + metricsPort);
         try {
-            if ("learner".equalsIgnoreCase(mode)) {
-                Path dir = Paths.get(System.getenv().getOrDefault("TRAJ_DIR", "./trajectories"));
-                int maxSamples = envInt("MAX_SAMPLES_PER_BATCH", 50000); // ~500MB for RTX 4070
-                int poll = envInt("POLL_SECONDS", 60);
-                int ckpt = envInt("CHECKPOINT_EVERY", 100);
-                new Learner(dir, maxSamples, poll, ckpt).run();
-            } else if ("worker".equalsIgnoreCase(mode)) {
-                int eps = envInt("EPISODES_PER_WORKER", 100);
-                Path dir = Paths.get(System.getenv().getOrDefault("TRAJ_DIR", "./trajectories"));
-                new GameWorker(eps, dir).run();
-            } else if ("eval".equalsIgnoreCase(mode)) {
+            if ("eval".equalsIgnoreCase(mode)) {
                 runEvaluation(NUM_EVAL_EPISODES);
             } else if ("benchmark".equalsIgnoreCase(mode)) {
-                int gamesPerMatchup = envInt("GAMES_PER_MATCHUP", 20);
+                int gamesPerMatchup = EnvConfig.i32("GAMES_PER_MATCHUP", 20);
                 new RLTrainer().runBenchmark(gamesPerMatchup);
             } else {
                 new RLTrainer().train();
@@ -252,8 +260,7 @@ public class RLTrainer {
             } catch (Exception e) {
                 logger.warn("Failed to read episode counter, starting from 0", e);
             }
-            boolean resetEpisodeCounter = "1".equals(env("RESET_EPISODE_COUNTER", "0"))
-                    || "true".equalsIgnoreCase(env("RESET_EPISODE_COUNTER", "0"));
+            boolean resetEpisodeCounter = EnvConfig.bool("RESET_EPISODE_COUNTER", false);
             if (resetEpisodeCounter) {
                 EPISODE_COUNTER.set(0);
                 initialEpisodeCount = 0;
@@ -267,6 +274,19 @@ public class RLTrainer {
                         + EPISODE_COUNT_PATH);
                 return;
             }
+
+            // Add shutdown hook to save episode counter on Ctrl+C
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+                try {
+                    int finalCount = EPISODE_COUNTER.get();
+                    Files.write(Paths.get(EPISODE_COUNT_PATH),
+                            String.valueOf(finalCount).getBytes(StandardCharsets.UTF_8));
+                    System.out.println("Shutdown hook: Saved episode counter = " + finalCount);
+                } catch (IOException e) {
+                    System.err.println("Shutdown hook: Failed to save episode counter: " + e.getMessage());
+                }
+            }, "Episode-Counter-Shutdown-Hook"));
+            logger.info("Registered shutdown hook for episode counter persistence");
 
             // Log system resource utilization
             int cpuCores = Runtime.getRuntime().availableProcessors();
@@ -284,8 +304,8 @@ public class RLTrainer {
             final long startMs = System.currentTimeMillis();
             final int startEpisodeCountSnapshot = EPISODE_COUNTER.get();
             final int targetEpisodeCount = NUM_EPISODES;
-            final int trainLogEvery = envInt("TRAIN_LOG_EVERY", 10);
-            final int trainHeartbeatSec = envInt("TRAIN_HEARTBEAT_SEC", 30);
+            final int trainLogEvery = EnvConfig.i32("TRAIN_LOG_EVERY", 10);
+            final int trainHeartbeatSec = EnvConfig.i32("TRAIN_HEARTBEAT_SEC", 30);
             final java.util.concurrent.atomic.AtomicInteger lastLoggedEpisode = new java.util.concurrent.atomic.AtomicInteger(startEpisodeCountSnapshot);
 
             // Heartbeat so the console doesn't look stuck during long games.
@@ -344,8 +364,10 @@ public class RLTrainer {
                         if (epNumber > NUM_EPISODES) {
                             break; // Another thread reached the target
                         }
+                        metrics.recordEpisodeStarted();
                         long episodeStartNanos = System.nanoTime();
                         ACTIVE_EPISODES.incrementAndGet();
+                        metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
                         Path rlPlayerDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
                         Deck rlPlayerDeckThread = loadDeck(rlPlayerDeckPath.toString());
                         Path opponentDeckPath = deckFiles.get(threadRand.nextInt(deckFiles.size()));
@@ -353,6 +375,7 @@ public class RLTrainer {
                         if (rlPlayerDeckThread == null || opponentDeckThread == null) {
                             logger.warn("Train: failed to load deck(s) for game, skipping.");
                             ACTIVE_EPISODES.decrementAndGet();
+                            metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
                             continue;
                         }
 
@@ -363,15 +386,26 @@ public class RLTrainer {
                         match.startGame();
                         Game game = match.getGames().get(0);
 
+                        // Enable game logging if this episode should be logged
+                        boolean enableGameLogging = GAME_LOG_FREQUENCY > 0
+                                && (epNumber == 0 || epNumber % GAME_LOG_FREQUENCY == 0);
+                        GameLogger gameLogger = GameLogger.create(enableGameLogging);
+                        threadLocalGameLogger.set(gameLogger);
+
                         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel);
                         rlPlayer.setCurrentEpisode(epNumber); // Set episode for mulligan logging
                         game.addPlayer(rlPlayer, rlPlayerDeckThread);
                         match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
-                        // Use adaptive curriculum opponent selection
-                        Player opponentPlayer = createAdaptiveOpponent(epNumber, threadRand);
+                        // Opponent selection
+                        Player opponentPlayer = createTrainingOpponent(epNumber, threadRand);
                         game.addPlayer(opponentPlayer, opponentDeckThread);
                         match.addPlayer(opponentPlayer, opponentDeckThread);
+
+                        String opponentTag = formatOpponentTag(opponentPlayer);
+                        if (gameLogger.isEnabled()) {
+                            gameLogger.log("OPPONENT: " + opponentTag + " (name=" + opponentPlayer.getName() + ")");
+                        }
 
                         logger.info("Players added to game. RL player library size: " + rlPlayer.getLibrary().size() + ", Opponent library size: " + opponentPlayer.getLibrary().size());
                         System.out.println("DEBUG: Players added to game. RL player library size: " + rlPlayer.getLibrary().size() + ", Opponent library size: " + opponentPlayer.getLibrary().size());
@@ -393,13 +427,25 @@ public class RLTrainer {
                         double snapshotWinrate = outcomeSnapshot[0];
                         int snapshotSampleSize = (int) outcomeSnapshot[1];
 
+                        // Log game outcome to detailed game log if enabled
+                        if (gameLogger.isEnabled()) {
+                            String winner = rlPlayerWon ? rlPlayer.getName() : opponentPlayer.getName();
+                            String loser = rlPlayerWon ? opponentPlayer.getName() : rlPlayer.getName();
+                            int turns = game.getTurnNum();
+                            String reason = String.format("Episode %d - Win", epNumber);
+                            gameLogger.logOutcome(winner, loser, turns, reason);
+                            logger.info("GAME LOGS stats: " + opponentTag + " gameId=" + gameLogger.getGameId());
+                            gameLogger.close();
+                        }
+
                         // Train mulligan model from this game's decisions
                         trainMulliganModel(rlPlayer, rlPlayerWon);
                         maybeSaveMulliganModel();
 
                         logGameResult(game, rlPlayer);
                         long rewardStartNanos = System.nanoTime();
-                        double finalReward = updateModelBasedOnOutcome(game, rlPlayer, opponentPlayer);
+                        RewardDiag rewardDiag = updateModelBasedOnOutcome(game, rlPlayer, opponentPlayer);
+                        double finalReward = rewardDiag.finalReward;
                         long rewardEndNanos = System.nanoTime();
 
                         // Defer statistics writing until after we compute episodeSeconds below
@@ -407,6 +453,17 @@ public class RLTrainer {
                         long episodeDurationNanos = System.nanoTime() - episodeStartNanos;
                         double episodeSeconds = episodeDurationNanos / 1_000_000_000.0;
                         RLTrainer.threadLocalLogger.get().info(String.format("Episode %d completed in %.2f seconds", epNumber, episodeSeconds));
+
+                        // Periodically save episode counter (every 100 episodes)
+                        if (epNumber % 100 == 0) {
+                            try {
+                                Files.write(Paths.get(EPISODE_COUNT_PATH),
+                                        String.valueOf(epNumber).getBytes(StandardCharsets.UTF_8));
+                                logger.info("Episode counter saved: " + epNumber);
+                            } catch (IOException e) {
+                                logger.error("Failed to save episode counter at episode " + epNumber, e);
+                            }
+                        }
                         if (TRAIN_DIAG && (TRAIN_DIAG_EVERY <= 1 || epNumber % TRAIN_DIAG_EVERY == 0)) {
                             double totalMs = (System.nanoTime() - episodeStartNanos) / 1_000_000.0;
                             double gameMs = (endGameNanos - startGameNanos) / 1_000_000.0;
@@ -429,24 +486,38 @@ public class RLTrainer {
                                 double epsPerSec = done / (elapsedMs / 1000.0);
                                 long etaSec = epsPerSec > 0 ? (long) (remaining / epsPerSec) : -1;
                                 int rlFailures = ComputerPlayerRL.getRLActivationFailureCount();
+
+                                // Get training stats
+                                java.util.Map<String, Integer> mainStats = sharedModel.getMainModelTrainingStats();
+                                java.util.Map<String, Integer> mulliganStats = sharedModel.getMulliganModelTrainingStats();
+
                                 logger.info(String.format(
                                         "Training progress: episode=%d/%d (run=%d, %.3f eps/s), ETA %ds, RL_activation_failures=%d",
                                         epNumber, targetEpisodeCount, done, epsPerSec, etaSec, rlFailures
+                                ));
+                                logger.info(String.format(
+                                        "  Main model: %d train steps, %d samples | Mulligan model: %d train steps, %d samples",
+                                        mainStats.get("train_steps"), mainStats.get("train_samples"),
+                                        mulliganStats.get("train_steps"), mulliganStats.get("train_samples")
+                                ));
+                                // Value head quality metrics
+                                logger.info(String.format(
+                                        "  Value head: accuracy=%.1f%%, avg_win=%.3f, avg_loss=%.3f (target: +1/-1)",
+                                        metrics.getValueAccuracy() * 100,
+                                        metrics.getAverageValueForWins(),
+                                        metrics.getAverageValueForLosses()
+                                ));
+                                logger.info(String.format(
+                                        "  Reward diag (last ep): won=%s steps=%d finalReward=%.3f mc_return0=%.3f sum_rewards=%.3f last_reward=%.3f",
+                                        rewardDiag.won, rewardDiag.steps, rewardDiag.finalReward,
+                                        rewardDiag.mcReturn0, rewardDiag.sumRewards, rewardDiag.lastReward
                                 ));
                             }
                         }
 
                         // ------------------ Statistics ------------------
                         int turns = game.getTurnNum();
-                        String opponentType = "UNKNOWN";
-                        if (opponentPlayer instanceof ComputerPlayerRL) {
-                            opponentType = "SELFPLAY";
-                        } else if (opponentPlayer instanceof ComputerPlayer7) {
-                            opponentType = "CP7";
-                        } else if (opponentPlayer instanceof mage.player.ai.ComputerPlayer) {
-                            opponentType = "CP_WEAK";
-                        }
-
+                        String opponentType = opponentTag;
                         logger.info(String.format("Episode %d summary: turns=%d, reward=%.3f, opponent=%s, winrate=%.3f (%d games)",
                                 epNumber, turns, finalReward, opponentType, snapshotWinrate, snapshotSampleSize));
 
@@ -469,7 +540,9 @@ public class RLTrainer {
                         } catch (IOException e) {
                             logger.warn("Failed to write stats CSV", e);
                         }
+                        metrics.recordEpisodeCompleted();
                         ACTIVE_EPISODES.decrementAndGet();
+                        metrics.setActiveEpisodes(ACTIVE_EPISODES.get());
                     }
                     return null;
                 });
@@ -518,6 +591,54 @@ public class RLTrainer {
         }
     }
 
+    private static String formatOpponentTag(Player opponentPlayer) {
+        if (opponentPlayer instanceof ComputerPlayerRL) {
+            return "SELFPLAY";
+        }
+        if (opponentPlayer instanceof ComputerPlayer7) {
+            String name;
+            try {
+                name = opponentPlayer.getName();
+            } catch (Exception ignored) {
+                name = "";
+            }
+            if (name == null) {
+                name = "";
+            }
+            String n = name.toLowerCase();
+            int skill = 0;
+            if (n.contains("weak")) {
+                skill = 1;
+            } else if (n.contains("medium")) {
+                skill = 2;
+            } else if (n.contains("strong")) {
+                skill = 3;
+            } else {
+                int idx = n.indexOf("skill");
+                if (idx >= 0) {
+                    int j = idx + 5;
+                    int start = j;
+                    while (j < n.length() && Character.isDigit(n.charAt(j))) {
+                        j++;
+                    }
+                    if (j > start) {
+                        try {
+                            skill = Integer.parseInt(n.substring(start, j));
+                        } catch (NumberFormatException ignored) {
+                            skill = 0;
+                        }
+                    }
+                }
+            }
+            return (skill > 0) ? ("CP7-Skill " + skill) : "CP7";
+        }
+        try {
+            return opponentPlayer == null ? "UNKNOWN" : opponentPlayer.getName();
+        } catch (Exception ignored) {
+            return "UNKNOWN";
+        }
+    }
+
     public void eval(int numEpisodesPerThread) {
         runEvaluation(numEpisodesPerThread);
     }
@@ -535,7 +656,7 @@ public class RLTrainer {
         ComputerPlayerRL.resetRLActivationFailureCount();
         logger.info("Starting evaluation - RL activation failure counter reset to 0");
 
-        final int evalLogEvery = envInt("EVAL_LOG_EVERY", 50);
+        final int evalLogEvery = EnvConfig.i32("EVAL_LOG_EVERY", 50);
         final int totalEvalGames = Math.max(1, numEpisodesPerThread * NUM_GAME_RUNNERS);
         final long evalStartMs = System.currentTimeMillis();
         final AtomicInteger evalCounter = new AtomicInteger(0);
@@ -587,6 +708,13 @@ public class RLTrainer {
                     // Increment counter first to get unique episode number (avoid race condition in parallel execution)
                     int currentEvalGame = evalCounter.incrementAndGet();
 
+                    // Enable game logging for eval: either GAME_LOGGING=1 or GAME_LOG_FREQUENCY applies
+                    boolean enableGameLogging = "1".equals(System.getenv().getOrDefault("GAME_LOGGING", "0"))
+                            || "true".equalsIgnoreCase(System.getenv().getOrDefault("GAME_LOGGING", "0"))
+                            || (GAME_LOG_FREQUENCY > 0 && (currentEvalGame == 1 || currentEvalGame % GAME_LOG_FREQUENCY == 0));
+                    GameLogger gameLogger = GameLogger.create(enableGameLogging);
+                    threadLocalGameLogger.set(gameLogger);
+
                     // Greedy evaluation: use deterministic arg-max player
                     ComputerPlayerRL rlPlayer = new ComputerPlayerRL("PlayerRL1", RangeOfInfluence.ALL, sharedModel, true);
                     rlPlayer.setCurrentEpisode(-currentEvalGame); // Negative for eval = deterministic mulligan
@@ -594,8 +722,8 @@ public class RLTrainer {
                     match.addPlayer(rlPlayer, rlPlayerDeckThread);
 
                     // Use stronger opponent for evaluation (skill=6) - reserved for benchmarking
-                    int evalSkill = envInt("EVAL_OPPONENT_SKILL", 6);
-                    ComputerPlayer7 opponent = new ComputerPlayer7("EvalBot", RangeOfInfluence.ALL, evalSkill);
+                    int evalSkill = EnvConfig.i32("EVAL_OPPONENT_SKILL", 6);
+                    ComputerPlayer7 opponent = new ComputerPlayer7("EvalBot-Skill" + evalSkill, RangeOfInfluence.ALL, evalSkill);
                     game.addPlayer(opponent, opponentDeckThread);
                     match.addPlayer(opponent, opponentDeckThread);
 
@@ -609,7 +737,17 @@ public class RLTrainer {
 
                     boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
 
-                    // Train mulligan model during evaluation too
+                    // Log game outcome to detailed game log if enabled
+                    if (gameLogger.isEnabled()) {
+                        String winner = rlPlayerWon ? rlPlayer.getName() : opponent.getName();
+                        String loser = rlPlayerWon ? opponent.getName() : rlPlayer.getName();
+                        int turns = game.getTurnNum();
+                        String reason = String.format("Eval game %d", currentEvalGame);
+                        gameLogger.logOutcome(winner, loser, turns, reason);
+                        gameLogger.close();
+                    }
+
+                    // Train mulligan model during evaluation too (for consistency)
                     trainMulliganModel(rlPlayer, rlPlayerWon);
 
                     if (isFirst) {
@@ -676,10 +814,10 @@ public class RLTrainer {
                 return;
             }
 
-            final int benchThreads = envInt("BENCHMARK_THREADS", Math.max(1, Runtime.getRuntime().availableProcessors() - 1));
-            final int logEvery = envInt("BENCHMARK_LOG_EVERY", 5);
-            final int heartbeatSec = envInt("BENCHMARK_HEARTBEAT_SEC", 30);
-            final int gameTimeoutSec = envInt("BENCHMARK_GAME_TIMEOUT_SEC", 900);
+            final int benchThreads = EnvConfig.i32("BENCHMARK_THREADS", Math.max(1, Runtime.getRuntime().availableProcessors() - 1));
+            final int logEvery = EnvConfig.i32("BENCHMARK_LOG_EVERY", 5);
+            final int heartbeatSec = EnvConfig.i32("BENCHMARK_HEARTBEAT_SEC", 30);
+            final int gameTimeoutSec = EnvConfig.i32("BENCHMARK_GAME_TIMEOUT_SEC", 900);
             final int totalPlannedGames = decks.size() * (decks.size() - 1) * gamesPerMatchup;
 
             final AtomicLong completed = new AtomicLong(0);
@@ -833,8 +971,8 @@ public class RLTrainer {
         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("RL", RangeOfInfluence.ALL, sharedModel, true);
         rlPlayer.setCurrentEpisode(-1); // -1 indicates benchmark game
         // Use strong opponent for benchmarking
-        int benchSkill = envInt("BENCHMARK_OPPONENT_SKILL", 6);
-        Player opponent = new ComputerPlayer7("Benchmark", RangeOfInfluence.ALL, benchSkill);
+        int benchSkill = EnvConfig.i32("BENCHMARK_OPPONENT_SKILL", 6);
+        Player opponent = new ComputerPlayer7("Benchmark-Skill" + benchSkill, RangeOfInfluence.ALL, benchSkill);
 
         Deck rlDeck = d1.copy();
         Deck oppDeck = d2.copy();
@@ -970,24 +1108,13 @@ public class RLTrainer {
         }
     }
 
-    private double updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
+    private RewardDiag updateModelBasedOnOutcome(Game game, ComputerPlayerRL rlPlayer, Player opponentPlayer) {
         boolean rlPlayerWon = game.getWinner().contains(rlPlayer.getName());
 
         // ------------------------------------------------------------------
         // 1.  Terminal win / loss reward (ground-truth)
         // ------------------------------------------------------------------
         double finalReward = rlPlayerWon ? 1.0 : -1.0;
-
-        // ------------------------------------------------------------------
-        // 2.  Potential-based shaping term  ψ = α (Φ(s′) – Φ(s))
-        // ------------------------------------------------------------------
-        final double ALPHA = 0.05;
-        int rlLife = Math.max(0, rlPlayer.getLife());
-        UUID oppId = game.getOpponents(rlPlayer.getId()).iterator().next();
-        Player opp = game.getPlayer(oppId);
-        int oppLife = Math.max(0, (opp != null ? opp.getLife() : 20));
-        double phiFinal = Math.signum(Math.log(rlLife + 1.0) - Math.log(oppLife + 1.0));
-        finalReward += ALPHA * phiFinal;
 
         if (Double.isNaN(finalReward) || Double.isInfinite(finalReward)) {
             finalReward = rlPlayerWon ? 1.0 : -1.0;
@@ -1002,22 +1129,91 @@ public class RLTrainer {
             opponentTrainingData = ((ComputerPlayerRL) opponentPlayer).getTrainingBuffer();
         }
 
-        // --- Calculate discounted returns for each player ---
-        final double GAMMA = 0.99; // Discount factor for future rewards
+        // --- Calculate immediate rewards for each step (GAE will compute advantages in Python) ---
+        List<Double> rlPlayerRewards = calculateImmediateRewards(rlPlayerTrainingData, finalReward);
+        List<Double> opponentRewards = calculateImmediateRewards(opponentTrainingData, -finalReward); // Opposite reward for opponent
 
-        List<Double> rlPlayerReturns = calculateDiscountedReturns(rlPlayerTrainingData, finalReward, GAMMA);
-        List<Double> opponentReturns = calculateDiscountedReturns(opponentTrainingData, -finalReward, GAMMA); // Opposite reward for opponent
-
-        // Update the model with all states and rewards
+        // Update the model with all states and immediate rewards (Python will apply GAE)
         if (!rlPlayerTrainingData.isEmpty()) {
-            sharedModel.train(rlPlayerTrainingData, rlPlayerReturns);
+            sharedModel.enqueueTraining(rlPlayerTrainingData, rlPlayerRewards);
         }
         if (!opponentTrainingData.isEmpty()) {
-            sharedModel.train(opponentTrainingData, opponentReturns); // Opposite reward for opponent
+            sharedModel.enqueueTraining(opponentTrainingData, opponentRewards); // Opposite reward for opponent
         }
-        return finalReward;
+
+        // Record value head prediction for auto-GAE tracking
+        float lastValue = rlPlayer.getLastValueScore();
+        metrics.recordValuePrediction(lastValue, rlPlayerWon);
+        sharedModel.recordGameResult(lastValue, rlPlayerWon);
+
+        RewardDiag diag = new RewardDiag();
+        diag.won = rlPlayerWon;
+        diag.finalReward = finalReward;
+        diag.steps = rlPlayerRewards.size();
+        diag.sumRewards = rlPlayerRewards.stream().mapToDouble(d -> d).sum();
+        diag.lastReward = rlPlayerRewards.isEmpty() ? 0.0 : rlPlayerRewards.get(rlPlayerRewards.size() - 1);
+        diag.mcReturn0 = computeDiscountedReturn0(rlPlayerRewards, 0.99);
+        return diag;
     }
 
+    private static final class RewardDiag {
+
+        boolean won;
+        int steps;
+        double finalReward;
+        double mcReturn0;
+        double sumRewards;
+        double lastReward;
+    }
+
+    private static double computeDiscountedReturn0(List<Double> rewards, double gamma) {
+        if (rewards == null || rewards.isEmpty()) {
+            return 0.0;
+        }
+        double ret = 0.0;
+        double g = 1.0;
+        for (double r : rewards) {
+            ret += g * r;
+            g *= gamma;
+        }
+        return ret;
+    }
+
+    /**
+     * Calculate immediate rewards for each step in the trajectory. GAE
+     * (Generalized Advantage Estimation) will be computed in Python using these
+     * rewards.
+     *
+     * @param trajectory List of training data for one episode
+     * @param finalReward Terminal reward (+1 for win, -1 for loss)
+     * @return List of immediate rewards (one per step)
+     */
+    public static List<Double> calculateImmediateRewards(List<StateSequenceBuilder.TrainingData> trajectory, double finalReward) {
+        if (trajectory.isEmpty()) {
+            return new ArrayList<>();
+        }
+
+        List<Double> immediateRewards = new ArrayList<>(trajectory.size());
+
+        for (int i = 0; i < trajectory.size(); i++) {
+            double reward = trajectory.get(i).stepReward;
+
+            // Add terminal reward to the last step
+            if (i == trajectory.size() - 1) {
+                reward += finalReward;
+            }
+
+            immediateRewards.add(reward);
+        }
+
+        return immediateRewards;
+    }
+
+    /**
+     * DEPRECATED: Old Monte Carlo returns calculation. Kept for reference but
+     * no longer used (replaced by GAE in Python).
+     */
+    @Deprecated
     public static List<Double> calculateDiscountedReturns(List<StateSequenceBuilder.TrainingData> trajectory, double finalReward, double gamma) {
         if (trajectory.isEmpty()) {
             return new ArrayList<>();
@@ -1034,8 +1230,8 @@ public class RLTrainer {
                 immediateReward += finalReward;
             }
 
-            // By adding a small penalty for each step, we incentivize shorter games.
-            final double STEP_PENALTY = -0.01;
+            // Removed step penalty - let value head learn from win/loss signals only
+            final double STEP_PENALTY = 0.0;
             cumulativeReturn = (immediateReward + STEP_PENALTY) + gamma * cumulativeReturn;
             discountedReturns.set(i, cumulativeReturn);
         }
@@ -1052,15 +1248,16 @@ public class RLTrainer {
         return discountedReturns;
     }
 
-    public static PythonMLBridge getSharedModel() {
+    public static PythonModel getSharedModel() {
         return sharedModel;
     }
 
     /**
      * Records a game outcome and updates rolling winrate. Thread-safe for
      * concurrent training.
-     * 
-     * @return Array [winrate, sampleSize] at the moment this outcome was recorded
+     *
+     * @return Array [winrate, sampleSize] at the moment this outcome was
+     * recorded
      */
     private static double[] recordGameOutcome(boolean rlPlayerWon) {
         // Add to queue
@@ -1079,11 +1276,11 @@ public class RLTrainer {
                 winCount.decrementAndGet();
             }
         }
-        
+
         // Return snapshot at this exact moment (avoids race condition in logging)
         int size = recentWins.size();
         double winrate = size == 0 ? 0.0 : winCount.get() / (double) size;
-        return new double[] {winrate, size};
+        return new double[]{winrate, size};
     }
 
     /**
@@ -1109,6 +1306,7 @@ public class RLTrainer {
             List<int[]> handIds = rlPlayer.getMulliganHandIds();
             List<int[]> deckIds = rlPlayer.getMulliganDeckIds();
             List<Float> decisions = rlPlayer.getMulliganDecisions();
+            List<Integer> landCounts = rlPlayer.getMulliganLandCounts();
 
             if (mulliganNums.isEmpty()) {
                 return; // No mulligan decisions this game
@@ -1152,11 +1350,18 @@ public class RLTrainer {
                 outcomesBuf.putFloat(outcome);
             }
 
+            // Pack land counts for heuristic
+            java.nio.ByteBuffer landCountsBuf = java.nio.ByteBuffer.allocate(batchSize * 4).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+            for (Integer landCount : landCounts) {
+                landCountsBuf.putInt(landCount);
+            }
+
             // Train the model
-            sharedModel.getEntryPoint().trainMulligan(
+            sharedModel.trainMulligan(
                     featuresBuf.array(),
                     decisionsBuf.array(),
                     outcomesBuf.array(),
+                    landCountsBuf.array(),
                     batchSize
             );
 
@@ -1170,7 +1375,7 @@ public class RLTrainer {
 
     // Mulligan model save counter
     private static final AtomicInteger mulliganTrainCount = new AtomicInteger(0);
-    private static final int MULLIGAN_SAVE_INTERVAL = envInt("MULLIGAN_SAVE_INTERVAL", 100);
+    private static final int MULLIGAN_SAVE_INTERVAL = EnvConfig.i32("MULLIGAN_SAVE_INTERVAL", 100);
 
     /**
      * Periodically save mulligan model.
@@ -1178,11 +1383,138 @@ public class RLTrainer {
     private static void maybeSaveMulliganModel() {
         if (mulliganTrainCount.incrementAndGet() % MULLIGAN_SAVE_INTERVAL == 0) {
             try {
-                sharedModel.getEntryPoint().saveMulliganModel();
+                sharedModel.saveMulliganModel();
                 logger.info("Mulligan model saved (after " + mulliganTrainCount.get() + " training updates)");
             } catch (Exception e) {
                 logger.error("Failed to save mulligan model: " + e.getMessage(), e);
             }
+        }
+    }
+
+    private Player createTrainingOpponent(int episodeNum, Random rand) {
+        String mode = OPPONENT_SAMPLER == null ? "league" : OPPONENT_SAMPLER.trim().toLowerCase();
+        switch (mode) {
+            case "adaptive":
+                return createAdaptiveOpponent(episodeNum, rand);
+            case "fixed":
+                // Force fixed schedule by temporarily disabling adaptive logic.
+                // (This preserves existing behavior with FIXED_* env vars.)
+                return createFixedOpponent(episodeNum, rand);
+            case "league":
+            default:
+                return createLeagueOpponent(episodeNum, rand);
+        }
+    }
+
+    private Player createFixedOpponent(int episodeNum, Random rand) {
+        // Legacy fixed schedule, but keep a permanent bot floor by mixing bots even after self-play.
+        if (episodeNum < FIXED_WEAK_UNTIL) {
+            return new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 1);
+        } else if (episodeNum < FIXED_MEDIUM_UNTIL) {
+            return new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 2);
+        } else if (episodeNum < FIXED_STRONG_UNTIL) {
+            return new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 3);
+        } else {
+            double botFloor = Math.max(0.0, Math.min(1.0, BOT_FLOOR_P));
+            if (rand.nextDouble() < botFloor) {
+                return pickBotFromMix(rand);
+            }
+            return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel);
+        }
+    }
+
+    private Player createLeagueOpponent(int episodeNum, Random rand) {
+        // Self-play ramps up over time, but bots never go to zero.
+        double botFloor = Math.max(0.0, Math.min(1.0, BOT_FLOOR_P));
+        double startP = Math.max(0.0, Math.min(1.0, SELFPLAY_START_P));
+        double endP = Math.max(0.0, Math.min(1.0, SELFPLAY_END_P));
+        int ramp = Math.max(1, SELFPLAY_RAMP_EPISODES);
+
+        double t = Math.max(0.0, Math.min(1.0, (episodeNum - 1) / (double) ramp));
+        double selfPlayP = startP + (endP - startP) * t;
+        selfPlayP = Math.max(0.0, Math.min(1.0 - botFloor, selfPlayP));
+
+        if (rand.nextDouble() < selfPlayP) {
+            String policyKey = "train";
+            boolean trainingEnabled = true;
+
+            if (episodeNum >= SNAPSHOT_START_EPISODE && rand.nextDouble() < SNAPSHOT_OPPONENT_PROB) {
+                String snapKey = pickSnapshotPolicyKey(rand);
+                if (snapKey != null) {
+                    policyKey = snapKey;
+                    trainingEnabled = false; // snapshot opponent is off-policy; don't train from its trajectory
+                }
+            }
+
+            lastOpponentType = ("train".equals(policyKey) ? "SELFPLAY" : policyKey);
+            return new ComputerPlayerRL("SelfPlay", RangeOfInfluence.ALL, sharedModel, false, trainingEnabled, policyKey);
+        }
+
+        Player bot = pickBotFromMix(rand);
+        return bot;
+    }
+
+    private String pickSnapshotPolicyKey(Random rand) {
+        try {
+            java.nio.file.Path dir = java.nio.file.Paths.get(SNAPSHOT_DIR);
+            if (!java.nio.file.Files.isDirectory(dir)) {
+                return null;
+            }
+            java.util.List<java.nio.file.Path> snaps;
+            try (java.util.stream.Stream<java.nio.file.Path> stream = java.nio.file.Files.list(dir)) {
+                snaps = stream
+                        .filter(p -> p.getFileName() != null && p.getFileName().toString().endsWith(".pt"))
+                        .collect(java.util.stream.Collectors.toList());
+            }
+            if (snaps.isEmpty()) {
+                return null;
+            }
+            java.nio.file.Path pick = snaps.get(rand.nextInt(snaps.size()));
+            return "snap:" + pick.getFileName().toString();
+        } catch (Exception ignored) {
+            return null;
+        }
+    }
+
+    private Player pickBotFromMix(Random rand) {
+        double[] w = parseBotMix(BOT_MIX);
+        double r = rand.nextDouble() * (w[0] + w[1] + w[2]);
+        int skill;
+        if (r < w[0]) {
+            skill = 1;
+        } else if (r < w[0] + w[1]) {
+            skill = 2;
+        } else {
+            skill = 3;
+        }
+        lastOpponentType = "BOT-CP7(skill=" + skill + ")";
+        return new ComputerPlayer7("Bot-Skill" + skill, RangeOfInfluence.ALL, skill);
+    }
+
+    private static double[] parseBotMix(String s) {
+        // default: [0.25, 0.35, 0.40]
+        double[] def = new double[]{0.25, 0.35, 0.40};
+        if (s == null || s.trim().isEmpty()) {
+            return def;
+        }
+        String[] parts = s.split(",");
+        if (parts.length != 3) {
+            return def;
+        }
+        try {
+            double a = Double.parseDouble(parts[0].trim());
+            double b = Double.parseDouble(parts[1].trim());
+            double c = Double.parseDouble(parts[2].trim());
+            if (a < 0 || b < 0 || c < 0) {
+                return def;
+            }
+            double sum = a + b + c;
+            if (sum <= 0) {
+                return def;
+            }
+            return new double[]{a, b, c};
+        } catch (NumberFormatException ignored) {
+            return def;
         }
     }
 
@@ -1263,13 +1595,13 @@ public class RLTrainer {
 
             switch (newLevel) {
                 case WEAK:
-                    opType = "WEAK-ComputerPlayer";
-                    opponent = new mage.player.ai.ComputerPlayer("WeakBot", RangeOfInfluence.ALL);
+                    opType = "WEAK-CP7(skill=1)";
+                    opponent = new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 1);
                     break;
 
                 case MEDIUM:
-                    opType = "MEDIUM-CP7(skill=1)";
-                    opponent = new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 1);
+                    opType = "MEDIUM-CP7(skill=2)";
+                    opponent = new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 2);
                     break;
 
                 case STRONG:
@@ -1289,8 +1621,8 @@ public class RLTrainer {
                     break;
 
                 default:
-                    opType = "WEAK-ComputerPlayer";
-                    opponent = new mage.player.ai.ComputerPlayer("WeakBot", RangeOfInfluence.ALL);
+                    opType = "WEAK-CP7(skill=1)";
+                    opponent = new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 1);
             }
 
             // Log opponent transitions and reset tracking when level changes
@@ -1320,10 +1652,11 @@ public class RLTrainer {
 
         } else {
             // Fixed schedule (legacy behavior for comparison)
+            // Updated: start at skill=1 instead of useless ComputerPlayer
             if (episodeNum < FIXED_WEAK_UNTIL) {
-                return new mage.player.ai.ComputerPlayer("WeakBot", RangeOfInfluence.ALL);
+                return new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 1);
             } else if (episodeNum < FIXED_MEDIUM_UNTIL) {
-                return new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 1);
+                return new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 2);
             } else if (episodeNum < FIXED_STRONG_UNTIL) {
                 return new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 3);
             } else {

@@ -33,7 +33,8 @@ class MTGTransformerModel(nn.Module):
         self.cand_feat_dim = cand_feat_dim
 
         # Input scaling and normalization
-        self.input_scale = nn.Parameter(torch.ones(1) * 0.1)
+        # NOTE: Was 0.1, increased to 1.0 to avoid vanishing activations
+        self.input_scale = nn.Parameter(torch.ones(1) * 1.0)
         self.input_proj = nn.Linear(input_dim, d_model)
         self.input_norm = nn.LayerNorm(d_model)
         self.input_dropout = nn.Dropout(dropout)
@@ -92,7 +93,7 @@ class MTGTransformerModel(nn.Module):
         self.critic_proj2 = nn.Linear(d_model // 2, 1)
 
         # Learnable scaling factors
-        self.value_scale = nn.Parameter(torch.tensor(0.1))
+        self.value_scale = nn.Parameter(torch.tensor(1.0))
         # Start with a slightly lower temperature so small logit differences
         # translate to larger probability gaps and speed up early learning
         self.temperature = nn.Parameter(torch.tensor(0.7))
@@ -101,19 +102,26 @@ class MTGTransformerModel(nn.Module):
         self._init_weights()
 
         # Gradient clipping value (looser for faster learning)
-        self.max_grad_norm = 1.0
+        self.max_grad_norm = 5.0
 
         # --- utility lambdas ----------------------------------------
         self._stat_str = lambda a: f"Mean: {a.mean():.4f}, Std: {a.std():.4f}, Min: {a.min():.4f}, Max: {a.max():.4f}"
 
     def _init_weights(self):
-        """Initialize weights with small values for stability"""
-        # Increase gain for actor head to get less-tiny initial logits.
+        """Initialize weights with proper gains for gradient flow"""
+        # NOTE: Gains were too small (0.005/0.02) causing vanishing gradients
+        # Increased to standard ranges for transformer training
         special_actor_linears = {self.actor_proj1, self.actor_proj2}
+        special_critic_linears = {self.critic_proj1, self.critic_proj2}
 
         for m in self.modules():
             if isinstance(m, nn.Linear):
-                gain = 0.02 if m in special_actor_linears else 0.005
+                if m in special_actor_linears:
+                    gain = 0.5  # Stronger actor init for clearer policy signal
+                elif m in special_critic_linears:
+                    gain = 0.5  # Stronger critic init to avoid constant output
+                else:
+                    gain = 0.1  # Standard transformer layers (was 0.005)
                 nn.init.xavier_uniform_(m.weight, gain=gain)
                 if m.bias is not None:
                     nn.init.zeros_(m.bias)
@@ -121,10 +129,10 @@ class MTGTransformerModel(nn.Module):
                 nn.init.ones_(m.weight)
                 nn.init.zeros_(m.bias)
             elif isinstance(m, ScaledMultiheadAttention):
-                # Re-initialize attention weights with small gain
+                # Proper attention init (was 0.01, too small)
                 for param in m.parameters():
                     if param.dim() > 1:  # weight tensors
-                        nn.init.xavier_uniform_(param, gain=0.01)
+                        nn.init.xavier_uniform_(param, gain=0.1)
                     else:
                         nn.init.zeros_(param)
 
@@ -186,12 +194,18 @@ class MTGTransformerModel(nn.Module):
 
         scores = (cand * query.unsqueeze(1)).sum(dim=-1) / math.sqrt(self.d_model)
         valid = candidate_mask.bool()
+        # Numeric safety: if any score is NaN/Inf, treat it as invalid
+        scores = torch.nan_to_num(scores, nan=-1e9, posinf=1e9, neginf=-1e9)
         scores = scores.masked_fill(~valid, -1e9)
-        probs = torch.softmax(scores, dim=-1)
 
-        # Renormalize to be safe (especially if some rows are all-masked)
+        probs = torch.softmax(scores, dim=-1)
+        probs = torch.nan_to_num(probs, nan=0.0, posinf=0.0, neginf=0.0)
+
+        # Renormalize over valid candidates only; if none valid, return zeros.
         probs = probs * valid.float()
-        probs = probs / (probs.sum(dim=-1, keepdim=True) + 1e-8)
+        row_sum = probs.sum(dim=-1, keepdim=True)
+        fallback = valid.float() / (valid.float().sum(dim=-1, keepdim=True) + 1e-8)
+        probs = torch.where(row_sum > 0, probs / (row_sum + 1e-8), fallback)
 
         return probs, value_scores
 
@@ -288,14 +302,18 @@ class MTGTransformerModel(nn.Module):
         temp = torch.clamp(self.temperature, min=0.1)
         logits = logits / (temp + 1e-8)
 
+        # Clamp finite logits for numeric stability (do this BEFORE masking so
+        # masked positions can stay at a very negative value).
+        logits = torch.nan_to_num(logits, nan=0.0, posinf=20.0, neginf=-20.0)
+        logits = torch.clamp(logits, -20.0, 20.0)
+
         # Mask invalid actions if mask provided
         if action_masks is not None:
             action_masks = action_masks.float()
             logits = logits.masked_fill(~action_masks.bool(), -1e9)
 
-        # Final NaN/Inf guard and numeric clamp before softmax
+        # Final NaN/Inf guard (must not undo the -1e9 mask)
         logits = torch.nan_to_num(logits, nan=0.0, posinf=20.0, neginf=-20.0)
-        logits = torch.clamp(logits, -20.0, 20.0)
 
         return logits
 
@@ -317,7 +335,7 @@ class MTGTransformerModel(nn.Module):
         return logits, probs
 
     def _process_value(self, x: torch.Tensor) -> torch.Tensor:
-        """Return bounded scalar state-value from critic head."""
+        """Return scalar state-value from critic head."""
 
         # Normalisation & first projection
         x = self.critic_norm(x)
@@ -328,27 +346,20 @@ class MTGTransformerModel(nn.Module):
         # Second projection → scalar
         value = self.critic_proj2(x)
 
-        # Pre-activation clamp to avoid extreme values that could produce NaNs/Inf
+        # Numeric safety
         value = torch.nan_to_num(value, nan=0.0, posinf=50.0, neginf=-50.0)
         value = torch.clamp(value, -50.0, 50.0)
 
-        # Bound output to [-1, 1]
-        value = torch.tanh(value)
+        # Apply learnable scale (no tanh: allow critic to represent targets > 1.0)
+        scale = torch.clamp(self.value_scale, 0.01, 10.0)
+        value = value * scale
+        value = torch.clamp(value, -10.0, 10.0)
 
-        # Sanitize and apply learnable scaling factor
-        safe_scale = torch.nan_to_num(
-            self.value_scale, nan=0.0, posinf=5.0, neginf=-5.0)
-        # Keep scale in a reasonable range to avoid extreme shrink/expand
-        safe_scale = torch.clamp(safe_scale, -5.0, 5.0)
-        value = value * torch.sigmoid(safe_scale)
-
-        # Final safety clamp
+        # Final safety clamp for numerical stability
         if torch.isnan(value).any() or torch.isinf(value).any():
-            logger.error(
-                "NaN/Inf in value head – clamping to finite range after tanh")
-            value = torch.nan_to_num(value, nan=0.0, posinf=1.0, neginf=-1.0)
-
-        return torch.clamp(value, -1.0, 1.0)
+            logger.error("NaN/Inf in value head – replacing with zeros")
+            value = torch.nan_to_num(value, nan=0.0, posinf=0.0, neginf=0.0)
+        return value
 
     # ------------------------------------------------------------------
     # Generic helpers
@@ -398,7 +409,8 @@ class ScaledMultiheadAttention(nn.MultiheadAttention):
                          dropout=dropout, batch_first=batch_first)
 
         # Learnable scale shared across heads.
-        self.scale = nn.Parameter(torch.ones(1) * 0.1)
+        # NOTE: Was 0.1, increased to 1.0 to avoid uniform attention
+        self.scale = nn.Parameter(torch.ones(1) * 1.0)
 
     # ------------------------------------------------------------------
     # Override forward to inject scaling, then delegate to super().forward

@@ -3,127 +3,24 @@ from mtg_transformer import MTGTransformerModel
 import numpy as np
 import torch
 import torch.nn.functional as F
-import logging
 import sys
 import os
 import signal
 import time
-import tempfile
 import threading
 import queue
+import argparse
 from collections import deque
 import struct
 
-# Logging categories
-
-
-class LogCategory:
-    # Set to True to enable logging for each category
-    MODEL_INIT = True  # Enable model initialization logging
-    MODEL_PREDICT = True  # Enable prediction logging
-    MODEL_TRAIN = True
-    MODEL_SAVE = True  # Enable model save/load logging
-    MODEL_LOAD = True
-
-    GPU_MEMORY = False  # Enable GPU memory logging
-    GPU_BATCH = True  # Enable batch processing logging
-    GPU_CLEANUP = False
-
-    SYSTEM_INIT = True  # Enable system initialization logging
-    SYSTEM_CLEANUP = True
-    SYSTEM_ERROR = True
-
-    PERFORMANCE_BATCH = True  # Enable performance logging
-    PERFORMANCE_MEMORY = True
-    PERFORMANCE_TIMING = True
-
-    # Default category is always enabled
-    DEFAULT = True
-
-
-# Get the directory where this script is located
-script_dir = os.path.dirname(os.path.abspath(__file__))
-log_file = os.path.join(script_dir, 'mtg_ai.log')
-
-# Create a temporary directory for shared memory files
-TEMP_DIR = tempfile.mkdtemp(prefix='mtg_ai_')
-
-# Custom formatter that handles the category field
-
-
-class CategoryFormatter(logging.Formatter):
-    def format(self, record):
-        if not hasattr(record, 'category'):
-            record.category = LogCategory.DEFAULT
-        return super().format(record)
-
-# Adapter using stdlib LoggerAdapter to attach category per-call while keeping
-# the original logger.info(category, msg, ...) call pattern for minimal diff.
-
-
-class CategoryAdapter(logging.LoggerAdapter):
-    """Thin wrapper around LoggerAdapter that accepts (category, msg) style."""
-
-    def _log_with_category(self, level, category, msg, *args, **kwargs):
-        """Centralised category-aware logging.
-
-        • If *category* is a boolean flag (as used in ``LogCategory``) and is
-          ``False``, the call is a no-op—effectively silencing that log line.
-        • Otherwise, we attach the category to *extra* so the formatter can
-          display it.
-        """
-
-        # Fast-skip if the caller explicitly disabled this category.
-        if isinstance(category, bool) and category is False:
-            return
-
-        extra = kwargs.pop('extra', {})
-        extra['category'] = category
-        self.logger.log(level, msg, *args, extra=extra, **kwargs)
-
-    def info(self, category, msg, *args, **kwargs):
-        self._log_with_category(logging.INFO, category, msg, *args, **kwargs)
-
-    def warning(self, category, msg, *args, **kwargs):
-        self._log_with_category(
-            logging.WARNING, category, msg, *args, **kwargs)
-
-    def error(self, category, msg, *args, **kwargs):
-        self._log_with_category(logging.ERROR, category, msg, *args, **kwargs)
-
-    def debug(self, category, msg, *args, **kwargs):
-        self._log_with_category(logging.DEBUG, category, msg, *args, **kwargs)
-
-    # Preserve access to underlying logger attributes
-    def __getattr__(self, item):
-        return getattr(self.logger, item)
-
-
-# Configure base logging first
-base_logger = logging.getLogger('mtg_ai')
-
-# Default to WARNING to reduce verbosity; override via MTG_AI_LOG_LEVEL env var.
-log_level = os.getenv("MTG_AI_LOG_LEVEL", "WARNING").upper()
-base_logger.setLevel(getattr(logging, log_level, logging.WARNING))
-
-# Create formatters
-formatter = CategoryFormatter(
-    '%(asctime)s - %(name)s - %(levelname)s - [%(category)s] - %(message)s')
-
-# Create handlers
-file_handler = logging.FileHandler(log_file)
-console_handler = logging.StreamHandler()
-
-# Add formatter to handlers
-file_handler.setFormatter(formatter)
-console_handler.setFormatter(formatter)
-
-# Add the handlers to the logger
-base_logger.addHandler(file_handler)
-base_logger.addHandler(console_handler)
-
-# Use CategoryAdapter so existing call sites remain unchanged
-logger = CategoryAdapter(base_logger, {})
+# Import new modules
+from logging_utils import logger, LogCategory, TEMP_DIR, script_dir, log_file
+from cuda_manager import CUDAManager
+from snapshot_manager import SnapshotManager
+from metrics_collector import MetricsCollector
+from model_persistence import ModelPersistence
+from mulligan_model import MulliganNet
+from gpu_lock import GPULock
 
 # Now we can safely log initialization
 logger.info(LogCategory.SYSTEM_INIT, f"Logging to file: {log_file}")
@@ -261,272 +158,156 @@ def calculate_optimal_batch_size():
         return 10000  # Conservative fallback
 
 
-# ---------------------------------------------------------------------------
-#  SimpleBatcher – synchronous, single-threaded helper for prediction/training
-# ---------------------------------------------------------------------------
-
-class SimpleBatcher:
-    """A minimal replacement for the previous ModelBatcher.
-
-    • Runs prediction/training in the caller thread – no extra queues, locks.
-    • Still keeps the public .predict() / .train() signatures so Java code
-      does not need to change.
-    """
-
-    def __init__(self, model: MTGTransformerModel, device: torch.device, optimizer: torch.optim.Optimizer):
-        self.model = model
-        self.device = device
-        self.optimizer = optimizer
-
-    # -------------------------- byte helpers ---------------------------
-    @staticmethod
-    def _bytes_to_tensor(buf: bytes, shape, np_dtype: str, torch_dtype, device=None):
-        """Converts a byte buffer to a torch.Tensor, specifying the numpy and torch data types."""
-        arr = np.frombuffer(buf, dtype=np_dtype).reshape(*shape)
-        return torch.tensor(arr, dtype=torch_dtype, device=device)
-
-    # ------------------------------ API -------------------------------
-    def predict(self, sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions):
-        seq = self._bytes_to_tensor(
-            sequences_bytes, (batch_size, seq_len, d_model), '<f4', torch.float32, device=self.device)
-        mask = self._bytes_to_tensor(
-            masks_bytes, (batch_size, seq_len), '<i4', torch.bool, device=self.device)
-
-        # Convert action masks
-        act_mask = self._bytes_to_tensor(
-            action_masks_bytes, (batch_size, max_actions), '<i4', torch.bool, device=self.device)
-
-        self.model.eval()
-        with torch.no_grad():
-            _, policy_probs, value_scores = self.model(seq, mask, act_mask)
-
-        # Interleave policy and value scores for Java-side unpacking
-        policy_np = policy_probs.cpu().numpy()
-        value_np = value_scores.cpu().numpy()
-
-        # Combine them into a new array of shape [batch_size, num_actions + 1]
-        interleaved_results = np.concatenate((policy_np, value_np), axis=1)
-
-        # Flatten to a single byte array in the format Java expects
-        return interleaved_results.tobytes()
-
-    def train(self, sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
-              action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions):
-        """Trains the model using discounted returns as value targets."""
-        seq = self._bytes_to_tensor(
-            sequences_bytes, (batch_size, seq_len, d_model), '<f4', torch.float32, device=self.device)
-        mask = self._bytes_to_tensor(
-            masks_bytes, (batch_size, seq_len), '<i4', torch.bool, device=self.device)
-
-        # Target action indices (long)
-        tgt_idx = self._bytes_to_tensor(
-            policy_scores_bytes, (batch_size,), '<i4', torch.long, device=self.device)
-
-        # Target for the value function is the discounted return calculated in Java
-        reward_tensor = self._bytes_to_tensor(
-            discounted_returns_bytes, (batch_size, 1), '<f4', torch.float32, device=self.device)
-
-        # -------------- MICRO-BATCH GRADIENT ACCUMULATION ----------------
-        MICRO_BATCHES = 4  # tune if needed; must divide batch_size
-        if batch_size % MICRO_BATCHES != 0:
-            MICRO_BATCHES = 1  # fallback – no accumulation
-
-        micro_bs = batch_size // MICRO_BATCHES
-
-        self.model.train()
-        self.optimizer.zero_grad()
-
-        for mb in range(MICRO_BATCHES):
-            mb_slice = slice(mb * micro_bs, (mb + 1) * micro_bs)
-
-            mb_seq = seq[mb_slice]
-            mb_mask = mask[mb_slice]
-            mb_tgt_idx = tgt_idx[mb_slice]
-            mb_reward = reward_tensor[mb_slice]
-
-            logits, pred_policy, pred_val = self.model(mb_seq, mb_mask)
-
-            # --- losses (same as before) ---
-            value_loss_coeff = 0.5
-            loss_value = value_loss_coeff * F.mse_loss(pred_val, mb_reward)
-
-            # pad/trim logits
-            if logits.shape[1] != max_actions:
-                if logits.shape[1] < max_actions:
-                    pad = torch.zeros(micro_bs, max_actions -
-                                      logits.shape[1], device=self.device)
-                    logits_padded = torch.cat([logits, pad], dim=1)
-                else:
-                    logits_padded = logits[:, :max_actions]
-            else:
-                logits_padded = logits
-
-            logits_padded = torch.nan_to_num(
-                logits_padded, nan=0.0, posinf=20.0, neginf=-20.0)
-            logits_padded = torch.clamp(logits_padded, -20.0, 20.0)
-
-            log_probs = F.log_softmax(logits_padded, dim=-1)
-            selected_log_probs = log_probs.gather(
-                1, mb_tgt_idx.unsqueeze(1)).squeeze(1)
-
-            with torch.no_grad():
-                advantage = (mb_reward - pred_val).squeeze(1)
-                advantage = torch.clamp(advantage, -1.0, 1.0)
-
-            loss_policy = -(selected_log_probs * advantage).mean()
-
-            entropy = -(pred_policy * torch.log(pred_policy + 1e-9)
-                        ).sum(dim=-1).mean()
-            entropy_coeff = -0.05
-            loss_entropy = entropy_coeff * entropy
-
-            loss = loss_policy + loss_value + loss_entropy
-
-            # Scale loss by 1/M to keep gradient magnitude constant across accumulation
-            loss = loss / MICRO_BATCHES
-
-            loss.backward()
-
-        # After accumulation – clip and step
-        torch.nn.utils.clip_grad_norm_(
-            self.model.parameters(), self.model.max_grad_norm)
-        self.optimizer.step()
-
-        # Log training metrics
-        logger.info(
-            LogCategory.MODEL_TRAIN,
-            "Train step — loss_value: %.4f, loss_policy: %.4f, loss_entropy: %.4f",
-            loss_value.item(), loss_policy.item(), loss_entropy.item()
-        )
-
-        # -----------------------------------------------------
-        #  High-precision logging of policy logits (first item)
-        # -----------------------------------------------------
-        try:
-            sample_logits = logits[0].detach().cpu().numpy()
-            logger.info(LogCategory.MODEL_TRAIN,
-                        "Policy logits sample (precise): %s",
-                        np.array2string(sample_logits, precision=8, suppress_small=False))
-        except Exception as e:
-            logger.warning(LogCategory.MODEL_TRAIN,
-                           "Failed to log policy logits: %s", str(e))
-
-        # Free unused GPU memory
-        if torch.cuda.is_available():
-            torch.cuda.empty_cache()
-            logger.info(LogCategory.GPU_CLEANUP,
-                        "Cleared CUDA cache after training step")
-
-        return True
-
-
-class MulliganNet(torch.nn.Module):
-    """
-    Pure RL neural network for mulligan decisions.
-    No heuristics - learns entirely from game outcomes.
-    
-    Input: [mulligan_num, hand_card_ids[7], deck_card_ids[60]]
-    - mulligan_num: scalar (0-7)
-    - hand_card_ids: 7 card IDs (token vocab)
-    - deck_card_ids: 60 card IDs (token vocab)
-    
-    Architecture:
-    1. Embed each card ID
-    2. Pool hand and deck embeddings separately
-    3. Combine with mulligan number
-    4. MLP to output keep probability
-    """
-    def __init__(self, vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60):
-        super(MulliganNet, self).__init__()
-        
-        self.max_hand = max_hand
-        self.max_deck = max_deck
-        
-        # Card embedding (shared for hand and deck)
-        self.card_embed = torch.nn.Embedding(vocab_size, embed_dim, padding_idx=0)
-        
-        # Separate processing for hand and deck
-        self.hand_fc = torch.nn.Linear(embed_dim, 32)
-        self.deck_fc = torch.nn.Linear(embed_dim, 32)
-        
-        # Combine everything: [mulligan_num(1), hand_pool(32), deck_pool(32)] = 65
-        self.fc1 = torch.nn.Linear(1 + 32 + 32, 64)
-        self.fc2 = torch.nn.Linear(64, 32)
-        self.output = torch.nn.Linear(32, 1)
-        
-    def forward(self, x):
-        # x shape: [batch_size, 68] = [mulligan_num(1), hand_ids(7), deck_ids(60)]
-        
-        # Extract components
-        mulligan_num = x[:, 0:1]  # [batch, 1]
-        hand_ids = x[:, 1:1+self.max_hand].long()  # [batch, 7]
-        deck_ids = x[:, 1+self.max_hand:1+self.max_hand+self.max_deck].long()  # [batch, 60]
-        
-        # Embed cards
-        hand_embeds = self.card_embed(hand_ids)  # [batch, 7, embed_dim]
-        deck_embeds = self.card_embed(deck_ids)  # [batch, 60, embed_dim]
-        
-        # Pool: mean over cards (ignoring padding=0)
-        hand_mask = (hand_ids != 0).float().unsqueeze(-1)  # [batch, 7, 1]
-        deck_mask = (deck_ids != 0).float().unsqueeze(-1)  # [batch, 60, 1]
-        
-        hand_pool = (hand_embeds * hand_mask).sum(dim=1) / (hand_mask.sum(dim=1) + 1e-8)  # [batch, embed_dim]
-        deck_pool = (deck_embeds * deck_mask).sum(dim=1) / (deck_mask.sum(dim=1) + 1e-8)  # [batch, embed_dim]
-        
-        # Process hand and deck
-        hand_feat = F.relu(self.hand_fc(hand_pool))  # [batch, 32]
-        deck_feat = F.relu(self.deck_fc(deck_pool))  # [batch, 32]
-        
-        # Combine all features
-        combined = torch.cat([mulligan_num, hand_feat, deck_feat], dim=1)  # [batch, 65]
-        
-        # MLP
-        x = F.relu(self.fc1(combined))
-        x = F.relu(self.fc2(x))
-        
-        # Sigmoid: output probability of keeping (0.0 = mulligan, 1.0 = keep)
-        return torch.sigmoid(self.output(x))
-
-
 class PythonEntryPoint:
     def __init__(self):
+        # Core model state
         self.model = None
         self.optimizer = None
-        self.device = torch.device(
-            'cuda' if torch.cuda.is_available() else 'cpu')
-        self.batcher = None
-        # Get model path from environment variable
-        self.model_path = os.getenv('MTG_MODEL_PATH')
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.py_role = os.getenv("PY_ROLE", "learner").strip().lower()
         
-        # Mulligan model (separate from main model)
+        # GPU coordination lock (inter-process)
+        self.gpu_lock = GPULock()
+        self.process_name = f"{self.py_role}_{os.getpid()}"
+        
+        # Initialize helper modules
+        self.cuda_mgr = CUDAManager(self.py_role)
+        self.snapshot_mgr = SnapshotManager(self.device)
+        self.metrics = MetricsCollector()
+        self.persistence = ModelPersistence()
+        
+        # Mulligan model
         self.mulligan_model = None
         self.mulligan_optimizer = None
-        self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH', 
-                                              'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_model.pt')
-        self.mulligan_lock = threading.Lock()  # Prevent concurrent mulligan training
+        self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH',
+                                             'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_model.pt')
+        self.mulligan_lock = threading.Lock()
         
-        # ---------------------------------------------------------------
-        # Training step counter for periodic checkpointing
-        # ---------------------------------------------------------------
-        self.train_step_counter = 0  # counts successful trainFlat calls
-        logger.info(
-            LogCategory.GPU_MEMORY,
-            "Using device: %s", self.device
+        # PPO configuration
+        self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
+        self.use_ppo = bool(int(os.getenv('USE_PPO', '1')))
+        
+        # Loss scheduling
+        self.loss_schedule_enable = bool(int(os.getenv('LOSS_SCHEDULE_ENABLE', '1')))
+        self.critic_warmup_steps = int(os.getenv('CRITIC_WARMUP_STEPS', '200'))
+        self.freeze_encoder_in_warmup = bool(int(os.getenv('FREEZE_ENCODER_IN_WARMUP', '1')))
+        self._encoder_frozen = False
+        
+        # Loss coefficients
+        self.policy_loss_coef_warmup = float(os.getenv('POLICY_LOSS_COEF_WARMUP', '0.0'))
+        self.value_loss_coef_warmup = float(os.getenv('VALUE_LOSS_COEF_WARMUP', '20.0'))
+        self.entropy_loss_mult_warmup = float(os.getenv('ENTROPY_LOSS_MULT_WARMUP', '0.0'))
+        self.policy_loss_coef_main = float(os.getenv('POLICY_LOSS_COEF', '1.0'))
+        self.value_loss_coef_main = float(os.getenv('VALUE_LOSS_COEF', '5.0'))
+        self.entropy_loss_mult_main = float(os.getenv('ENTROPY_LOSS_MULT', '1.0'))
+        
+        # Auto-batching state (kept for backward compatibility)
+        self._infer_safe_max = None
+        self._train_safe_max_episodes = None
+        self._autobatch_counts = {
+            "infer_splits_cap": 0, "infer_splits_paging": 0, "infer_splits_oom": 0,
+            "train_splits_cap": 0, "train_splits_paging": 0, "train_splits_oom": 0,
+        }
+        
+        # Running advantage statistics for cross-batch normalization
+        # Per-batch normalization destroys policy signal when all samples have similar outcomes
+        self._adv_running_mean = 0.0
+        self._adv_running_var = 1.0
+        self._adv_ema_alpha = float(os.getenv('ADV_EMA_ALPHA', '0.01'))  # Smooth update
+        self._adv_use_running = bool(int(os.getenv('ADV_USE_RUNNING_STATS', '1')))  # Enable by default
+        
+        logger.info(LogCategory.GPU_MEMORY, "Using device: %s", self.device)
+
+    # CUDA/profiler methods and properties - delegate to cuda_mgr
+    @property
+    def auto_batch_enable(self):
+        return self.cuda_mgr.auto_batch_enable
+    
+    @property
+    def auto_avoid_paging(self):
+        return self.cuda_mgr.auto_avoid_paging
+    
+    @property
+    def auto_target_used_frac(self):
+        return self.cuda_mgr.auto_target_used_frac
+    
+    @property
+    def auto_min_free_mb(self):
+        return self.cuda_mgr.auto_min_free_mb
+    
+    @property
+    def auto_mem_ema_alpha(self):
+        return self.cuda_mgr.auto_mem_ema_alpha
+    
+    @property
+    def _infer_mb_per_sample(self):
+        return self.cuda_mgr._infer_mb_per_sample
+    
+    @_infer_mb_per_sample.setter
+    def _infer_mb_per_sample(self, value):
+        self.cuda_mgr._infer_mb_per_sample = value
+    
+    @property
+    def _train_mb_per_step(self):
+        return self.cuda_mgr._train_mb_per_step
+    
+    @_train_mb_per_step.setter
+    def _train_mb_per_step(self, value):
+        self.cuda_mgr._train_mb_per_step = value
+    
+    @property
+    def _autobatch_last_free_mb(self):
+        return self.cuda_mgr._autobatch_last_free_mb
+    
+    @property
+    def _autobatch_last_total_mb(self):
+        return self.cuda_mgr._autobatch_last_total_mb
+    
+    @property
+    def _autobatch_last_desired_free_mb(self):
+        return self.cuda_mgr._autobatch_last_desired_free_mb
+    
+    def _is_cuda_oom(self, e: Exception) -> bool:
+        return self.cuda_mgr.is_cuda_oom(e)
+    
+    def _cuda_cleanup_after_oom(self):
+        self.cuda_mgr.cuda_cleanup_after_oom()
+    
+    def _cuda_mem_info_mb(self):
+        return self.cuda_mgr.cuda_mem_info_mb()
+    
+    def _desired_free_mb(self):
+        return self.cuda_mgr.desired_free_mb()
+    
+    def _should_split_for_paging(self, estimated_extra_mb: float):
+        return self.cuda_mgr.should_split_for_paging(estimated_extra_mb)
+    
+    def _update_mem_ema(self, kind: str, extra_mb: float, n: int):
+        self.cuda_mgr.update_mem_ema(kind, extra_mb, n)
+    
+    def _measure_peak_extra_mb(self, fn):
+        return self.cuda_mgr.measure_peak_extra_mb(fn)
+
+    def _set_encoder_requires_grad(self, requires_grad: bool):
+        """
+        Toggle grads for the shared state encoder trunk.
+        Encoder params:
+        - input_* (proj/norm/scale)
+        - token_id_emb
+        - cls_token
+        - transformer_layers.*
+        """
+        if self.model is None:
+            return
+        prefixes = (
+            'input_',
+            'token_id_emb',
+            'cls_token',
+            'transformer_layers',
         )
-        
-        # Initialize mulligan model
-        self.initializeMulliganModel()
-        
-        if self.model_path:
-            logger.info(LogCategory.GPU_MEMORY,
-                        f"Model path configured: {self.model_path}")
-            if os.path.exists(self.model_path):
-                logger.info(LogCategory.GPU_MEMORY,
-                            "Found existing model, loading...")
-                self.loadModel(self.model_path)
-            else:
-                logger.info(LogCategory.GPU_MEMORY,
-                            "No existing model found, will initialize new model")
+        for name, p in self.model.named_parameters():
+            if name.startswith(prefixes):
+                p.requires_grad = requires_grad
 
     def initializeModel(self):
         """Initialize the model and optimizer"""
@@ -550,10 +331,9 @@ class PythonEntryPoint:
             # Slower, more stable learning rates to prevent policy collapse.
             self.optimizer = torch.optim.Adam([
                 {'params': actor_params, 'lr': 1e-4},
-                {'params': other_params, 'lr': 5e-5}
+                # Increased from 5e-5 to match actor LR
+                {'params': other_params, 'lr': 1e-4}
             ])
-            self.batcher = SimpleBatcher(
-                self.model, self.device, self.optimizer)
 
             # Log model size and GPU memory
             total_params = sum(p.numel() for p in self.model.parameters())
@@ -570,68 +350,100 @@ class PythonEntryPoint:
             logger.info(LogCategory.GPU_MEMORY,
                         "Model initialized successfully")
 
+        # One-time initial load + mulligan init
+        if not self._did_initial_load:
+            try:
+                if self.mulligan_model is None:
+                    self.initializeMulliganModel()
+            except Exception:
+                pass
+
+            # Load from base checkpoint if it exists
+            try:
+                if self.model_path:
+                    logger.info(LogCategory.GPU_MEMORY,
+                                f"Model path configured: {self.model_path}")
+                    if os.path.exists(self.model_path):
+                        logger.info(LogCategory.GPU_MEMORY,
+                                    "Found existing model, loading...")
+                        self.loadModel(self.model_path)
+            except Exception:
+                pass
+
+            # Inference workers prefer the 'latest' weights if present
+            try:
+                if self.py_role == "inference" and self.model_latest_path:
+                    self.reloadLatestModelIfNewer(self.model_latest_path)
+            except Exception:
+                pass
+
+            self._did_initial_load = True
+
     def initializeMulliganModel(self):
         """Initialize the mulligan model (separate from main model)"""
-        logger.info(LogCategory.MODEL_INIT, "Initializing card-level mulligan model")
-        
+        logger.info(LogCategory.MODEL_INIT,
+                    "Initializing card-level mulligan model")
+
         # vocab_size=65536 (same as main model), embed_dim=32, max_hand=7, max_deck=60
-        self.mulligan_model = MulliganNet(vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60).to(self.device)
-        self.mulligan_optimizer = torch.optim.Adam(self.mulligan_model.parameters(), lr=1e-3)
-        
+        self.mulligan_model = MulliganNet(
+            vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60).to(self.device)
+        self.mulligan_optimizer = torch.optim.Adam(
+            self.mulligan_model.parameters(), lr=1e-3)
+
         # Try to load existing mulligan model
         if os.path.exists(self.mulligan_model_path):
             try:
-                checkpoint = torch.load(self.mulligan_model_path, map_location=self.device)
-                self.mulligan_model.load_state_dict(checkpoint['model_state_dict'])
-                self.mulligan_optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
-                logger.info(LogCategory.MODEL_LOAD, 
-                           f"Loaded existing mulligan model from {self.mulligan_model_path}")
+                checkpoint = torch.load(
+                    self.mulligan_model_path, map_location=self.device)
+                self.mulligan_model.load_state_dict(
+                    checkpoint['model_state_dict'])
+                self.mulligan_optimizer.load_state_dict(
+                    checkpoint['optimizer_state_dict'])
+                logger.info(LogCategory.MODEL_LOAD,
+                            f"Loaded existing mulligan model from {self.mulligan_model_path}")
             except Exception as e:
                 logger.warning(LogCategory.MODEL_LOAD,
-                              f"Failed to load mulligan model, starting fresh: {e}")
+                               f"Failed to load mulligan model, starting fresh: {e}")
         else:
-            logger.info(LogCategory.MODEL_INIT, 
-                       "No existing mulligan model found, starting with random initialization")
-        
+            logger.info(LogCategory.MODEL_INIT,
+                        "No existing mulligan model found, starting with random initialization")
+
         logger.info(LogCategory.MODEL_INIT, "Mulligan model initialized")
 
-    def predictBatchFlat(self, sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions):
-        try:
-            start_time = time.time()
-            if self.model is None:
-                raise RuntimeError("Model not initialized")
+    # ------------------------------------------------------------------
+    # Snapshot opponent helpers
+    # ------------------------------------------------------------------
 
-            # Log GPU memory before prediction
-            log_gpu_memory()
-
-            # Use the batcher for prediction
-            result = self.batcher.predict(
-                sequences_bytes, masks_bytes, action_masks_bytes, batch_size, seq_len, d_model, max_actions)
-
-            # Log GPU memory after prediction
-            log_gpu_memory()
-
-            # Proactively clear unused GPU cache to avoid fragmentation
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
-                logger.info(LogCategory.GPU_CLEANUP,
-                            "Cleared CUDA cache after prediction")
-
-            total_time = time.time() - start_time
-            logger.info(
-                LogCategory.GPU_MEMORY, f"Total predictBatch operation took {total_time:.3f} seconds")
-
-            # Ensure result is a single byte array
-            if isinstance(result, list):
-                result = b''.join(result)
-            return result
-
-        except Exception as e:
-            logger.error(LogCategory.GPU_MEMORY,
-                         f"Error in predictBatchFlat: {str(e)}")
-            logger.error(
-                LogCategory.GPU_MEMORY, f"Input shapes at error - batch_size: {batch_size}, seq_len: {seq_len}, d_model: {d_model}")
-            raise
+    # Snapshot methods - delegate to snapshot_mgr
+    # Also expose attributes for backward compatibility
+    @property
+    def snapshot_dir(self):
+        return self.snapshot_mgr.snapshot_dir
+    
+    @property
+    def snapshot_save_every_steps(self):
+        return self.snapshot_mgr.snapshot_save_every_steps
+    
+    @property
+    def snapshot_max_files(self):
+        return self.snapshot_mgr.snapshot_max_files
+    
+    @property
+    def snapshot_cache_size(self):
+        return self.snapshot_mgr.snapshot_cache_size
+    
+    @property
+    def snapshot_models(self):
+        return self.snapshot_mgr.snapshot_models
+    
+    def _get_snapshot_model(self, snap_id: str):
+        return self.snapshot_mgr.get_snapshot_model(snap_id)
+    
+    def _get_policy_model(self, policy_key: str):
+        return self.snapshot_mgr.get_policy_model(policy_key, self.model)
+    
+    def _maybe_save_snapshot(self):
+        self.snapshot_mgr.maybe_save_snapshot(self.metrics.train_step_counter, lambda path: self.saveModel(path))
 
     def scoreCandidatesFlat(self,
                             sequences_bytes,
@@ -645,81 +457,364 @@ class PythonEntryPoint:
                             d_model,
                             max_candidates,
                             cand_feat_dim):
+        return self.scoreCandidatesPolicyFlat(
+            sequences_bytes,
+            masks_bytes,
+            token_ids_bytes,
+            candidate_features_bytes,
+            candidate_ids_bytes,
+            candidate_mask_bytes,
+            "train",
+            batch_size,
+            seq_len,
+            d_model,
+            max_candidates,
+            cand_feat_dim
+        )
+
+    def scoreCandidatesPolicyFlat(self,
+                                  sequences_bytes,
+                                  masks_bytes,
+                                  token_ids_bytes,
+                                  candidate_features_bytes,
+                                  candidate_ids_bytes,
+                                  candidate_mask_bytes,
+                                  policy_key,
+                                  batch_size,
+                                  seq_len,
+                                  d_model,
+                                  max_candidates,
+                                  cand_feat_dim):
         """Score padded candidates for each state (policy over candidates + value)."""
-        try:
+        t_start = time.perf_counter()
+        
+        def _score_numpy_range(start: int, end: int):
             if self.model is None:
                 raise RuntimeError("Model not initialized")
-
             device = self.device
 
             seq = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
-                batch_size, seq_len, d_model)
+                batch_size, seq_len, d_model)[start:end]
             mask = np.frombuffer(masks_bytes, dtype='<i4').reshape(
-                batch_size, seq_len)
+                batch_size, seq_len)[start:end]
             tok_ids = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(
-                batch_size, seq_len)
+                batch_size, seq_len)[start:end]
 
             cand_feat = np.frombuffer(candidate_features_bytes, dtype='<f4').reshape(
-                batch_size, max_candidates, cand_feat_dim)
+                batch_size, max_candidates, cand_feat_dim)[start:end]
             cand_ids = np.frombuffer(candidate_ids_bytes, dtype='<i4').reshape(
-                batch_size, max_candidates)
+                batch_size, max_candidates)[start:end]
             cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
-                batch_size, max_candidates)
+                batch_size, max_candidates)[start:end]
 
             seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
             mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
             tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
-            cand_feat_t = torch.tensor(
-                cand_feat, dtype=torch.float32, device=device)
+            cand_feat_t = torch.tensor(cand_feat, dtype=torch.float32, device=device)
             cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
             cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
+            
+            # Release numpy slices immediately
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask
 
-            self.model.eval()
+            model = self._get_policy_model(policy_key)
+            model.eval()
+
+            # Hard requirement: inference must only run while GPULock is held
+            if torch.cuda.is_available() and str(device).startswith("cuda") and not self.gpu_lock.is_locked:
+                raise RuntimeError("GPULock is required for inference. Call acquireGPULock() before scoring.")
+
             with torch.no_grad():
-                probs, value = self.model.score_candidates(
+                probs, value = model.score_candidates(
                     seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
-
+            
             probs_np = probs.detach().cpu().numpy()
             value_np = value.detach().cpu().numpy()
+            
+            # Release GPU tensors immediately (in this scope where they're defined)
+            del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
+            
+            return probs_np, value_np
 
+        def _score_with_oom_splitting(start: int, end: int):
+            n = int(end - start)
+            if n <= 0:
+                return np.zeros((0, max_candidates), dtype=np.float32), np.zeros((0, 1), dtype=np.float32)
+            # Proactive cap if configured or learned.
+            cap = self._infer_safe_max if (self.auto_batch_enable and self._infer_safe_max) else None
+            if cap is not None and n > cap:
+                try:
+                    self._autobatch_counts["infer_splits_cap"] += 1
+                except Exception:
+                    pass
+                probs_parts = []
+                value_parts = []
+                i = start
+                while i < end:
+                    j = min(end, i + int(cap))
+                    p, v = _score_with_oom_splitting(i, j)
+                    probs_parts.append(p)
+                    value_parts.append(v)
+                    i = j
+                result_probs = np.concatenate(probs_parts, axis=0)
+                result_values = np.concatenate(value_parts, axis=0)
+                # Clean up intermediate parts
+                del probs_parts, value_parts
+                return result_probs, result_values
+
+            # Proactive paging avoidance: if we'd exceed headroom, split before we start paging/thrashing.
+            if self.auto_batch_enable and self.auto_avoid_paging and torch.cuda.is_available():
+                est = 0.0
+                if self._infer_mb_per_sample is not None:
+                    est = float(self._infer_mb_per_sample) * float(n)
+                if self._should_split_for_paging(est) and n > 1:
+                    try:
+                        self._autobatch_counts["infer_splits_paging"] += 1
+                    except Exception:
+                        pass
+                    mid = start + (n // 2)
+                    p0, v0 = _score_with_oom_splitting(start, mid)
+                    p1, v1 = _score_with_oom_splitting(mid, end)
+                    return np.concatenate((p0, p1), axis=0), np.concatenate((v0, v1), axis=0)
+
+            try:
+                (p, v), extra_mb = self._measure_peak_extra_mb(lambda: _score_numpy_range(start, end))
+                # Update per-sample estimate from measured peak delta.
+                self._update_mem_ema("infer", extra_mb, n)
+                return p, v
+            except RuntimeError as e:
+                if self.auto_batch_enable and self._is_cuda_oom(e):
+                    self._cuda_cleanup_after_oom()
+                    if n <= 1:
+                        raise
+                    try:
+                        self._autobatch_counts["infer_splits_oom"] += 1
+                    except Exception:
+                        pass
+                    # Learn a smaller cap for future calls.
+                    new_cap = max(1, n // 2)
+                    if self._infer_safe_max is None or new_cap < int(self._infer_safe_max):
+                        self._infer_safe_max = int(new_cap)
+                        logger.warning(LogCategory.GPU_BATCH, "AutoBatch(infer): OOM -> shrinking infer cap to %d", int(self._infer_safe_max))
+                    mid = start + (n // 2)
+                    p0, v0 = _score_with_oom_splitting(start, mid)
+                    p1, v1 = _score_with_oom_splitting(mid, end)
+                    result_probs = np.concatenate((p0, p1), axis=0)
+                    result_values = np.concatenate((v0, v1), axis=0)
+                    # Clean up splits
+                    del p0, v0, p1, v1
+                    return result_probs, result_values
+                raise
+
+        try:
+            probs_np, value_np = _score_with_oom_splitting(0, int(batch_size))
+
+            # -------------------------------------------------------
+            # Debug: confirm inputs vary + value isn't flatlined
+            # -------------------------------------------------------
+            try:
+                self.score_call_counter += 1
+                diag_every = int(os.getenv("SCORE_DIAG_EVERY", "0"))
+                if diag_every > 0 and (self.score_call_counter % diag_every == 0):
+                    # mask: 1=pad, 0=valid (per StateSequenceBuilder). Keep this cheap: only inspect sample 0.
+                    mask_view = np.frombuffer(masks_bytes, dtype='<i4').reshape(batch_size, seq_len)
+                    tok_view = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(batch_size, seq_len)
+                    seq0 = np.frombuffer(sequences_bytes, dtype='<f4').reshape(batch_size, seq_len, d_model)[0]
+                    valid0 = int((mask_view[0] == 0).sum()) if batch_size > 0 else -1
+                    pad0 = int((mask_view[0] != 0).sum()) if batch_size > 0 else -1
+                    seq_mean = float(seq0.mean()) if batch_size > 0 else 0.0
+                    seq_std = float(seq0.std()) if batch_size > 0 else 0.0
+                    tok_unique0 = int(np.unique(tok_view[0]).shape[0]) if batch_size > 0 else 0
+                    logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "ScoreDiag call=%d policy=%s batch=%d | valid_tokens[0]=%d pad_tokens[0]=%d | seq0(mean=%.4f std=%.4f) tok_unique0=%d | value(mean=%.4f min=%.4f max=%.4f)",
+                        int(self.score_call_counter),
+                        str(policy_key),
+                        int(batch_size),
+                        valid0,
+                        pad0,
+                        seq_mean,
+                        seq_std,
+                        tok_unique0,
+                        float(value_np.mean()) if value_np.size > 0 else 0.0,
+                        float(value_np.min()) if value_np.size > 0 else 0.0,
+                        float(value_np.max()) if value_np.size > 0 else 0.0,
+                    )
+            except Exception:
+                # Don't fail inference for diagnostics
+                pass
+
+            # Increment inference counter
+            self.metrics.infer_counter += 1
+            
+            # Clear GPU cache immediately to prevent memory buildup from parallel workers
+            # Force GC every 50 inferences to aggressively prevent tensor reference leaks
+            if torch.cuda.is_available():
+                if self.metrics.infer_counter % 50 == 0:
+                    import gc
+                    gc.collect()
+                torch.cuda.empty_cache()
+
+            # Track timing
+            elapsed_ms = (time.perf_counter() - t_start) * 1000.0
+            self.metrics.update_timing_metric("infer", elapsed_ms)
+            
             out = np.concatenate((probs_np, value_np), axis=1)
-            return out.astype('<f4').tobytes()
+            result_bytes = out.astype('<f4').tobytes()
+            
+            # Clean up numpy arrays to prevent accumulation
+            del probs_np, value_np, out
+            
+            return result_bytes
 
         except Exception as e:
             logger.error(LogCategory.SYSTEM_ERROR,
-                         "Error in scoreCandidatesFlat: %s", str(e))
+                         "Error in scoreCandidatesPolicyFlat: %s", str(e))
             raise
 
     def predictMulligan(self, features):
         """
-        Predict mulligan decision using pure RL neural network (NO heuristics).
-        
+        Predict mulligan decision using Q-learning neural network.
+
         Args:
             features: List/array of mulligan features (68-dim vector)
                 Format: [mulligan_num(1), hand_card_ids(7), deck_card_ids(60)]
-            
+
         Returns:
-            float: Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
+            float: Deterministic keep indicator (0.0 = mulligan, 1.0 = keep)
+                   KEEP if Q_keep >= Q_mull else MULL
         """
         try:
             if self.mulligan_model is None:
                 self.initializeMulliganModel()
-            
+
             # Convert to tensor - should be 68 dims: 1 + 7 + 60
-            features_tensor = torch.tensor(features, dtype=torch.float32, device=self.device).unsqueeze(0)
-            
+            features_tensor = torch.tensor(
+                features, dtype=torch.float32, device=self.device).unsqueeze(0)
+
             # Forward pass (no gradient needed for inference)
             self.mulligan_model.eval()
             with torch.no_grad():
-                keep_prob = self.mulligan_model(features_tensor)
-            
-            return float(keep_prob.item())
-            
+                q_values = self.mulligan_model(features_tensor)  # [1, 2]
+                q_keep = q_values[0, 0].item()
+                q_mull = q_values[0, 1].item()
+
+            return 1.0 if q_keep >= q_mull else 0.0
+
         except Exception as e:
             logger.error(LogCategory.SYSTEM_ERROR,
                          "Error in predictMulligan: %s", str(e))
             # On error, default to 50/50
             return 0.5
+
+    def predictMulliganScores(self, features):
+        """
+        Return raw two-headed mulligan scores as little-endian float32 bytes: [Q_keep, Q_mull].
+        """
+        try:
+            if self.mulligan_model is None:
+                self.initializeMulliganModel()
+
+            features_tensor = torch.tensor(
+                features, dtype=torch.float32, device=self.device).unsqueeze(0)
+
+            self.mulligan_model.eval()
+            with torch.no_grad():
+                q_values = self.mulligan_model(features_tensor)  # [1, 2]
+                q_keep = float(q_values[0, 0].item())
+                q_mull = float(q_values[0, 1].item())
+
+            out = np.array([q_keep, q_mull], dtype='<f4')
+            return out.tobytes()
+        except Exception as e:
+            logger.error(LogCategory.SYSTEM_ERROR,
+                         "Error in predictMulliganScores: %s", str(e))
+            return np.array([0.0, 0.0], dtype='<f4').tobytes()
+
+    # Metrics methods and properties - delegate to metrics collector
+    # Counters
+    @property
+    def train_step_counter(self):
+        return self.metrics.train_step_counter
+    
+    @train_step_counter.setter
+    def train_step_counter(self, value):
+        self.metrics.train_step_counter = value
+    
+    @property
+    def mulligan_train_step_counter(self):
+        return self.metrics.mulligan_train_step_counter
+    
+    @mulligan_train_step_counter.setter
+    def mulligan_train_step_counter(self, value):
+        self.metrics.mulligan_train_step_counter = value
+    
+    @property
+    def score_call_counter(self):
+        return self.metrics.score_call_counter
+    
+    @score_call_counter.setter
+    def score_call_counter(self, value):
+        self.metrics.score_call_counter = value
+    
+    @property
+    def main_train_sample_counter(self):
+        return self.metrics.main_train_sample_counter
+    
+    @main_train_sample_counter.setter
+    def main_train_sample_counter(self, value):
+        self.metrics.main_train_sample_counter = value
+    
+    @property
+    def mulligan_train_sample_counter(self):
+        return self.metrics.mulligan_train_sample_counter
+    
+    @mulligan_train_sample_counter.setter
+    def mulligan_train_sample_counter(self, value):
+        self.metrics.mulligan_train_sample_counter = value
+    
+    # GAE properties
+    @property
+    def use_gae(self):
+        return self.metrics.use_gae
+    
+    @use_gae.setter
+    def use_gae(self, value):
+        self.metrics.use_gae = value
+    
+    @property
+    def current_gae_lambda(self):
+        return self.metrics.current_gae_lambda
+    
+    @current_gae_lambda.setter
+    def current_gae_lambda(self, value):
+        self.metrics.current_gae_lambda = value
+    
+    @property
+    def gae_enabled_step(self):
+        return self.metrics.gae_enabled_step
+    
+    @gae_enabled_step.setter
+    def gae_enabled_step(self, value):
+        self.metrics.gae_enabled_step = value
+    
+    # Delegated methods
+    def get_entropy_coefficient(self):
+        return self.metrics.get_entropy_coefficient()
+    
+    def record_value_prediction(self, value_pred, won):
+        self.metrics.record_value_prediction(value_pred, won)
+    
+    def get_value_metrics(self):
+        return self.metrics.get_value_metrics()
+    
+    def update_gae_lambda_schedule(self):
+        self.metrics.update_gae_lambda_schedule()
+    
+    def compute_gae(self, rewards, values, gamma=0.99, gae_lambda=None, dones=None):
+        return self.metrics.compute_gae(rewards, values, gamma, gae_lambda, dones)
 
     def trainCandidatesFlat(self,
                             sequences_bytes,
@@ -729,13 +824,13 @@ class PythonEntryPoint:
                             candidate_ids_bytes,
                             candidate_mask_bytes,
                             chosen_index_bytes,
-                            discounted_returns_bytes,
+                            rewards_bytes,  # Changed from discounted_returns_bytes
                             batch_size,
                             seq_len,
                             d_model,
                             max_candidates,
                             cand_feat_dim):
-        """Train on padded candidate decision steps."""
+        """Train on padded candidate decision steps using GAE for advantage estimation."""
         try:
             if self.model is None or self.optimizer is None:
                 raise RuntimeError("Model not initialized")
@@ -758,106 +853,360 @@ class PythonEntryPoint:
 
             chosen = np.frombuffer(chosen_index_bytes, dtype='<i4').reshape(
                 batch_size)
-            returns = np.frombuffer(discounted_returns_bytes, dtype='<f4').reshape(
-                batch_size, 1)
+            rewards = np.frombuffer(rewards_bytes, dtype='<f4').reshape(
+                batch_size)
 
             seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
             mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
             tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
             cand_feat_t = torch.tensor(
                 cand_feat, dtype=torch.float32, device=device)
-            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
-            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
+            cand_ids_t = torch.tensor(
+                cand_ids, dtype=torch.long, device=device)
+            cand_mask_t = torch.tensor(
+                cand_mask, dtype=torch.bool, device=device)
             chosen_t = torch.tensor(chosen, dtype=torch.long, device=device)
-            returns_t = torch.tensor(returns, dtype=torch.float32, device=device)
+            rewards_t = torch.tensor(
+                rewards, dtype=torch.float32, device=device)
+            
+            # Release numpy arrays immediately
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen, rewards
+
+            # Check for NaN/Inf in input data
+            if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in input sequence - skipping batch")
+                return
+            if torch.isnan(rewards_t).any() or torch.isinf(rewards_t).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in rewards - skipping batch (rewards=%s)", rewards_t.tolist())
+                return
+            if torch.isnan(cand_feat_t).any() or torch.isinf(cand_feat_t).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in candidate features - skipping batch")
+                return
 
             self.model.train()
+            next_step = self.train_step_counter + 1
+
+            # -------------------------------------------------------
+            # Encoder freeze during critic warmup (optional)
+            # -------------------------------------------------------
+            if self.freeze_encoder_in_warmup:
+                in_warmup = self.loss_schedule_enable and next_step <= self.critic_warmup_steps
+                if in_warmup and not self._encoder_frozen:
+                    self._set_encoder_requires_grad(False)
+                    self._encoder_frozen = True
+                    logger.info(LogCategory.MODEL_TRAIN,
+                                "Warmup: froze encoder params for %d steps", int(self.critic_warmup_steps))
+                elif (not in_warmup) and self._encoder_frozen:
+                    self._set_encoder_requires_grad(True)
+                    self._encoder_frozen = False
+                    logger.info(LogCategory.MODEL_TRAIN, "Warmup ended: unfroze encoder params")
+
+            # PPO: Get old policy probabilities before updating (no gradients)
+            with torch.no_grad():
+                old_probs, old_value = self.model.score_candidates(
+                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+                old_selected_probs = old_probs.gather(
+                    1, chosen_t.unsqueeze(1)).squeeze(1)
+
             self.optimizer.zero_grad()
 
+            # Get new policy probabilities (with gradients)
             probs, value = self.model.score_candidates(
                 seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
 
-            # Policy loss: REINFORCE with baseline (advantage)
-            log_probs = torch.log(probs + 1e-9)
-            selected = log_probs.gather(
+            # Check for NaN in model outputs before training
+            if torch.isnan(probs).any() or torch.isnan(value).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
+                               torch.isnan(probs).any().item(), torch.isnan(value).any().item())
+                return
+
+            # Compute advantages using GAE or simple baseline
+            value_squeezed = value.squeeze(1)
+
+            # IMPORTANT: Detach values for GAE computation to prevent gradients
+            # flowing through value targets and advantages. Only the current
+            # value prediction (value_squeezed) should have gradients for loss_value.
+            value_detached = value_squeezed.detach()
+
+            if self.use_gae:
+                # Use GAE for advantage estimation (reduces variance, better credit assignment)
+                self.update_gae_lambda_schedule()
+                advantages, value_targets = self.compute_gae(
+                    rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda)
+            else:
+                # Monte Carlo returns: compute discounted returns from terminal reward backwards
+                # This doesn't bootstrap from value estimates, so it avoids the sparse reward
+                # bootstrap trap where value stays ~0. Better for early training.
+                gamma = 0.99
+                monte_carlo_returns = torch.zeros_like(rewards_t)
+                running_return = 0.0
+                for t in reversed(range(batch_size)):
+                    running_return = rewards_t[t] + gamma * running_return
+                    monte_carlo_returns[t] = running_return
+
+                value_targets = monte_carlo_returns
+                advantages = monte_carlo_returns - value_detached
+
+            # -------------------------------------------------------
+            # Debug: value target / prediction distribution
+            # -------------------------------------------------------
+            diag_every = int(os.getenv("VALUE_TARGET_DIAG_EVERY", "50"))
+            post_every = int(os.getenv("VALUE_POSTUPDATE_DIAG_EVERY", "0"))
+            do_post = post_every > 0 and (next_step % post_every == 0)
+            # Optional eval-mode baseline before update (removes dropout noise)
+            v_before_eval = None
+            if do_post:
+                with torch.no_grad():
+                    self.model.eval()
+                    _p0, _v0 = self.model.score_candidates(
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
+                    )
+                    v_before_eval = _v0.squeeze(1).detach().float().view(-1)
+                    self.model.train()
+            if diag_every > 0 and (next_step % diag_every == 0):
+                with torch.no_grad():
+                    def _stats(name, t):
+                        t = t.detach().float().view(-1)
+                        if t.numel() == 0:
+                            return f"{name}: empty"
+                        pos = (t > 0).float().mean().item() * 100.0
+                        neg = (t < 0).float().mean().item() * 100.0
+                        zer = 100.0 - pos - neg
+                        return (f"{name}: mean={t.mean().item():.3f} std={t.std().item():.3f} "
+                                f"min={t.min().item():.3f} max={t.max().item():.3f} "
+                                f"pos={pos:.1f}% neg={neg:.1f}% zero={zer:.1f}%")
+
+                    logger.info(LogCategory.MODEL_TRAIN,
+                                "ValueDiag step=%d use_gae=%s lam=%.3f batch=%d | %s | %s | %s | %s",
+                                next_step, self.use_gae,
+                                (self.current_gae_lambda if self.use_gae else 1.0),
+                                int(batch_size),
+                                _stats("value_pred", value_squeezed),
+                                _stats("value_target", value_targets),
+                                _stats("adv", advantages),
+                                _stats("reward", rewards_t))
+
+            # Check for NaN in advantages BEFORE normalization
+            if torch.isnan(advantages).any() or torch.isinf(advantages).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in GAE advantages (batch_size=%d, rewards=%s, values_range=[%.4f,%.4f]) - skipping batch",
+                               # first 5 rewards
+                               batch_size, rewards_t.tolist()[:5],
+                               value_detached.min().item(), value_detached.max().item())
+                return
+
+            # Normalize advantages for policy gradient stability
+            # Use RUNNING statistics instead of per-batch to avoid destroying signal
+            # when all samples in batch have similar outcomes (common in RL)
+            advantages_normalized = advantages
+            if self._adv_use_running and batch_size >= 1:
+                # Update running statistics with current batch
+                batch_mean = float(advantages.mean().item())
+                batch_var = float(advantages.var().item()) if batch_size >= 2 else 1.0
+                alpha = self._adv_ema_alpha
+                self._adv_running_mean = (1 - alpha) * self._adv_running_mean + alpha * batch_mean
+                self._adv_running_var = (1 - alpha) * self._adv_running_var + alpha * batch_var
+                # Normalize using running stats (not per-batch)
+                running_std = max(self._adv_running_var ** 0.5, 1e-8)
+                advantages_normalized = (advantages - self._adv_running_mean) / running_std
+            elif batch_size >= 2:
+                # Fallback to per-batch if running stats disabled
+                adv_std = advantages.std()
+                if adv_std > 1e-8:
+                    advantages_normalized = (
+                        advantages - advantages.mean()) / adv_std
+
+            # Policy loss uses normalized advantages to prevent huge policy gradients
+            selected_probs = probs.gather(
                 1, chosen_t.unsqueeze(1)).squeeze(1)
 
-            with torch.no_grad():
-                advantage = (returns_t - value).squeeze(1)
-                advantage = torch.clamp(advantage, -1.0, 1.0)
+            if self.use_ppo:
+                # PPO: Clipped surrogate objective with numerical stability
+                # Clamp probabilities to avoid division issues
+                selected_probs_safe = torch.clamp(
+                    selected_probs, min=1e-8, max=1.0)
+                old_selected_probs_safe = torch.clamp(
+                    old_selected_probs, min=1e-8, max=1.0)
 
-            loss_policy = -(selected * advantage).mean()
+                ratio = selected_probs_safe / old_selected_probs_safe
+                # Clamp ratio to prevent extreme values
+                ratio = torch.clamp(ratio, min=0.01, max=100.0)
 
-            # Value loss
-            loss_value = 0.5 * F.mse_loss(value, returns_t)
+                clipped_ratio = torch.clamp(
+                    ratio, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
+                # Use normalized advantages for policy to prevent huge gradients
+                loss_policy = - \
+                    torch.min(ratio * advantages_normalized,
+                              clipped_ratio * advantages_normalized).mean()
+            else:
+                # REINFORCE: Simple policy gradient with normalized advantages
+                log_probs = torch.log(selected_probs + 1e-9)
+                loss_policy = -(log_probs * advantages_normalized).mean()
 
-            # Entropy bonus (encourage exploration)
-            entropy = -(probs * log_probs).sum(dim=-1).mean()
-            loss_entropy = -0.01 * entropy
+            # -------------------------------------------------------
+            # Loss coefficients (scheduled)
+            # -------------------------------------------------------
+            if self.loss_schedule_enable and next_step <= self.critic_warmup_steps:
+                policy_loss_coef = float(self.policy_loss_coef_warmup)
+                value_loss_coef = float(self.value_loss_coef_warmup)
+                entropy_loss_mult = float(self.entropy_loss_mult_warmup)
+            else:
+                policy_loss_coef = float(self.policy_loss_coef_main)
+                value_loss_coef = float(self.value_loss_coef_main)
+                entropy_loss_mult = float(self.entropy_loss_mult_main)
 
-            loss = loss_policy + loss_value + loss_entropy
+            # Value loss: MSE between predicted value and GAE value targets
+            # Coefficient increased to 5.0 to force value head out of local minimum
+            # At 1.0 coeff, value head gets stuck at -0.5 because MSE loss is "acceptable"
+            # Higher coeff forces it to actually learn correct predictions
+            loss_value = value_loss_coef * F.mse_loss(value_squeezed, value_targets)
+
+            # Entropy bonus (encourage exploration with decay schedule)
+            # Clamp probabilities to avoid log(0)
+            probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
+            log_probs = torch.log(probs_safe)
+            entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
+            loss_entropy = (self.get_entropy_coefficient() * entropy_loss_mult) * entropy
+
+            loss = (policy_loss_coef * loss_policy) + loss_value + loss_entropy
+
+            # NaN guard: skip update if loss is NaN to prevent model corruption
+            if torch.isnan(loss) or torch.isinf(loss):
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "Skipping update due to NaN/Inf loss (policy=%.4f, value=%.4f, ent=%.4f)",
+                               loss_policy.item() if not torch.isnan(loss_policy) else float('nan'),
+                               loss_value.item() if not torch.isnan(loss_value) else float('nan'),
+                               entropy.item() if not torch.isnan(entropy) else float('nan'))
+                self.optimizer.zero_grad()
+                return
+
             loss.backward()
+
+            # -------------------------------------------------------
+            # Debug: ensure critic gradients are nonzero
+            # -------------------------------------------------------
+            grad_diag_every = int(os.getenv("VALUE_GRAD_DIAG_EVERY", "0"))
+            if grad_diag_every > 0 and (next_step % grad_diag_every == 0):
+                with torch.no_grad():
+                    def _grad_norm(needle: str):
+                        s = 0.0
+                        c = 0
+                        for n, p in self.model.named_parameters():
+                            if needle in n and p.grad is not None:
+                                g = p.grad.detach()
+                                s += float(g.norm(2).item())
+                                c += 1
+                        return s, c
+
+                    critic_gn, critic_c = _grad_norm("critic_")
+                    actor_gn, actor_c = _grad_norm("actor_")
+                    enc_gn, enc_c = _grad_norm("transformer_layers")
+                    vs_gn = 0.0
+                    vs_has = 0
+                    for n, p in self.model.named_parameters():
+                        if n.endswith("value_scale") and p.grad is not None:
+                            vs_gn = float(p.grad.detach().norm(2).item())
+                            vs_has = 1
+                            break
+
+                    logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "GradDiag step=%d | critic=%.6f(n=%d) actor=%.6f(n=%d) enc=%.6f(n=%d) value_scale=%.6f(has=%d)",
+                        int(next_step),
+                        critic_gn, int(critic_c),
+                        actor_gn, int(actor_c),
+                        enc_gn, int(enc_c),
+                        vs_gn, int(vs_has)
+                    )
+
+            # Check for NaN gradients before applying
+            has_nan_grad = False
+            for param in self.model.parameters():
+                if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
+                    has_nan_grad = True
+                    break
+
+            if has_nan_grad:
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "Skipping update due to NaN/Inf gradients")
+                self.optimizer.zero_grad()
+                return
 
             torch.nn.utils.clip_grad_norm_(
                 self.model.parameters(), self.model.max_grad_norm)
             self.optimizer.step()
 
-            logger.info(LogCategory.MODEL_TRAIN,
-                        "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f",
-                        loss.item(), loss_policy.item(), loss_value.item(), entropy.item())
-            return True
-
-        except Exception as e:
-            logger.error(LogCategory.SYSTEM_ERROR,
-                         "Error in trainCandidatesFlat: %s", str(e))
-            raise
-
-    def trainFlat(self, sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
-                  action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions):
-        """Batch training using direct byte array conversion"""
-        # Trace entry so Java side can verify training invocations
-        logger.info(LogCategory.MODEL_TRAIN,
-                    "trainFlat called — batch_size=%d, max_actions=%d",
-                    batch_size, max_actions)
-
-        # Skip update if no actions provided (e.g., bookkeeping rows)
-        if max_actions <= 0:
-            logger.warning(LogCategory.MODEL_TRAIN,
-                           "max_actions == 0, skipping gradient step")
-            return True
-
-        try:
-            start_time = time.time()
-            if self.model is None:
-                raise RuntimeError("Model not initialized")
-
-            # Log GPU memory before training
-            log_gpu_memory()
-
-            # Use the batcher for training - note the signature change
-            result = self.batcher.train(sequences_bytes, masks_bytes, policy_scores_bytes, discounted_returns_bytes,
-                                        action_types_bytes, action_combos_bytes, batch_size, seq_len, d_model, max_actions)
-
-            # Log GPU memory after training
-            log_gpu_memory()
-
-            # Free unused GPU memory
-            if torch.cuda.is_available():
-                torch.cuda.empty_cache()
-                logger.info(LogCategory.GPU_CLEANUP,
-                            "Cleared CUDA cache after training step")
-
-            total_time = time.time() - start_time
-            logger.info(
-                LogCategory.GPU_MEMORY, f"Total trainFlat operation took {total_time:.3f} seconds")
+            # Log with PPO info if enabled
+            if self.use_ppo:
+                with torch.no_grad():
+                    ratio = selected_probs / (old_selected_probs + 1e-10)
+                    clip_frac = ((ratio < 1.0 - self.ppo_epsilon) |
+                                 (ratio > 1.0 + self.ppo_epsilon)).float().mean()
+                logger.info(LogCategory.MODEL_TRAIN,
+                            "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%%]",
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
+                            -self.get_entropy_coefficient(), clip_frac.item() * 100)
+            else:
+                logger.info(LogCategory.MODEL_TRAIN,
+                            "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), -self.get_entropy_coefficient())
 
             # -------------------------------------------------------
-            #  Increment counter & checkpoint every 100 updates
+            # Debug: did this update move value toward target?
+            # -------------------------------------------------------
+            if do_post:
+                with torch.no_grad():
+                    self.model.eval()
+                    _p1, _v1 = self.model.score_candidates(
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
+                    )
+                    v_after_eval = _v1.squeeze(1).detach().float().view(-1)
+                    self.model.train()
+
+                    v_before = v_before_eval if v_before_eval is not None else value_squeezed.detach().float().view(-1)
+                    v_after = v_after_eval
+                    v_tgt = value_targets.detach().float().view(-1)
+
+                    mse_before = float(F.mse_loss(v_before, v_tgt).item()) if v_before.numel() > 0 else 0.0
+                    mse_after = float(F.mse_loss(v_after, v_tgt).item()) if v_after.numel() > 0 else 0.0
+
+                    def _s(t):
+                        if t.numel() == 0:
+                            return "empty"
+                        pos = (t > 0).float().mean().item() * 100.0
+                        return f"mean={t.mean().item():.3f} min={t.min().item():.3f} max={t.max().item():.3f} pos={pos:.1f}%"
+
+                    logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "ValuePost step=%d | pred_before(%s) -> pred_after(%s) | target(%s) | mse_before=%.4f mse_after=%.4f | coefs(policy=%.2f value=%.2f entMult=%.2f)",
+                        int(next_step),
+                        _s(v_before),
+                        _s(v_after),
+                        _s(v_tgt),
+                        mse_before,
+                        mse_after,
+                        float(policy_loss_coef),
+                        float(value_loss_coef),
+                        float(entropy_loss_mult),
+                    )
+
+            # -------------------------------------------------------
+            #  Increment counters & checkpoint every 100 updates
             # -------------------------------------------------------
             self.train_step_counter += 1
+            self.main_train_sample_counter += batch_size
             if self.train_step_counter % 100 == 0:
-                ckpt_path = self.model_path or os.path.join(
-                    TEMP_DIR, f"checkpoint_step_{self.train_step_counter}.pt")
+                # Save to persistent location, not temp directory
+                if self.model_path:
+                    # Overwrite main model every 100 steps for continuous checkpointing
+                    ckpt_path = self.model_path
+                else:
+                    # Fallback to models directory
+                    ckpt_path = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"
                 try:
                     self.saveModel(ckpt_path)
                     logger.info(LogCategory.MODEL_SAVE,
@@ -868,137 +1217,784 @@ class PythonEntryPoint:
                                  "Failed to save checkpoint at step %d: %s",
                                  self.train_step_counter, str(e))
 
-            return result
+            # Explicit cleanup before saving to reduce VRAM pressure
+            del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
+            del chosen_t, rewards_t, value_targets, advantages
+            del loss, loss_policy, loss_value, entropy
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
+            
+            # Snapshot checkpoints (league opponents)
+            self._maybe_save_snapshot()
+
+            # Torch profiler step (env-gated)
+            self._prof_step("train")
+            return True
 
         except Exception as e:
-            logger.error(LogCategory.GPU_MEMORY,
-                         f"Error in trainFlat: {str(e)}")
-            logger.error(
-                LogCategory.GPU_MEMORY, f"Input shapes at error - batch_size: {batch_size}, seq_len: {seq_len}, d_model: {d_model}")
+            logger.error(LogCategory.SYSTEM_ERROR,
+                         "Error in trainCandidatesFlat: %s", str(e))
             raise
 
-    def saveModel(self, path):
-        """Save model state"""
-        try:
-            if self.model is None:
+    def trainCandidatesMultiFlat(self,
+                                 sequences_bytes,
+                                 masks_bytes,
+                                 token_ids_bytes,
+                                 candidate_features_bytes,
+                                 candidate_ids_bytes,
+                                 candidate_mask_bytes,
+                                 chosen_index_bytes,
+                                 rewards_bytes,
+                                 dones_bytes,
+                                 batch_size,
+                                 seq_len,
+                                 d_model,
+                                 max_candidates,
+                                 cand_feat_dim):
+        """
+        Train on a batch that concatenates multiple episodes.
+        dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
+        """
+        t_start = time.perf_counter()
+        
+        def _train_slice(start: int, end: int):
+            if self.model is None or self.optimizer is None:
                 raise RuntimeError("Model not initialized")
-            self.model.save(path)
-            logger.info(
-                LogCategory.GPU_MEMORY,
-                "Model saved to %s", path
-            )
+            device = self.device
+
+            seq = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
+                batch_size, seq_len, d_model)[start:end]
+            mask = np.frombuffer(masks_bytes, dtype='<i4').reshape(
+                batch_size, seq_len)[start:end]
+            tok_ids = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(
+                batch_size, seq_len)[start:end]
+
+            cand_feat = np.frombuffer(candidate_features_bytes, dtype='<f4').reshape(
+                batch_size, max_candidates, cand_feat_dim)[start:end]
+            cand_ids = np.frombuffer(candidate_ids_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)[start:end]
+            cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)[start:end]
+
+            chosen = np.frombuffer(chosen_index_bytes, dtype='<i4').reshape(
+                batch_size)[start:end]
+            rewards = np.frombuffer(rewards_bytes, dtype='<f4').reshape(
+                batch_size)[start:end]
+            dones = np.frombuffer(dones_bytes, dtype='<i4').reshape(
+                batch_size)[start:end]
+
+            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
+            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
+            tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
+            cand_feat_t = torch.tensor(cand_feat, dtype=torch.float32, device=device)
+            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
+            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
+            chosen_t = torch.tensor(chosen, dtype=torch.long, device=device)
+            rewards_t = torch.tensor(rewards, dtype=torch.float32, device=device)
+            dones_t = torch.tensor(dones, dtype=torch.float32, device=device)
+            
+            # Release numpy slices immediately
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen, rewards, dones
+
+            local_batch_size = int(end - start)
+
+            if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in input sequence - skipping batch")
+                return
+            if torch.isnan(rewards_t).any() or torch.isinf(rewards_t).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in rewards - skipping batch (rewards=%s)", rewards_t.tolist())
+                return
+            if torch.isnan(cand_feat_t).any() or torch.isinf(cand_feat_t).any():
+                logger.warning(LogCategory.MODEL_TRAIN,
+                               "NaN/Inf in candidate features - skipping batch")
+                return
+
+            self.model.train()
+            # Preserve the historical semantics of train_step_counter as "episodes processed".
+            # trainCandidatesFlat was called once per episode; here we batch multiple episodes.
+            ep_count = int(torch.clamp(dones_t.detach().sum(), min=1.0).item())
+            next_step = self.train_step_counter + ep_count
+
+            if self.freeze_encoder_in_warmup:
+                in_warmup = self.loss_schedule_enable and next_step <= self.critic_warmup_steps
+                if in_warmup and not self._encoder_frozen:
+                    self._set_encoder_requires_grad(False)
+                    self._encoder_frozen = True
+                    logger.info(LogCategory.MODEL_TRAIN,
+                                "Warmup: froze encoder params for %d steps", int(self.critic_warmup_steps))
+                elif (not in_warmup) and self._encoder_frozen:
+                    self._set_encoder_requires_grad(True)
+                    self._encoder_frozen = False
+                    logger.info(LogCategory.MODEL_TRAIN, "Warmup ended: unfroze encoder params")
+
+            # GPU lock is acquired by Java learner loop, not here
+            # (Learner holds lock for entire training burst)
+            try:
+                with torch.no_grad():
+                    old_probs, old_value = self.model.score_candidates(
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+                    old_selected_probs = old_probs.gather(
+                        1, chosen_t.unsqueeze(1)).squeeze(1)
+
+                self.optimizer.zero_grad()
+
+                probs, value = self.model.score_candidates(
+                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+
+                if torch.isnan(probs).any() or torch.isnan(value).any():
+                    logger.warning(LogCategory.MODEL_TRAIN,
+                                   "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
+                                   torch.isnan(probs).any().item(), torch.isnan(value).any().item())
+                    return
+
+                value_squeezed = value.squeeze(1)
+                value_detached = value_squeezed.detach()
+
+                value_squeezed = value.squeeze(1)
+                value_detached = value_squeezed.detach()
+
+                if self.use_gae:
+                    self.update_gae_lambda_schedule()
+                    advantages, value_targets = self.compute_gae(
+                        rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda, dones=dones_t)
+                else:
+                    gamma = 0.99
+                    monte_carlo_returns = torch.zeros_like(rewards_t)
+                    running_return = 0.0
+                    for t in reversed(range(local_batch_size)):
+                        if float(dones_t[t].item()) != 0.0:
+                            running_return = 0.0
+                        running_return = rewards_t[t] + gamma * running_return
+                        monte_carlo_returns[t] = running_return
+                    value_targets = monte_carlo_returns
+                    advantages = monte_carlo_returns - value_detached
+
+                diag_every = int(os.getenv("VALUE_TARGET_DIAG_EVERY", "50"))
+                post_every = int(os.getenv("VALUE_POSTUPDATE_DIAG_EVERY", "0"))
+                do_post = post_every > 0 and (next_step % post_every == 0)
+                v_before_eval = None
+                if do_post:
+                    with torch.no_grad():
+                        self.model.eval()
+                        _p0, _v0 = self.model.score_candidates(
+                            seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
+                        )
+                        v_before_eval = _v0.squeeze(1).detach().float().view(-1)
+                        self.model.train()
+                if diag_every > 0 and (next_step % diag_every == 0):
+                    with torch.no_grad():
+                        def _stats(name, t):
+                            t = t.detach().float().view(-1)
+                            if t.numel() == 0:
+                                return f"{name}: empty"
+                            pos = (t > 0).float().mean().item() * 100.0
+                            neg = (t < 0).float().mean().item() * 100.0
+                            zer = 100.0 - pos - neg
+                            return (f"{name}: mean={t.mean().item():.3f} std={t.std().item():.3f} "
+                                    f"min={t.min().item():.3f} max={t.max().item():.3f} "
+                                    f"pos={pos:.1f}% neg={neg:.1f}% zero={zer:.1f}%")
+
+                        logger.info(LogCategory.MODEL_TRAIN,
+                                    "ValueDiag step=%d use_gae=%s lam=%.3f batch=%d | %s | %s | %s | %s",
+                                    next_step, self.use_gae,
+                                    (self.current_gae_lambda if self.use_gae else 1.0),
+                                    int(batch_size),
+                                    _stats("value_pred", value_squeezed),
+                                    _stats("value_target", value_targets),
+                                    _stats("adv", advantages),
+                                    _stats("reward", rewards_t))
+
+                if torch.isnan(advantages).any() or torch.isinf(advantages).any():
+                    logger.warning(LogCategory.MODEL_TRAIN,
+                                   "NaN/Inf in advantages - skipping batch (batch_size=%d)", batch_size)
+                    return
+
+                # Normalize advantages using RUNNING statistics (cross-batch)
+                # Per-batch normalization destroys signal when outcomes are uniform
+                advantages_normalized = advantages
+                if self._adv_use_running and local_batch_size >= 1:
+                    # Update running statistics with current batch
+                    batch_mean = float(advantages.mean().item())
+                    batch_var = float(advantages.var().item()) if local_batch_size >= 2 else 1.0
+                    alpha = self._adv_ema_alpha
+                    self._adv_running_mean = (1 - alpha) * self._adv_running_mean + alpha * batch_mean
+                    self._adv_running_var = (1 - alpha) * self._adv_running_var + alpha * batch_var
+                    # Normalize using running stats (not per-batch)
+                    running_std = max(self._adv_running_var ** 0.5, 1e-8)
+                    advantages_normalized = (advantages - self._adv_running_mean) / running_std
+                elif local_batch_size >= 2:
+                    # Fallback to per-batch if running stats disabled
+                    adv_std = advantages.std()
+                    if adv_std > 1e-8:
+                        advantages_normalized = (
+                            advantages - advantages.mean()) / adv_std
+
+                selected_probs = probs.gather(
+                    1, chosen_t.unsqueeze(1)).squeeze(1)
+
+                if self.use_ppo:
+                    selected_probs_safe = torch.clamp(
+                        selected_probs, min=1e-8, max=1.0)
+                    old_selected_probs_safe = torch.clamp(
+                        old_selected_probs, min=1e-8, max=1.0)
+
+                    ratio = selected_probs_safe / old_selected_probs_safe
+                    ratio = torch.clamp(ratio, min=0.01, max=100.0)
+
+                    clipped_ratio = torch.clamp(
+                        ratio, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
+                    loss_policy = - \
+                        torch.min(ratio * advantages_normalized,
+                                  clipped_ratio * advantages_normalized).mean()
+                else:
+                    log_probs = torch.log(selected_probs + 1e-9)
+                    loss_policy = -(log_probs * advantages_normalized).mean()
+
+                if self.loss_schedule_enable and next_step <= self.critic_warmup_steps:
+                    policy_loss_coef = float(self.policy_loss_coef_warmup)
+                    value_loss_coef = float(self.value_loss_coef_warmup)
+                    entropy_loss_mult = float(self.entropy_loss_mult_warmup)
+                else:
+                    policy_loss_coef = float(self.policy_loss_coef_main)
+                    value_loss_coef = float(self.value_loss_coef_main)
+                    entropy_loss_mult = float(self.entropy_loss_mult_main)
+
+                loss_value = value_loss_coef * F.mse_loss(value_squeezed, value_targets)
+
+                probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
+                log_probs = torch.log(probs_safe)
+                entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
+                loss_entropy = (self.get_entropy_coefficient() * entropy_loss_mult) * entropy
+
+                loss = (policy_loss_coef * loss_policy) + loss_value + loss_entropy
+
+                if torch.isnan(loss) or torch.isinf(loss):
+                    logger.warning(LogCategory.MODEL_TRAIN,
+                                   "Skipping update due to NaN/Inf loss (policy=%.4f, value=%.4f, ent=%.4f)",
+                                   loss_policy.item() if not torch.isnan(loss_policy) else float('nan'),
+                                   loss_value.item() if not torch.isnan(loss_value) else float('nan'),
+                                   entropy.item() if not torch.isnan(entropy) else float('nan'))
+                    self.optimizer.zero_grad()
+                    return
+
+                loss.backward()
+
+                has_nan_grad = False
+                for param in self.model.parameters():
+                    if param.grad is not None and (torch.isnan(param.grad).any() or torch.isinf(param.grad).any()):
+                        has_nan_grad = True
+                        break
+                if has_nan_grad:
+                    logger.warning(LogCategory.MODEL_TRAIN,
+                                   "Skipping update due to NaN/Inf gradients")
+                    self.optimizer.zero_grad()
+                    return
+
+                torch.nn.utils.clip_grad_norm_(
+                    self.model.parameters(), self.model.max_grad_norm)
+                self.optimizer.step()
+            finally:
+                # GPU lock released by Java learner loop after entire burst
+                pass
+
+            if self.use_ppo:
+                with torch.no_grad():
+                    ratio2 = selected_probs / (old_selected_probs + 1e-10)
+                    clip_frac = ((ratio2 < 1.0 - self.ppo_epsilon) |
+                                 (ratio2 > 1.0 + self.ppo_epsilon)).float().mean()
+                logger.info(LogCategory.MODEL_TRAIN,
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%%]",
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
+                            -self.get_entropy_coefficient(), clip_frac.item() * 100)
+            else:
+                logger.info(LogCategory.MODEL_TRAIN,
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), -self.get_entropy_coefficient())
+
+            if do_post:
+                with torch.no_grad():
+                    self.model.eval()
+                    _p1, _v1 = self.model.score_candidates(
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
+                    )
+                    v_after_eval = _v1.squeeze(1).detach().float().view(-1)
+                    self.model.train()
+
+                    v_before = v_before_eval if v_before_eval is not None else value_squeezed.detach().float().view(-1)
+                    v_after = v_after_eval
+                    v_tgt = value_targets.detach().float().view(-1)
+
+                    mse_before = float(F.mse_loss(v_before, v_tgt).item()) if v_before.numel() > 0 else 0.0
+                    mse_after = float(F.mse_loss(v_after, v_tgt).item()) if v_after.numel() > 0 else 0.0
+
+                    def _s(t):
+                        if t.numel() == 0:
+                            return "empty"
+                        pos = (t > 0).float().mean().item() * 100.0
+                        return f"mean={t.mean().item():.3f} min={t.min().item():.3f} max={t.max().item():.3f} pos={pos:.1f}%"
+
+                    logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "ValuePost step=%d | pred_before(%s) -> pred_after(%s) | target(%s) | mse_before=%.4f mse_after=%.4f | coefs(policy=%.2f value=%.2f entMult=%.2f)",
+                        int(next_step),
+                        _s(v_before),
+                        _s(v_after),
+                        _s(v_tgt),
+                        mse_before,
+                        mse_after,
+                        float(policy_loss_coef),
+                        float(value_loss_coef),
+                        float(entropy_loss_mult),
+                    )
+
+            prev_step = int(self.train_step_counter)
+            self.train_step_counter += ep_count
+            self.main_train_sample_counter += local_batch_size
+            
+            # Explicit cleanup of training tensors
+            del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
+            del chosen_t, value_targets, advantages, rewards_t, dones_t
+            del loss, loss_policy, loss_value, entropy
+            if torch.cuda.is_available():
+                torch.cuda.synchronize()
+            
+            # Save once per 100 episodes (avoid missing the boundary when ep_count > 1)
+            if (self.train_step_counter // 100) > (prev_step // 100):
+                if self.model_path:
+                    ckpt_path = self.model_path
+                else:
+                    ckpt_path = "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt"
+                try:
+                    self.saveModel(ckpt_path)
+                    logger.info(LogCategory.MODEL_SAVE,
+                                "Checkpoint saved at step %d -> %s",
+                                self.train_step_counter, ckpt_path)
+                except Exception as e:
+                    logger.error(LogCategory.MODEL_SAVE,
+                                 "Failed to save checkpoint at step %d: %s",
+                                 self.train_step_counter, str(e))
+
+            self._maybe_save_snapshot()
+            
+            # Periodic CUDA cache flush to prevent memory fragmentation
+            # Increased frequency to combat memory accumulation from model reloads
+            if self.train_step_counter % 100 == 0 and torch.cuda.is_available():
+                import gc
+                gc.collect()  # Force Python GC to release tensor references
+                torch.cuda.empty_cache()
+                logger.debug(LogCategory.GPU_MEMORY, 
+                            "CUDA cache flushed + GC at step %d", self.train_step_counter)
+            
+            return True
+
+        def _episode_boundaries():
+            d = np.frombuffer(dones_bytes, dtype='<i4').reshape(batch_size)
+            ends = np.where(d != 0)[0].tolist()
+            if not ends or ends[-1] != (batch_size - 1):
+                ends.append(batch_size - 1)
+            spans = []
+            s = 0
+            for e in ends:
+                spans.append((s, int(e) + 1))
+                s = int(e) + 1
+            # Clean up temporary arrays
+            del d, ends
+            return spans
+
+        def _train_spans(spans):
+            if not spans:
+                return True
+            # Optional proactive cap by episodes (if set or learned).
+            cap_eps = self._train_safe_max_episodes if (self.auto_batch_enable and self._train_safe_max_episodes) else None
+            if cap_eps is not None and len(spans) > int(cap_eps):
+                try:
+                    self._autobatch_counts["train_splits_cap"] += 1
+                except Exception:
+                    pass
+                out = True
+                i = 0
+                while i < len(spans):
+                    j = min(len(spans), i + int(cap_eps))
+                    out = _train_spans(spans[i:j]) and out
+                    i = j
+                return out
+
+            start = spans[0][0]
+            end = spans[-1][1]
+            steps = int(end - start)
+            # Proactive paging avoidance: estimate extra VRAM for this slice and split episodes if needed.
+            if self.auto_batch_enable and self.auto_avoid_paging and torch.cuda.is_available() and len(spans) > 1:
+                est = 0.0
+                if self._train_mb_per_step is not None:
+                    est = float(self._train_mb_per_step) * float(steps)
+                if self._should_split_for_paging(est):
+                    try:
+                        self._autobatch_counts["train_splits_paging"] += 1
+                    except Exception:
+                        pass
+                    mid = len(spans) // 2
+                    ok0 = _train_spans(spans[:mid])
+                    ok1 = _train_spans(spans[mid:])
+                    return ok0 and ok1
+            try:
+                out, extra_mb = self._measure_peak_extra_mb(lambda: _train_slice(start, end))
+                # Update per-step estimate from measured peak delta.
+                self._update_mem_ema("train", extra_mb, max(1, steps))
+                return out
+            except RuntimeError as e:
+                if self.auto_batch_enable and self._is_cuda_oom(e):
+                    self._cuda_cleanup_after_oom()
+                    if len(spans) <= 1:
+                        # If even a single-episode chunk OOMs, we can't recover here.
+                        raise
+                    try:
+                        self._autobatch_counts["train_splits_oom"] += 1
+                    except Exception:
+                        pass
+                    new_cap = max(1, len(spans) // 2)
+                    if self._train_safe_max_episodes is None or new_cap < int(self._train_safe_max_episodes):
+                        self._train_safe_max_episodes = int(new_cap)
+                        logger.warning(LogCategory.GPU_BATCH, "AutoBatch(train): OOM -> shrinking train episode cap to %d", int(self._train_safe_max_episodes))
+                    mid = len(spans) // 2
+                    ok0 = _train_spans(spans[:mid])
+                    ok1 = _train_spans(spans[mid:])
+                    return ok0 and ok1
+                raise
+
+        try:
+            spans = _episode_boundaries()
+            result = _train_spans(spans)
+            
+            # Track timing
+            elapsed_ms = (time.perf_counter() - t_start) * 1000.0
+            self.metrics.update_timing_metric("train", elapsed_ms)
+            
+            return result
         except Exception as e:
-            logger.error(LogCategory.GPU_MEMORY,
-                         f"Error saving model: {str(e)}")
+            logger.error(LogCategory.SYSTEM_ERROR,
+                         "Error in trainCandidatesMultiFlat: %s", str(e))
             raise
+
+    # Persistence methods - delegate to persistence but keep model logic here
+    @property
+    def model_path(self):
+        return self.persistence.model_path
+    
+    @property
+    def model_latest_path(self):
+        return self.persistence.model_latest_path
+    
+    @property
+    def _did_initial_load(self):
+        return self.persistence._did_initial_load
+    
+    @_did_initial_load.setter
+    def _did_initial_load(self, value):
+        self.persistence._did_initial_load = value
+    
+    def saveModel(self, path):
+        self.persistence.save_model(self.model, path)
 
     def loadModel(self, path):
-        """Load model state"""
-        try:
-            if self.model is None:
-                self.initializeModel()
-            self.model.load(path)
-            logger.info(
-                LogCategory.GPU_MEMORY,
-                "Model loaded from %s", path
-            )
-        except Exception as e:
-            logger.error(LogCategory.GPU_MEMORY,
-                         f"Error loading model: {str(e)}")
-            raise
+        if self.model is None:
+            self.initializeModel()
+        self.persistence.load_model(self.model, path)
 
-    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, batch_size):
+    def saveLatestModelAtomic(self, path=None):
+        return self.persistence.save_latest_model_atomic(self.model, path)
+
+    def reloadLatestModelIfNewer(self, path=None):
+        if self.model is None:
+            self.initializeModel()
+        return self.persistence.reload_latest_model_if_newer(self.model, path)
+    
+    # GPU lock control for Java learner loop
+    def acquireGPULock(self):
+        """Acquire GPU lock (called by Java before training burst)."""
+        self.gpu_lock.acquire(timeout=None, process_name=self.process_name)
+    
+    def releaseGPULock(self):
+        """Release GPU lock (called by Java after training burst)."""
+        self.gpu_lock.release(process_name=self.process_name)
+
+    def trainMulligan(self, features_bytes, decisions_bytes, outcomes_bytes, land_counts_bytes, batch_size):
         """
-        Train mulligan model from game outcomes.
-        
+        Train mulligan model using Q-learning from game outcomes.
+
         Args:
             features_bytes: Raw bytes of mulligan features [batch_size * 68 * 4]
                 Format: [mulligan_num(1), hand_ids(7), deck_ids(60)] per sample
             decisions_bytes: Raw bytes of decisions (0=mulligan, 1=keep) [batch_size * 4]  
             outcomes_bytes: Raw bytes of game outcomes (1=win, 0=loss) [batch_size * 4]
-            batch_size: Number of samples
+            land_counts_bytes: Raw bytes of land counts [batch_size * 4] (unused in Q-learning)
+            batch_size: Number of decisions in this game
+            
+        Q-Learning approach:
+        - For each decision, train only the Q-value of the action taken
+        - Target = game outcome (1.0 for win, 0.0 for loss)
+        - Per-decision weighting: each decision weighted by 1/batch_size
         """
+        t_start = time.perf_counter()
         # Use lock to prevent concurrent training (avoids gradient conflicts)
         with self.mulligan_lock:
             try:
                 if self.mulligan_model is None:
                     self.initializeMulliganModel()
-            
+
                 # Parse inputs: 1 + 7 + 60 = 68 features per sample
-                features = np.frombuffer(features_bytes, dtype='<f4').reshape(batch_size, 68)
-                decisions = np.frombuffer(decisions_bytes, dtype='<f4').reshape(batch_size)
-                outcomes = np.frombuffer(outcomes_bytes, dtype='<f4').reshape(batch_size)
-                
+                features = np.frombuffer(
+                    features_bytes, dtype='<f4').reshape(batch_size, 68)
+                decisions = np.frombuffer(
+                    decisions_bytes, dtype='<f4').reshape(batch_size)
+                outcomes = np.frombuffer(
+                    outcomes_bytes, dtype='<f4').reshape(batch_size)
+                land_counts_np = np.frombuffer(
+                    land_counts_bytes, dtype='<i4').reshape(batch_size).astype(np.float32)
+
                 # Convert to tensors
-                features_t = torch.tensor(features, dtype=torch.float32, device=self.device)
-                decisions_t = torch.tensor(decisions, dtype=torch.float32, device=self.device)
-                outcomes_t = torch.tensor(outcomes, dtype=torch.float32, device=self.device)
+                features_t = torch.tensor(
+                    features, dtype=torch.float32, device=self.device)
+                decisions_t = torch.tensor(
+                    decisions, dtype=torch.float32, device=self.device)
+                outcomes_t = torch.tensor(
+                    outcomes, dtype=torch.float32, device=self.device)
+                land_counts_t = torch.tensor(
+                    land_counts_np, dtype=torch.float32, device=self.device)
                 
+                # Release numpy arrays immediately (but keep land_counts_np for heuristic below)
+                del features, decisions, outcomes
+
                 # Training mode
                 self.mulligan_model.train()
                 self.mulligan_optimizer.zero_grad()
-                
-                # Forward pass - squeeze only last dimension to preserve batch dimension
-                keep_probs = self.mulligan_model(features_t).squeeze(-1)
-                
-                # Loss: Binary cross-entropy
-                # Target: 1.0 if (kept and won), 0.0 if (kept and lost)
-                # For mulliganed hands, we don't have direct signal, so we skip them
-                kept_mask = decisions_t > 0.5
-                
-                if kept_mask.sum() > 0:
-                    kept_probs_filtered = keep_probs[kept_mask]
-                    kept_outcomes_filtered = outcomes_t[kept_mask]
+
+                # Acquire GPU lock before mulligan training
+                self.gpu_lock.acquire(timeout=None, process_name=self.process_name)
+                try:
+                    # Q-Learning: Train the Q-value of the action taken toward game outcome
+                    # All decisions get the same game outcome (win=1.0, loss=0.0)
                     
-                    # BCE loss: encourage keeping winning hands, mulliganing losing hands
-                    loss = F.binary_cross_entropy(kept_probs_filtered, kept_outcomes_filtered)
+                    # Forward pass to get Q-values [batch, 2] where [:, 0]=Q_keep, [:, 1]=Q_mull
+                    q_values = self.mulligan_model(features_t)  # [batch_size, 2]
                     
-                    # Backprop
-                    loss.backward()
-                    torch.nn.utils.clip_grad_norm_(self.mulligan_model.parameters(), 1.0)
-                    self.mulligan_optimizer.step()
+                    # Extract action indices
+                    # decisions_t: 1.0=keep, 0.0=mulligan
+                    # We want: index 0 for keep (Q_keep), index 1 for mulligan (Q_mull)
+                    action_indices = (decisions_t <= 0.5).long()  # [batch_size] - 0 for keep, 1 for mulligan
                     
-                    # Clear gradients and set to eval mode to prevent stale references
-                    self.mulligan_optimizer.zero_grad()
-                    self.mulligan_model.eval()
+                    # Get Q-value for the action taken using gather
+                    # q_values: [batch_size, 2], action_indices: [batch_size] -> [batch_size, 1]
+                    q_taken = q_values.gather(1, action_indices.unsqueeze(1)).squeeze(1)  # [batch_size]
                     
-                    logger.info(LogCategory.MODEL_TRAIN,
-                               f"Mulligan model trained - loss={loss.item():.4f}, samples={kept_mask.sum().item()}")
-                else:
-                    logger.info(LogCategory.MODEL_TRAIN,
-                               "No kept hands in batch, skipping mulligan training")
-                    self.mulligan_model.eval()
+                    targets = outcomes_t  # [batch_size]
+
+                    # Early label gating to avoid collapse (e.g., always-mull early)
+                    warmup_steps = int(os.getenv("MULLIGAN_TRAIN_WARMUP_STEPS", "50"))
+                    min_keep_rate = float(os.getenv("MULLIGAN_TRAIN_MIN_KEEP_RATE", "0.10"))
+                    max_keep_rate = float(os.getenv("MULLIGAN_TRAIN_MAX_KEEP_RATE", "0.90"))
+                    keep_rate = float((decisions_t > 0.5).float().mean().item()) if decisions_t.numel() > 0 else 0.0
+                    all_same = bool((decisions_t > 0.5).all().item() or (decisions_t <= 0.5).all().item()) if decisions_t.numel() > 0 else True
+                    if self.mulligan_train_step_counter < warmup_steps and (all_same or keep_rate < min_keep_rate or keep_rate > max_keep_rate):
+                        train_count = 0
+                        skipped_count = batch_size
+                        loss = torch.tensor(0.0, device=self.device)
+                    else:
+                        # Mulligan cost shaping (applies to MULL actions)
+                        mull_base = float(os.getenv("MULLIGAN_COST_BASE", "0.02"))
+                        mull_max = float(os.getenv("MULLIGAN_COST_MAX", "0.15"))
+                        mull_num = features_t[:, 0].clamp(min=0.0)
+                        mull_cost = (mull_base * (mull_num + 1.0)).clamp(max=mull_max)
+                        is_mull = (action_indices == 1).float()
+                        targets = targets - is_mull * mull_cost
+
+                        # Land-count shaping for KEEP (annealed toward 0)
+                        land_init = float(os.getenv("MULLIGAN_LAND_SHAPING_INIT", "0.05"))
+                        land_decay_steps = float(os.getenv("MULLIGAN_LAND_SHAPING_DECAY_STEPS", "5000"))
+                        t = float(self.mulligan_train_step_counter)
+                        shaping_scale = max(0.0, 1.0 - (t / max(1.0, land_decay_steps)))
+                        shaping_scale = land_init * shaping_scale
+
+                        if shaping_scale > 0.0:
+                            lc = land_counts_t.clamp(min=0.0, max=7.0)
+                            is_keep = (action_indices == 0).float()
+                            good = ((lc >= 2.0) & (lc <= 3.0)).float()
+                            low = (lc <= 1.0).float()
+                            high = (lc >= 4.0).float()
+                            land_shaping = shaping_scale * (good - 1.0 * low - 0.5 * high)
+                            targets = targets + is_keep * land_shaping
+
+                        # Per-decision weighting: 1/batch_size for each decision
+                        weight_per_decision = 1.0 / batch_size
+
+                        # Huber loss with per-decision weighting
+                        per_sample = F.smooth_l1_loss(q_taken, targets, reduction='none')
+                        loss = (per_sample * weight_per_decision).sum()
+
+                        train_count = batch_size
+                        skipped_count = 0
+                    
+                    if train_count > 0:
+                        loss.backward()
+                        torch.nn.utils.clip_grad_norm_(
+                            self.mulligan_model.parameters(), 1.0)
+                        self.mulligan_optimizer.step()
+                finally:
+                    # Release GPU lock after mulligan training
+                    self.gpu_lock.release(process_name=self.process_name)
+
+                # Clear gradients and set to eval mode
+                self.mulligan_optimizer.zero_grad()
+                self.mulligan_model.eval()
+
+                # Calculate Q-value statistics for logging
+                with torch.no_grad():
+                    q_keep_mean = q_values[:, 0].mean().item()
+                    q_mull_mean = q_values[:, 1].mean().item()
+                    q_taken_mean = q_taken.mean().item()
+
+                logger.info(LogCategory.MODEL_TRAIN,
+                            f"Mulligan Q-learning trained - loss={loss.item():.4f}, " +
+                            f"decisions={train_count}, skipped={skipped_count}, keep_rate={keep_rate:.3f}, " +
+                            f"Q_keep_avg={q_keep_mean:.3f}, Q_mull_avg={q_mull_mean:.3f}, " +
+                            f"Q_taken_avg={q_taken_mean:.3f}, target={outcomes_t[0].item():.1f}")
+
+                # Track training iterations
+                self.mulligan_train_step_counter += 1
+                self.mulligan_train_sample_counter += train_count
                 
+                # Explicit cleanup of mulligan tensors
+                del features_t, decisions_t, outcomes_t, land_counts_t
+                del q_values, action_indices, q_taken, targets, loss
+                if torch.cuda.is_available():
+                    torch.cuda.synchronize()
+
                 # Clear CUDA cache to free stale references
                 if torch.cuda.is_available():
                     torch.cuda.empty_cache()
+
+                # Track timing
+                elapsed_ms = (time.perf_counter() - t_start) * 1000.0
+                self.metrics.update_timing_metric("mulligan", elapsed_ms)
                 
                 return True
-                
+
             except Exception as e:
                 logger.error(LogCategory.SYSTEM_ERROR,
-                            f"Error in trainMulligan: {str(e)}")
+                             f"Error in trainMulligan: {str(e)}")
                 raise
 
     def saveMulliganModel(self):
         """Save mulligan model separately"""
         try:
             if self.mulligan_model is None:
-                logger.warning(LogCategory.MODEL_SAVE, "Mulligan model not initialized, nothing to save")
+                logger.warning(LogCategory.MODEL_SAVE,
+                               "Mulligan model not initialized, nothing to save")
                 return
-            
+
             checkpoint = {
                 'model_state_dict': self.mulligan_model.state_dict(),
                 'optimizer_state_dict': self.mulligan_optimizer.state_dict(),
             }
-            
+
             # Ensure directory exists
-            os.makedirs(os.path.dirname(self.mulligan_model_path), exist_ok=True)
+            os.makedirs(os.path.dirname(
+                self.mulligan_model_path), exist_ok=True)
             torch.save(checkpoint, self.mulligan_model_path)
-            logger.info(LogCategory.MODEL_SAVE, f"Mulligan model saved to {self.mulligan_model_path}")
-            
+            logger.info(LogCategory.MODEL_SAVE,
+                        f"Mulligan model saved to {self.mulligan_model_path}")
+
         except Exception as e:
-            logger.error(LogCategory.MODEL_SAVE, f"Failed to save mulligan model: {e}")
+            logger.error(LogCategory.MODEL_SAVE,
+                         f"Failed to save mulligan model: {e}")
+
+    def getMainModelTrainingStats(self):
+        """Get main model training statistics (iterations and samples)"""
+        # Convert to Java HashMap for Py4J compatibility
+        from py4j.java_gateway import java_import
+        java_import(gateway.jvm, 'java.util.HashMap')
+        result = gateway.jvm.HashMap()
+        result.put('train_steps', int(self.train_step_counter))
+        result.put('train_samples', int(self.main_train_sample_counter))
+        return result
+
+    def getMulliganModelTrainingStats(self):
+        """Get mulligan model training statistics (iterations and samples)"""
+        # Convert to Java HashMap for Py4J compatibility
+        from py4j.java_gateway import java_import
+        java_import(gateway.jvm, 'java.util.HashMap')
+        result = gateway.jvm.HashMap()
+        result.put('train_steps', int(self.mulligan_train_step_counter))
+        result.put('train_samples', int(self.mulligan_train_sample_counter))
+        return result
+
+    def recordGameResult(self, lastValuePrediction, won):
+        """
+        Record game result for value head quality tracking and auto-GAE.
+        Called from Java after each game ends.
+
+        Args:
+            lastValuePrediction: The final value prediction from the model
+            won: True if the RL player won the game
+        """
+        self.record_value_prediction(lastValuePrediction, won)
+
+    def getValueHeadMetrics(self):
+        """
+        Get current value head quality metrics (callable from Java).
+        Returns a HashMap with accuracy, avg_win, avg_loss, samples.
+        """
+        from py4j.java_gateway import java_import
+        java_import(gateway.jvm, 'java.util.HashMap')
+        metrics = self.get_value_metrics()
+        result = gateway.jvm.HashMap()
+        result.put('accuracy', float(metrics['accuracy']))
+        result.put('avg_win', float(metrics['avg_win']))
+        result.put('avg_loss', float(metrics['avg_loss']))
+        result.put('samples', int(metrics['samples']))
+        result.put('use_gae', self.use_gae)
+        return result
+
+    def getAutoBatchMetrics(self):
+        """
+        Export auto-batching decisions + timing metrics for Prometheus/Grafana via Java.
+        Returns a HashMap with counters, caps, estimates, and operation timings.
+        """
+        from py4j.java_gateway import java_import
+        java_import(gateway.jvm, 'java.util.HashMap')
+        result = gateway.jvm.HashMap()
+        role = str(getattr(self, "py_role", "learner")).strip().lower()
+        port = str(os.getenv("PY4J_PORT", "")).strip()
+        worker = f"{role}_port{port}_pid{os.getpid()}"
+        result.put("worker", worker)
+        result.put("role", role)
+        result.put("infer_safe_max", int(self._infer_safe_max) if self._infer_safe_max is not None else 0)
+        result.put("train_safe_max_episodes", int(self._train_safe_max_episodes) if self._train_safe_max_episodes is not None else 0)
+        result.put("infer_mb_per_sample", float(self._infer_mb_per_sample) if self._infer_mb_per_sample is not None else 0.0)
+        result.put("train_mb_per_step", float(self._train_mb_per_step) if self._train_mb_per_step is not None else 0.0)
+
+        # Refresh mem info best-effort so gauges are live.
+        try:
+            self._desired_free_mb()
+        except Exception:
+            pass
+        result.put("free_mb", float(self._autobatch_last_free_mb))
+        result.put("total_mb", float(self._autobatch_last_total_mb))
+        result.put("desired_free_mb", float(self._autobatch_last_desired_free_mb))
+
+        # Add timing metrics
+        timing = self.metrics.get_timing_metrics()
+        result.put("train_time_ms", float(timing['train_time_ms']))
+        result.put("infer_time_ms", float(timing['infer_time_ms']))
+        result.put("mulligan_time_ms", float(timing['mulligan_time_ms']))
+
+        for k, v in self._autobatch_counts.items():
+            try:
+                result.put(k, int(v))
+            except Exception:
+                pass
+        return result
 
     def shutdown(self):
         """Allows Java to cleanly shut down the Python gateway."""
@@ -1053,7 +2049,19 @@ class PythonEntryPoint:
 
 
 if __name__ == "__main__":
+    exit_code = 0
     try:
+        # CLI args (used by Java launcher); env vars still supported.
+        parser = argparse.ArgumentParser(add_help=False)
+        parser.add_argument("--port", type=int, default=None)
+        parser.add_argument("--role", type=str, default=None)
+        args, _ = parser.parse_known_args()
+
+        py4j_port = int(args.port) if args.port is not None else int(os.getenv("PY4J_PORT", "25334"))
+        py_role = (args.role or os.getenv("PY_ROLE", "learner")).strip().lower()
+        os.environ["PY4J_PORT"] = str(py4j_port)
+        os.environ["PY_ROLE"] = py_role
+
         # Start Py4J gateway with retry logic
         max_retries = 5
         retry_delay = 2  # seconds
@@ -1065,11 +2073,11 @@ if __name__ == "__main__":
                             f"Attempting to start Py4J gateway (attempt {attempt + 1}/{max_retries})")
                 gateway = ClientServer(
                     java_parameters=JavaParameters(),
-                    python_parameters=PythonParameters(),
+                    python_parameters=PythonParameters(port=py4j_port),
                     python_server_entry_point=PythonEntryPoint()
                 )
                 logger.info(LogCategory.SYSTEM_INIT,
-                            f"Python ML service started and ready for connections")
+                            f"Python ML service started on port {py4j_port} (role={py_role})")
                 break
             except Exception as e:
                 logger.error(LogCategory.SYSTEM_ERROR,
@@ -1097,11 +2105,11 @@ if __name__ == "__main__":
                         try:
                             gateway = ClientServer(
                                 java_parameters=JavaParameters(),
-                                python_parameters=PythonParameters(),
+                                python_parameters=PythonParameters(port=py4j_port),
                                 python_server_entry_point=PythonEntryPoint()
                             )
                             logger.info(LogCategory.SYSTEM_INIT,
-                                        "Successfully reconnected to Py4J gateway")
+                                        f"Successfully reconnected to Py4J gateway on port {py4j_port}")
                         except Exception as e:
                             logger.error(LogCategory.SYSTEM_ERROR,
                                          "Failed to reconnect to Py4J gateway: %s", str(e))
@@ -1121,6 +2129,7 @@ if __name__ == "__main__":
     except Exception as e:
         logger.error(LogCategory.SYSTEM_ERROR,
                      "Fatal error in gateway thread: %s", str(e))
+        exit_code = 1
     finally:
         cleanup_temp_files()
         if gateway is not None:
@@ -1130,3 +2139,4 @@ if __name__ == "__main__":
                 logger.error(LogCategory.SYSTEM_ERROR,
                              "Error during gateway shutdown: %s", str(e))
         logger.info(LogCategory.SYSTEM_CLEANUP, "Python ML service stopped")
+        sys.exit(exit_code)

@@ -1,0 +1,67 @@
+$env:MTG_AI_LOG_LEVEL="INFO"
+$env:METRICS_PORT=9090
+
+# Inference workers (each = 1 Python proc + 1 model replica on GPU)
+$env:PY4J_BASE_PORT=25334
+$env:INFER_WORKERS=1
+$env:INFER_STARTUP_THREADS=1
+$env:PY_SCORE_TIMEOUT_MS=0   # No timeout - games wait as long as needed
+$env:MODEL_RELOAD_EVERY_MS=2000
+
+# Snapshots (keep VRAM stable)
+$env:SNAPSHOT_CACHE_SIZE=0
+
+# Learner queue (don’t stall runners)
+$env:TRAIN_QUEUE_MAX_EPISODES=80
+$env:TRAIN_QUEUE_DROP_ON_FULL=1
+$env:TRAIN_QUEUE_OFFER_TIMEOUT_MS=0
+
+# Learner micro-batching
+$env:LEARNER_BATCH_MAX_EPISODES=2
+$env:LEARNER_BATCH_MAX_STEPS=30
+
+$env:MODEL_SYNC_EVERY_TRAIN_STEPS=100
+$env:MODEL_SYNC_EVERY_MS=5000
+
+# Java-side inference batching (performance)
+$env:PY_BATCH_MAX_SIZE=30
+$env:PY_BATCH_TIMEOUT_MS=1000   # Increased from 5 to accumulate more samples
+$env:PY_BATCH_LOG_LEVEL="WARNING"
+
+# Python-side auto-batching (avoid paging/shared RAM)
+$env:AUTO_BATCH_ENABLE=1
+$env:AUTO_AVOID_PAGING=1
+$env:AUTO_TARGET_USED_FRAC=0.75   # Reduced from 0.85 for snapshot safety
+$env:AUTO_MIN_FREE_MB=2048         # Increased from 1024 for snapshot spikes
+
+# Torch profiler (REMOVED - replaced with manual timing metrics in Grafana)
+# $env:TORCH_PROFILER_ENABLE=0
+
+# Training settings
+$env:USE_GAE=0
+$env:GAE_AUTO_ENABLE=1
+$env:GAE_AUTO_THRESHOLD=0.65
+$env:GAE_AUTO_MIN_SAMPLES=200
+
+# NO WARMUP - Train everything from start
+$env:LOSS_SCHEDULE_ENABLE=0
+$env:CRITIC_WARMUP_STEPS=0
+$env:FREEZE_ENCODER_IN_WARMUP=0
+
+# BALANCED LOSS COEFFICIENTS
+$env:VALUE_LOSS_COEF=5              # Reduced from 20 to stop value head dominance
+$env:POLICY_LOSS_COEF=2.0           # Increased from 0.5 to strengthen policy learning
+$env:ENTROPY_LOSS_MULT=0.5
+
+# Debug
+$env:VALUE_POSTUPDATE_DIAG_EVERY=200
+$env:VALUE_TARGET_DIAG_EVERY=200
+$env:VALUE_GRAD_DIAG_EVERY=200
+$env:SCORE_DIAG_EVERY=2000
+
+# League type
+$env:OPPONENT_SAMPLER="adaptive"
+
+# Run
+.\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -TotalEpisodes 100000 -NumGameRunners 50 `
+  -DeckListFile "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/decks/PauperSubset/decklist.txt"

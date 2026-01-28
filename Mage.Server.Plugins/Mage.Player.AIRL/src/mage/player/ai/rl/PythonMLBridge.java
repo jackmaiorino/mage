@@ -3,6 +3,8 @@ package mage.player.ai.rl;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -13,6 +15,8 @@ import java.util.logging.Level;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.net.InetAddress;
 import javax.net.ServerSocketFactory;
 import javax.net.SocketFactory;
@@ -31,8 +35,21 @@ public class PythonMLBridge implements AutoCloseable {
     private static final boolean VERBOSE_SUBPROCESS_LOGS
             = "1".equals(System.getenv().getOrDefault("PY_BRIDGE_VERBOSE", "0"))
             || "true".equalsIgnoreCase(System.getenv().getOrDefault("PY_BRIDGE_VERBOSE", "0"));
-    private static final int DEFAULT_PORT = 25334;
-    private static final int PYTHON_STARTUP_WAIT_MS = 30000;
+    private static final int DEFAULT_PY4J_PORT = 25334;
+    // Historical default was 30s, but in multi-process setups that makes startup look "hung".
+    // We rely on connectToPythonGateway retry logic for real readiness.
+    private static final int PYTHON_STARTUP_WAIT_MS = parseStartupWaitMs();
+    private static int parseStartupWaitMs() {
+        try {
+            String v = System.getenv("PYTHON_STARTUP_WAIT_MS");
+            if (v == null || v.trim().isEmpty()) {
+                return 1500;
+            }
+            return Math.max(0, Integer.parseInt(v.trim()));
+        } catch (Exception ignored) {
+            return 1500;
+        }
+    }
     private static final int PROCESS_KILL_WAIT_MS = 2000;
     private static final int MAX_INIT_RETRIES = 3;
     private static final int INIT_RETRY_DELAY_MS = 1000;
@@ -48,24 +65,53 @@ public class PythonMLBridge implements AutoCloseable {
     private final String venvPath = resolveVenvPath(projectRoot);
     private final String pythonScriptPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/MLPythonCode/py4j_entry_point.py").getAbsolutePath();
 
+    private final int py4jPort;
+    private final String pyRole;
+    private final boolean workerMode;
+    private final boolean cleanupEnabled;
+
     private ClientServer clientServer;
     private PythonEntryPoint entryPoint;
     private Process pythonProcess;
     private boolean isInitialized = false;
+    private PythonMLBatchManager batchManager;
+    private final Object py4jLock = new Object();
 
     /**
      * Private constructor to prevent direct instantiation
      */
     private PythonMLBridge() {
+        this(
+                parseIntEnv("PY4J_PORT", DEFAULT_PY4J_PORT),
+                System.getenv().getOrDefault("PY_ROLE", "learner"),
+                "1".equals(System.getenv().getOrDefault("PY_BRIDGE_WORKER", "0"))
+                || "true".equalsIgnoreCase(System.getenv().getOrDefault("PY_BRIDGE_WORKER", "0"))
+        );
+    }
+
+    private PythonMLBridge(int py4jPort, String pyRole, boolean workerMode) {
         try {
+            this.py4jPort = py4jPort;
+            this.pyRole = (pyRole == null || pyRole.trim().isEmpty()) ? "learner" : pyRole.trim();
+            this.workerMode = workerMode;
+            this.cleanupEnabled = "1".equals(System.getenv().getOrDefault("PY_BRIDGE_CLEANUP",
+                    (workerMode ? "0" : "1")))
+                    || "true".equalsIgnoreCase(System.getenv().getOrDefault("PY_BRIDGE_CLEANUP",
+                            (workerMode ? "0" : "1")));
+
             configureLogging();
             cleanupExistingPythonProcesses();
             setupPaths();
             setupVirtualEnvironment();
-            installDependencies();
+            if (!this.workerMode) {
+                installDependencies();
+            } else if (logger.isLoggable(Level.INFO)) {
+                logger.info("Worker mode: skipping dependency install checks");
+            }
             startPythonProcess();
             connectToPythonGateway();
             initializeModel();
+            this.batchManager = new PythonMLBatchManager(entryPoint, py4jLock);
             isInitialized = true;
         } catch (Exception e) {
             logger.severe("Failed to initialize Python ML Bridge: " + e.getMessage());
@@ -107,6 +153,25 @@ public class PythonMLBridge implements AutoCloseable {
             }
         }
         return instance;
+    }
+
+    /**
+     * Create an additional non-singleton bridge instance (for multi-process setups).
+     */
+    public static PythonMLBridge createAdditionalBridge(int py4jPort, String pyRole, boolean workerMode) {
+        return new PythonMLBridge(py4jPort, pyRole, workerMode);
+    }
+
+    private static int parseIntEnv(String key, int defaultValue) {
+        try {
+            String v = System.getenv(key);
+            if (v == null || v.trim().isEmpty()) {
+                return defaultValue;
+            }
+            return Integer.parseInt(v.trim());
+        } catch (Exception ignored) {
+            return defaultValue;
+        }
     }
 
     /**
@@ -228,7 +293,9 @@ public class PythonMLBridge implements AutoCloseable {
         String[] packages = {
             "numpy>=1.21.0",
             "transformers>=4.30.0",
-            "tensorboard>=2.12.0"
+            "tensorboard>=2.12.0",
+            // Required for TensorBoard "Profile" dashboard when using torch.profiler traces.
+            "torch-tb-profiler>=0.4.0"
         };
 
         for (String pkg : packages) {
@@ -391,7 +458,12 @@ public class PythonMLBridge implements AutoCloseable {
 
         // Use Python from virtual environment
         String pythonPath = getPythonExecutablePath("python");
-        ProcessBuilder pb = new ProcessBuilder(pythonPath, pythonScriptPath);
+        ProcessBuilder pb = new ProcessBuilder(
+                pythonPath,
+                pythonScriptPath,
+                "--port", String.valueOf(py4jPort),
+                "--role", pyRole
+        );
 
         // Set model path environment variable to a specific model file
         String modelPath = new File(projectRoot, "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/model.pt").getAbsolutePath();
@@ -408,6 +480,8 @@ public class PythonMLBridge implements AutoCloseable {
         pb.environment().put("MTG_MODEL_PATH", modelPath);
         // Keep Python console output quiet by default. Override via MTG_AI_LOG_LEVEL if desired.
         pb.environment().put("MTG_AI_LOG_LEVEL", System.getenv().getOrDefault("MTG_AI_LOG_LEVEL", "WARNING"));
+        pb.environment().put("PY4J_PORT", String.valueOf(py4jPort));
+        pb.environment().put("PY_ROLE", pyRole);
         if (logger.isLoggable(Level.INFO)) {
             logger.info("Set MTG_MODEL_PATH to: " + modelPath);
         }
@@ -431,27 +505,16 @@ public class PythonMLBridge implements AutoCloseable {
         outputThread.setDaemon(true);
         outputThread.start();
 
-        // Wait for Python process to start up and verify it's running
+        // Quick sanity check: ensure the process didn't exit immediately.
+        // Real readiness is handled by connectToPythonGateway() retry logic.
         long startTime = System.currentTimeMillis();
         while (System.currentTimeMillis() - startTime < PYTHON_STARTUP_WAIT_MS) {
             try {
-                // Check if process is still running
                 int exitValue = pythonProcess.exitValue();
                 throw new RuntimeException("Python process exited unexpectedly with code: " + exitValue);
             } catch (IllegalThreadStateException e) {
-                // Process is still running, which is good
-                Thread.sleep(100);
-            }
-        }
-
-        // Verify process is still running after wait
-        try {
-            int exitValue = pythonProcess.exitValue();
-            throw new RuntimeException("Python process exited unexpectedly with code: " + exitValue);
-        } catch (IllegalThreadStateException e) {
-            // Process is still running, which is good
-            if (logger.isLoggable(Level.INFO)) {
-                logger.info("Python process started successfully");
+                // still running
+                break;
             }
         }
     }
@@ -472,7 +535,7 @@ public class PythonMLBridge implements AutoCloseable {
                 clientServer = new ClientServer(
                         0,
                         InetAddress.getByName("127.0.0.1"),
-                        DEFAULT_PORT,
+                        py4jPort,
                         InetAddress.getByName("127.0.0.1"),
                         0,
                         0,
@@ -488,7 +551,7 @@ public class PythonMLBridge implements AutoCloseable {
                 // Test the connection by calling a simple method
                 entryPoint.initializeModel();
 
-                logger.info("Connected to Python ML Bridge on port " + DEFAULT_PORT);
+                logger.info("Connected to Python ML Bridge on port " + py4jPort + " (role=" + pyRole + ")");
                 return;
             } catch (Exception e) {
                 lastException = e;
@@ -533,28 +596,31 @@ public class PythonMLBridge implements AutoCloseable {
      * Cleans up any existing Python processes in Linux container.
      */
     private void cleanupExistingPythonProcesses() {
+        if (!cleanupEnabled) {
+            return;
+        }
         try {
             // On Windows we don't have pkill; skip cleanup.
             if (System.getProperty("os.name").toLowerCase().contains("win")) {
                 // Kill only processes running our script (best-effort).
                 // This avoids "callback server port already in use" failures.
-                String cmd =
-                        // 1) Kill lingering Python entrypoints
+                String cmd
+                        = // 1) Kill lingering Python entrypoints (best-effort)
                         "Get-CimInstance Win32_Process | "
-                                + "Where-Object { $_.CommandLine -like '*py4j_entry_point.py*' } | "
-                                + "ForEach-Object { Stop-Process -Id $_.ProcessId -Force } ; "
-                                // 2) Free Py4J callback/gateway ports if a previous Java run is stuck
-                                + "$ports = @(25333,25334); "
-                                + "foreach ($p in $ports) { "
-                                + "  $conns = Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue; "
-                                + "  foreach ($c in $conns) { "
-                                + "    $pid = $c.OwningProcess; "
-                                + "    $proc = Get-CimInstance Win32_Process -Filter \"ProcessId=$pid\" -ErrorAction SilentlyContinue; "
-                                + "    if ($proc -and $proc.Name -eq 'java.exe') { "
-                                + "      Stop-Process -Id $pid -Force "
-                                + "    } "
-                                + "  } "
-                                + "} ";
+                        + "Where-Object { $_.CommandLine -like '*py4j_entry_point.py*' } | "
+                        + "ForEach-Object { Stop-Process -Id $_.ProcessId -Force } ; "
+                        // 2) Free Py4J gateway port if a previous Java run is stuck
+                        + "$ports = @(" + py4jPort + "); "
+                        + "foreach ($p in $ports) { "
+                        + "  $conns = Get-NetTCPConnection -LocalPort $p -State Listen -ErrorAction SilentlyContinue; "
+                        + "  foreach ($c in $conns) { "
+                        + "    $pid = $c.OwningProcess; "
+                        + "    $proc = Get-CimInstance Win32_Process -Filter \"ProcessId=$pid\" -ErrorAction SilentlyContinue; "
+                        + "    if ($proc -and $proc.Name -eq 'java.exe') { "
+                        + "      Stop-Process -Id $pid -Force "
+                        + "    } "
+                        + "  } "
+                        + "} ";
                 ProcessBuilder pb = new ProcessBuilder("powershell", "-NoProfile", "-Command", cmd);
                 pb.redirectErrorStream(true);
                 Process process = pb.start();
@@ -564,14 +630,14 @@ public class PythonMLBridge implements AutoCloseable {
                 return;
             }
             // Use pkill to kill Python processes running our script
-            String scriptName = "py4j_entry_point.py";
-            ProcessBuilder pb = new ProcessBuilder("pkill", "-f", scriptName);
+            String match = "py4j_entry_point.py";
+            ProcessBuilder pb = new ProcessBuilder("pkill", "-f", match);
             Process process = pb.start();
             int exitCode = process.waitFor();
             if (exitCode == 0) {
-                logger.info("Successfully killed Python processes with script: " + scriptName);
+                logger.info("Successfully killed Python processes: " + match);
             } else {
-                logger.info("No Python processes found running script: " + scriptName);
+                logger.info("No Python processes found: " + match);
             }
             Thread.sleep(PROCESS_KILL_WAIT_MS);
         } catch (Exception e) {
@@ -628,10 +694,34 @@ public class PythonMLBridge implements AutoCloseable {
             int[] candidateActionIds,
             float[][] candidateFeatures,
             int[] candidateMask) {
+        return scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, "train");
+    }
+
+    public PythonMLBatchManager.PredictionResult scoreCandidates(
+            StateSequenceBuilder.SequenceOutput state,
+            int[] candidateActionIds,
+            float[][] candidateFeatures,
+            int[] candidateMask,
+            String policyKey) {
+        MetricsCollector.getInstance().recordInferenceRequest();
+        long startNs = System.nanoTime();
         CompletableFuture<PythonMLBatchManager.PredictionResult> future
-                = PythonMLBatchManager.getInstance(entryPoint).scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask);
+                = batchManager.scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, policyKey);
         try {
-            return future.get();
+            int timeoutMs = parseIntEnv("PY_SCORE_TIMEOUT_MS", 60000);
+            if (timeoutMs > 0) {
+                PythonMLBatchManager.PredictionResult r = future.get(timeoutMs, TimeUnit.MILLISECONDS);
+                long ms = (System.nanoTime() - startNs) / 1_000_000L;
+                MetricsCollector.getInstance().recordInferenceLatencyMs(ms);
+                return r;
+            }
+            PythonMLBatchManager.PredictionResult r = future.get();
+            long ms = (System.nanoTime() - startNs) / 1_000_000L;
+            MetricsCollector.getInstance().recordInferenceLatencyMs(ms);
+            return r;
+        } catch (TimeoutException te) {
+            MetricsCollector.getInstance().recordInferenceTimeout();
+            throw new RuntimeException("Candidate scoring timed out", te);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException("Candidate scoring failed", e);
         }
@@ -653,7 +743,7 @@ public class PythonMLBridge implements AutoCloseable {
 
     /**
      * Predict mulligan decision for a given hand.
-     * 
+     *
      * @param features Mulligan feature vector (hand + context)
      * @return Probability of keeping the hand (0.0 = mulligan, 1.0 = keep)
      */
@@ -665,8 +755,11 @@ public class PythonMLBridge implements AutoCloseable {
         try {
             // Call Python mulligan model
             // Returns a single float: probability of keeping
-            Object result = entryPoint.predictMulligan(features);
-            
+            Object result;
+            synchronized (py4jLock) {
+                result = entryPoint.predictMulligan(features);
+            }
+
             if (result instanceof Double) {
                 return ((Double) result).floatValue();
             } else if (result instanceof Float) {
@@ -685,18 +778,189 @@ public class PythonMLBridge implements AutoCloseable {
     }
 
     /**
-     * Train the model with a batch of states and discounted returns.
+     * Return raw two-headed mulligan scores: [Q_keep, Q_mull].
      */
-    public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> discountedReturns) {
+    public float[] predictMulliganScores(float[] features) {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        try {
+            Object result;
+            synchronized (py4jLock) {
+                result = entryPoint.predictMulliganScores(features);
+            }
+
+            if (!(result instanceof byte[])) {
+                logger.warning("Unexpected mulligan score type: " + (result == null ? "null" : result.getClass()));
+                return new float[]{0.0f, 0.0f};
+            }
+            byte[] bytes = (byte[]) result;
+            if (bytes.length < 8) {
+                logger.warning("Unexpected mulligan score byte length: " + bytes.length);
+                return new float[]{0.0f, 0.0f};
+            }
+            ByteBuffer buf = ByteBuffer.wrap(bytes).order(ByteOrder.LITTLE_ENDIAN);
+            float qKeep = buf.getFloat();
+            float qMull = buf.getFloat();
+            return new float[]{qKeep, qMull};
+        } catch (Py4JException e) {
+            logger.severe("Py4J error during mulligan score prediction: " + e.getMessage());
+            throw new RuntimeException("Failed to predict mulligan scores", e);
+        } catch (Exception e) {
+            logger.severe("Error during mulligan score prediction: " + e.getMessage());
+            throw new RuntimeException("Failed to predict mulligan scores", e);
+        }
+    }
+
+    /**
+     * Train the mulligan model with a batch of training data.
+     *
+     * @param features Batch of mulligan features
+     * @param decisions Batch of mulligan decisions (1=keep, 0=mulligan)
+     * @param outcomes Batch of game outcomes (win/loss)
+     * @param landCounts Batch of land counts for heuristic
+     * @param batchSize Size of the batch
+     */
+    public void trainMulligan(byte[] features, byte[] decisions, byte[] outcomes, byte[] landCounts, int batchSize) {
         if (!isInitialized) {
             throw new IllegalStateException("Python ML Bridge not initialized");
         }
 
         try {
-            PythonMLBatchManager.getInstance(entryPoint).train(trainingData, discountedReturns).get();
+            synchronized (py4jLock) {
+                entryPoint.trainMulligan(features, decisions, outcomes, landCounts, batchSize);
+            }
+        } catch (Py4JException e) {
+            logger.severe("Py4J error during mulligan training: " + e.getMessage());
+            throw new RuntimeException("Failed to train mulligan model", e);
+        } catch (Exception e) {
+            logger.severe("Error during mulligan training: " + e.getMessage());
+            throw new RuntimeException("Failed to train mulligan model", e);
+        }
+    }
+
+    /**
+     * Save the mulligan model to disk.
+     */
+    public void saveMulliganModel() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+
+        try {
+            synchronized (py4jLock) {
+                entryPoint.saveMulliganModel();
+            }
+        } catch (Py4JException e) {
+            logger.severe("Py4J error saving mulligan model: " + e.getMessage());
+            throw new RuntimeException("Failed to save mulligan model", e);
+        } catch (Exception e) {
+            logger.severe("Error saving mulligan model: " + e.getMessage());
+            throw new RuntimeException("Failed to save mulligan model", e);
+        }
+    }
+
+    /**
+     * Get main model training statistics (iterations and samples trained).
+     */
+    public java.util.Map<String, Integer> getMainModelTrainingStats() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            return entryPoint.getMainModelTrainingStats();
+        }
+    }
+
+    /**
+     * Get mulligan model training statistics (iterations and samples trained).
+     */
+    public java.util.Map<String, Integer> getMulliganModelTrainingStats() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            return entryPoint.getMulliganModelTrainingStats();
+        }
+    }
+
+    /**
+     * Record game result for value head quality tracking and auto-GAE.
+     * This is called after each game ends to track whether the value head
+     * correctly predicts wins (positive) vs losses (negative).
+     *
+     * @param lastValuePrediction The final value prediction from the model
+     * @param won True if the RL player won the game
+     */
+    public void recordGameResult(float lastValuePrediction, boolean won) {
+        if (!isInitialized) {
+            return; // Silently skip if not initialized
+        }
+        try {
+            synchronized (py4jLock) {
+                entryPoint.recordGameResult(lastValuePrediction, won);
+            }
+        } catch (Exception e) {
+            // Non-critical - just log and continue
+            logger.warning("Failed to record game result for auto-GAE: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Get current value head quality metrics from Python.
+     * Returns a map with 'accuracy', 'avg_win', 'avg_loss', 'samples', 'use_gae'.
+     */
+    public java.util.Map<String, Object> getValueHeadMetrics() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            return entryPoint.getValueHeadMetrics();
+        }
+    }
+
+    public java.util.Map<String, Object> getAutoBatchMetrics() {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        synchronized (py4jLock) {
+            return entryPoint.getAutoBatchMetrics();
+        }
+    }
+
+    /**
+     * Train the model with a batch of states and immediate rewards.
+     * GAE (Generalized Advantage Estimation) will be computed in Python.
+     */
+    public void train(List<StateSequenceBuilder.TrainingData> trainingData, List<Double> rewards) {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+
+        try {
+            batchManager.train(trainingData, rewards).get();
         } catch (Exception e) {
             logger.severe("Error during training: " + e.getMessage());
             throw new RuntimeException("Failed to train Python model", e);
+        }
+    }
+
+    /**
+     * Train on a concatenated multi-episode batch. The dones vector marks episode ends (1=end).
+     * This is used by the learner thread to increase GPU utilization and reduce per-episode overhead.
+     */
+    public void trainMulti(
+            List<StateSequenceBuilder.TrainingData> trainingData,
+            List<Double> rewards,
+            List<Integer> dones) {
+        if (!isInitialized) {
+            throw new IllegalStateException("Python ML Bridge not initialized");
+        }
+        try {
+            batchManager.trainMulti(trainingData, rewards, dones).get();
+        } catch (Exception e) {
+            logger.severe("Error during multi-episode training: " + e.getMessage());
+            throw new RuntimeException("Failed to train Python model (multi)", e);
         }
     }
 
@@ -709,7 +973,9 @@ public class PythonMLBridge implements AutoCloseable {
         }
 
         try {
-            entryPoint.saveModel(path);
+            synchronized (py4jLock) {
+                entryPoint.saveModel(path);
+            }
         } catch (Py4JException e) {
             logger.severe("Py4J error saving model: " + e.getMessage());
             throw new RuntimeException("Failed to save Python model", e);
@@ -728,13 +994,76 @@ public class PythonMLBridge implements AutoCloseable {
         }
 
         try {
-            entryPoint.loadModel(path);
+            synchronized (py4jLock) {
+                entryPoint.loadModel(path);
+            }
         } catch (Py4JException e) {
             logger.severe("Py4J error loading model: " + e.getMessage());
             throw new RuntimeException("Failed to load Python model", e);
         } catch (Exception e) {
             logger.severe("Error loading model: " + e.getMessage());
             throw new RuntimeException("Failed to load Python model", e);
+        }
+    }
+
+    public boolean saveLatestModelAtomic(String path) {
+        if (!isInitialized) {
+            return false;
+        }
+        try {
+            synchronized (py4jLock) {
+                return entryPoint.saveLatestModelAtomic(path);
+            }
+        } catch (Exception e) {
+            logger.warning("Failed to save latest model: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean reloadLatestModelIfNewer(String path) {
+        if (!isInitialized) {
+            return false;
+        }
+        try {
+            synchronized (py4jLock) {
+                return entryPoint.reloadLatestModelIfNewer(path);
+            }
+        } catch (Exception e) {
+            logger.warning("Failed to reload latest model: " + e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Acquire GPU lock (for learner training burst).
+     * Holds lock until releaseGPULock() is called.
+     */
+    public void acquireGPULock() {
+        if (!isInitialized) {
+            return;
+        }
+        try {
+            synchronized (py4jLock) {
+                entryPoint.acquireGPULock();
+            }
+        } catch (Exception e) {
+            logger.warning("Failed to acquire GPU lock: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Release GPU lock (after learner training burst).
+     */
+    public void releaseGPULock() {
+        if (!isInitialized) {
+            return;
+        }
+        try {
+            synchronized (py4jLock) {
+                entryPoint.releaseGPULock();
+            }
+        } catch (Exception e) {
+            logger.warning("Failed to release GPU lock: " + e.getMessage());
         }
     }
 
@@ -783,7 +1112,10 @@ public class PythonMLBridge implements AutoCloseable {
         }
 
         try {
-            int optimalSize = entryPoint.getOptimalBatchSize();
+            int optimalSize;
+            synchronized (py4jLock) {
+                optimalSize = entryPoint.getOptimalBatchSize();
+            }
             logger.info("GPU-optimized batch size calculated: " + optimalSize + " samples");
             return optimalSize;
         } catch (Exception e) {
@@ -800,7 +1132,9 @@ public class PythonMLBridge implements AutoCloseable {
             return "device=unknown cuda_available=false gpu= optimal_batch=null";
         }
         try {
-            return entryPoint.getDeviceInfo();
+            synchronized (py4jLock) {
+                return entryPoint.getDeviceInfo();
+            }
         } catch (Exception e) {
             return "device_info_error=" + e.getMessage();
         }
