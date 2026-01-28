@@ -219,31 +219,39 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         float[] actionProbs = prediction.policyScores; // length = maxCandidates
         float valueScore = prediction.valueScores;
 
-        // Apply mask and normalize over valid candidates only
+        // PPO-critical: mask in logits space then softmax to get a valid categorical distribution.
+        float[] logits = new float[candidateCount];
+        float maxLogit = -Float.MAX_VALUE;
+        for (int i = 0; i < candidateCount; i++) {
+            float p = actionProbs[i];
+            if (Float.isNaN(p) || Float.isInfinite(p) || p <= 0.0f) {
+                p = 1e-20f;
+            }
+            float logit = (float) Math.log(p);
+            if (candidateMask[i] != 1) {
+                logit = -1e9f;
+            }
+            logits[i] = logit;
+            if (logit > maxLogit) {
+                maxLogit = logit;
+            }
+        }
         float[] maskedProbs = new float[candidateCount];
-
-        // Apply mask and sum up probabilities
         float sum = 0.0f;
         for (int i = 0; i < candidateCount; i++) {
-            float prob = actionProbs[i];
-            // Handle numerical stability issues
-            if (Float.isNaN(prob) || Float.isInfinite(prob)) {
-                prob = 0.0f;
-            }
-            maskedProbs[i] = prob * (candidateMask[i] == 1 ? 1.0f : 0.0f);
-            sum += maskedProbs[i];
+            float e = (candidateMask[i] == 1) ? (float) Math.exp(logits[i] - maxLogit) : 0.0f;
+            maskedProbs[i] = e;
+            sum += e;
         }
-
-        // Normalize probabilities
-        if (sum > 0) {
-            for (int i = 0; i < candidateCount; i++) {
-                maskedProbs[i] /= sum;
-            }
-        } else {
-            // If all probabilities are 0, use uniform distribution
+        if (sum <= 0.0f || Float.isNaN(sum) || Float.isInfinite(sum)) {
+            // Fallback: uniform over valid candidates
             float uniformProb = 1.0f / candidateCount;
             for (int i = 0; i < candidateCount; i++) {
                 maskedProbs[i] = uniformProb;
+            }
+        } else {
+            for (int i = 0; i < candidateCount; i++) {
+                maskedProbs[i] /= sum;
             }
         }
 
@@ -254,93 +262,105 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         this.lastActionProbs = maskedProbs.clone();
         this.lastValueScore = valueScore;
 
-        // Choose indices ---------------------------------------------
+        // Choose indices (sequential without replacement) + joint old log-prob (PPO-critical)
         List<Integer> selectedIndices = new ArrayList<>();
+        boolean[] selected = new boolean[candidateCount];
+        float oldLogpTotal = 0.0f;
         Random random = new Random();
-        if (greedyMode) {
-            // Deterministic arg-max
-            int bestIdx = 0;
-            float bestProb = maskedProbs[0];
-            for (int i = 1; i < candidateCount; i++) {
-                if (maskedProbs[i] > bestProb) {
-                    bestProb = maskedProbs[i];
-                    bestIdx = i;
+        int picks = maxTargets; // historical behavior: pick maxTargets (then ensure >= minTargets via truncation above)
+        for (int t = 0; t < picks; t++) {
+            float denom = 0.0f;
+            for (int i = 0; i < candidateCount; i++) {
+                if (!selected[i]) {
+                    denom += maskedProbs[i];
                 }
             }
-            selectedIndices.add(bestIdx);
-        } else {
-            // Stochastic sampling as before
-            float[] cumulativeProbs = new float[candidateCount];
-            cumulativeProbs[0] = maskedProbs[0];
-            for (int i = 1; i < candidateCount; i++) {
-                cumulativeProbs[i] = cumulativeProbs[i - 1] + maskedProbs[i];
-            }
-
-            while (selectedIndices.size() < maxTargets) {
-                float r = random.nextFloat();
-                for (int i = 0; i < cumulativeProbs.length; i++) {
-                    if (r <= cumulativeProbs[i]) {
-                        if (!selectedIndices.contains(i)) {
-                            selectedIndices.add(i);
-                        }
+            if (!(denom > 0.0f)) {
+                // Degenerate: pick first remaining
+                int fallback = -1;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (!selected[i]) {
+                        fallback = i;
                         break;
                     }
                 }
+                if (fallback < 0) {
+                    break;
+                }
+                selected[fallback] = true;
+                selectedIndices.add(fallback);
+                oldLogpTotal += (float) Math.log(1e-8f);
+                continue;
             }
-        }
 
-        // Ensure we have at least minTargets
-        while (selectedIndices.size() < minTargets) {
-            int remaining = candidateCount - selectedIndices.size();
-            if (remaining <= 0) {
-                break;
-            }
-
-            // Find indices not yet selected
-            List<Integer> available = new ArrayList<>();
-            for (int i = 0; i < candidateCount; i++) {
-                if (!selectedIndices.contains(i)) {
-                    available.add(i);
+            int pickIdx = -1;
+            if (greedyMode) {
+                float best = -1.0f;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (!selected[i] && maskedProbs[i] > best) {
+                        best = maskedProbs[i];
+                        pickIdx = i;
+                    }
+                }
+            } else {
+                float r = random.nextFloat() * denom;
+                float c = 0.0f;
+                for (int i = 0; i < candidateCount; i++) {
+                    if (selected[i]) {
+                        continue;
+                    }
+                    c += maskedProbs[i];
+                    if (r <= c) {
+                        pickIdx = i;
+                        break;
+                    }
+                }
+                if (pickIdx < 0) {
+                    // numerical edge: take last remaining
+                    for (int i = candidateCount - 1; i >= 0; i--) {
+                        if (!selected[i]) {
+                            pickIdx = i;
+                            break;
+                        }
+                    }
                 }
             }
-
-            // Randomly select from remaining indices
-            if (!available.isEmpty()) {
-                selectedIndices.add(available.get(random.nextInt(available.size())));
+            if (pickIdx < 0) {
+                break;
             }
+            float pCond = maskedProbs[pickIdx] / denom;
+            oldLogpTotal += (float) Math.log(Math.max(1e-8f, pCond));
+            selected[pickIdx] = true;
+            selectedIndices.add(pickIdx);
         }
 
-        // after you compute logits/probs and make a choice
-        // Record training data for decisions
+        // Record training data for decisions (store full action + joint log-prob)
         if (trainingEnabled && !selectedIndices.isEmpty()) {
-            if (minTargets == 1 && maxTargets == 1) {
-                // Single-choice decision: log the chosen option
-                int chosen = selectedIndices.get(0);
-                double stepReward = computeStepReward(actionType, candidates.get(chosen));
-                trainingBuffer.add(new StateSequenceBuilder.TrainingData(
-                        baseState,
-                        candidateCount,
-                        candidateActionIds,
-                        candidateFeatures,
-                        candidateMask,
-                        chosen,
-                        actionType,
-                        stepReward));
-            } else if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
-                // Multi-choice ranking decision (London mulligan): store temporarily
-                // Only commit to training buffer if we KEEP the resulting hand
-                // (If we mulligan again, these cards get shuffled back and have no impact)
-                int bestKeptIndex = selectedIndices.get(0);
-                double stepReward = computeStepReward(actionType, candidates.get(bestKeptIndex));
-                pendingLondonMulliganTraining = new StateSequenceBuilder.TrainingData(
-                        baseState,
-                        candidateCount,
-                        candidateActionIds,
-                        candidateFeatures,
-                        candidateMask,
-                        bestKeptIndex,
-                        actionType,
-                        stepReward);
+            int[] chosenIndices = new int[maxCandidates];
+            Arrays.fill(chosenIndices, -1);
+            int chosenCount = Math.min(selectedIndices.size(), maxCandidates);
+            for (int i = 0; i < chosenCount; i++) {
+                chosenIndices[i] = selectedIndices.get(i);
+            }
+            int firstChosen = selectedIndices.get(0);
+            double stepReward = computeStepReward(actionType, candidates.get(firstChosen));
+            StateSequenceBuilder.TrainingData td = new StateSequenceBuilder.TrainingData(
+                    baseState,
+                    candidateCount,
+                    candidateActionIds,
+                    candidateFeatures,
+                    candidateMask,
+                    chosenCount,
+                    chosenIndices,
+                    oldLogpTotal,
+                    actionType,
+                    stepReward
+            );
+            if (actionType == StateSequenceBuilder.ActionType.LONDON_MULLIGAN) {
+                // Only commit if we KEEP the resulting hand.
+                pendingLondonMulliganTraining = td;
+            } else {
+                trainingBuffer.add(td);
             }
         }
 
@@ -442,31 +462,31 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     private double computeStepReward(StateSequenceBuilder.ActionType actionType, Object candidate) {
         // Denser reward shaping for better credit assignment
         // Terminal reward (+1/-1) is too sparse for long games
-        
+
         if (actionType == StateSequenceBuilder.ActionType.DECLARE_ATTACKS) {
             // Attacking is generally good - pressures opponent
             return ATTACK_REWARD;
         }
-        
+
         if (actionType == StateSequenceBuilder.ActionType.DECLARE_BLOCKS) {
             // Blocking prevents damage (small reward since sometimes not blocking is better)
             return BLOCK_REWARD;
         }
-        
+
         if (actionType != StateSequenceBuilder.ActionType.ACTIVATE_ABILITY_OR_SPELL || candidate == null) {
             return 0.0;
         }
-        
+
         if (candidate instanceof PlayLandAbility) {
             return LAND_PLAY_REWARD;
         }
-        
+
         if (candidate instanceof SpellAbility) {
             // NOTE: Can't check if creature without Game object
             // Treat all spells equally for now
             return SPELL_CAST_REWARD;
         }
-        
+
         return 0.0;
     }
 

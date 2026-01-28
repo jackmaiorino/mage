@@ -163,44 +163,52 @@ class PythonEntryPoint:
         # Core model state
         self.model = None
         self.optimizer = None
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.device = torch.device(
+            'cuda' if torch.cuda.is_available() else 'cpu')
         self.py_role = os.getenv("PY_ROLE", "learner").strip().lower()
-        
+
         # GPU coordination lock (inter-process)
         self.gpu_lock = GPULock()
         self.process_name = f"{self.py_role}_{os.getpid()}"
-        
+
         # Initialize helper modules
         self.cuda_mgr = CUDAManager(self.py_role)
         self.snapshot_mgr = SnapshotManager(self.device)
         self.metrics = MetricsCollector()
         self.persistence = ModelPersistence()
-        
+
         # Mulligan model
         self.mulligan_model = None
         self.mulligan_optimizer = None
         self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH',
                                              'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_model.pt')
         self.mulligan_lock = threading.Lock()
-        
+
         # PPO configuration
         self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
         self.use_ppo = bool(int(os.getenv('USE_PPO', '1')))
-        
+
         # Loss scheduling
-        self.loss_schedule_enable = bool(int(os.getenv('LOSS_SCHEDULE_ENABLE', '1')))
+        self.loss_schedule_enable = bool(
+            int(os.getenv('LOSS_SCHEDULE_ENABLE', '1')))
         self.critic_warmup_steps = int(os.getenv('CRITIC_WARMUP_STEPS', '200'))
-        self.freeze_encoder_in_warmup = bool(int(os.getenv('FREEZE_ENCODER_IN_WARMUP', '1')))
+        self.freeze_encoder_in_warmup = bool(
+            int(os.getenv('FREEZE_ENCODER_IN_WARMUP', '1')))
         self._encoder_frozen = False
-        
+
         # Loss coefficients
-        self.policy_loss_coef_warmup = float(os.getenv('POLICY_LOSS_COEF_WARMUP', '0.0'))
-        self.value_loss_coef_warmup = float(os.getenv('VALUE_LOSS_COEF_WARMUP', '20.0'))
-        self.entropy_loss_mult_warmup = float(os.getenv('ENTROPY_LOSS_MULT_WARMUP', '0.0'))
-        self.policy_loss_coef_main = float(os.getenv('POLICY_LOSS_COEF', '1.0'))
+        self.policy_loss_coef_warmup = float(
+            os.getenv('POLICY_LOSS_COEF_WARMUP', '0.0'))
+        self.value_loss_coef_warmup = float(
+            os.getenv('VALUE_LOSS_COEF_WARMUP', '20.0'))
+        self.entropy_loss_mult_warmup = float(
+            os.getenv('ENTROPY_LOSS_MULT_WARMUP', '0.0'))
+        self.policy_loss_coef_main = float(
+            os.getenv('POLICY_LOSS_COEF', '1.0'))
         self.value_loss_coef_main = float(os.getenv('VALUE_LOSS_COEF', '5.0'))
-        self.entropy_loss_mult_main = float(os.getenv('ENTROPY_LOSS_MULT', '1.0'))
-        
+        self.entropy_loss_mult_main = float(
+            os.getenv('ENTROPY_LOSS_MULT', '1.0'))
+
         # Auto-batching state (kept for backward compatibility)
         self._infer_safe_max = None
         self._train_safe_max_episodes = None
@@ -208,83 +216,85 @@ class PythonEntryPoint:
             "infer_splits_cap": 0, "infer_splits_paging": 0, "infer_splits_oom": 0,
             "train_splits_cap": 0, "train_splits_paging": 0, "train_splits_oom": 0,
         }
-        
+
         # Running advantage statistics for cross-batch normalization
         # Per-batch normalization destroys policy signal when all samples have similar outcomes
         self._adv_running_mean = 0.0
         self._adv_running_var = 1.0
-        self._adv_ema_alpha = float(os.getenv('ADV_EMA_ALPHA', '0.01'))  # Smooth update
-        self._adv_use_running = bool(int(os.getenv('ADV_USE_RUNNING_STATS', '1')))  # Enable by default
-        
+        self._adv_ema_alpha = float(
+            os.getenv('ADV_EMA_ALPHA', '0.01'))  # Smooth update
+        self._adv_use_running = bool(
+            int(os.getenv('ADV_USE_RUNNING_STATS', '1')))  # Enable by default
+
         logger.info(LogCategory.GPU_MEMORY, "Using device: %s", self.device)
 
     # CUDA/profiler methods and properties - delegate to cuda_mgr
     @property
     def auto_batch_enable(self):
         return self.cuda_mgr.auto_batch_enable
-    
+
     @property
     def auto_avoid_paging(self):
         return self.cuda_mgr.auto_avoid_paging
-    
+
     @property
     def auto_target_used_frac(self):
         return self.cuda_mgr.auto_target_used_frac
-    
+
     @property
     def auto_min_free_mb(self):
         return self.cuda_mgr.auto_min_free_mb
-    
+
     @property
     def auto_mem_ema_alpha(self):
         return self.cuda_mgr.auto_mem_ema_alpha
-    
+
     @property
     def _infer_mb_per_sample(self):
         return self.cuda_mgr._infer_mb_per_sample
-    
+
     @_infer_mb_per_sample.setter
     def _infer_mb_per_sample(self, value):
         self.cuda_mgr._infer_mb_per_sample = value
-    
+
     @property
     def _train_mb_per_step(self):
         return self.cuda_mgr._train_mb_per_step
-    
+
     @_train_mb_per_step.setter
     def _train_mb_per_step(self, value):
         self.cuda_mgr._train_mb_per_step = value
-    
+
     @property
     def _autobatch_last_free_mb(self):
         return self.cuda_mgr._autobatch_last_free_mb
-    
+
     @property
     def _autobatch_last_total_mb(self):
         return self.cuda_mgr._autobatch_last_total_mb
-    
+
     @property
     def _autobatch_last_desired_free_mb(self):
         return self.cuda_mgr._autobatch_last_desired_free_mb
-    
+
     def _is_cuda_oom(self, e: Exception) -> bool:
         return self.cuda_mgr.is_cuda_oom(e)
-    
+
     def _cuda_cleanup_after_oom(self):
         self.cuda_mgr.cuda_cleanup_after_oom()
-    
+
     def _cuda_mem_info_mb(self):
         return self.cuda_mgr.cuda_mem_info_mb()
-    
+
     def _desired_free_mb(self):
         return self.cuda_mgr.desired_free_mb()
-    
+
     def _should_split_for_paging(self, estimated_extra_mb: float):
         return self.cuda_mgr.should_split_for_paging(estimated_extra_mb)
-    
+
     def _update_mem_ema(self, kind: str, extra_mb: float, n: int):
         self.cuda_mgr.update_mem_ema(kind, extra_mb, n)
-    
+
     def _measure_peak_extra_mb(self, fn):
         return self.cuda_mgr.measure_peak_extra_mb(fn)
 
@@ -419,31 +429,32 @@ class PythonEntryPoint:
     @property
     def snapshot_dir(self):
         return self.snapshot_mgr.snapshot_dir
-    
+
     @property
     def snapshot_save_every_steps(self):
         return self.snapshot_mgr.snapshot_save_every_steps
-    
+
     @property
     def snapshot_max_files(self):
         return self.snapshot_mgr.snapshot_max_files
-    
+
     @property
     def snapshot_cache_size(self):
         return self.snapshot_mgr.snapshot_cache_size
-    
+
     @property
     def snapshot_models(self):
         return self.snapshot_mgr.snapshot_models
-    
+
     def _get_snapshot_model(self, snap_id: str):
         return self.snapshot_mgr.get_snapshot_model(snap_id)
-    
+
     def _get_policy_model(self, policy_key: str):
         return self.snapshot_mgr.get_policy_model(policy_key, self.model)
-    
+
     def _maybe_save_snapshot(self):
-        self.snapshot_mgr.maybe_save_snapshot(self.metrics.train_step_counter, lambda path: self.saveModel(path))
+        self.snapshot_mgr.maybe_save_snapshot(
+            self.metrics.train_step_counter, lambda path: self.saveModel(path))
 
     def scoreCandidatesFlat(self,
                             sequences_bytes,
@@ -487,7 +498,7 @@ class PythonEntryPoint:
                                   cand_feat_dim):
         """Score padded candidates for each state (policy over candidates + value)."""
         t_start = time.perf_counter()
-        
+
         def _score_numpy_range(start: int, end: int):
             if self.model is None:
                 raise RuntimeError("Model not initialized")
@@ -510,10 +521,13 @@ class PythonEntryPoint:
             seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
             mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
             tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
-            cand_feat_t = torch.tensor(cand_feat, dtype=torch.float32, device=device)
-            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
-            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
-            
+            cand_feat_t = torch.tensor(
+                cand_feat, dtype=torch.float32, device=device)
+            cand_ids_t = torch.tensor(
+                cand_ids, dtype=torch.long, device=device)
+            cand_mask_t = torch.tensor(
+                cand_mask, dtype=torch.bool, device=device)
+
             # Release numpy slices immediately
             del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask
 
@@ -522,20 +536,21 @@ class PythonEntryPoint:
 
             # Hard requirement: inference must only run while GPULock is held
             if torch.cuda.is_available() and str(device).startswith("cuda") and not self.gpu_lock.is_locked:
-                raise RuntimeError("GPULock is required for inference. Call acquireGPULock() before scoring.")
+                raise RuntimeError(
+                    "GPULock is required for inference. Call acquireGPULock() before scoring.")
 
             with torch.no_grad():
                 probs, value = model.score_candidates(
                     seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
-            
+
             probs_np = probs.detach().cpu().numpy()
             value_np = value.detach().cpu().numpy()
-            
+
             # Release GPU tensors immediately (in this scope where they're defined)
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
-            
+
             return probs_np, value_np
 
         def _score_with_oom_splitting(start: int, end: int):
@@ -543,7 +558,8 @@ class PythonEntryPoint:
             if n <= 0:
                 return np.zeros((0, max_candidates), dtype=np.float32), np.zeros((0, 1), dtype=np.float32)
             # Proactive cap if configured or learned.
-            cap = self._infer_safe_max if (self.auto_batch_enable and self._infer_safe_max) else None
+            cap = self._infer_safe_max if (
+                self.auto_batch_enable and self._infer_safe_max) else None
             if cap is not None and n > cap:
                 try:
                     self._autobatch_counts["infer_splits_cap"] += 1
@@ -580,7 +596,8 @@ class PythonEntryPoint:
                     return np.concatenate((p0, p1), axis=0), np.concatenate((v0, v1), axis=0)
 
             try:
-                (p, v), extra_mb = self._measure_peak_extra_mb(lambda: _score_numpy_range(start, end))
+                (p, v), extra_mb = self._measure_peak_extra_mb(
+                    lambda: _score_numpy_range(start, end))
                 # Update per-sample estimate from measured peak delta.
                 self._update_mem_ema("infer", extra_mb, n)
                 return p, v
@@ -597,7 +614,8 @@ class PythonEntryPoint:
                     new_cap = max(1, n // 2)
                     if self._infer_safe_max is None or new_cap < int(self._infer_safe_max):
                         self._infer_safe_max = int(new_cap)
-                        logger.warning(LogCategory.GPU_BATCH, "AutoBatch(infer): OOM -> shrinking infer cap to %d", int(self._infer_safe_max))
+                        logger.warning(
+                            LogCategory.GPU_BATCH, "AutoBatch(infer): OOM -> shrinking infer cap to %d", int(self._infer_safe_max))
                     mid = start + (n // 2)
                     p0, v0 = _score_with_oom_splitting(start, mid)
                     p1, v1 = _score_with_oom_splitting(mid, end)
@@ -619,14 +637,20 @@ class PythonEntryPoint:
                 diag_every = int(os.getenv("SCORE_DIAG_EVERY", "0"))
                 if diag_every > 0 and (self.score_call_counter % diag_every == 0):
                     # mask: 1=pad, 0=valid (per StateSequenceBuilder). Keep this cheap: only inspect sample 0.
-                    mask_view = np.frombuffer(masks_bytes, dtype='<i4').reshape(batch_size, seq_len)
-                    tok_view = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(batch_size, seq_len)
-                    seq0 = np.frombuffer(sequences_bytes, dtype='<f4').reshape(batch_size, seq_len, d_model)[0]
-                    valid0 = int((mask_view[0] == 0).sum()) if batch_size > 0 else -1
-                    pad0 = int((mask_view[0] != 0).sum()) if batch_size > 0 else -1
+                    mask_view = np.frombuffer(
+                        masks_bytes, dtype='<i4').reshape(batch_size, seq_len)
+                    tok_view = np.frombuffer(
+                        token_ids_bytes, dtype='<i4').reshape(batch_size, seq_len)
+                    seq0 = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
+                        batch_size, seq_len, d_model)[0]
+                    valid0 = int((mask_view[0] == 0).sum()
+                                 ) if batch_size > 0 else -1
+                    pad0 = int((mask_view[0] != 0).sum()
+                               ) if batch_size > 0 else -1
                     seq_mean = float(seq0.mean()) if batch_size > 0 else 0.0
                     seq_std = float(seq0.std()) if batch_size > 0 else 0.0
-                    tok_unique0 = int(np.unique(tok_view[0]).shape[0]) if batch_size > 0 else 0
+                    tok_unique0 = int(
+                        np.unique(tok_view[0]).shape[0]) if batch_size > 0 else 0
                     logger.info(
                         LogCategory.MODEL_TRAIN,
                         "ScoreDiag call=%d policy=%s batch=%d | valid_tokens[0]=%d pad_tokens[0]=%d | seq0(mean=%.4f std=%.4f) tok_unique0=%d | value(mean=%.4f min=%.4f max=%.4f)",
@@ -648,7 +672,7 @@ class PythonEntryPoint:
 
             # Increment inference counter
             self.metrics.infer_counter += 1
-            
+
             # Clear GPU cache immediately to prevent memory buildup from parallel workers
             # Force GC every 50 inferences to aggressively prevent tensor reference leaks
             if torch.cuda.is_available():
@@ -660,13 +684,13 @@ class PythonEntryPoint:
             # Track timing
             elapsed_ms = (time.perf_counter() - t_start) * 1000.0
             self.metrics.update_timing_metric("infer", elapsed_ms)
-            
+
             out = np.concatenate((probs_np, value_np), axis=1)
             result_bytes = out.astype('<f4').tobytes()
-            
+
             # Clean up numpy arrays to prevent accumulation
             del probs_np, value_np, out
-            
+
             return result_bytes
 
         except Exception as e:
@@ -738,83 +762,117 @@ class PythonEntryPoint:
     @property
     def train_step_counter(self):
         return self.metrics.train_step_counter
-    
+
     @train_step_counter.setter
     def train_step_counter(self, value):
         self.metrics.train_step_counter = value
-    
+
     @property
     def mulligan_train_step_counter(self):
         return self.metrics.mulligan_train_step_counter
-    
+
     @mulligan_train_step_counter.setter
     def mulligan_train_step_counter(self, value):
         self.metrics.mulligan_train_step_counter = value
-    
+
     @property
     def score_call_counter(self):
         return self.metrics.score_call_counter
-    
+
     @score_call_counter.setter
     def score_call_counter(self, value):
         self.metrics.score_call_counter = value
-    
+
     @property
     def main_train_sample_counter(self):
         return self.metrics.main_train_sample_counter
-    
+
     @main_train_sample_counter.setter
     def main_train_sample_counter(self, value):
         self.metrics.main_train_sample_counter = value
-    
+
     @property
     def mulligan_train_sample_counter(self):
         return self.metrics.mulligan_train_sample_counter
-    
+
     @mulligan_train_sample_counter.setter
     def mulligan_train_sample_counter(self, value):
         self.metrics.mulligan_train_sample_counter = value
-    
+
     # GAE properties
     @property
     def use_gae(self):
         return self.metrics.use_gae
-    
+
     @use_gae.setter
     def use_gae(self, value):
         self.metrics.use_gae = value
-    
+
     @property
     def current_gae_lambda(self):
         return self.metrics.current_gae_lambda
-    
+
     @current_gae_lambda.setter
     def current_gae_lambda(self, value):
         self.metrics.current_gae_lambda = value
-    
+
     @property
     def gae_enabled_step(self):
         return self.metrics.gae_enabled_step
-    
+
     @gae_enabled_step.setter
     def gae_enabled_step(self, value):
         self.metrics.gae_enabled_step = value
-    
+
     # Delegated methods
     def get_entropy_coefficient(self):
         return self.metrics.get_entropy_coefficient()
-    
+
     def record_value_prediction(self, value_pred, won):
         self.metrics.record_value_prediction(value_pred, won)
-    
+
     def get_value_metrics(self):
         return self.metrics.get_value_metrics()
-    
+
     def update_gae_lambda_schedule(self):
         self.metrics.update_gae_lambda_schedule()
-    
+
     def compute_gae(self, rewards, values, gamma=0.99, gae_lambda=None, dones=None):
         return self.metrics.compute_gae(rewards, values, gamma, gae_lambda, dones)
+
+    def _joint_logp_from_probs(self, probs_safe, cand_mask_t, chosen_indices_t, chosen_count_t):
+        """
+        Compute joint log-prob for sequential sampling without replacement, using a fixed base probs vector.
+        Matches the Java behavior policy:
+        - Start with remaining = cand_mask (valid candidates)
+        - At each pick, renormalize over remaining and add log(p_cond)
+        - Remove chosen index from remaining
+        """
+        bsz, max_c = probs_safe.shape
+        remaining = cand_mask_t.bool().clone()
+        chosen_count_t = torch.clamp(chosen_count_t.long(), min=0, max=max_c)
+        logp = torch.zeros((bsz,), dtype=torch.float32,
+                           device=probs_safe.device)
+
+        # Only iterate up to max chosen count in batch (bounded by max_c <= 64).
+        max_k = int(chosen_count_t.max().item()
+                    ) if chosen_count_t.numel() > 0 else 0
+        for t in range(max_k):
+            active = chosen_count_t > t
+            if not bool(active.any().item()):
+                break
+            denom = (probs_safe * remaining.float()).sum(dim=1).clamp_min(1e-8)
+            idx = chosen_indices_t[:, t].long()
+            idx_clamped = torch.clamp(idx, min=0, max=max_c - 1)
+            p = probs_safe.gather(1, idx_clamped.unsqueeze(1)).squeeze(1)
+            p_cond = (p / denom).clamp_min(1e-8)
+            logp = logp + active.float() * torch.log(p_cond)
+
+            # Remove chosen from remaining for active rows
+            rows = torch.nonzero(active, as_tuple=False).squeeze(1)
+            if rows.numel() > 0:
+                remaining[rows, idx_clamped[rows]] = False
+        return logp
 
     def trainCandidatesFlat(self,
                             sequences_bytes,
@@ -823,7 +881,9 @@ class PythonEntryPoint:
                             candidate_features_bytes,
                             candidate_ids_bytes,
                             candidate_mask_bytes,
-                            chosen_index_bytes,
+                            chosen_indices_bytes,
+                            chosen_count_bytes,
+                            old_logp_total_bytes,
                             rewards_bytes,  # Changed from discounted_returns_bytes
                             batch_size,
                             seq_len,
@@ -851,7 +911,9 @@ class PythonEntryPoint:
             cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
                 batch_size, max_candidates)
 
-            chosen = np.frombuffer(chosen_index_bytes, dtype='<i4').reshape(
+            chosen_indices = np.frombuffer(chosen_indices_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)
+            chosen_count = np.frombuffer(chosen_count_bytes, dtype='<i4').reshape(
                 batch_size)
             rewards = np.frombuffer(rewards_bytes, dtype='<f4').reshape(
                 batch_size)
@@ -865,12 +927,19 @@ class PythonEntryPoint:
                 cand_ids, dtype=torch.long, device=device)
             cand_mask_t = torch.tensor(
                 cand_mask, dtype=torch.bool, device=device)
-            chosen_t = torch.tensor(chosen, dtype=torch.long, device=device)
+            chosen_indices_t = torch.tensor(
+                chosen_indices, dtype=torch.long, device=device)
+            chosen_count_t = torch.tensor(
+                chosen_count, dtype=torch.long, device=device)
             rewards_t = torch.tensor(
                 rewards, dtype=torch.float32, device=device)
-            
+            old_logp_total = np.frombuffer(
+                old_logp_total_bytes, dtype='<f4').reshape(batch_size)
+            old_logp_t = torch.tensor(
+                old_logp_total, dtype=torch.float32, device=device)
+
             # Release numpy arrays immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen, rewards
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total
 
             # Check for NaN/Inf in input data
             if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
@@ -902,14 +971,8 @@ class PythonEntryPoint:
                 elif (not in_warmup) and self._encoder_frozen:
                     self._set_encoder_requires_grad(True)
                     self._encoder_frozen = False
-                    logger.info(LogCategory.MODEL_TRAIN, "Warmup ended: unfroze encoder params")
-
-            # PPO: Get old policy probabilities before updating (no gradients)
-            with torch.no_grad():
-                old_probs, old_value = self.model.score_candidates(
-                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
-                old_selected_probs = old_probs.gather(
-                    1, chosen_t.unsqueeze(1)).squeeze(1)
+                    logger.info(LogCategory.MODEL_TRAIN,
+                                "Warmup ended: unfroze encoder params")
 
             self.optimizer.zero_grad()
 
@@ -1006,13 +1069,17 @@ class PythonEntryPoint:
             if self._adv_use_running and batch_size >= 1:
                 # Update running statistics with current batch
                 batch_mean = float(advantages.mean().item())
-                batch_var = float(advantages.var().item()) if batch_size >= 2 else 1.0
+                batch_var = float(advantages.var().item()
+                                  ) if batch_size >= 2 else 1.0
                 alpha = self._adv_ema_alpha
-                self._adv_running_mean = (1 - alpha) * self._adv_running_mean + alpha * batch_mean
-                self._adv_running_var = (1 - alpha) * self._adv_running_var + alpha * batch_var
+                self._adv_running_mean = (
+                    1 - alpha) * self._adv_running_mean + alpha * batch_mean
+                self._adv_running_var = (
+                    1 - alpha) * self._adv_running_var + alpha * batch_var
                 # Normalize using running stats (not per-batch)
                 running_std = max(self._adv_running_var ** 0.5, 1e-8)
-                advantages_normalized = (advantages - self._adv_running_mean) / running_std
+                advantages_normalized = (
+                    advantages - self._adv_running_mean) / running_std
             elif batch_size >= 2:
                 # Fallback to per-batch if running stats disabled
                 adv_std = advantages.std()
@@ -1020,19 +1087,13 @@ class PythonEntryPoint:
                     advantages_normalized = (
                         advantages - advantages.mean()) / adv_std
 
-            # Policy loss uses normalized advantages to prevent huge policy gradients
-            selected_probs = probs.gather(
-                1, chosen_t.unsqueeze(1)).squeeze(1)
+            probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
+            new_logp = self._joint_logp_from_probs(
+                probs_safe, cand_mask_t, chosen_indices_t, chosen_count_t)
 
             if self.use_ppo:
                 # PPO: Clipped surrogate objective with numerical stability
-                # Clamp probabilities to avoid division issues
-                selected_probs_safe = torch.clamp(
-                    selected_probs, min=1e-8, max=1.0)
-                old_selected_probs_safe = torch.clamp(
-                    old_selected_probs, min=1e-8, max=1.0)
-
-                ratio = selected_probs_safe / old_selected_probs_safe
+                ratio = torch.exp(new_logp - old_logp_t)
                 # Clamp ratio to prevent extreme values
                 ratio = torch.clamp(ratio, min=0.01, max=100.0)
 
@@ -1044,8 +1105,7 @@ class PythonEntryPoint:
                               clipped_ratio * advantages_normalized).mean()
             else:
                 # REINFORCE: Simple policy gradient with normalized advantages
-                log_probs = torch.log(selected_probs + 1e-9)
-                loss_policy = -(log_probs * advantages_normalized).mean()
+                loss_policy = -(new_logp * advantages_normalized).mean()
 
             # -------------------------------------------------------
             # Loss coefficients (scheduled)
@@ -1063,14 +1123,16 @@ class PythonEntryPoint:
             # Coefficient increased to 5.0 to force value head out of local minimum
             # At 1.0 coeff, value head gets stuck at -0.5 because MSE loss is "acceptable"
             # Higher coeff forces it to actually learn correct predictions
-            loss_value = value_loss_coef * F.mse_loss(value_squeezed, value_targets)
+            loss_value = value_loss_coef * \
+                F.mse_loss(value_squeezed, value_targets)
 
             # Entropy bonus (encourage exploration with decay schedule)
             # Clamp probabilities to avoid log(0)
             probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
             log_probs = torch.log(probs_safe)
             entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
-            loss_entropy = (self.get_entropy_coefficient() * entropy_loss_mult) * entropy
+            loss_entropy = (self.get_entropy_coefficient()
+                            * entropy_loss_mult) * entropy
 
             loss = (policy_loss_coef * loss_policy) + loss_value + loss_entropy
 
@@ -1143,13 +1205,14 @@ class PythonEntryPoint:
             # Log with PPO info if enabled
             if self.use_ppo:
                 with torch.no_grad():
-                    ratio = selected_probs / (old_selected_probs + 1e-10)
+                    # Log the same stable ratio as the loss, plus approx KL.
+                    approx_kl = (old_logp_t - new_logp).mean()
                     clip_frac = ((ratio < 1.0 - self.ppo_epsilon) |
                                  (ratio > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%%]",
+                            "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
-                            -self.get_entropy_coefficient(), clip_frac.item() * 100)
+                            -self.get_entropy_coefficient(), clip_frac.item() * 100, approx_kl.item())
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
@@ -1171,8 +1234,10 @@ class PythonEntryPoint:
                     v_after = v_after_eval
                     v_tgt = value_targets.detach().float().view(-1)
 
-                    mse_before = float(F.mse_loss(v_before, v_tgt).item()) if v_before.numel() > 0 else 0.0
-                    mse_after = float(F.mse_loss(v_after, v_tgt).item()) if v_after.numel() > 0 else 0.0
+                    mse_before = float(F.mse_loss(
+                        v_before, v_tgt).item()) if v_before.numel() > 0 else 0.0
+                    mse_after = float(F.mse_loss(
+                        v_after, v_tgt).item()) if v_after.numel() > 0 else 0.0
 
                     def _s(t):
                         if t.numel() == 0:
@@ -1219,11 +1284,11 @@ class PythonEntryPoint:
 
             # Explicit cleanup before saving to reduce VRAM pressure
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-            del chosen_t, rewards_t, value_targets, advantages
+            del chosen_indices_t, chosen_count_t, rewards_t, old_logp_t, value_targets, advantages
             del loss, loss_policy, loss_value, entropy
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
-            
+
             # Snapshot checkpoints (league opponents)
             self._maybe_save_snapshot()
 
@@ -1243,8 +1308,10 @@ class PythonEntryPoint:
                                  candidate_features_bytes,
                                  candidate_ids_bytes,
                                  candidate_mask_bytes,
-                                 chosen_index_bytes,
                                  rewards_bytes,
+                                 chosen_indices_bytes,
+                                 chosen_count_bytes,
+                                 old_logp_total_bytes,
                                  dones_bytes,
                                  batch_size,
                                  seq_len,
@@ -1256,7 +1323,7 @@ class PythonEntryPoint:
         dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
         """
         t_start = time.perf_counter()
-        
+
         def _train_slice(start: int, end: int):
             if self.model is None or self.optimizer is None:
                 raise RuntimeError("Model not initialized")
@@ -1276,9 +1343,13 @@ class PythonEntryPoint:
             cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
                 batch_size, max_candidates)[start:end]
 
-            chosen = np.frombuffer(chosen_index_bytes, dtype='<i4').reshape(
+            chosen_indices = np.frombuffer(chosen_indices_bytes, dtype='<i4').reshape(
+                batch_size, max_candidates)[start:end]
+            chosen_count = np.frombuffer(chosen_count_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
             rewards = np.frombuffer(rewards_bytes, dtype='<f4').reshape(
+                batch_size)[start:end]
+            old_logp_total = np.frombuffer(old_logp_total_bytes, dtype='<f4').reshape(
                 batch_size)[start:end]
             dones = np.frombuffer(dones_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
@@ -1286,15 +1357,24 @@ class PythonEntryPoint:
             seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
             mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
             tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
-            cand_feat_t = torch.tensor(cand_feat, dtype=torch.float32, device=device)
-            cand_ids_t = torch.tensor(cand_ids, dtype=torch.long, device=device)
-            cand_mask_t = torch.tensor(cand_mask, dtype=torch.bool, device=device)
-            chosen_t = torch.tensor(chosen, dtype=torch.long, device=device)
-            rewards_t = torch.tensor(rewards, dtype=torch.float32, device=device)
+            cand_feat_t = torch.tensor(
+                cand_feat, dtype=torch.float32, device=device)
+            cand_ids_t = torch.tensor(
+                cand_ids, dtype=torch.long, device=device)
+            cand_mask_t = torch.tensor(
+                cand_mask, dtype=torch.bool, device=device)
+            chosen_indices_t = torch.tensor(
+                chosen_indices, dtype=torch.long, device=device)
+            chosen_count_t = torch.tensor(
+                chosen_count, dtype=torch.long, device=device)
+            rewards_t = torch.tensor(
+                rewards, dtype=torch.float32, device=device)
+            old_logp_t = torch.tensor(
+                old_logp_total, dtype=torch.float32, device=device)
             dones_t = torch.tensor(dones, dtype=torch.float32, device=device)
-            
+
             # Release numpy slices immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen, rewards, dones
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, dones
 
             local_batch_size = int(end - start)
 
@@ -1327,17 +1407,12 @@ class PythonEntryPoint:
                 elif (not in_warmup) and self._encoder_frozen:
                     self._set_encoder_requires_grad(True)
                     self._encoder_frozen = False
-                    logger.info(LogCategory.MODEL_TRAIN, "Warmup ended: unfroze encoder params")
+                    logger.info(LogCategory.MODEL_TRAIN,
+                                "Warmup ended: unfroze encoder params")
 
             # GPU lock is acquired by Java learner loop, not here
             # (Learner holds lock for entire training burst)
             try:
-                with torch.no_grad():
-                    old_probs, old_value = self.model.score_candidates(
-                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
-                    old_selected_probs = old_probs.gather(
-                        1, chosen_t.unsqueeze(1)).squeeze(1)
-
                 self.optimizer.zero_grad()
 
                 probs, value = self.model.score_candidates(
@@ -1381,7 +1456,8 @@ class PythonEntryPoint:
                         _p0, _v0 = self.model.score_candidates(
                             seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
                         )
-                        v_before_eval = _v0.squeeze(1).detach().float().view(-1)
+                        v_before_eval = _v0.squeeze(
+                            1).detach().float().view(-1)
                         self.model.train()
                 if diag_every > 0 and (next_step % diag_every == 0):
                     with torch.no_grad():
@@ -1417,13 +1493,17 @@ class PythonEntryPoint:
                 if self._adv_use_running and local_batch_size >= 1:
                     # Update running statistics with current batch
                     batch_mean = float(advantages.mean().item())
-                    batch_var = float(advantages.var().item()) if local_batch_size >= 2 else 1.0
+                    batch_var = float(advantages.var().item()
+                                      ) if local_batch_size >= 2 else 1.0
                     alpha = self._adv_ema_alpha
-                    self._adv_running_mean = (1 - alpha) * self._adv_running_mean + alpha * batch_mean
-                    self._adv_running_var = (1 - alpha) * self._adv_running_var + alpha * batch_var
+                    self._adv_running_mean = (
+                        1 - alpha) * self._adv_running_mean + alpha * batch_mean
+                    self._adv_running_var = (
+                        1 - alpha) * self._adv_running_var + alpha * batch_var
                     # Normalize using running stats (not per-batch)
                     running_std = max(self._adv_running_var ** 0.5, 1e-8)
-                    advantages_normalized = (advantages - self._adv_running_mean) / running_std
+                    advantages_normalized = (
+                        advantages - self._adv_running_mean) / running_std
                 elif local_batch_size >= 2:
                     # Fallback to per-batch if running stats disabled
                     adv_std = advantages.std()
@@ -1431,16 +1511,12 @@ class PythonEntryPoint:
                         advantages_normalized = (
                             advantages - advantages.mean()) / adv_std
 
-                selected_probs = probs.gather(
-                    1, chosen_t.unsqueeze(1)).squeeze(1)
+                probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
+                new_logp = self._joint_logp_from_probs(
+                    probs_safe, cand_mask_t, chosen_indices_t, chosen_count_t)
 
                 if self.use_ppo:
-                    selected_probs_safe = torch.clamp(
-                        selected_probs, min=1e-8, max=1.0)
-                    old_selected_probs_safe = torch.clamp(
-                        old_selected_probs, min=1e-8, max=1.0)
-
-                    ratio = selected_probs_safe / old_selected_probs_safe
+                    ratio = torch.exp(new_logp - old_logp_t)
                     ratio = torch.clamp(ratio, min=0.01, max=100.0)
 
                     clipped_ratio = torch.clamp(
@@ -1449,8 +1525,7 @@ class PythonEntryPoint:
                         torch.min(ratio * advantages_normalized,
                                   clipped_ratio * advantages_normalized).mean()
                 else:
-                    log_probs = torch.log(selected_probs + 1e-9)
-                    loss_policy = -(log_probs * advantages_normalized).mean()
+                    loss_policy = -(new_logp * advantages_normalized).mean()
 
                 if self.loss_schedule_enable and next_step <= self.critic_warmup_steps:
                     policy_loss_coef = float(self.policy_loss_coef_warmup)
@@ -1461,14 +1536,17 @@ class PythonEntryPoint:
                     value_loss_coef = float(self.value_loss_coef_main)
                     entropy_loss_mult = float(self.entropy_loss_mult_main)
 
-                loss_value = value_loss_coef * F.mse_loss(value_squeezed, value_targets)
+                loss_value = value_loss_coef * \
+                    F.mse_loss(value_squeezed, value_targets)
 
                 probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
                 log_probs = torch.log(probs_safe)
                 entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
-                loss_entropy = (self.get_entropy_coefficient() * entropy_loss_mult) * entropy
+                loss_entropy = (self.get_entropy_coefficient()
+                                * entropy_loss_mult) * entropy
 
-                loss = (policy_loss_coef * loss_policy) + loss_value + loss_entropy
+                loss = (policy_loss_coef * loss_policy) + \
+                    loss_value + loss_entropy
 
                 if torch.isnan(loss) or torch.isinf(loss):
                     logger.warning(LogCategory.MODEL_TRAIN,
@@ -1501,13 +1579,13 @@ class PythonEntryPoint:
 
             if self.use_ppo:
                 with torch.no_grad():
-                    ratio2 = selected_probs / (old_selected_probs + 1e-10)
-                    clip_frac = ((ratio2 < 1.0 - self.ppo_epsilon) |
-                                 (ratio2 > 1.0 + self.ppo_epsilon)).float().mean()
+                    approx_kl = (old_logp_t - new_logp).mean()
+                    clip_frac = ((ratio < 1.0 - self.ppo_epsilon) |
+                                 (ratio > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
-                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%%]",
+                            "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
-                            -self.get_entropy_coefficient(), clip_frac.item() * 100)
+                            -self.get_entropy_coefficient(), clip_frac.item() * 100, approx_kl.item())
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
@@ -1526,8 +1604,10 @@ class PythonEntryPoint:
                     v_after = v_after_eval
                     v_tgt = value_targets.detach().float().view(-1)
 
-                    mse_before = float(F.mse_loss(v_before, v_tgt).item()) if v_before.numel() > 0 else 0.0
-                    mse_after = float(F.mse_loss(v_after, v_tgt).item()) if v_after.numel() > 0 else 0.0
+                    mse_before = float(F.mse_loss(
+                        v_before, v_tgt).item()) if v_before.numel() > 0 else 0.0
+                    mse_after = float(F.mse_loss(
+                        v_after, v_tgt).item()) if v_after.numel() > 0 else 0.0
 
                     def _s(t):
                         if t.numel() == 0:
@@ -1552,14 +1632,14 @@ class PythonEntryPoint:
             prev_step = int(self.train_step_counter)
             self.train_step_counter += ep_count
             self.main_train_sample_counter += local_batch_size
-            
+
             # Explicit cleanup of training tensors
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-            del chosen_t, value_targets, advantages, rewards_t, dones_t
+            del chosen_indices_t, chosen_count_t, value_targets, advantages, rewards_t, dones_t
             del loss, loss_policy, loss_value, entropy
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
-            
+
             # Save once per 100 episodes (avoid missing the boundary when ep_count > 1)
             if (self.train_step_counter // 100) > (prev_step // 100):
                 if self.model_path:
@@ -1577,16 +1657,16 @@ class PythonEntryPoint:
                                  self.train_step_counter, str(e))
 
             self._maybe_save_snapshot()
-            
+
             # Periodic CUDA cache flush to prevent memory fragmentation
             # Increased frequency to combat memory accumulation from model reloads
             if self.train_step_counter % 100 == 0 and torch.cuda.is_available():
                 import gc
                 gc.collect()  # Force Python GC to release tensor references
                 torch.cuda.empty_cache()
-                logger.debug(LogCategory.GPU_MEMORY, 
-                            "CUDA cache flushed + GC at step %d", self.train_step_counter)
-            
+                logger.debug(LogCategory.GPU_MEMORY,
+                             "CUDA cache flushed + GC at step %d", self.train_step_counter)
+
             return True
 
         def _episode_boundaries():
@@ -1607,7 +1687,8 @@ class PythonEntryPoint:
             if not spans:
                 return True
             # Optional proactive cap by episodes (if set or learned).
-            cap_eps = self._train_safe_max_episodes if (self.auto_batch_enable and self._train_safe_max_episodes) else None
+            cap_eps = self._train_safe_max_episodes if (
+                self.auto_batch_enable and self._train_safe_max_episodes) else None
             if cap_eps is not None and len(spans) > int(cap_eps):
                 try:
                     self._autobatch_counts["train_splits_cap"] += 1
@@ -1639,7 +1720,8 @@ class PythonEntryPoint:
                     ok1 = _train_spans(spans[mid:])
                     return ok0 and ok1
             try:
-                out, extra_mb = self._measure_peak_extra_mb(lambda: _train_slice(start, end))
+                out, extra_mb = self._measure_peak_extra_mb(
+                    lambda: _train_slice(start, end))
                 # Update per-step estimate from measured peak delta.
                 self._update_mem_ema("train", extra_mb, max(1, steps))
                 return out
@@ -1656,7 +1738,8 @@ class PythonEntryPoint:
                     new_cap = max(1, len(spans) // 2)
                     if self._train_safe_max_episodes is None or new_cap < int(self._train_safe_max_episodes):
                         self._train_safe_max_episodes = int(new_cap)
-                        logger.warning(LogCategory.GPU_BATCH, "AutoBatch(train): OOM -> shrinking train episode cap to %d", int(self._train_safe_max_episodes))
+                        logger.warning(
+                            LogCategory.GPU_BATCH, "AutoBatch(train): OOM -> shrinking train episode cap to %d", int(self._train_safe_max_episodes))
                     mid = len(spans) // 2
                     ok0 = _train_spans(spans[:mid])
                     ok1 = _train_spans(spans[mid:])
@@ -1666,11 +1749,11 @@ class PythonEntryPoint:
         try:
             spans = _episode_boundaries()
             result = _train_spans(spans)
-            
+
             # Track timing
             elapsed_ms = (time.perf_counter() - t_start) * 1000.0
             self.metrics.update_timing_metric("train", elapsed_ms)
-            
+
             return result
         except Exception as e:
             logger.error(LogCategory.SYSTEM_ERROR,
@@ -1681,19 +1764,19 @@ class PythonEntryPoint:
     @property
     def model_path(self):
         return self.persistence.model_path
-    
+
     @property
     def model_latest_path(self):
         return self.persistence.model_latest_path
-    
+
     @property
     def _did_initial_load(self):
         return self.persistence._did_initial_load
-    
+
     @_did_initial_load.setter
     def _did_initial_load(self, value):
         self.persistence._did_initial_load = value
-    
+
     def saveModel(self, path):
         self.persistence.save_model(self.model, path)
 
@@ -1709,12 +1792,12 @@ class PythonEntryPoint:
         if self.model is None:
             self.initializeModel()
         return self.persistence.reload_latest_model_if_newer(self.model, path)
-    
+
     # GPU lock control for Java learner loop
     def acquireGPULock(self):
         """Acquire GPU lock (called by Java before training burst)."""
         self.gpu_lock.acquire(timeout=None, process_name=self.process_name)
-    
+
     def releaseGPULock(self):
         """Release GPU lock (called by Java after training burst)."""
         self.gpu_lock.release(process_name=self.process_name)
@@ -1730,7 +1813,7 @@ class PythonEntryPoint:
             outcomes_bytes: Raw bytes of game outcomes (1=win, 0=loss) [batch_size * 4]
             land_counts_bytes: Raw bytes of land counts [batch_size * 4] (unused in Q-learning)
             batch_size: Number of decisions in this game
-            
+
         Q-Learning approach:
         - For each decision, train only the Q-value of the action taken
         - Target = game outcome (1.0 for win, 0.0 for loss)
@@ -1762,7 +1845,7 @@ class PythonEntryPoint:
                     outcomes, dtype=torch.float32, device=self.device)
                 land_counts_t = torch.tensor(
                     land_counts_np, dtype=torch.float32, device=self.device)
-                
+
                 # Release numpy arrays immediately (but keep land_counts_np for heuristic below)
                 del features, decisions, outcomes
 
@@ -1771,49 +1854,65 @@ class PythonEntryPoint:
                 self.mulligan_optimizer.zero_grad()
 
                 # Acquire GPU lock before mulligan training
-                self.gpu_lock.acquire(timeout=None, process_name=self.process_name)
+                self.gpu_lock.acquire(
+                    timeout=None, process_name=self.process_name)
                 try:
                     # Q-Learning: Train the Q-value of the action taken toward game outcome
                     # All decisions get the same game outcome (win=1.0, loss=0.0)
-                    
+
                     # Forward pass to get Q-values [batch, 2] where [:, 0]=Q_keep, [:, 1]=Q_mull
-                    q_values = self.mulligan_model(features_t)  # [batch_size, 2]
-                    
+                    q_values = self.mulligan_model(
+                        features_t)  # [batch_size, 2]
+
                     # Extract action indices
                     # decisions_t: 1.0=keep, 0.0=mulligan
                     # We want: index 0 for keep (Q_keep), index 1 for mulligan (Q_mull)
-                    action_indices = (decisions_t <= 0.5).long()  # [batch_size] - 0 for keep, 1 for mulligan
-                    
+                    # [batch_size] - 0 for keep, 1 for mulligan
+                    action_indices = (decisions_t <= 0.5).long()
+
                     # Get Q-value for the action taken using gather
                     # q_values: [batch_size, 2], action_indices: [batch_size] -> [batch_size, 1]
-                    q_taken = q_values.gather(1, action_indices.unsqueeze(1)).squeeze(1)  # [batch_size]
-                    
+                    q_taken = q_values.gather(
+                        # [batch_size]
+                        1, action_indices.unsqueeze(1)).squeeze(1)
+
                     targets = outcomes_t  # [batch_size]
 
                     # Early label gating to avoid collapse (e.g., always-mull early)
-                    warmup_steps = int(os.getenv("MULLIGAN_TRAIN_WARMUP_STEPS", "50"))
-                    min_keep_rate = float(os.getenv("MULLIGAN_TRAIN_MIN_KEEP_RATE", "0.10"))
-                    max_keep_rate = float(os.getenv("MULLIGAN_TRAIN_MAX_KEEP_RATE", "0.90"))
-                    keep_rate = float((decisions_t > 0.5).float().mean().item()) if decisions_t.numel() > 0 else 0.0
-                    all_same = bool((decisions_t > 0.5).all().item() or (decisions_t <= 0.5).all().item()) if decisions_t.numel() > 0 else True
+                    warmup_steps = int(
+                        os.getenv("MULLIGAN_TRAIN_WARMUP_STEPS", "50"))
+                    min_keep_rate = float(
+                        os.getenv("MULLIGAN_TRAIN_MIN_KEEP_RATE", "0.10"))
+                    max_keep_rate = float(
+                        os.getenv("MULLIGAN_TRAIN_MAX_KEEP_RATE", "0.90"))
+                    keep_rate = float((decisions_t > 0.5).float().mean(
+                    ).item()) if decisions_t.numel() > 0 else 0.0
+                    all_same = bool((decisions_t > 0.5).all().item() or (
+                        decisions_t <= 0.5).all().item()) if decisions_t.numel() > 0 else True
                     if self.mulligan_train_step_counter < warmup_steps and (all_same or keep_rate < min_keep_rate or keep_rate > max_keep_rate):
                         train_count = 0
                         skipped_count = batch_size
                         loss = torch.tensor(0.0, device=self.device)
                     else:
                         # Mulligan cost shaping (applies to MULL actions)
-                        mull_base = float(os.getenv("MULLIGAN_COST_BASE", "0.02"))
-                        mull_max = float(os.getenv("MULLIGAN_COST_MAX", "0.15"))
+                        mull_base = float(
+                            os.getenv("MULLIGAN_COST_BASE", "0.02"))
+                        mull_max = float(
+                            os.getenv("MULLIGAN_COST_MAX", "0.15"))
                         mull_num = features_t[:, 0].clamp(min=0.0)
-                        mull_cost = (mull_base * (mull_num + 1.0)).clamp(max=mull_max)
+                        mull_cost = (mull_base * (mull_num + 1.0)
+                                     ).clamp(max=mull_max)
                         is_mull = (action_indices == 1).float()
                         targets = targets - is_mull * mull_cost
 
                         # Land-count shaping for KEEP (annealed toward 0)
-                        land_init = float(os.getenv("MULLIGAN_LAND_SHAPING_INIT", "0.05"))
-                        land_decay_steps = float(os.getenv("MULLIGAN_LAND_SHAPING_DECAY_STEPS", "5000"))
+                        land_init = float(
+                            os.getenv("MULLIGAN_LAND_SHAPING_INIT", "0.05"))
+                        land_decay_steps = float(
+                            os.getenv("MULLIGAN_LAND_SHAPING_DECAY_STEPS", "5000"))
                         t = float(self.mulligan_train_step_counter)
-                        shaping_scale = max(0.0, 1.0 - (t / max(1.0, land_decay_steps)))
+                        shaping_scale = max(
+                            0.0, 1.0 - (t / max(1.0, land_decay_steps)))
                         shaping_scale = land_init * shaping_scale
 
                         if shaping_scale > 0.0:
@@ -1822,19 +1921,21 @@ class PythonEntryPoint:
                             good = ((lc >= 2.0) & (lc <= 3.0)).float()
                             low = (lc <= 1.0).float()
                             high = (lc >= 4.0).float()
-                            land_shaping = shaping_scale * (good - 1.0 * low - 0.5 * high)
+                            land_shaping = shaping_scale * \
+                                (good - 1.0 * low - 0.5 * high)
                             targets = targets + is_keep * land_shaping
 
                         # Per-decision weighting: 1/batch_size for each decision
                         weight_per_decision = 1.0 / batch_size
 
                         # Huber loss with per-decision weighting
-                        per_sample = F.smooth_l1_loss(q_taken, targets, reduction='none')
+                        per_sample = F.smooth_l1_loss(
+                            q_taken, targets, reduction='none')
                         loss = (per_sample * weight_per_decision).sum()
 
                         train_count = batch_size
                         skipped_count = 0
-                    
+
                     if train_count > 0:
                         loss.backward()
                         torch.nn.utils.clip_grad_norm_(
@@ -1863,7 +1964,7 @@ class PythonEntryPoint:
                 # Track training iterations
                 self.mulligan_train_step_counter += 1
                 self.mulligan_train_sample_counter += train_count
-                
+
                 # Explicit cleanup of mulligan tensors
                 del features_t, decisions_t, outcomes_t, land_counts_t
                 del q_values, action_indices, q_taken, targets, loss
@@ -1877,7 +1978,7 @@ class PythonEntryPoint:
                 # Track timing
                 elapsed_ms = (time.perf_counter() - t_start) * 1000.0
                 self.metrics.update_timing_metric("mulligan", elapsed_ms)
-                
+
                 return True
 
             except Exception as e:
@@ -1969,10 +2070,14 @@ class PythonEntryPoint:
         worker = f"{role}_port{port}_pid{os.getpid()}"
         result.put("worker", worker)
         result.put("role", role)
-        result.put("infer_safe_max", int(self._infer_safe_max) if self._infer_safe_max is not None else 0)
-        result.put("train_safe_max_episodes", int(self._train_safe_max_episodes) if self._train_safe_max_episodes is not None else 0)
-        result.put("infer_mb_per_sample", float(self._infer_mb_per_sample) if self._infer_mb_per_sample is not None else 0.0)
-        result.put("train_mb_per_step", float(self._train_mb_per_step) if self._train_mb_per_step is not None else 0.0)
+        result.put("infer_safe_max", int(self._infer_safe_max)
+                   if self._infer_safe_max is not None else 0)
+        result.put("train_safe_max_episodes", int(self._train_safe_max_episodes)
+                   if self._train_safe_max_episodes is not None else 0)
+        result.put("infer_mb_per_sample", float(self._infer_mb_per_sample)
+                   if self._infer_mb_per_sample is not None else 0.0)
+        result.put("train_mb_per_step", float(self._train_mb_per_step)
+                   if self._train_mb_per_step is not None else 0.0)
 
         # Refresh mem info best-effort so gauges are live.
         try:
@@ -1981,7 +2086,8 @@ class PythonEntryPoint:
             pass
         result.put("free_mb", float(self._autobatch_last_free_mb))
         result.put("total_mb", float(self._autobatch_last_total_mb))
-        result.put("desired_free_mb", float(self._autobatch_last_desired_free_mb))
+        result.put("desired_free_mb", float(
+            self._autobatch_last_desired_free_mb))
 
         # Add timing metrics
         timing = self.metrics.get_timing_metrics()
@@ -2057,8 +2163,10 @@ if __name__ == "__main__":
         parser.add_argument("--role", type=str, default=None)
         args, _ = parser.parse_known_args()
 
-        py4j_port = int(args.port) if args.port is not None else int(os.getenv("PY4J_PORT", "25334"))
-        py_role = (args.role or os.getenv("PY_ROLE", "learner")).strip().lower()
+        py4j_port = int(args.port) if args.port is not None else int(
+            os.getenv("PY4J_PORT", "25334"))
+        py_role = (args.role or os.getenv(
+            "PY_ROLE", "learner")).strip().lower()
         os.environ["PY4J_PORT"] = str(py4j_port)
         os.environ["PY_ROLE"] = py_role
 
@@ -2105,7 +2213,8 @@ if __name__ == "__main__":
                         try:
                             gateway = ClientServer(
                                 java_parameters=JavaParameters(),
-                                python_parameters=PythonParameters(port=py4j_port),
+                                python_parameters=PythonParameters(
+                                    port=py4j_port),
                                 python_server_entry_point=PythonEntryPoint()
                             )
                             logger.info(LogCategory.SYSTEM_INIT,

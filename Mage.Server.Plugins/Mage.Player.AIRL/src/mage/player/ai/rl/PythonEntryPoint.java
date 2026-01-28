@@ -34,7 +34,8 @@ public interface PythonEntryPoint {
     boolean saveLatestModelAtomic(String path);
 
     /**
-     * Reload latest weights if the file exists and is newer than the currently loaded one.
+     * Reload latest weights if the file exists and is newer than the currently
+     * loaded one.
      *
      * @param path Path to latest weights file
      * @return true if reloaded
@@ -77,9 +78,8 @@ public interface PythonEntryPoint {
     /**
      * Score candidates using a specific policy key.
      * <p>
-     * policyKey:
-     * - "train" (current training model)
-     * - "snap:&lt;id&gt;" (snapshot opponent policy)
+     * policyKey: - "train" (current training model) - "snap:&lt;id&gt;"
+     * (snapshot opponent policy)
      */
     byte[] scoreCandidatesPolicyFlat(
             byte[] sequencesBytes,
@@ -105,7 +105,8 @@ public interface PythonEntryPoint {
     float predictMulligan(float[] features);
 
     /**
-     * Return raw two-headed mulligan scores (Q_keep, Q_mull) as little-endian float32 bytes.
+     * Return raw two-headed mulligan scores (Q_keep, Q_mull) as little-endian
+     * float32 bytes.
      *
      * @param features Mulligan feature vector (68-dim float array)
      * @return byte[8] containing 2 float32 values: [Q_keep, Q_mull]
@@ -141,7 +142,9 @@ public interface PythonEntryPoint {
             byte[] candidateFeaturesBytes,
             byte[] candidateIdsBytes,
             byte[] candidateMaskBytes,
-            byte[] chosenIndexBytes,
+            byte[] chosenIndicesBytes,
+            byte[] chosenCountBytes,
+            byte[] oldLogpTotalBytes,
             byte[] discountedReturnsBytes,
             int batchSize,
             int seqLen,
@@ -151,8 +154,8 @@ public interface PythonEntryPoint {
     );
 
     /**
-     * Train on a batch containing multiple episodes concatenated together.
-     * The dones array marks terminal steps (1 at end-of-episode, else 0) so that
+     * Train on a batch containing multiple episodes concatenated together. The
+     * dones array marks terminal steps (1 at end-of-episode, else 0) so that
      * GAE/returns are computed per-episode without leaking across boundaries.
      *
      * @param donesBytes int32[batchSize] 1=end-of-episode, 0=continuation
@@ -165,8 +168,10 @@ public interface PythonEntryPoint {
             byte[] candidateFeaturesBytes,
             byte[] candidateIdsBytes,
             byte[] candidateMaskBytes,
-            byte[] chosenIndexBytes,
             byte[] rewardsBytes,
+            byte[] chosenIndicesBytes,
+            byte[] chosenCountBytes,
+            byte[] oldLogpTotalBytes,
             byte[] donesBytes,
             int batchSize,
             int seqLen,
@@ -176,21 +181,21 @@ public interface PythonEntryPoint {
     );
 
     /**
-     * Get main model training statistics.
-     * Returns a map with 'train_steps' (int) and 'train_samples' (int).
+     * Get main model training statistics. Returns a map with 'train_steps'
+     * (int) and 'train_samples' (int).
      */
     java.util.Map<String, Integer> getMainModelTrainingStats();
 
     /**
-     * Get mulligan model training statistics.
-     * Returns a map with 'train_steps' (int) and 'train_samples' (int).
+     * Get mulligan model training statistics. Returns a map with 'train_steps'
+     * (int) and 'train_samples' (int).
      */
     java.util.Map<String, Integer> getMulliganModelTrainingStats();
 
     /**
-     * Record game result for value head quality tracking and auto-GAE.
-     * This is called after each game ends to track whether the value head
-     * correctly predicts wins (positive) vs losses (negative).
+     * Record game result for value head quality tracking and auto-GAE. This is
+     * called after each game ends to track whether the value head correctly
+     * predicts wins (positive) vs losses (negative).
      *
      * @param lastValuePrediction The final value prediction from the model
      * @param won True if the RL player won the game
@@ -198,25 +203,23 @@ public interface PythonEntryPoint {
     void recordGameResult(float lastValuePrediction, boolean won);
 
     /**
-     * Get current value head quality metrics.
-     * Returns a map with 'accuracy', 'avg_win', 'avg_loss', 'samples', 'use_gae'.
+     * Get current value head quality metrics. Returns a map with 'accuracy',
+     * 'avg_win', 'avg_loss', 'samples', 'use_gae'.
      */
     java.util.Map<String, Object> getValueHeadMetrics();
 
     /**
-     * Get auto-batching telemetry (caps/splits/headroom) for Grafana/Prometheus.
-     * Returns a map with keys like:
-     * - worker, role
-     * - infer_safe_max, train_safe_max_episodes
-     * - infer_mb_per_sample, train_mb_per_step
-     * - free_mb, total_mb, desired_free_mb
-     * - infer_splits_cap/paging/oom, train_splits_cap/paging/oom
+     * Get auto-batching telemetry (caps/splits/headroom) for
+     * Grafana/Prometheus. Returns a map with keys like: - worker, role -
+     * infer_safe_max, train_safe_max_episodes - infer_mb_per_sample,
+     * train_mb_per_step - free_mb, total_mb, desired_free_mb -
+     * infer_splits_cap/paging/oom, train_splits_cap/paging/oom
      */
     java.util.Map<String, Object> getAutoBatchMetrics();
 
     /**
-     * Acquire GPU lock (called by Java before learner training burst).
-     * Learner will hold this lock while draining the training queue.
+     * Acquire GPU lock (called by Java before learner training burst). Learner
+     * will hold this lock while draining the training queue.
      */
     void acquireGPULock();
 

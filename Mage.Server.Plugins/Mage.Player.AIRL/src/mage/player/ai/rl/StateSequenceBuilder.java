@@ -64,7 +64,7 @@ public class StateSequenceBuilder {
         DECLARE_ATTACKS,
         DECLARE_BLOCKS,
         MULLIGAN,
-        LONDON_MULLIGAN,  // Choosing which cards to put on bottom after mulligan
+        LONDON_MULLIGAN, // Choosing which cards to put on bottom after mulligan
         SELECT_CHOICE,
         SELECT_TRIGGERED_ABILITY,
         SELECT_CARD
@@ -387,7 +387,6 @@ public class StateSequenceBuilder {
         // For the local Pauper milestone we run fully offline:
         // - Do NOT embed rules text via external APIs.
         // - Any remaining dimensions stay as 0 padding here.
-
         // Validate final vector
         for (int i = 0; i < v.length; i++) {
             if (Float.isNaN(v[i]) || Float.isInfinite(v[i])) {
@@ -461,7 +460,6 @@ public class StateSequenceBuilder {
         // - Do NOT embed ability text via external APIs.
         // - Candidate/action IDs will be embedded on the Python side once we switch
         //   to action-conditional scoring.
-
         // Validate final vector
         for (int i = 0; i < encoding.length; i++) {
             if (Float.isNaN(encoding[i]) || Float.isInfinite(encoding[i])) {
@@ -511,14 +509,15 @@ public class StateSequenceBuilder {
         /**
          * Max number of candidates we will score per decision step.
          * <p>
-         * NOTE: This is a fixed-size padding limit for the Java<->Python bridge.
-         * We can tune it later via env/config once the pipeline is stable.
+         * NOTE: This is a fixed-size padding limit for the Java<->Python
+         * bridge. We can tune it later via env/config once the pipeline is
+         * stable.
          */
         public static final int MAX_CANDIDATES = 64;
 
         /**
-         * Fixed-dimensional numeric feature vector per candidate.
-         * Keep this small and structured for the initial Pauper milestone.
+         * Fixed-dimensional numeric feature vector per candidate. Keep this
+         * small and structured for the initial Pauper milestone.
          */
         public static final int CAND_FEAT_DIM = 32;
 
@@ -527,7 +526,9 @@ public class StateSequenceBuilder {
         public final int[] candidateActionIds;     // [MAX_CANDIDATES]
         public final float[][] candidateFeatures;  // [MAX_CANDIDATES][CAND_FEAT_DIM]
         public final int[] candidateMask;          // [MAX_CANDIDATES] 1=valid,0=pad
-        public final int chosenIndex;              // 0..MAX_CANDIDATES-1 (must be valid)
+        public final int chosenCount;              // number of picks in chosenIndices (<= MAX_CANDIDATES)
+        public final int[] chosenIndices;          // [MAX_CANDIDATES], padded with -1
+        public final float oldLogpTotal;           // joint log-prob of chosenIndices under behavior policy
         public final ActionType actionType;
         public final double stepReward;
 
@@ -536,7 +537,9 @@ public class StateSequenceBuilder {
                 int[] candidateActionIds,
                 float[][] candidateFeatures,
                 int[] candidateMask,
-                int chosenIndex,
+                int chosenCount,
+                int[] chosenIndices,
+                float oldLogpTotal,
                 ActionType actionType,
                 double stepReward) {
             this.state = state;
@@ -544,7 +547,9 @@ public class StateSequenceBuilder {
             this.candidateActionIds = candidateActionIds;
             this.candidateFeatures = candidateFeatures;
             this.candidateMask = candidateMask;
-            this.chosenIndex = chosenIndex;
+            this.chosenCount = chosenCount;
+            this.chosenIndices = chosenIndices;
+            this.oldLogpTotal = oldLogpTotal;
             this.actionType = actionType;
             this.stepReward = stepReward;
         }

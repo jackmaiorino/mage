@@ -296,8 +296,17 @@ public class PythonMLBatchManager {
                     .flatMap(List::stream)
                     .collect(Collectors.toList()));
 
-            byte[] chosenIndexBytes = convertIntegersToBytes(trainingData.stream()
-                    .map(d -> d.chosenIndex)
+            byte[] chosenIndicesBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> Arrays.stream(d.chosenIndices).boxed().collect(Collectors.toList()))
+                    .flatMap(List::stream)
+                    .collect(Collectors.toList()));
+
+            byte[] chosenCountBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> d.chosenCount)
+                    .collect(Collectors.toList()));
+
+            byte[] oldLogpTotalBytes = convertFloatsToBytes(trainingData.stream()
+                    .map(d -> d.oldLogpTotal)
                     .collect(Collectors.toList()));
 
             // Now passing immediate rewards instead of pre-computed returns
@@ -319,8 +328,10 @@ public class PythonMLBatchManager {
                         candFeat,
                         candIds,
                         candMask,
-                        chosenIndexBytes,
-                        rewardsBytes,  // Now passing immediate rewards
+                        chosenIndicesBytes,
+                        chosenCountBytes,
+                        oldLogpTotalBytes,
+                        rewardsBytes, // Now passing immediate rewards
                         batchSize,
                         seqLen,
                         dModel,
@@ -342,9 +353,10 @@ public class PythonMLBatchManager {
     }
 
     /**
-     * Train on multiple episodes concatenated in one batch. The dones array marks episode ends (1=end).
-     * This allows the Python learner to compute GAE/returns per-episode while still doing one larger
-     * forward/backward pass for better GPU utilization.
+     * Train on multiple episodes concatenated in one batch. The dones array
+     * marks episode ends (1=end). This allows the Python learner to compute
+     * GAE/returns per-episode while still doing one larger forward/backward
+     * pass for better GPU utilization.
      */
     public CompletableFuture<Boolean> trainMulti(
             List<StateSequenceBuilder.TrainingData> trainingData,
@@ -398,11 +410,18 @@ public class PythonMLBatchManager {
                     .flatMap(List::stream)
                     .collect(Collectors.toList()));
 
-            byte[] chosenIndexBytes = convertIntegersToBytes(trainingData.stream()
-                    .map(d -> d.chosenIndex)
+            byte[] chosenIndicesBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> Arrays.stream(d.chosenIndices).boxed().collect(Collectors.toList()))
+                    .flatMap(List::stream)
                     .collect(Collectors.toList()));
 
             byte[] rewardsBytes = convertDoublesToBytes(rewards);
+            byte[] chosenCountBytes = convertIntegersToBytes(trainingData.stream()
+                    .map(d -> d.chosenCount)
+                    .collect(Collectors.toList()));
+            byte[] oldLogpTotalBytes = convertFloatsToBytes(trainingData.stream()
+                    .map(d -> d.oldLogpTotal)
+                    .collect(Collectors.toList()));
             byte[] donesBytes = convertIntegersToBytes(dones);
 
             int batchSize = trainingData.size();
@@ -418,8 +437,10 @@ public class PythonMLBatchManager {
                         candFeat,
                         candIds,
                         candMask,
-                        chosenIndexBytes,
                         rewardsBytes,
+                        chosenIndicesBytes,
+                        chosenCountBytes,
+                        oldLogpTotalBytes,
                         donesBytes,
                         batchSize,
                         seqLen,
@@ -463,6 +484,15 @@ public class PythonMLBatchManager {
         buffer.order(ByteOrder.LITTLE_ENDIAN);
         for (Double value : data) {
             buffer.putFloat(value.floatValue());
+        }
+        return buffer.array();
+    }
+
+    private byte[] convertFloatsToBytes(List<Float> data) {
+        ByteBuffer buffer = ByteBuffer.allocate(data.size() * 4);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+        for (Float value : data) {
+            buffer.putFloat(value != null ? value : 0.0f);
         }
         return buffer.array();
     }
