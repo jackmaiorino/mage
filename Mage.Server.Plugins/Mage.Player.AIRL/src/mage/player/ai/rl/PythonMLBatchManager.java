@@ -309,6 +309,10 @@ public class PythonMLBatchManager {
                     .map(d -> d.oldLogpTotal)
                     .collect(Collectors.toList()));
 
+            byte[] oldValueBytes = convertFloatsToBytes(trainingData.stream()
+                    .map(d -> d.oldValue)
+                    .collect(Collectors.toList()));
+
             // Now passing immediate rewards instead of pre-computed returns
             // GAE (Generalized Advantage Estimation) will be computed in Python
             byte[] rewardsBytes = convertDoublesToBytes(rewards);
@@ -331,6 +335,7 @@ public class PythonMLBatchManager {
                         chosenIndicesBytes,
                         chosenCountBytes,
                         oldLogpTotalBytes,
+                        oldValueBytes,
                         rewardsBytes, // Now passing immediate rewards
                         batchSize,
                         seqLen,
@@ -422,6 +427,9 @@ public class PythonMLBatchManager {
             byte[] oldLogpTotalBytes = convertFloatsToBytes(trainingData.stream()
                     .map(d -> d.oldLogpTotal)
                     .collect(Collectors.toList()));
+            byte[] oldValueBytes = convertFloatsToBytes(trainingData.stream()
+                    .map(d -> d.oldValue)
+                    .collect(Collectors.toList()));
             byte[] donesBytes = convertIntegersToBytes(dones);
 
             int batchSize = trainingData.size();
@@ -441,6 +449,7 @@ public class PythonMLBatchManager {
                         chosenIndicesBytes,
                         chosenCountBytes,
                         oldLogpTotalBytes,
+                        oldValueBytes,
                         donesBytes,
                         batchSize,
                         seqLen,

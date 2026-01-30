@@ -747,9 +747,6 @@ public class RLTrainer {
                         gameLogger.close();
                     }
 
-                    // Train mulligan model during evaluation too (for consistency)
-                    trainMulliganModel(rlPlayer, rlPlayerWon);
-
                     if (isFirst) {
                         logStaticGameResult(game, rlPlayer);
                     }
@@ -1355,6 +1352,9 @@ public class RLTrainer {
             for (Integer landCount : landCounts) {
                 landCountsBuf.putInt(landCount);
             }
+
+            long keepN = decisions.stream().filter(d -> d != null && d > 0.5f).count();
+            logger.info(String.format("MULLIGAN TRAIN batch=%d keepN=%d mullN=%d decisions=%s", batchSize, keepN, batchSize - keepN, decisions));
 
             // Train the model
             sharedModel.trainMulligan(

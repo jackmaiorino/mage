@@ -183,10 +183,17 @@ class PythonEntryPoint:
         self.mulligan_model_path = os.getenv('MULLIGAN_MODEL_PATH',
                                              'Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/mulligan_model.pt')
         self.mulligan_lock = threading.Lock()
+        self._mull_target1_window = int(
+            os.getenv("MULLIGAN_TARGET1_WINDOW", "500"))
+        self._mull_target1_log_every = int(
+            os.getenv("MULLIGAN_TARGET1_LOG_EVERY", "20"))
+        self._mull_target1_hist = deque(
+            maxlen=max(1, self._mull_target1_window))
 
         # PPO configuration
         self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
         self.use_ppo = bool(int(os.getenv('USE_PPO', '1')))
+        self._ppo_stats_every = int(os.getenv("PPO_STATS_EVERY", "50"))
 
         # Loss scheduling
         self.loss_schedule_enable = bool(
@@ -548,8 +555,8 @@ class PythonEntryPoint:
 
             # Release GPU tensors immediately (in this scope where they're defined)
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value
-            if torch.cuda.is_available():
-                torch.cuda.synchronize()
+            # if torch.cuda.is_available():
+            #     torch.cuda.synchronize()
 
             return probs_np, value_np
 
@@ -675,11 +682,11 @@ class PythonEntryPoint:
 
             # Clear GPU cache immediately to prevent memory buildup from parallel workers
             # Force GC every 50 inferences to aggressively prevent tensor reference leaks
-            if torch.cuda.is_available():
-                if self.metrics.infer_counter % 50 == 0:
-                    import gc
-                    gc.collect()
-                torch.cuda.empty_cache()
+            # if torch.cuda.is_available():
+            #     if self.metrics.infer_counter % 50 == 0:
+            #         import gc
+            #         gc.collect()
+            #     torch.cuda.empty_cache()
 
             # Track timing
             elapsed_ms = (time.perf_counter() - t_start) * 1000.0
@@ -884,6 +891,7 @@ class PythonEntryPoint:
                             chosen_indices_bytes,
                             chosen_count_bytes,
                             old_logp_total_bytes,
+                            old_value_bytes,
                             rewards_bytes,  # Changed from discounted_returns_bytes
                             batch_size,
                             seq_len,
@@ -937,9 +945,13 @@ class PythonEntryPoint:
                 old_logp_total_bytes, dtype='<f4').reshape(batch_size)
             old_logp_t = torch.tensor(
                 old_logp_total, dtype=torch.float32, device=device)
+            old_value_np = np.frombuffer(
+                old_value_bytes, dtype='<f4').reshape(batch_size)
+            old_value_t = torch.tensor(
+                old_value_np, dtype=torch.float32, device=device)
 
             # Release numpy arrays immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value_np
 
             # Check for NaN/Inf in input data
             if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
@@ -998,21 +1010,16 @@ class PythonEntryPoint:
             if self.use_gae:
                 # Use GAE for advantage estimation (reduces variance, better credit assignment)
                 self.update_gae_lambda_schedule()
+                # Flat batches are not guaranteed to be a single ordered trajectory; prevent leakage.
+                dones_t = torch.ones_like(rewards_t)
                 advantages, value_targets = self.compute_gae(
-                    rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda)
+                    rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda, dones=dones_t)
+                advantages = advantages.detach()
+                value_targets = value_targets.detach()
             else:
-                # Monte Carlo returns: compute discounted returns from terminal reward backwards
-                # This doesn't bootstrap from value estimates, so it avoids the sparse reward
-                # bootstrap trap where value stays ~0. Better for early training.
-                gamma = 0.99
-                monte_carlo_returns = torch.zeros_like(rewards_t)
-                running_return = 0.0
-                for t in reversed(range(batch_size)):
-                    running_return = rewards_t[t] + gamma * running_return
-                    monte_carlo_returns[t] = running_return
-
-                value_targets = monte_carlo_returns
-                advantages = monte_carlo_returns - value_detached
+                # Flat batches: treat each sample as terminal to avoid cross-sample leakage.
+                value_targets = rewards_t
+                advantages = rewards_t - value_detached
 
             # -------------------------------------------------------
             # Debug: value target / prediction distribution
@@ -1093,16 +1100,42 @@ class PythonEntryPoint:
 
             if self.use_ppo:
                 # PPO: Clipped surrogate objective with numerical stability
-                ratio = torch.exp(new_logp - old_logp_t)
-                # Clamp ratio to prevent extreme values
-                ratio = torch.clamp(ratio, min=0.01, max=100.0)
-
+                # Use unclamped PPO ratio in objective; clamp only log-ratio for numeric safety.
+                log_ratio = (new_logp - old_logp_t).clamp(-20.0, 20.0)
+                ratio_raw = torch.exp(log_ratio)
                 clipped_ratio = torch.clamp(
-                    ratio, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
+                    ratio_raw, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
                 # Use normalized advantages for policy to prevent huge gradients
                 loss_policy = - \
-                    torch.min(ratio * advantages_normalized,
+                    torch.min(ratio_raw * advantages_normalized,
                               clipped_ratio * advantages_normalized).mean()
+
+                # PPO stats logging (mtg_ai.log) - mean/std of adv/ret/ratio
+                if self._ppo_stats_every > 0 and (next_step % self._ppo_stats_every == 0):
+                    with torch.no_grad():
+                        adv_t = advantages.detach().float().view(-1)
+                        ret_t = value_targets.detach().float().view(-1)
+                        rr_t = ratio_raw.detach().float().view(-1)
+                        adv_mean = float(adv_t.mean().item()
+                                         ) if adv_t.numel() > 0 else 0.0
+                        adv_std = float(adv_t.std().item()
+                                        ) if adv_t.numel() > 1 else 0.0
+                        ret_mean = float(ret_t.mean().item()
+                                         ) if ret_t.numel() > 0 else 0.0
+                        ret_std = float(ret_t.std().item()
+                                        ) if ret_t.numel() > 1 else 0.0
+                        ratio_mean = float(
+                            rr_t.mean().item()) if rr_t.numel() > 0 else 1.0
+                        ratio_std = float(
+                            rr_t.std().item()) if rr_t.numel() > 1 else 0.0
+                    logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "PPOStats step=%d adv(mean=%.4f std=%.4f) ret(mean=%.4f std=%.4f) ratio(mean=%.4f std=%.4f)",
+                        int(next_step),
+                        adv_mean, adv_std,
+                        ret_mean, ret_std,
+                        ratio_mean, ratio_std
+                    )
             else:
                 # REINFORCE: Simple policy gradient with normalized advantages
                 loss_policy = -(new_logp * advantages_normalized).mean()
@@ -1123,16 +1156,27 @@ class PythonEntryPoint:
             # Coefficient increased to 5.0 to force value head out of local minimum
             # At 1.0 coeff, value head gets stuck at -0.5 because MSE loss is "acceptable"
             # Higher coeff forces it to actually learn correct predictions
-            loss_value = value_loss_coef * \
-                F.mse_loss(value_squeezed, value_targets)
+            vf_clip = float(os.getenv("PPO_VF_CLIP", "0.2"))
+            if self.use_ppo and vf_clip > 0.0:
+                v_pred = value_squeezed
+                v_old = old_value_t.view_as(v_pred).detach()
+                v_clipped = v_old + (v_pred - v_old).clamp(-vf_clip, vf_clip)
+                vf_loss1 = (v_pred - value_targets).pow(2)
+                vf_loss2 = (v_clipped - value_targets).pow(2)
+                loss_value = value_loss_coef * \
+                    (0.5 * torch.max(vf_loss1, vf_loss2).mean())
+            else:
+                loss_value = value_loss_coef * \
+                    F.mse_loss(value_squeezed, value_targets)
 
             # Entropy bonus (encourage exploration with decay schedule)
             # Clamp probabilities to avoid log(0)
             probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
             log_probs = torch.log(probs_safe)
             entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
-            loss_entropy = (self.get_entropy_coefficient()
-                            * entropy_loss_mult) * entropy
+            entropy_coef = float(
+                self.get_entropy_coefficient()) * float(entropy_loss_mult)
+            loss_entropy = -entropy_coef * entropy
 
             loss = (policy_loss_coef * loss_policy) + loss_value + loss_entropy
 
@@ -1207,16 +1251,16 @@ class PythonEntryPoint:
                 with torch.no_grad():
                     # Log the same stable ratio as the loss, plus approx KL.
                     approx_kl = (old_logp_t - new_logp).mean()
-                    clip_frac = ((ratio < 1.0 - self.ppo_epsilon) |
-                                 (ratio > 1.0 + self.ppo_epsilon)).float().mean()
+                    clip_frac = ((ratio_raw < 1.0 - self.ppo_epsilon) |
+                                 (ratio_raw > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
-                            -self.get_entropy_coefficient(), clip_frac.item() * 100, approx_kl.item())
+                            entropy_coef, clip_frac.item() * 100, approx_kl.item())
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
-                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), -self.get_entropy_coefficient())
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
 
             # -------------------------------------------------------
             # Debug: did this update move value toward target?
@@ -1284,7 +1328,7 @@ class PythonEntryPoint:
 
             # Explicit cleanup before saving to reduce VRAM pressure
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-            del chosen_indices_t, chosen_count_t, rewards_t, old_logp_t, value_targets, advantages
+            del chosen_indices_t, chosen_count_t, rewards_t, old_logp_t, old_value_t, value_targets, advantages
             del loss, loss_policy, loss_value, entropy
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
@@ -1312,6 +1356,7 @@ class PythonEntryPoint:
                                  chosen_indices_bytes,
                                  chosen_count_bytes,
                                  old_logp_total_bytes,
+                                 old_value_bytes,
                                  dones_bytes,
                                  batch_size,
                                  seq_len,
@@ -1351,6 +1396,8 @@ class PythonEntryPoint:
                 batch_size)[start:end]
             old_logp_total = np.frombuffer(old_logp_total_bytes, dtype='<f4').reshape(
                 batch_size)[start:end]
+            old_value = np.frombuffer(old_value_bytes, dtype='<f4').reshape(
+                batch_size)[start:end]
             dones = np.frombuffer(dones_bytes, dtype='<i4').reshape(
                 batch_size)[start:end]
 
@@ -1371,10 +1418,12 @@ class PythonEntryPoint:
                 rewards, dtype=torch.float32, device=device)
             old_logp_t = torch.tensor(
                 old_logp_total, dtype=torch.float32, device=device)
+            old_value_t = torch.tensor(
+                old_value, dtype=torch.float32, device=device)
             dones_t = torch.tensor(dones, dtype=torch.float32, device=device)
 
             # Release numpy slices immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, dones
+            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask, chosen_indices, chosen_count, rewards, old_logp_total, old_value, dones
 
             local_batch_size = int(end - start)
 
@@ -1427,13 +1476,12 @@ class PythonEntryPoint:
                 value_squeezed = value.squeeze(1)
                 value_detached = value_squeezed.detach()
 
-                value_squeezed = value.squeeze(1)
-                value_detached = value_squeezed.detach()
-
                 if self.use_gae:
                     self.update_gae_lambda_schedule()
                     advantages, value_targets = self.compute_gae(
                         rewards_t, value_detached, gamma=0.99, gae_lambda=self.current_gae_lambda, dones=dones_t)
+                    advantages = advantages.detach()
+                    value_targets = value_targets.detach()
                 else:
                     gamma = 0.99
                     monte_carlo_returns = torch.zeros_like(rewards_t)
@@ -1516,14 +1564,40 @@ class PythonEntryPoint:
                     probs_safe, cand_mask_t, chosen_indices_t, chosen_count_t)
 
                 if self.use_ppo:
-                    ratio = torch.exp(new_logp - old_logp_t)
-                    ratio = torch.clamp(ratio, min=0.01, max=100.0)
-
+                    log_ratio = (new_logp - old_logp_t).clamp(-20.0, 20.0)
+                    ratio_raw = torch.exp(log_ratio)
                     clipped_ratio = torch.clamp(
-                        ratio, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
+                        ratio_raw, 1.0 - self.ppo_epsilon, 1.0 + self.ppo_epsilon)
                     loss_policy = - \
-                        torch.min(ratio * advantages_normalized,
+                        torch.min(ratio_raw * advantages_normalized,
                                   clipped_ratio * advantages_normalized).mean()
+
+                    # PPO stats logging (mtg_ai.log) - mean/std of adv/ret/ratio
+                    if self._ppo_stats_every > 0 and (next_step % self._ppo_stats_every == 0):
+                        with torch.no_grad():
+                            adv_t = advantages.detach().float().view(-1)
+                            ret_t = value_targets.detach().float().view(-1)
+                            rr_t = ratio_raw.detach().float().view(-1)
+                            adv_mean = float(
+                                adv_t.mean().item()) if adv_t.numel() > 0 else 0.0
+                            adv_std = float(adv_t.std().item()
+                                            ) if adv_t.numel() > 1 else 0.0
+                            ret_mean = float(
+                                ret_t.mean().item()) if ret_t.numel() > 0 else 0.0
+                            ret_std = float(ret_t.std().item()
+                                            ) if ret_t.numel() > 1 else 0.0
+                            ratio_mean = float(
+                                rr_t.mean().item()) if rr_t.numel() > 0 else 1.0
+                            ratio_std = float(
+                                rr_t.std().item()) if rr_t.numel() > 1 else 0.0
+                        logger.info(
+                            LogCategory.MODEL_TRAIN,
+                            "PPOStats step=%d adv(mean=%.4f std=%.4f) ret(mean=%.4f std=%.4f) ratio(mean=%.4f std=%.4f)",
+                            int(next_step),
+                            adv_mean, adv_std,
+                            ret_mean, ret_std,
+                            ratio_mean, ratio_std
+                        )
                 else:
                     loss_policy = -(new_logp * advantages_normalized).mean()
 
@@ -1536,14 +1610,26 @@ class PythonEntryPoint:
                     value_loss_coef = float(self.value_loss_coef_main)
                     entropy_loss_mult = float(self.entropy_loss_mult_main)
 
-                loss_value = value_loss_coef * \
-                    F.mse_loss(value_squeezed, value_targets)
+                vf_clip = float(os.getenv("PPO_VF_CLIP", "0.2"))
+                if self.use_ppo and vf_clip > 0.0:
+                    v_pred = value_squeezed
+                    v_old = old_value_t.view_as(v_pred).detach()
+                    v_clipped = v_old + \
+                        (v_pred - v_old).clamp(-vf_clip, vf_clip)
+                    vf_loss1 = (v_pred - value_targets).pow(2)
+                    vf_loss2 = (v_clipped - value_targets).pow(2)
+                    loss_value = value_loss_coef * \
+                        (0.5 * torch.max(vf_loss1, vf_loss2).mean())
+                else:
+                    loss_value = value_loss_coef * \
+                        F.mse_loss(value_squeezed, value_targets)
 
                 probs_safe = torch.clamp(probs, min=1e-8, max=1.0)
                 log_probs = torch.log(probs_safe)
                 entropy = -(probs_safe * log_probs).sum(dim=-1).mean()
-                loss_entropy = (self.get_entropy_coefficient()
-                                * entropy_loss_mult) * entropy
+                entropy_coef = float(
+                    self.get_entropy_coefficient()) * float(entropy_loss_mult)
+                loss_entropy = -entropy_coef * entropy
 
                 loss = (policy_loss_coef * loss_policy) + \
                     loss_value + loss_entropy
@@ -1580,16 +1666,16 @@ class PythonEntryPoint:
             if self.use_ppo:
                 with torch.no_grad():
                     approx_kl = (old_logp_t - new_logp).mean()
-                    clip_frac = ((ratio < 1.0 - self.ppo_epsilon) |
-                                 (ratio > 1.0 + self.ppo_epsilon)).float().mean()
+                    clip_frac = ((ratio_raw < 1.0 - self.ppo_epsilon) |
+                                 (ratio_raw > 1.0 + self.ppo_epsilon)).float().mean()
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f) [PPO clip: %.2f%% kl=%.6f]",
                             loss.item(), loss_policy.item(), loss_value.item(), entropy.item(),
-                            -self.get_entropy_coefficient(), clip_frac.item() * 100, approx_kl.item())
+                            entropy_coef, clip_frac.item() * 100, approx_kl.item())
             else:
                 logger.info(LogCategory.MODEL_TRAIN,
                             "trainCandidatesMultiFlat — loss=%.4f policy=%.4f value=%.4f ent=%.4f (coeff: %.4f)",
-                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), -self.get_entropy_coefficient())
+                            loss.item(), loss_policy.item(), loss_value.item(), entropy.item(), float(self.get_entropy_coefficient()) * float(entropy_loss_mult))
 
             if do_post:
                 with torch.no_grad():
@@ -1635,7 +1721,7 @@ class PythonEntryPoint:
 
             # Explicit cleanup of training tensors
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
-            del chosen_indices_t, chosen_count_t, value_targets, advantages, rewards_t, dones_t
+            del chosen_indices_t, chosen_count_t, value_targets, advantages, rewards_t, old_logp_t, old_value_t, dones_t
             del loss, loss_policy, loss_value, entropy
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
@@ -1924,6 +2010,32 @@ class PythonEntryPoint:
                             land_shaping = shaping_scale * \
                                 (good - 1.0 * low - 0.5 * high)
                             targets = targets + is_keep * land_shaping
+
+                        # Rolling target_1_rate over last N mulligan decisions (for mtg_ai.log)
+                        try:
+                            bits = (targets.detach() >= 0.5).to(
+                                torch.int32).cpu().tolist()
+                            for b in bits:
+                                self._mull_target1_hist.append(int(b))
+                        except Exception:
+                            pass
+                        if self._mull_target1_log_every > 0 and (self.mulligan_train_step_counter % self._mull_target1_log_every == 0):
+                            try:
+                                n = len(self._mull_target1_hist)
+                                if n > 0:
+                                    rate = float(
+                                        sum(self._mull_target1_hist)) / float(n)
+                                else:
+                                    rate = 0.0
+                                logger.info(
+                                    LogCategory.MODEL_TRAIN,
+                                    "MulliganTarget1 window=%d rate=%.3f (n=%d)",
+                                    int(self._mull_target1_hist.maxlen or 0),
+                                    float(rate),
+                                    int(n)
+                                )
+                            except Exception:
+                                pass
 
                         # Per-decision weighting: 1/batch_size for each decision
                         weight_per_decision = 1.0 / batch_size

@@ -529,6 +529,7 @@ public class StateSequenceBuilder {
         public final int chosenCount;              // number of picks in chosenIndices (<= MAX_CANDIDATES)
         public final int[] chosenIndices;          // [MAX_CANDIDATES], padded with -1
         public final float oldLogpTotal;           // joint log-prob of chosenIndices under behavior policy
+        public final float oldValue;               // V_old(s) at rollout time
         public final ActionType actionType;
         public final double stepReward;
 
@@ -540,6 +541,7 @@ public class StateSequenceBuilder {
                 int chosenCount,
                 int[] chosenIndices,
                 float oldLogpTotal,
+                float oldValue,
                 ActionType actionType,
                 double stepReward) {
             this.state = state;
@@ -550,6 +552,7 @@ public class StateSequenceBuilder {
             this.chosenCount = chosenCount;
             this.chosenIndices = chosenIndices;
             this.oldLogpTotal = oldLogpTotal;
+            this.oldValue = oldValue;
             this.actionType = actionType;
             this.stepReward = stepReward;
         }

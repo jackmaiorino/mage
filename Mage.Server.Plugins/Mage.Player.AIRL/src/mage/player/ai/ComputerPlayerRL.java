@@ -29,6 +29,7 @@ import mage.constants.TurnPhase;
 import mage.game.Game;
 import mage.game.events.GameEvent;
 import mage.game.permanent.Permanent;
+import mage.game.stack.StackObject;
 import mage.player.ai.rl.GameLogger;
 import mage.player.ai.rl.MulliganLogger;
 import mage.player.ai.rl.MulliganModel;
@@ -353,6 +354,7 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
                     chosenCount,
                     chosenIndices,
                     oldLogpTotal,
+                    valueScore,
                     actionType,
                     stepReward
             );
@@ -1297,10 +1299,6 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
     @Override
     public boolean chooseMulligan(Game game) {
         try {
-            // Use simple heuristic mulligan if flag is set (for isolating in-game play quality)
-            if (USE_HEURISTIC_MULLIGAN) {
-                return heuristicMulligan(game);
-            }
 
             // Guard against duplicate calls from game engine
             if (lastLoggedMulliganCount == mulliganCount) {
@@ -1392,138 +1390,8 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         }
     }
 
-    /**
-     * London mulligan: Choose which cards to put on the bottom of library. Uses
-     * the main RL model to rank cards by value.
-     *
-     * This is called AFTER drawing 7 new cards (post-mulligan), so we log the
-     * pending mulligan decision here with the full 7-card hand visible.
-     */
-    /**
-     * Simple heuristic mulligan logic (same as ComputerPlayer). Mulligan if
-     * lands < 2 OR lands > (hand.size() - 2)
-     */
-    private boolean heuristicMulligan(Game game) {
-        if (hand.size() < 6 || game.getClass().getName().contains("Momir")) {
-            mulliganCount++;
-            return false;
-        }
-        Set<Card> lands = hand.getCards(new FilterLandCard(), game);
-        boolean shouldMulligan = lands.size() < 2 || lands.size() > hand.size() - 2;
-
-        RLTrainer.threadLocalLogger.get().info(
-                String.format("Heuristic mulligan for %s: mulliganNum=%d, handSize=%d, lands=%d, decision=%s",
-                        getName(), mulliganCount, getHand().size(), lands.size(),
-                        shouldMulligan ? "MULLIGAN" : "KEEP")
-        );
-
-        mulliganCount++;
-        return shouldMulligan;
-    }
-
-    /**
-     * Simple heuristic for London mulligan bottom cards. If too many lands
-     * (>4), bottom excess lands. If too few lands (<2), bottom non-lands.
-     * Otherwise, bottom highest CMC non-lands.
-     */
-    private boolean heuristicLondonMulligan(Target target, Game game) {
-        List<Card> hand = new ArrayList<>(getHand().getCards(game));
-        if (hand.isEmpty()) {
-            return false;
-        }
-
-        int numToPutBack = target.getMinNumberOfTargets();
-        if (numToPutBack >= hand.size()) {
-            // Put back all cards
-            for (Card card : hand) {
-                target.addTarget(card.getId(), null, game);
-            }
-            RLTrainer.threadLocalLogger.get().info(
-                    String.format("Heuristic London mulligan: Putting back all %d cards", numToPutBack)
-            );
-            return true;
-        }
-
-        List<Card> lands = new ArrayList<>();
-        List<Card> nonLands = new ArrayList<>();
-        for (Card card : hand) {
-            if (card.isLand(game)) {
-                lands.add(card);
-            } else {
-                nonLands.add(card);
-            }
-        }
-
-        List<Card> toBottom = new ArrayList<>();
-
-        if (lands.size() > 4) {
-            // Too many lands - bottom excess lands first
-            for (int i = 0; i < Math.min(numToPutBack, lands.size() - 3); i++) {
-                toBottom.add(lands.get(i));
-            }
-            // If still need more, bottom highest CMC non-lands
-            nonLands.sort((a, b) -> Integer.compare(b.getManaValue(), a.getManaValue()));
-            for (Card card : nonLands) {
-                if (toBottom.size() >= numToPutBack) {
-                    break;
-                }
-                toBottom.add(card);
-            }
-        } else if (lands.size() < 2) {
-            // Too few lands - bottom non-lands, keeping lowest CMC
-            nonLands.sort((a, b) -> Integer.compare(b.getManaValue(), a.getManaValue()));
-            for (Card card : nonLands) {
-                if (toBottom.size() >= numToPutBack) {
-                    break;
-                }
-                toBottom.add(card);
-            }
-            // If still need more, bottom some lands
-            for (Card land : lands) {
-                if (toBottom.size() >= numToPutBack) {
-                    break;
-                }
-                toBottom.add(land);
-            }
-        } else {
-            // Reasonable land count - bottom highest CMC cards
-            hand.sort((a, b) -> Integer.compare(b.getManaValue(), a.getManaValue()));
-            for (int i = 0; i < numToPutBack; i++) {
-                toBottom.add(hand.get(i));
-            }
-        }
-
-        StringBuilder keptCards = new StringBuilder();
-        StringBuilder bottomedCards = new StringBuilder();
-        for (Card card : hand) {
-            if (toBottom.contains(card)) {
-                if (bottomedCards.length() > 0) {
-                    bottomedCards.append("; ");
-                }
-                bottomedCards.append(card.getName());
-                target.addTarget(card.getId(), null, game);
-            } else {
-                if (keptCards.length() > 0) {
-                    keptCards.append("; ");
-                }
-                keptCards.append(card.getName());
-            }
-        }
-
-        RLTrainer.threadLocalLogger.get().info(
-                String.format("Heuristic London mulligan: Keeping [%s], Bottoming [%s]",
-                        keptCards.toString(), bottomedCards.toString())
-        );
-
-        return true;
-    }
-
     private boolean chooseLondonMulliganCards(Target target, Game game) {
         try {
-            // Use simple heuristic if flag is set
-            if (USE_HEURISTIC_MULLIGAN) {
-                return heuristicLondonMulligan(target, game);
-            }
 
             // Guard: Only process if we have a pending mulligan decision
             // The game engine calls this method twice:
@@ -1827,7 +1695,34 @@ public class ComputerPlayerRL extends ComputerPlayer7 {
         StringBuilder sb = new StringBuilder();
 
         // Stack
-        sb.append("[Stack]: ").append(game.getStack().size()).append(" items\n");
+        int stackSize = game.getStack().size();
+        sb.append("[Stack]: ").append(stackSize).append(" items\n");
+        if (stackSize > 0) {
+            int idx = 0;
+            for (StackObject so : game.getStack()) {
+                String controller = "";
+                try {
+                    if (so != null && so.getControllerId() != null) {
+                        Player cp = game.getPlayer(so.getControllerId());
+                        controller = (cp != null && cp.getName() != null) ? cp.getName() : "";
+                    }
+                } catch (Exception ignored) {
+                    controller = "";
+                }
+                String name = "";
+                try {
+                    name = (so != null && so.getName() != null) ? so.getName() : "";
+                } catch (Exception ignored) {
+                    name = "";
+                }
+                sb.append("  - [").append(idx).append("] ").append(name);
+                if (!controller.isEmpty()) {
+                    sb.append(" (controller=").append(controller).append(")");
+                }
+                sb.append("\n");
+                idx++;
+            }
+        }
 
         // Players
         for (UUID pid : game.getState().getPlayersInRange(this.playerId, game)) {

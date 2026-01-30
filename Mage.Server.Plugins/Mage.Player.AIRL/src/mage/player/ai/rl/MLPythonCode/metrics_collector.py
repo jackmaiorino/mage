@@ -16,7 +16,7 @@ class MetricsCollector:
         self.infer_counter = 0  # For periodic GC during inference
         self.main_train_sample_counter = 0
         self.mulligan_train_sample_counter = 0
-        
+
         # Timing metrics (EMA with alpha=0.1)
         self.train_time_ms_ema = None
         self.infer_time_ms_ema = None
@@ -26,7 +26,8 @@ class MetricsCollector:
         # Entropy schedule configuration
         self.entropy_start = float(os.getenv('ENTROPY_START', '0.20'))
         self.entropy_end = float(os.getenv('ENTROPY_END', '0.02'))
-        self.entropy_decay_steps = int(os.getenv('ENTROPY_DECAY_STEPS', '5000'))
+        self.entropy_decay_steps = int(
+            os.getenv('ENTROPY_DECAY_STEPS', '5000'))
 
         # GAE (Generalized Advantage Estimation) configuration
         self.gae_lambda = float(os.getenv('GAE_LAMBDA', '0.95'))
@@ -34,13 +35,16 @@ class MetricsCollector:
 
         # Auto-GAE: Start with MC returns, auto-switch to GAE once value head is healthy
         self.gae_auto_enable = bool(int(os.getenv('GAE_AUTO_ENABLE', '0')))
-        self.gae_auto_threshold = float(os.getenv('GAE_AUTO_THRESHOLD', '0.65'))
-        self.gae_auto_min_samples = int(os.getenv('GAE_AUTO_MIN_SAMPLES', '200'))
+        self.gae_auto_threshold = float(
+            os.getenv('GAE_AUTO_THRESHOLD', '0.65'))
+        self.gae_auto_min_samples = int(
+            os.getenv('GAE_AUTO_MIN_SAMPLES', '200'))
 
         # GAE lambda schedule
         self.gae_lambda_high = float(os.getenv('GAE_LAMBDA_HIGH', '0.99'))
         self.gae_lambda_low = float(os.getenv('GAE_LAMBDA_LOW', '0.90'))
-        self.gae_lambda_decay_steps = int(os.getenv('GAE_LAMBDA_DECAY_STEPS', '5000'))
+        self.gae_lambda_decay_steps = int(
+            os.getenv('GAE_LAMBDA_DECAY_STEPS', '5000'))
         self.current_gae_lambda = self.gae_lambda_high if self.use_gae else 1.0
         self.gae_enabled_step = 0 if self.use_gae else None
 
@@ -56,8 +60,9 @@ class MetricsCollector:
         """
         progress = self.train_step_counter / max(1, self.entropy_decay_steps)
         decay_factor = math.exp(-progress)
-        coeff = (self.entropy_start - self.entropy_end) * decay_factor + self.entropy_end
-        return -coeff  # Negative because we're maximizing entropy
+        coeff = (self.entropy_start - self.entropy_end) * \
+            decay_factor + self.entropy_end
+        return coeff
 
     def record_value_prediction(self, value_pred, won):
         """Record a value prediction for auto-GAE tracking."""
@@ -98,7 +103,8 @@ class MetricsCollector:
             logger.info(
                 LogCategory.MODEL_TRAIN,
                 "Auto-GAE triggered! Value accuracy %.1f%% (win=%.1f%%, loss=%.1f%%) >= %.1f%% threshold. Switching from MC returns to GAE.",
-                accuracy * 100, win_accuracy * 100, loss_accuracy * 100, self.gae_auto_threshold * 100
+                accuracy * 100, win_accuracy * 100, loss_accuracy *
+                100, self.gae_auto_threshold * 100
             )
 
     def get_value_metrics(self):
@@ -133,7 +139,8 @@ class MetricsCollector:
         low = float(self.gae_lambda_low)
         decay_steps = max(1, int(self.gae_lambda_decay_steps))
 
-        steps_since = max(0, int(self.train_step_counter) - int(self.gae_enabled_step))
+        steps_since = max(0, int(self.train_step_counter) -
+                          int(self.gae_enabled_step))
         frac = min(1.0, steps_since / float(decay_steps))
         target = high + (low - high) * frac
 
@@ -164,7 +171,7 @@ class MetricsCollector:
         elif kind == "mulligan":
             self.mulligan_time_ms_ema = elapsed_ms if self.mulligan_time_ms_ema is None else \
                 (alpha * elapsed_ms + (1 - alpha) * self.mulligan_time_ms_ema)
-    
+
     def get_timing_metrics(self):
         """Get current timing metrics for Prometheus export."""
         return {
@@ -172,7 +179,7 @@ class MetricsCollector:
             'infer_time_ms': self.infer_time_ms_ema if self.infer_time_ms_ema is not None else 0.0,
             'mulligan_time_ms': self.mulligan_time_ms_ema if self.mulligan_time_ms_ema is not None else 0.0,
         }
-    
+
     def update_timing_metric(self, kind: str, elapsed_ms: float):
         """Update timing EMA for a given operation type."""
         alpha = self.timing_alpha
@@ -185,7 +192,7 @@ class MetricsCollector:
         elif kind == "mulligan":
             self.mulligan_time_ms_ema = elapsed_ms if self.mulligan_time_ms_ema is None else \
                 (alpha * elapsed_ms + (1 - alpha) * self.mulligan_time_ms_ema)
-    
+
     def get_timing_metrics(self):
         """Get current timing metrics for Prometheus export."""
         return {
@@ -193,7 +200,7 @@ class MetricsCollector:
             'infer_time_ms': self.infer_time_ms_ema if self.infer_time_ms_ema is not None else 0.0,
             'mulligan_time_ms': self.mulligan_time_ms_ema if self.mulligan_time_ms_ema is not None else 0.0,
         }
-    
+
     def compute_gae(self, rewards, values, gamma=0.99, gae_lambda=None, dones=None):
         """
         Compute Generalized Advantage Estimation (GAE).
