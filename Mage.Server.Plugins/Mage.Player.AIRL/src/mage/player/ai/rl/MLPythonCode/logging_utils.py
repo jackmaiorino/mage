@@ -3,6 +3,8 @@ import os
 import tempfile
 
 # Logging categories
+
+
 class LogCategory:
     # Set to True to enable logging for each category
     MODEL_INIT = True  # Enable model initialization logging
@@ -30,6 +32,9 @@ class LogCategory:
 # Get the directory where this script is located
 script_dir = os.path.dirname(os.path.abspath(__file__))
 log_file = os.path.join(script_dir, 'mtg_ai.log')
+mulligan_log_file = os.path.join(script_dir, 'mulligan_training.log')
+vram_log_dir = os.path.join(script_dir, 'logs')
+vram_diag_log_file = os.path.join(vram_log_dir, 'VRAM_diagnostics.log')
 
 # Create a temporary directory for shared memory files
 TEMP_DIR = tempfile.mkdtemp(prefix='mtg_ai_')
@@ -114,5 +119,67 @@ def setup_logger():
     return CategoryAdapter(base_logger, {})
 
 
+def setup_mulligan_logger():
+    """Dedicated logger for mulligan training/trace output."""
+    base_logger = logging.getLogger('mtg_ai.mulligan')
+
+    log_level = os.getenv("MTG_AI_LOG_LEVEL", "WARNING").upper()
+    base_logger.setLevel(getattr(logging, log_level, logging.WARNING))
+    base_logger.propagate = False  # don't duplicate into mtg_ai handlers
+
+    formatter = CategoryFormatter(
+        '%(asctime)s - %(name)s - %(levelname)s - [%(category)s] - %(message)s')
+
+    # Avoid duplicate handlers on reloads
+    already = False
+    for h in list(base_logger.handlers):
+        try:
+            if hasattr(h, 'baseFilename') and h.baseFilename == mulligan_log_file:
+                already = True
+                break
+        except Exception:
+            continue
+    if not already:
+        file_handler = FlushFileHandler(mulligan_log_file)
+        file_handler.setFormatter(formatter)
+        base_logger.addHandler(file_handler)
+
+    return CategoryAdapter(base_logger, {})
+
+def setup_vram_logger():
+    """Dedicated logger for VRAM diagnostics (always-on, separate file)."""
+    try:
+        os.makedirs(vram_log_dir, exist_ok=True)
+    except Exception:
+        pass
+
+    base_logger = logging.getLogger('mtg_ai.vram')
+
+    log_level = os.getenv("MTG_AI_LOG_LEVEL", "WARNING").upper()
+    base_logger.setLevel(getattr(logging, log_level, logging.WARNING))
+    base_logger.propagate = False  # don't duplicate into mtg_ai handlers
+
+    formatter = CategoryFormatter(
+        '%(asctime)s - %(name)s - %(levelname)s - [%(category)s] - %(message)s')
+
+    # Avoid duplicate handlers on reloads
+    already = False
+    for h in list(base_logger.handlers):
+        try:
+            if hasattr(h, 'baseFilename') and h.baseFilename == vram_diag_log_file:
+                already = True
+                break
+        except Exception:
+            continue
+    if not already:
+        file_handler = FlushFileHandler(vram_diag_log_file)
+        file_handler.setFormatter(formatter)
+        base_logger.addHandler(file_handler)
+
+    return CategoryAdapter(base_logger, {})
+
+
 # Global logger instance
 logger = setup_logger()
+mulligan_logger = setup_mulligan_logger()
+vram_logger = setup_vram_logger()

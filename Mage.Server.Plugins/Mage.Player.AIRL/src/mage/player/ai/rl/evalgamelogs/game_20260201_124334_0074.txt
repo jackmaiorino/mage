@@ -1,0 +1,3392 @@
+================================================================================
+GAME LOG: game_20260201_124334_0074
+Started: 2026-02-01T12:43:34.345111100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Vault of Whispers; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Vault of Whispers; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.168833 - Play Drossforge Bridge
+     [2] 0.024610 - Play Seat of the Synod
+ >>> [3] 0.806556 - Play Vault of Whispers
+
+VALUE SCORE: 0.480397
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480397
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.003444 - Pass
+ >>> [1] 0.996556 - Cast Toxin Analysis
+
+VALUE SCORE: 0.949103
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003444 - Pass
+
+VALUE SCORE: 0.949103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003444 - Pass
+
+VALUE SCORE: 0.949103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003444 - Pass
+
+VALUE SCORE: 0.949103
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Vault of Whispers; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Vault of Whispers; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.877211 - Play Drossforge Bridge
+     [2] 0.122211 - Play Seat of the Synod
+     [3] 0.000573 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.451994
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Vault of Whispers; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.006855 - Pass
+ >>> [1] 0.993145 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.444861
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.045682 - Pass
+ >>> [1] 0.954318 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.438735
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.045682 - Pass
+
+VALUE SCORE: 0.438735
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Clue Token; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Seat of the Synod; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Clue Token; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+ >>> [1] 0.701350 - Play Seat of the Synod
+     [2] 0.002137 - Cast Ichor Wellspring
+     [3] 0.000016 - Cast Galvanic Blast
+     [4] 0.287814 - Cast Refurbished Familiar
+     [5] 0.008666 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.453729
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Clue Token; Drossforge Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000058 - Pass
+     [1] 0.006895 - Cast Ichor Wellspring
+     [2] 0.000051 - Cast Galvanic Blast
+     [3] 0.012927 - Cast Myr Enforcer
+ >>> [4] 0.952893 - Cast Refurbished Familiar
+     [5] 0.027177 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.444993
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Drossforge Bridge; Seat of the Synod; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+     [0] 0.002055 - Pass
+     [1] 0.001789 - Cast Galvanic Blast
+ >>> [2] 0.996156 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.441399
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Saiba Cryptomancer]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002055 - Pass
+
+VALUE SCORE: 0.441399
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000388 - Cast Ichor Wellspring
+     [2] 0.000003 - Cast Galvanic Blast
+     [3] 0.000095 - Cast Krark-Clan Shaman
+ >>> [4] 0.999511 - Play Drossforge Bridge
+
+VALUE SCORE: 0.485110
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.002160 - Pass
+     [1] 0.321944 - Cast Ichor Wellspring
+     [2] 0.002458 - Cast Galvanic Blast
+ >>> [3] 0.593965 - Cast Myr Enforcer
+     [4] 0.079473 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.479744
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Saiba Cryptomancer; Spellstutter Sprite; Island]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Saiba Cryptomancer; Spellstutter Sprite; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002160 - Pass
+
+VALUE SCORE: 0.479744
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000073 - Cast Ichor Wellspring
+     [2] 0.000001 - Cast Galvanic Blast
+     [3] 0.000018 - Cast Krark-Clan Shaman
+ >>> [4] 0.999908 - Play Silverbluff Bridge
+
+VALUE SCORE: 0.494802
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.005623 - Pass
+ >>> [1] 0.791123 - Cast Ichor Wellspring
+     [2] 0.005476 - Cast Galvanic Blast
+     [3] 0.197778 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.449494
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.581915 - Pass
+     [1] 0.418085 - Cast Galvanic Blast
+
+VALUE SCORE: 0.393493
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.031474 - Pass
+     [1] 0.022591 - Cast Galvanic Blast
+ >>> [2] 0.945935 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.392637
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.586000 - Pass
+     [1] 0.413992 - Cast Galvanic Blast
+     [2] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.380775
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.590242 - Pass
+     [1] 0.409750 - Cast Galvanic Blast
+     [2] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.374459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Saiba Cryptomancer,blocking; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.591108 - Pass
+     [1] 0.408884 - Cast Galvanic Blast
+     [2] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.373181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.593891 - Pass
+     [1] 0.406102 - Cast Galvanic Blast
+     [2] 0.000007 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.369923
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.234182 - Pass
+ >>> [1] 0.765803 - Cast Galvanic Blast
+     [2] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.573966
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999943 - Pass
+     [1] 0.000058 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.569898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999938 - Pass
+     [1] 0.000062 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.577733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999948 - Pass
+     [1] 0.000052 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.557997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000051 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.556838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000051 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.557085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000051 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.556642
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Silverbluff Bridge; Blood Fountain]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Silverbluff Bridge; Blood Fountain]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999970 - Play Silverbluff Bridge
+     [2] 0.000030 - Cast Blood Fountain
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.509476
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.015881 - Pass
+ >>> [1] 0.984118 - Cast Blood Fountain
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.464436
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.096636 - Pass
+ >>> [1] 0.903362 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.458053
+SELECTED: {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999987 - Pass
+     [1] 0.000013 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.386104
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.326570
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.317475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped,attacking; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,blocking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.315593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.322914
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999968 - Pass
+     [1] 0.000032 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.491273
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.489690
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.484484
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.484484
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Drossforge Bridge,tapped; Myr Enforcer,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.480248
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.005773 - Pass
+ >>> [1] 0.941953 - Cast Ichor Wellspring
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+     [3] 0.052274 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.444163
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999987 - Pass
+     [1] 0.000013 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.383039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Seat of the Synod]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.999884 - Play Seat of the Synod
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+     [3] 0.000100 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.380666
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999988 - Pass
+     [1] 0.000012 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.369700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999989 - Pass
+     [1] 0.000011 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.362421
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999989 - Pass
+     [1] 0.000011 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.360993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999988 - Pass
+     [1] 0.000012 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.366255
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000034 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.501724
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000033 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.500108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999968 - Pass
+     [1] 0.000032 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.495146
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999968 - Pass
+     [1] 0.000032 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.495146
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod,tapped; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.490947
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.005570 - Pass
+ >>> [1] 0.927255 - Cast Thoughtcast
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+     [3] 0.067175 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.430461
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Krark-Clan Shaman; Great Furnace]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.000084 - Cast Krark-Clan Shaman
+ >>> [2] 0.999902 - Play Great Furnace
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+     [4] 0.000013 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.366824
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.016595 - Pass
+ >>> [1] 0.859708 - Cast Krark-Clan Shaman
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+     [3] 0.123696 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.352748
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.325895
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.315257
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.315257
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.307061
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+     [1] 0.000038 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.520732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999965 - Pass
+     [1] 0.000035 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.512358
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999965 - Pass
+     [1] 0.000035 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.512358
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.491688
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.490149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod,tapped; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.490149
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Fanatical Offering]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Fanatical Offering]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Blood Token; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.090650 - Pass
+     [1] 0.129746 - Cast Fanatical Offering
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+ >>> [3] 0.779603 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.395879
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.999999 - Play Mistvault Bridge
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.434956
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.414730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.406164
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.404485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.410814
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999937 - Pass
+     [1] 0.000063 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.590006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999947 - Pass
+     [1] 0.000053 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.566633
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999947 - Pass
+     [1] 0.000053 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.567368
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999952 - Pass
+     [1] 0.000048 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.556871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999952 - Pass
+     [1] 0.000048 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.556871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999958 - Pass
+     [1] 0.000042 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.537819
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000042 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.536377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000042 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.536377
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000036 - Pass
+ >>> [1] 0.999964 - Cast Refurbished Familiar
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.349081
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Refurbished Familiar (controller=RL)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.303178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.308605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.297898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Humbling Elder,blocking; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.295686
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.304817
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island]
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.554625
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.542599
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.542599
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+     [1] 0.000038 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.519269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.517921
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.517921
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.579949 - Pass
+     [1] 0.420044 - Cast Makeshift Munitions
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.365129
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999989 - Pass
+     [1] 0.000011 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.355920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Harrier Strix,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999989 - Pass
+     [1] 0.000011 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.354098
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.583898 - Pass
+     [1] 0.416095 - Cast Makeshift Munitions
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.361312
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.541240
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.539875
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999961 - Pass
+     [1] 0.000039 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.526430
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Krark-Clan Shaman,blocking; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999961 - Pass
+     [1] 0.000039 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.525667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+     [1] 0.000038 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.519512
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions; Vault of Whispers]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions; Vault of Whispers]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Makeshift Munitions
+ >>> [2] 1.000000 - Play Vault of Whispers
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.323839
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.661336 - Pass
+     [1] 0.338658 - Cast Makeshift Munitions
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.306435
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.296333
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped,attacking; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.294230
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.665535 - Pass
+     [1] 0.334459 - Cast Makeshift Munitions
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.302190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island]
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.507636
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.486730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.485317
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.473779
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman,blocking; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.473034
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman,blocking; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999976 - Pass
+     [1] 0.000024 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.443341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Seat of the Synod; Drossforge Bridge; Myr Enforcer,tapped; Silverbluff Bridge; Ichor Wellspring; Silverbluff Bridge; Ichor Wellspring; Seat of the Synod; Great Furnace; Krark-Clan Shaman,blocking; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.445349
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 12
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 144
+Ended: 2026-02-01T12:47:51.686780800
+================================================================================

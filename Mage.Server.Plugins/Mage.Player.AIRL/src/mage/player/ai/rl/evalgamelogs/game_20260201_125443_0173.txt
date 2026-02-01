@@ -1,0 +1,1415 @@
+================================================================================
+GAME LOG: game_20260201_125443_0173
+Started: 2026-02-01T12:54:43.116108400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Lorien Revealed; Deep Analysis; Cryptic Serpent; Tolarian Terror]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Lorien Revealed; Deep Analysis; Cryptic Serpent; Tolarian Terror]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124965
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Deep Analysis; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000045 - Pass
+ >>> [1] 0.999955 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.123370
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123370
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123370
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Island
+     [2] 0.000002 - Cast Brainstorm
+
+VALUE SCORE: 1.122231
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002347 - Pass
+ >>> [1] 0.997653 - Cast Brainstorm
+
+VALUE SCORE: 1.120457
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island; Lorien Revealed]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000046 - Pass
+ >>> [1] 0.999954 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.117703
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 1.117703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 1.117703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 1.117703
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 1.117703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 1.117703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 1.117703
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.119890
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.119890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.119890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.119890
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.119890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.119890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.119890
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island; Brainstorm]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Island; Brainstorm]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Island
+     [2] 0.000002 - Cast Brainstorm
+
+VALUE SCORE: 1.117306
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Cryptic Serpent; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000706 - Cast Deep Analysis
+ >>> [2] 0.949189 - Cast Cryptic Serpent
+     [3] 0.049611 - Cast Tolarian Terror
+     [4] 0.000492 - Cast Brainstorm
+
+VALUE SCORE: 1.115379
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.115379
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.115379
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.115379
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.115379
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.115379
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.115379
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Island; Brainstorm; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Deep Analysis
+     [2] 0.000163 - Cast Tolarian Terror
+ >>> [3] 0.999751 - Play Island
+     [4] 0.000002 - Cast Brainstorm
+     [5] 0.000082 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.114280
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Tolarian Terror; Brainstorm; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+     [1] 0.005782 - Cast Deep Analysis
+ >>> [2] 0.406390 - Cast Tolarian Terror
+     [3] 0.004057 - Cast Brainstorm
+     [4] 0.380251 - Cast Lorien Revealed
+     [5] 0.203510 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.112250
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000048 - Pass
+     [1] 0.020570 - Cast Brainstorm
+ >>> [2] 0.979382 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.101557
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 1.101557
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island; Thought Scour]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Island; Thought Scour]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Deep Analysis
+     [2] 0.000002 - Cast Brainstorm
+ >>> [3] 0.999978 - Play Island
+     [4] 0.000018 - Cast Thought Scour
+
+VALUE SCORE: 1.110893
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Thought Scour]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000170 - Pass
+     [1] 0.103263 - Cast Deep Analysis
+     [2] 0.073052 - Cast Brainstorm
+ >>> [3] 0.823515 - Cast Thought Scour
+
+VALUE SCORE: 1.108744
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000707 - Cast Deep Analysis
+     [2] 0.000509 - Cast Brainstorm
+ >>> [3] 0.998782 - Cast Cryptic Serpent
+
+VALUE SCORE: 1.101390
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Brainstorm]
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002318 - Pass
+ >>> [1] 0.997682 - Cast Brainstorm
+
+VALUE SCORE: 1.093890
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Lorien Revealed]
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000051 - Pass
+ >>> [1] 0.999949 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.089835
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 1.089835
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Deep Analysis
+ >>> [2] 0.999998 - Play Island
+
+VALUE SCORE: 1.103057
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001674 - Pass
+ >>> [1] 0.998326 - Cast Deep Analysis
+
+VALUE SCORE: 1.100669
+SELECTED: Cast Deep Analysis
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000020 - Pass
+     [1] 0.198039 - Cast Deem Inferior
+ >>> [2] 0.801942 - Cast Tolarian Terror
+
+VALUE SCORE: 1.088410
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000020 - Pass
+
+VALUE SCORE: 1.088410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000020 - Pass
+
+VALUE SCORE: 1.088410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000020 - Pass
+
+VALUE SCORE: 1.088410
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Elves.dek
+Total Decisions Logged: 60
+Ended: 2026-02-01T12:55:48.064898800
+================================================================================

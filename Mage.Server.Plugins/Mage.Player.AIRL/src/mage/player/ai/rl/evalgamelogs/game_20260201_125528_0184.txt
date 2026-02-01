@@ -1,0 +1,1662 @@
+================================================================================
+GAME LOG: game_20260201_125528_0184
+Started: 2026-02-01T12:55:28.837766400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124933
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000045 - Pass
+ >>> [1] 0.999955 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.123337
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 1.123337
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.097221
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.097221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.097221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.097221
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007340 - Pass
+ >>> [1] 0.992660 - Cast Counterspell
+
+VALUE SCORE: 0.184669
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007340 - Pass
+
+VALUE SCORE: 0.184669
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007340 - Pass
+
+VALUE SCORE: 0.184669
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007340 - Pass
+
+VALUE SCORE: 0.184669
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror; Ponder]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Island; Tolarian Terror; Ponder]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999589 - Play Island
+     [2] 0.000411 - Cast Ponder
+
+VALUE SCORE: 1.059853
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Ponder]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Cast Ponder
+
+VALUE SCORE: 1.056986
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 1.056986
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 1.056986
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 1.056986
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 1.056986
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Counterspell]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.004964 - Pass
+ >>> [1] 0.995036 - Cast Counterspell
+
+VALUE SCORE: 0.226877
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004964 - Pass
+
+VALUE SCORE: 0.226877
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004964 - Pass
+
+VALUE SCORE: 0.226877
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.956131 - Cast Cryptic Serpent
+     [2] 0.043365 - Cast Tolarian Terror
+     [3] 0.000502 - Cast Brainstorm
+
+VALUE SCORE: 1.071376
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.071376
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.852220 - Cast Cryptic Serpent
+     [2] 0.036708 - Cast Tolarian Terror
+     [3] 0.000454 - Cast Brainstorm
+     [4] 0.110616 - Cast Ponder
+
+VALUE SCORE: 1.054917
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Cryptic Serpent (controller=RL)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Cryptic Serpent (controller=RL)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=RL)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.054917
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder; Island]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Brainstorm
+     [2] 0.000408 - Cast Ponder
+ >>> [3] 0.999590 - Play Island
+
+VALUE SCORE: 1.027458
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Ponder]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.004251 - Cast Brainstorm
+ >>> [2] 0.995737 - Cast Ponder
+
+VALUE SCORE: 1.023976
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Thought Scour]
+-> Permanents: [Island; Island; Cryptic Serpent; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000284 - Pass
+     [1] 0.100926 - Cast Brainstorm
+ >>> [2] 0.898790 - Cast Thought Scour
+
+VALUE SCORE: 1.017538
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island; Cryptic Serpent; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000882 - Pass
+     [1] 0.298051 - Cast Brainstorm
+ >>> [2] 0.701067 - Cast Sleep of the Dead
+
+VALUE SCORE: 0.987406
+SELECTED: Cast Sleep of the Dead
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.987406
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Deep Analysis]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Brainstorm; Deep Analysis]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003034 - Pass
+ >>> [1] 0.996966 - Cast Brainstorm
+
+VALUE SCORE: 0.979975
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 5 cards
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror]
+-> Permanents: [Island; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003034 - Pass
+
+VALUE SCORE: 0.979975
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island; Cryptic Serpent; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Tolarian Terror; Deep Analysis; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island; Cryptic Serpent; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000033 - Pass
+ >>> [1] 0.751490 - Cast Tolarian Terror
+     [2] 0.248477 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 1.006612
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Deep Analysis; Tolarian Terror; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000033 - Pass
+
+VALUE SCORE: 1.006612
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Deep Analysis; Tolarian Terror; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000033 - Pass
+
+VALUE SCORE: 1.006612
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Tolarian Terror; Deep Analysis; Tolarian Terror; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000033 - Pass
+
+VALUE SCORE: 1.006612
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 8
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 71
+Ended: 2026-02-01T12:56:50.684191400
+================================================================================

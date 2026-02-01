@@ -1,0 +1,1600 @@
+================================================================================
+GAME LOG: game_20260201_125914_0224
+Started: 2026-02-01T12:59:14.030441200
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fiery Temper; Grab the Prize; Grab the Prize; Grab the Prize; Faithless Looting]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fiery Temper; Grab the Prize; Grab the Prize; Grab the Prize; Faithless Looting]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.187079
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Grab the Prize; Grab the Prize; Grab the Prize; Faithless Looting]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.287797 - Pass
+ >>> [1] 0.712203 - Cast Faithless Looting
+
+VALUE SCORE: 0.168464
+SELECTED: Cast Faithless Looting
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.287797 - Pass
+
+VALUE SCORE: 0.168464
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower; Masked Meower]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower; Masked Meower]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000013 - Pass
+ >>> [1] 0.999081 - Play Mountain
+     [2] 0.000078 - Cast Lightning Bolt
+     [3] 0.000828 - Cast Masked Meower
+
+VALUE SCORE: 0.170660
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Grab the Prize; Lightning Bolt; Masked Meower; Masked Meower]
+-> Permanents: [Mountain; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001963 - Pass
+ >>> [1] 0.878053 - Cast Grab the Prize
+     [2] 0.009519 - Cast Lightning Bolt
+     [3] 0.110465 - Cast Masked Meower
+
+VALUE SCORE: 0.153745
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001963 - Pass
+
+VALUE SCORE: 0.153745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001963 - Pass
+
+VALUE SCORE: 0.153745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001963 - Pass
+
+VALUE SCORE: 0.153745
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001963 - Pass
+
+VALUE SCORE: 0.153745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001963 - Pass
+
+VALUE SCORE: 0.153745
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001963 - Pass
+
+VALUE SCORE: 0.153745
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper; Mountain]
+-> Permanents: [Mountain; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper; Mountain]
+-> Permanents: [Mountain; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+     [1] 0.007517 - Cast Grab the Prize
+     [2] 0.000885 - Cast Masked Meower
+     [3] 0.000900 - Cast Voldaren Epicure
+ >>> [4] 0.990683 - Play Mountain
+
+VALUE SCORE: 0.160104
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Grab the Prize; Masked Meower; Masked Meower; Voldaren Epicure; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001923 - Pass
+ >>> [1] 0.759401 - Cast Grab the Prize
+     [2] 0.101853 - Cast Masked Meower
+     [3] 0.102119 - Cast Voldaren Epicure
+     [4] 0.022116 - Cast Fiery Temper
+     [5] 0.012588 - Flashback {2}{R}
+
+VALUE SCORE: 0.144165
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Meower; Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012259 - Pass
+ >>> [1] 0.498493 - Cast Masked Meower
+     [2] 0.484964 - Cast Voldaren Epicure
+     [3] 0.004284 - Cast Lava Dart
+
+VALUE SCORE: 0.113050
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.094660
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.091627
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.091627
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.089552
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999911 - Pass
+     [1] 0.000089 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.921308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999911 - Pass
+     [1] 0.000089 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.921444
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999911 - Pass
+     [1] 0.000089 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.921141
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart; Grab the Prize]
+-> Permanents: [Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Mountain; Lava Dart; Grab the Prize]
+-> Permanents: [Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000017 - Pass
+     [1] 0.000969 - Cast Voldaren Epicure
+     [2] 0.000224 - Cast Fiery Temper
+ >>> [3] 0.990952 - Play Mountain
+     [4] 0.000009 - Cast Lava Dart
+     [5] 0.007704 - Cast Grab the Prize
+     [6] 0.000125 - Flashback {2}{R}
+     [7] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.146765
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Lava Dart; Grab the Prize]
+-> Permanents: [Mountain; Mountain; Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002529 - Pass
+     [1] 0.120979 - Cast Voldaren Epicure
+     [2] 0.023630 - Cast Fiery Temper
+     [3] 0.001075 - Cast Lava Dart
+ >>> [4] 0.838354 - Cast Grab the Prize
+     [5] 0.013433 - Flashback {2}{R}
+     [6] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.130661
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Voldaren Epicure; Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.028707 - Pass
+ >>> [1] 0.958273 - Cast Voldaren Epicure
+     [2] 0.008443 - Cast Lava Dart
+     [3] 0.004576 - Flashback sacrifice a Mountain
+     [4] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.090329
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.724021 - Pass
+     [1] 0.186408 - Cast Lava Dart
+     [2] 0.089549 - Flashback sacrifice a Mountain
+     [3] 0.000022 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.072146
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.652548 - Pass
+     [1] 0.157425 - Cast Lava Dart
+     [2] 0.068300 - Flashback sacrifice a Mountain
+     [3] 0.000019 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.121707 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.050494
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.656617 - Pass
+     [1] 0.156845 - Cast Lava Dart
+     [2] 0.067045 - Flashback sacrifice a Mountain
+     [3] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.119490 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.046533
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.656617 - Pass
+     [1] 0.156845 - Cast Lava Dart
+     [2] 0.067045 - Flashback sacrifice a Mountain
+     [3] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.119490 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.046533
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.658326 - Pass
+     [1] 0.157009 - Cast Lava Dart
+     [2] 0.066260 - Flashback sacrifice a Mountain
+     [3] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.118403 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.043562
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000731 - Pass
+     [1] 0.040544 - Cast Lava Dart
+     [2] 0.427529 - Flashback sacrifice a Mountain
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+ >>> [4] 0.531196 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.818505
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 11
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002104 - Pass
+ >>> [1] 0.997895 - Flashback sacrifice a Mountain
+     [2] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.808388
+SELECTED: Flashback sacrifice a Mountain
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 10
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001607 - Pass
+ >>> [1] 0.998393 - Flashback sacrifice a Mountain
+     [2] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.835364
+SELECTED: Flashback sacrifice a Mountain
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 9
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999941 - Pass
+     [1] 0.000059 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.861366
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 9
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999941 - Pass
+     [1] 0.000059 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.861508
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 9
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999941 - Pass
+     [1] 0.000059 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.861125
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain; Masked Meower]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Mountain; Masked Meower]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+ >>> [1] 0.998983 - Play Mountain
+     [2] 0.000999 - Cast Masked Meower
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.138198
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Masked Meower]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012293 - Pass
+     [1] 0.106893 - Cast Fiery Temper
+     [2] 0.231948 - Cast Guttersnipe
+ >>> [3] 0.588915 - Cast Masked Meower
+     [4] 0.059951 - Flashback {2}{R}
+     [5] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.120728
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain,tapped; Masked Meower]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.112585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped,attacking; Mountain; Voldaren Epicure,tapped,attacking; Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.092649
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped,attacking; Mountain; Voldaren Epicure,tapped,attacking; Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.092649
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped; Mountain; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.085993
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped; Mountain; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped; Mountain; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.829448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped; Mountain; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.829654
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe]
+-> Permanents: [Mountain; Masked Meower,tapped; Mountain; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.829224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Lightning Bolt]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Guttersnipe; Lightning Bolt]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.018554 - Pass
+     [1] 0.244358 - Cast Fiery Temper
+ >>> [2] 0.507339 - Cast Guttersnipe
+     [3] 0.096956 - Cast Lightning Bolt
+     [4] 0.132793 - Flashback {2}{R}
+     [5] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.131750
+SELECTED: Cast Guttersnipe
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Masked Meower; Guttersnipe]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.074025
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Masked Meower,tapped,attacking; Guttersnipe]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.053296
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Masked Meower,tapped,attacking; Guttersnipe]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.053296
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Masked Meower,tapped,attacking; Guttersnipe]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.050393
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Masked Meower,tapped,attacking; Guttersnipe]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.050393
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.040823
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999973 - Pass
+     [1] 0.000027 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.740753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.733571
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.733838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.733290
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain; Masked Meower,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.000182 - Cast Fiery Temper
+     [2] 0.000071 - Cast Lightning Bolt
+ >>> [3] 0.999642 - Play Mountain
+     [4] 0.000095 - Flashback {2}{R}
+     [5] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.139009
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Lightning Bolt]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Mountain; Masked Meower,tapped; Guttersnipe; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.039137 - Pass
+ >>> [1] 0.491128 - Cast Fiery Temper
+     [2] 0.207744 - Cast Lightning Bolt
+     [3] 0.261990 - Flashback {2}{R}
+     [4] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.114353
+SELECTED: Cast Fiery Temper
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=RL)
+  - [2] Fiery Temper (controller=RL)
+[RL], life = 20
+-> Hand: [Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Masked Meower,tapped; Guttersnipe; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.277266 - Pass
+ >>> [1] 0.722726 - Cast Lightning Bolt
+     [2] 0.000007 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.050577
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] Lightning Bolt (controller=RL)
+  - [1] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=RL)
+  - [3] Fiery Temper (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Masked Meower,tapped; Guttersnipe; Mountain,tapped]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277266 - Pass
+
+VALUE SCORE: 0.050577
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 65
+Ended: 2026-02-01T13:00:29.928438900
+================================================================================

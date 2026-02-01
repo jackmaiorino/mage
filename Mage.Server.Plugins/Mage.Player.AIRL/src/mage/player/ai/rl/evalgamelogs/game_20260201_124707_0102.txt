@@ -1,0 +1,1947 @@
+================================================================================
+GAME LOG: game_20260201_124707_0102
+Started: 2026-02-01T12:47:07.662336
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000055 - Pass
+ >>> [1] 0.999945 - Play Drossforge Bridge
+
+VALUE SCORE: 0.213200
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.213200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.014969 - Pass
+ >>> [1] 0.874276 - Cast Nihil Spellbomb
+     [2] 0.110754 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.206491
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.188970 - Pass
+ >>> [1] 0.811030 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.198050
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.188970 - Pass
+
+VALUE SCORE: 0.198050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra; Vault of Whispers]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra; Vault of Whispers]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000013 - Pass
+     [1] 0.000083 - Cast Krark-Clan Shaman
+ >>> [2] 0.999904 - Play Vault of Whispers
+
+VALUE SCORE: 0.180786
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000328 - Pass
+     [1] 0.000654 - Cast Cleansing Wildfire
+     [2] 0.000056 - Cast Fanatical Offering
+ >>> [3] 0.996874 - Cast Refurbished Familiar
+     [4] 0.002087 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.177990
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite; Island]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Spellstutter Sprite; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped; Island; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000328 - Pass
+
+VALUE SCORE: 0.177990
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped; Island; Spellstutter Sprite,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped; Island; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000001 - Cast Cleansing Wildfire
+     [2] 0.000000 - Cast Fanatical Offering
+     [3] 0.000005 - Cast Krark-Clan Shaman
+     [4] 0.002477 - Cast Refurbished Familiar
+ >>> [5] 0.997516 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.214850
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped; Island; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000278 - Pass
+     [1] 0.000605 - Cast Cleansing Wildfire
+     [2] 0.000056 - Cast Fanatical Offering
+     [3] 0.002002 - Cast Krark-Clan Shaman
+ >>> [4] 0.997060 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.186245
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Refurbished Familiar (controller=RL)
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge; Vault of Whispers,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000278 - Pass
+
+VALUE SCORE: 0.186245
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Krark-Clan Shaman; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge; Vault of Whispers,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.116281 - Pass
+ >>> [1] 0.883719 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.181192
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.175116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.175236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.174941
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Spellstutter Sprite; Island]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Spellstutter Sprite; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999678 - Pass
+     [1] 0.000322 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.793312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999721 - Pass
+     [1] 0.000279 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.776066
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999751 - Pass
+     [1] 0.000249 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.761652
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999793 - Pass
+     [1] 0.000207 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.736884
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999855 - Pass
+     [1] 0.000145 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.685330
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999857 - Pass
+     [1] 0.000143 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.683793
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra; Forest]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra; Forest]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000019 - Pass
+     [1] 0.000047 - Cast Cleansing Wildfire
+     [2] 0.000005 - Cast Fanatical Offering
+     [3] 0.000003 - Cast Nyxborn Hydra
+ >>> [4] 0.999926 - Play Forest
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.198236
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Cleansing Wildfire; Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.262519 - Pass
+ >>> [1] 0.561749 - Cast Cleansing Wildfire
+     [2] 0.049250 - Cast Fanatical Offering
+     [3] 0.029578 - Cast Nyxborn Hydra
+     [4] 0.096903 - Cast Nyxborn Hydra using bestow
+     [5] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.172766
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Cleansing Wildfire; Fanatical Offering; Nyxborn Hydra; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.302078 - Pass
+ >>> [1] 0.616170 - Cast Cleansing Wildfire
+     [2] 0.050847 - Cast Fanatical Offering
+     [3] 0.030904 - Cast Nyxborn Hydra
+     [4] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.156193
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.127490
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.127675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.127109
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999926 - Pass
+     [1] 0.000074 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.600943
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999927 - Pass
+     [1] 0.000073 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.599515
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999936 - Pass
+     [1] 0.000064 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.584801
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999936 - Pass
+     [1] 0.000064 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.584801
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge,tapped; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999945 - Pass
+     [1] 0.000055 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.566916
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+     [1] 0.000002 - Cast Fanatical Offering
+     [2] 0.000001 - Cast Nyxborn Hydra
+     [3] 0.000004 - Cast Nyxborn Hydra using bestow
+     [4] 0.296057 - Play Drossforge Bridge
+ >>> [5] 0.703926 - Play Mountain
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.188192
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.615007 - Pass
+     [1] 0.107987 - Cast Fanatical Offering
+     [2] 0.066701 - Cast Nyxborn Hydra
+     [3] 0.210303 - Cast Nyxborn Hydra using bestow
+     [4] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158265
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.850447 - Pass
+     [1] 0.149549 - Cast Fanatical Offering
+     [2] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158488
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.615577 - Pass
+     [1] 0.107820 - Cast Fanatical Offering
+     [2] 0.066592 - Cast Nyxborn Hydra
+     [3] 0.210008 - Cast Nyxborn Hydra using bestow
+     [4] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.157950
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Fanatical Offering; Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Drossforge Bridge; Vault of Whispers; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.057437 - Pass
+ >>> [1] 0.942556 - Cast Fanatical Offering
+     [2] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.675631
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Toxin Analysis]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.035563 - Pass
+ >>> [1] 0.964434 - Cast Toxin Analysis
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.621027
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Krark-Clan Shaman; Forest; Mountain,tapped; Map Token; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000196 - Pass
+ >>> [1] 0.999804 - {2}, Sacrifice this artifact: Draw a card.
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.550352
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Forest,tapped; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+     [1] 0.000038 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.511541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+
+VALUE SCORE: 0.511541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+
+VALUE SCORE: 0.511541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+
+VALUE SCORE: 0.511541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+
+VALUE SCORE: 0.511541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Mountain,tapped; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+
+VALUE SCORE: 0.511541
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman; Twisted Landscape]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Forest; Mountain; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman; Twisted Landscape]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Forest; Mountain; Map Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000000 - Cast Nyxborn Hydra
+     [2] 0.000000 - Cast Nyxborn Hydra using bestow
+     [3] 0.019866 - Play Drossforge Bridge
+     [4] 0.046593 - Play Mountain
+     [5] 0.003679 - Cast Refurbished Familiar
+     [6] 0.000008 - Cast Krark-Clan Shaman
+ >>> [7] 0.929810 - Play Twisted Landscape
+     [8] 0.000043 - Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+
+VALUE SCORE: 0.137621
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Forest; Mountain; Map Token; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000332 - Pass
+     [1] 0.000025 - Cast Nyxborn Hydra
+     [2] 0.000079 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.997288 - Cast Refurbished Familiar
+     [4] 0.002275 - Cast Krark-Clan Shaman
+     [5] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.119559
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Forest; Mountain; Map Token; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999452 - Pass
+     [1] 0.000548 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.094553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Forest; Mountain; Map Token; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.033579 - Pass
+     [1] 0.001975 - Cast Nyxborn Hydra
+     [2] 0.005730 - Cast Nyxborn Hydra using bestow
+     [3] 0.196256 - Cast Krark-Clan Shaman
+ >>> [4] 0.762442 - {1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
+     [5] 0.000017 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.077986
+SELECTED: {1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain; Krark-Clan Shaman]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.156232 - Pass
+     [1] 0.007773 - Cast Nyxborn Hydra
+     [2] 0.019827 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.816096 - Cast Krark-Clan Shaman
+     [4] 0.000071 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.030520
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.952801 - Pass
+     [1] 0.046787 - Cast Nyxborn Hydra
+     [2] 0.000411 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.026329
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999567 - Pass
+     [1] 0.000432 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.025479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.952711 - Pass
+     [1] 0.046877 - Cast Nyxborn Hydra
+     [2] 0.000411 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.027488
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island; Faerie Miscreant; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island; Faerie Miscreant; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996613 - Pass
+     [1] 0.003361 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000027 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.464086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island; Faerie Miscreant; Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996663 - Pass
+     [1] 0.003311 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000026 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.461707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Ninja of the Deep Hours; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997168 - Pass
+     [1] 0.002810 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000022 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.434030
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite; Island; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Ninja of the Deep Hours; Humbling Elder; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997200 - Pass
+     [1] 0.002779 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000021 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.432115
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Humbling Elder; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997802 - Pass
+     [1] 0.002182 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000016 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.388640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Nyxborn Hydra; Drossforge Bridge; Drossforge Bridge; Mountain]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Forest; Mountain,tapped; Twisted Landscape; Refurbished Familiar,blocking; Krark-Clan Shaman,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Humbling Elder; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997838 - Pass
+     [1] 0.002146 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000016 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.385162
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 81
+Ended: 2026-02-01T12:48:43.718146200
+================================================================================

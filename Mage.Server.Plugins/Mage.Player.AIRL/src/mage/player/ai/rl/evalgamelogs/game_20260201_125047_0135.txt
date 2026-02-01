@@ -1,0 +1,1262 @@
+================================================================================
+GAME LOG: game_20260201_125047_0135
+Started: 2026-02-01T12:50:47.792825600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Goblin Tomb Raider; Great Furnace]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Goblin Tomb Raider; Great Furnace]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Great Furnace
+
+VALUE SCORE: 1.073054
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Lightning Bolt; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000031 - Pass
+     [1] 0.033546 - Cast Chain Lightning
+     [2] 0.002573 - Cast Galvanic Blast
+ >>> [3] 0.663238 - Cast Lightning Bolt
+     [4] 0.300613 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.068651
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Lightning Bolt (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 1.068651
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider; End the Festivities]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider; End the Festivities]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+     [1] 0.006941 - Cast Chain Lightning
+     [2] 0.000533 - Cast Galvanic Blast
+     [3] 0.062629 - Cast Goblin Tomb Raider
+ >>> [4] 0.929891 - Cast End the Festivities
+
+VALUE SCORE: 1.062909
+SELECTED: Cast End the Festivities
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] End the Festivities (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 1.062909
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000093 - Pass
+     [1] 0.097846 - Cast Chain Lightning
+     [2] 0.007529 - Cast Galvanic Blast
+ >>> [3] 0.894532 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.051950
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.051950
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Mountain]
+-> Permanents: [Great Furnace; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary; Mountain]
+-> Permanents: [Great Furnace; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000003 - Cast Chain Lightning
+     [2] 0.000000 - Cast Galvanic Blast
+ >>> [3] 0.999996 - Play Mountain
+
+VALUE SCORE: 1.037166
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary; Burning-Tree Emissary]
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.102049 - Cast Rally at the Hornburg
+     [2] 0.000269 - Cast Reckless Impulse
+     [3] 0.002333 - Cast Chain Lightning
+     [4] 0.000181 - Cast Galvanic Blast
+ >>> [5] 0.895165 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 1.029471
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.029471
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.029471
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.029471
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.102095 - Cast Rally at the Hornburg
+     [2] 0.000232 - Cast Reckless Impulse
+     [3] 0.001914 - Cast Chain Lightning
+     [4] 0.000158 - Cast Galvanic Blast
+ >>> [5] 0.895599 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 0.969607
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+  - [1] Burning-Tree Emissary (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.969607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.969607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+  - [1] Burning-Tree Emissary (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.969607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.969607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.969607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000023 - Pass
+ >>> [1] 0.980000 - Cast Rally at the Hornburg
+     [2] 0.002082 - Cast Reckless Impulse
+     [3] 0.016534 - Cast Chain Lightning
+     [4] 0.001361 - Cast Galvanic Blast
+
+VALUE SCORE: 0.922022
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000023 - Pass
+
+VALUE SCORE: 0.922022
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain; Burning-Tree Emissary; Burning-Tree Emissary; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast; Goblin Bushwhacker]
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain; Burning-Tree Emissary; Burning-Tree Emissary; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000041 - Cast Reckless Impulse
+     [2] 0.000333 - Cast Chain Lightning
+     [3] 0.000026 - Cast Galvanic Blast
+ >>> [4] 0.999600 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.932142
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Chain Lightning; Galvanic Blast]
+-> Permanents: [Great Furnace; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Human Soldier Token; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001217 - Pass
+ >>> [1] 0.925557 - Cast Chain Lightning
+     [2] 0.073226 - Cast Galvanic Blast
+
+VALUE SCORE: 0.901169
+SELECTED: Cast Chain Lightning
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider; Mountain,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Human Soldier Token; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001217 - Pass
+
+VALUE SCORE: 0.901169
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001217 - Pass
+
+VALUE SCORE: 0.901169
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Galvanic Blast]
+-> Permanents: [Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001217 - Pass
+
+VALUE SCORE: 0.901169
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 6
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 54
+Ended: 2026-02-01T12:51:51.342526100
+================================================================================

@@ -1,0 +1,4044 @@
+================================================================================
+GAME LOG: game_20260201_124209_0067
+Started: 2026-02-01T12:42:09.768905900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Play Mistvault Bridge
+
+VALUE SCORE: 0.480614
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480614
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480614
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Hunter's Blowgun; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.082617 - Pass
+ >>> [1] 0.917383 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.437953
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.082617 - Pass
+
+VALUE SCORE: 0.437953
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+ >>> [1] 0.999991 - Play Mistvault Bridge
+
+VALUE SCORE: 0.375790
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.375790
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.375790
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.375790
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Slagwoods Bridge; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Slagwoods Bridge; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.375790
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.375790
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Cryogen Relic; Fanatical Offering; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.771730 - Pass
+     [1] 0.228270 - Cast Toxin Analysis
+
+VALUE SCORE: 0.166287
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756474 - Pass
+     [1] 0.243526 - Cast Toxin Analysis
+
+VALUE SCORE: 0.170438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756481 - Pass
+     [1] 0.243519 - Cast Toxin Analysis
+
+VALUE SCORE: 0.170494
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756649 - Pass
+     [1] 0.243351 - Cast Toxin Analysis
+
+VALUE SCORE: 0.170341
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Thoughtcast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cryogen Relic; Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Thoughtcast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.005628 - Pass
+ >>> [1] 0.685281 - Cast Cryogen Relic
+     [2] 0.012819 - Cast Toxin Analysis
+     [3] 0.296272 - Cast Thoughtcast
+
+VALUE SCORE: 0.401423
+SELECTED: Cast Cryogen Relic
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Thoughtcast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005628 - Pass
+
+VALUE SCORE: 0.401423
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Thoughtcast; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000049 - Pass
+ >>> [1] 0.999951 - Play Seat of the Synod
+
+VALUE SCORE: 0.391544
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Thoughtcast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.018966 - Pass
+ >>> [1] 0.981034 - Cast Thoughtcast
+
+VALUE SCORE: 0.377566
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp; Swamp,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped,attacking; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped,attacking; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018966 - Pass
+
+VALUE SCORE: 0.377566
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Cryogen Relic; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Cryogen Relic; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000096 - Pass
+     [1] 0.000148 - Cast Toxin Analysis
+     [2] 0.017195 - Cast Black Mage's Rod
+     [3] 0.012591 - Cast Myr Enforcer
+ >>> [4] 0.966941 - Cast Refurbished Familiar
+     [5] 0.003029 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+VALUE SCORE: 0.326349
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Cryogen Relic; Seat of the Synod; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.029510 - Pass
+     [1] 0.045498 - Cast Toxin Analysis
+ >>> [2] 0.924992 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+VALUE SCORE: 0.319396
+SELECTED: {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.) (controller=RL)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Ichor Wellspring; Swamp,tapped; Refurbished Familiar,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Swamp,tapped; Refurbished Familiar; Swamp,tapped; Drossforge Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Swamp,tapped; Refurbished Familiar; Swamp,tapped; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+  - [1] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029510 - Pass
+
+VALUE SCORE: 0.319396
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Black Mage's Rod; Myr Enforcer; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.004590 - Pass
+     [1] 0.004196 - Cast Toxin Analysis
+ >>> [2] 0.509829 - Cast Black Mage's Rod
+     [3] 0.432392 - Cast Myr Enforcer
+     [4] 0.047916 - Cast Reckoner's Bargain
+     [5] 0.001076 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.205939
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Myr Enforcer; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.603400 - Pass
+     [1] 0.396600 - Cast Toxin Analysis
+
+VALUE SCORE: 0.138475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Myr Enforcer; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.012599 - Pass
+     [1] 0.008950 - Cast Toxin Analysis
+ >>> [2] 0.978452 - Cast Myr Enforcer
+
+VALUE SCORE: 0.134409
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Swamp; Drossforge Bridge; Map Token; Drossforge Bridge; Forest]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Swamp; Drossforge Bridge; Map Token; Drossforge Bridge; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Hero Token; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012599 - Pass
+
+VALUE SCORE: 0.134409
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Thoughtcast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar; Black Mage's Rod]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Thoughtcast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar; Black Mage's Rod]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.042291 - Pass
+     [1] 0.017432 - Cast Toxin Analysis
+     [2] 0.176415 - Cast Reckoner's Bargain
+ >>> [3] 0.682435 - Cast Thoughtcast
+     [4] 0.075978 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.005450 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.095015
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Thoughtcast; Vault of Whispers]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000013 - Pass
+     [1] 0.000004 - Cast Toxin Analysis
+     [2] 0.000037 - Cast Reckoner's Bargain
+     [3] 0.000156 - Cast Thoughtcast
+ >>> [4] 0.999789 - Play Vault of Whispers
+     [5] 0.000001 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.059977
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Thoughtcast]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.060490 - Pass
+     [1] 0.016090 - Cast Toxin Analysis
+     [2] 0.165038 - Cast Reckoner's Bargain
+ >>> [3] 0.689571 - Cast Thoughtcast
+     [4] 0.062807 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.006003 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.045212
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Nihil Spellbomb; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.018392 - Pass
+     [1] 0.004355 - Cast Toxin Analysis
+     [2] 0.045687 - Cast Reckoner's Bargain
+ >>> [3] 0.724638 - Cast Nihil Spellbomb
+     [4] 0.205177 - Cast Ichor Wellspring
+     [5] 0.001751 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.023154
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.294148 - Pass
+     [1] 0.061888 - Cast Toxin Analysis
+ >>> [2] 0.643963 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.000825
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Forest,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Swamp; Swamp; Drossforge Bridge; Map Token; Drossforge Bridge; Forest; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Swamp; Swamp; Drossforge Bridge; Map Token; Drossforge Bridge; Forest; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp; Swamp,tapped; Drossforge Bridge; Map Token; Drossforge Bridge; Forest,tapped; Krark-Clan Shaman,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman,tapped,attacking; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman,tapped,attacking; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Seat of the Synod,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.294148 - Pass
+
+VALUE SCORE: -0.000825
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar; Black Mage's Rod; Vault of Whispers]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar; Black Mage's Rod; Vault of Whispers]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.000073 - Pass
+     [1] 0.000019 - Cast Toxin Analysis
+     [2] 0.000905 - Cast Ichor Wellspring
+     [3] 0.000124 - Cast Blood Fountain
+ >>> [4] 0.998800 - Play Drossforge Bridge
+     [5] 0.000071 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000008 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.011482
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Ichor Wellspring; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod; Refurbished Familiar; Black Mage's Rod; Vault of Whispers; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.070355 - Pass
+     [1] 0.016063 - Cast Toxin Analysis
+ >>> [2] 0.746616 - Cast Ichor Wellspring
+     [3] 0.102053 - Cast Blood Fountain
+     [4] 0.057726 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.007188 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: -0.018914
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.859416 - Pass
+     [1] 0.140583 - Cast Toxin Analysis
+
+VALUE SCORE: -0.076554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Seat of the Synod,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.232936 - Pass
+     [1] 0.037872 - Cast Toxin Analysis
+     [2] 0.244478 - Cast Blood Fountain
+ >>> [3] 0.463773 - Cast Reckoner's Bargain
+     [4] 0.020941 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: -0.079127
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped,attacking; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Toxin Analysis; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge,tapped; Swamp,tapped; Swamp,tapped; Drossforge Bridge,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Swamp; Swamp; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Slagwoods Bridge; Swamp; Swamp; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Slagwoods Bridge; Swamp; Swamp,tapped; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Drossforge Bridge; Map Token; Forest,tapped; Krark-Clan Shaman; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Refurbished Familiar,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped,attacking; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped,attacking; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.232936 - Pass
+
+VALUE SCORE: -0.079127
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Silverbluff Bridge; Mistvault Bridge; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.000000 - Cast Galvanic Blast
+     [2] 0.000032 - Cast Krark-Clan Shaman
+     [3] 0.000007 - Cast Blood Fountain
+ >>> [4] 0.958311 - Play Silverbluff Bridge
+     [5] 0.041535 - Play Mistvault Bridge
+     [6] 0.000111 - Cast Black Mage's Rod
+
+VALUE SCORE: -0.013271
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Nihil Spellbomb; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.034283 - Pass
+     [1] 0.002151 - Cast Galvanic Blast
+     [2] 0.242773 - Cast Krark-Clan Shaman
+     [3] 0.039714 - Cast Blood Fountain
+ >>> [4] 0.681079 - Cast Black Mage's Rod
+
+VALUE SCORE: -0.063698
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Black Mage's Rod (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946255 - Pass
+     [1] 0.053745 - Cast Galvanic Blast
+
+VALUE SCORE: -0.105855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Black Mage's Rod (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946255 - Pass
+     [1] 0.053745 - Cast Galvanic Blast
+
+VALUE SCORE: -0.105855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944929 - Pass
+     [1] 0.055071 - Cast Galvanic Blast
+
+VALUE SCORE: -0.094838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Lembas; Drossforge Bridge,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945803 - Pass
+     [1] 0.054197 - Cast Galvanic Blast
+
+VALUE SCORE: -0.100095
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Drossforge Bridge,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945659 - Pass
+     [1] 0.054341 - Cast Galvanic Blast
+
+VALUE SCORE: -0.098904
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Drossforge Bridge,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946754 - Pass
+     [1] 0.053246 - Cast Galvanic Blast
+
+VALUE SCORE: -0.096213
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Krark-Clan Shaman,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943840 - Pass
+     [1] 0.056160 - Cast Galvanic Blast
+
+VALUE SCORE: -0.072161
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941469 - Pass
+     [1] 0.058531 - Cast Galvanic Blast
+
+VALUE SCORE: -0.055447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941469 - Pass
+     [1] 0.058531 - Cast Galvanic Blast
+
+VALUE SCORE: -0.055447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Krark-Clan Shaman; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.106922 - Pass
+     [1] 0.006491 - Cast Galvanic Blast
+ >>> [2] 0.756662 - Cast Krark-Clan Shaman
+     [3] 0.119625 - Cast Blood Fountain
+     [4] 0.010300 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: -0.075063
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Blood Fountain; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.495976 - Pass
+ >>> [1] 0.504024 - Cast Blood Fountain
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.110376
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.145245
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.149461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.208049
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.207499
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.209064
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.212720
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Hero Token; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.231183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Krark-Clan Shaman; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.257344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: -0.257344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: -0.257344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Black Mage's Rod; Vault of Whispers,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped; Black Mage's Rod; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: -0.257344
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge; Drossforge Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge; Drossforge Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000084 - Pass
+     [1] 0.000005 - Cast Galvanic Blast
+     [2] 0.461933 - Play Mistvault Bridge
+ >>> [3] 0.537907 - Play Drossforge Bridge
+     [4] 0.000061 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [5] 0.000011 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.087635
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.556997 - Pass
+     [1] 0.029794 - Cast Galvanic Blast
+     [2] 0.353939 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.059270 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.129792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.556620 - Pass
+     [1] 0.029806 - Cast Galvanic Blast
+     [2] 0.354225 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.059349 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.129216
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.557723 - Pass
+     [1] 0.029770 - Cast Galvanic Blast
+     [2] 0.353378 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.059129 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.130678
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.706818 - Pass
+     [1] 0.023858 - Cast Galvanic Blast
+     [2] 0.232084 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.037240 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.239087
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.733058 - Pass
+     [1] 0.023501 - Cast Galvanic Blast
+     [2] 0.210447 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.032994 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.297812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.732928 - Pass
+     [1] 0.023496 - Cast Galvanic Blast
+     [2] 0.210559 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.033017 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.297351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.733371 - Pass
+     [1] 0.023502 - Cast Galvanic Blast
+     [2] 0.210182 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.032944 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.298537
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000043 - Pass
+     [1] 0.000002 - Cast Galvanic Blast
+     [2] 0.183156 - Play Mistvault Bridge
+ >>> [3] 0.816771 - Play Vault of Whispers
+     [4] 0.000024 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [5] 0.000004 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.163363
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.602957 - Pass
+     [1] 0.028342 - Cast Galvanic Blast
+     [2] 0.317645 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.051056 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.188497
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.602567 - Pass
+     [1] 0.028353 - Cast Galvanic Blast
+     [2] 0.317956 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.051124 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.187895
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.603818 - Pass
+     [1] 0.028316 - Cast Galvanic Blast
+     [2] 0.316952 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.050914 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.189520
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.685158 - Pass
+     [1] 0.024527 - Cast Galvanic Blast
+     [2] 0.249487 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.040828 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.199913
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Vault of Whispers; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.719158 - Pass
+     [1] 0.023616 - Cast Galvanic Blast
+     [2] 0.222025 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.035201 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.265322
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.730981 - Pass
+     [1] 0.023557 - Cast Galvanic Blast
+     [2] 0.212180 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.033282 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.295534
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.741103 - Pass
+     [1] 0.023507 - Cast Galvanic Blast
+     [2] 0.203589 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.031801 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.315160
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.745087 - Pass
+     [1] 0.023601 - Cast Galvanic Blast
+     [2] 0.200117 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.031195 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.325770
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.745087 - Pass
+     [1] 0.023601 - Cast Galvanic Blast
+     [2] 0.200117 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.031195 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.325770
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.747116 - Pass
+     [1] 0.023671 - Cast Galvanic Blast
+     [2] 0.198316 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.030897 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.331764
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Mistvault Bridge; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000337 - Pass
+     [1] 0.000014 - Cast Galvanic Blast
+ >>> [2] 0.998919 - Play Mistvault Bridge
+     [3] 0.000558 - Cast Reckoner's Bargain
+     [4] 0.000148 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [5] 0.000024 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.219304
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Vault of Whispers; Swamp; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.325254 - Pass
+     [1] 0.012699 - Cast Galvanic Blast
+ >>> [2] 0.514683 - Cast Reckoner's Bargain
+     [3] 0.127396 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [4] 0.019967 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.260986
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.488712 - Pass
+     [1] 0.018629 - Cast Galvanic Blast
+     [2] 0.286068 - Cast Blood Fountain
+     [3] 0.178835 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [4] 0.027757 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.290882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.684412 - Pass
+     [1] 0.026088 - Cast Galvanic Blast
+     [2] 0.250599 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.038901 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.290436
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Map Token; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.489245 - Pass
+     [1] 0.018637 - Cast Galvanic Blast
+     [2] 0.285760 - Cast Blood Fountain
+     [3] 0.178640 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [4] 0.027718 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.291825
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.710598 - Pass
+     [1] 0.024039 - Cast Galvanic Blast
+     [2] 0.229140 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.036222 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.259063
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge; Clue Token; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.713236 - Pass
+     [1] 0.023995 - Cast Galvanic Blast
+     [2] 0.226971 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.035797 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.264340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp; Map Token; Forest; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra; Slagwoods Bridge; Clue Token; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.732511 - Pass
+     [1] 0.023945 - Cast Galvanic Blast
+     [2] 0.210728 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.032816 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.311234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #150 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nihil Spellbomb; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge; Clue Token; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.748911 - Pass
+     [1] 0.024283 - Cast Galvanic Blast
+     [2] 0.196253 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.030553 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.351930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #151 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.763057 - Pass
+     [1] 0.025223 - Cast Galvanic Blast
+     [2] 0.182912 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028809 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.396107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #152 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.762407 - Pass
+     [1] 0.024949 - Cast Galvanic Blast
+     [2] 0.183761 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028884 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.389817
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #153 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nihil Spellbomb; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.762407 - Pass
+     [1] 0.024949 - Cast Galvanic Blast
+     [2] 0.183761 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028884 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.389817
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #154 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.762852 - Pass
+     [1] 0.025084 - Cast Galvanic Blast
+     [2] 0.183228 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028835 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.393228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #155 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.762852 - Pass
+     [1] 0.025084 - Cast Galvanic Blast
+     [2] 0.183228 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028835 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.393228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #156 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.763262 - Pass
+     [1] 0.025268 - Cast Galvanic Blast
+     [2] 0.182679 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028791 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.397398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #157 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.763158 - Pass
+     [1] 0.025432 - Cast Galvanic Blast
+     [2] 0.182615 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.028795 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.400260
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #158 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000501 - Pass
+     [1] 0.000019 - Cast Galvanic Blast
+     [2] 0.469555 - Play Seat of the Synod
+     [3] 0.000266 - Cast Blood Fountain
+ >>> [4] 0.529466 - Play Drossforge Bridge
+     [5] 0.000167 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [6] 0.000026 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.329115
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #159 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.524956 - Pass
+     [1] 0.019506 - Cast Galvanic Blast
+     [2] 0.264115 - Cast Blood Fountain
+     [3] 0.165790 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [4] 0.025634 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.350356
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #160 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.713342 - Pass
+     [1] 0.026496 - Cast Galvanic Blast
+     [2] 0.225324 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.034838 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.350097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #161 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Slagwoods Bridge,tapped; Nyxborn Hydra,tapped; Slagwoods Bridge,tapped; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.525242 - Pass
+     [1] 0.019522 - Cast Galvanic Blast
+     [2] 0.263926 - Cast Blood Fountain
+     [3] 0.165692 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [4] 0.025618 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.350915
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp; Forest; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nyxborn Hydra; Slagwoods Bridge; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #162 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp; Forest; Map Token; Mountain; Makeshift Munitions; Slagwoods Bridge; Nyxborn Hydra; Slagwoods Bridge; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.723571 - Pass
+     [1] 0.023800 - Cast Galvanic Blast
+     [2] 0.218373 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.034256 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.286506
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #163 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Forest; Map Token; Mountain; Makeshift Munitions; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.734487 - Pass
+     [1] 0.023864 - Cast Galvanic Blast
+     [2] 0.209078 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.032570 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.312664
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #164 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Forest; Map Token; Mountain; Makeshift Munitions; Nyxborn Hydra,tapped,attacking; Slagwoods Bridge; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.734528 - Pass
+     [1] 0.023865 - Cast Galvanic Blast
+     [2] 0.209043 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.032564 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.312772
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #165 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Forest; Map Token; Mountain,tapped; Makeshift Munitions; Nyxborn Hydra,tapped,attacking; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.741665 - Pass
+     [1] 0.023838 - Cast Galvanic Blast
+     [2] 0.202903 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.031593 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.326558
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #166 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Forest; Map Token; Mountain,tapped; Makeshift Munitions; Nyxborn Hydra,tapped,attacking; Clue Token; Blood Fountain; Blood Token; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.741701 - Pass
+     [1] 0.023840 - Cast Galvanic Blast
+     [2] 0.202871 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.031588 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.326662
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #167 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest; Map Token; Mountain,tapped; Makeshift Munitions; Nyxborn Hydra,tapped; Clue Token; Blood Fountain; Blood Token; Map Token; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.753246 - Pass
+     [1] 0.024481 - Cast Galvanic Blast
+     [2] 0.192282 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.029991 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.364253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #168 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Nyxborn Hydra,tapped; Blood Fountain; Blood Token; Map Token; Twisted Landscape; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.753279 - Pass
+     [1] 0.024490 - Cast Galvanic Blast
+     [2] 0.192239 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.029992 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.364660
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #169 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Seat of the Synod; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Mistvault Bridge; Black Mage's Rod; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge; Black Mage's Rod; Blood Fountain; Blood Token; Drossforge Bridge; Swamp; Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Mountain,tapped; Makeshift Munitions; Nyxborn Hydra,tapped; Blood Fountain; Blood Token; Twisted Landscape,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756401 - Pass
+     [1] 0.024629 - Cast Galvanic Blast
+     [2] 0.189357 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.029613 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.373395
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 13
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 169
+Ended: 2026-02-01T12:51:39.490505900
+================================================================================

@@ -1,0 +1,1922 @@
+================================================================================
+GAME LOG: game_20260201_125308_0160
+Started: 2026-02-01T12:53:08.336445
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Mono Red Rally.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987237
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+     [1] 0.425361 - Cast Faerie Miscreant
+ >>> [2] 0.574602 - Cast Faerie Seer
+
+VALUE SCORE: 0.982962
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.982962
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.000041 - Pass
+     [1] 0.437972 - Cast Faerie Miscreant
+ >>> [2] 0.561987 - Cast Faerie Seer
+
+VALUE SCORE: 0.951190
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Great Furnace; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Great Furnace; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Great Furnace; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000041 - Pass
+
+VALUE SCORE: 0.951190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Island]
+-> Permanents: [Island; Faerie Seer; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant; Island]
+-> Permanents: [Island; Faerie Seer; Faerie Seer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000101 - Cast Faerie Miscreant
+ >>> [2] 0.999899 - Play Island
+
+VALUE SCORE: 0.882310
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Saiba Cryptomancer; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island; Faerie Seer; Faerie Seer; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+ >>> [1] 0.866402 - Cast Saiba Cryptomancer
+     [2] 0.006073 - Cast Spellstutter Sprite
+     [3] 0.127510 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.871082
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Seer; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Seer; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.871082
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Faerie Seer; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Faerie Seer; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000400 - Pass
+     [1] 0.032714 - Cast Spellstutter Sprite
+ >>> [2] 0.966885 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.620874
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Saiba Cryptomancer,blocking; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000400 - Pass
+
+VALUE SCORE: 0.620874
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell; Harrier Strix]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Spellstutter Sprite; Counterspell; Harrier Strix]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.003625 - Pass
+ >>> [1] 0.757818 - Cast Spellstutter Sprite
+     [2] 0.238558 - Cast Harrier Strix
+
+VALUE SCORE: 0.743982
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003625 - Pass
+
+VALUE SCORE: 0.743982
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000001 - Cast Harrier Strix
+ >>> [2] 0.999999 - Play Island
+
+VALUE SCORE: 0.633665
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Harrier Strix]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999771 - Cast Of One Mind
+     [2] 0.000225 - Cast Harrier Strix
+
+VALUE SCORE: 0.625327
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.625327
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours; Humbling Elder]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Island; Ninja of the Deep Hours; Humbling Elder]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.004360 - Cast Of One Mind
+     [2] 0.000001 - Cast Harrier Strix
+ >>> [3] 0.995574 - Play Island
+     [4] 0.000064 - Cast Humbling Elder
+
+VALUE SCORE: 0.319996
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Of One Mind; Counterspell; Harrier Strix; Ninja of the Deep Hours; Humbling Elder]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Spellstutter Sprite; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000013 - Pass
+ >>> [1] 0.950290 - Cast Of One Mind
+     [2] 0.000332 - Cast Harrier Strix
+     [3] 0.035892 - Cast Ninja of the Deep Hours
+     [4] 0.013473 - Cast Humbling Elder
+
+VALUE SCORE: 0.295464
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Humbling Elder; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.001308 - Pass
+     [1] 0.036882 - Cast Harrier Strix
+ >>> [2] 0.961810 - Cast Humbling Elder
+
+VALUE SCORE: 0.195684
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=RL)
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Spellstutter Sprite; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Goblin Bushwhacker,tapped; Mountain; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Counterspell; Harrier Strix; Ninja of the Deep Hours; Snap; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token; Goblin Bushwhacker; Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Blood Token; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001308 - Pass
+
+VALUE SCORE: 0.195684
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 84
+Ended: 2026-02-01T12:54:27.424993400
+================================================================================

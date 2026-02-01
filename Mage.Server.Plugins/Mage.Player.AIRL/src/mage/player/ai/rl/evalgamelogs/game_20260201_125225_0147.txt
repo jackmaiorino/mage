@@ -1,0 +1,2248 @@
+================================================================================
+GAME LOG: game_20260201_125225_0147
+Started: 2026-02-01T12:52:25.269112900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987006
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987006
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987006
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.965120
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.001562 - Pass
+ >>> [1] 0.998438 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.960841
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001562 - Pass
+
+VALUE SCORE: 0.960841
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000003 - Cast Snap
+     [2] 0.000006 - Cast Spellstutter Sprite
+ >>> [3] 0.999990 - Play Island
+
+VALUE SCORE: 0.956739
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.997858 - Cast Of One Mind
+     [2] 0.000743 - Cast Snap
+     [3] 0.001396 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.952086
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.952086
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Island; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000003 - Cast Snap
+     [2] 0.000006 - Cast Spellstutter Sprite
+     [3] 0.000001 - Cast Harrier Strix
+ >>> [4] 0.999990 - Play Island
+
+VALUE SCORE: 0.918589
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Ninja of the Deep Hours; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000038 - Pass
+     [1] 0.011321 - Cast Snap
+ >>> [2] 0.965253 - Cast Ninja of the Deep Hours
+     [3] 0.018505 - Cast Spellstutter Sprite
+     [4] 0.004883 - Cast Harrier Strix
+
+VALUE SCORE: 0.912466
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000038 - Pass
+
+VALUE SCORE: 0.912466
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Snap
+     [2] 0.000005 - Cast Spellstutter Sprite
+     [3] 0.000001 - Cast Harrier Strix
+ >>> [4] 0.999990 - Play Island
+
+VALUE SCORE: 0.879788
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Spellstutter Sprite; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.001382 - Pass
+     [1] 0.354555 - Cast Snap
+ >>> [2] 0.509141 - Cast Spellstutter Sprite
+     [3] 0.134922 - Cast Harrier Strix
+
+VALUE SCORE: 0.873046
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.003025 - Pass
+ >>> [1] 0.732978 - Cast Snap
+     [2] 0.263997 - Cast Harrier Strix
+
+VALUE SCORE: 0.852273
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Harrier Strix; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.009938 - Pass
+ >>> [1] 0.990062 - Cast Harrier Strix
+
+VALUE SCORE: 0.872929
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009938 - Pass
+
+VALUE SCORE: 0.872929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009938 - Pass
+
+VALUE SCORE: 0.872929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009938 - Pass
+
+VALUE SCORE: 0.872929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009938 - Pass
+
+VALUE SCORE: 0.872929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009938 - Pass
+
+VALUE SCORE: 0.872929
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000151 - Pass
+ >>> [1] 0.999849 - Cast Counterspell
+
+VALUE SCORE: 0.825357
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000151 - Pass
+
+VALUE SCORE: 0.825357
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=RL)
+  - [1] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000151 - Pass
+
+VALUE SCORE: 0.825357
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000151 - Pass
+
+VALUE SCORE: 0.825357
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000151 - Pass
+
+VALUE SCORE: 0.825357
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000151 - Pass
+
+VALUE SCORE: 0.825357
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+     [2] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.847752
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997618 - Pass
+     [1] 0.002382 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.837080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999880 - Pass
+     [1] 0.000120 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.804236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999880 - Pass
+     [1] 0.000120 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.804236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000070 - Pass
+ >>> [1] 0.999930 - Cast Ninja of the Deep Hours
+     [2] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.782778
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.782778
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000149 - Pass
+ >>> [1] 0.999851 - Cast Counterspell
+
+VALUE SCORE: 0.803125
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000149 - Pass
+
+VALUE SCORE: 0.803125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=RL)
+  - [1] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000149 - Pass
+
+VALUE SCORE: 0.803125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000149 - Pass
+
+VALUE SCORE: 0.803125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000149 - Pass
+
+VALUE SCORE: 0.803125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000149 - Pass
+
+VALUE SCORE: 0.803125
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999719 - Play Island
+     [2] 0.000281 - Cast Ninja of the Deep Hours
+     [3] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.822503
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000062 - Pass
+ >>> [1] 0.999938 - Cast Ninja of the Deep Hours
+     [2] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.807541
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998221 - Pass
+     [1] 0.001779 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.739629
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999912 - Pass
+     [1] 0.000088 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.706921
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999912 - Pass
+     [1] 0.000088 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.706921
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.685773
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999886 - Pass
+     [1] 0.000114 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.794823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999891 - Pass
+     [1] 0.000109 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.773513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999891 - Pass
+     [1] 0.000109 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.773588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999891 - Pass
+     [1] 0.000109 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.773643
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999891 - Pass
+     [1] 0.000109 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.773320
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Faerie Seer]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Faerie Seer]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999584 - Play Island
+     [2] 0.000281 - Cast Ninja of the Deep Hours
+     [3] 0.000134 - Cast Faerie Seer
+     [4] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.804087
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ninja of the Deep Hours; Faerie Seer]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000045 - Pass
+ >>> [1] 0.677011 - Cast Ninja of the Deep Hours
+     [2] 0.322944 - Cast Faerie Seer
+     [3] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.787635
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Faerie Seer]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000166 - Pass
+ >>> [1] 0.999834 - Cast Faerie Seer
+     [2] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.725827
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998401 - Pass
+     [1] 0.001599 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.711953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998401 - Pass
+     [1] 0.001599 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.711953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999925 - Pass
+     [1] 0.000075 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.679650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999925 - Pass
+     [1] 0.000075 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.679650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999935 - Pass
+     [1] 0.000065 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.655553
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000149 - Pass
+ >>> [1] 0.999851 - Cast Counterspell
+     [2] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.751257
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.325982 - Pass
+ >>> [1] 0.674018 - Cast Dispel
+
+VALUE SCORE: 0.730521
+SELECTED: Cast Dispel
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.325982 - Pass
+
+VALUE SCORE: 0.730521
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island; Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+     [2] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.725113
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Harrier Strix; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Island; Ninja of the Deep Hours; Faerie Seer; Island]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998371 - Pass
+     [1] 0.001629 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.714744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999927 - Pass
+     [1] 0.000073 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.671019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Island; Island; Spellstutter Sprite,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999927 - Pass
+     [1] 0.000073 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.670386
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 9
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Elves.dek
+Total Decisions Logged: 96
+Ended: 2026-02-01T12:54:43.090383100
+================================================================================

@@ -1,0 +1,1622 @@
+================================================================================
+GAME LOG: game_20260201_125440_0171
+Started: 2026-02-01T12:54:40.853182300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Lorien Revealed; Deem Inferior; Mental Note; Mental Note]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Lorien Revealed; Deem Inferior; Mental Note; Mental Note]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124992
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Deem Inferior; Mental Note; Mental Note]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000034 - Pass
+ >>> [1] 0.767486 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.232479 - Cast Mental Note
+
+VALUE SCORE: 1.123396
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 1.123396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 1.123396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 1.123396
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 1.123396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 1.123396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 1.123396
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Deem Inferior; Mental Note; Mental Note; Island; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999975 - Play Island
+     [2] 0.000025 - Cast Mental Note
+
+VALUE SCORE: 1.104868
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Mental Note; Mental Note; Island; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000164 - Pass
+ >>> [1] 0.999836 - Cast Mental Note
+
+VALUE SCORE: 1.102932
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Mental Note; Island; Island; Mental Note]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000166 - Pass
+ >>> [1] 0.999834 - Cast Mental Note
+
+VALUE SCORE: 1.099140
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000166 - Pass
+
+VALUE SCORE: 1.099140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000166 - Pass
+
+VALUE SCORE: 1.099140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000166 - Pass
+
+VALUE SCORE: 1.099140
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000166 - Pass
+
+VALUE SCORE: 1.099140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000166 - Pass
+
+VALUE SCORE: 1.099140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000166 - Pass
+
+VALUE SCORE: 1.099140
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior; Cryptic Serpent]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deem Inferior; Island; Island; Mental Note; Deem Inferior; Cryptic Serpent]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999976 - Play Island
+     [2] 0.000024 - Cast Mental Note
+
+VALUE SCORE: 1.086317
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Mental Note; Deem Inferior; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000183 - Pass
+ >>> [1] 0.999817 - Cast Mental Note
+
+VALUE SCORE: 1.084113
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Sea Gate]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror]
+-> Permanents: [Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000183 - Pass
+
+VALUE SCORE: 1.084113
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.996694 - Play Island
+     [2] 0.003164 - Cast Cryptic Serpent
+     [3] 0.000142 - Cast Tolarian Terror
+
+VALUE SCORE: 1.068228
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.957362 - Cast Cryptic Serpent
+     [2] 0.042637 - Cast Tolarian Terror
+
+VALUE SCORE: 1.065693
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.065693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent; Dispel]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Deem Inferior; Tolarian Terror; Cryptic Serpent; Dispel]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000033 - Cast Deem Inferior
+ >>> [2] 0.996638 - Play Island
+     [3] 0.000127 - Cast Tolarian Terror
+     [4] 0.003202 - Cast Cryptic Serpent
+
+VALUE SCORE: 1.029180
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Cryptic Serpent; Dispel]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.009784 - Cast Deem Inferior
+     [2] 0.037504 - Cast Tolarian Terror
+ >>> [3] 0.952711 - Cast Cryptic Serpent
+
+VALUE SCORE: 1.026173
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate; The Modern Age; Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.026173
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel; Island]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel; Island]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000030 - Cast Deem Inferior
+     [2] 0.000109 - Cast Tolarian Terror
+ >>> [3] 0.999861 - Play Island
+
+VALUE SCORE: 0.978121
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Tolarian Terror; Dispel]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+     [1] 0.219724 - Cast Deem Inferior
+ >>> [2] 0.780236 - Cast Tolarian Terror
+
+VALUE SCORE: 0.973750
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Deem Inferior; Dispel]
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000186 - Pass
+ >>> [1] 0.999814 - Cast Deem Inferior
+
+VALUE SCORE: 0.955594
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; The Modern Age; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Sea Gate; The Modern Age; Heap Gate; Island]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Sea Gate; The Modern Age; Heap Gate; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped; Heap Gate,tapped; Island,tapped; Vector Glider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Sea Gate; Sea Gate,tapped; Heap Gate,tapped; Island,tapped; Vector Glider; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Island,tapped; Vector Glider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000186 - Pass
+
+VALUE SCORE: 0.955594
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel; Island]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island; Cryptic Serpent; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel; Island]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island; Cryptic Serpent; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000030 - Cast Deem Inferior
+ >>> [2] 0.999970 - Play Island
+
+VALUE SCORE: 0.986758
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island; Island; Island; Island; Cryptic Serpent; Island; Cryptic Serpent; Island; Tolarian Terror; Island]
+[Benchmark-Skill6], life = 2
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000165 - Pass
+ >>> [1] 0.999835 - Cast Deem Inferior
+
+VALUE SCORE: 0.982194
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=Benchmark-Skill6)
+  - [1] Deem Inferior (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Island,tapped; Tolarian Terror; Island]
+[Benchmark-Skill6], life = 2
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.041333 - Pass
+ >>> [1] 0.958667 - Cast Dispel
+
+VALUE SCORE: 0.951883
+SELECTED: Cast Dispel
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Island,tapped; Tolarian Terror; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.041333 - Pass
+
+VALUE SCORE: 0.951883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Island,tapped; Tolarian Terror; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.041333 - Pass
+
+VALUE SCORE: 0.951883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.041333 - Pass
+
+VALUE SCORE: 0.951883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Sea Gate,tapped; Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.041333 - Pass
+
+VALUE SCORE: 0.951883
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 70
+Ended: 2026-02-01T12:55:48.102337200
+================================================================================

@@ -1,0 +1,2450 @@
+================================================================================
+GAME LOG: game_20260201_124545_0088
+Started: 2026-02-01T12:45:45.165980500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Forest; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Forest; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000019 - Pass
+     [1] 0.347705 - Play Drossforge Bridge
+ >>> [2] 0.652276 - Play Forest
+
+VALUE SCORE: 0.212614
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.212614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.212614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.212614
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.212614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.212614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000019 - Pass
+
+VALUE SCORE: 0.212614
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000056 - Pass
+ >>> [1] 0.999944 - Play Drossforge Bridge
+
+VALUE SCORE: 0.209321
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.209321
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Slagwoods Bridge]
+-> Permanents: [Forest; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Slagwoods Bridge]
+-> Permanents: [Forest; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.014424 - Play Drossforge Bridge
+     [2] 0.000018 - Cast Ichor Wellspring
+     [3] 0.000003 - Cast Lembas
+     [4] 0.000003 - Cast Blood Fountain
+     [5] 0.000009 - Cast Eviscerator's Insight
+ >>> [6] 0.985542 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.192547
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.037512 - Pass
+ >>> [1] 0.554824 - Cast Ichor Wellspring
+     [2] 0.076231 - Cast Lembas
+     [3] 0.093119 - Cast Blood Fountain
+     [4] 0.238314 - Cast Eviscerator's Insight
+
+VALUE SCORE: 0.174166
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped,attacking; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped,attacking; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037512 - Pass
+
+VALUE SCORE: 0.174166
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb; Makeshift Munitions]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb; Makeshift Munitions]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000099 - Pass
+ >>> [1] 0.993115 - Play Drossforge Bridge
+     [2] 0.001390 - Cast Ichor Wellspring
+     [3] 0.000182 - Cast Lembas
+     [4] 0.000229 - Cast Blood Fountain
+     [5] 0.000561 - Cast Eviscerator's Insight
+     [6] 0.004421 - Cast Nihil Spellbomb
+     [7] 0.000005 - Cast Makeshift Munitions
+
+VALUE SCORE: 0.167826
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Nihil Spellbomb; Makeshift Munitions]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.014791 - Pass
+     [1] 0.199664 - Cast Ichor Wellspring
+     [2] 0.025200 - Cast Lembas
+     [3] 0.032545 - Cast Blood Fountain
+     [4] 0.076869 - Cast Eviscerator's Insight
+ >>> [5] 0.650278 - Cast Nihil Spellbomb
+     [6] 0.000653 - Cast Makeshift Munitions
+
+VALUE SCORE: 0.162610
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Ichor Wellspring; Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions]
+-> Permanents: [Forest,tapped; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.048122 - Pass
+ >>> [1] 0.518113 - Cast Ichor Wellspring
+     [2] 0.057350 - Cast Lembas
+     [3] 0.083739 - Cast Blood Fountain
+     [4] 0.171434 - Cast Eviscerator's Insight
+     [5] 0.001635 - Cast Makeshift Munitions
+     [6] 0.119608 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.145836
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Nihil Spellbomb; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.327774 - Pass
+ >>> [1] 0.672226 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.120520
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+  - [1] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate; Island]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped,attacking; Sacred Cat,tapped,attacking; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped,attacking; Sacred Cat,tapped,attacking; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 23
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.327774 - Pass
+
+VALUE SCORE: 0.120520
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape; Slagwoods Bridge]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 23
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate; Island; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape; Slagwoods Bridge]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 23
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000001 - Cast Lembas
+     [2] 0.000002 - Cast Blood Fountain
+     [3] 0.000004 - Cast Eviscerator's Insight
+     [4] 0.000000 - Cast Makeshift Munitions
+     [5] 0.412906 - Play Twisted Landscape
+     [6] 0.000023 - Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+ >>> [7] 0.587063 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.153020
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Twisted Landscape]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.036240 - Pass
+     [1] 0.036117 - Cast Lembas
+     [2] 0.056224 - Cast Blood Fountain
+     [3] 0.105085 - Cast Eviscerator's Insight
+     [4] 0.001058 - Cast Makeshift Munitions
+ >>> [5] 0.765276 - Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+
+VALUE SCORE: 0.130299
+SELECTED: Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Blood Fountain; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate; Island; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.464994 - Pass
+ >>> [1] 0.535006 - Cast Blood Fountain
+
+VALUE SCORE: 0.085295
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Blood Fountain (controller=RL)
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sacred Cat,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate; Island,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sacred Cat; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped,attacking; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped,attacking; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.464994 - Pass
+
+VALUE SCORE: 0.085295
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000193 - Pass
+     [1] 0.000131 - Cast Lembas
+     [2] 0.000357 - Cast Eviscerator's Insight
+     [3] 0.000004 - Cast Makeshift Munitions
+ >>> [4] 0.999301 - Play Drossforge Bridge
+     [5] 0.000014 - Cast Fanatical Offering
+
+VALUE SCORE: 0.092431
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Eviscerator's Insight; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.318400 - Pass
+     [1] 0.183833 - Cast Lembas
+ >>> [2] 0.472136 - Cast Eviscerator's Insight
+     [3] 0.005854 - Cast Makeshift Munitions
+     [4] 0.019776 - Cast Fanatical Offering
+
+VALUE SCORE: 0.064634
+SELECTED: Cast Eviscerator's Insight
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Cast Down]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.021076 - Pass
+     [1] 0.009569 - Cast Lembas
+     [2] 0.000327 - Cast Makeshift Munitions
+     [3] 0.001087 - Cast Fanatical Offering
+ >>> [4] 0.637283 - Cast Nihil Spellbomb
+     [5] 0.330658 - Cast Cast Down
+
+VALUE SCORE: 0.029308
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Cast Down]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge; Nihil Spellbomb]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Outlaw Medic,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.058262 - Pass
+     [1] 0.019609 - Cast Lembas
+     [2] 0.000777 - Cast Makeshift Munitions
+     [3] 0.002341 - Cast Fanatical Offering
+ >>> [4] 0.822429 - Cast Cast Down
+     [5] 0.096583 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.029010
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.387828 - Pass
+ >>> [1] 0.612172 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: -0.080635
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+  - [1] stack ability (When {this} dies, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Preordain (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.387828 - Pass
+
+VALUE SCORE: -0.080635
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Drossforge Bridge; Ichor Wellspring; Slagwoods Bridge]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.023290 - Pass
+     [1] 0.008991 - Cast Lembas
+     [2] 0.000330 - Cast Makeshift Munitions
+     [3] 0.000989 - Cast Fanatical Offering
+     [4] 0.002656 - Cast Toxin Analysis
+ >>> [5] 0.963744 - Flashback {4}{B}
+
+VALUE SCORE: -0.032743
+SELECTED: Flashback {4}{B}
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Slagwoods Bridge; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+ >>> [1] 0.731427 - Play Slagwoods Bridge
+     [2] 0.268567 - Play Swamp
+
+VALUE SCORE: -0.177589
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate; Sacred Cat,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 26
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate; Sacred Cat,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp]
+-> Permanents: [Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 32
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: -0.177589
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp; Krark-Clan Shaman]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 32
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Swamp; Krark-Clan Shaman]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 32
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+     [1] 0.000004 - Cast Lembas
+     [2] 0.000000 - Cast Makeshift Munitions
+     [3] 0.000000 - Cast Fanatical Offering
+     [4] 0.000001 - Cast Toxin Analysis
+ >>> [5] 0.999935 - Play Swamp
+     [6] 0.000048 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.032322
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Krark-Clan Shaman]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.163300 - Pass
+     [1] 0.056452 - Cast Lembas
+     [2] 0.002207 - Cast Makeshift Munitions
+     [3] 0.006376 - Cast Fanatical Offering
+     [4] 0.017013 - Cast Toxin Analysis
+ >>> [5] 0.754652 - Cast Krark-Clan Shaman
+
+VALUE SCORE: -0.068525
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+  - [1] Krark-Clan Shaman (controller=RL)
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.896154 - Pass
+     [1] 0.029690 - Cast Fanatical Offering
+     [2] 0.074156 - Cast Toxin Analysis
+
+VALUE SCORE: -0.204117
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=RL)
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.895284 - Pass
+     [1] 0.029808 - Cast Fanatical Offering
+     [2] 0.074908 - Cast Toxin Analysis
+
+VALUE SCORE: -0.196444
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Krark-Clan Shaman (controller=RL)
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.899552 - Pass
+     [1] 0.029856 - Cast Fanatical Offering
+     [2] 0.070592 - Cast Toxin Analysis
+
+VALUE SCORE: -0.274582
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.713600 - Pass
+     [1] 0.195500 - Cast Lembas
+     [2] 0.010434 - Cast Makeshift Munitions
+     [3] 0.023725 - Cast Fanatical Offering
+     [4] 0.056740 - Cast Toxin Analysis
+
+VALUE SCORE: -0.262391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.898636 - Pass
+     [1] 0.029874 - Cast Fanatical Offering
+     [2] 0.071490 - Cast Toxin Analysis
+
+VALUE SCORE: -0.261600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate,tapped; Sacred Cat,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.713788 - Pass
+     [1] 0.195352 - Cast Lembas
+     [2] 0.010451 - Cast Makeshift Munitions
+     [3] 0.023727 - Cast Fanatical Offering
+     [4] 0.056681 - Cast Toxin Analysis
+
+VALUE SCORE: -0.263540
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.877140 - Pass
+     [1] 0.033423 - Cast Fanatical Offering
+     [2] 0.089437 - Cast Toxin Analysis
+
+VALUE SCORE: -0.078967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878559 - Pass
+     [1] 0.033068 - Cast Fanatical Offering
+     [2] 0.088372 - Cast Toxin Analysis
+
+VALUE SCORE: -0.086133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate; Sacred Cat,tapped,attacking; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.882591 - Pass
+     [1] 0.032110 - Cast Fanatical Offering
+     [2] 0.085299 - Cast Toxin Analysis
+
+VALUE SCORE: -0.109670
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 32
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate; Sacred Cat,tapped,attacking; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.882591 - Pass
+     [1] 0.032110 - Cast Fanatical Offering
+     [2] 0.085299 - Cast Toxin Analysis
+
+VALUE SCORE: -0.109670
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge,tapped; Swamp]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.884565 - Pass
+     [1] 0.031679 - Cast Fanatical Offering
+     [2] 0.083756 - Cast Toxin Analysis
+
+VALUE SCORE: -0.124030
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Twisted Landscape]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis; Twisted Landscape]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000001 - Cast Lembas
+     [2] 0.000000 - Cast Makeshift Munitions
+     [3] 0.000000 - Cast Fanatical Offering
+     [4] 0.000000 - Cast Toxin Analysis
+ >>> [5] 0.999908 - Play Twisted Landscape
+     [6] 0.000084 - Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+
+VALUE SCORE: -0.216736
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.711095 - Pass
+     [1] 0.197231 - Cast Lembas
+     [2] 0.010307 - Cast Makeshift Munitions
+     [3] 0.023740 - Cast Fanatical Offering
+     [4] 0.057260 - Cast Toxin Analysis
+     [5] 0.000366 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.253057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.897293 - Pass
+     [1] 0.029954 - Cast Fanatical Offering
+     [2] 0.072292 - Cast Toxin Analysis
+     [3] 0.000461 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.252250
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped; Journey to Nowhere; Sea Gate; Sacred Cat,tapped; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.711288 - Pass
+     [1] 0.197080 - Cast Lembas
+     [2] 0.010324 - Cast Makeshift Munitions
+     [3] 0.023741 - Cast Fanatical Offering
+     [4] 0.057200 - Cast Toxin Analysis
+     [5] 0.000367 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.254234
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped; Citadel Gate; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped; Citadel Gate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.869009 - Pass
+     [1] 0.035650 - Cast Fanatical Offering
+     [2] 0.094935 - Cast Toxin Analysis
+     [3] 0.000406 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.038245
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat; Journey to Nowhere; Sea Gate; Sacred Cat; Island,tapped; Citadel Gate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.871309 - Pass
+     [1] 0.035024 - Cast Fanatical Offering
+     [2] 0.093262 - Cast Toxin Analysis
+     [3] 0.000405 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.047560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate; Sacred Cat,tapped,attacking; Island,tapped; Citadel Gate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.877071 - Pass
+     [1] 0.033482 - Cast Fanatical Offering
+     [2] 0.089043 - Cast Toxin Analysis
+     [3] 0.000404 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.073879
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lembas; Makeshift Munitions; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Forest; Drossforge Bridge; Slagwoods Bridge; Ichor Wellspring; Ichor Wellspring; Slagwoods Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+[Benchmark-Skill6], life = 39
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Basilisk Gate,tapped; Sea Gate; Island,tapped; Sacred Cat,tapped,attacking; Journey to Nowhere; Sea Gate; Sacred Cat,tapped,attacking; Island,tapped; Citadel Gate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.877071 - Pass
+     [1] 0.033482 - Cast Fanatical Offering
+     [2] 0.089043 - Cast Toxin Analysis
+     [3] 0.000404 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: -0.073879
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 102
+Ended: 2026-02-01T12:47:25.432320700
+================================================================================

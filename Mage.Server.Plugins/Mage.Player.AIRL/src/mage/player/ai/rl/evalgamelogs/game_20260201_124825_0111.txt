@@ -1,0 +1,2492 @@
+================================================================================
+GAME LOG: game_20260201_124825_0111
+Started: 2026-02-01T12:48:25.355546100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Drossforge Bridge]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Drossforge Bridge]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000107 - Pass
+ >>> [1] 0.999893 - Play Drossforge Bridge
+
+VALUE SCORE: 0.175318
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.175318
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Nihil Spellbomb; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.020724 - Pass
+     [1] 0.041141 - Cast Blood Fountain
+ >>> [2] 0.837691 - Cast Nihil Spellbomb
+     [3] 0.100443 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.163684
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.283031 - Pass
+ >>> [1] 0.716969 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.157737
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.283031 - Pass
+
+VALUE SCORE: 0.157737
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions; Slagwoods Bridge]
+-> Permanents: [Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.000004 - Cast Blood Fountain
+     [2] 0.000009 - Cast Krark-Clan Shaman
+ >>> [3] 0.999986 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.170640
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Krark-Clan Shaman; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.140146 - Pass
+     [1] 0.239672 - Cast Blood Fountain
+ >>> [2] 0.620182 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.153924
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.149167
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.149245
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.149042
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.099373
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.099536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.099263
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Refurbished Familiar; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000433 - Pass
+     [1] 0.005674 - Cast Ichor Wellspring
+     [2] 0.000947 - Cast Blood Fountain
+ >>> [3] 0.992173 - Cast Refurbished Familiar
+     [4] 0.000754 - Cast Cleansing Wildfire
+     [5] 0.000020 - Cast Makeshift Munitions
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.169247
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.152120
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158571
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158454
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.079553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.034922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.064946
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.065715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.065942
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.065590
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis; Twisted Landscape]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis; Twisted Landscape]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000029 - Cast Ichor Wellspring
+     [2] 0.000005 - Cast Blood Fountain
+     [3] 0.000005 - Cast Cleansing Wildfire
+     [4] 0.000000 - Cast Makeshift Munitions
+ >>> [5] 0.999958 - Play Twisted Landscape
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.148640
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Pulse of Murasa; Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.015622 - Pass
+ >>> [1] 0.808102 - Cast Pulse of Murasa
+     [2] 0.132340 - Cast Ichor Wellspring
+     [3] 0.021868 - Cast Blood Fountain
+     [4] 0.021607 - Cast Cleansing Wildfire
+     [5] 0.000450 - Cast Makeshift Munitions
+     [6] 0.000012 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.141456
+SELECTED: Cast Pulse of Murasa
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.121993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped,attacking; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.117859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped,attacking; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.117859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.115390
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.026593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.026936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.026321
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis; Cast Down]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis; Cast Down]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.033384 - Pass
+     [1] 0.297289 - Cast Ichor Wellspring
+     [2] 0.048970 - Cast Blood Fountain
+     [3] 0.047146 - Cast Cleansing Wildfire
+     [4] 0.001007 - Cast Makeshift Munitions
+ >>> [5] 0.572178 - Cast Cast Down
+     [6] 0.000025 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.142982
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033384 - Pass
+
+VALUE SCORE: 0.142982
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis; Swamp]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Refurbished Familiar; Twisted Landscape]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis; Swamp]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Refurbished Familiar; Twisted Landscape]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.000109 - Cast Ichor Wellspring
+     [2] 0.000018 - Cast Blood Fountain
+     [3] 0.000017 - Cast Cleansing Wildfire
+     [4] 0.000000 - Cast Makeshift Munitions
+ >>> [5] 0.999844 - Play Swamp
+     [6] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.144327
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Writhing Chrysalis]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Refurbished Familiar; Twisted Landscape; Swamp]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000452 - Pass
+     [1] 0.003855 - Cast Ichor Wellspring
+     [2] 0.000635 - Cast Blood Fountain
+     [3] 0.000625 - Cast Cleansing Wildfire
+     [4] 0.000013 - Cast Makeshift Munitions
+ >>> [5] 0.994420 - Cast Writhing Chrysalis
+     [6] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.139953
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=RL)
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000452 - Pass
+
+VALUE SCORE: 0.139953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Ichor Wellspring; Blood Fountain; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.133877 - Pass
+ >>> [1] 0.866123 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.084466
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=RL)
+  - [1] Ichor Wellspring (controller=RL)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight]
+-> Permanents: [Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133877 - Pass
+
+VALUE SCORE: 0.084466
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight; Lembas]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Refurbished Familiar; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Eviscerator's Insight; Lembas]
+-> Permanents: [Drossforge Bridge; Slagwoods Bridge; Refurbished Familiar; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.142017 - Pass
+     [1] 0.193326 - Cast Blood Fountain
+     [2] 0.192500 - Cast Cleansing Wildfire
+     [3] 0.003939 - Cast Makeshift Munitions
+ >>> [4] 0.349761 - Cast Eviscerator's Insight
+     [5] 0.118353 - Cast Lembas
+     [6] 0.000104 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.136882
+SELECTED: Cast Eviscerator's Insight
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Refurbished Familiar,tapped; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.142017 - Pass
+
+VALUE SCORE: 0.136882
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Refurbished Familiar; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000795 - Pass
+     [1] 0.000906 - Cast Blood Fountain
+     [2] 0.000914 - Cast Cleansing Wildfire
+     [3] 0.000017 - Cast Makeshift Munitions
+     [4] 0.000459 - Cast Lembas
+ >>> [5] 0.996908 - Cast Refurbished Familiar
+     [6] 0.000001 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.104044
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000795 - Pass
+
+VALUE SCORE: 0.104044
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.140230 - Pass
+     [1] 0.144157 - Cast Blood Fountain
+     [2] 0.142141 - Cast Cleansing Wildfire
+     [3] 0.002409 - Cast Makeshift Munitions
+     [4] 0.061886 - Cast Lembas
+ >>> [5] 0.509093 - Cast Krark-Clan Shaman
+     [6] 0.000085 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.068434
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.425896 - Pass
+     [1] 0.412606 - Cast Blood Fountain
+     [2] 0.161244 - Cast Lembas
+     [3] 0.000252 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.047631
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999415 - Pass
+     [1] 0.000582 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.038850
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure,blocking; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999416 - Pass
+     [1] 0.000581 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.038137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.432206 - Pass
+     [1] 0.411016 - Cast Blood Fountain
+     [2] 0.156525 - Cast Lembas
+     [3] 0.000252 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.039532
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999184 - Pass
+     [1] 0.000813 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.331981
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999177 - Pass
+     [1] 0.000820 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.335436
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999178 - Pass
+     [1] 0.000819 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.334942
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Twisted Landscape; Swamp; Writhing Chrysalis,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999175 - Pass
+     [1] 0.000822 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.336655
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire; Cast Down]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire; Cast Down]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape; Swamp; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.063113 - Pass
+     [1] 0.055925 - Cast Blood Fountain
+     [2] 0.053000 - Cast Cleansing Wildfire
+     [3] 0.000844 - Cast Makeshift Munitions
+     [4] 0.019616 - Cast Lembas
+ >>> [5] 0.807467 - Cast Cast Down
+     [6] 0.000035 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.007455
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis; Ichor Wellspring; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.038968
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.087499
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cleansing Wildfire; Makeshift Munitions; Lembas; Cleansing Wildfire; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Twisted Landscape,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.087499
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 13
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 104
+Ended: 2026-02-01T12:49:52.235057200
+================================================================================

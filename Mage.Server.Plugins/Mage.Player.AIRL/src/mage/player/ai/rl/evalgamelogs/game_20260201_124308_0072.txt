@@ -1,0 +1,1640 @@
+================================================================================
+GAME LOG: game_20260201_124308_0072
+Started: 2026-02-01T12:43:08.736888900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono Red Rally.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Vault of Whispers; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Vault of Whispers; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.143309 - Play Drossforge Bridge
+     [2] 0.172203 - Play Mistvault Bridge
+ >>> [3] 0.684488 - Play Vault of Whispers
+
+VALUE SCORE: 0.480269
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480269
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.477225 - Play Drossforge Bridge
+ >>> [2] 0.522771 - Play Mistvault Bridge
+
+VALUE SCORE: 0.365891
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.365891
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod; Vault of Whispers]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod; Vault of Whispers]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.138877 - Play Drossforge Bridge
+     [2] 0.143004 - Play Mistvault Bridge
+     [3] 0.000077 - Cast Ichor Wellspring
+     [4] 0.000221 - Cast Black Mage's Rod
+ >>> [5] 0.717819 - Play Vault of Whispers
+
+VALUE SCORE: 0.293159
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.004486 - Pass
+     [1] 0.258133 - Cast Ichor Wellspring
+ >>> [2] 0.737381 - Cast Black Mage's Rod
+
+VALUE SCORE: 0.287559
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004486 - Pass
+
+VALUE SCORE: 0.287559
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+ >>> [1] 0.511796 - Play Drossforge Bridge
+     [2] 0.487294 - Play Mistvault Bridge
+     [3] 0.000277 - Cast Ichor Wellspring
+     [4] 0.000628 - Cast Myr Enforcer
+
+VALUE SCORE: 0.224236
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.006388 - Pass
+     [1] 0.302119 - Cast Ichor Wellspring
+ >>> [2] 0.691493 - Cast Myr Enforcer
+
+VALUE SCORE: 0.201787
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Bushwhacker; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Bushwhacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006388 - Pass
+
+VALUE SCORE: 0.201787
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge; Cryogen Relic]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Drossforge Bridge; Cryogen Relic]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.444622 - Play Mistvault Bridge
+     [2] 0.000329 - Cast Ichor Wellspring
+     [3] 0.000002 - Cast Galvanic Blast
+ >>> [4] 0.554840 - Play Drossforge Bridge
+     [5] 0.000195 - Cast Cryogen Relic
+
+VALUE SCORE: 0.064287
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Ichor Wellspring; Galvanic Blast; Cryogen Relic]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.026420 - Pass
+ >>> [1] 0.614383 - Cast Ichor Wellspring
+     [2] 0.003332 - Cast Galvanic Blast
+     [3] 0.355865 - Cast Cryogen Relic
+
+VALUE SCORE: 0.032386
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Cryogen Relic]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.901734 - Pass
+     [1] 0.098266 - Cast Galvanic Blast
+
+VALUE SCORE: -0.006292
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.084899 - Pass
+     [1] 0.009193 - Cast Galvanic Blast
+ >>> [2] 0.905908 - Cast Cryogen Relic
+
+VALUE SCORE: -0.008174
+SELECTED: Cast Cryogen Relic
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.084899 - Pass
+
+VALUE SCORE: -0.008174
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Swamp]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Swamp]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.074823 - Play Mistvault Bridge
+     [2] 0.000000 - Cast Galvanic Blast
+     [3] 0.000009 - Cast Krark-Clan Shaman
+ >>> [4] 0.925159 - Play Swamp
+     [5] 0.000009 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+VALUE SCORE: 0.208112
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge; Ichor Wellspring; Cryogen Relic; Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.019290 - Pass
+     [1] 0.005949 - Cast Galvanic Blast
+ >>> [2] 0.502324 - Cast Krark-Clan Shaman
+     [3] 0.472437 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+VALUE SCORE: 0.176928
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Vault of Whispers; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Cryogen Relic; Swamp; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.046379 - Pass
+     [1] 0.010328 - Cast Galvanic Blast
+     [2] 0.193426 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+ >>> [3] 0.749868 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.102883
+SELECTED: {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.) (controller=RL)
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Vault of Whispers; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.103969 - Pass
+     [1] 0.016235 - Cast Galvanic Blast
+ >>> [2] 0.879795 - Cast Reckoner's Bargain
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.039239
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.) (controller=RL)
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.874544 - Pass
+     [1] 0.125454 - Cast Galvanic Blast
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.012734
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.874544 - Pass
+     [1] 0.125454 - Cast Galvanic Blast
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.012734
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.874391 - Pass
+     [1] 0.125606 - Cast Galvanic Blast
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.013240
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Goblin Bushwhacker,tapped; Mountain; Goblin Bushwhacker,tapped; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.874759 - Pass
+     [1] 0.125239 - Cast Galvanic Blast
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.012178
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.049082 - Pass
+ >>> [1] 0.950904 - Cast Galvanic Blast
+     [2] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.715104
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token; Mountain; Goblin Bushwhacker; Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999740 - Pass
+     [1] 0.000260 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.692136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999913 - Pass
+     [1] 0.000087 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.488405
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mistvault Bridge; Galvanic Blast; Seat of the Synod; Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring; Swamp,tapped; Krark-Clan Shaman,blocking]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure,tapped,attacking; Blood Token; Voldaren Epicure,tapped,attacking; Blood Token; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.482150
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 6
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 70
+Ended: 2026-02-01T12:45:45.115232
+================================================================================

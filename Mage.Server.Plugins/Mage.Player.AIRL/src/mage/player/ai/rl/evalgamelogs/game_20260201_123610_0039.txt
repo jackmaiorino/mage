@@ -1,0 +1,2747 @@
+================================================================================
+GAME LOG: game_20260201_123610_0039
+Started: 2026-02-01T12:36:10.673542
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Winding Way; Generous Ent; Generous Ent; Masked Vandal; Wellwisher]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Winding Way; Generous Ent; Generous Ent; Masked Vandal; Wellwisher]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894596
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Generous Ent; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000350 - Pass
+ >>> [1] 0.999650 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.891249
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000350 - Pass
+
+VALUE SCORE: 0.891249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000350 - Pass
+
+VALUE SCORE: 0.891249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000350 - Pass
+
+VALUE SCORE: 0.891249
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000350 - Pass
+
+VALUE SCORE: 0.891249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000350 - Pass
+
+VALUE SCORE: 0.891249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000350 - Pass
+
+VALUE SCORE: 0.891249
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000001 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000000 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.841905
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Wellwisher; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000106 - Pass
+     [1] 0.101449 - Cast Winding Way
+     [2] 0.179320 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.240284 - Cast Masked Vandal
+ >>> [4] 0.466500 - Cast Wellwisher
+     [5] 0.012340 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.838113
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 0.838113
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000001 - Cast Masked Vandal
+ >>> [4] 0.999993 - Play Snow-Covered Forest
+     [5] 0.000000 - Cast Nyxborn Hydra
+     [6] 0.000000 - Cast Nyxborn Hydra using bestow
+     [7] 0.000006 - Cast Priest of Titania
+     [8] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.813638
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.000046 - Pass
+     [1] 0.036185 - Cast Winding Way
+     [2] 0.059774 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.081876 - Cast Masked Vandal
+     [4] 0.003914 - Cast Nyxborn Hydra
+     [5] 0.000881 - Cast Nyxborn Hydra using bestow
+ >>> [6] 0.817323 - Cast Priest of Titania
+     [7] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.810186
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Masked Vandal; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.000742 - Pass
+ >>> [1] 0.938905 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.060353 - Cast Nyxborn Hydra
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.803713
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+     [1] 0.000549 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Slagwoods Bridge,tapped; Forest,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Slagwoods Bridge; Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999451 - Pass
+
+VALUE SCORE: 0.804616
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000001 - Cast Masked Vandal
+     [3] 0.000000 - Cast Nyxborn Hydra
+     [4] 0.000000 - Cast Nyxborn Hydra using bestow
+ >>> [5] 0.999999 - Play Snow-Covered Forest
+     [6] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.812205
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.000355 - Pass
+     [1] 0.290603 - Cast Winding Way
+ >>> [2] 0.670569 - Cast Masked Vandal
+     [3] 0.031496 - Cast Nyxborn Hydra
+     [4] 0.006978 - Cast Nyxborn Hydra using bestow
+     [5] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.809064
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999465 - Pass
+     [1] 0.000535 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.802680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.011275 - Pass
+ >>> [1] 0.988719 - Cast Nyxborn Hydra
+     [2] 0.000006 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.805491
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+     [1] 0.000525 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999475 - Pass
+
+VALUE SCORE: 0.800325
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000042 - Pass
+     [1] 0.037410 - Cast Winding Way
+     [2] 0.088075 - Cast Masked Vandal
+ >>> [3] 0.874473 - Cast Priest of Titania
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.819297
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+     [1] 0.000572 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999428 - Pass
+
+VALUE SCORE: 0.813320
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000001 - Cast Masked Vandal
+ >>> [3] 0.999999 - Play Snow-Covered Forest
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.766697
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000521 - Pass
+     [1] 0.317249 - Cast Winding Way
+ >>> [2] 0.682230 - Cast Masked Vandal
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.763475
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999605 - Pass
+     [1] 0.000395 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.756809
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001360 - Pass
+ >>> [1] 0.998639 - Cast Winding Way
+     [2] 0.000001 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.785561
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.024610 - Cast Wellwisher
+ >>> [2] 0.975379 - Cast Fyndhorn Elves
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.775217
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000426 - Pass
+ >>> [1] 0.999574 - Cast Wellwisher
+     [2] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.769903
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+     [1] 0.000412 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest; Makeshift Munitions; Swamp,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Fyndhorn Elves; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999588 - Pass
+
+VALUE SCORE: 0.766527
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996006 - Pass
+     [1] 0.003586 - Cast Wellwisher
+     [2] 0.000409 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.762037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996006 - Pass
+
+VALUE SCORE: 0.762037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996006 - Pass
+
+VALUE SCORE: 0.762037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Masked Vandal,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999877 - Pass
+     [1] 0.000123 - Cast Wellwisher
+
+VALUE SCORE: 0.705902
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Masked Vandal,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Masked Vandal,tapped; Wellwisher,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999877 - Pass
+
+VALUE SCORE: 0.705902
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999877 - Pass
+
+VALUE SCORE: 0.705902
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999877 - Pass
+
+VALUE SCORE: 0.705902
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999877 - Pass
+
+VALUE SCORE: 0.705902
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000019 - Pass
+     [1] 0.000000 - Cast Wellwisher
+ >>> [2] 0.999981 - Cast Fyndhorn Elves
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.731806
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997198 - Pass
+     [1] 0.002471 - Cast Wellwisher
+     [2] 0.000332 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.727281
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Fyndhorn Elves]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997198 - Pass
+
+VALUE SCORE: 0.727281
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Fyndhorn Elves]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997198 - Pass
+
+VALUE SCORE: 0.727281
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+     [1] 0.000086 - Cast Wellwisher
+
+VALUE SCORE: 0.669697
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+
+VALUE SCORE: 0.669697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+
+VALUE SCORE: 0.669697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+
+VALUE SCORE: 0.669697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+
+VALUE SCORE: 0.669697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+
+VALUE SCORE: 0.669697
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002998 - Pass
+     [1] 0.000004 - Cast Wellwisher
+ >>> [2] 0.996997 - Cast Lead the Stampede
+     [3] 0.000001 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.665294
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000440 - Pass
+     [1] 0.000001 - Cast Wellwisher
+ >>> [2] 0.770165 - Cast Generous Ent
+     [3] 0.229393 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.691560
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Fyndhorn Elves,tapped; Generous Ent]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999757 - Pass
+     [1] 0.000243 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.679079
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+     [1] 0.000217 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+
+VALUE SCORE: 0.659586
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000122 - Pass
+     [1] 0.000000 - Cast Wellwisher
+     [2] 0.000000 - Cast Generous Ent
+     [3] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+ >>> [5] 0.999878 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.670634
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Fyndhorn Elves; Generous Ent]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998410 - Pass
+     [1] 0.001280 - Cast Wellwisher
+     [2] 0.000065 - Cast Generous Ent
+     [3] 0.000019 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000226 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.663805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Fyndhorn Elves,tapped,attacking; Generous Ent,tapped,attacking]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.608080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Fyndhorn Elves,tapped,attacking; Generous Ent,tapped,attacking]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.608080
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999956 - Pass
+     [1] 0.000038 - Cast Wellwisher
+     [2] 0.000006 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.587123
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest; Makeshift Munitions; Swamp; Ichor Wellspring; Drossforge Bridge; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest; Makeshift Munitions; Swamp; Ichor Wellspring; Drossforge Bridge; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.175106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.163114
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Fyndhorn Elves,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.163016
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.167223
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.184616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 9 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.174121
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 8 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.170699
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest; Wellwisher,tapped; Generous Ent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 8 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.177869
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Wellwisher; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000053 - Pass
+     [1] 0.000000 - Cast Wellwisher
+     [2] 0.000000 - Cast Generous Ent
+     [3] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.999947 - Cast Avenging Hunter
+     [5] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.660128
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Generous Ent; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999786 - Pass
+     [1] 0.000017 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000197 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.644892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Generous Ent; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999786 - Pass
+     [1] 0.000017 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000197 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.644892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Generous Ent; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999786 - Pass
+     [1] 0.000017 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000197 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.644892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Generous Ent; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 1.000000 - Play Snow-Covered Forest
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.648378
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher; Generous Ent; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998735 - Pass
+     [1] 0.001050 - Cast Wellwisher
+     [2] 0.000017 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000198 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.645267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Generous Ent,tapped,attacking; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.605335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Wellwisher; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Generous Ent,tapped,attacking; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Makeshift Munitions; Swamp,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.605335
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 11
+Reason: Benchmark: Deck - Elves.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 116
+Ended: 2026-02-01T12:39:54.333280800
+================================================================================

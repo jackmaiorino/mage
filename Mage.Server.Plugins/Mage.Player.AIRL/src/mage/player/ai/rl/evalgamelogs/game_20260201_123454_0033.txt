@@ -1,0 +1,2893 @@
+================================================================================
+GAME LOG: game_20260201_123454_0033
+Started: 2026-02-01T12:34:54.833954
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894696
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000048 - Pass
+ >>> [1] 0.989811 - Cast Elvish Mystic
+     [2] 0.010141 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.891352
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 0.891352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 0.891352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 0.891352
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 0.891352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 0.891352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000048 - Pass
+
+VALUE SCORE: 0.891352
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999989 - Play Snow-Covered Forest
+     [2] 0.000007 - Cast Priest of Titania
+     [3] 0.000004 - Cast Elvish Mystic
+     [4] 0.000000 - Cast Nyxborn Hydra
+     [5] 0.000000 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.862304
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Priest of Titania; Elvish Mystic; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000024 - Pass
+ >>> [1] 0.655082 - Cast Priest of Titania
+     [2] 0.340714 - Cast Elvish Mystic
+     [3] 0.003544 - Cast Nyxborn Hydra
+     [4] 0.000636 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.858948
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Elvish Mystic; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000072 - Pass
+ >>> [1] 0.989692 - Cast Elvish Mystic
+     [2] 0.010236 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.852589
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: 0.852589
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Nyxborn Hydra; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+ >>> [1] 0.758013 - Cast Priest of Titania
+     [2] 0.003956 - Cast Nyxborn Hydra
+     [3] 0.000761 - Cast Nyxborn Hydra using bestow
+     [4] 0.180038 - Cast Generous Ent
+     [5] 0.057200 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.843973
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.000135 - Pass
+     [1] 0.016038 - Cast Nyxborn Hydra
+     [2] 0.003155 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.744345 - Cast Generous Ent
+     [4] 0.236327 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.836977
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000135 - Pass
+
+VALUE SCORE: 0.836977
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000008 - Pass
+     [1] 0.000918 - Cast Nyxborn Hydra
+     [2] 0.000185 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.727303 - Cast Timberwatch Elf
+     [4] 0.271585 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.832693
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Timberwatch Elf (controller=RL)
+[RL], life = 20
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.000027 - Pass
+ >>> [1] 0.999973 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.840953
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Timberwatch Elf (controller=RL)
+[RL], life = 23
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Priest of Titania; Generous Ent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.840953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Timberwatch Elf (controller=RL)
+[RL], life = 23
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Priest of Titania; Generous Ent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.840953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=RL)
+[RL], life = 23
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Priest of Titania; Generous Ent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.840953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Nyxborn Hydra; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.006766 - Pass
+ >>> [1] 0.831924 - Cast Nyxborn Hydra
+     [2] 0.161310 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.836745
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.006905 - Pass
+ >>> [1] 0.830574 - Cast Nyxborn Hydra
+     [2] 0.162522 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.834032
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Priest of Titania,tapped; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped,attacking; Priest of Titania,tapped; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped,attacking; Priest of Titania,tapped; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006905 - Pass
+
+VALUE SCORE: 0.834032
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.768176
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999088 - Pass
+     [1] 0.000912 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.765278
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999111 - Pass
+     [1] 0.000889 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.761921
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Hero Token,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999117 - Pass
+     [1] 0.000883 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.761025
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998904 - Pass
+     [1] 0.001096 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.789276
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace; Black Mage's Rod]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999893 - Pass
+     [1] 0.000107 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.466584
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace; Black Mage's Rod; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999893 - Pass
+     [1] 0.000107 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.466363
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999901 - Pass
+     [1] 0.000099 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.459756
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999906 - Pass
+     [1] 0.000094 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.455819
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999907 - Pass
+     [1] 0.000093 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.454770
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999906 - Pass
+     [1] 0.000094 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.454814
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999907 - Pass
+     [1] 0.000093 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.454628
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.729145
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999314 - Pass
+     [1] 0.000686 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.725784
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999332 - Pass
+     [1] 0.000668 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.721857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Refurbished Familiar,blocking; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999336 - Pass
+     [1] 0.000664 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.720893
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Black Mage's Rod; Swamp,tapped; Nihil Spellbomb; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999316 - Pass
+     [1] 0.000685 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.725469
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer; Seat of the Synod]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer; Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999921 - Pass
+     [1] 0.000079 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.419750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer; Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999935 - Pass
+     [1] 0.000065 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.382997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999936 - Pass
+     [1] 0.000064 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.381709
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999938 - Pass
+     [1] 0.000062 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.376407
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999938 - Pass
+     [1] 0.000062 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.376407
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999941 - Pass
+     [1] 0.000060 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.369509
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Priest of Titania; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+ >>> [1] 0.999960 - Cast Avenging Hunter
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.693470
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999539 - Pass
+     [1] 0.000461 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.669293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999539 - Pass
+     [1] 0.000461 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.669293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999539 - Pass
+     [1] 0.000461 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.669293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.650987
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999607 - Pass
+     [1] 0.000393 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.647300
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999619 - Pass
+     [1] 0.000381 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.643227
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped,attacking; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999619 - Pass
+     [1] 0.000381 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.643227
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999626 - Pass
+     [1] 0.000374 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.640444
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Nihil Spellbomb; Myr Enforcer; Seat of the Synod; Myr Enforcer; Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Nihil Spellbomb; Myr Enforcer; Seat of the Synod; Myr Enforcer; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999950 - Pass
+     [1] 0.000050 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.342743
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Nihil Spellbomb; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+     [1] 0.000038 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.284737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000033 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.259331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Priest of Titania,tapped; Generous Ent,tapped; Timberwatch Elf; Nyxborn Hydra; Nyxborn Hydra; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Seat of the Synod,tapped; Myr Enforcer; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000033 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.259286
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+
+VALUE SCORE: 0.259286
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+
+VALUE SCORE: 0.259286
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+
+VALUE SCORE: 0.259286
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Nihil Spellbomb; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001448 - Pass
+ >>> [1] 0.998552 - Cast Masked Vandal
+
+VALUE SCORE: 0.672933
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Masked Vandal (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Masked Vandal (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace; Swamp,tapped; Seat of the Synod; Silverbluff Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace; Swamp,tapped; Seat of the Synod; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Blood Token; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Blood Token; Great Furnace; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Blood Token; Great Furnace; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Blood Token; Great Furnace; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001448 - Pass
+
+VALUE SCORE: 0.672933
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.004536 - Pass
+ >>> [1] 0.995464 - Cast Winding Way
+
+VALUE SCORE: 0.589721
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter; Quirion Ranger; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000460 - Pass
+ >>> [1] 0.992005 - Cast Quirion Ranger
+     [2] 0.005024 - Cast Nyxborn Hydra
+     [3] 0.002510 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.585249
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.059692 - Pass
+ >>> [1] 0.624480 - Cast Nyxborn Hydra
+     [2] 0.315805 - Cast Nyxborn Hydra using bestow
+     [3] 0.000023 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.577961
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999647 - Pass
+     [1] 0.000353 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.566079
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999647 - Pass
+     [1] 0.000353 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.566185
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Hunter's Blowgun; Great Furnace,tapped; Swamp,tapped; Seat of the Synod,tapped; Silverbluff Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999648 - Pass
+     [1] 0.000352 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.565921
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999894 - Pass
+     [1] 0.000106 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.368574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999906 - Pass
+     [1] 0.000094 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.350537
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.321162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.321162
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999931 - Pass
+     [1] 0.000069 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.288839
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000062 - Pass
+ >>> [1] 0.999938 - Cast Avenging Hunter
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.607016
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999602 - Pass
+     [1] 0.000398 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.588859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999602 - Pass
+     [1] 0.000398 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.588859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, draw a card. <i>(Archives)</i>) (controller=RL)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999602 - Pass
+     [1] 0.000398 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.588859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Quirion Ranger; Nyxborn Hydra; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999605 - Pass
+     [1] 0.000395 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.587715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.578128
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Nyxborn Hydra,tapped,attacking; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.578128
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod,tapped; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999973 - Pass
+     [1] 0.000027 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.568409
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod; Silverbluff Bridge; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Drossforge Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod; Silverbluff Bridge; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.391014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod; Silverbluff Bridge; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.392998
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.362398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Quirion Ranger,tapped; Nyxborn Hydra,tapped; Avenging Hunter,blocking]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge; Hunter's Blowgun; Great Furnace,tapped; Swamp; Seat of the Synod; Silverbluff Bridge; Great Furnace; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.360020
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 10
+Reason: Benchmark: Deck - Elves.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 124
+Ended: 2026-02-01T12:39:06.530071500
+================================================================================

@@ -1,0 +1,2156 @@
+================================================================================
+GAME LOG: game_20260201_124529_0084
+Started: 2026-02-01T12:45:29.599569600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033616 - Pass
+
+VALUE SCORE: 0.076674
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb; Mistvault Bridge]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb; Mistvault Bridge]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Play Mistvault Bridge
+
+VALUE SCORE: 0.449142
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Lava Dart (controller=Benchmark-Skill6)
+  - [2] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.449142
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb; Great Furnace]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb; Great Furnace]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.000617 - Cast Nihil Spellbomb
+ >>> [2] 0.999378 - Play Great Furnace
+
+VALUE SCORE: 0.450467
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Refurbished Familiar; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000071 - Pass
+     [1] 0.021883 - Cast Black Mage's Rod
+     [2] 0.000058 - Cast Galvanic Blast
+     [3] 0.010070 - Cast Nihil Spellbomb
+ >>> [4] 0.967918 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.446799
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Guttersnipe; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Guttersnipe,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Guttersnipe,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.446799
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003981 - Pass
+ >>> [1] 0.555396 - Cast Black Mage's Rod
+     [2] 0.001349 - Cast Galvanic Blast
+     [3] 0.382881 - Cast Nihil Spellbomb
+     [4] 0.056393 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.294566
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003981 - Pass
+
+VALUE SCORE: 0.294566
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Black Mage's Rod; Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.004624 - Pass
+ >>> [1] 0.520477 - Cast Black Mage's Rod
+     [2] 0.001149 - Cast Galvanic Blast
+     [3] 0.410123 - Cast Nihil Spellbomb
+     [4] 0.063057 - Cast Krark-Clan Shaman
+     [5] 0.000570 - Cast Makeshift Munitions
+
+VALUE SCORE: 0.219682
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=RL)
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped,attacking; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped,attacking; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004624 - Pass
+
+VALUE SCORE: 0.219682
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.000003 - Cast Galvanic Blast
+     [2] 0.001138 - Cast Nihil Spellbomb
+     [3] 0.000182 - Cast Krark-Clan Shaman
+     [4] 0.000002 - Cast Makeshift Munitions
+ >>> [5] 0.998664 - Play Mistvault Bridge
+
+VALUE SCORE: 0.237574
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.008782 - Pass
+     [1] 0.002217 - Cast Galvanic Blast
+ >>> [2] 0.848075 - Cast Nihil Spellbomb
+     [3] 0.139835 - Cast Krark-Clan Shaman
+     [4] 0.001093 - Cast Makeshift Munitions
+
+VALUE SCORE: 0.208312
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Nihil Spellbomb (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008782 - Pass
+
+VALUE SCORE: 0.208312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008782 - Pass
+
+VALUE SCORE: 0.208312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Nihil Spellbomb; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.010083 - Pass
+ >>> [1] 0.919138 - Cast Nihil Spellbomb
+     [2] 0.070779 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.169593
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Nihil Spellbomb (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.143790 - Pass
+ >>> [1] 0.856210 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.127086
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [2] Nihil Spellbomb (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.143790 - Pass
+
+VALUE SCORE: 0.127086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Nihil Spellbomb (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.143790 - Pass
+
+VALUE SCORE: 0.127086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.143790 - Pass
+
+VALUE SCORE: 0.127086
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.134768 - Pass
+ >>> [1] 0.865232 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.145774
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Black Mage's Rod; Hero Token,tapped,attacking; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Black Mage's Rod; Hero Token,tapped,attacking; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped; Masked Meower,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.134768 - Pass
+
+VALUE SCORE: 0.145774
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Great Furnace; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.014644 - Pass
+     [1] 0.003874 - Cast Galvanic Blast
+     [2] 0.227356 - Cast Krark-Clan Shaman
+     [3] 0.001962 - Cast Makeshift Munitions
+ >>> [4] 0.675528 - Cast Ichor Wellspring
+     [5] 0.076636 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.223799
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014644 - Pass
+
+VALUE SCORE: 0.223799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 10
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014644 - Pass
+
+VALUE SCORE: 0.223799
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions; Thoughtcast]
+-> Permanents: [Mistvault Bridge; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 10
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.033614 - Pass
+ >>> [1] 0.966386 - Cast Thoughtcast
+
+VALUE SCORE: 0.165741
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=RL)
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033614 - Pass
+
+VALUE SCORE: 0.165741
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions; Great Furnace; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000020 - Pass
+ >>> [1] 0.999980 - Play Great Furnace
+
+VALUE SCORE: 0.117619
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Krark-Clan Shaman; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.077174 - Pass
+     [1] 0.010822 - Cast Galvanic Blast
+ >>> [2] 0.912003 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.085008
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.030303
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped,attacking; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.005592
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped,attacking; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.005592
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.004247
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.121774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.139518
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Galvanic Blast; Galvanic Blast; Makeshift Munitions; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Black Mage's Rod; Hero Token,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Great Furnace,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain; Sneaky Snacker,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.139518
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 93
+Ended: 2026-02-01T12:46:37.291094900
+================================================================================

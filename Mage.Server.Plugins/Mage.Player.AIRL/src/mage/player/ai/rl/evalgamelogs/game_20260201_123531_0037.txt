@@ -1,0 +1,3494 @@
+================================================================================
+GAME LOG: game_20260201_123531_0037
+Started: 2026-02-01T12:35:31.396209400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Nyxborn Hydra]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Nyxborn Hydra]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894797
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.004721 - Pass
+ >>> [1] 0.995279 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.891443
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004721 - Pass
+
+VALUE SCORE: 0.891443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004721 - Pass
+
+VALUE SCORE: 0.891443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004721 - Pass
+
+VALUE SCORE: 0.891443
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004721 - Pass
+
+VALUE SCORE: 0.891443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004721 - Pass
+
+VALUE SCORE: 0.891443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004721 - Pass
+
+VALUE SCORE: 0.891443
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000136 - Pass
+ >>> [1] 0.999864 - Cast Llanowar Elves
+
+VALUE SCORE: 0.862578
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000136 - Pass
+
+VALUE SCORE: 0.862578
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000001 - Cast Masked Vandal
+     [3] 0.000001 - Cast Wellwisher
+ >>> [4] 0.999998 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.834326
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.000140 - Pass
+     [1] 0.128885 - Cast Winding Way
+     [2] 0.301353 - Cast Masked Vandal
+ >>> [3] 0.569622 - Cast Wellwisher
+
+VALUE SCORE: 0.831341
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge; Forest,tapped; Lembas; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge; Forest,tapped; Lembas; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000140 - Pass
+
+VALUE SCORE: 0.831341
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Masked Vandal; Winding Way]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Masked Vandal; Winding Way]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000635 - Pass
+     [1] 0.328349 - Cast Winding Way
+ >>> [2] 0.671016 - Cast Masked Vandal
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.744824
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Drossforge Bridge,tapped; Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999647 - Pass
+     [1] 0.000353 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.736757
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999636 - Pass
+     [1] 0.000364 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.740922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999636 - Pass
+     [1] 0.000364 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.741005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Forest,tapped; Lembas; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999636 - Pass
+     [1] 0.000364 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.740750
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.171666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.172908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.156069
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.153514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.152578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.152578
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.151747
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000918 - Pass
+     [1] 0.330082 - Cast Winding Way
+ >>> [2] 0.669000 - Cast Wellwisher
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.690027
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+     [1] 0.000261 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999739 - Pass
+
+VALUE SCORE: 0.678149
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Winding Way; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Winding Way; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.001238 - Pass
+     [1] 0.447273 - Cast Winding Way
+ >>> [2] 0.551489 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.687008
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Winding Way; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+ >>> [2] 1.000000 - Play Snow-Covered Forest
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.658152
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.003327 - Pass
+ >>> [1] 0.996672 - Cast Winding Way
+     [2] 0.000001 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.654227
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+     [1] 0.000210 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Masked Vandal,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999790 - Pass
+
+VALUE SCORE: 0.648178
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Timberwatch Elf; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Nihil Spellbomb; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.000128 - Pass
+     [1] 0.012839 - Cast Winding Way
+ >>> [2] 0.830846 - Cast Timberwatch Elf
+     [3] 0.147401 - Cast Priest of Titania
+     [4] 0.008785 - Cast Lead the Stampede
+     [5] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.488078
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Timberwatch Elf (controller=RL)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.481851
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Timberwatch Elf (controller=RL)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.481851
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=RL)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.482737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.481747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped,attacking; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999922 - Pass
+     [1] 0.000078 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.479057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped,attacking; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999922 - Pass
+     [1] 0.000078 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.478476
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Clue Token; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.482208
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999976 - Pass
+     [1] 0.000024 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.150676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+     [1] 0.000022 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.134991
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest,tapped; Wellwisher; Masked Vandal,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+     [1] 0.000022 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.139611
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+
+VALUE SCORE: 0.139611
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+
+VALUE SCORE: 0.139611
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+
+VALUE SCORE: 0.139611
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+
+VALUE SCORE: 0.139611
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Priest of Titania; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000341 - Pass
+     [1] 0.061831 - Cast Winding Way
+ >>> [2] 0.886441 - Cast Priest of Titania
+     [3] 0.051378 - Cast Lead the Stampede
+     [4] 0.000007 - Cast Timberwatch Elf
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.576016
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest; Timberwatch Elf; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+     [1] 0.000223 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain,tapped; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped,attacking; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999777 - Pass
+
+VALUE SCORE: 0.568247
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000000 - Cast Lead the Stampede
+     [3] 0.000000 - Cast Timberwatch Elf
+ >>> [4] 1.000000 - Play Snow-Covered Forest
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.573005
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003061 - Pass
+ >>> [1] 0.548928 - Cast Winding Way
+     [2] 0.447947 - Cast Lead the Stampede
+     [3] 0.000063 - Cast Timberwatch Elf
+     [4] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.569723
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Priest of Titania; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000178 - Pass
+     [1] 0.038386 - Cast Winding Way
+ >>> [2] 0.588956 - Cast Priest of Titania
+     [3] 0.372480 - Cast Quirion Ranger
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.591173
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+     [1] 0.000244 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Ichor Wellspring; Refurbished Familiar,tapped; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest; Mountain; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 5 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [4] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped,attacking; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Priest of Titania,blocking]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped,attacking; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999756 - Pass
+
+VALUE SCORE: 0.582959
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000675 - Pass
+     [1] 0.044134 - Cast Winding Way
+     [2] 0.025887 - Cast Lead the Stampede
+     [3] 0.000005 - Cast Timberwatch Elf
+ >>> [4] 0.497019 - Cast Quirion Ranger
+     [5] 0.432280 - Cast Priest of Titania
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.410787
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.001370 - Pass
+     [1] 0.088317 - Cast Winding Way
+     [2] 0.051364 - Cast Lead the Stampede
+     [3] 0.000011 - Cast Timberwatch Elf
+ >>> [4] 0.858938 - Cast Priest of Titania
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.404907
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+     [1] 0.000142 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000076 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.395201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+     [1] 0.000142 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000076 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.395366
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999783 - Pass
+     [1] 0.000142 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000075 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.395099
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest; Writhing Chrysalis; Slagwoods Bridge; Map Token; Drossforge Bridge; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest; Writhing Chrysalis; Slagwoods Bridge; Map Token; Drossforge Bridge; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999917 - Pass
+     [1] 0.000056 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000026 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.154429
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999951 - Pass
+     [1] 0.000035 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000014 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.086773
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Slagwoods Bridge,tapped; Map Token; Drossforge Bridge; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000030 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.047108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999958 - Pass
+     [1] 0.000031 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.054812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999958 - Pass
+     [1] 0.000031 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.053522
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000030 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.052221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000030 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.050896
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000030 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.052798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped,attacking; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999965 - Pass
+     [1] 0.000026 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.004980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,blocking; Snow-Covered Forest,tapped; Quirion Ranger,blocking; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped,attacking; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Map Token; Drossforge Bridge,tapped; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000025 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.000739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.096107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.095147
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.094271
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.093383
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999983 - Pass
+     [1] 0.000017 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.114673
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.006822 - Pass
+     [1] 0.350321 - Cast Winding Way
+     [2] 0.189366 - Cast Lead the Stampede
+     [3] 0.000041 - Cast Timberwatch Elf
+ >>> [4] 0.453450 - Cast Masked Vandal
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.362216
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999939 - Pass
+     [1] 0.000061 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.350214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.012729 - Pass
+ >>> [1] 0.642878 - Cast Winding Way
+     [2] 0.344320 - Cast Lead the Stampede
+     [3] 0.000073 - Cast Timberwatch Elf
+     [4] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.354817
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Elvish Mystic; Fyndhorn Elves; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.000612 - Pass
+     [1] 0.084768 - Cast Elvish Mystic
+ >>> [2] 0.884973 - Cast Fyndhorn Elves
+     [3] 0.029647 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.386459
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Elvish Mystic; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.005371 - Pass
+ >>> [1] 0.736446 - Cast Elvish Mystic
+     [2] 0.258183 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.382815
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999930 - Pass
+     [1] 0.000070 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.379256
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999930 - Pass
+     [1] 0.000070 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.379458
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999930 - Pass
+     [1] 0.000070 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.379128
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+     [1] 0.000022 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.131292
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.091486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis; Nihil Spellbomb; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.015443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis; Nihil Spellbomb; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.022620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis; Writhing Chrysalis; Ichor Wellspring; Writhing Chrysalis; Nihil Spellbomb; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.006590
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped,attacking; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Nihil Spellbomb; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000007 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.126462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,blocking; Snow-Covered Forest,tapped; Priest of Titania,tapped; Masked Vandal,blocking; Fyndhorn Elves,blocking; Elvish Mystic]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Forest,tapped; Mountain,tapped; Refurbished Familiar,tapped,attacking; Slagwoods Bridge,tapped; Swamp,tapped; Ichor Wellspring; Forest,tapped; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Nihil Spellbomb; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000007 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: -0.140238
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 11
+Reason: Benchmark: Deck - Elves.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 149
+Ended: 2026-02-01T12:40:33.930293300
+================================================================================

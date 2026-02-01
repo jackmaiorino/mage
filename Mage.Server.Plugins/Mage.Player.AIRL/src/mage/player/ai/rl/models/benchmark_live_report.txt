@@ -1,0 +1,81 @@
+BENCHMARK LIVE REPORT
+updated_ms=1769968965464
+progress=224/224 started=224 done=224 wins=107 winrate=0.4777 games_per_s=0.128 eta_s=0
+
+WITH_DECK
+Deck - Caw-Gates.dek,winrate=0.1071,wins=3,games=28
+Deck - Elves.dek,winrate=0.6429,wins=18,games=28
+Deck - Grixis Affinity.dek,winrate=0.5714,wins=16,games=28
+Deck - Jund Wildfire.dek,winrate=0.2500,wins=7,games=28
+Deck - Mono Red Rally.dek,winrate=0.6071,wins=17,games=28
+Deck - Mono-Blue Faeries.dek,winrate=0.5357,wins=15,games=28
+Deck - Mono-Blue Terror.dek,winrate=0.7143,wins=20,games=28
+Deck - Mono-Red Burn.dek,winrate=0.3929,wins=11,games=28
+
+VS_DECK
+Deck - Caw-Gates.dek,winrate=0.6429,wins=18,games=28
+Deck - Elves.dek,winrate=0.3571,wins=10,games=28
+Deck - Grixis Affinity.dek,winrate=0.2500,wins=7,games=28
+Deck - Jund Wildfire.dek,winrate=0.6429,wins=18,games=28
+Deck - Mono Red Rally.dek,winrate=0.2857,wins=8,games=28
+Deck - Mono-Blue Faeries.dek,winrate=0.4286,wins=12,games=28
+Deck - Mono-Blue Terror.dek,winrate=0.5357,wins=15,games=28
+Deck - Mono-Red Burn.dek,winrate=0.6786,wins=19,games=28
+
+MATCHUP
+Deck - Caw-Gates.dek vs Deck - Elves.dek,winrate=0.0000,wins=0,games=4
+Deck - Caw-Gates.dek vs Deck - Grixis Affinity.dek,winrate=0.0000,wins=0,games=4
+Deck - Caw-Gates.dek vs Deck - Jund Wildfire.dek,winrate=0.0000,wins=0,games=4
+Deck - Caw-Gates.dek vs Deck - Mono Red Rally.dek,winrate=0.0000,wins=0,games=4
+Deck - Caw-Gates.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.2500,wins=1,games=4
+Deck - Caw-Gates.dek vs Deck - Mono-Blue Terror.dek,winrate=0.2500,wins=1,games=4
+Deck - Caw-Gates.dek vs Deck - Mono-Red Burn.dek,winrate=0.2500,wins=1,games=4
+Deck - Elves.dek vs Deck - Caw-Gates.dek,winrate=1.0000,wins=4,games=4
+Deck - Elves.dek vs Deck - Grixis Affinity.dek,winrate=0.0000,wins=0,games=4
+Deck - Elves.dek vs Deck - Jund Wildfire.dek,winrate=0.7500,wins=3,games=4
+Deck - Elves.dek vs Deck - Mono Red Rally.dek,winrate=0.7500,wins=3,games=4
+Deck - Elves.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.2500,wins=1,games=4
+Deck - Elves.dek vs Deck - Mono-Blue Terror.dek,winrate=0.7500,wins=3,games=4
+Deck - Elves.dek vs Deck - Mono-Red Burn.dek,winrate=1.0000,wins=4,games=4
+Deck - Grixis Affinity.dek vs Deck - Caw-Gates.dek,winrate=0.2500,wins=1,games=4
+Deck - Grixis Affinity.dek vs Deck - Elves.dek,winrate=0.7500,wins=3,games=4
+Deck - Grixis Affinity.dek vs Deck - Jund Wildfire.dek,winrate=0.7500,wins=3,games=4
+Deck - Grixis Affinity.dek vs Deck - Mono Red Rally.dek,winrate=0.2500,wins=1,games=4
+Deck - Grixis Affinity.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.7500,wins=3,games=4
+Deck - Grixis Affinity.dek vs Deck - Mono-Blue Terror.dek,winrate=0.5000,wins=2,games=4
+Deck - Grixis Affinity.dek vs Deck - Mono-Red Burn.dek,winrate=0.7500,wins=3,games=4
+Deck - Jund Wildfire.dek vs Deck - Caw-Gates.dek,winrate=0.0000,wins=0,games=4
+Deck - Jund Wildfire.dek vs Deck - Elves.dek,winrate=0.2500,wins=1,games=4
+Deck - Jund Wildfire.dek vs Deck - Grixis Affinity.dek,winrate=0.2500,wins=1,games=4
+Deck - Jund Wildfire.dek vs Deck - Mono Red Rally.dek,winrate=0.0000,wins=0,games=4
+Deck - Jund Wildfire.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.0000,wins=0,games=4
+Deck - Jund Wildfire.dek vs Deck - Mono-Blue Terror.dek,winrate=0.5000,wins=2,games=4
+Deck - Jund Wildfire.dek vs Deck - Mono-Red Burn.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono Red Rally.dek vs Deck - Caw-Gates.dek,winrate=1.0000,wins=4,games=4
+Deck - Mono Red Rally.dek vs Deck - Elves.dek,winrate=0.2500,wins=1,games=4
+Deck - Mono Red Rally.dek vs Deck - Grixis Affinity.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono Red Rally.dek vs Deck - Jund Wildfire.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono Red Rally.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono Red Rally.dek vs Deck - Mono-Blue Terror.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono Red Rally.dek vs Deck - Mono-Red Burn.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Caw-Gates.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Elves.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Grixis Affinity.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Jund Wildfire.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Mono Red Rally.dek,winrate=0.0000,wins=0,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Mono-Blue Terror.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Blue Faeries.dek vs Deck - Mono-Red Burn.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Caw-Gates.dek,winrate=1.0000,wins=4,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Elves.dek,winrate=0.2500,wins=1,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Grixis Affinity.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Jund Wildfire.dek,winrate=1.0000,wins=4,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Mono Red Rally.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono-Blue Terror.dek vs Deck - Mono-Red Burn.dek,winrate=0.7500,wins=3,games=4
+Deck - Mono-Red Burn.dek vs Deck - Caw-Gates.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Red Burn.dek vs Deck - Elves.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Red Burn.dek vs Deck - Grixis Affinity.dek,winrate=0.0000,wins=0,games=4
+Deck - Mono-Red Burn.dek vs Deck - Jund Wildfire.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Red Burn.dek vs Deck - Mono Red Rally.dek,winrate=0.2500,wins=1,games=4
+Deck - Mono-Red Burn.dek vs Deck - Mono-Blue Faeries.dek,winrate=0.5000,wins=2,games=4
+Deck - Mono-Red Burn.dek vs Deck - Mono-Blue Terror.dek,winrate=0.5000,wins=2,games=4

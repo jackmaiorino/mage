@@ -1,0 +1,1890 @@
+================================================================================
+GAME LOG: game_20260201_123449_0032
+Started: 2026-02-01T12:34:49.301104
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894889
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.004716 - Pass
+ >>> [1] 0.995284 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.891536
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004716 - Pass
+
+VALUE SCORE: 0.891536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004716 - Pass
+
+VALUE SCORE: 0.891536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004716 - Pass
+
+VALUE SCORE: 0.891536
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004716 - Pass
+
+VALUE SCORE: 0.891536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004716 - Pass
+
+VALUE SCORE: 0.891536
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004716 - Pass
+
+VALUE SCORE: 0.891536
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.862446
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Priest of Titania; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000030 - Pass
+ >>> [1] 0.824652 - Cast Priest of Titania
+     [2] 0.175318 - Cast Wellwisher
+
+VALUE SCORE: 0.859158
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Preordain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000030 - Pass
+
+VALUE SCORE: 0.859158
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Wellwisher; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000147 - Pass
+     [1] 0.220507 - Cast Lead the Stampede
+ >>> [2] 0.779345 - Cast Wellwisher
+
+VALUE SCORE: 0.850040
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Wellwisher]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Wellwisher]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.850040
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.009248 - Cast Lead the Stampede
+ >>> [2] 0.990743 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.795829
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Avenging Hunter; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001061 - Pass
+ >>> [1] 0.998939 - Cast Lead the Stampede
+
+VALUE SCORE: 0.791211
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001061 - Pass
+
+VALUE SCORE: 0.791211
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+ >>> [1] 0.872391 - Cast Avenging Hunter
+     [2] 0.016208 - Cast Lead the Stampede
+     [3] 0.111369 - Cast Quirion Ranger
+
+VALUE SCORE: 0.718706
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 0.718706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 0.718706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000032 - Pass
+
+VALUE SCORE: 0.718706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.677279
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000329 - Pass
+ >>> [1] 0.999671 - Cast Quirion Ranger
+
+VALUE SCORE: 0.673313
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999341 - Pass
+     [1] 0.000659 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.667389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999341 - Pass
+     [1] 0.000659 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.667466
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999342 - Pass
+     [1] 0.000658 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.667179
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999954 - Pass
+     [1] 0.000046 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.129447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999954 - Pass
+     [1] 0.000046 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.129906
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.126706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.126706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.113299
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.112008
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 9 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000042 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.117698
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter; Lead the Stampede; Winding Way]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Avenging Hunter; Lead the Stampede; Winding Way]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+ >>> [1] 0.967852 - Cast Avenging Hunter
+     [2] 0.016269 - Cast Lead the Stampede
+     [3] 0.015832 - Cast Winding Way
+     [4] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.668689
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999398 - Pass
+     [1] 0.000602 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.652044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999398 - Pass
+     [1] 0.000602 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.652044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999398 - Pass
+     [1] 0.000602 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.652044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003085 - Pass
+ >>> [1] 0.996913 - Cast Winding Way
+     [2] 0.000002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.651622
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999525 - Pass
+     [1] 0.000475 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.612592
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999964 - Pass
+     [1] 0.000036 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.606589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Avenging Hunter]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999964 - Pass
+     [1] 0.000036 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.606589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999965 - Pass
+     [1] 0.000035 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.603011
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.127180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.124465
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 8 cards
+-> Permanents: [Sea Gate; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate; Squadron Hawk,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.124465
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.103758
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped; Squadron Hawk,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.102326
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.082541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.080407
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.073436
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Lead the Stampede
+     [2] 0.000000 - Cast Nyxborn Hydra
+     [3] 0.000000 - Cast Nyxborn Hydra using bestow
+ >>> [4] 1.000000 - Play Snow-Covered Forest
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.653952
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest; Priest of Titania; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.002741 - Pass
+ >>> [1] 0.918595 - Cast Lead the Stampede
+     [2] 0.056338 - Cast Nyxborn Hydra
+     [3] 0.022324 - Cast Nyxborn Hydra using bestow
+     [4] 0.000002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.650077
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=Benchmark-Skill6)
+  - [1] Lead the Stampede (controller=RL)
+[RL], life = 18
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999480 - Pass
+     [1] 0.000520 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.632456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=RL)
+[RL], life = 18
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999493 - Pass
+     [1] 0.000507 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.628590
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Generous Ent; Nyxborn Hydra; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000028 - Pass
+     [1] 0.014301 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000727 - Cast Nyxborn Hydra
+     [3] 0.000260 - Cast Nyxborn Hydra using bestow
+ >>> [4] 0.984684 - Cast Fyndhorn Elves
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.663731
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Generous Ent; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Avenging Hunter; Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001842 - Pass
+ >>> [1] 0.933944 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.047217 - Cast Nyxborn Hydra
+     [3] 0.016996 - Cast Nyxborn Hydra using bestow
+     [4] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.660126
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves; Avenging Hunter; Quirion Ranger; Avenging Hunter; Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.037591 - Pass
+ >>> [1] 0.962386 - Cast Nyxborn Hydra
+     [2] 0.000023 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.660206
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter; Quirion Ranger; Avenging Hunter; Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999427 - Pass
+     [1] 0.000573 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.650517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped,attacking; Quirion Ranger,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999961 - Pass
+     [1] 0.000039 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.632740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped; Fyndhorn Elves,tapped; Avenging Hunter,tapped,attacking; Quirion Ranger,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Fyndhorn Elves; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Squadron Hawk,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999961 - Pass
+     [1] 0.000039 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.632740
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Elves.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 81
+Ended: 2026-02-01T12:37:37.199595900
+================================================================================

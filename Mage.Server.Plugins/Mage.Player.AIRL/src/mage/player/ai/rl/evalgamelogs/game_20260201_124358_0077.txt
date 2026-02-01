@@ -1,0 +1,2128 @@
+================================================================================
+GAME LOG: game_20260201_124358_0077
+Started: 2026-02-01T12:43:58.201165200
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Swamp; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Swamp; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.126176 - Play Drossforge Bridge
+     [2] 0.142127 - Play Great Furnace
+ >>> [3] 0.731696 - Play Swamp
+
+VALUE SCORE: 0.481190
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481190
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Great Furnace; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.476004 - Play Drossforge Bridge
+ >>> [2] 0.523994 - Play Great Furnace
+
+VALUE SCORE: 0.489310
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.489310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.489310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.489310
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.489310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.489310
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.489310
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Swamp; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999997 - Play Drossforge Bridge
+
+VALUE SCORE: 0.499973
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Refurbished Familiar; Myr Enforcer]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000061 - Pass
+ >>> [1] 0.999939 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.491491
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000061 - Pass
+
+VALUE SCORE: 0.491491
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.999643 - Play Drossforge Bridge
+     [2] 0.000355 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.538946
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.004553 - Pass
+ >>> [1] 0.995447 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.534354
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.022182 - Pass
+ >>> [1] 0.977818 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.528175
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022182 - Pass
+
+VALUE SCORE: 0.528175
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+ >>> [1] 0.999964 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.528009
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.528009
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000013 - Cast Toxin Analysis
+     [2] 0.000561 - Cast Myr Enforcer
+ >>> [3] 0.999425 - Play Great Furnace
+
+VALUE SCORE: 0.573162
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002254 - Pass
+     [1] 0.021882 - Cast Toxin Analysis
+ >>> [2] 0.975864 - Cast Myr Enforcer
+
+VALUE SCORE: 0.570180
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+  - [1] Myr Enforcer (controller=RL)
+[RL], life = 20
+-> Hand: [Toxin Analysis; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.103592 - Pass
+ >>> [1] 0.896408 - Cast Toxin Analysis
+
+VALUE SCORE: 0.542085
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Toxin Analysis (controller=RL)
+  - [2] Thought Scour (controller=Benchmark-Skill6)
+  - [3] Myr Enforcer (controller=RL)
+[RL], life = 20
+-> Hand: [Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.103592 - Pass
+
+VALUE SCORE: 0.542085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+  - [1] Myr Enforcer (controller=RL)
+[RL], life = 20
+-> Hand: [Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.103592 - Pass
+
+VALUE SCORE: 0.542085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=RL)
+[RL], life = 20
+-> Hand: [Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.103592 - Pass
+
+VALUE SCORE: 0.542085
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002089 - Pass
+ >>> [1] 0.997911 - Cast Myr Enforcer
+
+VALUE SCORE: 0.545940
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Myr Enforcer]
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002022 - Pass
+ >>> [1] 0.997978 - Cast Myr Enforcer
+
+VALUE SCORE: 0.537925
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island; Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002022 - Pass
+
+VALUE SCORE: 0.537925
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.002324 - Pass
+ >>> [1] 0.997676 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.605270
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Ichor Wellspring (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Island]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace,tapped; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002324 - Pass
+
+VALUE SCORE: 0.605270
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Mistvault Bridge]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mistvault Bridge
+
+VALUE SCORE: 0.526348
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Island; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Cryptic Serpent; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer; Myr Enforcer; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer,blocking; Myr Enforcer,blocking; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.526348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Nihil Spellbomb]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer,tapped; Mistvault Bridge]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Nihil Spellbomb]
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer,tapped; Mistvault Bridge]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.002755 - Pass
+ >>> [1] 0.997245 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.428046
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Nihil Spellbomb]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.015907 - Pass
+ >>> [1] 0.984093 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.407923
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 8
+-> Hand: [Seat of the Synod]
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015907 - Pass
+
+VALUE SCORE: 0.407923
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Seat of the Synod]
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.999998 - Play Seat of the Synod
+
+VALUE SCORE: 0.402137
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lorien Revealed (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Cryptic Serpent; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lorien Revealed (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island; Cryptic Serpent; Cryptic Serpent; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Swamp,tapped; Great Furnace; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.402137
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 93
+Ended: 2026-02-01T12:46:19.461781900
+================================================================================

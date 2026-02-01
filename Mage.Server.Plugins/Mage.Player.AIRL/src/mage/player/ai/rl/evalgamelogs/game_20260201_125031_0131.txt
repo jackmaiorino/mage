@@ -1,0 +1,2713 @@
+================================================================================
+GAME LOG: game_20260201_125031_0131
+Started: 2026-02-01T12:50:31.166998400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Clockwork Percussionist; Goblin Bushwhacker; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Chain Lightning; Clockwork Percussionist; Goblin Bushwhacker; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078342
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Bushwhacker; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000420 - Cast Chain Lightning
+     [2] 0.091459 - Cast Clockwork Percussionist
+ >>> [3] 0.903452 - Cast Goblin Bushwhacker
+     [4] 0.003737 - Cast Goblin Tomb Raider
+     [5] 0.000933 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.073672
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073672
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Chain Lightning
+     [2] 0.000831 - Cast Clockwork Percussionist
+     [3] 0.000034 - Cast Goblin Tomb Raider
+     [4] 0.000009 - Cast Voldaren Epicure
+ >>> [5] 0.999123 - Play Mountain
+
+VALUE SCORE: 1.059366
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.004182 - Cast Chain Lightning
+ >>> [2] 0.947633 - Cast Clockwork Percussionist
+     [3] 0.038176 - Cast Goblin Tomb Raider
+     [4] 0.010005 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.053349
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Goblin Tomb Raider; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000084 - Pass
+     [1] 0.076684 - Cast Chain Lightning
+ >>> [2] 0.718498 - Cast Goblin Tomb Raider
+     [3] 0.204734 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.030892
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 1.030892
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Chain Lightning; Voldaren Epicure; Voldaren Epicure; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000298 - Pass
+     [1] 0.252543 - Cast Chain Lightning
+ >>> [2] 0.717269 - Cast Voldaren Epicure
+     [3] 0.029890 - Cast Reckless Impulse
+
+VALUE SCORE: 1.018622
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 19
+-> Hand: [Chain Lightning; Voldaren Epicure; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000298 - Pass
+
+VALUE SCORE: 1.018622
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Chain Lightning; Voldaren Epicure; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000150 - Pass
+     [1] 0.094763 - Cast Chain Lightning
+     [2] 0.359041 - Cast Voldaren Epicure
+ >>> [3] 0.546046 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.955715
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.955715
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000050 - Cast Voldaren Epicure
+     [2] 0.000002 - Cast Reckless Impulse
+ >>> [3] 0.999948 - Play Great Furnace
+
+VALUE SCORE: 0.962350
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Voldaren Epicure; Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Great Furnace]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000397 - Pass
+ >>> [1] 0.967058 - Cast Voldaren Epicure
+     [2] 0.032545 - Cast Reckless Impulse
+
+VALUE SCORE: 0.952222
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000397 - Pass
+
+VALUE SCORE: 0.952222
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Great Furnace; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000376 - Pass
+     [1] 0.025476 - Cast Reckless Impulse
+ >>> [2] 0.974147 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.873747
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Goblin Tomb Raider,tapped,attacking; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000376 - Pass
+
+VALUE SCORE: 0.873747
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse; Burning-Tree Emissary; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000234 - Cast Reckless Impulse
+ >>> [2] 0.999763 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 0.890258
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 15
+-> Hand: [Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.890258
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse; Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.015856 - Pass
+ >>> [1] 0.984144 - Cast Reckless Impulse
+
+VALUE SCORE: 0.826994
+SELECTED: Cast Reckless Impulse
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.005868 - Cast Goblin Bushwhacker
+ >>> [2] 0.994132 - Play Mountain
+
+VALUE SCORE: 0.819420
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000047 - Cast Reckless Impulse
+ >>> [2] 0.999952 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.809324
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Faerie Seer; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer; Island; Faerie Seer; Island; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer; Island; Faerie Seer; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped,attacking; Island,tapped; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped,attacking; Island,tapped; Island; Humbling Elder; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.809324
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Reckless Impulse; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Reckless Impulse; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.013655 - Pass
+ >>> [1] 0.970801 - Cast Reckless Impulse
+     [2] 0.015544 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.861783
+SELECTED: Cast Reckless Impulse
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Goblin Bushwhacker
+ >>> [2] 0.999990 - Play Mountain
+     [3] 0.000010 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.828067
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000410 - Pass
+     [1] 0.000373 - Cast Goblin Bushwhacker
+ >>> [2] 0.999218 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.817656
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000410 - Pass
+
+VALUE SCORE: 0.817656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.521336 - Pass
+     [1] 0.478664 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.819406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped,attacking; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.521336 - Pass
+
+VALUE SCORE: 0.819406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped,attacking; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.521336 - Pass
+
+VALUE SCORE: 0.819406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island,tapped; Humbling Elder; Ninja of the Deep Hours,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+     [1] 0.439235 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Humbling Elder; Ninja of the Deep Hours; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Humbling Elder; Ninja of the Deep Hours; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker,blocking; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.560765 - Pass
+
+VALUE SCORE: 0.790228
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Goblin Bushwhacker
+ >>> [2] 0.999963 - Play Mountain
+     [3] 0.000037 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.841704
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000110 - Pass
+     [1] 0.000108 - Cast Goblin Bushwhacker
+ >>> [2] 0.999782 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.827148
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000110 - Pass
+
+VALUE SCORE: 0.827148
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000477 - Pass
+     [1] 0.000302 - Cast Goblin Bushwhacker
+ >>> [2] 0.999221 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.736820
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain,tapped; Samurai Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped,attacking; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island]
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer,tapped,attacking; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped,attacking; Humbling Elder; Faerie Miscreant,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer,tapped,attacking; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped,attacking; Humbling Elder; Faerie Miscreant,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,tapped; Goblin Bushwhacker; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000477 - Pass
+
+VALUE SCORE: 0.736820
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker; Experimental Synthesizer]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000352 - Pass
+     [1] 0.000452 - Cast Goblin Bushwhacker
+ >>> [2] 0.999196 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.881890
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Experimental Synthesizer (controller=RL)
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000352 - Pass
+
+VALUE SCORE: 0.881890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.504926 - Pass
+     [1] 0.495074 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.820511
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.504926 - Pass
+
+VALUE SCORE: 0.820511
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+     [1] 0.494514 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island]
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped,attacking; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped,attacking; Humbling Elder; Faerie Miscreant,tapped,attacking; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped,attacking; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped,attacking; Humbling Elder; Faerie Miscreant,tapped,attacking; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.505486 - Pass
+
+VALUE SCORE: 0.819987
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.000383 - Pass
+     [1] 0.000452 - Cast Goblin Bushwhacker
+ >>> [2] 0.999165 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.860216
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 3
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token; Voldaren Epicure]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000383 - Pass
+
+VALUE SCORE: 0.860216
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Goblin Bushwhacker; Mountain; Samurai Token; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.000492 - Pass
+     [1] 0.000402 - Cast Goblin Bushwhacker
+ >>> [2] 0.999106 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.777178
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Rally at the Hornburg]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.000029 - Pass
+ >>> [1] 0.999971 - Cast Rally at the Hornburg
+
+VALUE SCORE: 0.789228
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island; Island; Ninja of the Deep Hours; Faerie Seer,tapped; Humbling Elder; Faerie Miscreant,tapped; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Island; Ninja of the Deep Hours; Faerie Seer; Humbling Elder; Faerie Miscreant; Island; Harrier Strix; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary; Mountain,tapped; Samurai Token; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Harrier Strix,tapped,attacking; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,blocking; Mountain,tapped; Clockwork Percussionist; Voldaren Epicure; Great Furnace,tapped; Voldaren Epicure; Burning-Tree Emissary,blocking; Mountain,tapped; Samurai Token,blocking; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Harrier Strix,tapped,attacking; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.789228
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 119
+Ended: 2026-02-01T12:52:39.047822600
+================================================================================

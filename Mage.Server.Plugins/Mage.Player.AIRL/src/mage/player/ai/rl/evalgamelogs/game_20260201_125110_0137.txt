@@ -1,0 +1,1753 @@
+================================================================================
+GAME LOG: game_20260201_125110_0137
+Started: 2026-02-01T12:51:10.854009900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078307
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary; Goblin Bushwhacker]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.057665 - Cast End the Festivities
+     [2] 0.000034 - Cast Galvanic Blast
+ >>> [3] 0.942301 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.073632
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073632
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073632
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073632
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073632
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073632
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073632
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999494 - Play Mountain
+     [2] 0.000506 - Cast End the Festivities
+     [3] 0.000000 - Cast Galvanic Blast
+
+VALUE SCORE: 1.061975
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; End the Festivities; Galvanic Blast; Burning-Tree Emissary; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.275707 - Cast End the Festivities
+     [2] 0.000157 - Cast Galvanic Blast
+ >>> [3] 0.724134 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 1.056347
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; End the Festivities; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 1.056347
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; End the Festivities; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+ >>> [1] 0.999419 - Cast End the Festivities
+     [2] 0.000573 - Cast Galvanic Blast
+
+VALUE SCORE: 1.013453
+SELECTED: Cast End the Festivities
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.013453
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Galvanic Blast; Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.829458 - Play Mountain
+     [2] 0.000000 - Cast Galvanic Blast
+     [3] 0.170541 - Play Great Furnace
+
+VALUE SCORE: 1.056495
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012363 - Pass
+ >>> [1] 0.987637 - Cast Galvanic Blast
+
+VALUE SCORE: 1.050058
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012363 - Pass
+
+VALUE SCORE: 1.050058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Great Furnace; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.826231 - Play Mountain
+     [2] 0.167102 - Play Great Furnace
+     [3] 0.006667 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.037544
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.029668
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.029668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Great Furnace; Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Great Furnace
+     [2] 0.000002 - Cast Reckless Impulse
+
+VALUE SCORE: 0.982966
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.011044 - Pass
+ >>> [1] 0.988956 - Cast Reckless Impulse
+
+VALUE SCORE: 0.973817
+SELECTED: Cast Reckless Impulse
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker; Great Furnace]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000168 - Pass
+ >>> [1] 0.999832 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.903680
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker; Great Furnace,tapped; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace,tapped; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain,tapped; Mountain,tapped; Mountain; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000168 - Pass
+
+VALUE SCORE: 0.903680
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Goblin Tomb Raider
+ >>> [2] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.938307
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace; Goblin Tomb Raider; Mountain]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996850 - Pass
+     [1] 0.003150 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.928657
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace; Goblin Tomb Raider,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996850 - Pass
+
+VALUE SCORE: 0.928657
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace; Goblin Tomb Raider,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996850 - Pass
+
+VALUE SCORE: 0.928657
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+     [1] 0.000131 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When this card is exiled this way, you may cast it by paying {R} instead of putting it into your graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999869 - Pass
+
+VALUE SCORE: 0.844920
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace; Goblin Tomb Raider; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider; Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace; Goblin Tomb Raider; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.176178 - Pass
+     [1] 0.000261 - Cast Goblin Tomb Raider
+ >>> [2] 0.823561 - Play Mountain
+
+VALUE SCORE: 0.794506
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Mountain; Mountain; Mountain; Goblin Bushwhacker; Great Furnace; Goblin Tomb Raider; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998592 - Pass
+     [1] 0.001408 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.785953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace; Goblin Tomb Raider,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998592 - Pass
+
+VALUE SCORE: 0.785953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped,attacking; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped,attacking; Great Furnace; Goblin Tomb Raider,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998592 - Pass
+
+VALUE SCORE: 0.785953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+     [1] 0.000058 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker,tapped; Mountain; Mountain; Mountain; Goblin Bushwhacker,tapped; Great Furnace; Goblin Tomb Raider,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+
+VALUE SCORE: 0.685324
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 76
+Ended: 2026-02-01T12:52:35.997683600
+================================================================================

@@ -1,0 +1,2081 @@
+================================================================================
+GAME LOG: game_20260201_125410_0167
+Started: 2026-02-01T12:54:10.655270400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant; Humbling Elder]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant; Humbling Elder]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.988151
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant; Humbling Elder]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+     [1] 0.247080 - Cast Faerie Miscreant
+ >>> [2] 0.752898 - Cast Humbling Elder
+
+VALUE SCORE: 0.983785
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.983785
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant; Island]
+-> Permanents: [Island; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant; Island]
+-> Permanents: [Island; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000109 - Cast Faerie Miscreant
+ >>> [2] 0.999891 - Play Island
+
+VALUE SCORE: 0.905680
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap; Faerie Miscreant]
+-> Permanents: [Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000115 - Pass
+     [1] 0.031785 - Cast Snap
+ >>> [2] 0.968100 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.899029
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Of One Mind; Counterspell; Snap]
+-> Permanents: [Island; Humbling Elder; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999997 - Cast Of One Mind
+
+VALUE SCORE: 0.886100
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.886100
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Island; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.004314 - Cast Of One Mind
+     [2] 0.000003 - Cast Snap
+ >>> [3] 0.995652 - Play Island
+     [4] 0.000031 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.920889
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Of One Mind; Counterspell; Snap; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.992291 - Cast Of One Mind
+     [2] 0.000746 - Cast Snap
+     [3] 0.006960 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.912574
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Miscreant; Island]
+-> Permanents: [Island; Humbling Elder; Island,tapped; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000082 - Pass
+     [1] 0.024116 - Cast Snap
+     [2] 0.218995 - Cast Moon-Circuit Hacker
+ >>> [3] 0.756807 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.898765
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000082 - Pass
+
+VALUE SCORE: 0.898765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Moon-Circuit Hacker; Island; Snap]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000082 - Pass
+
+VALUE SCORE: 0.898765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Moon-Circuit Hacker; Island; Snap]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000082 - Pass
+
+VALUE SCORE: 0.898765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Moon-Circuit Hacker; Island; Snap]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000467 - Pass
+ >>> [1] 0.999533 - Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.858855
+SELECTED: Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000467 - Pass
+
+VALUE SCORE: 0.858855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000467 - Pass
+
+VALUE SCORE: 0.858855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000467 - Pass
+
+VALUE SCORE: 0.858855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000467 - Pass
+
+VALUE SCORE: 0.858855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000467 - Pass
+
+VALUE SCORE: 0.858855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000467 - Pass
+
+VALUE SCORE: 0.858855
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind; Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Island; Faerie Miscreant; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Island; Snap; Faerie Miscreant; Of One Mind; Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Island; Faerie Miscreant; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Snap
+ >>> [2] 0.995007 - Play Island
+     [3] 0.000101 - Cast Faerie Miscreant
+     [4] 0.004887 - Cast Of One Mind
+
+VALUE SCORE: 0.764892
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Snap; Faerie Miscreant; Of One Mind; Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Island; Faerie Miscreant; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000823 - Cast Snap
+     [2] 0.058384 - Cast Ninja of the Deep Hours
+     [3] 0.018859 - Cast Faerie Miscreant
+ >>> [4] 0.921929 - Cast Of One Mind
+
+VALUE SCORE: 0.748057
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Snap; Faerie Miscreant; Ninja of the Deep Hours; Island; Island]
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island; Faerie Miscreant; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000281 - Pass
+     [1] 0.044105 - Cast Snap
+ >>> [2] 0.955614 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.720678
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Counterspell; Snap; Ninja of the Deep Hours; Snap; Ninja of the Deep Hours; Island; Island]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.006681 - Pass
+ >>> [1] 0.993319 - Cast Snap
+
+VALUE SCORE: 0.693027
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Snap; Ninja of the Deep Hours; Island; Island]
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.005818 - Pass
+ >>> [1] 0.994182 - Cast Snap
+
+VALUE SCORE: 0.737096
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Ninja of the Deep Hours; Island; Island]
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005818 - Pass
+
+VALUE SCORE: 0.737096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Ninja of the Deep Hours; Island; Island; Dispel]
+-> Permanents: [Island; Humbling Elder; Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005818 - Pass
+
+VALUE SCORE: 0.737096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Ninja of the Deep Hours; Island; Island; Dispel]
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005818 - Pass
+
+VALUE SCORE: 0.737096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Ninja of the Deep Hours; Island; Island; Dispel]
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002190 - Pass
+ >>> [1] 0.997810 - Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.709876
+SELECTED: Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 7 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain; Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain; Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain; Mountain; Mountain; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002190 - Pass
+
+VALUE SCORE: 0.709876
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix; Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Island; Moon-Circuit Hacker; Island; Faerie Miscreant; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Island; Dispel; Faerie Miscreant; Harrier Strix; Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Island; Moon-Circuit Hacker; Island; Faerie Miscreant; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000278 - Cast Ninja of the Deep Hours
+ >>> [2] 0.999637 - Play Island
+     [3] 0.000083 - Cast Faerie Miscreant
+     [4] 0.000001 - Cast Harrier Strix
+
+VALUE SCORE: 0.503123
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Ninja of the Deep Hours; Island; Dispel; Faerie Miscreant; Harrier Strix; Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Island; Moon-Circuit Hacker; Island; Faerie Miscreant; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000200 - Pass
+ >>> [1] 0.766412 - Cast Ninja of the Deep Hours
+     [2] 0.229962 - Cast Faerie Miscreant
+     [3] 0.003426 - Cast Harrier Strix
+
+VALUE SCORE: 0.490372
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Faerie Miscreant; Harrier Strix; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Moon-Circuit Hacker; Island; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000890 - Pass
+ >>> [1] 0.982314 - Cast Faerie Miscreant
+     [2] 0.016796 - Cast Harrier Strix
+
+VALUE SCORE: 0.427795
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,blocking; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Blood Token; Mountain,tapped; Mountain,tapped; Mountain,tapped; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 6 cards
+-> Permanents: [Mountain; Blood Token; Mountain; Mountain; Mountain; Blood Token; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 6 cards
+-> Permanents: [Mountain; Blood Token; Mountain; Mountain; Mountain; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Blood Token; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain; Mountain,tapped; Blood Token; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Ninja of the Deep Hours; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000890 - Pass
+
+VALUE SCORE: 0.427795
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Island; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999701 - Play Island
+     [2] 0.000001 - Cast Harrier Strix
+     [3] 0.000271 - Cast Ninja of the Deep Hours
+     [4] 0.000027 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.616145
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Ninja of the Deep Hours; Harrier Strix; Moon-Circuit Hacker; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000115 - Pass
+     [1] 0.003658 - Cast Harrier Strix
+ >>> [2] 0.904579 - Cast Ninja of the Deep Hours
+     [3] 0.091647 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.606273
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.001149 - Pass
+     [1] 0.039768 - Cast Harrier Strix
+ >>> [2] 0.959082 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.554022
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Masked Meower; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001149 - Pass
+
+VALUE SCORE: 0.554022
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker; Faerie Seer]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker; Faerie Seer]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island; Ninja of the Deep Hours; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000468 - Pass
+     [1] 0.006507 - Cast Harrier Strix
+     [2] 0.167558 - Cast Moon-Circuit Hacker
+ >>> [3] 0.825466 - Cast Faerie Seer
+
+VALUE SCORE: 0.393771
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000468 - Pass
+
+VALUE SCORE: 0.393771
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002708 - Pass
+     [1] 0.039705 - Cast Harrier Strix
+ >>> [2] 0.957587 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.359710
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.056953 - Pass
+ >>> [1] 0.943047 - Cast Harrier Strix
+
+VALUE SCORE: 0.295079
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Moon-Circuit Hacker; Harrier Strix]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056953 - Pass
+
+VALUE SCORE: 0.295079
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel; Harrier Strix]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Moon-Circuit Hacker; Harrier Strix]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.059514 - Pass
+ >>> [1] 0.940486 - Cast Harrier Strix
+
+VALUE SCORE: 0.194837
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 8
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Moon-Circuit Hacker; Harrier Strix; Harrier Strix]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059514 - Pass
+
+VALUE SCORE: 0.194837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Faerie Miscreant; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Moon-Circuit Hacker; Harrier Strix; Harrier Strix]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059514 - Pass
+
+VALUE SCORE: 0.194837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Island; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Faerie Seer; Moon-Circuit Hacker; Harrier Strix; Harrier Strix]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower; Guttersnipe,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059514 - Pass
+
+VALUE SCORE: 0.194837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Island; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Faerie Seer; Moon-Circuit Hacker; Harrier Strix; Harrier Strix]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped; Masked Meower,blocking; Guttersnipe,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059514 - Pass
+
+VALUE SCORE: 0.194837
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 91
+Ended: 2026-02-01T12:56:34.550277300
+================================================================================

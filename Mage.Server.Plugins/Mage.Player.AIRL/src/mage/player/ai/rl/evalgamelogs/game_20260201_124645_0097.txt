@@ -1,0 +1,1782 @@
+================================================================================
+GAME LOG: game_20260201_124645_0097
+Started: 2026-02-01T12:46:45.127914500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono Red Rally.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.685431 - Play Slagwoods Bridge
+     [2] 0.314568 - Play Twisted Landscape
+
+VALUE SCORE: 0.212793
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212793
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.616510 - Play Slagwoods Bridge
+     [2] 0.383446 - Play Twisted Landscape
+     [3] 0.000038 - Cast Nihil Spellbomb
+     [4] 0.000005 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.177511
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.021458 - Pass
+ >>> [1] 0.873193 - Cast Nihil Spellbomb
+     [2] 0.105349 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.161391
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.308605 - Pass
+ >>> [1] 0.691395 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.143483
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.308605 - Pass
+
+VALUE SCORE: 0.143483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Slagwoods Bridge; Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.554178 - Play Slagwoods Bridge
+     [2] 0.445815 - Play Twisted Landscape
+     [3] 0.000006 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.145138
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Krark-Clan Shaman; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.205713 - Pass
+ >>> [1] 0.794287 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.126978
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.109942
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.110052
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.109795
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998628 - Pass
+     [1] 0.001372 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.933994
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998640 - Pass
+     [1] 0.001360 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.932274
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Burning-Tree Emissary (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999242 - Pass
+     [1] 0.000758 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.853347
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999255 - Pass
+     [1] 0.000745 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.851095
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999290 - Pass
+     [1] 0.000710 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.843969
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999290 - Pass
+
+VALUE SCORE: 0.843969
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999290 - Pass
+
+VALUE SCORE: 0.843969
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999290 - Pass
+
+VALUE SCORE: 0.843969
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999290 - Pass
+
+VALUE SCORE: 0.843969
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Twisted Landscape; Blood Fountain; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999997 - Play Twisted Landscape
+
+VALUE SCORE: 0.105877
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+     [0] 0.000531 - Pass
+ >>> [1] 0.999469 - Cast Writhing Chrysalis
+     [2] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.096866
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=RL)
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain; Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Experimental Synthesizer; Mountain; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000531 - Pass
+
+VALUE SCORE: 0.096866
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999409 - Pass
+     [1] 0.000591 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.096662
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999409 - Pass
+     [1] 0.000591 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.096874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Experimental Synthesizer; Mountain; Burning-Tree Emissary,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999410 - Pass
+     [1] 0.000590 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.096378
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942412 - Pass
+     [1] 0.057587 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.819874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943128 - Pass
+     [1] 0.056872 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.814323
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.958678 - Pass
+     [1] 0.041322 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.759985
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker; Mountain,tapped; Burning-Tree Emissary; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.958064 - Pass
+     [1] 0.041936 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.762759
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980475 - Pass
+     [1] 0.019525 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.650376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token,blocking; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Burning-Tree Emissary,tapped,attacking; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980984 - Pass
+     [1] 0.019016 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.646094
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978959 - Pass
+     [1] 0.021041 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.652048
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Samurai Token; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.195536 - Pass
+ >>> [1] 0.804360 - Cast Krark-Clan Shaman
+     [2] 0.000104 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.065476
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999487 - Pass
+     [1] 0.000511 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.029953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+     [1] 0.000512 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.030486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Goblin Bushwhacker,tapped; Goblin Bushwhacker,tapped; Mountain,tapped; Burning-Tree Emissary,tapped; Samurai Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999487 - Pass
+     [1] 0.000511 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.029192
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Samurai Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Samurai Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.927170 - Pass
+     [1] 0.072149 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000681 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.847876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped,attacking; Samurai Token,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936518 - Pass
+     [1] 0.062895 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000587 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.829615
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape; Eldrazi Spawn Token,blocking; Krark-Clan Shaman,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped,attacking; Samurai Token,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.938043 - Pass
+     [1] 0.061386 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000570 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.825630
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924188 - Pass
+     [1] 0.075812 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.854785
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.048889 - Pass
+ >>> [1] 0.951070 - Cast Ichor Wellspring
+     [2] 0.000041 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.158728
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.048889 - Pass
+
+VALUE SCORE: 0.158728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Slagwoods Bridge; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Mountain; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.409350 - Pass
+ >>> [1] 0.590650 - Cast Cleansing Wildfire
+
+VALUE SCORE: 0.122389
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain; Clockwork Percussionist; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary,tapped; Samurai Token; Mountain; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Samurai Token; Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Samurai Token; Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Goblin Bushwhacker; Goblin Bushwhacker; Mountain; Burning-Tree Emissary; Samurai Token; Mountain; Mountain; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain; Burning-Tree Emissary,tapped,attacking; Samurai Token,attacking; Mountain; Mountain; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Blood Fountain; Cast Down; Fanatical Offering; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Mountain; Burning-Tree Emissary,tapped,attacking; Samurai Token,attacking; Mountain; Mountain; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.409350 - Pass
+
+VALUE SCORE: 0.122389
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 76
+Ended: 2026-02-01T12:47:59.739062900
+================================================================================

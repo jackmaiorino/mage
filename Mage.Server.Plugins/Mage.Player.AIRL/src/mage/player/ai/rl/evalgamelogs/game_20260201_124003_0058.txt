@@ -1,0 +1,2472 @@
+================================================================================
+GAME LOG: game_20260201_124003_0058
+Started: 2026-02-01T12:40:03.347123400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Vault of Whispers; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Vault of Whispers; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.173212 - Play Drossforge Bridge
+ >>> [2] 0.826788 - Play Vault of Whispers
+
+VALUE SCORE: 0.481792
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481792
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481792
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999941 - Play Drossforge Bridge
+     [2] 0.000055 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.484194
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.068711 - Pass
+ >>> [1] 0.931289 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.475966
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.068711 - Pass
+
+VALUE SCORE: 0.475966
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Refurbished Familiar; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+     [0] 0.000089 - Pass
+     [1] 0.000039 - Cast Makeshift Munitions
+ >>> [2] 0.997909 - Cast Refurbished Familiar
+     [3] 0.001881 - Cast Krark-Clan Shaman
+     [4] 0.000082 - Cast Fanatical Offering
+
+VALUE SCORE: 0.409848
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000089 - Pass
+
+VALUE SCORE: 0.409848
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+     [0] 0.051164 - Pass
+ >>> [1] 0.948835 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.372198
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.365447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.365520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.365220
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.076014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.085467
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.085807
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.084984
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.344799 - Pass
+     [1] 0.146707 - Cast Makeshift Munitions
+     [2] 0.310175 - Cast Fanatical Offering
+     [3] 0.198312 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.401128
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.527847 - Pass
+     [1] 0.472152 - Cast Fanatical Offering
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.398172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.527847 - Pass
+     [1] 0.472152 - Cast Fanatical Offering
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.398172
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.346834 - Pass
+     [1] 0.145210 - Cast Makeshift Munitions
+     [2] 0.309656 - Cast Fanatical Offering
+     [3] 0.198300 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.396433
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.923725 - Pass
+     [1] 0.076275 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.120009
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.931539 - Pass
+     [1] 0.068461 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.101190
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.927235 - Pass
+     [1] 0.072764 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.109212
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.940091 - Pass
+     [1] 0.059909 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.072367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.940600 - Pass
+     [1] 0.059400 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.070520
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.041187 - Pass
+     [1] 0.015634 - Cast Makeshift Munitions
+     [2] 0.034216 - Cast Fanatical Offering
+ >>> [3] 0.887113 - Cast Krark-Clan Shaman
+     [4] 0.021849 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.381472
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.375329
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.373412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.373412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.371951
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.045671
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.043258
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.033663
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.023142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.023142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.015760
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Black Mage's Rod]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+     [0] 0.004940 - Pass
+     [1] 0.001343 - Cast Makeshift Munitions
+     [2] 0.003139 - Cast Fanatical Offering
+ >>> [3] 0.988513 - Cast Black Mage's Rod
+     [4] 0.002065 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.333856
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999990 - Pass
+     [1] 0.000010 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.315044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999990 - Pass
+     [1] 0.000010 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.319077
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.305794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.305794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.296879
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate; Outlaw Medic; Idyllic Beachfront; The Modern Age]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate; Outlaw Medic; Idyllic Beachfront; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.015173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.123959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; The Modern Age; Heap Gate; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.113373
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront; The Modern Age; Heap Gate; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.126383
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.201558
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.192553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 1.000000 - Pass
+     [1] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.202462
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000000 - Cast Makeshift Munitions
+     [2] 0.000000 - Cast Fanatical Offering
+ >>> [3] 0.999999 - Play Silverbluff Bridge
+     [4] 0.000000 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.296448
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.549873 - Pass
+     [1] 0.080358 - Cast Makeshift Munitions
+     [2] 0.209897 - Cast Fanatical Offering
+     [3] 0.159868 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.231831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Black Mage's Rod; Hero Token,tapped,attacking; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.794420 - Pass
+     [1] 0.205579 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Black Mage's Rod; Hero Token,tapped,attacking; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.794420 - Pass
+     [1] 0.205580 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.158938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; The Modern Age; Heap Gate,tapped; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.653241 - Pass
+     [1] 0.053947 - Cast Makeshift Munitions
+     [2] 0.154808 - Cast Fanatical Offering
+     [3] 0.138004 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.138085
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate; Outlaw Medic; Idyllic Beachfront; The Modern Age; Heap Gate; Treasure Token; Treasure Token]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate; Treasure Token; Basilisk Gate; Outlaw Medic; Idyllic Beachfront; The Modern Age; Heap Gate; Treasure Token; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.958513 - Pass
+     [1] 0.041487 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.020454
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965727 - Pass
+     [1] 0.034273 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.154145
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.965908 - Pass
+     [1] 0.034092 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.162261
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966172 - Pass
+     [1] 0.033827 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.176168
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966172 - Pass
+     [1] 0.033827 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.176168
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,tapped; Krark-Clan Shaman,tapped; Black Mage's Rod; Hero Token,tapped; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.966318 - Pass
+     [1] 0.033681 - Cast Fanatical Offering
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.185574
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast; Drossforge Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+     [1] 0.000002 - Cast Makeshift Munitions
+     [2] 0.000004 - Cast Fanatical Offering
+     [3] 0.000295 - Cast Thoughtcast
+ >>> [4] 0.999634 - Play Drossforge Bridge
+     [5] 0.000057 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000003 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.320157
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Thoughtcast]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.015869 - Pass
+     [1] 0.003990 - Cast Makeshift Munitions
+     [2] 0.009510 - Cast Fanatical Offering
+ >>> [3] 0.817364 - Cast Thoughtcast
+     [4] 0.146385 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.006882 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.303151
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=RL)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.693263 - Pass
+     [1] 0.306732 - Cast Fanatical Offering
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.250114
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.012460 - Pass
+     [1] 0.002127 - Cast Makeshift Munitions
+     [2] 0.005413 - Cast Fanatical Offering
+ >>> [3] 0.751590 - Cast Ichor Wellspring
+     [4] 0.224225 - Cast Reckoner's Bargain
+     [5] 0.004186 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.245491
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [2] Ichor Wellspring (controller=RL)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.153888
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Ichor Wellspring (controller=RL)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.169450
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.169291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.165794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.162937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.163576
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.162198
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.178177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Treasure Token; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.262414
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.291473
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.294547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped,attacking; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.315159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped,attacking; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.315159
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.326320
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge; Drossforge Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge; Drossforge Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000000 - Cast Makeshift Munitions
+     [2] 0.000000 - Cast Fanatical Offering
+     [3] 0.000010 - Cast Reckoner's Bargain
+ >>> [4] 0.999985 - Play Silverbluff Bridge
+     [5] 0.000003 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000000 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.135345
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers; Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge; Drossforge Bridge; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.087658 - Pass
+     [1] 0.005183 - Cast Makeshift Munitions
+     [2] 0.014847 - Cast Fanatical Offering
+ >>> [3] 0.658528 - Cast Reckoner's Bargain
+     [4] 0.216900 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.016884 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.061899
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=RL)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Drossforge Bridge; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge; Drossforge Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.124652 - Pass
+     [1] 0.018537 - Cast Fanatical Offering
+ >>> [2] 0.856811 - Cast Reckoner's Bargain
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.039275
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Reckoner's Bargain (controller=RL)
+  - [1] Reckoner's Bargain (controller=RL)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.001372
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=RL)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.000266
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.001729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.008954
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.008954
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate,tapped; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped; Island,tapped; Citadel Gate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.014436
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Heap Gate; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.190281
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Citadel Gate,tapped; Outlaw Medic; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.272584
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider; Island,tapped; Citadel Gate,tapped; Outlaw Medic; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.265253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped,attacking; Island,tapped; Citadel Gate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.304101
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Fanatical Offering; Nihil Spellbomb; Blood Fountain; Mistvault Bridge; Vault of Whispers]
+-> Permanents: [Drossforge Bridge,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Krark-Clan Shaman,blocking; Krark-Clan Shaman; Black Mage's Rod; Hero Token; Silverbluff Bridge,tapped; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Azorius Guildgate; Heap Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Treasure Token; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; Idyllic Beachfront,tapped; Heap Gate; Treasure Token; Treasure Token; Vector Glider,tapped,attacking; Island,tapped; Citadel Gate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: -0.305630
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 102
+Ended: 2026-02-01T12:44:57.849557300
+================================================================================

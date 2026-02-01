@@ -15,6 +15,9 @@ import java.util.stream.Collectors;
 public class PythonMLBatchManager {
 
     private static final Logger logger = Logger.getLogger(PythonMLBatchManager.class.getName());
+    private static final boolean SINGLE_BACKEND = "single".equalsIgnoreCase(
+            System.getenv().getOrDefault("PY_BACKEND_MODE", "multi").trim()
+    );
 
     static {
         // This class can log on every single decision; keep it quiet by default.
@@ -223,8 +226,11 @@ public class PythonMLBatchManager {
 
         byte[] resultsBytes;
         synchronized (py4jLock) { // ensure exclusive Py4J channel (but don't block enqueueing)
-            // Require GPULock for inference (mirrors learner burst locking).
-            entryPoint.acquireGPULock();
+            // Multi-backend: Java acquires GPU lock for inference.
+            // Single-backend: Python uses an in-process mutex to pause inference during training.
+            if (!SINGLE_BACKEND) {
+                entryPoint.acquireGPULock();
+            }
             try {
                 resultsBytes = entryPoint.scoreCandidatesPolicyFlat(
                         seqBytes,
@@ -240,7 +246,9 @@ public class PythonMLBatchManager {
                         maxCandidates,
                         candFeatDim);
             } finally {
-                entryPoint.releaseGPULock();
+                if (!SINGLE_BACKEND) {
+                    entryPoint.releaseGPULock();
+                }
             }
         }
 

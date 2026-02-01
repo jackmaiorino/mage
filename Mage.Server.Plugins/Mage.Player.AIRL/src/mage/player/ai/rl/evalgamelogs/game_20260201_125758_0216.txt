@@ -1,0 +1,1949 @@
+================================================================================
+GAME LOG: game_20260201_125758_0216
+Started: 2026-02-01T12:57:58.553105600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Mono Red Rally.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Lightning Bolt; Guttersnipe; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Lightning Bolt; Guttersnipe; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.188795
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe; Voldaren Epicure]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.014198 - Pass
+     [1] 0.079520 - Cast Lightning Bolt
+ >>> [2] 0.906282 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.169655
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014198 - Pass
+
+VALUE SCORE: 0.169655
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe; Highway Robbery]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Mountain; Lightning Bolt; Guttersnipe; Highway Robbery]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000033 - Pass
+ >>> [1] 0.999854 - Play Mountain
+     [2] 0.000101 - Cast Lightning Bolt
+     [3] 0.000012 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.103795
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe; Highway Robbery]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+     [1] 0.000093 - Cast Lightning Bolt
+     [2] 0.000036 - Cast Highway Robbery
+ >>> [3] 0.999823 - Plot {1}{R}
+     [4] 0.000011 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.088029
+SELECTED: Plot {1}{R}
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.088029
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lightning Bolt; Guttersnipe; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+ >>> [1] 0.999448 - Play Mountain
+     [2] 0.000112 - Cast Lightning Bolt
+     [3] 0.000392 - Cast Highway Robbery using Plot
+     [4] 0.000011 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.047265
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Guttersnipe; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.039081 - Pass
+     [1] 0.100647 - Cast Lightning Bolt
+ >>> [2] 0.486973 - Cast Guttersnipe
+     [3] 0.364063 - Cast Highway Robbery using Plot
+     [4] 0.009235 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.029455
+SELECTED: Cast Guttersnipe
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.114339 - Pass
+ >>> [1] 0.885661 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.028789
+SELECTED: Cast Highway Robbery using Plot
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=RL)
+[RL], life = 19
+-> Hand: [Lightning Bolt; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain; Human Soldier Token; Human Soldier Token]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.114339 - Pass
+
+VALUE SCORE: -0.028789
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.000028 - Pass
+     [1] 0.000118 - Cast Lightning Bolt
+     [2] 0.001336 - Cast Masked Meower
+ >>> [3] 0.998510 - Play Mountain
+     [4] 0.000009 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.000197
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Masked Meower; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.021492 - Pass
+     [1] 0.074467 - Cast Lightning Bolt
+ >>> [2] 0.899084 - Cast Masked Meower
+     [3] 0.004957 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.027966
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lightning Bolt; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.242866 - Pass
+ >>> [1] 0.714108 - Cast Lightning Bolt
+     [2] 0.000006 - Discard a card, Sacrifice {this}: Draw a card.
+     [3] 0.043020 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.060998
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain,tapped; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.876265 - Pass
+     [1] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+     [2] 0.123712 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.095887
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain,tapped; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.876132 - Pass
+     [1] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+     [2] 0.123845 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.095211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain,tapped; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.876818 - Pass
+     [1] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+     [2] 0.123159 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.096830
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain,tapped; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Mountain,tapped; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.000723 - Pass
+     [1] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+ >>> [2] 0.999276 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.755243
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=RL)
+  - [2] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=RL)
+  - [1] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Highway Robbery]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Highway Robbery]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Highway Robbery]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Highway Robbery]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Highway Robbery]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000723 - Pass
+
+VALUE SCORE: 0.755243
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Highway Robbery; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Highway Robbery; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.000018 - Cast Highway Robbery
+ >>> [2] 0.670427 - Plot {1}{R}
+     [3] 0.329543 - Play Mountain
+
+VALUE SCORE: -0.073303
+SELECTED: Plot {1}{R}
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000072 - Pass
+ >>> [1] 0.999928 - Play Mountain
+
+VALUE SCORE: -0.141203
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckless Impulse (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000072 - Pass
+
+VALUE SCORE: -0.141203
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000172 - Pass
+ >>> [1] 0.997737 - Play Mountain
+     [2] 0.002091 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.278585
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.075839 - Pass
+ >>> [1] 0.924161 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.294540
+SELECTED: Cast Highway Robbery using Plot
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Great Furnace,tapped; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Clockwork Percussionist (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace,tapped; Samurai Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace,tapped; Clockwork Percussionist; Mountain,tapped; Human Soldier Token; Human Soldier Token; Great Furnace,tapped; Samurai Token; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Mountain,tapped; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.075839 - Pass
+
+VALUE SCORE: -0.294540
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker; Mountain; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker; Mountain; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000205 - Pass
+ >>> [1] 0.997889 - Play Mountain
+     [2] 0.001905 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.303919
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.104264 - Pass
+ >>> [1] 0.895736 - Cast Voldaren Epicure
+
+VALUE SCORE: -0.321412
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 1
+-> Hand: [Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.104264 - Pass
+
+VALUE SCORE: -0.321412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.935087 - Pass
+     [1] 0.064914 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.365420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.935125 - Pass
+     [1] 0.064875 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.365221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 0 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Mountain,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped; Great Furnace,tapped; Samurai Token; Clockwork Percussionist,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.935275 - Pass
+     [1] 0.064725 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.365912
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Samurai Token; Clockwork Percussionist]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain; Mountain; Mountain; Mountain; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Samurai Token; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.001019 - Pass
+ >>> [1] 0.998980 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.576227
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lightning Bolt]
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Samurai Token; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+     [0] 0.000100 - Pass
+ >>> [1] 0.999900 - Cast Lightning Bolt
+
+VALUE SCORE: 0.570299
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain,tapped; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Clockwork Percussionist; Mountain; Human Soldier Token; Human Soldier Token; Great Furnace; Samurai Token; Clockwork Percussionist]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.570299
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain,tapped; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace; Clockwork Percussionist,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace; Samurai Token,attacking; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.570299
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Mountain,tapped; Mountain; Mountain,tapped; Mountain; Mountain,tapped; Mountain; Voldaren Epicure,blocking]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Voldaren Epicure,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace; Clockwork Percussionist,tapped,attacking; Mountain; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Great Furnace; Samurai Token,attacking; Clockwork Percussionist,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 0.570299
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 84
+Ended: 2026-02-01T12:59:17.123297500
+================================================================================

@@ -1,0 +1,2110 @@
+================================================================================
+GAME LOG: game_20260201_125821_0219
+Started: 2026-02-01T12:58:21.894746400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.187632
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe; Masked Meower]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.016236 - Pass
+ >>> [1] 0.983764 - Cast Masked Meower
+
+VALUE SCORE: 0.168783
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.154960
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.152389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.152389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.150858
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+     [1] 0.000086 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.913765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912706
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912392
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe; Mountain]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Grab the Prize; Guttersnipe; Mountain]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+ >>> [1] 0.999988 - Play Mountain
+     [2] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.168147
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Grab the Prize; Guttersnipe; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.002120 - Pass
+     [1] 0.000091 - Cast Fireblast
+ >>> [2] 0.997788 - Cast Grab the Prize
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.149603
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970830 - Pass
+     [1] 0.029140 - Cast Fireblast
+     [2] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.118851
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970825 - Pass
+     [1] 0.029145 - Cast Fireblast
+     [2] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.119001
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970928 - Pass
+     [1] 0.029043 - Cast Fireblast
+     [2] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.118601
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fireblast; Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fireblast; Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.053455 - Pass
+ >>> [1] 0.946499 - Cast Fireblast
+     [2] 0.000046 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.830599
+SELECTED: Cast Fireblast
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998599 - Pass
+     [1] 0.001401 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.899688
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998612 - Pass
+     [1] 0.001388 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.898553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998668 - Pass
+     [1] 0.001332 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.892928
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998668 - Pass
+     [1] 0.001332 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.892928
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998700 - Pass
+     [1] 0.001300 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.889442
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure; Mountain]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain; Highway Robbery; Voldaren Epicure; Mountain]
+-> Permanents: [Masked Meower]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+ >>> [1] 0.999979 - Play Mountain
+     [2] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.125519
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Voldaren Epicure; Mountain]
+-> Permanents: [Masked Meower; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.022843 - Pass
+ >>> [1] 0.977156 - Cast Voldaren Epicure
+     [2] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.108059
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.089199
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.066066
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.066266
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.065751
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite; Island]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999425 - Pass
+     [1] 0.000575 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.772084
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999435 - Pass
+     [1] 0.000565 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.769538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999506 - Pass
+     [1] 0.000494 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.749426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999506 - Pass
+     [1] 0.000494 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.749426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999533 - Pass
+     [1] 0.000467 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.740295
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Highway Robbery; Mountain; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Highway Robbery; Mountain; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+ >>> [1] 0.999910 - Play Mountain
+     [2] 0.000047 - Cast Faithless Looting
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.000011 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.081737
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Highway Robbery; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000035 - Pass
+     [1] 0.000031 - Cast Highway Robbery
+ >>> [2] 0.999881 - Plot {1}{R}
+     [3] 0.000044 - Cast Faithless Looting
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+     [5] 0.000010 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.063042
+SELECTED: Plot {1}{R}
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.032106
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.032417
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.031756
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Spellstutter Sprite; Island; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Faerie Miscreant; Island; Spellstutter Sprite; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999506 - Pass
+     [1] 0.000494 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.750680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999595 - Pass
+     [1] 0.000405 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.718220
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999629 - Pass
+     [1] 0.000371 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.702852
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999679 - Pass
+     [1] 0.000321 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.680140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999757 - Pass
+     [1] 0.000243 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.640380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Guttersnipe; Faithless Looting]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999776 - Pass
+     [1] 0.000224 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.629737
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Guttersnipe; Faithless Looting; Grab the Prize]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Guttersnipe; Faithless Looting; Grab the Prize]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.003823 - Pass
+     [1] 0.004989 - Cast Faithless Looting
+ >>> [2] 0.949232 - Cast Grab the Prize
+     [3] 0.040860 - Cast Highway Robbery using Plot
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+     [5] 0.001097 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.040448
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Guttersnipe; Highway Robbery; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000079 - Pass
+ >>> [1] 0.999298 - Play Mountain
+     [2] 0.000623 - Cast Highway Robbery using Plot
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.019318
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Guttersnipe; Highway Robbery]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.112764 - Pass
+ >>> [1] 0.871076 - Cast Highway Robbery using Plot
+     [2] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+     [3] 0.016156 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.046175
+SELECTED: Cast Highway Robbery using Plot
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Highway Robbery; Sneaky Snacker; Guttersnipe]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878667 - Pass
+     [1] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+     [2] 0.121310 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.057826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Highway Robbery; Sneaky Snacker; Guttersnipe]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878571 - Pass
+     [1] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+     [2] 0.121406 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.057288
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Highway Robbery; Sneaky Snacker; Guttersnipe]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878981 - Pass
+     [1] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+     [2] 0.120996 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: -0.058504
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Highway Robbery; Sneaky Snacker; Guttersnipe]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Highway Robbery; Sneaky Snacker; Guttersnipe]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.020171 - Pass
+     [1] 0.000002 - Discard a card, Sacrifice {this}: Draw a card.
+ >>> [2] 0.979826 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.511104
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Highway Robbery; Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999894 - Pass
+     [1] 0.000106 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.519201
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Highway Robbery; Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999896 - Pass
+     [1] 0.000104 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.517266
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Highway Robbery; Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999912 - Pass
+     [1] 0.000088 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.488325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Highway Robbery; Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999912 - Pass
+     [1] 0.000088 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.488325
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Highway Robbery; Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999921 - Pass
+     [1] 0.000079 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.466852
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Highway Robbery; Guttersnipe; Mountain; Mountain]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Highway Robbery; Guttersnipe; Mountain; Mountain]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000020 - Pass
+     [1] 0.000017 - Cast Highway Robbery
+ >>> [2] 0.628866 - Plot {1}{R}
+     [3] 0.000254 - Cast Guttersnipe
+     [4] 0.370803 - Play Mountain
+     [5] 0.000041 - Flashback {2}{R}
+     [6] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.013849
+SELECTED: Plot {1}{R}
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000087 - Pass
+ >>> [1] 0.999913 - Play Mountain
+     [2] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.070636
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.101653
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.100899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.102693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Island; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Island; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999897 - Pass
+     [1] 0.000103 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.512601
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999898 - Pass
+     [1] 0.000102 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.510754
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999909 - Pass
+     [1] 0.000091 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.490416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999910 - Pass
+     [1] 0.000090 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.488480
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999917 - Pass
+     [1] 0.000083 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.475405
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999930 - Pass
+     [1] 0.000070 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.442715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999930 - Pass
+     [1] 0.000070 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.442715
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999948 - Pass
+     [1] 0.000052 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.359350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain; Masked Meower]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999948 - Pass
+
+VALUE SCORE: 0.359350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain; Masked Meower; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain; Masked Meower; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000059 - Pass
+     [1] 0.000755 - Cast Guttersnipe
+ >>> [2] 0.996317 - Play Mountain
+     [3] 0.002166 - Cast Masked Meower
+     [4] 0.000111 - Flashback {2}{R}
+     [5] 0.000592 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.038197
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Masked Meower; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.016950 - Pass
+     [1] 0.203681 - Cast Guttersnipe
+ >>> [2] 0.588459 - Cast Masked Meower
+     [3] 0.026643 - Flashback {2}{R}
+     [4] 0.164267 - Cast Highway Robbery using Plot
+
+VALUE SCORE: -0.066727
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Benchmark-Skill6)
+  - [1] Masked Meower (controller=RL)
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016950 - Pass
+
+VALUE SCORE: -0.066727
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=RL)
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016950 - Pass
+
+VALUE SCORE: -0.066727
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Benchmark-Skill6)
+  - [1] Masked Meower (controller=RL)
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016950 - Pass
+
+VALUE SCORE: -0.066727
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=RL)
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016950 - Pass
+
+VALUE SCORE: -0.066727
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.088256 - Pass
+ >>> [1] 0.911741 - Cast Highway Robbery using Plot
+     [2] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.247693
+SELECTED: Cast Highway Robbery using Plot
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=RL)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.748242 - Pass
+     [1] 0.251732 - Cast Lava Dart
+     [2] 0.000025 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.263922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.750528 - Pass
+     [1] 0.249446 - Cast Lava Dart
+     [2] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.285744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.750565 - Pass
+     [1] 0.249409 - Cast Lava Dart
+     [2] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.285316
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Spellstutter Sprite; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.750718 - Pass
+     [1] 0.249256 - Cast Lava Dart
+     [2] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.286601
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.164990 - Pass
+ >>> [1] 0.834999 - Cast Lava Dart
+     [2] 0.000010 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.408644
+SELECTED: Cast Lava Dart
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Lava Dart (controller=RL)
+  - [2] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.297864
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.129214 - Pass
+ >>> [1] 0.870781 - Flashback sacrifice a Mountain
+     [2] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.306076
+SELECTED: Flashback sacrifice a Mountain
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999948 - Pass
+     [1] 0.000052 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.364138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000052 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.361142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Miscreant; Island; Island; Ninja of the Deep Hours; Spellstutter Sprite; Faerie Seer; Island; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.336648
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Island; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.236527
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,blocking; Mountain,tapped; Mountain,tapped; Mountain; Masked Meower,blocking; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Spellstutter Sprite,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Island; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.227898
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 88
+Ended: 2026-02-01T13:00:40.074331
+================================================================================

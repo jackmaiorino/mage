@@ -1,0 +1,2592 @@
+================================================================================
+GAME LOG: game_20260201_123411_0026
+Started: 2026-02-01T12:34:11.405898700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Heap Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Heap Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.009792 - Play Basilisk Gate
+ >>> [2] 0.722030 - Play Heap Gate
+     [3] 0.268168 - Play Idyllic Beachfront
+
+VALUE SCORE: 0.179014
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.179014
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; Idyllic Beachfront; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000074 - Pass
+     [1] 0.040406 - Play Basilisk Gate
+ >>> [2] 0.959507 - Play Idyllic Beachfront
+     [3] 0.000013 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.153428
+SELECTED: Play Idyllic Beachfront
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863075 - Pass
+     [1] 0.136924 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.147756
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.862959 - Pass
+     [1] 0.137041 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.147864
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863289 - Pass
+     [1] 0.136711 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.147639
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.796511 - Pass
+     [1] 0.203489 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.132225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.796531 - Pass
+     [1] 0.203469 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.132322
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.797451 - Pass
+     [1] 0.202549 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.131996
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Basilisk Gate; The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.002022 - Pass
+ >>> [1] 0.899060 - Play Basilisk Gate
+     [2] 0.090509 - Cast The Modern Age
+     [3] 0.000362 - Cast Thraben Charm
+     [4] 0.007752 - Cast Sacred Cat
+     [5] 0.000295 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.143833
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [The Modern Age; Thraben Charm; Sacred Cat; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.020429 - Pass
+ >>> [1] 0.897065 - Cast The Modern Age
+     [2] 0.003547 - Cast Thraben Charm
+     [3] 0.075408 - Cast Sacred Cat
+     [4] 0.002864 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [5] 0.000688 - Cast Prismatic Strands
+
+VALUE SCORE: 0.141025
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.889027 - Pass
+     [1] 0.110973 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.131421
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892282 - Pass
+     [1] 0.107718 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.128220
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892167 - Pass
+     [1] 0.107833 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.128369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892466 - Pass
+     [1] 0.107534 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.128050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.903131 - Pass
+     [1] 0.096869 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.072349
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887745 - Pass
+     [1] 0.112255 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.085471
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887774 - Pass
+     [1] 0.112226 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.085397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.886712 - Pass
+     [1] 0.113288 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.086380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.886740 - Pass
+     [1] 0.113260 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.086523
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.829006 - Pass
+     [1] 0.170994 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.116252
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.829053 - Pass
+     [1] 0.170947 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.116182
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.827755 - Pass
+     [1] 0.172245 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.116901
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 10
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 10
+-> Hand: [Thraben Charm; Sacred Cat; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.790524 - Pass
+     [1] 0.117482 - Cast Thraben Charm
+     [2] 0.091994 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.128594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.001813 - Pass
+     [1] 0.000266 - Cast Thraben Charm
+     [2] 0.000207 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.403734 - Play Citadel Gate
+ >>> [4] 0.583927 - Play Basilisk Gate
+     [5] 0.010055 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: 0.126718
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.149909 - Pass
+     [1] 0.021627 - Cast Thraben Charm
+     [2] 0.016763 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.811672 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+     [4] 0.000029 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.122637
+SELECTED: Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.415492 - Pass
+     [1] 0.055693 - Cast Thraben Charm
+     [2] 0.041660 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.487084 - Flashback tap an untapped white creature you control
+     [4] 0.000072 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.102988
+SELECTED: Flashback tap an untapped white creature you control
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811730 - Pass
+     [1] 0.107863 - Cast Thraben Charm
+     [2] 0.080268 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000139 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.099800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811632 - Pass
+     [1] 0.107903 - Cast Thraben Charm
+     [2] 0.080327 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000139 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.100028
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811881 - Pass
+     [1] 0.107795 - Cast Thraben Charm
+     [2] 0.080184 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000139 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.099535
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.766140 - Pass
+     [1] 0.127294 - Cast Thraben Charm
+     [2] 0.106425 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000141 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.084894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.770381 - Pass
+     [1] 0.125263 - Cast Thraben Charm
+     [2] 0.104216 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000140 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.082024
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.770381 - Pass
+     [1] 0.125263 - Cast Thraben Charm
+     [2] 0.104216 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000140 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.082024
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772514 - Pass
+     [1] 0.124236 - Cast Thraben Charm
+     [2] 0.103110 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000140 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.079512
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate; Preordain]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate; Preordain]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; The Modern Age; Basilisk Gate; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.815522 - Pass
+     [1] 0.106113 - Cast Thraben Charm
+     [2] 0.078227 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000138 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.094130
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Basilisk Gate; Preordain]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.002344 - Pass
+     [1] 0.000299 - Cast Thraben Charm
+     [2] 0.000218 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.400306 - Play Citadel Gate
+ >>> [4] 0.539968 - Play Basilisk Gate
+     [5] 0.056865 - Cast Preordain
+     [6] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.086994
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Preordain]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.039573 - Pass
+     [1] 0.004942 - Cast Thraben Charm
+     [2] 0.003574 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.951906 - Cast Preordain
+     [4] 0.000006 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.079689
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Sacred Cat]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.290945 - Pass
+     [1] 0.034291 - Cast Thraben Charm
+     [2] 0.024165 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.650556 - Cast Sacred Cat
+     [4] 0.000043 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.059628
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.930656 - Pass
+     [1] 0.069343 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.026087
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.932333 - Pass
+     [1] 0.067667 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.016151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.932333 - Pass
+     [1] 0.067667 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.016151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Guttersnipe,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.933436 - Pass
+     [1] 0.066564 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.008830
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.911268 - Pass
+     [1] 0.088732 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.024287
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.911252 - Pass
+     [1] 0.088748 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.024660
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider; Basilisk Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.911390 - Pass
+     [1] 0.088610 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.023901
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Brainstorm]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Citadel Gate; Brainstorm]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.005617 - Pass
+     [1] 0.000706 - Cast Thraben Charm
+     [2] 0.000513 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.919567 - Play Citadel Gate
+     [4] 0.073596 - Cast Brainstorm
+     [5] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.084256
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Brainstorm]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.069275 - Pass
+     [1] 0.008374 - Cast Thraben Charm
+     [2] 0.005973 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.916367 - Cast Brainstorm
+     [4] 0.000011 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.069721
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed; Journey to Nowhere]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.113745 - Pass
+     [1] 0.013278 - Cast Thraben Charm
+     [2] 0.009311 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.861947 - Cast Journey to Nowhere
+     [4] 0.000017 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [5] 0.001702 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: 0.055600
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.934333 - Pass
+     [1] 0.065667 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.002362
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.934152 - Pass
+     [1] 0.065848 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.003774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941635 - Pass
+     [1] 0.058365 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.045613
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941635 - Pass
+     [1] 0.058365 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.045613
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945462 - Pass
+     [1] 0.054538 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.081935
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936810 - Pass
+     [1] 0.063190 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.197510
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936538 - Pass
+     [1] 0.063462 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.192226
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.937756 - Pass
+     [1] 0.062244 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.213812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.937756 - Pass
+     [1] 0.062244 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.213812
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.938315 - Pass
+     [1] 0.061685 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.228490
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.039164 - Pass
+     [1] 0.004348 - Cast Thraben Charm
+     [2] 0.090734 - Cast Lorien Revealed
+     [3] 0.002970 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.862779 - Cast Preordain
+     [5] 0.000005 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.035539
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed; Basilisk Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007188 - Pass
+     [1] 0.000759 - Cast Thraben Charm
+     [2] 0.000504 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.991548 - Play Basilisk Gate
+     [4] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.009900
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.316152 - Pass
+     [1] 0.032508 - Cast Thraben Charm
+ >>> [2] 0.626273 - Cast Lorien Revealed
+     [3] 0.020874 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000038 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [5] 0.004156 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.011989
+SELECTED: Cast Lorien Revealed
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate,tapped; Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.316152 - Pass
+
+VALUE SCORE: -0.011989
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007238 - Pass
+     [1] 0.000686 - Cast Thraben Charm
+     [2] 0.332535 - Cast Outlaw Medic
+     [3] 0.000111 - Cast Prismatic Strands
+ >>> [4] 0.659429 - Play Citadel Gate
+     [5] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.165869
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Outlaw Medic; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.023205 - Pass
+     [1] 0.002259 - Cast Thraben Charm
+ >>> [2] 0.974171 - Cast Outlaw Medic
+     [3] 0.000362 - Cast Prismatic Strands
+     [4] 0.000002 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.219416
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.027077 - Pass
+     [1] 0.002746 - Cast Thraben Charm
+     [2] 0.000440 - Cast Prismatic Strands
+ >>> [3] 0.969401 - Cast Outlaw Medic
+     [4] 0.000003 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [5] 0.000334 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.291160
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+  - [1] Outlaw Medic (controller=RL)
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.906668 - Pass
+     [1] 0.093234 - Cast Thraben Charm
+     [2] 0.000098 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.324398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=RL)
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.906668 - Pass
+     [1] 0.093234 - Cast Thraben Charm
+     [2] 0.000098 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.324398
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+  - [1] Outlaw Medic (controller=RL)
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.907512 - Pass
+     [1] 0.092395 - Cast Thraben Charm
+     [2] 0.000093 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.306469
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=RL)
+[RL], life = 8
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.907797 - Pass
+     [1] 0.092111 - Cast Thraben Charm
+     [2] 0.000092 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.302231
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.907619 - Pass
+     [1] 0.092289 - Cast Thraben Charm
+     [2] 0.000093 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.305470
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.905041 - Pass
+     [1] 0.094856 - Cast Thraben Charm
+     [2] 0.000103 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.339891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.905041 - Pass
+     [1] 0.094856 - Cast Thraben Charm
+     [2] 0.000103 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.339891
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.903490 - Pass
+     [1] 0.096400 - Cast Thraben Charm
+     [2] 0.000110 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.356269
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.894863 - Pass
+     [1] 0.104980 - Cast Thraben Charm
+     [2] 0.000157 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.406421
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.895158 - Pass
+     [1] 0.104683 - Cast Thraben Charm
+     [2] 0.000158 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.408027
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.894201 - Pass
+     [1] 0.105628 - Cast Thraben Charm
+     [2] 0.000170 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.422967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.894241 - Pass
+     [1] 0.105589 - Cast Thraben Charm
+     [2] 0.000170 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.422874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Sacred Cat,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Sacred Cat,tapped; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate,tapped; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.894228 - Pass
+     [1] 0.105602 - Cast Thraben Charm
+     [2] 0.000171 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.423425
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands; Sea Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands; Sea Gate]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic; Outlaw Medic]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.004958 - Pass
+     [1] 0.000483 - Cast Thraben Charm
+     [2] 0.000078 - Cast Prismatic Strands
+ >>> [3] 0.994480 - Play Sea Gate
+     [4] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.246217
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic; Outlaw Medic; Sea Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.885387 - Pass
+     [1] 0.089188 - Cast Thraben Charm
+     [2] 0.014381 - Cast Prismatic Strands
+     [3] 0.000090 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [4] 0.010954 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.297711
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped,attacking; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped,attacking; Outlaw Medic,tapped,attacking; Sea Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892609 - Pass
+     [1] 0.092220 - Cast Thraben Charm
+     [2] 0.015072 - Cast Prismatic Strands
+     [3] 0.000099 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.332256
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped,attacking; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped,attacking; Outlaw Medic,tapped,attacking; Sea Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892609 - Pass
+     [1] 0.092220 - Cast Thraben Charm
+     [2] 0.015072 - Cast Prismatic Strands
+     [3] 0.000099 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.332256
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped; Outlaw Medic,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.880367 - Pass
+     [1] 0.092463 - Cast Thraben Charm
+     [2] 0.015288 - Cast Prismatic Strands
+     [3] 0.000104 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [4] 0.011778 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.348921
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped; Outlaw Medic,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped; Outlaw Medic,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878371 - Pass
+     [1] 0.102753 - Cast Thraben Charm
+     [2] 0.018740 - Cast Prismatic Strands
+     [3] 0.000135 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.371909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped; Outlaw Medic,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878411 - Pass
+     [1] 0.102723 - Cast Thraben Charm
+     [2] 0.018731 - Cast Prismatic Strands
+     [3] 0.000135 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.371642
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider,tapped; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic,tapped; Outlaw Medic,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878397 - Pass
+     [1] 0.102724 - Cast Thraben Charm
+     [2] 0.018742 - Cast Prismatic Strands
+     [3] 0.000136 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.372774
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic; Outlaw Medic; Sea Gate]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate; Sacred Cat; Citadel Gate; Journey to Nowhere; Basilisk Gate; Citadel Gate; Outlaw Medic; Outlaw Medic; Sea Gate]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.404936 - Pass
+     [1] 0.038961 - Cast Thraben Charm
+     [2] 0.006288 - Cast Prismatic Strands
+ >>> [3] 0.525869 - Cast Lorien Revealed
+     [4] 0.019203 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [5] 0.000038 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [6] 0.004706 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.221570
+SELECTED: Cast Lorien Revealed
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands; Thraben Charm; Sea Gate; Counterspell]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate; Outlaw Medic; Outlaw Medic; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.006920 - Pass
+     [1] 0.000734 - Cast Thraben Charm
+     [2] 0.000122 - Cast Prismatic Strands
+ >>> [3] 0.992223 - Play Sea Gate
+     [4] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.349516
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands; Thraben Charm; Counterspell]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Sacred Cat; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate; Outlaw Medic; Outlaw Medic; Sea Gate,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.885987 - Pass
+     [1] 0.097325 - Cast Thraben Charm
+     [2] 0.016569 - Cast Prismatic Strands
+     [3] 0.000119 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.376955
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands; Thraben Charm; Counterspell]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate; Outlaw Medic,tapped,attacking; Outlaw Medic,tapped,attacking; Sea Gate,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.879355 - Pass
+     [1] 0.102269 - Cast Thraben Charm
+     [2] 0.018235 - Cast Prismatic Strands
+     [3] 0.000141 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.407053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Prismatic Strands; Thraben Charm; Counterspell]
+-> Permanents: [Heap Gate; Idyllic Beachfront; Basilisk Gate,tapped; Basilisk Gate; Sacred Cat,tapped,attacking; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Sacred Cat,tapped,attacking; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate,tapped; Citadel Gate; Outlaw Medic,tapped,attacking; Outlaw Medic,tapped,attacking; Sea Gate,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: [Mountain; Voldaren Epicure,blocking; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.879083 - Pass
+     [1] 0.102479 - Cast Thraben Charm
+     [2] 0.018297 - Cast Prismatic Strands
+     [3] 0.000142 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.407899
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 10
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 105
+Ended: 2026-02-01T12:38:22.734821400
+================================================================================

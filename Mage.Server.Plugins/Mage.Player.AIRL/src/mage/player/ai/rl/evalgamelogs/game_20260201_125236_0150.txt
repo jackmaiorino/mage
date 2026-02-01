@@ -1,0 +1,2040 @@
+================================================================================
+GAME LOG: game_20260201_125236_0150
+Started: 2026-02-01T12:52:36.017839
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.988228
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.988228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.988228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.988228
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Island; Force Spike; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.013976 - Pass
+ >>> [1] 0.986024 - Cast Force Spike
+
+VALUE SCORE: 0.478647
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013976 - Pass
+
+VALUE SCORE: 0.478647
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013976 - Pass
+
+VALUE SCORE: 0.478647
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.013976 - Pass
+
+VALUE SCORE: 0.478647
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Ninja of the Deep Hours; Saiba Cryptomancer; Ninja of the Deep Hours]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Ninja of the Deep Hours; Saiba Cryptomancer; Ninja of the Deep Hours]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.951149
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Saiba Cryptomancer; Ninja of the Deep Hours]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+ >>> [1] 0.999990 - Cast Saiba Cryptomancer
+
+VALUE SCORE: 0.945291
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.945291
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.922468
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Saiba Cryptomancer; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.922468
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Saiba Cryptomancer,tapped,attacking; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.922468
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Saiba Cryptomancer,tapped,attacking; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000597 - Pass
+ >>> [1] 0.999403 - Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.911377
+SELECTED: Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Saiba Cryptomancer; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000597 - Pass
+
+VALUE SCORE: 0.911377
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Saiba Cryptomancer; Island; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Ninja of the Deep Hours; Saiba Cryptomancer; Island; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999396 - Play Island
+     [2] 0.000599 - Cast Saiba Cryptomancer
+     [3] 0.000005 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.831021
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Saiba Cryptomancer; Island; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000026 - Pass
+     [1] 0.367464 - Cast Ninja of the Deep Hours
+ >>> [2] 0.626674 - Cast Saiba Cryptomancer
+     [3] 0.005836 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.820610
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Spellstutter Sprite]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.005480 - Pass
+ >>> [1] 0.994520 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.787867
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,blocking]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005480 - Pass
+
+VALUE SCORE: 0.787867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Island; Force Spike; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000365 - Cast Ninja of the Deep Hours
+ >>> [2] 0.999635 - Play Island
+
+VALUE SCORE: 0.757355
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Ninja of the Deep Hours; Force Spike; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000103 - Pass
+ >>> [1] 0.999897 - Cast Ninja of the Deep Hours
+
+VALUE SCORE: 0.739883
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Force Spike; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000103 - Pass
+
+VALUE SCORE: 0.739883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Force Spike; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000103 - Pass
+
+VALUE SCORE: 0.739883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Force Spike; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000103 - Pass
+
+VALUE SCORE: 0.739883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Force Spike; Island; Moon-Circuit Hacker]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000103 - Pass
+
+VALUE SCORE: 0.739883
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Force Spike; Island; Moon-Circuit Hacker]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Force Spike; Island; Moon-Circuit Hacker]
+-> Permanents: [Island; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.006697 - Pass
+ >>> [1] 0.993303 - Cast Force Spike
+
+VALUE SCORE: 0.464389
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006697 - Pass
+
+VALUE SCORE: 0.464389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006697 - Pass
+
+VALUE SCORE: 0.464389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006697 - Pass
+
+VALUE SCORE: 0.464389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006697 - Pass
+
+VALUE SCORE: 0.464389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006697 - Pass
+
+VALUE SCORE: 0.464389
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999957 - Play Island
+     [2] 0.000038 - Cast Moon-Circuit Hacker
+     [3] 0.000005 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.655104
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Moon-Circuit Hacker; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.001569 - Pass
+ >>> [1] 0.894063 - Cast Moon-Circuit Hacker
+     [2] 0.104367 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.641339
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Spellstutter Sprite]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Island; Ninja of the Deep Hours; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.016880 - Pass
+ >>> [1] 0.983120 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.615397
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016880 - Pass
+
+VALUE SCORE: 0.615397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016880 - Pass
+
+VALUE SCORE: 0.615397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016880 - Pass
+
+VALUE SCORE: 0.615397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Moon-Circuit Hacker; Island]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.001829 - Pass
+ >>> [1] 0.998171 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.576228
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Drossforge Bridge; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Moon-Circuit Hacker; Spellstutter Sprite; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.576228
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.590231
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.590231
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.590231
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.590231
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell; Of One Mind; Dispel]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.999984 - Cast Of One Mind
+
+VALUE SCORE: 0.557319
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell; Dispel; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000932 - Pass
+ >>> [1] 0.985624 - Cast Faerie Miscreant
+     [2] 0.013445 - Cast Harrier Strix
+
+VALUE SCORE: 0.545847
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell; Dispel; Harrier Strix]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.063674 - Pass
+ >>> [1] 0.936326 - Cast Harrier Strix
+
+VALUE SCORE: 0.532837
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 22
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999115 - Pass
+     [1] 0.000885 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.518196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Clue Token; Makeshift Munitions,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999162 - Pass
+     [1] 0.000838 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.503884
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000556 - Pass
+ >>> [1] 0.999411 - Cast Counterspell
+     [2] 0.000033 - Cast Dispel
+     [3] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.360336
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000556 - Pass
+
+VALUE SCORE: 0.360336
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000556 - Pass
+
+VALUE SCORE: 0.360336
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000556 - Pass
+
+VALUE SCORE: 0.360336
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000556 - Pass
+
+VALUE SCORE: 0.360336
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.560623
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island; Island; Ninja of the Deep Hours; Island; Spellstutter Sprite; Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.560623
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.560623
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Island; Ninja of the Deep Hours,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Clue Token; Makeshift Munitions; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.560623
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 8
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 89
+Ended: 2026-02-01T12:54:45.983828300
+================================================================================

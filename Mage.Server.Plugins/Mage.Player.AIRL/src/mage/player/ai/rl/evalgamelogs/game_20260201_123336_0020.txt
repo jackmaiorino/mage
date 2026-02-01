@@ -1,0 +1,4217 @@
+================================================================================
+GAME LOG: game_20260201_123336_0020
+Started: 2026-02-01T12:33:36.205540700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Preordain; Sacred Cat; Island]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Preordain; Sacred Cat; Island]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+ >>> [1] 0.999960 - Play Island
+
+VALUE SCORE: 0.186417
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Preordain; Sacred Cat]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.018709 - Pass
+ >>> [1] 0.981291 - Cast Preordain
+
+VALUE SCORE: 0.183547
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; The Modern Age; Sacred Cat; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.018709 - Pass
+
+VALUE SCORE: 0.183547
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.200889 - Pass
+ >>> [1] 0.799111 - Cast Spell Pierce
+
+VALUE SCORE: 0.180693
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.200889 - Pass
+
+VALUE SCORE: 0.180693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.200889 - Pass
+
+VALUE SCORE: 0.180693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.200889 - Pass
+
+VALUE SCORE: 0.180693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+ >>> [1] 0.999953 - Play Island
+
+VALUE SCORE: 0.173775
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.173775
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.173775
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.173775
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.008092 - Pass
+ >>> [1] 0.991908 - Cast Counterspell
+
+VALUE SCORE: 0.176684
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008092 - Pass
+
+VALUE SCORE: 0.176684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008092 - Pass
+
+VALUE SCORE: 0.176684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008092 - Pass
+
+VALUE SCORE: 0.176684
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008092 - Pass
+
+VALUE SCORE: 0.176684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008092 - Pass
+
+VALUE SCORE: 0.176684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008092 - Pass
+
+VALUE SCORE: 0.176684
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007432 - Pass
+ >>> [1] 0.992568 - Cast Counterspell
+
+VALUE SCORE: 0.180924
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007432 - Pass
+
+VALUE SCORE: 0.180924
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007432 - Pass
+
+VALUE SCORE: 0.180924
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007432 - Pass
+
+VALUE SCORE: 0.180924
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell; Spell Pierce]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell; Spell Pierce]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007432 - Pass
+
+VALUE SCORE: 0.180924
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell; Spell Pierce]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007432 - Pass
+
+VALUE SCORE: 0.180924
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell; Spell Pierce]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007432 - Pass
+
+VALUE SCORE: 0.180924
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell; Spell Pierce]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Counterspell; Spell Pierce]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.008434 - Pass
+ >>> [1] 0.958995 - Cast Counterspell
+     [2] 0.032571 - Cast Spell Pierce
+
+VALUE SCORE: 0.162217
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008434 - Pass
+
+VALUE SCORE: 0.162217
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Spell Pierce; Journey to Nowhere]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.193084 - Pass
+ >>> [1] 0.806916 - Cast Spell Pierce
+
+VALUE SCORE: 0.169279
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.193084 - Pass
+
+VALUE SCORE: 0.169279
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Citadel Gate]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003865 - Pass
+ >>> [1] 0.996135 - Play Citadel Gate
+
+VALUE SCORE: 0.114225
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+-> Permanents: [Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003865 - Pass
+
+VALUE SCORE: 0.114225
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island; Island; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island; Island; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.054089 - Pass
+ >>> [1] 0.417538 - Cast Journey to Nowhere
+     [2] 0.142681 - Cast Sacred Cat
+     [3] 0.380605 - Cast Squadron Hawk
+     [4] 0.005087 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.073327
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Writhing Chrysalis; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924788 - Pass
+     [1] 0.075212 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.029419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.923036 - Pass
+     [1] 0.076964 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.038295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922929 - Pass
+     [1] 0.077071 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.038881
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.923204 - Pass
+     [1] 0.076796 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.037459
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.794454 - Pass
+     [1] 0.205546 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.144284
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.830222 - Pass
+     [1] 0.169778 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.131926
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped,attacking; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.842331 - Pass
+     [1] 0.157669 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.124394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped,attacking; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.842331 - Pass
+     [1] 0.157669 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.124394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.857733 - Pass
+     [1] 0.142267 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.116193
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed; Brainstorm]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed; Brainstorm]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.030413 - Pass
+     [1] 0.233707 - Cast Journey to Nowhere
+     [2] 0.081784 - Cast Sacred Cat
+     [3] 0.212985 - Cast Squadron Hawk
+     [4] 0.002959 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [5] 0.438152 - Cast Brainstorm
+
+VALUE SCORE: 0.086289
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed; Citadel Gate]
+-> Permanents: [Island,tapped; Island; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.004654 - Pass
+     [1] 0.035818 - Cast Journey to Nowhere
+     [2] 0.011657 - Cast Sacred Cat
+     [3] 0.031726 - Cast Squadron Hawk
+     [4] 0.000419 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [5] 0.915726 - Play Citadel Gate
+
+VALUE SCORE: 0.066640
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.056787 - Pass
+ >>> [1] 0.436495 - Cast Journey to Nowhere
+     [2] 0.128538 - Cast Sacred Cat
+     [3] 0.373572 - Cast Squadron Hawk
+     [4] 0.004608 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.035752
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Nyxborn Hydra,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056787 - Pass
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed; Basilisk Gate]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed; Basilisk Gate]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003603 - Pass
+     [1] 0.008764 - Cast Sacred Cat
+     [2] 0.027787 - Cast Journey to Nowhere
+     [3] 0.024505 - Cast Squadron Hawk
+     [4] 0.000313 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [5] 0.935029 - Play Basilisk Gate
+
+VALUE SCORE: 0.052585
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.049101 - Pass
+     [1] 0.112125 - Cast Sacred Cat
+ >>> [2] 0.378069 - Cast Journey to Nowhere
+     [3] 0.326658 - Cast Squadron Hawk
+     [4] 0.130048 - Cast Lorien Revealed
+     [5] 0.003999 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.032126
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Journey to Nowhere; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.058822 - Pass
+     [1] 0.118342 - Cast Sacred Cat
+ >>> [2] 0.469978 - Cast Journey to Nowhere
+     [3] 0.348862 - Cast Squadron Hawk
+     [4] 0.003996 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.037931
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944856 - Pass
+     [1] 0.055144 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.122474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944809 - Pass
+     [1] 0.055191 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.121496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944930 - Pass
+     [1] 0.055070 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.123701
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944444 - Pass
+     [1] 0.055556 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.151671
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944397 - Pass
+     [1] 0.055603 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.150761
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944524 - Pass
+     [1] 0.055476 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.152968
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed; Azorius Guildgate]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed; Azorius Guildgate]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000015 - Cast Sacred Cat
+     [2] 0.000039 - Cast Squadron Hawk
+     [3] 0.000018 - Cast Lorien Revealed
+     [4] 0.000001 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [5] 0.999923 - Play Azorius Guildgate
+
+VALUE SCORE: 0.087490
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Island; Island; Citadel Gate; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+     [0] 0.074812 - Pass
+     [1] 0.186723 - Cast Sacred Cat
+ >>> [2] 0.513695 - Cast Squadron Hawk
+     [3] 0.218099 - Cast Lorien Revealed
+     [4] 0.006670 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.060296
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.929085 - Pass
+     [1] 0.070915 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.006825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943191 - Pass
+     [1] 0.056809 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.088856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941612 - Pass
+     [1] 0.058388 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.072586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+     [0] 0.115472 - Pass
+     [1] 0.217754 - Cast Sacred Cat
+     [2] 0.007591 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.659182 - Cast Squadron Hawk
+
+VALUE SCORE: -0.029699
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946519 - Pass
+     [1] 0.053481 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.105787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944806 - Pass
+     [1] 0.055194 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.085842
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944737 - Pass
+     [1] 0.055263 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.084998
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Map Token; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944910 - Pass
+     [1] 0.055090 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.086958
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Eviscerator's Insight (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949905 - Pass
+     [1] 0.050095 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.269780
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950332 - Pass
+     [1] 0.049668 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.329289
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946273 - Pass
+     [1] 0.053727 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.393489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945942 - Pass
+     [1] 0.054058 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.395923
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945896 - Pass
+     [1] 0.054104 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.397270
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945955 - Pass
+     [1] 0.054045 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.396967
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945832 - Pass
+     [1] 0.054168 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.397777
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 14 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk; Guardian of the Guildpact]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk; Guardian of the Guildpact]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.092549 - Pass
+     [1] 0.159140 - Cast Sacred Cat
+     [2] 0.155584 - Cast Lorien Revealed
+     [3] 0.005151 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.460595 - Cast Squadron Hawk
+     [5] 0.126981 - Cast Guardian of the Guildpact
+
+VALUE SCORE: -0.111794
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Guardian of the Guildpact]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950663 - Pass
+     [1] 0.049337 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.184988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+     [0] 0.116311 - Pass
+     [1] 0.194644 - Cast Sacred Cat
+     [2] 0.006119 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.147373 - Cast Guardian of the Guildpact
+ >>> [4] 0.535553 - Cast Squadron Hawk
+
+VALUE SCORE: -0.165775
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.951609 - Pass
+     [1] 0.048391 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.241736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.951310 - Pass
+     [1] 0.048690 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.222425
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 14, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.951307 - Pass
+     [1] 0.048693 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.221626
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 14, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Twisted Landscape,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.951328 - Pass
+     [1] 0.048672 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.223522
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 14 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp,tapped; Slagwoods Bridge; Twisted Landscape; Lembas; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp,tapped; Slagwoods Bridge; Twisted Landscape; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948713 - Pass
+     [1] 0.051288 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.309154
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Guardian of the Guildpact; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp,tapped; Slagwoods Bridge; Twisted Landscape; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948743 - Pass
+     [1] 0.051257 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.311946
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Forest; Mountain; Swamp,tapped; Slagwoods Bridge; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948407 - Pass
+     [1] 0.051593 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.322887
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946379 - Pass
+     [1] 0.053621 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.395640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946509 - Pass
+     [1] 0.053491 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.402404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946365 - Pass
+     [1] 0.053635 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.403748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 14, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946414 - Pass
+     [1] 0.053587 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.403502
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 14, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946312 - Pass
+     [1] 0.053688 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.404188
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 15 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sea Gate]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sea Gate]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.004504 - Pass
+     [1] 0.007040 - Cast Sacred Cat
+     [2] 0.005496 - Cast Lorien Revealed
+     [3] 0.000227 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.016107 - Cast Squadron Hawk
+ >>> [5] 0.966565 - Play Sea Gate
+     [6] 0.000060 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.317348
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.141427 - Pass
+     [1] 0.215167 - Cast Sacred Cat
+     [2] 0.162012 - Cast Lorien Revealed
+     [3] 0.007192 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.472220 - Cast Squadron Hawk
+     [5] 0.001982 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.346634
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950063 - Pass
+     [1] 0.049937 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.381824
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.175447 - Pass
+     [1] 0.262099 - Cast Sacred Cat
+     [2] 0.009149 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.550669 - Cast Squadron Hawk
+     [4] 0.002636 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.374184
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948293 - Pass
+     [1] 0.051707 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.401329
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948763 - Pass
+     [1] 0.051237 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.395330
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 15, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948794 - Pass
+     [1] 0.051207 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.395082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 15, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Lembas; Slagwoods Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948726 - Pass
+     [1] 0.051274 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.395753
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 15 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Swamp; Slagwoods Bridge; Lembas; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Swamp; Slagwoods Bridge; Lembas; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947109 - Pass
+     [1] 0.052892 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.384485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Lembas; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945112 - Pass
+     [1] 0.054888 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.402143
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+  - [2] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943998 - Pass
+     [1] 0.056002 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.418121
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944573 - Pass
+     [1] 0.055427 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.413798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944599 - Pass
+     [1] 0.055401 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.413613
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944737 - Pass
+     [1] 0.055263 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.411942
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 15, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943855 - Pass
+     [1] 0.056145 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.419088
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 15, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943855 - Pass
+     [1] 0.056145 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.419088
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 15, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943084 - Pass
+     [1] 0.056916 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.423509
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 16 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Brainstorm]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Sacred Cat; Lorien Revealed; Squadron Hawk; Squadron Hawk; Brainstorm]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.067823 - Pass
+     [1] 0.102038 - Cast Sacred Cat
+     [2] 0.074570 - Cast Lorien Revealed
+     [3] 0.003553 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.214290 - Cast Squadron Hawk
+ >>> [5] 0.536706 - Cast Brainstorm
+     [6] 0.001019 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.373144
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.191780 - Pass
+     [1] 0.206233 - Cast Lorien Revealed
+     [2] 0.010364 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.584536 - Cast Squadron Hawk
+     [4] 0.004031 - Cast Prismatic Strands
+     [5] 0.003056 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.390947
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 14
+-> Hand: [Lorien Revealed; Squadron Hawk; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925209 - Pass
+     [1] 0.053252 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.021539 - Cast Prismatic Strands
+
+VALUE SCORE: -0.413652
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #150 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.246542 - Pass
+     [1] 0.013913 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.005551 - Cast Prismatic Strands
+ >>> [3] 0.733994 - Cast Squadron Hawk
+
+VALUE SCORE: -0.406096
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #151 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943851 - Pass
+     [1] 0.056149 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.424042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #152 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944446 - Pass
+     [1] 0.055554 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.420040
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #153 - Turn 16, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944485 - Pass
+     [1] 0.055515 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.419878
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #154 - Turn 16, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944392 - Pass
+     [1] 0.055608 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.420388
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 16 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #155 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942804 - Pass
+     [1] 0.057196 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.423136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #156 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943420 - Pass
+     [1] 0.056580 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.425774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #157 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943326 - Pass
+     [1] 0.056673 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.426544
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #158 - Turn 16, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge; Krark-Clan Shaman,tapped,attacking; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941846 - Pass
+     [1] 0.058154 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.436314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #159 - Turn 16, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge; Krark-Clan Shaman,tapped,attacking; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941846 - Pass
+     [1] 0.058154 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.436314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #160 - Turn 16, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.940836 - Pass
+     [1] 0.059164 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.441576
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 17 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #161 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate; Island; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.194355 - Pass
+     [1] 0.200265 - Cast Lorien Revealed
+     [2] 0.011128 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.004535 - Cast Prismatic Strands
+ >>> [4] 0.561649 - Cast Squadron Hawk
+     [5] 0.024613 - Cast Thraben Charm
+     [6] 0.003455 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.417019
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #162 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Squadron Hawk; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island; Sea Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821980 - Pass
+     [1] 0.049372 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.020547 - Cast Prismatic Strands
+     [3] 0.108102 - Cast Thraben Charm
+
+VALUE SCORE: -0.431341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #163 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.196136 - Pass
+     [1] 0.200324 - Cast Lorien Revealed
+     [2] 0.011661 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.004837 - Cast Prismatic Strands
+     [4] 0.025585 - Cast Thraben Charm
+ >>> [5] 0.557764 - Cast Squadron Hawk
+     [6] 0.003693 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.428289
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #164 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941816 - Pass
+     [1] 0.058184 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.439205
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #165 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942253 - Pass
+     [1] 0.057747 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.436751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #166 - Turn 17, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942287 - Pass
+     [1] 0.057713 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.436655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #167 - Turn 17, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Slagwoods Bridge; Krark-Clan Shaman,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942206 - Pass
+     [1] 0.057794 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.437018
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 17 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #168 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946546 - Pass
+     [1] 0.053454 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.390908
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #169 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944731 - Pass
+     [1] 0.055269 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.413803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #170 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945032 - Pass
+     [1] 0.054968 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.412126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #171 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944409 - Pass
+     [1] 0.055591 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.422383
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #172 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944439 - Pass
+     [1] 0.055561 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.428663
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #173 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944377 - Pass
+     [1] 0.055623 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.429021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #174 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944315 - Pass
+     [1] 0.055685 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.429376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #175 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar; Eldrazi Spawn Token; Writhing Chrysalis; Slagwoods Bridge; Krark-Clan Shaman; Refurbished Familiar; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Ichor Wellspring; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944287 - Pass
+     [1] 0.055713 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.428877
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #176 - Turn 17, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge; Krark-Clan Shaman,tapped,attacking; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943337 - Pass
+     [1] 0.056663 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.442473
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #177 - Turn 17, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lorien Revealed; Lorien Revealed; Prismatic Strands; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Journey to Nowhere; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Azorius Guildgate,tapped; Island,tapped; Sea Gate]
+[Benchmark-Skill6], life = 23
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Slagwoods Bridge; Refurbished Familiar,tapped,attacking; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge; Krark-Clan Shaman,tapped,attacking; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Ichor Wellspring; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.943337 - Pass
+     [1] 0.056663 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.442473
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 17
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 177
+Ended: 2026-02-01T12:40:31.761224800
+================================================================================

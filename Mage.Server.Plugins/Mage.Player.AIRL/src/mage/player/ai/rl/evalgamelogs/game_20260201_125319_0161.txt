@@ -1,0 +1,1425 @@
+================================================================================
+GAME LOG: game_20260201_125319_0161
+Started: 2026-02-01T12:53:19.022551
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.985934
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.985934
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.985934
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.985934
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.985934
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.985934
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.985934
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.980913
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Moon-Circuit Hacker; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000229 - Pass
+ >>> [1] 0.834495 - Cast Moon-Circuit Hacker
+     [2] 0.165276 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.976255
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000229 - Pass
+
+VALUE SCORE: 0.976255
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Seer]
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Seer]
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999854 - Play Island
+     [2] 0.000006 - Cast Spellstutter Sprite
+     [3] 0.000140 - Cast Faerie Seer
+
+VALUE SCORE: 0.953395
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours; Faerie Seer]
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000068 - Pass
+     [1] 0.042004 - Cast Spellstutter Sprite
+ >>> [2] 0.957928 - Cast Faerie Seer
+
+VALUE SCORE: 0.947949
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001719 - Pass
+ >>> [1] 0.998281 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.938074
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001719 - Pass
+
+VALUE SCORE: 0.938074
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001405 - Pass
+ >>> [1] 0.998595 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.970005
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Spellstutter Sprite (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001452 - Pass
+     [1] 0.018832 - Cast Dispel
+ >>> [2] 0.979716 - Cast Force Spike
+
+VALUE SCORE: 0.939090
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001452 - Pass
+
+VALUE SCORE: 0.939090
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001452 - Pass
+
+VALUE SCORE: 0.939090
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001452 - Pass
+
+VALUE SCORE: 0.939090
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001452 - Pass
+
+VALUE SCORE: 0.939090
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Island]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.899617
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.899617
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.024514 - Pass
+ >>> [1] 0.975486 - Cast Dispel
+
+VALUE SCORE: 1.022015
+SELECTED: Cast Dispel
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024514 - Pass
+
+VALUE SCORE: 1.022015
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024514 - Pass
+
+VALUE SCORE: 1.022015
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024514 - Pass
+
+VALUE SCORE: 1.022015
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Moon-Circuit Hacker]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Moon-Circuit Hacker]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000297 - Pass
+ >>> [1] 0.999703 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.941529
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000297 - Pass
+
+VALUE SCORE: 0.941529
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.906958
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Moon-Circuit Hacker,tapped,attacking; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Moon-Circuit Hacker,tapped,attacking; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Island; Moon-Circuit Hacker,tapped; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Spellstutter Sprite; Island; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Moon-Circuit Hacker,tapped,attacking; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Moon-Circuit Hacker,tapped,attacking; Island]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.906958
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 61
+Ended: 2026-02-01T12:54:20.730003300
+================================================================================

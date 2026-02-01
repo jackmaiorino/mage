@@ -1,0 +1,2960 @@
+================================================================================
+GAME LOG: game_20260201_124310_0073
+Started: 2026-02-01T12:43:10.382560400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Vault of Whispers; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Vault of Whispers; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.201103 - Play Mistvault Bridge
+ >>> [2] 0.798896 - Play Vault of Whispers
+
+VALUE SCORE: 0.481569
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481569
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481569
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481569
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481569
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481569
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481569
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999452 - Play Mistvault Bridge
+     [2] 0.000544 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.478162
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Vault of Whispers; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.006855 - Pass
+ >>> [1] 0.993145 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.468291
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.043232 - Pass
+ >>> [1] 0.956768 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.459668
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043232 - Pass
+
+VALUE SCORE: 0.459668
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.008238 - Pass
+ >>> [1] 0.991762 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.481053
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008238 - Pass
+
+VALUE SCORE: 0.481053
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.005523 - Pass
+     [1] 0.391849 - Cast Thoughtcast
+ >>> [2] 0.602627 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.452334
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005523 - Pass
+
+VALUE SCORE: 0.452334
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.005218 - Pass
+     [1] 0.312731 - Cast Thoughtcast
+     [2] 0.200330 - Cast Reckoner's Bargain
+ >>> [3] 0.481721 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.417556
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005218 - Pass
+
+VALUE SCORE: 0.417556
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain; Silverbluff Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.999999 - Play Silverbluff Bridge
+
+VALUE SCORE: 0.408607
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.408607
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Myr Enforcer; Thoughtcast; Reckoner's Bargain; Myr Enforcer]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.003553 - Pass
+     [1] 0.219486 - Cast Thoughtcast
+     [2] 0.002236 - Cast Galvanic Blast
+ >>> [3] 0.644422 - Cast Myr Enforcer
+     [4] 0.130303 - Cast Reckoner's Bargain
+
+VALUE SCORE: 0.388889
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Myr Enforcer; Thoughtcast; Reckoner's Bargain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.003469 - Pass
+     [1] 0.221407 - Cast Thoughtcast
+     [2] 0.002157 - Cast Galvanic Blast
+ >>> [3] 0.643526 - Cast Myr Enforcer
+     [4] 0.129440 - Cast Reckoner's Bargain
+
+VALUE SCORE: 0.381179
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Thoughtcast; Reckoner's Bargain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.003435 - Pass
+     [1] 0.221802 - Cast Thoughtcast
+     [2] 0.002117 - Cast Galvanic Blast
+     [3] 0.129116 - Cast Reckoner's Bargain
+ >>> [4] 0.643530 - Cast Myr Enforcer
+
+VALUE SCORE: 0.376870
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Galvanic Blast; Thoughtcast; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.009528 - Pass
+ >>> [1] 0.623354 - Cast Thoughtcast
+     [2] 0.005819 - Cast Galvanic Blast
+     [3] 0.361299 - Cast Reckoner's Bargain
+
+VALUE SCORE: 0.372327
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Thoughtcast; Reckoner's Bargain; Great Furnace; Seat of the Synod]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000002 - Cast Galvanic Blast
+     [2] 0.000237 - Cast Thoughtcast
+ >>> [3] 0.881880 - Play Great Furnace
+     [4] 0.117877 - Play Seat of the Synod
+
+VALUE SCORE: 0.363408
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Thoughtcast; Reckoner's Bargain; Seat of the Synod]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.013758 - Pass
+     [1] 0.008293 - Cast Galvanic Blast
+ >>> [2] 0.977949 - Cast Thoughtcast
+
+VALUE SCORE: 0.356030
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.631629 - Pass
+     [1] 0.368371 - Cast Galvanic Blast
+
+VALUE SCORE: 0.340492
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.631655 - Pass
+     [1] 0.368345 - Cast Galvanic Blast
+
+VALUE SCORE: 0.340700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.631757 - Pass
+     [1] 0.368243 - Cast Galvanic Blast
+
+VALUE SCORE: 0.340152
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.091468 - Pass
+ >>> [1] 0.908532 - Cast Galvanic Blast
+
+VALUE SCORE: 0.739639
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.091468 - Pass
+
+VALUE SCORE: 0.739639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.091468 - Pass
+
+VALUE SCORE: 0.739639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.091468 - Pass
+
+VALUE SCORE: 0.739639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.091468 - Pass
+
+VALUE SCORE: 0.739639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.091468 - Pass
+
+VALUE SCORE: 0.739639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.091468 - Pass
+
+VALUE SCORE: 0.739639
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Seat of the Synod; Blood Fountain; Blood Fountain; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000030 - Pass
+     [1] 0.000019 - Cast Galvanic Blast
+     [2] 0.001230 - Cast Reckoner's Bargain
+ >>> [3] 0.991193 - Play Seat of the Synod
+     [4] 0.000848 - Cast Blood Fountain
+     [5] 0.005874 - Cast Myr Enforcer
+     [6] 0.000806 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.380346
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Blood Fountain; Blood Fountain; Myr Enforcer; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Great Furnace; Seat of the Synod]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.003353 - Pass
+     [1] 0.002109 - Cast Galvanic Blast
+     [2] 0.138334 - Cast Reckoner's Bargain
+     [3] 0.093915 - Cast Blood Fountain
+ >>> [4] 0.669279 - Cast Myr Enforcer
+     [5] 0.093010 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.370110
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Reckoner's Bargain; Blood Fountain; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Great Furnace; Seat of the Synod; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.010003 - Pass
+     [1] 0.006245 - Cast Galvanic Blast
+ >>> [2] 0.418550 - Cast Reckoner's Bargain
+     [3] 0.281325 - Cast Blood Fountain
+     [4] 0.283877 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.365200
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Krark-Clan Shaman; Drossforge Bridge; Ichor Wellspring]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.005895 - Pass
+     [1] 0.003652 - Cast Galvanic Blast
+     [2] 0.169612 - Cast Blood Fountain
+     [3] 0.177516 - Cast Krark-Clan Shaman
+ >>> [4] 0.643326 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.355374
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Krark-Clan Shaman; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.691876 - Pass
+     [1] 0.308124 - Cast Galvanic Blast
+
+VALUE SCORE: 0.285165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Krark-Clan Shaman; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.035703 - Pass
+     [1] 0.015840 - Cast Galvanic Blast
+ >>> [2] 0.948457 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.283561
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.258570
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.236282
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,blocking; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.231988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.245107
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999928 - Pass
+     [1] 0.000072 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.601990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000051 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.559846
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000051 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.558535
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999949 - Pass
+     [1] 0.000051 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.559137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999951 - Pass
+     [1] 0.000049 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.555121
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999951 - Pass
+     [1] 0.000049 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.555121
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999952 - Pass
+     [1] 0.000048 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.552136
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge; Thoughtcast]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Drossforge Bridge; Thoughtcast]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000002 - Cast Galvanic Blast
+     [2] 0.000086 - Cast Blood Fountain
+ >>> [3] 0.999638 - Play Drossforge Bridge
+     [4] 0.000269 - Cast Thoughtcast
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.295005
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Thoughtcast]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.013444 - Pass
+     [1] 0.005581 - Cast Galvanic Blast
+     [2] 0.228183 - Cast Blood Fountain
+ >>> [3] 0.752793 - Cast Thoughtcast
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.274806
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Refurbished Familiar; Toxin Analysis]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000089 - Pass
+     [1] 0.000026 - Cast Galvanic Blast
+     [2] 0.000934 - Cast Blood Fountain
+ >>> [3] 0.998833 - Cast Refurbished Familiar
+     [4] 0.000117 - Cast Toxin Analysis
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.203530
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.395121 - Pass
+     [1] 0.108590 - Cast Galvanic Blast
+ >>> [2] 0.496288 - Cast Toxin Analysis
+     [3] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.177978
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.836457 - Pass
+     [1] 0.163539 - Cast Galvanic Blast
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.098280
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.825330 - Pass
+     [1] 0.174667 - Cast Galvanic Blast
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.100726
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.843678 - Pass
+     [1] 0.156319 - Cast Galvanic Blast
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.066044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Humbling Elder,blocking; Spellstutter Sprite,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.845968 - Pass
+     [1] 0.154029 - Cast Galvanic Blast
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.061666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.840002 - Pass
+     [1] 0.159995 - Cast Galvanic Blast
+     [2] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.074155
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Galvanic Blast; Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.330828 - Pass
+ >>> [1] 0.669162 - Cast Galvanic Blast
+     [2] 0.000010 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.488194
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Galvanic Blast (controller=RL)
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000021 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.444899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000021 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.445116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000021 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.441369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Krark-Clan Shaman,blocking; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+     [1] 0.000021 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.441165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999979 - Pass
+
+VALUE SCORE: 0.441165
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000086 - Cast Blood Fountain
+ >>> [2] 0.998952 - Play Drossforge Bridge
+     [3] 0.000003 - Cast Fanatical Offering
+     [4] 0.000955 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.291674
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Clue Token; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.004915 - Pass
+     [1] 0.080632 - Cast Blood Fountain
+     [2] 0.002730 - Cast Fanatical Offering
+ >>> [3] 0.911723 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.270738
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Blood Fountain; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.058793 - Pass
+ >>> [1] 0.818817 - Cast Blood Fountain
+     [2] 0.028236 - Cast Fanatical Offering
+     [3] 0.094154 - Cast Toxin Analysis
+
+VALUE SCORE: 0.240477
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 19
+-> Hand: [Blood Fountain; Fanatical Offering; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Drossforge Bridge,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.332963 - Pass
+     [1] 0.148233 - Cast Fanatical Offering
+ >>> [2] 0.518804 - Cast Toxin Analysis
+
+VALUE SCORE: 0.214069
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 19
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.332963 - Pass
+
+VALUE SCORE: 0.214069
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Blood Fountain; Clue Token; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.581250 - Pass
+     [1] 0.418750 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.061276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Blood Fountain; Clue Token; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.643606 - Pass
+     [1] 0.356394 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.023434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Blood Fountain; Clue Token; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Island; Faerie Seer,blocking; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.646741 - Pass
+     [1] 0.353259 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.021522
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token; Blood Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.665742 - Pass
+     [1] 0.334258 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.008202
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token; Blood Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Blood Fountain; Fanatical Offering]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token; Blood Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.027436 - Pass
+ >>> [1] 0.972564 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.414651
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.027436 - Pass
+
+VALUE SCORE: 0.414651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.027436 - Pass
+
+VALUE SCORE: 0.414651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.027436 - Pass
+
+VALUE SCORE: 0.414651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Myr Enforcer,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.027436 - Pass
+
+VALUE SCORE: 0.414651
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain; Refurbished Familiar]
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Clue Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000052 - Pass
+     [1] 0.000032 - Cast Fanatical Offering
+     [2] 0.001889 - Cast Reckoner's Bargain
+ >>> [3] 0.984114 - Cast Refurbished Familiar
+     [4] 0.013626 - {2}, Sacrifice this artifact: Draw a card.
+     [5] 0.000286 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+VALUE SCORE: 0.253321
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.003463 - Pass
+     [1] 0.002009 - Cast Fanatical Offering
+     [2] 0.122116 - Cast Reckoner's Bargain
+ >>> [3] 0.853641 - {2}, Sacrifice this artifact: Draw a card.
+     [4] 0.018771 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+VALUE SCORE: 0.227268
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 23
+-> Hand: [Fanatical Offering; Reckoner's Bargain; Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge; Myr Enforcer; Myr Enforcer; Seat of the Synod,tapped; Myr Enforcer; Ichor Wellspring; Drossforge Bridge; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.032246 - Pass
+     [1] 0.015933 - Cast Fanatical Offering
+ >>> [2] 0.951820 - Cast Reckoner's Bargain
+
+VALUE SCORE: 0.189091
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge; Silverbluff Bridge; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.032246 - Pass
+
+VALUE SCORE: 0.189091
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge; Silverbluff Bridge; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.106472 - Play Mistvault Bridge
+ >>> [2] 0.888057 - Play Silverbluff Bridge
+     [3] 0.005471 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.162646
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge; Refurbished Familiar]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge; Blood Fountain; Refurbished Familiar; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000098 - Pass
+ >>> [1] 0.999902 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.077744
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Benchmark-Skill6)
+  - [1] Refurbished Familiar (controller=RL)
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Blood Fountain; Refurbished Familiar; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000098 - Pass
+
+VALUE SCORE: 0.077744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Blood Fountain; Refurbished Familiar; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000098 - Pass
+
+VALUE SCORE: 0.077744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Blood Fountain; Refurbished Familiar; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000098 - Pass
+
+VALUE SCORE: 0.077744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Fanatical Offering; Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Ichor Wellspring; Ichor Wellspring; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Myr Enforcer,tapped,attacking; Ichor Wellspring; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Blood Fountain; Refurbished Familiar; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000098 - Pass
+
+VALUE SCORE: 0.077744
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 11
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 126
+Ended: 2026-02-01T12:47:12.734343800
+================================================================================

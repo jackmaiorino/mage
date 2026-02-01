@@ -1,0 +1,1330 @@
+================================================================================
+GAME LOG: game_20260201_124033_0063
+Started: 2026-02-01T12:40:33.946735100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Swamp; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Toxin Analysis]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Swamp; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Toxin Analysis]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.159357 - Play Great Furnace
+     [2] 0.020644 - Play Seat of the Synod
+ >>> [3] 0.819998 - Play Swamp
+
+VALUE SCORE: 0.481255
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Toxin Analysis]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.071088 - Pass
+ >>> [1] 0.928912 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.476707
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071088 - Pass
+
+VALUE SCORE: 0.476707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071088 - Pass
+
+VALUE SCORE: 0.476707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071088 - Pass
+
+VALUE SCORE: 0.476707
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071088 - Pass
+
+VALUE SCORE: 0.476707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071088 - Pass
+
+VALUE SCORE: 0.476707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.071088 - Pass
+
+VALUE SCORE: 0.476707
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.885927 - Play Great Furnace
+     [2] 0.114069 - Play Seat of the Synod
+
+VALUE SCORE: 0.476094
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000075 - Pass
+     [1] 0.000072 - Cast Galvanic Blast
+ >>> [2] 0.999853 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.470619
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000075 - Pass
+
+VALUE SCORE: 0.470619
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis; Drossforge Bridge]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis; Drossforge Bridge]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.126692 - Play Seat of the Synod
+     [2] 0.000004 - Cast Galvanic Blast
+     [3] 0.000014 - Cast Toxin Analysis
+ >>> [4] 0.873283 - Play Drossforge Bridge
+     [5] 0.000004 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.483870
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast; Toxin Analysis]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.145302 - Pass
+     [1] 0.145027 - Cast Galvanic Blast
+ >>> [2] 0.568082 - Cast Toxin Analysis
+     [3] 0.141589 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.475738
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.570837 - Pass
+     [1] 0.429163 - Cast Galvanic Blast
+
+VALUE SCORE: 0.434838
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.572895 - Pass
+     [1] 0.427105 - Cast Galvanic Blast
+
+VALUE SCORE: 0.433150
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.572895 - Pass
+     [1] 0.427105 - Cast Galvanic Blast
+
+VALUE SCORE: 0.433150
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.574125 - Pass
+     [1] 0.425875 - Cast Galvanic Blast
+
+VALUE SCORE: 0.432032
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.078133 - Pass
+ >>> [1] 0.921867 - Cast Galvanic Blast
+
+VALUE SCORE: 0.786039
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.078133 - Pass
+
+VALUE SCORE: 0.786039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.078133 - Pass
+
+VALUE SCORE: 0.786039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.078133 - Pass
+
+VALUE SCORE: 0.786039
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast; Myr Enforcer]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Clue Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Seat of the Synod; Thoughtcast; Myr Enforcer]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Clue Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+ >>> [1] 0.979676 - Play Seat of the Synod
+     [2] 0.007034 - Cast Myr Enforcer
+     [3] 0.000028 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.013224 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.443992
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Myr Enforcer]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Clue Token; Seat of the Synod]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001863 - Pass
+     [1] 0.108217 - Cast Thoughtcast
+     [2] 0.326262 - Cast Myr Enforcer
+     [3] 0.001254 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+ >>> [4] 0.562404 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.426789
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Myr Enforcer; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.004974 - Pass
+ >>> [1] 0.860106 - Cast Myr Enforcer
+     [2] 0.131677 - Cast Blood Fountain
+     [3] 0.003243 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.420993
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Great Furnace,tapped; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004974 - Pass
+
+VALUE SCORE: 0.420993
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain; Reckoner's Bargain]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Seat of the Synod; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Thoughtcast; Blood Fountain; Reckoner's Bargain]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Seat of the Synod; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.005001 - Pass
+ >>> [1] 0.418492 - Cast Thoughtcast
+     [2] 0.234117 - Cast Blood Fountain
+     [3] 0.337142 - Cast Reckoner's Bargain
+     [4] 0.005248 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.484706
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Reckoner's Bargain; Cryogen Relic; Drossforge Bridge]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000160 - Cast Blood Fountain
+     [2] 0.000225 - Cast Reckoner's Bargain
+ >>> [3] 0.999606 - Play Drossforge Bridge
+     [4] 0.000004 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.438523
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Reckoner's Bargain; Cryogen Relic]
+-> Permanents: [Swamp; Hunter's Blowgun; Great Furnace; Refurbished Familiar; Drossforge Bridge; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.013547 - Pass
+     [1] 0.404746 - Cast Blood Fountain
+ >>> [2] 0.572042 - Cast Reckoner's Bargain
+     [3] 0.009665 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.431445
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Refurbished Familiar; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000074 - Pass
+     [1] 0.002183 - Cast Blood Fountain
+ >>> [2] 0.997689 - Cast Refurbished Familiar
+     [3] 0.000054 - Cast Galvanic Blast
+
+VALUE SCORE: 0.426965
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000074 - Pass
+
+VALUE SCORE: 0.426965
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast; Ichor Wellspring]
+-> Permanents: [Swamp; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge; Seat of the Synod; Myr Enforcer; Drossforge Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Cryogen Relic; Galvanic Blast; Ichor Wellspring]
+-> Permanents: [Swamp; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge; Seat of the Synod; Myr Enforcer; Drossforge Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.002075 - Pass
+     [1] 0.107276 - Cast Blood Fountain
+ >>> [2] 0.600673 - Cast Cryogen Relic
+     [3] 0.002360 - Cast Galvanic Blast
+     [4] 0.285288 - Cast Ichor Wellspring
+     [5] 0.002328 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.489975
+SELECTED: Cast Cryogen Relic
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=RL)
+[RL], life = 22
+-> Hand: [Blood Fountain; Galvanic Blast; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge; Refurbished Familiar; Cryogen Relic]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.551490 - Pass
+     [1] 0.448510 - Cast Galvanic Blast
+
+VALUE SCORE: 0.441323
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Galvanic Blast; Ichor Wellspring; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge; Refurbished Familiar; Cryogen Relic]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.005842 - Pass
+     [1] 0.199398 - Cast Blood Fountain
+     [2] 0.004742 - Cast Galvanic Blast
+ >>> [3] 0.626922 - Cast Ichor Wellspring
+     [4] 0.158499 - Cast Krark-Clan Shaman
+     [5] 0.004596 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.440861
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 22
+-> Hand: [Blood Fountain; Galvanic Blast; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge,tapped; Refurbished Familiar; Cryogen Relic; Ichor Wellspring]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005842 - Pass
+
+VALUE SCORE: 0.440861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Galvanic Blast; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer; Drossforge Bridge,tapped; Refurbished Familiar; Cryogen Relic; Ichor Wellspring]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005842 - Pass
+
+VALUE SCORE: 0.440861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Galvanic Blast; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Cryogen Relic; Ichor Wellspring]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005842 - Pass
+
+VALUE SCORE: 0.440861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 22
+-> Hand: [Blood Fountain; Galvanic Blast; Krark-Clan Shaman; Galvanic Blast]
+-> Permanents: [Swamp,tapped; Hunter's Blowgun; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Seat of the Synod,tapped; Myr Enforcer,tapped,attacking; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Cryogen Relic; Ichor Wellspring]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005842 - Pass
+
+VALUE SCORE: 0.440861
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 6
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Elves.dek
+Total Decisions Logged: 56
+Ended: 2026-02-01T12:42:48.351461600
+================================================================================

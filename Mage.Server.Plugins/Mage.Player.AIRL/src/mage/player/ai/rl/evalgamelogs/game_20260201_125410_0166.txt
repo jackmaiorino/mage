@@ -1,0 +1,2105 @@
+================================================================================
+GAME LOG: game_20260201_125410_0166
+Started: 2026-02-01T12:54:10.496922
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer; Faerie Seer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer; Faerie Seer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.986979
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer; Faerie Seer]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000064 - Pass
+ >>> [1] 0.999936 - Cast Faerie Seer
+
+VALUE SCORE: 0.982736
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000064 - Pass
+
+VALUE SCORE: 0.982736
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999559 - Play Island
+     [2] 0.000141 - Cast Faerie Seer
+     [3] 0.000300 - Cast Humbling Elder
+
+VALUE SCORE: 0.951566
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000023 - Pass
+     [1] 0.013842 - Cast Spellstutter Sprite
+     [2] 0.316242 - Cast Faerie Seer
+ >>> [3] 0.669892 - Cast Humbling Elder
+
+VALUE SCORE: 0.946092
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Faerie Seer]
+-> Permanents: [Island; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000076 - Pass
+ >>> [1] 0.999924 - Cast Faerie Seer
+
+VALUE SCORE: 0.936214
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000076 - Pass
+
+VALUE SCORE: 0.936214
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999994 - Play Island
+     [2] 0.000006 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.908405
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.002245 - Pass
+ >>> [1] 0.997755 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.901133
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder; Faerie Seer; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Island]
+-> Permanents: [Island,tapped; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002245 - Pass
+
+VALUE SCORE: 0.901133
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Island; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Island; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.816500
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.816500
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.816500
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.816500
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.816500
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain; Sneaky Snacker; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain; Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.009501 - Pass
+ >>> [1] 0.990499 - Cast Counterspell
+
+VALUE SCORE: 0.058725
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain; Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009501 - Pass
+
+VALUE SCORE: 0.058725
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain; Sneaky Snacker,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009501 - Pass
+
+VALUE SCORE: 0.058725
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain; Sneaky Snacker,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009501 - Pass
+
+VALUE SCORE: 0.058725
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009501 - Pass
+
+VALUE SCORE: 0.058725
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Humbling Elder]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Humbling Elder]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000142 - Pass
+ >>> [1] 0.999858 - Cast Humbling Elder
+
+VALUE SCORE: 0.743076
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=RL)
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island; Humbling Elder]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.743076
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island; Humbling Elder]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.743076
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Humbling Elder]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.743076
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Humbling Elder]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.743076
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain; Sneaky Snacker,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.743076
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.010323 - Pass
+ >>> [1] 0.989677 - Cast Counterspell
+
+VALUE SCORE: 0.031234
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010323 - Pass
+
+VALUE SCORE: 0.031234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010323 - Pass
+
+VALUE SCORE: 0.031234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010323 - Pass
+
+VALUE SCORE: 0.031234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010323 - Pass
+
+VALUE SCORE: 0.031234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010323 - Pass
+
+VALUE SCORE: 0.031234
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Island]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Island]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island; Humbling Elder]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.762821
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Spellstutter Sprite; Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Island; Humbling Elder,tapped,attacking; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Spellstutter Sprite,tapped; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped,attacking; Sneaky Snacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped,attacking; Sneaky Snacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.762821
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Faerie Seer]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Faerie Seer]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000191 - Pass
+ >>> [1] 0.999809 - Cast Faerie Seer
+
+VALUE SCORE: 0.758538
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Masked Meower,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower; Sneaky Snacker]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower; Sneaky Snacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Seer,blocking]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower; Sneaky Snacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.758538
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000252 - Pass
+ >>> [1] 0.999748 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.775100
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Masked Meower; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Masked Meower; Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island; Humbling Elder,tapped; Faerie Seer,tapped; Island; Island; Humbling Elder,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000252 - Pass
+
+VALUE SCORE: 0.775100
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Moon-Circuit Hacker]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Moon-Circuit Hacker]
+-> Permanents: [Island; Island; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001734 - Pass
+ >>> [1] 0.998266 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.597410
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder; Faerie Seer; Island; Island; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001734 - Pass
+
+VALUE SCORE: 0.597410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001734 - Pass
+
+VALUE SCORE: 0.597410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Humbling Elder,tapped,attacking; Faerie Seer,tapped,attacking; Island; Island; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 2
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Sneaky Snacker,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001734 - Pass
+
+VALUE SCORE: 0.597410
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 9
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 92
+Ended: 2026-02-01T12:55:34.950969900
+================================================================================

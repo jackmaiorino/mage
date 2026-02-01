@@ -480,6 +480,7 @@ public class PythonMLBridge implements AutoCloseable {
         pb.environment().put("MTG_MODEL_PATH", modelPath);
         // Keep Python console output quiet by default. Override via MTG_AI_LOG_LEVEL if desired.
         pb.environment().put("MTG_AI_LOG_LEVEL", System.getenv().getOrDefault("MTG_AI_LOG_LEVEL", "WARNING"));
+        pb.environment().put("PY_BACKEND_MODE", System.getenv().getOrDefault("PY_BACKEND_MODE", "multi"));
         pb.environment().put("PY4J_PORT", String.valueOf(py4jPort));
         pb.environment().put("PY_ROLE", pyRole);
         if (logger.isLoggable(Level.INFO)) {

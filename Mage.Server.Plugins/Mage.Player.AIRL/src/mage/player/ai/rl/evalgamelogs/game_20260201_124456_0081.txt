@@ -1,0 +1,1684 @@
+================================================================================
+GAME LOG: game_20260201_124456_0081
+Started: 2026-02-01T12:44:56.778876300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Silverbluff Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Silverbluff Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.180370 - Play Mistvault Bridge
+ >>> [2] 0.819629 - Play Silverbluff Bridge
+
+VALUE SCORE: 0.481071
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481071
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.481071
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.515970 - Play Mistvault Bridge
+     [2] 0.000002 - Cast Galvanic Blast
+     [3] 0.000025 - Cast Hunter's Blowgun
+     [4] 0.000281 - Cast Nihil Spellbomb
+     [5] 0.483720 - Play Great Furnace
+
+VALUE SCORE: 0.478097
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Nihil Spellbomb; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.006269 - Pass
+     [1] 0.005870 - Cast Galvanic Blast
+     [2] 0.080193 - Cast Hunter's Blowgun
+ >>> [3] 0.907668 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.468264
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.046315 - Pass
+ >>> [1] 0.953685 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.449600
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.046315 - Pass
+
+VALUE SCORE: 0.449600
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace; Black Mage's Rod]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Great Furnace; Black Mage's Rod]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000004 - Cast Galvanic Blast
+     [2] 0.000055 - Cast Hunter's Blowgun
+ >>> [3] 0.998585 - Play Great Furnace
+     [4] 0.001352 - Cast Black Mage's Rod
+
+VALUE SCORE: 0.440083
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Black Mage's Rod]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002792 - Pass
+     [1] 0.173672 - Cast Thoughtcast
+     [2] 0.002103 - Cast Galvanic Blast
+     [3] 0.031893 - Cast Hunter's Blowgun
+ >>> [4] 0.789540 - Cast Black Mage's Rod
+
+VALUE SCORE: 0.434997
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.618675 - Pass
+     [1] 0.381325 - Cast Galvanic Blast
+
+VALUE SCORE: 0.399839
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Galvanic Blast; Hunter's Blowgun; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.014087 - Pass
+ >>> [1] 0.823672 - Cast Thoughtcast
+     [2] 0.009191 - Cast Galvanic Blast
+     [3] 0.153050 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.406932
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=RL)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014087 - Pass
+
+VALUE SCORE: 0.406932
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar; Drossforge Bridge]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+     [1] 0.000004 - Cast Galvanic Blast
+     [2] 0.000065 - Cast Hunter's Blowgun
+     [3] 0.001028 - Cast Myr Enforcer
+     [4] 0.070897 - Cast Refurbished Familiar
+ >>> [5] 0.927999 - Play Drossforge Bridge
+
+VALUE SCORE: 0.407606
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000086 - Pass
+     [1] 0.000052 - Cast Galvanic Blast
+     [2] 0.000878 - Cast Hunter's Blowgun
+     [3] 0.013878 - Cast Myr Enforcer
+ >>> [4] 0.985106 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.399752
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.627063 - Pass
+     [1] 0.372937 - Cast Galvanic Blast
+
+VALUE SCORE: 0.393953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Myr Enforcer; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.006540 - Pass
+     [1] 0.003218 - Cast Galvanic Blast
+     [2] 0.060199 - Cast Hunter's Blowgun
+ >>> [3] 0.930043 - Cast Myr Enforcer
+
+VALUE SCORE: 0.360966
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Galvanic Blast; Hunter's Blowgun; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.094317 - Pass
+     [1] 0.044657 - Cast Galvanic Blast
+ >>> [2] 0.861026 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.351006
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+  - [1] Hunter's Blowgun (controller=RL)
+[RL], life = 17
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.094317 - Pass
+
+VALUE SCORE: 0.351006
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Ichor Wellspring]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Ichor Wellspring]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.009675 - Pass
+     [1] 0.006380 - Cast Galvanic Blast
+ >>> [2] 0.840709 - Cast Ichor Wellspring
+     [3] 0.137194 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.006042 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.414417
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.612010 - Pass
+     [1] 0.387990 - Cast Galvanic Blast
+
+VALUE SCORE: 0.404248
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Black Mage's Rod]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.003827 - Pass
+     [1] 0.002423 - Cast Galvanic Blast
+ >>> [2] 0.991454 - Cast Black Mage's Rod
+     [3] 0.002296 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.403831
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003827 - Pass
+
+VALUE SCORE: 0.403831
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Thoughtcast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Thoughtcast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012477 - Pass
+     [1] 0.008867 - Cast Galvanic Blast
+ >>> [2] 0.777279 - Cast Thoughtcast
+     [3] 0.192860 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.008517 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.423369
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.586324 - Pass
+     [1] 0.413676 - Cast Galvanic Blast
+
+VALUE SCORE: 0.419373
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Great Furnace; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.000003 - Cast Galvanic Blast
+ >>> [2] 0.999920 - Play Great Furnace
+     [3] 0.000069 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000003 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.419551
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.055991 - Pass
+     [1] 0.039290 - Cast Galvanic Blast
+ >>> [2] 0.866709 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.038010 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.415963
+SELECTED: Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.658618 - Pass
+     [1] 0.341382 - Cast Galvanic Blast
+
+VALUE SCORE: 0.356512
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped,attacking; Great Furnace,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.719118 - Pass
+     [1] 0.280882 - Cast Galvanic Blast
+
+VALUE SCORE: 0.303047
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped,attacking; Great Furnace,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.719118 - Pass
+     [1] 0.280882 - Cast Galvanic Blast
+
+VALUE SCORE: 0.303047
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.728818 - Pass
+     [1] 0.271182 - Cast Galvanic Blast
+
+VALUE SCORE: 0.290688
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949948 - Pass
+     [1] 0.050052 - Cast Galvanic Blast
+
+VALUE SCORE: -0.022739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.949915 - Pass
+     [1] 0.050085 - Cast Galvanic Blast
+
+VALUE SCORE: -0.022148
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped; Myr Enforcer,tapped; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.950007 - Pass
+     [1] 0.049993 - Cast Galvanic Blast
+
+VALUE SCORE: -0.023248
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000072 - Pass
+     [1] 0.000051 - Cast Galvanic Blast
+ >>> [2] 0.998721 - Cast Refurbished Familiar
+     [3] 0.001108 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000049 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.420300
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.586931 - Pass
+     [1] 0.413069 - Cast Galvanic Blast
+
+VALUE SCORE: 0.416039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Great Furnace; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.051501 - Pass
+     [1] 0.039785 - Cast Galvanic Blast
+ >>> [2] 0.870162 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.038551 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.432472
+SELECTED: Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar; Myr Enforcer; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.592022 - Pass
+     [1] 0.407978 - Cast Galvanic Blast
+
+VALUE SCORE: 0.409256
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped,attacking; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.655664 - Pass
+     [1] 0.344336 - Cast Galvanic Blast
+
+VALUE SCORE: 0.357537
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Galvanic Blast; Galvanic Blast; Galvanic Blast]
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Black Mage's Rod; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Hunter's Blowgun; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped,attacking; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 3
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.655664 - Pass
+     [1] 0.344336 - Cast Galvanic Blast
+
+VALUE SCORE: 0.357537
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 71
+Ended: 2026-02-01T12:46:33.872659800
+================================================================================

@@ -1,0 +1,3229 @@
+================================================================================
+GAME LOG: game_20260201_123432_0030
+Started: 2026-02-01T12:34:32.079431800
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894827
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000113 - Pass
+     [1] 0.023825 - Cast Nyxborn Hydra
+ >>> [2] 0.976062 - Cast Quirion Ranger
+
+VALUE SCORE: 0.891472
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997526 - Pass
+     [1] 0.002474 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.887456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997525 - Pass
+     [1] 0.002475 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.887502
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997529 - Pass
+     [1] 0.002471 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.887277
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999934 - Pass
+     [1] 0.000066 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.168229
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999934 - Pass
+     [1] 0.000066 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.168319
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999934 - Pass
+     [1] 0.000066 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.168130
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Nyxborn Hydra; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.006473 - Pass
+ >>> [1] 0.993514 - Cast Nyxborn Hydra
+     [2] 0.000014 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.863640
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997935 - Pass
+     [1] 0.002065 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.858559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999844 - Pass
+     [1] 0.000156 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.856180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999844 - Pass
+     [1] 0.000156 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.856180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999846 - Pass
+     [1] 0.000154 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.854677
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.160781
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.160318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.157811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.157915
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.157684
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998158 - Pass
+     [1] 0.001842 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.840686
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped,attacking; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999861 - Pass
+     [1] 0.000139 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.838337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped,attacking; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999861 - Pass
+     [1] 0.000139 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.838337
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999862 - Pass
+     [1] 0.000138 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.836798
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=Benchmark-Skill6)
+  - [1] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=Benchmark-Skill6)
+  - [1] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.164051
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.164343
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.159911
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.160024
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.159780
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.808472
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Priest of Titania; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000049 - Pass
+     [1] 0.037007 - Cast Winding Way
+ >>> [2] 0.823723 - Cast Priest of Titania
+     [3] 0.139221 - Cast Wellwisher
+     [4] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.805250
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998594 - Pass
+     [1] 0.001406 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.798369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999894 - Pass
+     [1] 0.000106 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.795641
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999894 - Pass
+     [1] 0.000106 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.795641
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999895 - Pass
+     [1] 0.000105 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.793792
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; The Modern Age; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; The Modern Age; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.157102
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.149379
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.149522
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.149221
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Lead the Stampede
+     [2] 0.000000 - Cast Winding Way
+     [3] 0.000001 - Cast Wellwisher
+ >>> [4] 0.999998 - Play Snow-Covered Forest
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.810945
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000019 - Pass
+     [1] 0.019453 - Cast Lead the Stampede
+     [2] 0.014799 - Cast Winding Way
+     [3] 0.056862 - Cast Wellwisher
+ >>> [4] 0.908867 - Cast Avenging Hunter
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.807985
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998619 - Pass
+     [1] 0.001381 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.796127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998619 - Pass
+     [1] 0.001381 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.796127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998619 - Pass
+     [1] 0.001381 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.796127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998789 - Pass
+     [1] 0.001211 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.773501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998788 - Pass
+     [1] 0.001212 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.773574
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998790 - Pass
+     [1] 0.001210 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.773330
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999951 - Pass
+     [1] 0.000049 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.138524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider; Basilisk Gate; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999952 - Pass
+     [1] 0.000048 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.137830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.127973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped,attacking; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.123128
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped,attacking; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.123128
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999956 - Pass
+     [1] 0.000044 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.124626
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest; Winding Way]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Snow-Covered Forest; Winding Way]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Lead the Stampede
+     [2] 0.000000 - Cast Winding Way
+     [3] 0.000001 - Cast Wellwisher
+     [4] 0.000015 - Cast Avenging Hunter
+ >>> [5] 0.999984 - Play Snow-Covered Forest
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.716295
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Avenging Hunter; Winding Way]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000035 - Pass
+     [1] 0.017145 - Cast Lead the Stampede
+     [2] 0.015174 - Cast Winding Way
+     [3] 0.035200 - Cast Wellwisher
+ >>> [4] 0.932446 - Cast Avenging Hunter
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.712796
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999219 - Pass
+     [1] 0.000781 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.696567
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999219 - Pass
+     [1] 0.000781 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.696567
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999219 - Pass
+     [1] 0.000781 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.696567
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999220 - Pass
+     [1] 0.000780 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.696267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999941 - Pass
+     [1] 0.000059 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.693534
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999941 - Pass
+     [1] 0.000059 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.693534
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+     [1] 0.000058 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.691432
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.126919
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider,tapped,attacking; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.122390
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider,tapped,attacking; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.122390
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999994 - Pass
+     [1] 0.000006 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.102099
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.073835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.071324
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000145 - Pass
+     [1] 0.047017 - Cast Lead the Stampede
+     [2] 0.046777 - Cast Winding Way
+     [3] 0.083022 - Cast Wellwisher
+ >>> [4] 0.823038 - Cast Priest of Titania
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.659061
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Wellwisher; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000843 - Pass
+     [1] 0.265748 - Cast Lead the Stampede
+     [2] 0.268388 - Cast Winding Way
+ >>> [3] 0.465020 - Cast Wellwisher
+     [4] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.651703
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.001637 - Pass
+     [1] 0.491315 - Cast Lead the Stampede
+ >>> [2] 0.507047 - Cast Winding Way
+     [3] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.641338
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Timberwatch Elf; Generous Ent; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.001407 - Pass
+     [1] 0.441492 - Cast Winding Way
+ >>> [2] 0.520759 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.025692 - Cast Nyxborn Hydra
+     [4] 0.010650 - Cast Nyxborn Hydra using bestow
+     [5] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.636316
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Timberwatch Elf; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Nyxborn Hydra
+ >>> [2] 1.000000 - Play Snow-Covered Forest
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.638825
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Winding Way; Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.002952 - Pass
+ >>> [1] 0.921366 - Cast Winding Way
+     [2] 0.053453 - Cast Nyxborn Hydra
+     [3] 0.022227 - Cast Nyxborn Hydra using bestow
+     [4] 0.000002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.635497
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999457 - Pass
+     [1] 0.000543 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.637418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999465 - Pass
+     [1] 0.000535 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.635115
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped; Sacred Cat,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999467 - Pass
+     [1] 0.000533 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.634592
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999462 - Pass
+     [1] 0.000538 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.635999
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000041 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.112711
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider,tapped,attacking; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.108278
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate; Vector Glider,tapped,attacking; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.108278
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.094176
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.000130
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.005779
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.002497
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Lead the Stampede
+     [2] 0.000018 - Cast Timberwatch Elf
+     [3] 0.000000 - Cast Nyxborn Hydra
+     [4] 0.000000 - Cast Nyxborn Hydra using bestow
+     [5] 0.000002 - Cast Quirion Ranger
+     [6] 0.000015 - Cast Fyndhorn Elves
+     [7] 0.000013 - Cast Avenging Hunter
+ >>> [8] 0.999951 - Play Snow-Covered Forest
+     [9] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [10] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.632265
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Timberwatch Elf; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+     [1] 0.004119 - Cast Lead the Stampede
+ >>> [2] 0.371994 - Cast Timberwatch Elf
+     [3] 0.000246 - Cast Nyxborn Hydra
+     [4] 0.000106 - Cast Nyxborn Hydra using bestow
+     [5] 0.039605 - Cast Quirion Ranger
+     [6] 0.313164 - Cast Fyndhorn Elves
+     [7] 0.270751 - Cast Avenging Hunter
+     [8] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [9] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.628989
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Quirion Ranger; Fyndhorn Elves; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000024 - Pass
+     [1] 0.006449 - Cast Lead the Stampede
+     [2] 0.000384 - Cast Nyxborn Hydra
+     [3] 0.000167 - Cast Nyxborn Hydra using bestow
+     [4] 0.065105 - Cast Quirion Ranger
+ >>> [5] 0.489052 - Cast Fyndhorn Elves
+     [6] 0.438820 - Cast Avenging Hunter
+     [7] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [8] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.617301
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Fyndhorn Elves]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+     [1] 0.012406 - Cast Lead the Stampede
+     [2] 0.000737 - Cast Nyxborn Hydra
+     [3] 0.000322 - Cast Nyxborn Hydra using bestow
+     [4] 0.128113 - Cast Quirion Ranger
+ >>> [5] 0.858374 - Cast Avenging Hunter
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.611667
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Fyndhorn Elves; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999421 - Pass
+     [1] 0.000432 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000147 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.601326
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Fyndhorn Elves; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999421 - Pass
+     [1] 0.000432 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000147 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.601326
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, draw a card. <i>(Archives)</i>) (controller=RL)
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Fyndhorn Elves; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999421 - Pass
+     [1] 0.000432 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000147 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.601326
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Fyndhorn Elves; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000353 - Pass
+     [1] 0.080610 - Cast Lead the Stampede
+     [2] 0.004734 - Cast Nyxborn Hydra
+     [3] 0.002160 - Cast Nyxborn Hydra using bestow
+ >>> [4] 0.912143 - Cast Quirion Ranger
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.588087
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Fyndhorn Elves; Avenging Hunter; Quirion Ranger]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.004066 - Pass
+ >>> [1] 0.917432 - Cast Lead the Stampede
+     [2] 0.053866 - Cast Nyxborn Hydra
+     [3] 0.024633 - Cast Nyxborn Hydra using bestow
+     [4] 0.000002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.000001 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.585045
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+     [1] 0.000582 - Cast Nyxborn Hydra
+     [2] 0.000258 - Cast Nyxborn Hydra using bestow
+     [3] 0.012478 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.020767 - Cast Masked Vandal
+ >>> [5] 0.965874 - Cast Timberwatch Elf
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.598061
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001184 - Pass
+     [1] 0.016872 - Cast Nyxborn Hydra
+     [2] 0.007524 - Cast Nyxborn Hydra using bestow
+     [3] 0.364196 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.610223 - Cast Masked Vandal
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.593758
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999461 - Pass
+     [1] 0.000402 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000137 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.590499
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} leaves the battlefield, return the exiled card to the battlefield under its owner's control.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999460 - Pass
+     [1] 0.000403 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000137 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.590793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999466 - Pass
+     [1] 0.000399 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000135 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.589219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999466 - Pass
+     [1] 0.000399 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000135 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.589219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, Reveal the top ten cards of your library. Put a creature card from among them onto the battlefield with three +1/+1 counters on it. It gains hexproof until your next turn. Then shuffle. <i>(Throne of the Dead Three)</i>) (controller=RL)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999466 - Pass
+     [1] 0.000399 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000135 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.589219
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Vector Glider,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999469 - Pass
+     [1] 0.000397 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000135 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.588423
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999436 - Pass
+     [1] 0.000421 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000143 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.597077
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999446 - Pass
+     [1] 0.000413 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000141 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.594460
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 6
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Sacred Cat,blocking; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999448 - Pass
+     [1] 0.000412 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000140 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.593836
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999339 - Pass
+     [1] 0.000492 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000169 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.623693
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Prismatic Strands (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate; Squadron Hawk; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Prismatic Strands (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate; Squadron Hawk; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999959 - Pass
+     [1] 0.000027 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000014 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.027624
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000022 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.057539
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000021 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.063473
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped,attacking; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000021 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.086945
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped,attacking; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000021 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.086945
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000020 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000012 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: -0.106942
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Generous Ent; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Generous Ent; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Nyxborn Hydra
+     [2] 0.000000 - Cast Nyxborn Hydra using bestow
+     [3] 0.000001 - Cast Generous Ent
+     [4] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [5] 0.999999 - Play Snow-Covered Forest
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [8] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.628946
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000635 - Pass
+     [1] 0.010710 - Cast Nyxborn Hydra
+     [2] 0.004560 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.764400 - Cast Generous Ent
+     [4] 0.219695 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.625591
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest,tapped; Generous Ent]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999124 - Pass
+     [1] 0.000436 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000148 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000292 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.603985
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Prismatic Strands (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest,tapped; Generous Ent]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999155 - Pass
+     [1] 0.000420 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000143 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000282 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.598434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest,tapped; Generous Ent]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999140 - Pass
+     [1] 0.000427 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000145 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000287 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.601056
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest,tapped; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000210 - Pass
+     [1] 0.002619 - Cast Nyxborn Hydra
+     [2] 0.001223 - Cast Nyxborn Hydra using bestow
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+ >>> [5] 0.995949 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.578546
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest,tapped; Generous Ent]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.043742 - Pass
+ >>> [1] 0.667681 - Cast Nyxborn Hydra
+     [2] 0.288541 - Cast Nyxborn Hydra using bestow
+     [3] 0.000018 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.000006 - {T}: You gain 1 life for each Elf on the battlefield.
+     [5] 0.000012 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.596058
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999185 - Pass
+     [1] 0.000405 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000137 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000272 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.592979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999980 - Pass
+     [1] 0.000020 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.517129
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania,tapped; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999980 - Pass
+     [1] 0.000020 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.517129
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.449433
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.324377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate; Basilisk Gate; Basilisk Gate; Citadel Gate; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.327699
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.359834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.361997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.369154
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Basilisk Gate; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.368779
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999990 - Pass
+     [1] 0.000010 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.403679
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Priest of Titania,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999990 - Pass
+     [1] 0.000010 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: -0.406775
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest; Generous Ent; Nyxborn Hydra]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000790 - Pass
+ >>> [1] 0.999209 - Cast Elvish Mystic
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.591221
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Wellwisher; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Masked Vandal; Avenging Hunter; Snow-Covered Forest; Generous Ent; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999218 - Pass
+     [1] 0.000392 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000134 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.000257 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.585430
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Priest of Titania,tapped,attacking; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest; Generous Ent,tapped,attacking; Nyxborn Hydra,tapped,attacking; Elvish Mystic]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk; Island,tapped; Outlaw Medic; Sacred Cat; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999981 - Pass
+     [1] 0.000019 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.503319
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Quirion Ranger,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Priest of Titania,tapped,attacking; Wellwisher,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest; Generous Ent,tapped,attacking; Nyxborn Hydra,tapped,attacking; Elvish Mystic]
+[Benchmark-Skill6], life = 1
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Sea Gate; Squadron Hawk,blocking; Island,tapped; Outlaw Medic,blocking; Sacred Cat,blocking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999981 - Pass
+     [1] 0.000019 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.500292
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 10
+Reason: Benchmark: Deck - Elves.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 133
+Ended: 2026-02-01T12:42:41.776762300
+================================================================================

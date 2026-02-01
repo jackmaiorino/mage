@@ -1,0 +1,1051 @@
+================================================================================
+GAME LOG: game_20260201_123756_0045
+Started: 2026-02-01T12:37:56.302466700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Fyndhorn Elves; Quirion Ranger; Masked Vandal; Snow-Covered Forest]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer]
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Fyndhorn Elves; Quirion Ranger; Masked Vandal; Snow-Covered Forest]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.865811
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Fyndhorn Elves; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.066483 - Cast Elvish Mystic
+ >>> [2] 0.902571 - Cast Fyndhorn Elves
+     [3] 0.030942 - Cast Quirion Ranger
+
+VALUE SCORE: 0.862646
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Harrier Strix; Island,tapped; Saiba Cryptomancer]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Faerie Miscreant; Harrier Strix; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Miscreant; Harrier Strix; Island; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking; Harrier Strix,tapped,attacking; Island; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.862646
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Fyndhorn Elves; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.065980 - Cast Elvish Mystic
+     [2] 0.032578 - Cast Quirion Ranger
+ >>> [3] 0.901438 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.853729
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.853729
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Elvish Mystic; Quirion Ranger; Masked Vandal; Elvish Mystic; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000030 - Pass
+ >>> [1] 0.561016 - Cast Elvish Mystic
+     [2] 0.253489 - Cast Quirion Ranger
+     [3] 0.106287 - Cast Masked Vandal
+     [4] 0.079177 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.862679
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Elvish Mystic; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000034 - Pass
+     [1] 0.286949 - Cast Quirion Ranger
+ >>> [2] 0.624389 - Cast Elvish Mystic
+     [3] 0.088628 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.858293
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant; Island; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000034 - Pass
+
+VALUE SCORE: 0.858293
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Timberwatch Elf; Quirion Ranger; Masked Vandal; Generous Ent; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Elvish Mystic; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+     [1] 0.010793 - Cast Lead the Stampede
+ >>> [2] 0.804155 - Cast Timberwatch Elf
+     [3] 0.051423 - Cast Quirion Ranger
+     [4] 0.020396 - Cast Masked Vandal
+     [5] 0.014518 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [6] 0.098709 - Cast Elvish Mystic
+
+VALUE SCORE: 0.830514
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic; Elvish Mystic,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000044 - Pass
+     [1] 0.324505 - Cast Quirion Ranger
+     [2] 0.088114 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.587337 - Cast Elvish Mystic
+
+VALUE SCORE: 0.816588
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours,tapped; Faerie Miscreant,tapped; Island,tapped; Humbling Elder,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island; Humbling Elder; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island; Humbling Elder; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped; Ninja of the Deep Hours; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped; Ninja of the Deep Hours; Harrier Strix; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped; Ninja of the Deep Hours; Harrier Strix; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Saiba Cryptomancer; Ninja of the Deep Hours; Faerie Miscreant; Island,tapped; Humbling Elder; Island,tapped; Ninja of the Deep Hours; Harrier Strix; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Harrier Strix; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lead the Stampede; Lead the Stampede; Quirion Ranger; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Timberwatch Elf,tapped; Elvish Mystic,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Saiba Cryptomancer,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Harrier Strix; Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000044 - Pass
+
+VALUE SCORE: 0.816588
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Elves.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 45
+Ended: 2026-02-01T12:38:50.622542300
+================================================================================

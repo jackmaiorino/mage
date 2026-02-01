@@ -1,0 +1,3046 @@
+================================================================================
+GAME LOG: game_20260201_125704_0200
+Started: 2026-02-01T12:57:04.823446600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.188000
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.014875 - Pass
+     [1] 0.082811 - Cast Lightning Bolt
+ >>> [2] 0.902315 - Cast Masked Meower
+
+VALUE SCORE: 0.168949
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.155063
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.152465
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.152465
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.150932
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.142688
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.142810
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.142547
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000019 - Pass
+ >>> [1] 0.999894 - Play Mountain
+     [2] 0.000087 - Cast Lightning Bolt
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.153527
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Lightning Bolt; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.214420 - Pass
+ >>> [1] 0.785573 - Cast Lightning Bolt
+     [2] 0.000007 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.139876
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.237528 - Pass
+ >>> [1] 0.762465 - Cast Lightning Bolt
+     [2] 0.000007 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.129560
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.112088
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.108978
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.108978
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.106997
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.131067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.130829
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.131018
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.130624
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.999984 - Play Mountain
+     [2] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.152687
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain]
+[Benchmark-Skill6], life = 12
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.087264 - Pass
+ >>> [1] 0.912733 - Cast Fiery Temper
+     [2] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.136527
+SELECTED: Cast Fiery Temper
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.096474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.093343
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.093343
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.091223
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.084355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.083045
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+
+VALUE SCORE: 0.083045
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+
+VALUE SCORE: 0.083045
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+
+VALUE SCORE: 0.083045
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 8
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.120113 - Pass
+ >>> [1] 0.835607 - Cast Fiery Temper
+     [2] 0.044281 - Cast Lava Dart
+
+VALUE SCORE: 0.105637
+SELECTED: Cast Fiery Temper
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 6 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 6 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 5 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.120113 - Pass
+
+VALUE SCORE: 0.105637
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000074 - Pass
+     [1] 0.000019 - Cast Lava Dart
+ >>> [2] 0.999907 - Play Mountain
+
+VALUE SCORE: 0.056396
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811244 - Pass
+     [1] 0.188756 - Cast Lava Dart
+
+VALUE SCORE: 0.036056
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811258 - Pass
+     [1] 0.188742 - Cast Lava Dart
+
+VALUE SCORE: 0.036377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate,tapped; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811432 - Pass
+     [1] 0.188568 - Cast Lava Dart
+
+VALUE SCORE: 0.035752
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828524 - Pass
+     [1] 0.171476 - Cast Lava Dart
+
+VALUE SCORE: 0.065713
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828951 - Pass
+     [1] 0.171049 - Cast Lava Dart
+
+VALUE SCORE: 0.064197
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.836210 - Pass
+     [1] 0.163790 - Cast Lava Dart
+
+VALUE SCORE: 0.030478
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Sacred Cat,tapped,attacking; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.839389 - Pass
+     [1] 0.160611 - Cast Lava Dart
+
+VALUE SCORE: 0.008687
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Sacred Cat,tapped,attacking; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.839389 - Pass
+     [1] 0.160611 - Cast Lava Dart
+
+VALUE SCORE: 0.008687
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.840769 - Pass
+     [1] 0.159231 - Cast Lava Dart
+
+VALUE SCORE: -0.007094
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart; Fiery Temper]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.276184 - Pass
+     [1] 0.060670 - Cast Lava Dart
+ >>> [2] 0.663146 - Cast Fiery Temper
+
+VALUE SCORE: 0.006681
+SELECTED: Cast Fiery Temper
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824356 - Pass
+     [1] 0.175644 - Cast Lava Dart
+
+VALUE SCORE: -0.060228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824449 - Pass
+     [1] 0.175551 - Cast Lava Dart
+
+VALUE SCORE: -0.059620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824359 - Pass
+     [1] 0.175641 - Cast Lava Dart
+
+VALUE SCORE: -0.060867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.836898 - Pass
+     [1] 0.163102 - Cast Lava Dart
+
+VALUE SCORE: 0.033237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Preordain (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.843983 - Pass
+     [1] 0.156017 - Cast Lava Dart
+
+VALUE SCORE: -0.019580
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.842896 - Pass
+     [1] 0.157104 - Cast Lava Dart
+
+VALUE SCORE: -0.078137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Sacred Cat,tapped,attacking; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.841076 - Pass
+     [1] 0.158924 - Cast Lava Dart
+
+VALUE SCORE: -0.117340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Sacred Cat,tapped,attacking; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.841076 - Pass
+     [1] 0.158924 - Cast Lava Dart
+
+VALUE SCORE: -0.117340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain,tapped; Mountain,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.839443 - Pass
+     [1] 0.160557 - Cast Lava Dart
+
+VALUE SCORE: -0.139111
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.363966 - Pass
+     [1] 0.081183 - Cast Lava Dart
+ >>> [2] 0.554851 - Cast Lightning Bolt
+
+VALUE SCORE: -0.012258
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Prismatic Strands (controller=Benchmark-Skill6)
+  - [1] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.811244 - Pass
+     [1] 0.188756 - Cast Lava Dart
+
+VALUE SCORE: -0.126836
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.812051 - Pass
+     [1] 0.187949 - Cast Lava Dart
+
+VALUE SCORE: -0.120442
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.812685 - Pass
+     [1] 0.187315 - Cast Lava Dart
+
+VALUE SCORE: -0.114200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.812836 - Pass
+     [1] 0.187164 - Cast Lava Dart
+
+VALUE SCORE: -0.113340
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 2 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sacred Cat,tapped; Sea Gate; The Modern Age; Idyllic Beachfront,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.812622 - Pass
+     [1] 0.187378 - Cast Lava Dart
+
+VALUE SCORE: -0.115292
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 3 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; The Modern Age; Idyllic Beachfront; Azorius Guildgate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.836252 - Pass
+     [1] 0.163748 - Cast Lava Dart
+
+VALUE SCORE: 0.033800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat; Sacred Cat; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.841212 - Pass
+     [1] 0.158788 - Cast Lava Dart
+
+VALUE SCORE: -0.099517
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.835160 - Pass
+     [1] 0.164840 - Cast Lava Dart
+
+VALUE SCORE: -0.177199
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sacred Cat; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826910 - Pass
+     [1] 0.173090 - Cast Lava Dart
+
+VALUE SCORE: -0.240120
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.827806 - Pass
+     [1] 0.172194 - Cast Lava Dart
+
+VALUE SCORE: -0.233836
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.827806 - Pass
+     [1] 0.172194 - Cast Lava Dart
+
+VALUE SCORE: -0.233836
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.825792 - Pass
+     [1] 0.174208 - Cast Lava Dart
+
+VALUE SCORE: -0.249182
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped,attacking; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.825792 - Pass
+     [1] 0.174208 - Cast Lava Dart
+
+VALUE SCORE: -0.249182
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.823921 - Pass
+     [1] 0.176079 - Cast Lava Dart
+
+VALUE SCORE: -0.260803
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+     [0] 0.000381 - Pass
+     [1] 0.000100 - Cast Lava Dart
+ >>> [2] 0.999519 - Play Mountain
+
+VALUE SCORE: -0.286346
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.788896 - Pass
+     [1] 0.211104 - Cast Lava Dart
+
+VALUE SCORE: -0.320863
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.789057 - Pass
+     [1] 0.210943 - Cast Lava Dart
+
+VALUE SCORE: -0.320296
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate,tapped; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate,tapped; Vector Glider; Sea Gate,tapped; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.788855 - Pass
+     [1] 0.211145 - Cast Lava Dart
+
+VALUE SCORE: -0.322188
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Prismatic Strands (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Prismatic Strands (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.841868 - Pass
+     [1] 0.158132 - Cast Lava Dart
+
+VALUE SCORE: -0.094697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.840495 - Pass
+     [1] 0.159505 - Cast Lava Dart
+
+VALUE SCORE: -0.120756
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.827627 - Pass
+     [1] 0.172373 - Cast Lava Dart
+
+VALUE SCORE: -0.244641
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sacred Cat,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.827169 - Pass
+     [1] 0.172831 - Cast Lava Dart
+
+VALUE SCORE: -0.248006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.830488 - Pass
+     [1] 0.169512 - Cast Lava Dart
+
+VALUE SCORE: -0.225394
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828483 - Pass
+     [1] 0.171517 - Cast Lava Dart
+
+VALUE SCORE: -0.239405
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828483 - Pass
+     [1] 0.171517 - Cast Lava Dart
+
+VALUE SCORE: -0.239405
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826897 - Pass
+     [1] 0.173103 - Cast Lava Dart
+
+VALUE SCORE: -0.249986
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart; Mountain]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+     [0] 0.000476 - Pass
+     [1] 0.000124 - Cast Lava Dart
+ >>> [2] 0.999400 - Play Mountain
+
+VALUE SCORE: -0.311838
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791189 - Pass
+     [1] 0.208811 - Cast Lava Dart
+
+VALUE SCORE: -0.341151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791308 - Pass
+     [1] 0.208692 - Cast Lava Dart
+
+VALUE SCORE: -0.340710
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island,tapped; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront,tapped; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791213 - Pass
+     [1] 0.208787 - Cast Lava Dart
+
+VALUE SCORE: -0.342302
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.830769 - Pass
+     [1] 0.169231 - Cast Lava Dart
+
+VALUE SCORE: -0.223840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat,tapped,attacking; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826784 - Pass
+     [1] 0.173216 - Cast Lava Dart
+
+VALUE SCORE: -0.252118
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat,tapped,attacking; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826784 - Pass
+     [1] 0.173216 - Cast Lava Dart
+
+VALUE SCORE: -0.252118
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.823195 - Pass
+     [1] 0.176805 - Cast Lava Dart
+
+VALUE SCORE: -0.270464
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart; Masked Meower]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart; Masked Meower]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.043164 - Pass
+     [1] 0.011247 - Cast Lava Dart
+ >>> [2] 0.945588 - Cast Masked Meower
+
+VALUE SCORE: -0.332553
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.793166 - Pass
+     [1] 0.206802 - Cast Lava Dart
+     [2] 0.000033 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.361191
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.792709 - Pass
+     [1] 0.207284 - Cast Lava Dart
+     [2] 0.000007 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.371759
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.792709 - Pass
+     [1] 0.207284 - Cast Lava Dart
+     [2] 0.000007 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.371759
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.792204 - Pass
+     [1] 0.207788 - Cast Lava Dart
+     [2] 0.000008 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.376975
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826999 - Pass
+     [1] 0.172997 - Cast Lava Dart
+     [2] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.255610
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat,tapped,attacking; Journey to Nowhere; Citadel Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821854 - Pass
+     [1] 0.178142 - Cast Lava Dart
+     [2] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.284467
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat,tapped,attacking; Journey to Nowhere; Citadel Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821854 - Pass
+     [1] 0.178142 - Cast Lava Dart
+     [2] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.284467
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.812701 - Pass
+     [1] 0.187294 - Cast Lava Dart
+     [2] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.326645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.812171 - Pass
+     [1] 0.187825 - Cast Lava Dart
+     [2] 0.000005 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.329366
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.591321 - Pass
+     [1] 0.154696 - Cast Lava Dart
+     [2] 0.253957 - Cast Faithless Looting
+     [3] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.372473
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.792672 - Pass
+     [1] 0.207294 - Cast Lava Dart
+     [2] 0.000034 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.372179
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate,tapped; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat,tapped; Journey to Nowhere; Citadel Gate; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.591667 - Pass
+     [1] 0.154792 - Cast Lava Dart
+     [2] 0.253515 - Cast Faithless Looting
+     [3] 0.000026 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.373405
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824192 - Pass
+     [1] 0.175788 - Cast Lava Dart
+     [2] 0.000020 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.268073
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821383 - Pass
+     [1] 0.178596 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.283157
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821383 - Pass
+     [1] 0.178596 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.283157
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.819203 - Pass
+     [1] 0.180776 - Cast Lava Dart
+     [2] 0.000022 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.292858
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.309299 - Pass
+     [1] 0.081302 - Cast Lava Dart
+     [2] 0.132780 - Cast Faithless Looting
+ >>> [3] 0.476606 - Cast Lightning Bolt
+     [4] 0.000013 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.373918
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.598088 - Pass
+     [1] 0.157780 - Cast Lava Dart
+     [2] 0.244103 - Cast Faithless Looting
+     [3] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.394546
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791286 - Pass
+     [1] 0.208676 - Cast Lava Dart
+     [2] 0.000038 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.394351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.598350 - Pass
+     [1] 0.157857 - Cast Lava Dart
+     [2] 0.243764 - Cast Faithless Looting
+     [3] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.395283
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.819522 - Pass
+     [1] 0.180456 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.288197
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.816885 - Pass
+     [1] 0.183093 - Cast Lava Dart
+     [2] 0.000022 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.300911
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.816885 - Pass
+     [1] 0.183093 - Cast Lava Dart
+     [2] 0.000022 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.300911
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Mountain; Mountain,tapped; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814899 - Pass
+     [1] 0.185078 - Cast Lava Dart
+     [2] 0.000023 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.309807
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.594159 - Pass
+     [1] 0.155695 - Cast Lava Dart
+     [2] 0.250120 - Cast Faithless Looting
+     [3] 0.000027 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.380980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.792400 - Pass
+     [1] 0.207565 - Cast Lava Dart
+     [2] 0.000036 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.380734
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 0 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.594469 - Pass
+     [1] 0.155785 - Cast Lava Dart
+     [2] 0.249719 - Cast Faithless Looting
+     [3] 0.000027 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.381822
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider; Sea Gate; Journey to Nowhere; Sacred Cat; Journey to Nowhere; Citadel Gate; Sacred Cat; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824656 - Pass
+     [1] 0.175324 - Cast Lava Dart
+     [2] 0.000020 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.258392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat,tapped,attacking; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.816906 - Pass
+     [1] 0.183072 - Cast Lava Dart
+     [2] 0.000022 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.298060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Sneaky Snacker; Lava Dart; Faithless Looting; Lava Dart]
+-> Permanents: [Mountain; Mountain; Mountain; Mountain; Mountain; Mountain; Masked Meower,blocking]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Sea Gate; Island; Journey to Nowhere; Citadel Gate; Sea Gate; Idyllic Beachfront; Azorius Guildgate; Vector Glider,tapped,attacking; Sea Gate; Journey to Nowhere; Sacred Cat,tapped,attacking; Journey to Nowhere; Citadel Gate; Sacred Cat,tapped,attacking; Azorius Guildgate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.816409 - Pass
+     [1] 0.183570 - Cast Lava Dart
+     [2] 0.000022 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: -0.300168
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 13
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 126
+Ended: 2026-02-01T13:00:32.274386500
+================================================================================

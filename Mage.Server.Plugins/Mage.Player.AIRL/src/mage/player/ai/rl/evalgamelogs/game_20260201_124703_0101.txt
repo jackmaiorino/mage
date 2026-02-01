@@ -1,0 +1,1933 @@
+================================================================================
+GAME LOG: game_20260201_124703_0101
+Started: 2026-02-01T12:47:03.642178900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Twisted Landscape; Cast Down; Lembas; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Twisted Landscape; Cast Down; Lembas; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.262257 - Play Swamp
+ >>> [2] 0.737741 - Play Twisted Landscape
+
+VALUE SCORE: 0.213099
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.017805 - Pass
+ >>> [1] 0.982173 - Cast Nihil Spellbomb
+     [2] 0.000022 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204654
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.225675 - Pass
+ >>> [1] 0.774325 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.184573
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225675 - Pass
+
+VALUE SCORE: 0.184573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Swamp; Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+ >>> [1] 0.999994 - Play Swamp
+     [2] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.190076
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Cast Down; Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.029756 - Pass
+ >>> [1] 0.788814 - Cast Cast Down
+     [2] 0.085636 - Cast Lembas
+     [3] 0.095762 - Cast Blood Fountain
+     [4] 0.000032 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.187434
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.029756 - Pass
+
+VALUE SCORE: 0.187434
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis; Vault of Whispers]
+-> Permanents: [Twisted Landscape; Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis; Vault of Whispers]
+-> Permanents: [Twisted Landscape; Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.000035 - Cast Lembas
+     [2] 0.000038 - Cast Blood Fountain
+ >>> [3] 0.999917 - Play Vault of Whispers
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.191329
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Blood Fountain; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.130903 - Pass
+     [1] 0.414709 - Cast Lembas
+ >>> [2] 0.454252 - Cast Blood Fountain
+     [3] 0.000136 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.187146
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lembas; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999025 - Pass
+     [1] 0.000975 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.179781
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lembas; Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.278618 - Pass
+ >>> [1] 0.591437 - Cast Lembas
+     [2] 0.000238 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.129707 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.164619
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278618 - Pass
+
+VALUE SCORE: 0.164619
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain; Blood Token; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.381913 - Pass
+     [1] 0.000278 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [2] 0.481579 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+     [3] 0.136231 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.143255
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=RL)
+[RL], life = 18
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756389 - Pass
+     [1] 0.000522 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.243089 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.134770
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756161 - Pass
+     [1] 0.000522 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.243317 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.134890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.755997 - Pass
+     [1] 0.000522 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.243480 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.135031
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.756902 - Pass
+     [1] 0.000522 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.242576 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.134579
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Krark-Clan Shaman; Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.002194 - Pass
+     [1] 0.000094 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [2] 0.997712 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.829549
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002194 - Pass
+
+VALUE SCORE: 0.829549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002194 - Pass
+
+VALUE SCORE: 0.829549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002194 - Pass
+
+VALUE SCORE: 0.829549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002194 - Pass
+
+VALUE SCORE: 0.829549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002194 - Pass
+
+VALUE SCORE: 0.829549
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002194 - Pass
+
+VALUE SCORE: 0.829549
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Cast Down]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Cast Down]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.040501 - Pass
+     [1] 0.010718 - Cast Toxin Analysis
+ >>> [2] 0.948755 - Cast Cast Down
+     [3] 0.000026 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.126165
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999383 - Pass
+     [1] 0.000617 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.117428
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999382 - Pass
+     [1] 0.000618 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.117622
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999384 - Pass
+     [1] 0.000616 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.117063
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963911 - Pass
+     [1] 0.036089 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.815657
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970312 - Pass
+     [1] 0.029688 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.791189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.970332 - Pass
+     [1] 0.029668 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.791021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977316 - Pass
+     [1] 0.022684 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.755418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977495 - Pass
+     [1] 0.022505 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.754302
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979605 - Pass
+     [1] 0.020395 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.738749
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Lembas]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Lembas]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.344625 - Pass
+     [1] 0.101083 - Cast Toxin Analysis
+ >>> [2] 0.554065 - Cast Lembas
+     [3] 0.000227 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.129278
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Force Spike (controller=Benchmark-Skill6)
+  - [1] Lembas (controller=RL)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+     [1] 0.000546 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=RL)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Island,tapped; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Spellstutter Sprite,tapped,attacking; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Spellstutter Sprite,tapped,attacking; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999454 - Pass
+
+VALUE SCORE: 0.092782
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar; Twisted Landscape]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar; Twisted Landscape]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000000 - Cast Toxin Analysis
+     [2] 0.003067 - Cast Refurbished Familiar
+ >>> [3] 0.996930 - Play Twisted Landscape
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.000001 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.072852
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Twisted Landscape; Swamp; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000556 - Pass
+     [1] 0.000109 - Cast Toxin Analysis
+ >>> [2] 0.998391 - Cast Refurbished Familiar
+     [3] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.000462 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [5] 0.000482 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.043299
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.513355 - Pass
+     [1] 0.086174 - Cast Toxin Analysis
+     [2] 0.000224 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.400247 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.003173
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.515220 - Pass
+     [1] 0.085473 - Cast Toxin Analysis
+     [2] 0.000224 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.399084 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.001067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.514933 - Pass
+     [1] 0.085578 - Cast Toxin Analysis
+     [2] 0.000224 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.399265 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.000214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Spellstutter Sprite,tapped; Moon-Circuit Hacker,tapped; Spellstutter Sprite,tapped; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.515687 - Pass
+     [1] 0.085293 - Cast Toxin Analysis
+     [2] 0.000224 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.398796 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: -0.002213
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers; Blood Fountain; Lembas; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.002297 - Pass
+     [1] 0.102927 - Cast Toxin Analysis
+     [2] 0.000040 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [3] 0.894736 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.713846
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=RL)
+[RL], life = 2
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984704 - Pass
+     [1] 0.015296 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.696016
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker; Island; Faerie Seer; Island; Spellstutter Sprite; Moon-Circuit Hacker; Spellstutter Sprite; Saiba Cryptomancer; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984689 - Pass
+     [1] 0.015311 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.696197
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Spellstutter Sprite,tapped,attacking; Saiba Cryptomancer,tapped,attacking; Moon-Circuit Hacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987842 - Pass
+     [1] 0.012158 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.662309
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Writhing Chrysalis; Makeshift Munitions; Nyxborn Hydra; Toxin Analysis; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape; Swamp,tapped; Vault of Whispers,tapped; Blood Fountain; Twisted Landscape,tapped; Refurbished Familiar,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island; Island; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Spellstutter Sprite,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Spellstutter Sprite,tapped,attacking; Saiba Cryptomancer,tapped,attacking; Moon-Circuit Hacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987915 - Pass
+     [1] 0.012085 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.661411
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 82
+Ended: 2026-02-01T12:48:25.320491600
+================================================================================

@@ -1,0 +1,1776 @@
+================================================================================
+GAME LOG: game_20260201_125709_0202
+Started: 2026-02-01T12:57:09.606060700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.189143
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt; Masked Meower]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.014804 - Pass
+     [1] 0.083102 - Cast Lightning Bolt
+ >>> [2] 0.902095 - Cast Masked Meower
+
+VALUE SCORE: 0.169844
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.155684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.153070
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.153070
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.151586
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.828719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.827842
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.827900
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.827667
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt; Lava Dart]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Grab the Prize; Lightning Bolt; Lava Dart]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+ >>> [1] 0.999895 - Play Mountain
+     [2] 0.000081 - Cast Lightning Bolt
+     [3] 0.000008 - Cast Lava Dart
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.158656
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Grab the Prize; Lightning Bolt; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.002469 - Pass
+ >>> [1] 0.985526 - Cast Grab the Prize
+     [2] 0.010829 - Cast Lightning Bolt
+     [3] 0.001176 - Cast Lava Dart
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.145050
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.114397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.114529
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.114172
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999437 - Pass
+     [1] 0.000563 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.771582
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999440 - Pass
+     [1] 0.000560 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.770850
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999440 - Pass
+     [1] 0.000560 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.770926
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999441 - Pass
+     [1] 0.000559 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.770655
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.015480 - Pass
+     [1] 0.074167 - Cast Lightning Bolt
+     [2] 0.007772 - Cast Lava Dart
+ >>> [3] 0.869332 - Cast Voldaren Epicure
+     [4] 0.033248 - Cast Faithless Looting
+     [5] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.144767
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.216570 - Pass
+ >>> [1] 0.700147 - Cast Lightning Bolt
+     [2] 0.083276 - Cast Lava Dart
+     [3] 0.000007 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.120045
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+  - [1] Lightning Bolt (controller=RL)
+  - [2] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.089417
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lightning Bolt (controller=RL)
+  - [1] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.089417
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.090599
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.071167
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.071323
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.070918
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999647 - Pass
+     [1] 0.000353 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.695594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999652 - Pass
+     [1] 0.000348 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.693759
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999661 - Pass
+     [1] 0.000339 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.690277
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999661 - Pass
+     [1] 0.000339 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.690277
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999665 - Pass
+     [1] 0.000335 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.688446
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000034 - Pass
+     [1] 0.000012 - Cast Lava Dart
+     [2] 0.001359 - Cast Voldaren Epicure
+     [3] 0.000049 - Cast Faithless Looting
+ >>> [4] 0.998533 - Play Mountain
+     [5] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+     [6] 0.000012 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.088214
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Voldaren Epicure; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.026818 - Pass
+     [1] 0.008341 - Cast Lava Dart
+ >>> [2] 0.923764 - Cast Voldaren Epicure
+     [3] 0.033763 - Cast Faithless Looting
+     [4] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+     [5] 0.007313 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.071929
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 19
+-> Hand: [Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.683680 - Pass
+     [1] 0.178384 - Cast Lava Dart
+     [2] 0.000019 - Discard a card, Sacrifice {this}: Draw a card.
+     [3] 0.137917 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.047274
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.418118 - Pass
+     [1] 0.104310 - Cast Lava Dart
+     [2] 0.404427 - Cast Faithless Looting
+     [3] 0.000011 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.073134 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.021787
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.702082 - Pass
+     [1] 0.175062 - Cast Lava Dart
+     [2] 0.000019 - Discard a card, Sacrifice {this}: Draw a card.
+     [3] 0.122837 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.022042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.418537 - Pass
+     [1] 0.104270 - Cast Lava Dart
+     [2] 0.404179 - Cast Faithless Looting
+     [3] 0.000011 - Discard a card, Sacrifice {this}: Draw a card.
+     [4] 0.073003 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.021421
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lava Dart; Faithless Looting]
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.006541 - Pass
+     [1] 0.101970 - Cast Lava Dart
+     [2] 0.000002 - Discard a card, Sacrifice {this}: Draw a card.
+ >>> [3] 0.891487 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.679555
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.008950 - Pass
+     [1] 0.109871 - Cast Lava Dart
+     [2] 0.000002 - Discard a card, Sacrifice {this}: Draw a card.
+ >>> [3] 0.881176 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.650443
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.016810 - Pass
+ >>> [1] 0.983186 - Flashback sacrifice a Mountain
+     [2] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.632632
+SELECTED: Flashback sacrifice a Mountain
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999710 - Pass
+     [1] 0.000290 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.667894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999712 - Pass
+     [1] 0.000288 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.667048
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999712 - Pass
+     [1] 0.000288 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.667048
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999712 - Pass
+     [1] 0.000288 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.667048
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999701 - Pass
+     [1] 0.000299 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.672153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999719 - Pass
+     [1] 0.000281 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.663515
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999719 - Pass
+     [1] 0.000281 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.663515
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Guttersnipe; Mountain]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999730 - Pass
+     [1] 0.000270 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.657415
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Guttersnipe; Mountain; Fireblast]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Guttersnipe; Mountain; Fireblast]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+ >>> [1] 0.999962 - Play Mountain
+     [2] 0.000001 - Cast Fireblast
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.082963
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Guttersnipe; Fireblast]
+-> Permanents: [Masked Meower; Mountain; Voldaren Epicure; Mountain; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.064660 - Pass
+ >>> [1] 0.763886 - Cast Guttersnipe
+     [2] 0.001372 - Cast Fireblast
+     [3] 0.170079 - Flashback {2}{R}
+     [4] 0.000002 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.066386
+SELECTED: Cast Guttersnipe
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fireblast]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984023 - Pass
+     [1] 0.015949 - Cast Fireblast
+     [2] 0.000027 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.019418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fireblast]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984023 - Pass
+     [1] 0.015949 - Cast Fireblast
+     [2] 0.000027 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.019703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Fireblast]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984036 - Pass
+     [1] 0.015937 - Cast Fireblast
+     [2] 0.000027 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.019104
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Fireblast]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Fireblast]
+-> Permanents: [Masked Meower; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.278180 - Pass
+ >>> [1] 0.721757 - Cast Fireblast
+     [2] 0.000064 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.630138
+SELECTED: Cast Fireblast
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Fireblast (controller=RL)
+  - [1] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Masked Meower; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Masked Meower; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Masked Meower; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter; Wellwisher; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Masked Meower; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Masked Meower; Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Masked Meower,blocking; Voldaren Epicure,blocking; Mountain,tapped; Voldaren Epicure; Guttersnipe,blocking]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.278180 - Pass
+
+VALUE SCORE: 0.630138
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000055 - Pass
+ >>> [1] 0.999945 - Play Mountain
+
+VALUE SCORE: 0.036097
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest,tapped; Avenging Hunter,tapped; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest; Avenging Hunter; Wellwisher; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest; Avenging Hunter; Wellwisher; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter; Wellwisher; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 0 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Snow-Covered Forest,tapped; Avenging Hunter; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,blocking; Guttersnipe,tapped; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Wellwisher,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000055 - Pass
+
+VALUE SCORE: 0.036097
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 6
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Elves.dek
+Total Decisions Logged: 74
+Ended: 2026-02-01T12:58:58.146728200
+================================================================================

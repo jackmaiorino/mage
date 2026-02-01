@@ -1,0 +1,1206 @@
+================================================================================
+GAME LOG: game_20260201_124952_0123
+Started: 2026-02-01T12:49:52.257121300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078398
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.008951 - Cast Lightning Bolt
+ >>> [2] 0.986966 - Cast Goblin Bushwhacker
+     [3] 0.004083 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.073728
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073728
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000321 - Cast Lightning Bolt
+     [2] 0.037489 - Cast Goblin Bushwhacker
+     [3] 0.000144 - Cast Goblin Tomb Raider
+ >>> [4] 0.962046 - Play Great Furnace
+
+VALUE SCORE: 1.011239
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Bushwhacker; Goblin Tomb Raider]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.007205 - Cast Lightning Bolt
+     [2] 0.145115 - Cast Burning-Tree Emissary
+ >>> [3] 0.844472 - Cast Goblin Bushwhacker
+     [4] 0.003208 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.004351
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lightning Bolt; Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000045 - Pass
+ >>> [1] 0.689920 - Cast Lightning Bolt
+     [2] 0.310034 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.975735
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000045 - Pass
+
+VALUE SCORE: 0.975735
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Great Furnace]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Burning-Tree Emissary; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Great Furnace]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.641951 - Cast Burning-Tree Emissary
+     [2] 0.013498 - Cast Goblin Tomb Raider
+     [3] 0.344549 - Cast Clockwork Percussionist
+
+VALUE SCORE: 0.989300
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.989300
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Burning-Tree Emissary; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.664815 - Cast Burning-Tree Emissary
+     [2] 0.012679 - Cast Goblin Tomb Raider
+     [3] 0.322504 - Cast Clockwork Percussionist
+
+VALUE SCORE: 0.940376
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.940376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+     [1] 0.037787 - Cast Goblin Tomb Raider
+ >>> [2] 0.962206 - Cast Clockwork Percussionist
+
+VALUE SCORE: 0.933037
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.933037
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Lightning Bolt]
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Lightning Bolt]
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000068 - Pass
+     [1] 0.321720 - Cast Goblin Tomb Raider
+ >>> [2] 0.678212 - Cast Lightning Bolt
+
+VALUE SCORE: 0.898457
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000248 - Pass
+ >>> [1] 0.999752 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.865188
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Clockwork Percussionist,tapped,attacking; Goblin Tomb Raider,tapped,attacking]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped; Goblin Tomb Raider,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Burning-Tree Emissary,tapped; Burning-Tree Emissary,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000248 - Pass
+
+VALUE SCORE: 0.865188
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.823326
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary; Burning-Tree Emissary; Clockwork Percussionist; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.823326
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Clockwork Percussionist,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.823326
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace; Burning-Tree Emissary,tapped,attacking; Burning-Tree Emissary,tapped,attacking; Clockwork Percussionist,tapped,attacking; Mountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Blood Fountain; Clue Token; Silverbluff Bridge,tapped; Ichor Wellspring; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.823326
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 5
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 52
+Ended: 2026-02-01T12:50:31.142943200
+================================================================================

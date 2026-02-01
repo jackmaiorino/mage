@@ -1,0 +1,1316 @@
+================================================================================
+GAME LOG: game_20260201_125846_0220
+Started: 2026-02-01T12:58:46.565485700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe; Masked Meower]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+ >>> [1] 0.999988 - Play Mountain
+
+VALUE SCORE: 0.181517
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe; Masked Meower]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.016595 - Pass
+     [1] 0.009088 - Cast Lava Dart
+ >>> [2] 0.974317 - Cast Masked Meower
+
+VALUE SCORE: 0.164992
+SELECTED: Cast Masked Meower
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.152501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.150042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.150042
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.148456
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999914 - Pass
+     [1] 0.000086 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.913595
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912449
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912449
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912580
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.912135
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Highway Robbery; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain; Masked Meower]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+ >>> [1] 0.999980 - Play Mountain
+     [2] 0.000007 - Cast Lava Dart
+     [3] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.168764
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Highway Robbery; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.000017 - Pass
+     [1] 0.000045 - Cast Highway Robbery
+ >>> [2] 0.999929 - Plot {1}{R}
+     [3] 0.000009 - Cast Lava Dart
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.151737
+SELECTED: Plot {1}{R}
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.126615
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.126733
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.126397
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999003 - Pass
+     [1] 0.000997 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.852854
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999013 - Pass
+     [1] 0.000987 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.851491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999057 - Pass
+     [1] 0.000943 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.845171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999057 - Pass
+     [1] 0.000943 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.845171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999088 - Pass
+     [1] 0.000912 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.840402
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Mountain; Lava Dart; Guttersnipe; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000014 - Pass
+ >>> [1] 0.999747 - Play Mountain
+     [2] 0.000008 - Cast Lava Dart
+     [3] 0.000231 - Cast Highway Robbery using Plot
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.149049
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Guttersnipe; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.026679 - Pass
+     [1] 0.012432 - Cast Lava Dart
+ >>> [2] 0.603615 - Cast Guttersnipe
+     [3] 0.357273 - Cast Highway Robbery using Plot
+     [4] 0.000001 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.132515
+SELECTED: Cast Guttersnipe
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.104576 - Pass
+ >>> [1] 0.895421 - Cast Highway Robbery using Plot
+     [2] 0.000003 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.088811
+SELECTED: Cast Highway Robbery using Plot
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=RL)
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.087510
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.081561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.081756
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999971 - Pass
+     [1] 0.000029 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.081367
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Saiba Cryptomancer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999504 - Pass
+     [1] 0.000496 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.752067
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999513 - Pass
+     [1] 0.000487 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.749345
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999569 - Pass
+     [1] 0.000431 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.728935
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999630 - Pass
+     [1] 0.000370 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.702592
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999630 - Pass
+     [1] 0.000370 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.702592
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999656 - Pass
+     [1] 0.000344 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.689281
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt; Fiery Temper]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer; Island]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt; Fiery Temper]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.059700 - Pass
+     [1] 0.028168 - Cast Lava Dart
+     [2] 0.272015 - Cast Lightning Bolt
+ >>> [3] 0.640115 - Cast Fiery Temper
+     [4] 0.000002 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.112935
+SELECTED: Cast Fiery Temper
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=RL)
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.055783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped; Mountain,tapped; Guttersnipe]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999972 - Pass
+     [1] 0.000028 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.057226
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped,attacking]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.047731
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped,attacking]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Saiba Cryptomancer,blocking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.046814
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.043518
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999982 - Pass
+     [1] 0.000018 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.672555
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999982 - Pass
+     [1] 0.000018 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.669388
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.645524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999985 - Pass
+     [1] 0.000015 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.645524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped; Mountain,tapped; Guttersnipe,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.634200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt; Mountain]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000022 - Pass
+     [1] 0.000010 - Cast Lava Dart
+     [2] 0.000088 - Cast Lightning Bolt
+ >>> [3] 0.999880 - Play Mountain
+     [4] 0.000000 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.104208
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart; Lightning Bolt]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.223667 - Pass
+     [1] 0.081745 - Cast Lava Dart
+ >>> [2] 0.694582 - Cast Lightning Bolt
+     [3] 0.000006 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.085373
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=RL)
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe; Mountain,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.742189 - Pass
+     [1] 0.257791 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.072651
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe; Mountain,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.740601 - Pass
+     [1] 0.259379 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.074296
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe,tapped,attacking; Mountain,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.744096 - Pass
+     [1] 0.255884 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.070069
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe,tapped,attacking; Mountain,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.744096 - Pass
+     [1] 0.255884 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.070069
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.745658 - Pass
+     [1] 0.254322 - Cast Lava Dart
+     [2] 0.000021 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.066540
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Lava Dart; Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain; Guttersnipe,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.043026 - Pass
+ >>> [1] 0.956956 - Cast Lava Dart
+     [2] 0.000018 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.725151
+SELECTED: Cast Lava Dart
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lava Dart (controller=RL)
+  - [1] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Sneaky Snacker; Lava Dart]
+-> Permanents: [Mountain; Masked Meower; Mountain; Mountain,tapped; Guttersnipe,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.067680 - Pass
+ >>> [1] 0.932302 - Cast Lava Dart
+     [2] 0.000018 - Discard a card, Sacrifice {this}: Draw a card.
+
+VALUE SCORE: 0.653910
+SELECTED: Cast Lava Dart
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 5
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 54
+Ended: 2026-02-01T13:00:14.560495300
+================================================================================

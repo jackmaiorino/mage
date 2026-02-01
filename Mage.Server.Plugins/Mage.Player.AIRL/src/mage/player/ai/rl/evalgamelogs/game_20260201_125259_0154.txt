@@ -1,0 +1,2738 @@
+================================================================================
+GAME LOG: game_20260201_125259_0154
+Started: 2026-02-01T12:52:59.036623400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Faerie Miscreant; Harrier Strix]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Faerie Miscreant; Harrier Strix]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987018
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Faerie Miscreant; Harrier Strix]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000086 - Pass
+ >>> [1] 0.982884 - Cast Faerie Miscreant
+     [2] 0.017030 - Cast Harrier Strix
+
+VALUE SCORE: 0.982516
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000086 - Pass
+
+VALUE SCORE: 0.982516
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000086 - Pass
+
+VALUE SCORE: 0.982516
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000086 - Pass
+
+VALUE SCORE: 0.982516
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000086 - Pass
+
+VALUE SCORE: 0.982516
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000086 - Pass
+
+VALUE SCORE: 0.982516
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000086 - Pass
+
+VALUE SCORE: 0.982516
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix; Counterspell]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Harrier Strix; Counterspell]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.005805 - Pass
+ >>> [1] 0.994195 - Cast Harrier Strix
+
+VALUE SCORE: 0.967813
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005805 - Pass
+
+VALUE SCORE: 0.967813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Moon-Circuit Hacker; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Faerie Miscreant,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000385 - Pass
+ >>> [1] 0.999615 - Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.919717
+SELECTED: Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Nihil Spellbomb; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Nihil Spellbomb; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Nihil Spellbomb; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Nihil Spellbomb; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000385 - Pass
+
+VALUE SCORE: 0.919717
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Nihil Spellbomb; Mountain,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Nihil Spellbomb; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000085 - Pass
+     [1] 0.429156 - Cast Faerie Miscreant
+ >>> [2] 0.570760 - Cast Faerie Seer
+
+VALUE SCORE: 0.845489
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [2] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest,tapped; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Swamp; Forest; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.845489
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000322 - Pass
+ >>> [1] 0.999678 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.772221
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000322 - Pass
+
+VALUE SCORE: 0.772221
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours; Island]
+-> Permanents: [Island; Faerie Seer; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours; Island]
+-> Permanents: [Island; Faerie Seer; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000125 - Cast Faerie Miscreant
+ >>> [2] 0.999874 - Play Island
+
+VALUE SCORE: 0.652183
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Faerie Miscreant; Ninja of the Deep Hours]
+-> Permanents: [Island; Faerie Seer; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.000740 - Pass
+     [1] 0.041436 - Cast Spellstutter Sprite
+ >>> [2] 0.957824 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.634132
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000740 - Pass
+
+VALUE SCORE: 0.634132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000740 - Pass
+
+VALUE SCORE: 0.634132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000740 - Pass
+
+VALUE SCORE: 0.634132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000740 - Pass
+
+VALUE SCORE: 0.634132
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Mountain; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Mountain; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000740 - Pass
+
+VALUE SCORE: 0.634132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+     [1] 0.003517 - Cast Dispel
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996483 - Pass
+
+VALUE SCORE: 0.159973
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer; Moon-Circuit Hacker]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Saiba Cryptomancer; Moon-Circuit Hacker]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.000882 - Pass
+     [1] 0.024155 - Cast Spellstutter Sprite
+ >>> [2] 0.715053 - Cast Saiba Cryptomancer
+     [3] 0.259910 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.539561
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 4 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Writhing Chrysalis; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Writhing Chrysalis; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Writhing Chrysalis; Eldrazi Spawn Token; Writhing Chrysalis; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Writhing Chrysalis; Eldrazi Spawn Token; Writhing Chrysalis; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Writhing Chrysalis; Eldrazi Spawn Token; Writhing Chrysalis; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Drossforge Bridge; Writhing Chrysalis; Eldrazi Spawn Token; Writhing Chrysalis; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Saiba Cryptomancer,blocking]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [3] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [2] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000882 - Pass
+
+VALUE SCORE: 0.539561
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Spellstutter Sprite
+     [2] 0.000044 - Cast Moon-Circuit Hacker
+ >>> [3] 0.999952 - Play Island
+
+VALUE SCORE: 0.523124
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Of One Mind; Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker]
+-> Permanents: [Island; Faerie Seer; Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+ >>> [1] 0.992554 - Cast Of One Mind
+     [2] 0.000566 - Cast Spellstutter Sprite
+     [3] 0.006859 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.514420
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Ichor Wellspring; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Swamp,tapped; Refurbished Familiar,tapped,attacking; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Faerie Seer,blocking; Island,tapped; Faerie Miscreant,blocking; Island,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Swamp,tapped; Refurbished Familiar,tapped,attacking; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.514420
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island; Humbling Elder]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Island; Humbling Elder]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000003 - Cast Spellstutter Sprite
+     [2] 0.000041 - Cast Moon-Circuit Hacker
+     [3] 0.000208 - Cast Faerie Seer
+ >>> [4] 0.999614 - Play Island
+     [5] 0.000133 - Cast Humbling Elder
+
+VALUE SCORE: 0.453789
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000201 - Pass
+     [1] 0.004071 - Cast Spellstutter Sprite
+ >>> [2] 0.451177 - Cast Ninja of the Deep Hours
+     [3] 0.059636 - Cast Moon-Circuit Hacker
+     [4] 0.300120 - Cast Faerie Seer
+     [5] 0.184795 - Cast Humbling Elder
+
+VALUE SCORE: 0.441818
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Writhing Chrysalis,tapped; Swamp,tapped; Refurbished Familiar,tapped; Map Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp; Refurbished Familiar; Map Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp; Refurbished Familiar; Map Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp; Refurbished Familiar; Map Token; Mountain; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar; Map Token; Mountain; Krark-Clan Shaman; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer; Humbling Elder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar; Map Token; Mountain; Krark-Clan Shaman; Swamp,tapped; Nihil Spellbomb; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman; Writhing Chrysalis; Writhing Chrysalis; Writhing Chrysalis; Swamp,tapped; Refurbished Familiar; Map Token; Mountain; Krark-Clan Shaman; Swamp,tapped; Nihil Spellbomb; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 22
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman,tapped,attacking; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Swamp,tapped; Refurbished Familiar,tapped,attacking; Map Token; Mountain; Krark-Clan Shaman; Swamp,tapped; Nihil Spellbomb; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Dispel; Counterspell; Spellstutter Sprite; Moon-Circuit Hacker; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours,blocking]
+[Benchmark-Skill6], life = 22
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Mountain,tapped; Krark-Clan Shaman,tapped,attacking; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Writhing Chrysalis,tapped,attacking; Swamp,tapped; Refurbished Familiar,tapped,attacking; Map Token; Mountain; Krark-Clan Shaman; Swamp,tapped; Nihil Spellbomb; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000201 - Pass
+
+VALUE SCORE: 0.441818
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 119
+Ended: 2026-02-01T12:55:22.350177400
+================================================================================

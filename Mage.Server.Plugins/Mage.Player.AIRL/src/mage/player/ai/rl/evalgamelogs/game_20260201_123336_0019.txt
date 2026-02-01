@@ -1,0 +1,2236 @@
+================================================================================
+GAME LOG: game_20260201_123336_0019
+Started: 2026-02-01T12:33:36.089678700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.001044 - Pass
+ >>> [1] 0.998955 - Play Basilisk Gate
+
+VALUE SCORE: 0.178824
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791559 - Pass
+     [1] 0.208441 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.176160
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791365 - Pass
+     [1] 0.208635 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.176258
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.791932 - Pass
+     [1] 0.208068 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.176050
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lorien Revealed; Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.155322 - Pass
+ >>> [1] 0.844678 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.447439
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Island]
+-> Permanents: [Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155322 - Pass
+
+VALUE SCORE: 0.447439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Island]
+-> Permanents: [Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155322 - Pass
+
+VALUE SCORE: 0.447439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Island]
+-> Permanents: [Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155322 - Pass
+
+VALUE SCORE: 0.447439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Island]
+-> Permanents: [Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.155322 - Pass
+
+VALUE SCORE: 0.447439
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Island; Sea Gate]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Island; Sea Gate]
+-> Permanents: [Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+ >>> [1] 0.879203 - Play Island
+     [2] 0.120756 - Play Sea Gate
+
+VALUE SCORE: 0.166890
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000040 - Pass
+
+VALUE SCORE: 0.166890
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate; Counterspell]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Sea Gate; Counterspell]
+-> Permanents: [Basilisk Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000483 - Pass
+ >>> [1] 0.999517 - Play Sea Gate
+
+VALUE SCORE: 0.147203
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token; Seat of the Synod]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token; Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token; Seat of the Synod; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.147203
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Journey to Nowhere; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.059363 - Pass
+ >>> [1] 0.466442 - Cast Journey to Nowhere
+     [2] 0.008735 - Cast Thraben Charm
+     [3] 0.465459 - Cast Squadron Hawk
+
+VALUE SCORE: 0.099732
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Hero Token,tapped; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar; Makeshift Munitions; Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.059363 - Pass
+
+VALUE SCORE: 0.099732
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell; Azorius Guildgate]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell; Azorius Guildgate]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.000001 - Cast Thraben Charm
+     [2] 0.000034 - Cast Squadron Hawk
+ >>> [3] 0.999961 - Play Azorius Guildgate
+
+VALUE SCORE: 0.067422
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.119530 - Pass
+     [1] 0.014970 - Cast Thraben Charm
+ >>> [2] 0.865500 - Cast Squadron Hawk
+
+VALUE SCORE: 0.036321
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryogen Relic (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Swamp; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryogen Relic (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Swamp; Black Mage's Rod; Seat of the Synod,tapped; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace; Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Vault of Whispers,tapped; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Great Furnace,tapped; Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.119530 - Pass
+
+VALUE SCORE: 0.036321
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+     [0] 0.119580 - Pass
+     [1] 0.015916 - Cast Thraben Charm
+ >>> [2] 0.864504 - Cast Squadron Hawk
+
+VALUE SCORE: 0.078022
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.889881 - Pass
+     [1] 0.110119 - Cast Thraben Charm
+
+VALUE SCORE: 0.043896
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+     [0] 0.121872 - Pass
+     [1] 0.015381 - Cast Thraben Charm
+ >>> [2] 0.862747 - Cast Squadron Hawk
+
+VALUE SCORE: 0.054153
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Seat of the Synod,tapped; Ichor Wellspring; Cryogen Relic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Cryogen Relic; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Cryogen Relic; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Counterspell; Thraben Charm; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Seat of the Synod; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.121872 - Pass
+
+VALUE SCORE: 0.054153
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.020432 - Pass
+     [1] 0.142170 - Cast Squadron Hawk
+ >>> [2] 0.837398 - Cast The Modern Age
+
+VALUE SCORE: 0.028407
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Counterspell; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate; Journey to Nowhere; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020432 - Pass
+
+VALUE SCORE: 0.028407
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Squadron Hawk; Squadron Hawk; Thraben Charm]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate; Journey to Nowhere; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.133936 - Pass
+ >>> [1] 0.850771 - Cast Squadron Hawk
+     [2] 0.015293 - Cast Thraben Charm
+
+VALUE SCORE: -0.036988
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Squadron Hawk; Thraben Charm]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped,attacking; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.133936 - Pass
+
+VALUE SCORE: -0.036988
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 1
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 1
+-> Hand: [Counterspell; Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.897072 - Pass
+     [1] 0.102927 - Cast Thraben Charm
+
+VALUE SCORE: -0.018565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat; Island]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000202 - Pass
+     [1] 0.000023 - Cast Thraben Charm
+     [2] 0.001278 - Cast Squadron Hawk
+     [3] 0.000438 - Cast Sacred Cat
+ >>> [4] 0.998059 - Play Island
+
+VALUE SCORE: -0.030864
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island; Sea Gate; Journey to Nowhere; Azorius Guildgate; The Modern Age; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.107462 - Pass
+     [1] 0.011965 - Cast Thraben Charm
+ >>> [2] 0.652170 - Cast Squadron Hawk
+     [3] 0.226993 - Cast Sacred Cat
+     [4] 0.001410 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.058033
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Squadron Hawk; Sacred Cat]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate; The Modern Age; Island; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.901266 - Pass
+     [1] 0.098734 - Cast Thraben Charm
+
+VALUE SCORE: -0.114870
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate; The Modern Age; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.113201 - Pass
+     [1] 0.012415 - Cast Thraben Charm
+     [2] 0.231267 - Cast Sacred Cat
+ >>> [3] 0.643117 - Cast Squadron Hawk
+
+VALUE SCORE: -0.100463
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113201 - Pass
+
+VALUE SCORE: -0.100463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113201 - Pass
+
+VALUE SCORE: -0.100463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113201 - Pass
+
+VALUE SCORE: -0.100463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Black Mage's Rod; Refurbished Familiar,tapped; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113201 - Pass
+
+VALUE SCORE: -0.100463
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Basilisk Gate; Island,tapped; Sea Gate,tapped; Journey to Nowhere; Azorius Guildgate,tapped; The Modern Age; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Refurbished Familiar; Makeshift Munitions; Ichor Wellspring; Cryogen Relic; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113201 - Pass
+
+VALUE SCORE: -0.100463
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 97
+Ended: 2026-02-01T12:35:31.348779300
+================================================================================

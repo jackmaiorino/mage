@@ -1,0 +1,2420 @@
+================================================================================
+GAME LOG: game_20260201_125512_0177
+Started: 2026-02-01T12:55:12.930027
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Thought Scour; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Thought Scour; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124906
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000205 - Pass
+ >>> [1] 0.999795 - Cast Thought Scour
+
+VALUE SCORE: 1.123313
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000205 - Pass
+
+VALUE SCORE: 1.123313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000205 - Pass
+
+VALUE SCORE: 1.123313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000205 - Pass
+
+VALUE SCORE: 1.123313
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000205 - Pass
+
+VALUE SCORE: 1.123313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000205 - Pass
+
+VALUE SCORE: 1.123313
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000205 - Pass
+
+VALUE SCORE: 1.123313
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island; Brainstorm]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Island
+     [2] 0.000002 - Cast Brainstorm
+
+VALUE SCORE: 1.102010
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002435 - Pass
+ >>> [1] 0.997565 - Cast Brainstorm
+
+VALUE SCORE: 1.099987
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002434 - Pass
+ >>> [1] 0.997566 - Cast Brainstorm
+
+VALUE SCORE: 1.096803
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002434 - Pass
+
+VALUE SCORE: 1.096803
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Brainstorm
+ >>> [2] 0.999998 - Play Island
+
+VALUE SCORE: 1.047843
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Brainstorm]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.002735 - Pass
+ >>> [1] 0.997265 - Cast Brainstorm
+
+VALUE SCORE: 1.044870
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Mental Note]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000232 - Pass
+ >>> [1] 0.999768 - Cast Mental Note
+
+VALUE SCORE: 1.040149
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Ponder]
+-> Permanents: [Island; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+     [1] 0.238305 - Cast Tolarian Terror
+ >>> [2] 0.761686 - Cast Ponder
+
+VALUE SCORE: 1.031834
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod; Black Mage's Rod; Hero Token; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.031834
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island; Mental Note]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Island; Mental Note]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.003162 - Cast Cryptic Serpent
+     [2] 0.000109 - Cast Tolarian Terror
+ >>> [3] 0.996713 - Play Island
+     [4] 0.000017 - Cast Mental Note
+
+VALUE SCORE: 0.983953
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Tolarian Terror; Tolarian Terror; Mental Note]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.962483 - Cast Cryptic Serpent
+     [2] 0.032543 - Cast Tolarian Terror
+     [3] 0.004973 - Cast Mental Note
+
+VALUE SCORE: 0.978976
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Tolarian Terror; Tolarian Terror; Mental Note]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000042 - Pass
+ >>> [1] 0.869277 - Cast Tolarian Terror
+     [2] 0.130681 - Cast Mental Note
+
+VALUE SCORE: 0.963648
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Tolarian Terror; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Cryptic Serpent; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000043 - Pass
+ >>> [1] 0.870587 - Cast Tolarian Terror
+     [2] 0.129370 - Cast Mental Note
+
+VALUE SCORE: 0.953116
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Hero Token,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge; Seat of the Synod; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge; Seat of the Synod; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge; Seat of the Synod,tapped; Hero Token; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Seat of the Synod,tapped; Hero Token; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Tolarian Terror]
+[Benchmark-Skill6], life = 22
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Hero Token; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Krark-Clan Shaman; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.953116
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note; Ponder]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note; Ponder]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+     [1] 0.035964 - Cast Mental Note
+ >>> [2] 0.964021 - Cast Ponder
+
+VALUE SCORE: 0.929594
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note; Deem Inferior]
+-> Permanents: [Island; Island; Island,tapped; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000150 - Pass
+     [1] 0.332313 - Cast Mental Note
+ >>> [2] 0.667537 - Cast Deem Inferior
+
+VALUE SCORE: 0.920754
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000483 - Pass
+ >>> [1] 0.999517 - Cast Mental Note
+
+VALUE SCORE: 0.907811
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge; Blood Token; Drossforge Bridge,tapped; Vault of Whispers; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge; Blood Token; Drossforge Bridge,tapped; Vault of Whispers; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000483 - Pass
+
+VALUE SCORE: 0.907811
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note; Island]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note; Island]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000011 - Cast Mental Note
+ >>> [2] 0.999989 - Play Island
+
+VALUE SCORE: 0.848974
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Mental Note]
+-> Permanents: [Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000710 - Pass
+ >>> [1] 0.999290 - Cast Mental Note
+
+VALUE SCORE: 0.840524
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel; Tolarian Terror]
+-> Permanents: [Island; Island; Island,tapped; Island; Island]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000093 - Pass
+ >>> [1] 0.999907 - Cast Tolarian Terror
+
+VALUE SCORE: 0.819644
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 0.819644
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 0.819644
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Vault of Whispers,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 0.819644
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Counterspell; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000233 - Pass
+ >>> [1] 0.999710 - Cast Counterspell
+     [2] 0.000057 - Cast Dispel
+
+VALUE SCORE: 0.462780
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000233 - Pass
+
+VALUE SCORE: 0.462780
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000233 - Pass
+
+VALUE SCORE: 0.462780
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000233 - Pass
+
+VALUE SCORE: 0.462780
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000233 - Pass
+
+VALUE SCORE: 0.462780
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000233 - Pass
+
+VALUE SCORE: 0.462780
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999997 - Cast Cryptic Serpent
+
+VALUE SCORE: 0.803460
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.803460
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.803460
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 27
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.803460
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.803460
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+     [1] 0.165292 - Cast Dispel
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.834708 - Pass
+
+VALUE SCORE: 0.406961
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thought Scour]
+-> Permanents: [Island; Island; Island; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thought Scour]
+-> Permanents: [Island; Island; Island; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.001080 - Pass
+ >>> [1] 0.998920 - Cast Thought Scour
+
+VALUE SCORE: 0.650885
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.614224
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge; Refurbished Familiar; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Ichor Wellspring; Mistvault Bridge; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Mistvault Bridge,tapped; Blood Token; Drossforge Bridge; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Mistvault Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Mistvault Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Mistvault Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Mistvault Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Mistvault Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island,tapped; Island; Island; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.614224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Murmuring Mystic]
+-> Permanents: [Island; Island; Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Murmuring Mystic]
+-> Permanents: [Island; Island; Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Cast Murmuring Mystic
+
+VALUE SCORE: 0.625012
+SELECTED: Cast Murmuring Mystic
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror; Cryptic Serpent; Island; Murmuring Mystic]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 0.625012
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island; Murmuring Mystic]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 0.625012
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island; Murmuring Mystic]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Blood Token; Drossforge Bridge,tapped; Clue Token; Drossforge Bridge,tapped; Blood Fountain; Blood Token; Ichor Wellspring; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000011 - Pass
+
+VALUE SCORE: 0.625012
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 9
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 106
+Ended: 2026-02-01T12:57:54.510551200
+================================================================================

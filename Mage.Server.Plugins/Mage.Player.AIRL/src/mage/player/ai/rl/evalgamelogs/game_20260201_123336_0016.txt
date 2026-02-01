@@ -1,0 +1,3757 @@
+================================================================================
+GAME LOG: game_20260201_123336_0016
+Started: 2026-02-01T12:33:36.089678700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Idyllic Beachfront; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Idyllic Beachfront; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+     [1] 0.026682 - Play Citadel Gate
+ >>> [2] 0.973280 - Play Idyllic Beachfront
+
+VALUE SCORE: 0.178673
+SELECTED: Play Idyllic Beachfront
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.178673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.178673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.178673
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.178673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.178673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat]
+-> Permanents: [Idyllic Beachfront,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.178673
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat; Counterspell]
+-> Permanents: [Idyllic Beachfront]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat; Counterspell]
+-> Permanents: [Idyllic Beachfront]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001963 - Pass
+ >>> [1] 0.987340 - Play Citadel Gate
+     [2] 0.010697 - Cast Sacred Cat
+
+VALUE SCORE: 0.162635
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Sacred Cat; Counterspell]
+-> Permanents: [Idyllic Beachfront; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.163217 - Pass
+ >>> [1] 0.836783 - Cast Sacred Cat
+
+VALUE SCORE: 0.157448
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.163217 - Pass
+
+VALUE SCORE: 0.157448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.163217 - Pass
+
+VALUE SCORE: 0.157448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.163217 - Pass
+
+VALUE SCORE: 0.157448
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.163217 - Pass
+
+VALUE SCORE: 0.157448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.163217 - Pass
+
+VALUE SCORE: 0.157448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.163217 - Pass
+
+VALUE SCORE: 0.157448
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; The Modern Age; Squadron Hawk; Counterspell; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.016667 - Pass
+ >>> [1] 0.823337 - Cast The Modern Age
+     [2] 0.157236 - Cast Squadron Hawk
+     [3] 0.002760 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.149680
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped,attacking; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped,attacking; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; The Modern Age; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Sacred Cat,tapped; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Counterspell; Preordain; Citadel Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Sacred Cat; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Counterspell; Preordain; Citadel Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Sacred Cat; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016667 - Pass
+
+VALUE SCORE: 0.149680
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Preordain; Citadel Gate; Citadel Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Sacred Cat; The Modern Age]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.003909 - Pass
+     [1] 0.027685 - Cast Squadron Hawk
+     [2] 0.104377 - Cast Preordain
+ >>> [3] 0.864029 - Play Citadel Gate
+
+VALUE SCORE: 0.105421
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Preordain; Citadel Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Sacred Cat; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.028959 - Pass
+     [1] 0.203030 - Cast Squadron Hawk
+ >>> [2] 0.768011 - Cast Preordain
+
+VALUE SCORE: 0.090800
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Sacred Cat; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Sacred Cat; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Sacred Cat; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Sacred Cat; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Sacred Cat; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 21
+-> Hand: [Counterspell; Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk; Sea Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk; Sea Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.028959 - Pass
+
+VALUE SCORE: 0.090800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk; Sea Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.001517 - Pass
+     [1] 0.009095 - Cast Squadron Hawk
+     [2] 0.225271 - Play Citadel Gate
+ >>> [3] 0.759147 - Play Sea Gate
+     [4] 0.004970 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.029724
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.103794 - Pass
+ >>> [1] 0.572899 - Cast Squadron Hawk
+     [2] 0.323307 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.080700
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.103794 - Pass
+
+VALUE SCORE: -0.080700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.263532 - Pass
+ >>> [1] 0.736468 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.117646
+SELECTED: Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryogen Relic (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryogen Relic (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [2] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.263532 - Pass
+
+VALUE SCORE: -0.117646
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Citadel Gate; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007787 - Pass
+ >>> [1] 0.890334 - Play Citadel Gate
+     [2] 0.038243 - Cast Squadron Hawk
+     [3] 0.063636 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.128168
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Squadron Hawk; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.072083 - Pass
+     [1] 0.332401 - Cast Squadron Hawk
+ >>> [2] 0.595516 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.168628
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.072083 - Pass
+
+VALUE SCORE: -0.168628
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.192700 - Pass
+ >>> [1] 0.807300 - Cast Squadron Hawk
+
+VALUE SCORE: -0.225620
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 19
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Squadron Hawk; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Squadron Hawk,blocking]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.192700 - Pass
+
+VALUE SCORE: -0.225620
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.072184 - Pass
+     [1] 0.326648 - Cast Squadron Hawk
+ >>> [2] 0.601168 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.192851
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Myr Enforcer; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.072184 - Pass
+
+VALUE SCORE: -0.192851
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.191965 - Pass
+ >>> [1] 0.808035 - Cast Squadron Hawk
+
+VALUE SCORE: -0.238958
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 17
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.191965 - Pass
+
+VALUE SCORE: -0.238958
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000486 - Pass
+     [1] 0.002064 - Cast Squadron Hawk
+ >>> [2] 0.997450 - Play Island
+
+VALUE SCORE: -0.237642
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.199451 - Pass
+ >>> [1] 0.800549 - Cast Squadron Hawk
+
+VALUE SCORE: -0.265591
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.199451 - Pass
+
+VALUE SCORE: -0.265591
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.211165 - Pass
+ >>> [1] 0.788835 - Cast Squadron Hawk
+
+VALUE SCORE: -0.306597
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.211165 - Pass
+
+VALUE SCORE: -0.306597
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.220526 - Pass
+ >>> [1] 0.779474 - Cast Squadron Hawk
+
+VALUE SCORE: -0.334438
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Silverbluff Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.220526 - Pass
+
+VALUE SCORE: -0.334438
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000463 - Pass
+     [1] 0.001958 - Cast Squadron Hawk
+ >>> [2] 0.997578 - Play Island
+
+VALUE SCORE: -0.250792
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.200168 - Pass
+ >>> [1] 0.799832 - Cast Squadron Hawk
+
+VALUE SCORE: -0.279978
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 11
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.200168 - Pass
+
+VALUE SCORE: -0.279978
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.211665 - Pass
+ >>> [1] 0.788335 - Cast Squadron Hawk
+
+VALUE SCORE: -0.316482
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 11
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.211665 - Pass
+
+VALUE SCORE: -0.316482
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.221810 - Pass
+ >>> [1] 0.778190 - Cast Squadron Hawk
+
+VALUE SCORE: -0.346224
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 11
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge; Seat of the Synod]
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge; Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge; Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Ichor Wellspring; Krark-Clan Shaman; Drossforge Bridge,tapped; Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Krark-Clan Shaman; Drossforge Bridge,tapped; Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Krark-Clan Shaman; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221810 - Pass
+
+VALUE SCORE: -0.346224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.007120 - Pass
+     [1] 0.030438 - Cast Squadron Hawk
+ >>> [2] 0.962442 - Play Citadel Gate
+
+VALUE SCORE: -0.252445
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.202120 - Pass
+ >>> [1] 0.797880 - Cast Squadron Hawk
+
+VALUE SCORE: -0.296228
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island,tapped; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.202120 - Pass
+
+VALUE SCORE: -0.296228
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.212612 - Pass
+ >>> [1] 0.787388 - Cast Squadron Hawk
+
+VALUE SCORE: -0.326823
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.212612 - Pass
+
+VALUE SCORE: -0.326823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.221475 - Pass
+ >>> [1] 0.778525 - Cast Squadron Hawk
+
+VALUE SCORE: -0.354514
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #150 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.221475 - Pass
+
+VALUE SCORE: -0.354514
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Squadron Hawk; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island; Citadel Gate]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #151 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Squadron Hawk; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island; Citadel Gate]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.161195 - Pass
+ >>> [1] 0.612005 - Cast Squadron Hawk
+     [2] 0.218016 - Cast Lorien Revealed
+     [3] 0.008784 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.319366
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #152 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 2
+-> Hand: [Squadron Hawk; Lorien Revealed]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island,tapped; Citadel Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945817 - Pass
+     [1] 0.054183 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.355622
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #153 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island; Island,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.166981 - Pass
+     [1] 0.217497 - Cast Lorien Revealed
+     [2] 0.009499 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.606023 - Cast Squadron Hawk
+
+VALUE SCORE: -0.347308
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #154 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.942768 - Pass
+     [1] 0.057232 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.378445
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #155 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate; Citadel Gate; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.219810 - Pass
+     [1] 0.013184 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.767006 - Cast Squadron Hawk
+
+VALUE SCORE: -0.371473
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #156 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.939826 - Pass
+     [1] 0.060174 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.395397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #157 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.224322 - Pass
+     [1] 0.014129 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.761549 - Cast Squadron Hawk
+
+VALUE SCORE: -0.389184
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #158 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #159 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #160 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #161 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #162 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge; Black Mage's Rod; Hero Token; Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #163 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge; Black Mage's Rod; Hero Token; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #164 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge; Black Mage's Rod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #165 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #166 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge; Refurbished Familiar; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #167 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: [Lorien Revealed; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Idyllic Beachfront,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Vector Glider,tapped; Sea Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Journey to Nowhere; Island,tapped; Island,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Mistvault Bridge,tapped; Swamp,tapped; Hunter's Blowgun; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.224322 - Pass
+
+VALUE SCORE: -0.389184
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 11
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 167
+Ended: 2026-02-01T12:38:22.774885500
+================================================================================

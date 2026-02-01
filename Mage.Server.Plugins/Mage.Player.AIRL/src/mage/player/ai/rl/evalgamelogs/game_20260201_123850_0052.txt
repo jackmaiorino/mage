@@ -1,0 +1,1015 @@
+================================================================================
+GAME LOG: game_20260201_123850_0052
+Started: 2026-02-01T12:38:50.634638600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic; Fyndhorn Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic; Fyndhorn Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894734
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.069369 - Cast Elvish Mystic
+ >>> [2] 0.930628 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.891391
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891391
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.891391
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999986 - Play Snow-Covered Forest
+     [2] 0.000008 - Cast Priest of Titania
+     [3] 0.000004 - Cast Elvish Mystic
+     [4] 0.000002 - Cast Llanowar Elves
+
+VALUE SCORE: 0.891791
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.549904 - Cast Priest of Titania
+     [2] 0.313101 - Cast Elvish Mystic
+     [3] 0.136979 - Cast Llanowar Elves
+
+VALUE SCORE: 0.888500
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000036 - Pass
+ >>> [1] 0.689576 - Cast Elvish Mystic
+     [2] 0.310388 - Cast Llanowar Elves
+
+VALUE SCORE: 0.882142
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.882142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.882142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.882142
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.882142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.882142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.882142
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000018 - Cast Avenging Hunter
+     [2] 0.000008 - Cast Priest of Titania
+     [3] 0.000002 - Cast Llanowar Elves
+ >>> [4] 0.999972 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.887602
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000008 - Pass
+ >>> [1] 0.656937 - Cast Avenging Hunter
+     [2] 0.274230 - Cast Priest of Titania
+     [3] 0.068825 - Cast Llanowar Elves
+
+VALUE SCORE: 0.884236
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 20
+-> Hand: [Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.884236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 20
+-> Hand: [Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.884236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.884236
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000030 - Pass
+ >>> [1] 0.786845 - Cast Priest of Titania
+     [2] 0.213125 - Cast Llanowar Elves
+
+VALUE SCORE: 0.847867
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000141 - Pass
+ >>> [1] 0.999859 - Cast Llanowar Elves
+
+VALUE SCORE: 0.845738
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000141 - Pass
+
+VALUE SCORE: 0.845738
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000141 - Pass
+
+VALUE SCORE: 0.845738
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000141 - Pass
+
+VALUE SCORE: 0.845738
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000141 - Pass
+
+VALUE SCORE: 0.845738
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000141 - Pass
+
+VALUE SCORE: 0.845738
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000141 - Pass
+
+VALUE SCORE: 0.845738
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999993 - Play Snow-Covered Forest
+     [2] 0.000007 - Cast Priest of Titania
+
+VALUE SCORE: 0.862825
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Llanowar Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000035 - Pass
+ >>> [1] 0.999965 - Cast Priest of Titania
+
+VALUE SCORE: 0.859526
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Elvish Mystic,tapped,attacking; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Priest of Titania,tapped,attacking; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Elvish Mystic,tapped,attacking; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Priest of Titania,tapped,attacking; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.859526
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Priest of Titania; Elvish Mystic; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.005278 - Pass
+ >>> [1] 0.847963 - Cast Nyxborn Hydra
+     [2] 0.146758 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.860692
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Priest of Titania; Elvish Mystic; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005278 - Pass
+
+VALUE SCORE: 0.860692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Elvish Mystic,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Nyxborn Hydra]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005278 - Pass
+
+VALUE SCORE: 0.860692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Elvish Mystic,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Priest of Titania,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Nyxborn Hydra]
+[Benchmark-Skill6], life = 3
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005278 - Pass
+
+VALUE SCORE: 0.860692
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 5
+Reason: Benchmark: Deck - Elves.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 43
+Ended: 2026-02-01T12:40:04.270382700
+================================================================================

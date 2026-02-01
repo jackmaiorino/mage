@@ -1,0 +1,1595 @@
+================================================================================
+GAME LOG: game_20260201_125714_0204
+Started: 2026-02-01T12:57:14.452958300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.187815
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.015507 - Pass
+ >>> [1] 0.984493 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.168823
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015507 - Pass
+
+VALUE SCORE: 0.168823
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+     [0] 0.000016 - Pass
+ >>> [1] 0.999972 - Play Mountain
+     [2] 0.000012 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.149092
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.638640 - Pass
+     [1] 0.361360 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.136526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.638673 - Pass
+     [1] 0.361326 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.136628
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.640132 - Pass
+     [1] 0.359868 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.136243
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001999 - Pass
+ >>> [1] 0.998001 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.844979
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Sneaky Snacker; Mountain; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001999 - Pass
+
+VALUE SCORE: 0.844979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Sneaky Snacker; Mountain; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001999 - Pass
+
+VALUE SCORE: 0.844979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Sneaky Snacker; Mountain; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001999 - Pass
+
+VALUE SCORE: 0.844979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Sneaky Snacker; Mountain; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001999 - Pass
+
+VALUE SCORE: 0.844979
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Sneaky Snacker; Mountain; Voldaren Epicure; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Sneaky Snacker; Mountain; Voldaren Epicure; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+ >>> [1] 0.998987 - Play Mountain
+     [2] 0.000917 - Cast Voldaren Epicure
+     [3] 0.000081 - Cast Lightning Bolt
+
+VALUE SCORE: 0.154883
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain; Voldaren Epicure; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.017262 - Pass
+ >>> [1] 0.908348 - Cast Voldaren Epicure
+     [2] 0.074390 - Cast Lightning Bolt
+
+VALUE SCORE: 0.140508
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain; Lightning Bolt]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.254020 - Pass
+ >>> [1] 0.745980 - Cast Lightning Bolt
+
+VALUE SCORE: 0.115962
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.254020 - Pass
+
+VALUE SCORE: 0.115962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.803947 - Pass
+     [1] 0.196053 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.078668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.803966 - Pass
+     [1] 0.196035 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.078805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.804695 - Pass
+     [1] 0.195305 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.078371
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.003093 - Pass
+ >>> [1] 0.996908 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.787834
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003093 - Pass
+
+VALUE SCORE: 0.787834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003093 - Pass
+
+VALUE SCORE: 0.787834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003093 - Pass
+
+VALUE SCORE: 0.787834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003093 - Pass
+
+VALUE SCORE: 0.787834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003093 - Pass
+
+VALUE SCORE: 0.787834
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003093 - Pass
+
+VALUE SCORE: 0.787834
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker; Grab the Prize]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sneaky Snacker; Mountain; Sneaky Snacker; Grab the Prize]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+ >>> [1] 0.992238 - Play Mountain
+     [2] 0.007743 - Cast Grab the Prize
+
+VALUE SCORE: 0.132842
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sneaky Snacker; Sneaky Snacker; Grab the Prize]
+-> Permanents: [Mountain; Voldaren Epicure; Mountain; Mountain; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+     [0] 0.003100 - Pass
+ >>> [1] 0.996900 - Cast Grab the Prize
+
+VALUE SCORE: 0.117072
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=RL)
+[RL], life = 19
+-> Hand: [Sneaky Snacker; Grab the Prize; Fireblast]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Mountain]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.978824 - Pass
+     [1] 0.021176 - Cast Fireblast
+
+VALUE SCORE: 0.080462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sneaky Snacker; Grab the Prize; Fireblast]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain; Voldaren Epicure; Mountain; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+     [0] 0.005956 - Pass
+ >>> [1] 0.993922 - Cast Grab the Prize
+     [2] 0.000122 - Cast Fireblast
+
+VALUE SCORE: 0.072852
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Fireblast; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983521 - Pass
+     [1] 0.016479 - Cast Fireblast
+
+VALUE SCORE: 0.042588
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Fireblast; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983520 - Pass
+     [1] 0.016480 - Cast Fireblast
+
+VALUE SCORE: 0.042833
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Fireblast; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983537 - Pass
+     [1] 0.016463 - Cast Fireblast
+
+VALUE SCORE: 0.042304
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Fireblast; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Masked Vandal; Priest of Titania; Snow-Covered Forest; Quirion Ranger]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Fireblast; Faithless Looting; Lightning Bolt]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Masked Vandal; Priest of Titania; Snow-Covered Forest; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+     [0] 0.226009 - Pass
+ >>> [1] 0.773991 - Cast Fireblast
+
+VALUE SCORE: 0.656976
+SELECTED: Cast Fireblast
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=RL)
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal; Priest of Titania; Snow-Covered Forest; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=RL)
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal; Priest of Titania; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=RL)
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal; Priest of Titania; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Priest of Titania,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped,attacking; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped,attacking; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.226009 - Pass
+
+VALUE SCORE: 0.656976
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Voldaren Epicure; Mountain; Voldaren Epicure; Mountain; Sneaky Snacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Voldaren Epicure; Mountain; Voldaren Epicure; Mountain; Sneaky Snacker]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.014336 - Pass
+     [1] 0.032578 - Cast Faithless Looting
+     [2] 0.084965 - Cast Lightning Bolt
+ >>> [3] 0.868120 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.122255
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 18
+-> Hand: [Faithless Looting; Lightning Bolt]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain; Sneaky Snacker; Voldaren Epicure]
+[Benchmark-Skill6], life = 7
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.210571 - Pass
+ >>> [1] 0.789429 - Cast Lightning Bolt
+
+VALUE SCORE: 0.089645
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker; Voldaren Epicure]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped,attacking; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped,attacking; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal,tapped,attacking; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Masked Vandal,tapped,attacking; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Faithless Looting]
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.210571 - Pass
+
+VALUE SCORE: 0.089645
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Faithless Looting; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Mountain; Voldaren Epicure; Mountain; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Faithless Looting; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Mountain; Voldaren Epicure; Mountain; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.002551 - Pass
+     [1] 0.004122 - Cast Faithless Looting
+ >>> [2] 0.992317 - Cast Grab the Prize
+     [3] 0.001010 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.048110
+SELECTED: Cast Grab the Prize
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Grab the Prize (controller=RL)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002551 - Pass
+
+VALUE SCORE: 0.048110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=RL)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Fyndhorn Elves,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002551 - Pass
+
+VALUE SCORE: 0.048110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Grab the Prize (controller=RL)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Fyndhorn Elves,tapped; Nyxborn Hydra; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002551 - Pass
+
+VALUE SCORE: 0.048110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=RL)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Priest of Titania,tapped; Quirion Ranger; Fyndhorn Elves,tapped; Nyxborn Hydra; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002551 - Pass
+
+VALUE SCORE: 0.048110
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 6
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Elves.dek
+Total Decisions Logged: 69
+Ended: 2026-02-01T12:59:33.257746300
+================================================================================

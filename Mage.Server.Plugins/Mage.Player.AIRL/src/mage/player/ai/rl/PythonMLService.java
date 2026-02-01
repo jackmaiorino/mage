@@ -56,6 +56,7 @@ public class PythonMLService implements PythonModel {
     private final PythonMLBridge learner;
     private final List<InferSlot> inference;
     private final AtomicInteger rr;
+    private final boolean singleBackend;
 
     private final ArrayBlockingQueue<TrainItem> trainQueue;
     private final Thread learnerThread;
@@ -103,6 +104,8 @@ public class PythonMLService implements PythonModel {
     }
 
     private PythonMLService() {
+        String backendMode = EnvConfig.str("PY_BACKEND_MODE", "multi").trim().toLowerCase();
+        this.singleBackend = "single".equals(backendMode);
         int inferWorkers = Math.max(0, EnvConfig.i32("INFER_WORKERS", 4));
         int basePort = EnvConfig.i32("PY4J_BASE_PORT", 25334);
         int trainQueueMax = Math.max(8, EnvConfig.i32("TRAIN_QUEUE_MAX_EPISODES", 256));
@@ -117,9 +120,15 @@ public class PythonMLService implements PythonModel {
         // Learner micro-batching: drain multiple completed episodes per train() call to improve GPU utilization.
         this.learnerBatchMaxEpisodes = Math.max(1, EnvConfig.i32("LEARNER_BATCH_MAX_EPISODES", 8));
         this.learnerBatchMaxSteps = Math.max(128, EnvConfig.i32("LEARNER_BATCH_MAX_STEPS", 4096));
-        // Allow disabling reloads entirely with MODEL_RELOAD_EVERY_MS=0
+        // Allow disabling reloads entirely with MODEL_RELOAD_EVERY_MS=0.
+        // In single-backend mode we don't spin inference workers, so periodic reload is unnecessary.
         long reloadMs = EnvConfig.i32("MODEL_RELOAD_EVERY_MS", 2000);
-        this.reloadEveryMs = reloadMs <= 0 ? 0 : Math.max(200, reloadMs);
+        if (singleBackend) {
+            this.reloadEveryMs = 0L;
+            inferWorkers = 0;
+        } else {
+            this.reloadEveryMs = reloadMs <= 0 ? 0 : Math.max(200, reloadMs);
+        }
 
         this.learner = PythonMLBridge.createAdditionalBridge(basePort, "learner", false);
 
@@ -178,8 +187,11 @@ public class PythonMLService implements PythonModel {
                     continue;
                 }
 
-                // Acquire GPU lock for entire training burst (hold until queue is empty)
-                learner.acquireGPULock();
+                // Multi-backend: acquire GPU lock for entire training burst (hold until queue is empty).
+                // Single-backend: Python-side mutex handles "training pauses inference".
+                if (!singleBackend) {
+                    learner.acquireGPULock();
+                }
                 try {
                     // Process all available episodes in queue while holding GPU lock
                     boolean hasMoreWork = true;
@@ -251,8 +263,10 @@ public class PythonMLService implements PythonModel {
                         hasMoreWork = (currentFirst != null);
                     }
                 } finally {
-                    // Release GPU lock after training burst completes
-                    learner.releaseGPULock();
+                    if (!singleBackend) {
+                        // Release GPU lock after training burst completes
+                        learner.releaseGPULock();
+                    }
                 }
 
                 // Poll auto-batching telemetry from learner periodically (best-effort).
@@ -302,7 +316,7 @@ public class PythonMLService implements PythonModel {
 
         // Best-effort periodic reload to keep inference workers reasonably fresh.
         long now = System.currentTimeMillis();
-        if (slot != null && reloadEveryMs > 0) {
+        if (!singleBackend && slot != null && reloadEveryMs > 0) {
             if (now - slot.lastReloadMs > reloadEveryMs) {
                 slot.lastReloadMs = now;
                 try {
@@ -320,7 +334,7 @@ public class PythonMLService implements PythonModel {
         PythonMLBatchManager.PredictionResult r = b.scoreCandidates(state, candidateActionIds, candidateFeatures, candidateMask, policyKey);
 
         // Poll auto-batching telemetry from inference workers occasionally (best-effort).
-        if (slot != null) {
+        if (!singleBackend && slot != null) {
             int c = slot.autoBatchPollCounter.incrementAndGet();
             long now2 = System.currentTimeMillis();
             if (c >= 500 || (now2 - slot.lastAutoBatchPollMs) > 5000L) {

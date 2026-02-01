@@ -1,0 +1,2115 @@
+================================================================================
+GAME LOG: game_20260201_124424_0078
+Started: 2026-02-01T12:44:24.255302900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Swamp; Ichor Wellspring; Blood Fountain; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Swamp; Ichor Wellspring; Blood Fountain; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.484735 - Play Silverbluff Bridge
+ >>> [2] 0.515264 - Play Swamp
+
+VALUE SCORE: 0.481421
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Blood Fountain; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.023776 - Pass
+ >>> [1] 0.976224 - Cast Blood Fountain
+
+VALUE SCORE: 0.476869
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023776 - Pass
+
+VALUE SCORE: 0.476869
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Swamp; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Swamp; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.999885 - Play Silverbluff Bridge
+     [2] 0.000109 - Cast Nihil Spellbomb
+     [3] 0.000005 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.449198
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer; Nihil Spellbomb]
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.007734 - Pass
+ >>> [1] 0.959069 - Cast Nihil Spellbomb
+     [2] 0.033197 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.402501
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.060898 - Pass
+ >>> [1] 0.939102 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.394022
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060898 - Pass
+
+VALUE SCORE: 0.394022
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer; Refurbished Familiar]
+-> Permanents: [Swamp; Blood Fountain; Blood Token; Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000069 - Pass
+     [1] 0.007902 - Cast Ichor Wellspring
+     [2] 0.000063 - Cast Galvanic Blast
+ >>> [3] 0.991472 - Cast Refurbished Familiar
+     [4] 0.000494 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.457563
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Galvanic Blast; Myr Enforcer; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Blood Token; Silverbluff Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.113775 - Pass
+     [1] 0.100332 - Cast Galvanic Blast
+ >>> [2] 0.785892 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.451441
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.113775 - Pass
+
+VALUE SCORE: 0.451441
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Great Furnace]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring; Great Furnace]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.000361 - Cast Ichor Wellspring
+ >>> [2] 0.999637 - Play Great Furnace
+
+VALUE SCORE: 0.531035
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001927 - Pass
+     [1] 0.356611 - Cast Ichor Wellspring
+ >>> [2] 0.641462 - Cast Myr Enforcer
+
+VALUE SCORE: 0.527475
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001927 - Pass
+
+VALUE SCORE: 0.527475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001927 - Pass
+
+VALUE SCORE: 0.527475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001927 - Pass
+
+VALUE SCORE: 0.527475
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001927 - Pass
+
+VALUE SCORE: 0.527475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001927 - Pass
+
+VALUE SCORE: 0.527475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001927 - Pass
+
+VALUE SCORE: 0.527475
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring; Nihil Spellbomb]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Ichor Wellspring; Nihil Spellbomb]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001295 - Pass
+     [1] 0.262627 - Cast Ichor Wellspring
+ >>> [2] 0.463104 - Cast Myr Enforcer
+     [3] 0.272974 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.548209
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Myr Enforcer (controller=RL)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Nihil Spellbomb]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001295 - Pass
+
+VALUE SCORE: 0.548209
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Nihil Spellbomb]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.004319 - Pass
+ >>> [1] 0.995681 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.545627
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.020603 - Pass
+ >>> [1] 0.979397 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.536267
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Myr Enforcer,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Myr Enforcer,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020603 - Pass
+
+VALUE SCORE: 0.536267
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Krark-Clan Shaman]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Krark-Clan Shaman]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.003369 - Pass
+ >>> [1] 0.807549 - Cast Ichor Wellspring
+     [2] 0.189082 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.561193
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003369 - Pass
+
+VALUE SCORE: 0.561193
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Krark-Clan Shaman; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.016813 - Pass
+ >>> [1] 0.983187 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.554327
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999954 - Pass
+     [1] 0.000046 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.545059
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.543984
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.543984
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.543148
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998011 - Pass
+     [1] 0.001989 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 1.004439
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998010 - Pass
+     [1] 0.001990 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 1.004541
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998014 - Pass
+     [1] 0.001986 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 1.004263
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Mistvault Bridge]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer; Mistvault Bridge]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000261 - Cast Ichor Wellspring
+     [2] 0.000451 - Cast Myr Enforcer
+ >>> [3] 0.999287 - Play Mistvault Bridge
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.565179
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring; Myr Enforcer]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001521 - Pass
+     [1] 0.366143 - Cast Ichor Wellspring
+ >>> [2] 0.632336 - Cast Myr Enforcer
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.560374
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Ichor Wellspring]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.004106 - Pass
+ >>> [1] 0.995894 - Cast Ichor Wellspring
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.553957
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999954 - Pass
+     [1] 0.000046 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.543973
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Myr Enforcer]
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.002321 - Pass
+ >>> [1] 0.997679 - Cast Myr Enforcer
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.543034
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999956 - Pass
+     [1] 0.000044 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.540780
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.537673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.537673
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.535492
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999945 - Pass
+     [1] 0.000055 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.914902
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.841142
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.865807
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.866061
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.865561
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Refurbished Familiar]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Refurbished Familiar]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+ >>> [1] 0.999583 - Cast Refurbished Familiar
+     [2] 0.000385 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.514810
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000033 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.509837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999967 - Pass
+     [1] 0.000033 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.515304
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped,attacking; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped,attacking; Refurbished Familiar]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.504317
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped,attacking; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped,attacking; Refurbished Familiar]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.504317
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.494474
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.899508
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.899728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999964 - Pass
+     [1] 0.000036 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.863431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Blood Fountain; Silverbluff Bridge; Refurbished Familiar,tapped; Great Furnace; Ichor Wellspring; Krark-Clan Shaman,tapped; Mistvault Bridge; Ichor Wellspring; Myr Enforcer,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999964 - Pass
+     [1] 0.000036 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.861795
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Myr Enforcer]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Myr Enforcer]
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.001917 - Pass
+ >>> [1] 0.969241 - Cast Myr Enforcer
+     [2] 0.028842 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.513379
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp; Blood Fountain; Silverbluff Bridge; Refurbished Familiar; Great Furnace; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Myr Enforcer]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.061891 - Pass
+ >>> [1] 0.938107 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.508698
+SELECTED: {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Silverbluff Bridge,tapped; Refurbished Familiar; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman; Mistvault Bridge,tapped; Ichor Wellspring; Myr Enforcer; Refurbished Familiar; Myr Enforcer]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999978 - Pass
+     [1] 0.000022 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.467267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Mistvault Bridge,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Myr Enforcer]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.438223
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Swamp,tapped; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Ichor Wellspring; Krark-Clan Shaman,tapped,attacking; Mistvault Bridge,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Myr Enforcer]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.436470
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 9
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 90
+Ended: 2026-02-01T12:46:45.065717100
+================================================================================

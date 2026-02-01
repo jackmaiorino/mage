@@ -1,0 +1,3727 @@
+================================================================================
+GAME LOG: game_20260201_123850_0050
+Started: 2026-02-01T12:38:50.075881500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.895459
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000110 - Pass
+     [1] 0.024121 - Cast Nyxborn Hydra
+ >>> [2] 0.975769 - Cast Quirion Ranger
+
+VALUE SCORE: 0.892012
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997521 - Pass
+     [1] 0.002479 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.888022
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997520 - Pass
+     [1] 0.002480 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.888070
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997524 - Pass
+     [1] 0.002476 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.887848
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990161 - Pass
+     [1] 0.009839 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.104091
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990158 - Pass
+     [1] 0.009842 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.104146
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990166 - Pass
+     [1] 0.009834 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.104013
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Quirion Ranger; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000110 - Pass
+     [1] 0.024244 - Cast Nyxborn Hydra
+ >>> [2] 0.975647 - Cast Quirion Ranger
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.892637
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997515 - Pass
+     [1] 0.002485 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.888320
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999814 - Pass
+     [1] 0.000186 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.886018
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999814 - Pass
+     [1] 0.000186 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.886018
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999816 - Pass
+     [1] 0.000184 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.884596
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999295 - Pass
+     [1] 0.000705 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.097063
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999296 - Pass
+     [1] 0.000704 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.096965
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999296 - Pass
+     [1] 0.000704 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.097016
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999296 - Pass
+     [1] 0.000704 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.096877
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000044 - Pass
+     [1] 0.009956 - Cast Nyxborn Hydra
+ >>> [2] 0.990000 - Cast Elvish Mystic
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.892173
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997529 - Pass
+     [1] 0.002471 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.888141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger,tapped,attacking; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999819 - Pass
+     [1] 0.000181 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.883718
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger,tapped,attacking; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999819 - Pass
+     [1] 0.000181 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.883718
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999822 - Pass
+     [1] 0.000178 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.881125
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999334 - Pass
+     [1] 0.000666 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.088660
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 17
+-> Hand: 8 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999335 - Pass
+     [1] 0.000665 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.088412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 17
+-> Hand: 8 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999335 - Pass
+     [1] 0.000665 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.088464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999363 - Pass
+     [1] 0.000638 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.082177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999379 - Pass
+     [1] 0.000621 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.078303
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Nyxborn Hydra
+ >>> [2] 1.000000 - Play Snow-Covered Forest
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.892921
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Wellwisher; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000069 - Pass
+ >>> [1] 0.690178 - Cast Wellwisher
+     [2] 0.016274 - Cast Nyxborn Hydra
+     [3] 0.002462 - Cast Nyxborn Hydra using bestow
+     [4] 0.291016 - Cast Masked Vandal
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.890004
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997626 - Pass
+     [1] 0.002374 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.883057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999828 - Pass
+     [1] 0.000172 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.878936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999828 - Pass
+     [1] 0.000172 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.878936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999831 - Pass
+     [1] 0.000169 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.876444
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999461 - Pass
+     [1] 0.000539 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.059007
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999491 - Pass
+     [1] 0.000509 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.050183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Wellwisher]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999508 - Pass
+     [1] 0.000492 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.045064
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999479 - Pass
+     [1] 0.000521 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.053685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999479 - Pass
+     [1] 0.000521 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.053765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999480 - Pass
+     [1] 0.000520 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.053547
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Timberwatch Elf; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+ >>> [1] 0.920511 - Cast Timberwatch Elf
+     [2] 0.001395 - Cast Nyxborn Hydra
+     [3] 0.000195 - Cast Nyxborn Hydra using bestow
+     [4] 0.025003 - Cast Masked Vandal
+     [5] 0.052892 - Cast Quirion Ranger
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.898099
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997541 - Pass
+     [1] 0.002459 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.888962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999824 - Pass
+     [1] 0.000176 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.884991
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999824 - Pass
+     [1] 0.000176 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.884991
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999827 - Pass
+     [1] 0.000173 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.882463
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999480 - Pass
+     [1] 0.000520 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.053490
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999500 - Pass
+     [1] 0.000500 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.047702
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999550 - Pass
+     [1] 0.000450 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.032277
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999550 - Pass
+     [1] 0.000450 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.032370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,tapped; Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999551 - Pass
+     [1] 0.000449 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.032121
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger; Wellwisher]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Quirion Ranger; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.000036 - Pass
+     [1] 0.009783 - Cast Nyxborn Hydra
+     [2] 0.001397 - Cast Nyxborn Hydra using bestow
+     [3] 0.179796 - Cast Masked Vandal
+     [4] 0.385049 - Cast Quirion Ranger
+ >>> [5] 0.423938 - Cast Wellwisher
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.890195
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.000092 - Pass
+     [1] 0.024029 - Cast Nyxborn Hydra
+ >>> [2] 0.975880 - Cast Quirion Ranger
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.883463
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997703 - Pass
+     [1] 0.002297 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.878702
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997702 - Pass
+     [1] 0.002298 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.878753
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997705 - Pass
+     [1] 0.002295 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.878554
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993289 - Pass
+     [1] 0.006711 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.045329
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994175 - Pass
+     [1] 0.005825 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.023947
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994204 - Pass
+     [1] 0.005796 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.023179
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994506 - Pass
+     [1] 0.005494 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.014935
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,blocking; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994652 - Pass
+     [1] 0.005348 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.010810
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994368 - Pass
+     [1] 0.005632 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 1.018781
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Nyxborn Hydra
+     [2] 0.000000 - Cast Nyxborn Hydra using bestow
+     [3] 0.000001 - Cast Masked Vandal
+ >>> [4] 0.999999 - Play Snow-Covered Forest
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.883996
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Quirion Ranger; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.000192 - Pass
+     [1] 0.049757 - Cast Nyxborn Hydra
+     [2] 0.007205 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.942845 - Cast Masked Vandal
+     [4] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.881323
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.003438 - Pass
+ >>> [1] 0.869613 - Cast Nyxborn Hydra
+     [2] 0.126929 - Cast Nyxborn Hydra using bestow
+     [3] 0.000008 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.000003 - {T}: You gain 1 life for each Elf on the battlefield.
+     [5] 0.000008 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.875319
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994816 - Pass
+     [1] 0.002132 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000843 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.002210 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.867583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994813 - Pass
+     [1] 0.002133 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000843 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.002211 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.867667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994821 - Pass
+     [1] 0.002130 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000842 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.002207 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.867453
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982001 - Pass
+     [1] 0.005952 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002822 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.009225 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.028445
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982115 - Pass
+     [1] 0.005916 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002804 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.009165 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.027504
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983765 - Pass
+     [1] 0.005408 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002549 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.008277 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.013464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Quirion Ranger,blocking; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984235 - Pass
+     [1] 0.005265 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002477 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.008024 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.009346
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983895 - Pass
+     [1] 0.005363 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002529 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.008213 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.012084
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.000026 - Pass
+ >>> [1] 0.999974 - Cast Priest of Titania
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [3] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.855353
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995491 - Pass
+     [1] 0.001893 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000734 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.001882 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.848244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995489 - Pass
+     [1] 0.001894 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000734 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.001883 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.848316
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995497 - Pass
+     [1] 0.001891 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000733 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.001879 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.848088
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.980725 - Pass
+     [1] 0.006374 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.003022 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.009879 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.039504
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982390 - Pass
+     [1] 0.005819 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002763 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.009029 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.024555
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982728 - Pass
+     [1] 0.005707 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002709 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.008855 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 1.021395
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Timberwatch Elf; Wellwisher; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985371 - Pass
+     [1] 0.004902 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002312 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.007415 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.996961
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Timberwatch Elf,blocking; Wellwisher,blocking; Quirion Ranger,blocking; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986548 - Pass
+     [1] 0.004558 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.002149 - {T}: You gain 1 life for each Elf on the battlefield.
+     [3] 0.006745 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.984401
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.986548 - Pass
+
+VALUE SCORE: 0.984401
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000013 - Cast Avenging Hunter
+ >>> [2] 0.999987 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.823007
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+ >>> [1] 0.999988 - Cast Avenging Hunter
+
+VALUE SCORE: 0.819297
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 15
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 15
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 15
+-> Hand: [Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter,blocking]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.819297
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Avenging Hunter; Snow-Covered Forest; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Avenging Hunter; Snow-Covered Forest; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000013 - Cast Avenging Hunter
+ >>> [2] 0.999982 - Play Snow-Covered Forest
+     [3] 0.000005 - Cast Priest of Titania
+
+VALUE SCORE: 0.830867
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Avenging Hunter; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000008 - Pass
+ >>> [1] 0.717508 - Cast Avenging Hunter
+     [2] 0.282484 - Cast Priest of Titania
+
+VALUE SCORE: 0.827355
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 4
+-> Hand: [Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.827355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 4
+-> Hand: [Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.827355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 4
+-> Hand: [Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.827355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000029 - Pass
+ >>> [1] 0.999972 - Cast Priest of Titania
+
+VALUE SCORE: 0.808798
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Nyxborn Hydra; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Nyxborn Hydra,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Nyxborn Hydra,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000029 - Pass
+
+VALUE SCORE: 0.808798
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 5
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Priest of Titania]
+[Benchmark-Skill6], life = 5
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.884053
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 5
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 5
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 5
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Murmuring Mystic,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Nyxborn Hydra; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Masked Vandal,blocking; Nyxborn Hydra,blocking; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.884053
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 14 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lead the Stampede; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lead the Stampede; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.019640 - Cast Lead the Stampede
+ >>> [2] 0.980350 - Cast Avenging Hunter
+
+VALUE SCORE: 0.815565
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.815565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.815565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, Reveal the top ten cards of your library. Put a creature card from among them onto the battlefield with three +1/+1 counters on it. It gains hexproof until your next turn. Then shuffle. <i>(Throne of the Dead Three)</i>) (controller=RL)
+[RL], life = 4
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.815565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000010 - Pass
+
+VALUE SCORE: 0.815565
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+     [1] 0.036786 - Cast Lead the Stampede
+ >>> [2] 0.963193 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.780960
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000527 - Pass
+ >>> [1] 0.999473 - Cast Lead the Stampede
+
+VALUE SCORE: 0.785105
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+     [1] 0.185196 - Cast Masked Vandal
+ >>> [2] 0.814767 - Cast Elvish Mystic
+
+VALUE SCORE: 0.789889
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.789889
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 14, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.789889
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 14, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.789889
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 14 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.789889
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 14, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.789889
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 14, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.789889
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 15 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf; Snow-Covered Forest; Winding Way]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf; Snow-Covered Forest; Winding Way]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Generous Ent; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000001 - Cast Masked Vandal
+     [2] 0.000025 - Cast Timberwatch Elf
+ >>> [3] 0.999974 - Play Snow-Covered Forest
+     [4] 0.000000 - Cast Winding Way
+
+VALUE SCORE: 0.893208
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Timberwatch Elf; Winding Way]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Generous Ent; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.026481 - Cast Masked Vandal
+ >>> [2] 0.965594 - Cast Timberwatch Elf
+     [3] 0.007921 - Cast Winding Way
+
+VALUE SCORE: 0.890336
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000107 - Pass
+ >>> [1] 0.772216 - Cast Masked Vandal
+     [2] 0.227677 - Cast Winding Way
+
+VALUE SCORE: 0.880237
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Masked Vandal (controller=RL)
+[RL], life = 7
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000107 - Pass
+
+VALUE SCORE: 0.880237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Winding Way]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Generous Ent; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000479 - Pass
+ >>> [1] 0.999521 - Cast Winding Way
+
+VALUE SCORE: 0.864195
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Elvish Mystic; Masked Vandal; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.120086 - Cast Elvish Mystic
+     [2] 0.021910 - Cast Masked Vandal
+     [3] 0.043239 - Cast Generous Ent
+     [4] 0.015164 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [5] 0.799597 - Cast Timberwatch Elf
+
+VALUE SCORE: 0.866309
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Elvish Mystic; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+ >>> [1] 0.595381 - Cast Elvish Mystic
+     [2] 0.112173 - Cast Masked Vandal
+     [3] 0.216685 - Cast Generous Ent
+     [4] 0.075748 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.854326
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000036 - Pass
+     [1] 0.278469 - Cast Masked Vandal
+ >>> [2] 0.534695 - Cast Generous Ent
+     [3] 0.186799 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.851334
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 7
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000036 - Pass
+
+VALUE SCORE: 0.851334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.083640 - Cast Masked Vandal
+ >>> [2] 0.916348 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.828826
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.828826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 15, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.828826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 15, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.828826
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 15 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.828826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 15, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.828826
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #150 - Turn 15, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.828826
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 16 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #151 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Masked Vandal; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Avenging Hunter; Elvish Mystic; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000127 - Pass
+ >>> [1] 0.999866 - Cast Masked Vandal
+     [2] 0.000007 - Cast Elvish Mystic
+     [3] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.892733
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #152 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+  - [1] Masked Vandal (controller=RL)
+[RL], life = 10
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997318 - Pass
+     [1] 0.002682 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.878197
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #153 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=RL)
+[RL], life = 10
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997300 - Pass
+     [1] 0.002700 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.879126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #154 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Masked Vandal (controller=RL)
+[RL], life = 10
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997468 - Pass
+     [1] 0.002532 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.868524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #155 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter; Elvish Mystic; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Elvish Mystic; Generous Ent]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953833 - Pass
+     [1] 0.043715 - Cast Elvish Mystic
+     [2] 0.002452 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.870322
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #156 - Turn 16, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Elvish Mystic,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Elvish Mystic,tapped,attacking; Generous Ent,tapped,attacking]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953833 - Pass
+
+VALUE SCORE: 0.870322
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #157 - Turn 16, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest; Priest of Titania,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Elvish Mystic,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Elvish Mystic,tapped,attacking; Generous Ent,tapped,attacking]
+[Benchmark-Skill6], life = 3
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Tolarian Terror,blocking; Cryptic Serpent,blocking; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953833 - Pass
+
+VALUE SCORE: 0.870322
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 16
+Reason: Benchmark: Deck - Elves.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 157
+Ended: 2026-02-01T12:46:33.917683300
+================================================================================

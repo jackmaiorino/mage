@@ -1,0 +1,2069 @@
+================================================================================
+GAME LOG: game_20260201_125447_0175
+Started: 2026-02-01T12:54:47.324660900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Deep Analysis; Counterspell; Counterspell; Thought Scour]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Deep Analysis; Counterspell; Counterspell; Thought Scour]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124975
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deep Analysis; Counterspell; Counterspell; Thought Scour]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+ >>> [1] 0.820261 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.179702 - Cast Thought Scour
+
+VALUE SCORE: 1.123380
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 1.123380
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Deep Analysis; Counterspell; Counterspell; Thought Scour; Island; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999982 - Play Island
+     [2] 0.000018 - Cast Thought Scour
+
+VALUE SCORE: 1.102617
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Thought Scour; Island; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000221 - Pass
+ >>> [1] 0.999779 - Cast Thought Scour
+
+VALUE SCORE: 1.100691
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000221 - Pass
+
+VALUE SCORE: 1.100691
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Llanowar Elves]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Island; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.093884
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Deem Inferior; Tolarian Terror]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000106 - Pass
+ >>> [1] 0.999894 - Cast Deem Inferior
+
+VALUE SCORE: 1.091683
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000106 - Pass
+
+VALUE SCORE: 1.091683
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror; Sleep of the Dead]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Island; Tolarian Terror; Sleep of the Dead]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999996 - Play Island
+     [2] 0.000004 - Cast Sleep of the Dead
+
+VALUE SCORE: 1.076299
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Tolarian Terror; Sleep of the Dead]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000027 - Pass
+     [1] 0.014349 - Cast Deep Analysis
+ >>> [2] 0.957790 - Cast Tolarian Terror
+     [3] 0.027833 - Cast Sleep of the Dead
+
+VALUE SCORE: 1.073917
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 1.073917
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000672 - Cast Deep Analysis
+     [2] 0.001314 - Cast Sleep of the Dead
+ >>> [3] 0.998013 - Cast Cryptic Serpent
+
+VALUE SCORE: 1.069477
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.069477
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead; Lorien Revealed]
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000067 - Pass
+     [1] 0.032546 - Cast Deep Analysis
+     [2] 0.066164 - Cast Sleep of the Dead
+ >>> [3] 0.901224 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.046731
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island; Island; Island,tapped; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000067 - Pass
+
+VALUE SCORE: 1.046731
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island; Island; Island,tapped; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000067 - Pass
+
+VALUE SCORE: 1.046731
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead; Island]
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Sleep of the Dead
+ >>> [2] 0.999996 - Play Island
+
+VALUE SCORE: 1.064887
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Sleep of the Dead]
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000648 - Pass
+     [1] 0.333350 - Cast Deep Analysis
+ >>> [2] 0.666002 - Cast Sleep of the Dead
+
+VALUE SCORE: 1.061725
+SELECTED: Cast Sleep of the Dead
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Island,tapped; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000093 - Pass
+ >>> [1] 0.999907 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 1.049183
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Fyndhorn Elves,blocking; Quirion Ranger,blocking; Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania,tapped; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania; Masked Vandal; Wellwisher; Timberwatch Elf,tapped; Quirion Ranger; Timberwatch Elf; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania; Masked Vandal; Wellwisher; Timberwatch Elf,tapped; Quirion Ranger; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania; Masked Vandal; Wellwisher; Timberwatch Elf,tapped; Quirion Ranger; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Deep Analysis; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000093 - Pass
+
+VALUE SCORE: 1.049183
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Tolarian Terror]
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Deep Analysis; Counterspell; Counterspell; Tolarian Terror]
+-> Permanents: [Island; Island; Island; Tolarian Terror; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.002592 - Pass
+ >>> [1] 0.997408 - Cast Deep Analysis
+
+VALUE SCORE: 0.984668
+SELECTED: Cast Deep Analysis
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Deep Analysis (controller=RL)
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002592 - Pass
+
+VALUE SCORE: 0.984668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=RL)
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002592 - Pass
+
+VALUE SCORE: 0.984668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Deep Analysis (controller=RL)
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002592 - Pass
+
+VALUE SCORE: 0.984668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=RL)
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002592 - Pass
+
+VALUE SCORE: 0.984668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Island; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.972961
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000288 - Pass
+ >>> [1] 0.999712 - Cast Mental Note
+
+VALUE SCORE: 0.965712
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped; Timberwatch Elf,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Llanowar Elves,tapped; Priest of Titania,tapped; Masked Vandal,tapped; Wellwisher,tapped; Timberwatch Elf,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Llanowar Elves; Priest of Titania; Masked Vandal; Wellwisher; Timberwatch Elf; Quirion Ranger; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Counterspell; Counterspell; Tolarian Terror; Brainstorm; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Masked Vandal,tapped,attacking; Wellwisher,tapped,attacking; Timberwatch Elf,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000288 - Pass
+
+VALUE SCORE: 0.965712
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Elves.dek
+Total Decisions Logged: 91
+Ended: 2026-02-01T12:57:23.383343200
+================================================================================

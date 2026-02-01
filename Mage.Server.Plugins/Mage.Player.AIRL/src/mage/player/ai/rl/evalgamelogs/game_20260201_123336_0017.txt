@@ -1,0 +1,3121 @@
+================================================================================
+GAME LOG: game_20260201_123336_0017
+Started: 2026-02-01T12:33:36.089678700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000046 - Pass
+     [1] 0.043940 - Play Basilisk Gate
+ >>> [2] 0.956014 - Play Island
+
+VALUE SCORE: 0.178871
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000046 - Pass
+
+VALUE SCORE: 0.178871
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk; Prismatic Strands]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Island; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk; Prismatic Strands]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.000080 - Pass
+     [1] 0.044447 - Play Basilisk Gate
+ >>> [2] 0.955473 - Play Island
+
+VALUE SCORE: 0.153406
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; The Modern Age; Outlaw Medic; Outlaw Medic; Squadron Hawk; Prismatic Strands]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+     [0] 0.019885 - Pass
+ >>> [1] 0.980115 - Cast The Modern Age
+
+VALUE SCORE: 0.150237
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Prismatic Strands]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm]
+-> Permanents: [Island,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.019885 - Pass
+
+VALUE SCORE: 0.150237
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm; Brainstorm]
+-> Permanents: [Island; Island; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm; Brainstorm]
+-> Permanents: [Island; Island; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.066605 - Pass
+ >>> [1] 0.933395 - Cast Brainstorm
+
+VALUE SCORE: 0.132848
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.066605 - Pass
+
+VALUE SCORE: 0.132848
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Citadel Gate]
+-> Permanents: [Island; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.003756 - Pass
+ >>> [1] 0.996244 - Play Citadel Gate
+
+VALUE SCORE: 0.122789
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island,tapped; The Modern Age; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003756 - Pass
+
+VALUE SCORE: 0.122789
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Basilisk Gate]
+-> Permanents: [Island; Island; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb; Great Furnace,tapped; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Basilisk Gate]
+-> Permanents: [Island; Island; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Nihil Spellbomb; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.871792 - Pass
+     [1] 0.128208 - Cast Thraben Charm
+
+VALUE SCORE: 0.106880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Basilisk Gate]
+-> Permanents: [Island; Island; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.871149 - Pass
+     [1] 0.128851 - Cast Thraben Charm
+
+VALUE SCORE: 0.107587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Basilisk Gate]
+-> Permanents: [Island; Island; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.871149 - Pass
+     [1] 0.128851 - Cast Thraben Charm
+
+VALUE SCORE: 0.107587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Basilisk Gate]
+-> Permanents: [Island; Island; The Modern Age; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.869345 - Pass
+     [1] 0.130655 - Cast Thraben Charm
+
+VALUE SCORE: 0.109809
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere; Basilisk Gate]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.001812 - Pass
+     [1] 0.218188 - Cast Outlaw Medic
+     [2] 0.013527 - Cast Squadron Hawk
+     [3] 0.000255 - Cast Thraben Charm
+     [4] 0.078243 - Cast The Modern Age
+     [5] 0.013872 - Cast Journey to Nowhere
+ >>> [6] 0.674103 - Play Basilisk Gate
+
+VALUE SCORE: 0.099729
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.005630 - Pass
+ >>> [1] 0.666167 - Cast Outlaw Medic
+     [2] 0.041612 - Cast Squadron Hawk
+     [3] 0.000771 - Cast Thraben Charm
+     [4] 0.242560 - Cast The Modern Age
+     [5] 0.043165 - Cast Journey to Nowhere
+     [6] 0.000094 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: 0.088495
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Thraben Charm; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Vector Glider; Basilisk Gate; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.023157 - Pass
+ >>> [1] 0.976843 - Cast The Modern Age
+
+VALUE SCORE: 0.049861
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Thraben Charm; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace; Myr Enforcer; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace; Myr Enforcer; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023157 - Pass
+
+VALUE SCORE: 0.049861
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age; Brainstorm]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age; Brainstorm]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.064730 - Pass
+ >>> [1] 0.935270 - Cast Brainstorm
+
+VALUE SCORE: -0.017198
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; The Modern Age; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064730 - Pass
+
+VALUE SCORE: -0.017198
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; Journey to Nowhere; Preordain]
+-> Permanents: [Island,tapped; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.028240 - Pass
+     [1] 0.158850 - Cast Squadron Hawk
+     [2] 0.227409 - Cast Journey to Nowhere
+ >>> [3] 0.585501 - Cast Preordain
+
+VALUE SCORE: -0.073395
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.069382 - Pass
+     [1] 0.360741 - Cast Squadron Hawk
+ >>> [2] 0.569877 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.116691
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Myr Enforcer,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Outlaw Medic,tapped,attacking; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 25
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Outlaw Medic,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell; Journey to Nowhere]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell; Journey to Nowhere]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069382 - Pass
+
+VALUE SCORE: -0.116691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-Skill6)
+  - [2] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Counterspell; Journey to Nowhere]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.020207 - Pass
+ >>> [1] 0.979793 - Cast Counterspell
+
+VALUE SCORE: -0.057295
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020207 - Pass
+
+VALUE SCORE: -0.057295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020207 - Pass
+
+VALUE SCORE: -0.057295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Vector Glider; Basilisk Gate; Outlaw Medic; Journey to Nowhere; Vector Glider]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.069517 - Pass
+     [1] 0.352413 - Cast Squadron Hawk
+ >>> [2] 0.578070 - Cast Journey to Nowhere
+
+VALUE SCORE: -0.143406
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Outlaw Medic; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped,attacking; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 22
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate,tapped; Vector Glider,tapped; Basilisk Gate,tapped; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069517 - Pass
+
+VALUE SCORE: -0.143406
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Sea Gate]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere; Sea Gate]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.002159 - Pass
+     [1] 0.011692 - Cast Squadron Hawk
+     [2] 0.017690 - Cast Journey to Nowhere
+ >>> [3] 0.968433 - Play Sea Gate
+     [4] 0.000027 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.099834
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Island; Island; Citadel Gate; Vector Glider; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.069647 - Pass
+     [1] 0.349507 - Cast Squadron Hawk
+ >>> [2] 0.580001 - Cast Journey to Nowhere
+     [3] 0.000845 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.147867
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Vector Glider; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped,attacking; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped,attacking; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Vault of Whispers,tapped; Mistvault Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace; Mistvault Bridge; Clue Token; Vault of Whispers; Mistvault Bridge; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace; Mistvault Bridge; Clue Token; Vault of Whispers; Mistvault Bridge; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Squadron Hawk]
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Vector Glider,tapped; Journey to Nowhere; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.069647 - Pass
+
+VALUE SCORE: -0.147867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987913 - Pass
+     [1] 0.012087 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.218524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987913 - Pass
+
+VALUE SCORE: -0.218524
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987911 - Pass
+     [1] 0.012089 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.219520
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987911 - Pass
+
+VALUE SCORE: -0.219520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Clue Token; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+     [0] 0.203431 - Pass
+ >>> [1] 0.796569 - Cast Spell Pierce
+
+VALUE SCORE: -0.006243
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+  - [1] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Vector Glider; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.203431 - Pass
+
+VALUE SCORE: -0.006243
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987273 - Pass
+     [1] 0.012727 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.287164
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987273 - Pass
+
+VALUE SCORE: -0.287164
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers,tapped; Hunter's Blowgun; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987260 - Pass
+     [1] 0.012740 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.288096
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar; Swamp; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar; Swamp; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987260 - Pass
+
+VALUE SCORE: -0.288096
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Spell Pierce]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers; Hunter's Blowgun; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp; Black Mage's Rod; Hero Token; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.181934 - Pass
+ >>> [1] 0.818066 - Cast Spell Pierce
+
+VALUE SCORE: -0.024618
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] Spell Pierce (controller=RL)
+  - [2] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [3] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp; Black Mage's Rod; Hero Token; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [2] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers; Mistvault Bridge; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Vault of Whispers,tapped; Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Mistvault Bridge,tapped; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.181934 - Pass
+
+VALUE SCORE: -0.024618
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987149 - Pass
+     [1] 0.012851 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.288298
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987149 - Pass
+
+VALUE SCORE: -0.288298
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987140 - Pass
+     [1] 0.012861 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.289175
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar; Swamp; Black Mage's Rod; Drossforge Bridge; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge; Refurbished Familiar; Swamp; Black Mage's Rod; Drossforge Bridge; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987140 - Pass
+
+VALUE SCORE: -0.289175
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Silverbluff Bridge,tapped; Refurbished Familiar,tapped,attacking; Swamp; Black Mage's Rod; Drossforge Bridge; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.006657 - Pass
+ >>> [1] 0.993343 - Cast Counterspell
+
+VALUE SCORE: -0.061939
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Mistvault Bridge; Mistvault Bridge; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Drossforge Bridge; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Mistvault Bridge; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Drossforge Bridge; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Drossforge Bridge,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=RL)
+  - [1] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped,attacking; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006657 - Pass
+
+VALUE SCORE: -0.061939
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Sacred Cat]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Sacred Cat]
+-> Permanents: [Island; Island; Citadel Gate; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.329253 - Pass
+ >>> [1] 0.666485 - Cast Sacred Cat
+     [2] 0.004262 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.193623
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987135 - Pass
+     [1] 0.012865 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.227670
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987135 - Pass
+
+VALUE SCORE: -0.227670
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Refurbished Familiar,tapped; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987134 - Pass
+     [1] 0.012866 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.228629
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Makeshift Munitions; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge; Makeshift Munitions; Swamp,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987134 - Pass
+
+VALUE SCORE: -0.228629
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Island; Island; Citadel Gate,tapped; Basilisk Gate; Journey to Nowhere; Journey to Nowhere; Sea Gate; Journey to Nowhere; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mistvault Bridge,tapped; Makeshift Munitions; Swamp,tapped; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.987134 - Pass
+
+VALUE SCORE: -0.228629
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 11
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 135
+Ended: 2026-02-01T12:38:50.054193200
+================================================================================

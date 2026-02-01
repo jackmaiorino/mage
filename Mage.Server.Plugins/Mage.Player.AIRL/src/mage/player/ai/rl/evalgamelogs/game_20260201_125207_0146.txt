@@ -1,0 +1,3150 @@
+================================================================================
+GAME LOG: game_20260201_125207_0146
+Started: 2026-02-01T12:52:07.671593300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987635
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000087 - Pass
+ >>> [1] 0.999913 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.983332
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983332
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Spellstutter Sprite; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999890 - Play Island
+     [2] 0.000110 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.957673
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000088 - Pass
+     [1] 0.053958 - Cast Spellstutter Sprite
+ >>> [2] 0.945954 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.952861
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.952861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.952861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000088 - Pass
+
+VALUE SCORE: 0.952861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Moon-Circuit Hacker]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000296 - Pass
+ >>> [1] 0.999704 - Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.937559
+SELECTED: Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000296 - Pass
+
+VALUE SCORE: 0.937559
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Island; Faerie Miscreant; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Island; Faerie Miscreant; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999741 - Play Island
+     [2] 0.000006 - Cast Spellstutter Sprite
+     [3] 0.000112 - Cast Faerie Miscreant
+     [4] 0.000142 - Cast Faerie Seer
+
+VALUE SCORE: 0.922607
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Island; Faerie Miscreant; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000048 - Pass
+     [1] 0.022680 - Cast Spellstutter Sprite
+     [2] 0.430427 - Cast Faerie Miscreant
+ >>> [3] 0.546845 - Cast Faerie Seer
+
+VALUE SCORE: 0.916968
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Spellstutter Sprite; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island; Island; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.002223 - Pass
+ >>> [1] 0.997777 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.906788
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002223 - Pass
+
+VALUE SCORE: 0.906788
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant; Snap]
+-> Permanents: [Island; Island; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Faerie Miscreant; Snap]
+-> Permanents: [Island; Island; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+     [0] 0.000131 - Pass
+ >>> [1] 0.967016 - Cast Faerie Miscreant
+     [2] 0.032854 - Cast Snap
+
+VALUE SCORE: 0.868961
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Snap]
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+     [0] 0.004144 - Pass
+ >>> [1] 0.995856 - Cast Snap
+
+VALUE SCORE: 0.854556
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Faerie Miscreant]
+-> Permanents: [Island; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004144 - Pass
+
+VALUE SCORE: 0.854556
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+     [0] 0.000142 - Pass
+ >>> [1] 0.999858 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.857419
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,blocking; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest; Wellwisher,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000142 - Pass
+
+VALUE SCORE: 0.857419
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Snap
+ >>> [2] 0.999996 - Play Island
+
+VALUE SCORE: 0.801689
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell; Snap]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.005143 - Pass
+ >>> [1] 0.994857 - Cast Snap
+
+VALUE SCORE: 0.791886
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Snow-Covered Forest; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest; Wellwisher,tapped,attacking; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005143 - Pass
+
+VALUE SCORE: 0.791886
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel; Counterspell; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000167 - Pass
+ >>> [1] 0.999833 - Cast Counterspell
+
+VALUE SCORE: 0.788410
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000163 - Pass
+ >>> [1] 0.999837 - Cast Counterspell
+
+VALUE SCORE: 0.770241
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000163 - Pass
+
+VALUE SCORE: 0.770241
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.797656
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.797656
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel; Faerie Seer]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel; Faerie Seer]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000147 - Pass
+ >>> [1] 0.999853 - Cast Faerie Seer
+
+VALUE SCORE: 0.786351
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island,tapped; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island,tapped; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island,tapped; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island,tapped; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island,tapped; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island,tapped; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 9
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 9
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island,tapped; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000147 - Pass
+
+VALUE SCORE: 0.786351
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.772830
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped,attacking; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.772830
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.720593
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Island; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Island; Island]
+[Benchmark-Skill6], life = 22
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Priest of Titania; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Timberwatch Elf; Timberwatch Elf; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf; Timberwatch Elf; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.720593
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.693847
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant; Island; Faerie Seer; Spellstutter Sprite; Faerie Miscreant; Faerie Miscreant; Island; Island; Faerie Seer; Island; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Island; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Island; Faerie Seer,tapped,attacking; Island; Island; Island]
+[Benchmark-Skill6], life = 23
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Wellwisher,tapped; Elvish Mystic,tapped; Quirion Ranger,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher; Elvish Mystic; Quirion Ranger; Timberwatch Elf; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher; Elvish Mystic; Quirion Ranger; Timberwatch Elf; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher; Elvish Mystic; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher; Elvish Mystic; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 24
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Wellwisher,tapped; Elvish Mystic; Quirion Ranger; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 24
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped; Elvish Mystic,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped,attacking; Snow-Covered Forest; Avenging Hunter,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Dispel; Island]
+-> Permanents: [Island; Island; Faerie Miscreant,tapped; Island; Faerie Seer,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island; Island; Faerie Seer,tapped; Island; Island; Island]
+[Benchmark-Skill6], life = 24
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped; Elvish Mystic,tapped,attacking; Quirion Ranger,tapped,attacking; Timberwatch Elf,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped,attacking; Snow-Covered Forest; Avenging Hunter,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.693847
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 10
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Elves.dek
+Total Decisions Logged: 140
+Ended: 2026-02-01T12:55:26.961119900
+================================================================================

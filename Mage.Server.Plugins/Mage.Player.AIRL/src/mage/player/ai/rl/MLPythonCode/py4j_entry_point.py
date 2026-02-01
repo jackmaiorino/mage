@@ -12,9 +12,11 @@ import queue
 import argparse
 from collections import deque
 import struct
+import random
+from contextlib import nullcontext
 
 # Import new modules
-from logging_utils import logger, LogCategory, TEMP_DIR, script_dir, log_file
+from logging_utils import logger, mulligan_logger, vram_logger, LogCategory, TEMP_DIR, script_dir, log_file, mulligan_log_file, vram_diag_log_file
 from cuda_manager import CUDAManager
 from snapshot_manager import SnapshotManager
 from metrics_collector import MetricsCollector
@@ -25,7 +27,46 @@ from gpu_lock import GPULock
 # Now we can safely log initialization
 logger.info(LogCategory.SYSTEM_INIT, f"Logging to file: {log_file}")
 logger.info(LogCategory.SYSTEM_INIT,
+            f"Mulligan training log file: {mulligan_log_file}")
+logger.info(LogCategory.SYSTEM_INIT,
+            f"VRAM diagnostics log file: {vram_diag_log_file}")
+logger.info(LogCategory.SYSTEM_INIT,
             f"Created temporary directory for shared memory: {TEMP_DIR}")
+
+def _maybe_set_cuda_memory_fraction():
+    """
+    Hard-cap CUDA allocator to avoid silent paging/spill into shared memory.
+    Default: 0.90 (override with CUDA_MEM_FRACTION env var).
+    """
+    try:
+        if not torch.cuda.is_available():
+            return
+        frac_s = os.getenv("CUDA_MEM_FRACTION", "0.90").strip()
+        try:
+            frac = float(frac_s)
+        except Exception:
+            frac = 0.90
+        frac = max(0.05, min(1.0, frac))
+        dev = int(os.getenv("CUDA_MEM_FRACTION_DEVICE", "0"))
+        torch.cuda.set_per_process_memory_fraction(frac, device=dev)
+        try:
+            vram_logger.info(
+                "VRAM",
+                "CudaMemCap set_per_process_memory_fraction=%.3f device=%d",
+                float(frac),
+                int(dev),
+            )
+        except Exception:
+            pass
+    except Exception as e:
+        try:
+            logger.warning(LogCategory.SYSTEM_INIT,
+                           "Failed to set CUDA per-process memory fraction: %s", str(e))
+        except Exception:
+            pass
+
+
+_maybe_set_cuda_memory_fraction()
 
 # ------------------------------
 # Runtime tuning via environment
@@ -166,6 +207,28 @@ class PythonEntryPoint:
         self.device = torch.device(
             'cuda' if torch.cuda.is_available() else 'cpu')
         self.py_role = os.getenv("PY_ROLE", "learner").strip().lower()
+        self.backend_mode = os.getenv(
+            "PY_BACKEND_MODE", "multi").strip().lower()
+        # Single-backend runs inference+training in one process; ensure training pauses inference.
+        self._gpu_mutex = threading.Lock()
+
+        # Mulligan model device toggle (separate from main model device)
+        # Env: MULLIGAN_DEVICE=auto|cpu|cuda
+        mull_dev = os.getenv("MULLIGAN_DEVICE", "auto").strip().lower()
+        if mull_dev in ("cpu",):
+            self.mulligan_device = torch.device("cpu")
+        elif mull_dev in ("cuda", "gpu"):
+            self.mulligan_device = torch.device(
+                "cuda" if torch.cuda.is_available() else "cpu")
+        else:
+            # auto
+            self.mulligan_device = torch.device(
+                "cuda" if torch.cuda.is_available() else "cpu")
+        try:
+            logger.info(LogCategory.MODEL_INIT,
+                        "Mulligan device=%s (requested=%s)", str(self.mulligan_device), str(mull_dev))
+        except Exception:
+            pass
 
         # GPU coordination lock (inter-process)
         self.gpu_lock = GPULock()
@@ -189,6 +252,38 @@ class PythonEntryPoint:
             os.getenv("MULLIGAN_TARGET1_LOG_EVERY", "20"))
         self._mull_target1_hist = deque(
             maxlen=max(1, self._mull_target1_window))
+
+        # ---------------------------------------------------------
+        # Mulligan replay buffer (train in minibatches)
+        # ---------------------------------------------------------
+        self._mull_replay_max_per_class = int(
+            os.getenv("MULLIGAN_REPLAY_MAX_PER_CLASS", "20000"))
+        self._mull_replay_min_samples = int(
+            os.getenv("MULLIGAN_REPLAY_MIN_SAMPLES", "32"))
+        self._mull_replay_batch_size = int(
+            os.getenv("MULLIGAN_REPLAY_BATCH_SIZE", "16"))
+        self._mull_replay_stratified = bool(
+            int(os.getenv("MULLIGAN_REPLAY_STRATIFIED", "1")))
+        self._mull_replay_oversample_minority = bool(
+            int(os.getenv("MULLIGAN_REPLAY_OVERSAMPLE_MINORITY", "1")))
+        self._mull_replay_stats_window = int(
+            os.getenv("MULLIGAN_REPLAY_STATS_WINDOW", "200"))
+        self._mull_target_clamp = bool(
+            int(os.getenv("MULLIGAN_TARGET_CLAMP", "1")))
+
+        self._mull_replay_keep = deque(
+            maxlen=max(1, self._mull_replay_max_per_class))
+        self._mull_replay_mull = deque(
+            maxlen=max(1, self._mull_replay_max_per_class))
+        self._mull_action_hist = deque(maxlen=max(
+            1, self._mull_replay_stats_window))  # 1=KEEP, 0=MULL
+
+        seed = os.getenv("MULLIGAN_REPLAY_SEED", "").strip()
+        try:
+            seed_i = int(seed) if seed else None
+        except Exception:
+            seed_i = None
+        self._mull_rng = np.random.default_rng(seed_i)
 
         # PPO configuration
         self.ppo_epsilon = float(os.getenv('PPO_EPSILON', '0.2'))
@@ -233,7 +328,54 @@ class PythonEntryPoint:
         self._adv_use_running = bool(
             int(os.getenv('ADV_USE_RUNNING_STATS', '1')))  # Enable by default
 
+        # ---------------------------------------------------------
+        # Microbatching + AMP (VRAM pressure control)
+        # ---------------------------------------------------------
+        self.infer_chunk = int(os.getenv("INFER_CHUNK", "256"))
+        self.train_chunk = int(os.getenv("TRAIN_CHUNK", "256"))
+        self.train_multi_chunk = int(os.getenv("TRAIN_MULTI_CHUNK", "256"))
+
+        self.amp_enable = bool(int(os.getenv("AMP_ENABLE", "1")))
+        self.amp_dtype_name = os.getenv("AMP_DTYPE", "bf16").strip().lower()
+        self.amp_use_scaler = False
+        self.amp_scaler = None
+        if torch.cuda.is_available() and str(self.device).startswith("cuda") and self.amp_enable:
+            if self.amp_dtype_name in ("bf16", "bfloat16"):
+                self.amp_dtype = torch.bfloat16
+            else:
+                self.amp_dtype = torch.float16
+                self.amp_use_scaler = True
+            if self.amp_use_scaler:
+                try:
+                    self.amp_scaler = torch.cuda.amp.GradScaler()
+                except Exception:
+                    self.amp_scaler = None
+                    self.amp_use_scaler = False
+
         logger.info(LogCategory.GPU_MEMORY, "Using device: %s", self.device)
+
+    def _log_cuda_mem(self, where: str):
+        """Lightweight CUDA memory snapshot for VRAM creep diagnostics."""
+        try:
+            if not torch.cuda.is_available():
+                return
+            if not str(self.device).startswith("cuda"):
+                return
+            dev = torch.cuda.current_device()
+            alloc = int(torch.cuda.memory_allocated(dev))
+            reserved = int(torch.cuda.memory_reserved(dev))
+            max_alloc = int(torch.cuda.max_memory_allocated(dev))
+            vram_logger.info(
+                "VRAM",
+                "CudaMem %s dev=%d alloc_mb=%.1f reserved_mb=%.1f max_alloc_mb=%.1f",
+                str(where),
+                int(dev),
+                float(alloc) / (1024.0 * 1024.0),
+                float(reserved) / (1024.0 * 1024.0),
+                float(max_alloc) / (1024.0 * 1024.0),
+            )
+        except Exception:
+            pass
 
     # CUDA/profiler methods and properties - delegate to cuda_mgr
     @property
@@ -403,7 +545,7 @@ class PythonEntryPoint:
 
         # vocab_size=65536 (same as main model), embed_dim=32, max_hand=7, max_deck=60
         self.mulligan_model = MulliganNet(
-            vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60).to(self.device)
+            vocab_size=65536, embed_dim=32, max_hand=7, max_deck=60).to(self.mulligan_device)
         self.mulligan_optimizer = torch.optim.Adam(
             self.mulligan_model.parameters(), lr=1e-3)
 
@@ -411,7 +553,7 @@ class PythonEntryPoint:
         if os.path.exists(self.mulligan_model_path):
             try:
                 checkpoint = torch.load(
-                    self.mulligan_model_path, map_location=self.device)
+                    self.mulligan_model_path, map_location=self.mulligan_device)
                 self.mulligan_model.load_state_dict(
                     checkpoint['model_state_dict'])
                 self.mulligan_optimizer.load_state_dict(
@@ -457,6 +599,9 @@ class PythonEntryPoint:
         return self.snapshot_mgr.get_snapshot_model(snap_id)
 
     def _get_policy_model(self, policy_key: str):
+        # Single-backend: guarantee only one GPU model instance (no snapshot models).
+        if self.backend_mode == "single":
+            return self.model
         return self.snapshot_mgr.get_policy_model(policy_key, self.model)
 
     def _maybe_save_snapshot(self):
@@ -510,55 +655,65 @@ class PythonEntryPoint:
             if self.model is None:
                 raise RuntimeError("Model not initialized")
             device = self.device
+            lock_held = False
+            if self.backend_mode == "single":
+                # Single-backend: pause inference while training is updating weights.
+                self._gpu_mutex.acquire()
+                lock_held = True
+            try:
+                seq = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
+                    batch_size, seq_len, d_model)[start:end]
+                mask = np.frombuffer(masks_bytes, dtype='<i4').reshape(
+                    batch_size, seq_len)[start:end]
+                tok_ids = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(
+                    batch_size, seq_len)[start:end]
 
-            seq = np.frombuffer(sequences_bytes, dtype='<f4').reshape(
-                batch_size, seq_len, d_model)[start:end]
-            mask = np.frombuffer(masks_bytes, dtype='<i4').reshape(
-                batch_size, seq_len)[start:end]
-            tok_ids = np.frombuffer(token_ids_bytes, dtype='<i4').reshape(
-                batch_size, seq_len)[start:end]
+                cand_feat = np.frombuffer(candidate_features_bytes, dtype='<f4').reshape(
+                    batch_size, max_candidates, cand_feat_dim)[start:end]
+                cand_ids = np.frombuffer(candidate_ids_bytes, dtype='<i4').reshape(
+                    batch_size, max_candidates)[start:end]
+                cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
+                    batch_size, max_candidates)[start:end]
 
-            cand_feat = np.frombuffer(candidate_features_bytes, dtype='<f4').reshape(
-                batch_size, max_candidates, cand_feat_dim)[start:end]
-            cand_ids = np.frombuffer(candidate_ids_bytes, dtype='<i4').reshape(
-                batch_size, max_candidates)[start:end]
-            cand_mask = np.frombuffer(candidate_mask_bytes, dtype='<i4').reshape(
-                batch_size, max_candidates)[start:end]
+                seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
+                mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
+                tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
+                cand_feat_t = torch.tensor(
+                    cand_feat, dtype=torch.float32, device=device)
+                cand_ids_t = torch.tensor(
+                    cand_ids, dtype=torch.long, device=device)
+                cand_mask_t = torch.tensor(
+                    cand_mask, dtype=torch.bool, device=device)
 
-            seq_t = torch.tensor(seq, dtype=torch.float32, device=device)
-            mask_t = torch.tensor(mask, dtype=torch.bool, device=device)
-            tok_t = torch.tensor(tok_ids, dtype=torch.long, device=device)
-            cand_feat_t = torch.tensor(
-                cand_feat, dtype=torch.float32, device=device)
-            cand_ids_t = torch.tensor(
-                cand_ids, dtype=torch.long, device=device)
-            cand_mask_t = torch.tensor(
-                cand_mask, dtype=torch.bool, device=device)
+                # Release numpy slices immediately
+                del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask
 
-            # Release numpy slices immediately
-            del seq, mask, tok_ids, cand_feat, cand_ids, cand_mask
+                model = self._get_policy_model(policy_key)
+                model.eval()
 
-            model = self._get_policy_model(policy_key)
-            model.eval()
+                if self.backend_mode != "single":
+                    # Multi-backend: inference must only run while GPULock is held (coordinated by Java).
+                    if torch.cuda.is_available() and str(device).startswith("cuda") and not self.gpu_lock.is_locked:
+                        raise RuntimeError(
+                            "GPULock is required for inference. Call acquireGPULock() before scoring.")
 
-            # Hard requirement: inference must only run while GPULock is held
-            if torch.cuda.is_available() and str(device).startswith("cuda") and not self.gpu_lock.is_locked:
-                raise RuntimeError(
-                    "GPULock is required for inference. Call acquireGPULock() before scoring.")
+                with torch.inference_mode():
+                    probs, value = model.score_candidates(
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
 
-            with torch.no_grad():
-                probs, value = model.score_candidates(
-                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+                probs_np = probs.detach().cpu().numpy()
+                value_np = value.detach().cpu().numpy()
 
-            probs_np = probs.detach().cpu().numpy()
-            value_np = value.detach().cpu().numpy()
+                # Release GPU tensors immediately (in this scope where they're defined)
+                del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value
 
-            # Release GPU tensors immediately (in this scope where they're defined)
-            del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t, probs, value
-            # if torch.cuda.is_available():
-            #     torch.cuda.synchronize()
-
-            return probs_np, value_np
+                return probs_np, value_np
+            finally:
+                if lock_held:
+                    try:
+                        self._gpu_mutex.release()
+                    except Exception:
+                        pass
 
         def _score_with_oom_splitting(start: int, end: int):
             n = int(end - start)
@@ -634,7 +789,25 @@ class PythonEntryPoint:
                 raise
 
         try:
-            probs_np, value_np = _score_with_oom_splitting(0, int(batch_size))
+            # Fixed microbatching on the batch dimension (states), to reduce peak activations.
+            n_total = int(batch_size)
+            infer_chunk = int(self.infer_chunk) if hasattr(
+                self, "infer_chunk") else 0
+            if infer_chunk and infer_chunk > 0 and n_total > infer_chunk:
+                probs_parts = []
+                value_parts = []
+                i = 0
+                while i < n_total:
+                    j = min(n_total, i + int(infer_chunk))
+                    p, v = _score_with_oom_splitting(i, j)
+                    probs_parts.append(p)
+                    value_parts.append(v)
+                    i = j
+                probs_np = np.concatenate(probs_parts, axis=0)
+                value_np = np.concatenate(value_parts, axis=0)
+                del probs_parts, value_parts
+            else:
+                probs_np, value_np = _score_with_oom_splitting(0, n_total)
 
             # -------------------------------------------------------
             # Debug: confirm inputs vary + value isn't flatlined
@@ -697,6 +870,7 @@ class PythonEntryPoint:
 
             # Clean up numpy arrays to prevent accumulation
             del probs_np, value_np, out
+            self._log_cuda_mem("scoreCandidatesPolicyFlat:end")
 
             return result_bytes
 
@@ -723,12 +897,17 @@ class PythonEntryPoint:
 
             # Convert to tensor - should be 68 dims: 1 + 7 + 60
             features_tensor = torch.tensor(
-                features, dtype=torch.float32, device=self.device).unsqueeze(0)
+                features, dtype=torch.float32, device=self.mulligan_device).unsqueeze(0)
 
             # Forward pass (no gradient needed for inference)
             self.mulligan_model.eval()
             with torch.no_grad():
-                q_values = self.mulligan_model(features_tensor)  # [1, 2]
+                if self.backend_mode == "single" and str(self.mulligan_device).startswith("cuda"):
+                    with self._gpu_mutex:
+                        q_values = self.mulligan_model(
+                            features_tensor)  # [1, 2]
+                else:
+                    q_values = self.mulligan_model(features_tensor)  # [1, 2]
                 q_keep = q_values[0, 0].item()
                 q_mull = q_values[0, 1].item()
 
@@ -749,11 +928,16 @@ class PythonEntryPoint:
                 self.initializeMulliganModel()
 
             features_tensor = torch.tensor(
-                features, dtype=torch.float32, device=self.device).unsqueeze(0)
+                features, dtype=torch.float32, device=self.mulligan_device).unsqueeze(0)
 
             self.mulligan_model.eval()
             with torch.no_grad():
-                q_values = self.mulligan_model(features_tensor)  # [1, 2]
+                if self.backend_mode == "single" and str(self.mulligan_device).startswith("cuda"):
+                    with self._gpu_mutex:
+                        q_values = self.mulligan_model(
+                            features_tensor)  # [1, 2]
+                else:
+                    q_values = self.mulligan_model(features_tensor)  # [1, 2]
                 q_keep = float(q_values[0, 0].item())
                 q_mull = float(q_values[0, 1].item())
 
@@ -899,6 +1083,10 @@ class PythonEntryPoint:
                             max_candidates,
                             cand_feat_dim):
         """Train on padded candidate decision steps using GAE for advantage estimation."""
+        lock_held = False
+        if self.backend_mode == "single":
+            self._gpu_mutex.acquire()
+            lock_held = True
         try:
             if self.model is None or self.optimizer is None:
                 raise RuntimeError("Model not initialized")
@@ -957,14 +1145,17 @@ class PythonEntryPoint:
             if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "NaN/Inf in input sequence - skipping batch")
+                self._log_cuda_mem("trainCandidatesFlat:skip_seq_nan")
                 return
             if torch.isnan(rewards_t).any() or torch.isinf(rewards_t).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "NaN/Inf in rewards - skipping batch (rewards=%s)", rewards_t.tolist())
+                self._log_cuda_mem("trainCandidatesFlat:skip_rewards_nan")
                 return
             if torch.isnan(cand_feat_t).any() or torch.isinf(cand_feat_t).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "NaN/Inf in candidate features - skipping batch")
+                self._log_cuda_mem("trainCandidatesFlat:skip_candfeat_nan")
                 return
 
             self.model.train()
@@ -986,17 +1177,24 @@ class PythonEntryPoint:
                     logger.info(LogCategory.MODEL_TRAIN,
                                 "Warmup ended: unfroze encoder params")
 
-            self.optimizer.zero_grad()
+            use_amp = bool(self.amp_enable) and torch.cuda.is_available() and str(device).startswith("cuda")
+            autocast_ctx = torch.autocast(
+                device_type="cuda", dtype=self.amp_dtype) if use_amp else nullcontext()
+            scaler = self.amp_scaler if (use_amp and bool(self.amp_use_scaler) and self.amp_scaler is not None) else None
+
+            self.optimizer.zero_grad(set_to_none=True)
 
             # Get new policy probabilities (with gradients)
-            probs, value = self.model.score_candidates(
-                seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+            with autocast_ctx:
+                probs, value = self.model.score_candidates(
+                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
 
             # Check for NaN in model outputs before training
             if torch.isnan(probs).any() or torch.isnan(value).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
                                torch.isnan(probs).any().item(), torch.isnan(value).any().item())
+                self._log_cuda_mem("trainCandidatesFlat:skip_model_nan")
                 return
 
             # Compute advantages using GAE or simple baseline
@@ -1067,6 +1265,7 @@ class PythonEntryPoint:
                                # first 5 rewards
                                batch_size, rewards_t.tolist()[:5],
                                value_detached.min().item(), value_detached.max().item())
+                self._log_cuda_mem("trainCandidatesFlat:skip_adv_nan")
                 return
 
             # Normalize advantages for policy gradient stability
@@ -1188,9 +1387,13 @@ class PythonEntryPoint:
                                loss_value.item() if not torch.isnan(loss_value) else float('nan'),
                                entropy.item() if not torch.isnan(entropy) else float('nan'))
                 self.optimizer.zero_grad()
+                self._log_cuda_mem("trainCandidatesFlat:skip_loss_nan")
                 return
 
-            loss.backward()
+            if scaler is not None:
+                scaler.scale(loss).backward()
+            else:
+                loss.backward()
 
             # -------------------------------------------------------
             # Debug: ensure critic gradients are nonzero
@@ -1240,11 +1443,21 @@ class PythonEntryPoint:
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "Skipping update due to NaN/Inf gradients")
                 self.optimizer.zero_grad()
+                self._log_cuda_mem("trainCandidatesFlat:skip_grad_nan")
                 return
 
+            if scaler is not None:
+                try:
+                    scaler.unscale_(self.optimizer)
+                except Exception:
+                    pass
             torch.nn.utils.clip_grad_norm_(
                 self.model.parameters(), self.model.max_grad_norm)
-            self.optimizer.step()
+            if scaler is not None:
+                scaler.step(self.optimizer)
+                scaler.update()
+            else:
+                self.optimizer.step()
 
             # Log with PPO info if enabled
             if self.use_ppo:
@@ -1330,6 +1543,13 @@ class PythonEntryPoint:
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
             del chosen_indices_t, chosen_count_t, rewards_t, old_logp_t, old_value_t, value_targets, advantages
             del loss, loss_policy, loss_value, entropy
+            try:
+                import gc
+                gc.collect()
+            except Exception:
+                pass
+            if torch.cuda.is_available() and bool(int(os.getenv("CUDA_EMPTY_CACHE_AFTER_TRAIN", "0"))):
+                torch.cuda.empty_cache()
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
 
@@ -1338,12 +1558,19 @@ class PythonEntryPoint:
 
             # Torch profiler step (env-gated)
             self._prof_step("train")
+            self._log_cuda_mem("trainCandidatesFlat:end")
             return True
 
         except Exception as e:
             logger.error(LogCategory.SYSTEM_ERROR,
                          "Error in trainCandidatesFlat: %s", str(e))
             raise
+        finally:
+            if lock_held:
+                try:
+                    self._gpu_mutex.release()
+                except Exception:
+                    pass
 
     def trainCandidatesMultiFlat(self,
                                  sequences_bytes,
@@ -1368,6 +1595,10 @@ class PythonEntryPoint:
         dones marks episode ends (1=end-of-episode), so GAE/returns do not leak across boundaries.
         """
         t_start = time.perf_counter()
+        lock_held = False
+        if self.backend_mode == "single":
+            self._gpu_mutex.acquire()
+            lock_held = True
 
         def _train_slice(start: int, end: int):
             if self.model is None or self.optimizer is None:
@@ -1430,14 +1661,18 @@ class PythonEntryPoint:
             if torch.isnan(seq_t).any() or torch.isinf(seq_t).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "NaN/Inf in input sequence - skipping batch")
+                self._log_cuda_mem("trainCandidatesMultiFlat:skip_seq_nan")
                 return
             if torch.isnan(rewards_t).any() or torch.isinf(rewards_t).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "NaN/Inf in rewards - skipping batch (rewards=%s)", rewards_t.tolist())
+                self._log_cuda_mem("trainCandidatesMultiFlat:skip_rewards_nan")
                 return
             if torch.isnan(cand_feat_t).any() or torch.isinf(cand_feat_t).any():
                 logger.warning(LogCategory.MODEL_TRAIN,
                                "NaN/Inf in candidate features - skipping batch")
+                self._log_cuda_mem(
+                    "trainCandidatesMultiFlat:skip_candfeat_nan")
                 return
 
             self.model.train()
@@ -1462,15 +1697,23 @@ class PythonEntryPoint:
             # GPU lock is acquired by Java learner loop, not here
             # (Learner holds lock for entire training burst)
             try:
-                self.optimizer.zero_grad()
+                use_amp = bool(self.amp_enable) and torch.cuda.is_available() and str(device).startswith("cuda")
+                autocast_ctx = torch.autocast(
+                    device_type="cuda", dtype=self.amp_dtype) if use_amp else nullcontext()
+                scaler = self.amp_scaler if (use_amp and bool(self.amp_use_scaler) and self.amp_scaler is not None) else None
 
-                probs, value = self.model.score_candidates(
-                    seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
+                self.optimizer.zero_grad(set_to_none=True)
+
+                with autocast_ctx:
+                    probs, value = self.model.score_candidates(
+                        seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t)
 
                 if torch.isnan(probs).any() or torch.isnan(value).any():
                     logger.warning(LogCategory.MODEL_TRAIN,
                                    "Model produced NaN outputs - skipping batch (probs_nan=%s, value_nan=%s)",
                                    torch.isnan(probs).any().item(), torch.isnan(value).any().item())
+                    self._log_cuda_mem(
+                        "trainCandidatesMultiFlat:skip_model_nan")
                     return
 
                 value_squeezed = value.squeeze(1)
@@ -1533,6 +1776,7 @@ class PythonEntryPoint:
                 if torch.isnan(advantages).any() or torch.isinf(advantages).any():
                     logger.warning(LogCategory.MODEL_TRAIN,
                                    "NaN/Inf in advantages - skipping batch (batch_size=%d)", batch_size)
+                    self._log_cuda_mem("trainCandidatesMultiFlat:skip_adv_nan")
                     return
 
                 # Normalize advantages using RUNNING statistics (cross-batch)
@@ -1641,9 +1885,14 @@ class PythonEntryPoint:
                                    loss_value.item() if not torch.isnan(loss_value) else float('nan'),
                                    entropy.item() if not torch.isnan(entropy) else float('nan'))
                     self.optimizer.zero_grad()
+                    self._log_cuda_mem(
+                        "trainCandidatesMultiFlat:skip_loss_nan")
                     return
 
-                loss.backward()
+                if scaler is not None:
+                    scaler.scale(loss).backward()
+                else:
+                    loss.backward()
 
                 has_nan_grad = False
                 for param in self.model.parameters():
@@ -1654,11 +1903,22 @@ class PythonEntryPoint:
                     logger.warning(LogCategory.MODEL_TRAIN,
                                    "Skipping update due to NaN/Inf gradients")
                     self.optimizer.zero_grad()
+                    self._log_cuda_mem(
+                        "trainCandidatesMultiFlat:skip_grad_nan")
                     return
 
+                if scaler is not None:
+                    try:
+                        scaler.unscale_(self.optimizer)
+                    except Exception:
+                        pass
                 torch.nn.utils.clip_grad_norm_(
                     self.model.parameters(), self.model.max_grad_norm)
-                self.optimizer.step()
+                if scaler is not None:
+                    scaler.step(self.optimizer)
+                    scaler.update()
+                else:
+                    self.optimizer.step()
             finally:
                 # GPU lock released by Java learner loop after entire burst
                 pass
@@ -1723,6 +1983,13 @@ class PythonEntryPoint:
             del seq_t, mask_t, tok_t, cand_feat_t, cand_ids_t, cand_mask_t
             del chosen_indices_t, chosen_count_t, value_targets, advantages, rewards_t, old_logp_t, old_value_t, dones_t
             del loss, loss_policy, loss_value, entropy
+            try:
+                import gc
+                gc.collect()
+            except Exception:
+                pass
+            if torch.cuda.is_available() and bool(int(os.getenv("CUDA_EMPTY_CACHE_AFTER_TRAIN", "0"))):
+                torch.cuda.empty_cache()
             if torch.cuda.is_available():
                 torch.cuda.synchronize()
 
@@ -1791,6 +2058,27 @@ class PythonEntryPoint:
             start = spans[0][0]
             end = spans[-1][1]
             steps = int(end - start)
+            # Fixed microbatching (episode-aligned) to reduce peak activations / avoid paging cliffs.
+            max_steps_cap = int(os.getenv("TRAIN_MULTI_MAX_STEPS", "512"))
+            if max_steps_cap > 0 and steps > int(max_steps_cap) and len(spans) > 1:
+                groups = []
+                cur = []
+                cur_steps = 0
+                for (s, e) in spans:
+                    st = int(e - s)
+                    if cur and (cur_steps + st) > int(max_steps_cap):
+                        groups.append(cur)
+                        cur = [(s, e)]
+                        cur_steps = st
+                    else:
+                        cur.append((s, e))
+                        cur_steps += st
+                if cur:
+                    groups.append(cur)
+                out = True
+                for g in groups:
+                    out = _train_spans(g) and out
+                return out
             # Proactive paging avoidance: estimate extra VRAM for this slice and split episodes if needed.
             if self.auto_batch_enable and self.auto_avoid_paging and torch.cuda.is_available() and len(spans) > 1:
                 est = 0.0
@@ -1839,12 +2127,19 @@ class PythonEntryPoint:
             # Track timing
             elapsed_ms = (time.perf_counter() - t_start) * 1000.0
             self.metrics.update_timing_metric("train", elapsed_ms)
+            self._log_cuda_mem("trainCandidatesMultiFlat:end")
 
             return result
         except Exception as e:
             logger.error(LogCategory.SYSTEM_ERROR,
                          "Error in trainCandidatesMultiFlat: %s", str(e))
             raise
+        finally:
+            if lock_held:
+                try:
+                    self._gpu_mutex.release()
+                except Exception:
+                    pass
 
     # Persistence methods - delegate to persistence but keep model logic here
     @property
@@ -1908,78 +2203,252 @@ class PythonEntryPoint:
         t_start = time.perf_counter()
         # Use lock to prevent concurrent training (avoids gradient conflicts)
         with self.mulligan_lock:
+            lock_held = False
+            if self.backend_mode == "single" and str(self.mulligan_device).startswith("cuda"):
+                self._gpu_mutex.acquire()
+                lock_held = True
             try:
+                # --------------------------
+                # Parse and enqueue to replay
+                # --------------------------
+                bs = int(batch_size)
+                if bs <= 0:
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan replay skipped - reason=empty_batch bs=%d", int(
+                            bs)
+                    )
+                    return True
+
+                features_np = np.frombuffer(
+                    features_bytes, dtype='<f4').reshape(bs, 68)
+                decisions_np = np.frombuffer(
+                    decisions_bytes, dtype='<f4').reshape(bs)
+                outcomes_np = np.frombuffer(
+                    outcomes_bytes, dtype='<f4').reshape(bs)
+                land_counts_np = np.frombuffer(
+                    land_counts_bytes, dtype='<i4').reshape(bs).astype(np.float32)
+
+                stored = 0
+                dropped_nonfinite = 0
+                for i in range(bs):
+                    f = np.array(features_np[i], dtype=np.float32, copy=True)
+                    d = float(decisions_np[i])
+                    o = float(outcomes_np[i])
+                    lc = float(land_counts_np[i])
+                    if not np.isfinite(f).all() or not np.isfinite([d, o, lc]).all():
+                        dropped_nonfinite += 1
+                        continue
+                    is_keep = bool(d > 0.5)
+                    # Store tuple: (features, action_keep(1/0), outcome, land_count, mulligan_num)
+                    action_keep = 1 if is_keep else 0
+                    mulligan_num = float(f[0]) if f.shape[0] > 0 else 0.0
+                    sample = (f, action_keep, o, lc, mulligan_num)
+                    if is_keep:
+                        self._mull_replay_keep.append(sample)
+                        self._mull_action_hist.append(1)
+                    else:
+                        self._mull_replay_mull.append(sample)
+                        self._mull_action_hist.append(0)
+                    stored += 1
+
+                replay_keep = int(len(self._mull_replay_keep))
+                replay_mull = int(len(self._mull_replay_mull))
+                replay_total = replay_keep + replay_mull
+
+                # Replay-based stats for degenerate gating (windowed over recent samples)
+                hist_n = int(len(self._mull_action_hist))
+                hist_keep_rate = float(
+                    sum(self._mull_action_hist)) / float(hist_n) if hist_n > 0 else 0.0
+                hist_all_same = bool(
+                    hist_keep_rate <= 0.0 or hist_keep_rate >= 1.0) if hist_n > 0 else True
+
+                # Decide whether we will actually do an optimizer step
+                mb = int(max(1, self._mull_replay_batch_size))
+                min_samples = int(max(1, self._mull_replay_min_samples))
+
+                if replay_total < min_samples or replay_total < mb:
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan replay skipped - reason=replay_not_ready stored=%d dropped_nonfinite=%d replay_total=%d keep=%d mull=%d min=%d mb=%d hist_keep_rate=%.3f",
+                        int(stored),
+                        int(dropped_nonfinite),
+                        int(replay_total),
+                        int(replay_keep),
+                        int(replay_mull),
+                        int(min_samples),
+                        int(mb),
+                        float(hist_keep_rate),
+                    )
+                    return True
+
+                # Warmup gating moved to replay stats (not per-call batch)
+                warmup_steps = int(
+                    os.getenv("MULLIGAN_TRAIN_WARMUP_STEPS", "50"))
+                min_keep_rate = float(
+                    os.getenv("MULLIGAN_TRAIN_MIN_KEEP_RATE", "0.10"))
+                max_keep_rate = float(
+                    os.getenv("MULLIGAN_TRAIN_MAX_KEEP_RATE", "0.90"))
+                do_gate = (self.mulligan_train_step_counter < warmup_steps) and (
+                    hist_n >= min(50, self._mull_replay_stats_window))
+                if do_gate and (hist_all_same or hist_keep_rate < min_keep_rate or hist_keep_rate > max_keep_rate):
+                    if hist_all_same:
+                        reason = "replay_warmup_gate_all_same"
+                    elif hist_keep_rate < min_keep_rate:
+                        reason = "replay_warmup_gate_keep_rate_low"
+                    else:
+                        reason = "replay_warmup_gate_keep_rate_high"
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan replay skipped - reason=%s replay_total=%d keep=%d mull=%d hist_keep_rate=%.3f hist_n=%d step=%d/%d",
+                        str(reason),
+                        int(replay_total),
+                        int(replay_keep),
+                        int(replay_mull),
+                        float(hist_keep_rate),
+                        int(hist_n),
+                        int(self.mulligan_train_step_counter),
+                        int(warmup_steps),
+                    )
+                    return True
+
+                # --------------------------
+                # Sample minibatch (stratified)
+                # --------------------------
+                n_keep = 0
+                n_mull = 0
+                if self._mull_replay_stratified:
+                    half = mb // 2
+                    n_keep = min(replay_keep, half)
+                    n_mull = min(replay_mull, mb - n_keep)
+                    # Try to keep it balanced when possible
+                    if n_keep < half and replay_mull > n_mull:
+                        extra = min(replay_mull - n_mull, half - n_keep)
+                        n_mull += extra
+                    if n_mull < half and replay_keep > n_keep:
+                        extra = min(replay_keep - n_keep, half - n_mull)
+                        n_keep += extra
+                    # Fill remainder from whichever has more left
+                    rem = mb - (n_keep + n_mull)
+                    if rem > 0:
+                        if (replay_keep - n_keep) >= (replay_mull - n_mull):
+                            n_keep += min(rem, replay_keep - n_keep)
+                        else:
+                            n_mull += min(rem, replay_mull - n_mull)
+                else:
+                    # Unstratified: just sample from combined pool later
+                    n_keep = min(replay_keep, mb)
+                    n_mull = min(replay_mull, mb - n_keep)
+
+                keep_samples = []
+                mull_samples = []
+                if n_keep > 0:
+                    idx = self._mull_rng.choice(
+                        replay_keep, size=int(n_keep), replace=False)
+                    buf = list(self._mull_replay_keep)
+                    keep_samples = [buf[int(i)] for i in idx]
+                if n_mull > 0:
+                    idx = self._mull_rng.choice(
+                        replay_mull, size=int(n_mull), replace=False)
+                    buf = list(self._mull_replay_mull)
+                    mull_samples = [buf[int(i)] for i in idx]
+                # Oversample minority class (with replacement) to avoid "always keep" drift when mull is rare
+                if self._mull_replay_stratified and self._mull_replay_oversample_minority and mb > 1:
+                    target_half = mb // 2
+                    if replay_mull > 0 and len(mull_samples) < target_half:
+                        need = int(target_half - len(mull_samples))
+                        idx = self._mull_rng.choice(
+                            replay_mull, size=need, replace=True)
+                        buf = list(self._mull_replay_mull)
+                        mull_samples.extend([buf[int(i)] for i in idx])
+                    if replay_keep > 0 and len(keep_samples) < target_half:
+                        need = int(target_half - len(keep_samples))
+                        idx = self._mull_rng.choice(
+                            replay_keep, size=need, replace=True)
+                        buf = list(self._mull_replay_keep)
+                        keep_samples.extend([buf[int(i)] for i in idx])
+
+                batch = keep_samples + mull_samples
+                if not batch:
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan replay skipped - reason=empty_minibatch replay_total=%d keep=%d mull=%d mb=%d",
+                        int(replay_total), int(replay_keep), int(
+                            replay_mull), int(mb)
+                    )
+                    return True
+                random.shuffle(batch)
+
+                feats_mb = np.stack([b[0] for b in batch], axis=0).astype(
+                    np.float32, copy=False)
+                action_keep_mb = np.array(
+                    [b[1] for b in batch], dtype=np.int64)
+                outcomes_mb = np.array([b[2] for b in batch], dtype=np.float32)
+                land_mb = np.array([b[3] for b in batch], dtype=np.float32)
+                mull_num_mb = np.array([b[4] for b in batch], dtype=np.float32)
+
+                mb_size = int(feats_mb.shape[0])
+                mb_keep_rate = float(
+                    (action_keep_mb > 0).mean()) if mb_size > 0 else 0.0
+                outcome_mean = float(
+                    outcomes_mb.mean()) if mb_size > 0 else 0.0
+
+                # Validate minibatch before touching GPU
+                if feats_mb.shape[1] != 68:
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan replay skipped - reason=bad_features_shape mb=%d feat_dim=%d",
+                        int(mb_size), int(feats_mb.shape[1])
+                    )
+                    return True
+                if not np.isfinite(feats_mb).all() or not np.isfinite(outcomes_mb).all() or not np.isfinite(land_mb).all() or not np.isfinite(mull_num_mb).all():
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan replay skipped - reason=non_finite_minibatch mb=%d keep_rate=%.3f outcome_mean=%.3f",
+                        int(mb_size), float(mb_keep_rate), float(outcome_mean)
+                    )
+                    return True
+
+                # Now init model if needed
                 if self.mulligan_model is None:
                     self.initializeMulliganModel()
 
-                # Parse inputs: 1 + 7 + 60 = 68 features per sample
-                features = np.frombuffer(
-                    features_bytes, dtype='<f4').reshape(batch_size, 68)
-                decisions = np.frombuffer(
-                    decisions_bytes, dtype='<f4').reshape(batch_size)
-                outcomes = np.frombuffer(
-                    outcomes_bytes, dtype='<f4').reshape(batch_size)
-                land_counts_np = np.frombuffer(
-                    land_counts_bytes, dtype='<i4').reshape(batch_size).astype(np.float32)
-
-                # Convert to tensors
-                features_t = torch.tensor(
-                    features, dtype=torch.float32, device=self.device)
-                decisions_t = torch.tensor(
-                    decisions, dtype=torch.float32, device=self.device)
-                outcomes_t = torch.tensor(
-                    outcomes, dtype=torch.float32, device=self.device)
-                land_counts_t = torch.tensor(
-                    land_counts_np, dtype=torch.float32, device=self.device)
-
-                # Release numpy arrays immediately (but keep land_counts_np for heuristic below)
-                del features, decisions, outcomes
-
-                # Training mode
+                # --------------------------
+                # Train step on minibatch
+                # --------------------------
                 self.mulligan_model.train()
                 self.mulligan_optimizer.zero_grad()
 
-                # Acquire GPU lock before mulligan training
-                self.gpu_lock.acquire(
-                    timeout=None, process_name=self.process_name)
+                mdev = self.mulligan_device
+                use_gpu_lock = (str(mdev).startswith("cuda")
+                                and self.backend_mode != "single")
+                # Multi-backend + mulligan on GPU: use inter-process GPULock.
+                if use_gpu_lock:
+                    self.gpu_lock.acquire(
+                        timeout=None, process_name=self.process_name)
                 try:
-                    # Q-Learning: Train the Q-value of the action taken toward game outcome
-                    # All decisions get the same game outcome (win=1.0, loss=0.0)
+                    features_t = torch.tensor(
+                        feats_mb, dtype=torch.float32, device=mdev)
+                    action_keep_t = torch.tensor(
+                        action_keep_mb, dtype=torch.long, device=mdev)
+                    outcomes_t = torch.tensor(
+                        outcomes_mb, dtype=torch.float32, device=mdev)
+                    land_counts_t = torch.tensor(
+                        land_mb, dtype=torch.float32, device=mdev)
 
-                    # Forward pass to get Q-values [batch, 2] where [:, 0]=Q_keep, [:, 1]=Q_mull
-                    q_values = self.mulligan_model(
-                        features_t)  # [batch_size, 2]
-
-                    # Extract action indices
-                    # decisions_t: 1.0=keep, 0.0=mulligan
-                    # We want: index 0 for keep (Q_keep), index 1 for mulligan (Q_mull)
-                    # [batch_size] - 0 for keep, 1 for mulligan
-                    action_indices = (decisions_t <= 0.5).long()
-
-                    # Get Q-value for the action taken using gather
-                    # q_values: [batch_size, 2], action_indices: [batch_size] -> [batch_size, 1]
-                    q_taken = q_values.gather(
-                        # [batch_size]
-                        1, action_indices.unsqueeze(1)).squeeze(1)
-
-                    targets = outcomes_t  # [batch_size]
-
-                    # Early label gating to avoid collapse (e.g., always-mull early)
-                    warmup_steps = int(
-                        os.getenv("MULLIGAN_TRAIN_WARMUP_STEPS", "50"))
-                    min_keep_rate = float(
-                        os.getenv("MULLIGAN_TRAIN_MIN_KEEP_RATE", "0.10"))
-                    max_keep_rate = float(
-                        os.getenv("MULLIGAN_TRAIN_MAX_KEEP_RATE", "0.90"))
-                    keep_rate = float((decisions_t > 0.5).float().mean(
-                    ).item()) if decisions_t.numel() > 0 else 0.0
-                    all_same = bool((decisions_t > 0.5).all().item() or (
-                        decisions_t <= 0.5).all().item()) if decisions_t.numel() > 0 else True
-                    if self.mulligan_train_step_counter < warmup_steps and (all_same or keep_rate < min_keep_rate or keep_rate > max_keep_rate):
+                    q_values = self.mulligan_model(features_t)  # [mb, 2]
+                    if q_values is None or q_values.ndim != 2 or q_values.shape[0] != mb_size or q_values.shape[1] != 2:
+                        skip_reason = "bad_q_values_shape"
                         train_count = 0
-                        skipped_count = batch_size
-                        loss = torch.tensor(0.0, device=self.device)
+                        skipped_count = mb_size
+                        loss = torch.tensor(0.0, device=mdev)
                     else:
+                        # action_keep_t: 1=keep, 0=mull -> action_idx: 0=keep, 1=mull
+                        action_indices = (action_keep_t <= 0).long()
+                        q_taken = q_values.gather(
+                            1, action_indices.unsqueeze(1)).squeeze(1)
+                        targets = outcomes_t
+
                         # Mulligan cost shaping (applies to MULL actions)
                         mull_base = float(
                             os.getenv("MULLIGAN_COST_BASE", "0.02"))
@@ -2000,7 +2469,6 @@ class PythonEntryPoint:
                         shaping_scale = max(
                             0.0, 1.0 - (t / max(1.0, land_decay_steps)))
                         shaping_scale = land_init * shaping_scale
-
                         if shaping_scale > 0.0:
                             lc = land_counts_t.clamp(min=0.0, max=7.0)
                             is_keep = (action_indices == 0).float()
@@ -2011,81 +2479,112 @@ class PythonEntryPoint:
                                 (good - 1.0 * low - 0.5 * high)
                             targets = targets + is_keep * land_shaping
 
-                        # Rolling target_1_rate over last N mulligan decisions (for mtg_ai.log)
-                        try:
-                            bits = (targets.detach() >= 0.5).to(
-                                torch.int32).cpu().tolist()
-                            for b in bits:
-                                self._mull_target1_hist.append(int(b))
-                        except Exception:
-                            pass
-                        if self._mull_target1_log_every > 0 and (self.mulligan_train_step_counter % self._mull_target1_log_every == 0):
+                        if self._mull_target_clamp:
+                            targets = targets.clamp(0.0, 1.0)
+
+                        target_mean = float(targets.detach().mean(
+                        ).item()) if targets.numel() > 0 else 0.0
+                        if not torch.isfinite(targets).all().item():
+                            skip_reason = "non_finite_targets"
+                            train_count = 0
+                            skipped_count = mb_size
+                            loss = torch.tensor(0.0, device=mdev)
+                        else:
+                            # Rolling target_1_rate over last N targets
                             try:
-                                n = len(self._mull_target1_hist)
-                                if n > 0:
-                                    rate = float(
-                                        sum(self._mull_target1_hist)) / float(n)
-                                else:
-                                    rate = 0.0
-                                logger.info(
-                                    LogCategory.MODEL_TRAIN,
-                                    "MulliganTarget1 window=%d rate=%.3f (n=%d)",
-                                    int(self._mull_target1_hist.maxlen or 0),
-                                    float(rate),
-                                    int(n)
-                                )
+                                bits = (targets.detach() >= 0.5).to(
+                                    torch.int32).cpu().tolist()
+                                for b in bits:
+                                    self._mull_target1_hist.append(int(b))
                             except Exception:
                                 pass
+                            if self._mull_target1_log_every > 0 and (self.mulligan_train_step_counter % self._mull_target1_log_every == 0):
+                                try:
+                                    n = len(self._mull_target1_hist)
+                                    rate = float(
+                                        sum(self._mull_target1_hist)) / float(n) if n > 0 else 0.0
+                                    mulligan_logger.info(
+                                        LogCategory.MODEL_TRAIN,
+                                        "MulliganTarget1 window=%d rate=%.3f (n=%d)",
+                                        int(self._mull_target1_hist.maxlen or 0),
+                                        float(rate),
+                                        int(n)
+                                    )
+                                except Exception:
+                                    pass
 
-                        # Per-decision weighting: 1/batch_size for each decision
-                        weight_per_decision = 1.0 / batch_size
-
-                        # Huber loss with per-decision weighting
-                        per_sample = F.smooth_l1_loss(
-                            q_taken, targets, reduction='none')
-                        loss = (per_sample * weight_per_decision).sum()
-
-                        train_count = batch_size
-                        skipped_count = 0
+                            loss = F.smooth_l1_loss(
+                                q_taken, targets, reduction='mean')
+                            if not torch.isfinite(loss).all().item():
+                                skip_reason = "non_finite_loss"
+                                train_count = 0
+                                skipped_count = mb_size
+                                loss = torch.tensor(0.0, device=mdev)
+                            else:
+                                skip_reason = ""
+                                train_count = mb_size
+                                skipped_count = 0
 
                     if train_count > 0:
                         loss.backward()
                         torch.nn.utils.clip_grad_norm_(
                             self.mulligan_model.parameters(), 1.0)
                         self.mulligan_optimizer.step()
-                finally:
-                    # Release GPU lock after mulligan training
-                    self.gpu_lock.release(process_name=self.process_name)
 
-                # Clear gradients and set to eval mode
+                    # Q-value stats
+                    with torch.no_grad():
+                        q_keep_mean = q_values[:, 0].mean().item(
+                        ) if q_values is not None and q_values.numel() > 0 else 0.0
+                        q_mull_mean = q_values[:, 1].mean().item(
+                        ) if q_values is not None and q_values.numel() > 0 else 0.0
+                        q_taken_mean = q_taken.mean().item() if 'q_taken' in locals(
+                        ) and q_taken is not None and q_taken.numel() > 0 else 0.0
+                        target_mean = float(targets.detach().mean().item()) if 'targets' in locals(
+                        ) and targets is not None and targets.numel() > 0 else 0.0
+
+                finally:
+                    if use_gpu_lock:
+                        self.gpu_lock.release(process_name=self.process_name)
+
+                # Switch back to eval for inference safety
                 self.mulligan_optimizer.zero_grad()
                 self.mulligan_model.eval()
 
-                # Calculate Q-value statistics for logging
-                with torch.no_grad():
-                    q_keep_mean = q_values[:, 0].mean().item()
-                    q_mull_mean = q_values[:, 1].mean().item()
-                    q_taken_mean = q_taken.mean().item()
+                # Logging: train vs skip
+                if train_count > 0:
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan Q-learning trained - loss=%.4f, mb=%d, keep_rate=%.3f, replay_total=%d (keep=%d mull=%d), hist_keep_rate=%.3f, target_mean=%.3f, Q_keep_avg=%.3f, Q_mull_avg=%.3f, Q_taken_avg=%.3f",
+                        float(loss.item()),
+                        int(train_count),
+                        float(mb_keep_rate),
+                        int(replay_total),
+                        int(replay_keep),
+                        int(replay_mull),
+                        float(hist_keep_rate),
+                        float(target_mean),
+                        float(q_keep_mean),
+                        float(q_mull_mean),
+                        float(q_taken_mean),
+                    )
+                else:
+                    mulligan_logger.info(
+                        LogCategory.MODEL_TRAIN,
+                        "Mulligan Q-learning skipped - reason=%s, mb=%d, keep_rate=%.3f, replay_total=%d (keep=%d mull=%d), hist_keep_rate=%.3f, outcome_mean=%.3f",
+                        str(skip_reason) if 'skip_reason' in locals() else "unknown",
+                        int(mb_size),
+                        float(mb_keep_rate),
+                        int(replay_total),
+                        int(replay_keep),
+                        int(replay_mull),
+                        float(hist_keep_rate),
+                        float(outcome_mean),
+                    )
 
-                logger.info(LogCategory.MODEL_TRAIN,
-                            f"Mulligan Q-learning trained - loss={loss.item():.4f}, " +
-                            f"decisions={train_count}, skipped={skipped_count}, keep_rate={keep_rate:.3f}, " +
-                            f"Q_keep_avg={q_keep_mean:.3f}, Q_mull_avg={q_mull_mean:.3f}, " +
-                            f"Q_taken_avg={q_taken_mean:.3f}, target={outcomes_t[0].item():.1f}")
-
-                # Track training iterations
-                self.mulligan_train_step_counter += 1
-                self.mulligan_train_sample_counter += train_count
-
-                # Explicit cleanup of mulligan tensors
-                del features_t, decisions_t, outcomes_t, land_counts_t
-                del q_values, action_indices, q_taken, targets, loss
-                if torch.cuda.is_available():
-                    torch.cuda.synchronize()
-
-                # Clear CUDA cache to free stale references
-                if torch.cuda.is_available():
-                    torch.cuda.empty_cache()
+                # Track training iterations only on actual optimizer steps
+                if train_count > 0:
+                    self.mulligan_train_step_counter += 1
+                    self.mulligan_train_sample_counter += int(train_count)
 
                 # Track timing
                 elapsed_ms = (time.perf_counter() - t_start) * 1000.0
@@ -2097,6 +2596,12 @@ class PythonEntryPoint:
                 logger.error(LogCategory.SYSTEM_ERROR,
                              f"Error in trainMulligan: {str(e)}")
                 raise
+            finally:
+                if lock_held:
+                    try:
+                        self._gpu_mutex.release()
+                    except Exception:
+                        pass
 
     def saveMulliganModel(self):
         """Save mulligan model separately"""

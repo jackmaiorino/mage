@@ -1,0 +1,3202 @@
+================================================================================
+GAME LOG: game_20260201_123537_0038
+Started: 2026-02-01T12:35:37.518388800
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894610
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.010268 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.989728 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.891264
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Snow-Covered Forest
+     [2] 0.000000 - Cast Winding Way
+     [3] 0.000001 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000001 - Cast Masked Vandal
+
+VALUE SCORE: 0.872864
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000008 - Pass
+     [1] 0.014273 - Cast Lead the Stampede
+     [2] 0.009842 - Cast Winding Way
+     [3] 0.018889 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.932463 - Cast Timberwatch Elf
+     [5] 0.024524 - Cast Masked Vandal
+
+VALUE SCORE: 0.869589
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 0.869589
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Masked Vandal; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Nihil Spellbomb; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000171 - Pass
+     [1] 0.213260 - Cast Lead the Stampede
+     [2] 0.155633 - Cast Winding Way
+     [3] 0.270767 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.360170 - Cast Masked Vandal
+
+VALUE SCORE: 0.835172
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Masked Vandal (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000621 - Pass
+ >>> [1] 0.999379 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.833029
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Masked Vandal (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000621 - Pass
+
+VALUE SCORE: 0.833029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Masked Vandal (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000621 - Pass
+
+VALUE SCORE: 0.833029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=RL)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000621 - Pass
+
+VALUE SCORE: 0.833029
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.808253
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Swamp; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.808253
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Lead the Stampede
+     [2] 0.000000 - Cast Winding Way
+ >>> [3] 0.999999 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.820323
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000527 - Pass
+ >>> [1] 0.570300 - Cast Lead the Stampede
+     [2] 0.429173 - Cast Winding Way
+
+VALUE SCORE: 0.817663
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000068 - Pass
+     [1] 0.132967 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.866965 - Cast Elvish Mystic
+
+VALUE SCORE: 0.846426
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp,tapped; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Swamp; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000068 - Pass
+
+VALUE SCORE: 0.846426
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000014 - Pass
+     [1] 0.010533 - Cast Winding Way
+     [2] 0.013760 - Cast Lead the Stampede
+ >>> [3] 0.958543 - Cast Timberwatch Elf
+     [4] 0.017150 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.806181
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000014 - Pass
+
+VALUE SCORE: 0.806181
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000598 - Pass
+     [1] 0.282473 - Cast Winding Way
+     [2] 0.330099 - Cast Lead the Stampede
+ >>> [3] 0.386796 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000033 - Cast Timberwatch Elf
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.736722
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+ >>> [2] 1.000000 - Play Snow-Covered Forest
+     [3] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.732892
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000995 - Pass
+     [1] 0.463255 - Cast Winding Way
+ >>> [2] 0.535696 - Cast Lead the Stampede
+     [3] 0.000054 - Cast Timberwatch Elf
+     [4] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.729833
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+     [1] 0.000844 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal; Priest of Titania; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+
+VALUE SCORE: 0.756036
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Fyndhorn Elves; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Fyndhorn Elves; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Nihil Spellbomb; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+     [1] 0.007641 - Cast Winding Way
+     [2] 0.154449 - Cast Priest of Titania
+ >>> [3] 0.822471 - Cast Fyndhorn Elves
+     [4] 0.015423 - Cast Masked Vandal
+
+VALUE SCORE: 0.732744
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Fyndhorn Elves (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.732744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Fyndhorn Elves (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.732744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=RL)
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.732744
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Masked Vandal]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000083 - Pass
+     [1] 0.042548 - Cast Winding Way
+ >>> [2] 0.870115 - Cast Priest of Titania
+     [3] 0.087255 - Cast Masked Vandal
+
+VALUE SCORE: 0.734646
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 22
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped,attacking; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped,attacking; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000083 - Pass
+
+VALUE SCORE: 0.734646
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000035 - Pass
+     [1] 0.015423 - Cast Winding Way
+ >>> [2] 0.954382 - Cast Avenging Hunter
+     [3] 0.030156 - Cast Masked Vandal
+     [4] 0.000003 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.709457
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.709457
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.709457
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000035 - Pass
+
+VALUE SCORE: 0.709457
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Masked Vandal; Fyndhorn Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000000 - Cast Masked Vandal
+     [3] 0.000000 - Cast Fyndhorn Elves
+ >>> [4] 0.999999 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.685652
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000854 - Pass
+     [1] 0.339865 - Cast Winding Way
+ >>> [2] 0.659223 - Cast Masked Vandal
+     [3] 0.000058 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.680938
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000854 - Pass
+
+VALUE SCORE: 0.680938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest; Masked Vandal]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002549 - Pass
+ >>> [1] 0.997283 - Cast Winding Way
+     [2] 0.000168 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.676750
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 21
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped,attacking; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped,attacking; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002549 - Pass
+
+VALUE SCORE: 0.676750
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000013 - Cast Avenging Hunter
+     [2] 0.000000 - Cast Fyndhorn Elves
+     [3] 0.000000 - Cast Nyxborn Hydra
+     [4] 0.000000 - Cast Nyxborn Hydra using bestow
+ >>> [5] 0.999987 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.638586
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Avenging Hunter; Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000052 - Pass
+ >>> [1] 0.998643 - Cast Avenging Hunter
+     [2] 0.000002 - Cast Fyndhorn Elves
+     [3] 0.000919 - Cast Nyxborn Hydra
+     [4] 0.000384 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.634066
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000052 - Pass
+
+VALUE SCORE: 0.634066
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000052 - Pass
+
+VALUE SCORE: 0.634066
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000052 - Pass
+
+VALUE SCORE: 0.634066
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Nyxborn Hydra; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania; Avenging Hunter; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.043888 - Pass
+     [1] 0.001516 - Cast Fyndhorn Elves
+ >>> [2] 0.663041 - Cast Nyxborn Hydra
+     [3] 0.291554 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.607313
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.047877 - Pass
+     [1] 0.001426 - Cast Fyndhorn Elves
+ >>> [2] 0.654252 - Cast Nyxborn Hydra
+     [3] 0.296445 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.591059
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+     [1] 0.027757 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped; Nyxborn Hydra,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Swamp; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 12
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.972243 - Pass
+
+VALUE SCORE: 0.586474
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves; Elvish Mystic]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+     [0] 0.001210 - Pass
+     [1] 0.000027 - Cast Fyndhorn Elves
+ >>> [2] 0.998763 - Cast Elvish Mystic
+
+VALUE SCORE: 0.567469
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979506 - Pass
+     [1] 0.020494 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.558860
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979506 - Pass
+
+VALUE SCORE: 0.558860
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 7
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Eldrazi Spawn Token,blocking; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.979506 - Pass
+
+VALUE SCORE: 0.558860
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+     [1] 0.024054 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Swamp; Swamp; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge; Swamp,tapped; Writhing Chrysalis]
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Swamp; Swamp; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge; Swamp,tapped; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Swamp; Swamp; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge; Swamp,tapped; Writhing Chrysalis; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Forest; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge; Swamp,tapped; Writhing Chrysalis; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+  - [2] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves,blocking; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped,attacking; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975946 - Pass
+
+VALUE SCORE: 0.574420
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Fyndhorn Elves
+     [2] 0.000002 - Cast Quirion Ranger
+ >>> [3] 0.999998 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.537412
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000560 - Pass
+     [1] 0.000009 - Cast Fyndhorn Elves
+ >>> [2] 0.999432 - Cast Quirion Ranger
+
+VALUE SCORE: 0.530873
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter; Nyxborn Hydra; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.985710 - Pass
+     [1] 0.014023 - Cast Fyndhorn Elves
+     [2] 0.000267 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.519293
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Nyxborn Hydra,tapped,attacking; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999754 - Pass
+     [1] 0.000246 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.502302
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Snow-Covered Forest; Fyndhorn Elves; Priest of Titania; Snow-Covered Forest; Masked Vandal,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest; Avenging Hunter,tapped,attacking; Nyxborn Hydra,tapped,attacking; Nyxborn Hydra; Elvish Mystic; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 6
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Forest,tapped; Map Token; Refurbished Familiar,blocking; Map Token; Drossforge Bridge,tapped; Swamp,tapped; Writhing Chrysalis,tapped; Refurbished Familiar; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999755 - Pass
+     [1] 0.000245 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.501551
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 11
+Reason: Benchmark: Deck - Elves.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 139
+Ended: 2026-02-01T12:39:43.065713400
+================================================================================

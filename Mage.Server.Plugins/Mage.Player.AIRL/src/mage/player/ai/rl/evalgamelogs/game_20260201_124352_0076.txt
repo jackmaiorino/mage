@@ -1,0 +1,3279 @@
+================================================================================
+GAME LOG: game_20260201_124352_0076
+Started: 2026-02-01T12:43:52.521254
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Play Great Furnace
+
+VALUE SCORE: 0.481082
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.006830 - Pass
+ >>> [1] 0.993170 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.475453
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.049790 - Pass
+ >>> [1] 0.950210 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.442396
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.049790 - Pass
+
+VALUE SCORE: 0.442396
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Nihil Spellbomb; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.005690 - Pass
+ >>> [1] 0.912132 - Cast Nihil Spellbomb
+     [2] 0.082178 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.489486
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.036818 - Pass
+ >>> [1] 0.963182 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.478988
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.036818 - Pass
+
+VALUE SCORE: 0.478988
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun; Vault of Whispers]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun; Vault of Whispers]
+-> Permanents: [Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000010 - Cast Hunter's Blowgun
+ >>> [2] 0.999990 - Play Vault of Whispers
+
+VALUE SCORE: 0.501441
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace; Vault of Whispers]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.002034 - Pass
+ >>> [1] 0.955083 - Cast Black Mage's Rod
+     [2] 0.010319 - Cast Toxin Analysis
+     [3] 0.032564 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.497606
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002034 - Pass
+
+VALUE SCORE: 0.497606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun; Blood Fountain]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun; Blood Fountain]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.012067 - Pass
+     [1] 0.061083 - Cast Toxin Analysis
+     [2] 0.197315 - Cast Hunter's Blowgun
+ >>> [3] 0.729536 - Cast Blood Fountain
+
+VALUE SCORE: 0.483019
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=RL)
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012067 - Pass
+
+VALUE SCORE: 0.483019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012067 - Pass
+
+VALUE SCORE: 0.483019
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Hunter's Blowgun]
+-> Permanents: [Great Furnace; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.040843 - Pass
+ >>> [1] 0.616407 - Cast Hunter's Blowgun
+     [2] 0.342750 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.443573
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Hunter's Blowgun (controller=RL)
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040843 - Pass
+
+VALUE SCORE: 0.443573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Fanatical Offering]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Toxin Analysis; Myr Enforcer; Fanatical Offering]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.002941 - Pass
+     [1] 0.015093 - Cast Toxin Analysis
+ >>> [2] 0.942222 - Cast Myr Enforcer
+     [3] 0.005187 - Cast Fanatical Offering
+     [4] 0.003659 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.030897 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.450096
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Toxin Analysis; Fanatical Offering]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Blood Token; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.060177 - Pass
+     [1] 0.309426 - Cast Toxin Analysis
+ >>> [2] 0.630397 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.437058
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.060177 - Pass
+
+VALUE SCORE: 0.437058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb; Great Furnace]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb; Great Furnace]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000003 - Cast Fanatical Offering
+     [2] 0.000324 - Cast Nihil Spellbomb
+ >>> [3] 0.999669 - Play Great Furnace
+     [4] 0.000002 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.476461
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Fanatical Offering; Nihil Spellbomb]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Great Furnace]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.003650 - Pass
+     [1] 0.007948 - Cast Fanatical Offering
+ >>> [2] 0.863769 - Cast Nihil Spellbomb
+     [3] 0.118994 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.005639 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.469861
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [2] Nihil Spellbomb (controller=RL)
+[RL], life = 13
+-> Hand: [Thoughtcast; Fanatical Offering]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Great Furnace,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.302409 - Pass
+ >>> [1] 0.697591 - Cast Fanatical Offering
+
+VALUE SCORE: 0.440740
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] Fanatical Offering (controller=RL)
+  - [1] Counterspell (controller=Benchmark-Skill6)
+  - [2] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [3] Nihil Spellbomb (controller=RL)
+[RL], life = 13
+-> Hand: [Thoughtcast]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [2] Nihil Spellbomb (controller=RL)
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Map Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Map Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped,attacking; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped,attacking; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder,blocking; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island; Faerie Miscreant; Island; Island,tapped; Ninja of the Deep Hours; Moon-Circuit Hacker; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Hero Token,blocking; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.302409 - Pass
+
+VALUE SCORE: 0.440740
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions; Ichor Wellspring]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Vault of Whispers; Makeshift Munitions; Ichor Wellspring]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Map Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999718 - Play Vault of Whispers
+     [2] 0.000000 - Cast Makeshift Munitions
+     [3] 0.000048 - Cast Ichor Wellspring
+     [4] 0.000000 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000233 - {1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
+
+VALUE SCORE: 0.412045
+SELECTED: Play Vault of Whispers
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions; Ichor Wellspring]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Map Token; Vault of Whispers]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000643 - Pass
+     [1] 0.000665 - Cast Makeshift Munitions
+     [2] 0.165011 - Cast Ichor Wellspring
+     [3] 0.019683 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.001029 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+ >>> [5] 0.812970 - {1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
+
+VALUE SCORE: 0.408024
+SELECTED: {1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions; Ichor Wellspring]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.002572 - Pass
+ >>> [1] 0.990815 - Cast Ichor Wellspring
+     [2] 0.006614 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.443657
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002572 - Pass
+
+VALUE SCORE: 0.443657
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.001722 - Pass
+ >>> [1] 0.998278 - Cast Myr Enforcer
+
+VALUE SCORE: 0.412856
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix; Island; Faerie Miscreant; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix; Island; Faerie Miscreant; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001722 - Pass
+
+VALUE SCORE: 0.412856
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions; Mistvault Bridge]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions; Mistvault Bridge]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers; Ichor Wellspring; Myr Enforcer]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000001 - Cast Makeshift Munitions
+ >>> [2] 0.999970 - Play Mistvault Bridge
+     [3] 0.000027 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.000001 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.489746
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.021403 - Pass
+     [1] 0.034511 - Cast Makeshift Munitions
+ >>> [2] 0.900349 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [3] 0.043737 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.477137
+SELECTED: Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Moon-Circuit Hacker,blocking; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Myr Enforcer,tapped; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix; Island; Faerie Miscreant; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021403 - Pass
+
+VALUE SCORE: 0.477137
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer; Silverbluff Bridge]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer; Silverbluff Bridge]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000041 - Cast Thoughtcast
+     [2] 0.000000 - Cast Makeshift Munitions
+     [3] 0.000093 - Cast Myr Enforcer
+ >>> [4] 0.999853 - Play Silverbluff Bridge
+     [5] 0.000009 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000000 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [7] 0.000003 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+VALUE SCORE: 0.502543
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Makeshift Munitions; Myr Enforcer]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.001574 - Pass
+     [1] 0.282902 - Cast Thoughtcast
+     [2] 0.001960 - Cast Makeshift Munitions
+ >>> [3] 0.637776 - Cast Myr Enforcer
+     [4] 0.054292 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.002594 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.018902 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+VALUE SCORE: 0.456992
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Makeshift Munitions]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.004213 - Pass
+ >>> [1] 0.784935 - Cast Thoughtcast
+     [2] 0.005263 - Cast Makeshift Munitions
+     [3] 0.146978 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.007056 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.051555 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+
+VALUE SCORE: 0.451865
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge; Krark-Clan Shaman]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.009124 - Pass
+     [1] 0.011793 - Cast Makeshift Munitions
+ >>> [2] 0.632535 - Cast Krark-Clan Shaman
+     [3] 0.330145 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.016403 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.442196
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island; Harrier Strix,tapped; Island; Faerie Miscreant,tapped; Island; Island; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.343792 - Pass
+ >>> [1] 0.656202 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.429544
+SELECTED: Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=RL)
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.382364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>) (controller=RL)
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.385861
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.385083
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.377315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 12
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.377315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.370926
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island,tapped; Island,tapped; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island,tapped; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000086 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.622773
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.621825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999917 - Pass
+     [1] 0.000083 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.616798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999917 - Pass
+     [1] 0.000083 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.616798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Drossforge Bridge]
+-> Permanents: [Great Furnace,tapped; Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999919 - Pass
+     [1] 0.000081 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.611350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Drossforge Bridge; Reckoner's Bargain]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Drossforge Bridge; Reckoner's Bargain]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000001 - Cast Makeshift Munitions
+ >>> [2] 0.999877 - Play Drossforge Bridge
+     [3] 0.000099 - Cast Reckoner's Bargain
+     [4] 0.000017 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.000001 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000006 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.456354
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Reckoner's Bargain]
+-> Permanents: [Great Furnace; Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.002035 - Pass
+     [1] 0.005143 - Cast Makeshift Munitions
+ >>> [2] 0.813421 - Cast Reckoner's Bargain
+     [3] 0.124497 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [4] 0.007475 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.047429 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.452826
+SELECTED: Cast Reckoner's Bargain
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis; Black Mage's Rod]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000547 - Pass
+     [1] 0.001386 - Cast Makeshift Munitions
+     [2] 0.008014 - Cast Toxin Analysis
+ >>> [3] 0.954552 - Cast Black Mage's Rod
+     [4] 0.033385 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.002116 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.439277
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999981 - Pass
+     [1] 0.000019 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.412520
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999980 - Pass
+     [1] 0.000020 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.411668
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999982 - Pass
+     [1] 0.000018 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.392234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 7
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island; Ninja of the Deep Hours,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999982 - Pass
+     [1] 0.000018 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.390321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island; Island,tapped; Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999981 - Pass
+     [1] 0.000019 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.398221
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island,tapped; Island; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island; Island,tapped; Island; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+     [1] 0.000058 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.567704
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.596414
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999916 - Pass
+     [1] 0.000084 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.582909
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix; Island,tapped; Faerie Miscreant; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999916 - Pass
+     [1] 0.000084 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.582002
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999916 - Pass
+     [1] 0.000084 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.577800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999916 - Pass
+     [1] 0.000084 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.577800
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped; Mistvault Bridge,tapped; Silverbluff Bridge; Myr Enforcer,tapped; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999917 - Pass
+     [1] 0.000083 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.569857
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Toxin Analysis; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Toxin Analysis; Ichor Wellspring]
+-> Permanents: [Vault of Whispers; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.001195 - Pass
+     [1] 0.004056 - Cast Makeshift Munitions
+     [2] 0.022600 - Cast Toxin Analysis
+ >>> [3] 0.841378 - Cast Ichor Wellspring
+     [4] 0.087185 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [5] 0.006644 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+     [6] 0.036941 - {3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.401676
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Toxin Analysis]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.051074 - Pass
+ >>> [1] 0.948925 - Cast Toxin Analysis
+     [2] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.364412
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=RL)
+  - [1] Ichor Wellspring (controller=RL)
+[RL], life = 1
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999983 - Pass
+     [1] 0.000017 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.329661
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 1
+-> Hand: [Makeshift Munitions]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge; Silverbluff Bridge; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Clue Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000243 - Pass
+ >>> [1] 0.999757 - {2}, Sacrifice this artifact: Draw a card.
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.271666
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Black Mage's Rod]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999984 - Pass
+     [1] 0.000016 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.280933
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Black Mage's Rod]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999984 - Pass
+     [1] 0.000016 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.276026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Black Mage's Rod; Mistvault Bridge]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mistvault Bridge
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.271686
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Black Mage's Rod]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Krark-Clan Shaman; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999986 - Pass
+     [1] 0.000014 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.189587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Black Mage's Rod]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Ichor Wellspring; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.010890
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Makeshift Munitions; Black Mage's Rod]
+-> Permanents: [Vault of Whispers,tapped; Black Mage's Rod; Blood Fountain; Hunter's Blowgun; Vault of Whispers,tapped; Ichor Wellspring; Myr Enforcer,tapped,attacking; Mistvault Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Krark-Clan Shaman,tapped,attacking; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Ichor Wellspring; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 1
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Harrier Strix,tapped; Island,tapped; Faerie Miscreant,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Spellstutter Sprite,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999999 - Pass
+     [1] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.003561
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 11
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 141
+Ended: 2026-02-01T12:47:07.631547500
+================================================================================

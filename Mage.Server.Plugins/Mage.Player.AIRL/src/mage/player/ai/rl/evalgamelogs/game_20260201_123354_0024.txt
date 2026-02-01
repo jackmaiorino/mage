@@ -1,0 +1,2147 @@
+================================================================================
+GAME LOG: game_20260201_123354_0024
+Started: 2026-02-01T12:33:54.934765900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000342 - Pass
+ >>> [1] 0.999658 - Play Sea Gate
+
+VALUE SCORE: 0.178318
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000342 - Pass
+
+VALUE SCORE: 0.178318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000342 - Pass
+
+VALUE SCORE: 0.178318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000342 - Pass
+
+VALUE SCORE: 0.178318
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000342 - Pass
+
+VALUE SCORE: 0.178318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000342 - Pass
+
+VALUE SCORE: 0.178318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000342 - Pass
+
+VALUE SCORE: 0.178318
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Preordain; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.020725 - Pass
+ >>> [1] 0.979275 - Cast Preordain
+
+VALUE SCORE: 0.176703
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat; Azorius Guildgate]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999997 - Play Azorius Guildgate
+
+VALUE SCORE: 0.168746
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.168746
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.168746
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.168746
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.168746
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.168746
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.168746
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; The Modern Age; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.012774 - Pass
+ >>> [1] 0.753880 - Cast The Modern Age
+     [2] 0.003276 - Cast Thraben Charm
+     [3] 0.078245 - Cast Sacred Cat
+     [4] 0.151825 - Cast Squadron Hawk
+
+VALUE SCORE: 0.169692
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.012774 - Pass
+
+VALUE SCORE: 0.169692
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.787771 - Pass
+     [1] 0.212229 - Cast Thraben Charm
+
+VALUE SCORE: 0.169079
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Squadron Hawk; Counterspell; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.048552 - Pass
+     [1] 0.012915 - Cast Thraben Charm
+     [2] 0.322720 - Cast Sacred Cat
+ >>> [3] 0.615814 - Cast Squadron Hawk
+
+VALUE SCORE: 0.167675
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.233606 - Pass
+ >>> [1] 0.766394 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.160253
+SELECTED: Flashback tap an untapped white creature you control
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Thraben Charm; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Sea Gate; Azorius Guildgate; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Sea Gate; Azorius Guildgate; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.233606 - Pass
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Vector Glider]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.056494 - Pass
+     [1] 0.310412 - Cast Sacred Cat
+ >>> [2] 0.633094 - Cast Squadron Hawk
+
+VALUE SCORE: 0.152936
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Vector Glider; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.056494 - Pass
+
+VALUE SCORE: 0.152936
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.039708 - Pass
+     [1] 0.341441 - Cast Sacred Cat
+ >>> [2] 0.618851 - Cast Squadron Hawk
+
+VALUE SCORE: 0.160606
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039708 - Pass
+
+VALUE SCORE: 0.160606
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Thraben Charm]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Squadron Hawk; Thraben Charm]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.037325 - Pass
+     [1] 0.337655 - Cast Sacred Cat
+ >>> [2] 0.613763 - Cast Squadron Hawk
+     [3] 0.011257 - Cast Thraben Charm
+
+VALUE SCORE: 0.151697
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037325 - Pass
+
+VALUE SCORE: 0.151697
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk; Spell Pierce]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Squadron Hawk; Spell Pierce]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+     [0] 0.050647 - Pass
+     [1] 0.302953 - Cast Sacred Cat
+     [2] 0.011300 - Cast Thraben Charm
+ >>> [3] 0.635100 - Cast Squadron Hawk
+
+VALUE SCORE: 0.119301
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Spell Pierce]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Thraben Charm; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 7 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 7 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 7 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 7 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island; Cryptic Serpent,tapped; Cryptic Serpent,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.050647 - Pass
+
+VALUE SCORE: 0.119301
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Brainstorm]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Brainstorm]
+-> Permanents: [Sea Gate; Azorius Guildgate; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.031003 - Pass
+     [1] 0.123690 - Cast Sacred Cat
+     [2] 0.297249 - Cast Squadron Hawk
+ >>> [3] 0.548057 - Cast Brainstorm
+
+VALUE SCORE: 0.074451
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Sacred Cat; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.239467 - Pass
+ >>> [1] 0.760533 - Cast Sacred Cat
+
+VALUE SCORE: 0.038783
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Sacred Cat]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped,attacking; Squadron Hawk,tapped,attacking; Sacred Cat]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Cryptic Serpent,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Cryptic Serpent; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Sacred Cat]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Counterspell; Counterspell; Sacred Cat; Spell Pierce; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate,tapped; Azorius Guildgate,tapped; Squadron Hawk,tapped; Squadron Hawk,tapped; Sacred Cat,blocking]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Cryptic Serpent,tapped,attacking; Tolarian Terror,tapped,attacking; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.239467 - Pass
+
+VALUE SCORE: 0.038783
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 93
+Ended: 2026-02-01T12:35:07.272863900
+================================================================================

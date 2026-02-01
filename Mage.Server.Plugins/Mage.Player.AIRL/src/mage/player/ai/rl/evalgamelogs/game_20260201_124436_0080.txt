@@ -1,0 +1,2209 @@
+================================================================================
+GAME LOG: game_20260201_124436_0080
+Started: 2026-02-01T12:44:36.757791500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mistvault Bridge; Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Play Mistvault Bridge
+
+VALUE SCORE: 0.480501
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.480501
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.014888 - Pass
+ >>> [1] 0.985112 - Cast Blood Fountain
+
+VALUE SCORE: 0.516244
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+  - [1] Blood Fountain (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.014888 - Pass
+
+VALUE SCORE: 0.516244
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast; Cryogen Relic]
+-> Permanents: [Mistvault Bridge; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Galvanic Blast; Cryogen Relic]
+-> Permanents: [Mistvault Bridge; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.058431 - Pass
+ >>> [1] 0.941569 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.533477
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.058431 - Pass
+
+VALUE SCORE: 0.533477
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Blood Fountain; Toxin Analysis]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.007037 - Pass
+     [1] 0.068219 - Cast Toxin Analysis
+ >>> [2] 0.924744 - Cast Blood Fountain
+
+VALUE SCORE: 0.567410
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island; Island; Murmuring Mystic; Island]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island; Island,tapped; Island; Island; Murmuring Mystic; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=Benchmark-Skill6)
+  - [2] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=Benchmark-Skill6)
+  - [2] Counterspell (controller=Benchmark-Skill6)
+  - [3] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=Benchmark-Skill6)
+  - [2] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007037 - Pass
+
+VALUE SCORE: 0.567410
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis; Silverbluff Bridge]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis; Silverbluff Bridge]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Toxin Analysis
+ >>> [2] 0.999992 - Play Silverbluff Bridge
+     [3] 0.000005 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.538668
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Toxin Analysis]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Blood Token; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.037017 - Pass
+     [1] 0.296872 - Cast Toxin Analysis
+ >>> [2] 0.666111 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.495214
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Deep Analysis (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Deep Analysis (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.037017 - Pass
+
+VALUE SCORE: 0.495214
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Seat of the Synod; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+     [1] 0.004081 - Cast Black Mage's Rod
+     [2] 0.001310 - Cast Ichor Wellspring
+     [3] 0.000789 - Cast Reckoner's Bargain
+     [4] 0.000033 - Cast Toxin Analysis
+     [5] 0.002768 - Cast Cryogen Relic
+ >>> [6] 0.991014 - Play Seat of the Synod
+
+VALUE SCORE: 0.436204
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Black Mage's Rod; Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Silverbluff Bridge; Seat of the Synod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000564 - Pass
+ >>> [1] 0.454879 - Cast Black Mage's Rod
+     [2] 0.149112 - Cast Ichor Wellspring
+     [3] 0.088077 - Cast Reckoner's Bargain
+     [4] 0.003686 - Cast Toxin Analysis
+     [5] 0.303681 - Cast Cryogen Relic
+
+VALUE SCORE: 0.419364
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Ponder (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Ponder (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island; Island; Murmuring Mystic; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000564 - Pass
+
+VALUE SCORE: 0.419364
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Silverbluff Bridge; Seat of the Synod; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Cryogen Relic; Reckoner's Bargain; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge; Blood Fountain; Silverbluff Bridge; Seat of the Synod; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.002526 - Pass
+     [1] 0.333826 - Cast Ichor Wellspring
+     [2] 0.136955 - Cast Reckoner's Bargain
+     [3] 0.007111 - Cast Toxin Analysis
+ >>> [4] 0.409773 - Cast Cryogen Relic
+     [5] 0.109809 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.248121
+SELECTED: Cast Cryogen Relic
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002526 - Pass
+
+VALUE SCORE: 0.248121
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Swamp]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000009 - Cast Krark-Clan Shaman
+ >>> [2] 0.999991 - Play Swamp
+
+VALUE SCORE: 0.143651
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.005246 - Pass
+ >>> [1] 0.470107 - Cast Ichor Wellspring
+     [2] 0.171232 - Cast Reckoner's Bargain
+     [3] 0.009824 - Cast Toxin Analysis
+     [4] 0.202969 - Cast Krark-Clan Shaman
+     [5] 0.140623 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+VALUE SCORE: 0.122691
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=Benchmark-Skill6)
+  - [2] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Dispel (controller=Benchmark-Skill6)
+  - [2] Counterspell (controller=Benchmark-Skill6)
+  - [3] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=Benchmark-Skill6)
+  - [2] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token,tapped; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Ichor Wellspring; Reckoner's Bargain; Toxin Analysis; Reckoner's Bargain; Krark-Clan Shaman; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped; Blood Fountain; Silverbluff Bridge,tapped; Seat of the Synod,tapped; Black Mage's Rod; Cryogen Relic; Swamp,tapped; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005246 - Pass
+
+VALUE SCORE: 0.122691
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 95
+Ended: 2026-02-01T12:46:21.068964100
+================================================================================

@@ -1,0 +1,1224 @@
+================================================================================
+GAME LOG: game_20260201_124251_0071
+Started: 2026-02-01T12:42:51.076640100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Mono Red Rally.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Mistvault Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.454218 - Play Drossforge Bridge
+ >>> [2] 0.545780 - Play Mistvault Bridge
+
+VALUE SCORE: 0.480716
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.480716
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+ >>> [1] 0.999909 - Play Drossforge Bridge
+     [2] 0.000082 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.366432
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Hunter's Blowgun; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.100084 - Pass
+ >>> [1] 0.899916 - Cast Hunter's Blowgun
+
+VALUE SCORE: 0.357180
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Tomb Raider (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100084 - Pass
+
+VALUE SCORE: 0.357180
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Black Mage's Rod; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002456 - Pass
+     [1] 0.108368 - Cast Thoughtcast
+ >>> [2] 0.475922 - Cast Black Mage's Rod
+     [3] 0.195308 - Cast Cryogen Relic
+     [4] 0.162671 - Cast Ichor Wellspring
+     [5] 0.053744 - Cast Reckoner's Bargain
+     [6] 0.001532 - Cast Fanatical Offering
+
+VALUE SCORE: 0.329123
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Goblin Bushwhacker (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002456 - Pass
+
+VALUE SCORE: 0.329123
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.004800 - Pass
+     [1] 0.212481 - Cast Thoughtcast
+ >>> [2] 0.361456 - Cast Cryogen Relic
+     [3] 0.316300 - Cast Ichor Wellspring
+     [4] 0.102192 - Cast Reckoner's Bargain
+     [5] 0.002771 - Cast Fanatical Offering
+
+VALUE SCORE: 0.309395
+SELECTED: Cast Cryogen Relic
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, draw a card.) (controller=RL)
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004800 - Pass
+
+VALUE SCORE: 0.309395
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer; Mistvault Bridge]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.000006 - Pass
+ >>> [1] 0.999994 - Play Mistvault Bridge
+
+VALUE SCORE: 0.290922
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000006 - Pass
+
+VALUE SCORE: 0.290922
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Myr Enforcer; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.005168 - Pass
+     [1] 0.149259 - Cast Thoughtcast
+     [2] 0.206969 - Cast Ichor Wellspring
+     [3] 0.050701 - Cast Reckoner's Bargain
+     [4] 0.001306 - Cast Fanatical Offering
+ >>> [5] 0.477621 - Cast Myr Enforcer
+     [6] 0.031526 - Cast Blood Fountain
+     [7] 0.077449 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+
+VALUE SCORE: 0.141061
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Drossforge Bridge; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.010774 - Pass
+     [1] 0.293999 - Cast Thoughtcast
+ >>> [2] 0.396840 - Cast Ichor Wellspring
+     [3] 0.096332 - Cast Reckoner's Bargain
+     [4] 0.002377 - Cast Fanatical Offering
+     [5] 0.057482 - Cast Blood Fountain
+     [6] 0.139881 - {1}{U}, Sacrifice {this}: Put a stun counter on up to one target tapped creature.
+     [7] 0.002315 - Equip {2} <i>({2}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.108010
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped; Blood Token; Goblin Bushwhacker,tapped; Mountain,tapped; Goblin Tomb Raider,tapped; Goblin Bushwhacker,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker; Human Soldier Token; Human Soldier Token]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Rally at the Hornburg (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure; Blood Token; Goblin Bushwhacker; Mountain,tapped; Goblin Tomb Raider; Goblin Bushwhacker; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thoughtcast; Reckoner's Bargain; Fanatical Offering; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Hunter's Blowgun; Black Mage's Rod; Cryogen Relic; Mistvault Bridge,tapped; Myr Enforcer,blocking; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Voldaren Epicure,tapped,attacking; Blood Token; Goblin Bushwhacker,tapped,attacking; Mountain,tapped; Goblin Tomb Raider,tapped,attacking; Goblin Bushwhacker,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010774 - Pass
+
+VALUE SCORE: 0.108010
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 5
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 52
+Ended: 2026-02-01T12:44:24.228655900
+================================================================================

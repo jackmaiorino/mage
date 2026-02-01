@@ -824,6 +824,15 @@ public class RLTrainer {
 
             final ConcurrentHashMap<String, AtomicLong> matchupWins = new ConcurrentHashMap<>();
             final ConcurrentHashMap<String, AtomicLong> matchupGames = new ConcurrentHashMap<>();
+            final ConcurrentHashMap<String, AtomicLong> deckWinsAsRL = new ConcurrentHashMap<>();
+            final ConcurrentHashMap<String, AtomicLong> deckGamesAsRL = new ConcurrentHashMap<>();
+            final ConcurrentHashMap<String, AtomicLong> deckWinsVsOpp = new ConcurrentHashMap<>();
+            final ConcurrentHashMap<String, AtomicLong> deckGamesVsOpp = new ConcurrentHashMap<>();
+
+            final String liveReportPathStr = EnvConfig.str("BENCHMARK_LIVE_REPORT_PATH",
+                    "Mage.Server.Plugins/Mage.Player.AIRL/src/mage/player/ai/rl/models/benchmark_live_report.txt");
+            final Path liveReportPath = Paths.get(liveReportPathStr);
+            final AtomicLong lastLiveReportDone = new AtomicLong(0);
 
             ExecutorService exec = Executors.newFixedThreadPool(benchThreads, r -> {
                 Thread t = new Thread(r);
@@ -881,9 +890,15 @@ public class RLTrainer {
                     final Path p1 = decks.get(i);
                     final Path p2 = decks.get(j);
                     final String matchupKey = p1.getFileName() + " vs " + p2.getFileName();
+                    final String rlDeckKey = String.valueOf(p1.getFileName());
+                    final String oppDeckKey = String.valueOf(p2.getFileName());
 
                     matchupWins.putIfAbsent(matchupKey, new AtomicLong(0));
                     matchupGames.putIfAbsent(matchupKey, new AtomicLong(0));
+                    deckWinsAsRL.putIfAbsent(rlDeckKey, new AtomicLong(0));
+                    deckGamesAsRL.putIfAbsent(rlDeckKey, new AtomicLong(0));
+                    deckWinsVsOpp.putIfAbsent(oppDeckKey, new AtomicLong(0));
+                    deckGamesVsOpp.putIfAbsent(oppDeckKey, new AtomicLong(0));
 
                     for (int g = 0; g < gamesPerMatchup; g++) {
                         futures.add(exec.submit(() -> {
@@ -894,10 +909,14 @@ public class RLTrainer {
                             }
 
                             boolean win = runSingleBenchmarkGame(p1, p2, gameTimeoutSec);
+                            deckGamesAsRL.get(rlDeckKey).incrementAndGet();
+                            deckGamesVsOpp.get(oppDeckKey).incrementAndGet();
                             matchupGames.get(matchupKey).incrementAndGet();
                             if (win) {
                                 matchupWins.get(matchupKey).incrementAndGet();
                                 winsTotal.incrementAndGet();
+                                deckWinsAsRL.get(rlDeckKey).incrementAndGet();
+                                deckWinsVsOpp.get(oppDeckKey).incrementAndGet();
                             }
 
                             long done = completed.incrementAndGet();
@@ -910,6 +929,25 @@ public class RLTrainer {
                                         "Benchmark progress: %d/%d games done (%.2f games/s), ETA %ds",
                                         done, totalPlannedGames, gamesPerSec, etaSec
                                 ));
+
+                                // Live report file (overwrite) so you can tail it during eval/benchmark.
+                                long prev = lastLiveReportDone.get();
+                                if (done > prev && lastLiveReportDone.compareAndSet(prev, done)) {
+                                    writeBenchmarkLiveReport(
+                                            liveReportPath,
+                                            done,
+                                            totalPlannedGames,
+                                            startMs,
+                                            started.get(),
+                                            winsTotal.get(),
+                                            matchupWins,
+                                            matchupGames,
+                                            deckWinsAsRL,
+                                            deckGamesAsRL,
+                                            deckWinsVsOpp,
+                                            deckGamesVsOpp
+                                    );
+                                }
                             }
                             return null;
                         }));
@@ -931,9 +969,11 @@ public class RLTrainer {
             }
 
             // Per-matchup summary
-            for (String matchupKey : matchupGames.keySet()) {
-                long games = matchupGames.get(matchupKey).get();
-                long wins = matchupWins.get(matchupKey).get();
+            java.util.List<String> matchupKeys = new java.util.ArrayList<>(matchupGames.keySet());
+            java.util.Collections.sort(matchupKeys);
+            for (String matchupKey : matchupKeys) {
+                long games = matchupGames.get(matchupKey) == null ? 0L : matchupGames.get(matchupKey).get();
+                long wins = matchupWins.get(matchupKey) == null ? 0L : matchupWins.get(matchupKey).get();
                 double wr = games > 0 ? (double) wins / games : 0.0;
                 logger.info("Benchmark matchup: " + matchupKey + " winRate=" + String.format("%.3f", wr)
                         + " (" + wins + "/" + games + ")");
@@ -944,8 +984,130 @@ public class RLTrainer {
             double overall = totalGames > 0 ? (double) totalWins / totalGames : 0.0;
             logger.info("Benchmark overall win rate vs heuristic across pool: " + String.format("%.3f", overall)
                     + " (" + totalWins + "/" + totalGames + ")");
+
+            // Per-deck summaries
+            java.util.List<String> deckKeys = new java.util.ArrayList<>(deckGamesAsRL.keySet());
+            java.util.Collections.sort(deckKeys);
+
+            logger.info("Benchmark winrate WITH each deck (RL piloting deck):");
+            for (String dk : deckKeys) {
+                long games = deckGamesAsRL.get(dk) == null ? 0L : deckGamesAsRL.get(dk).get();
+                long wins = deckWinsAsRL.get(dk) == null ? 0L : deckWinsAsRL.get(dk).get();
+                double wr = games > 0 ? (double) wins / games : 0.0;
+                logger.info("  WITH " + dk + ": winRate=" + String.format("%.3f", wr) + " (" + wins + "/" + games + ")");
+            }
+
+            java.util.List<String> oppKeys = new java.util.ArrayList<>(deckGamesVsOpp.keySet());
+            java.util.Collections.sort(oppKeys);
+            logger.info("Benchmark winrate AGAINST each deck (opponent deck):");
+            for (String dk : oppKeys) {
+                long games = deckGamesVsOpp.get(dk) == null ? 0L : deckGamesVsOpp.get(dk).get();
+                long wins = deckWinsVsOpp.get(dk) == null ? 0L : deckWinsVsOpp.get(dk).get();
+                double wr = games > 0 ? (double) wins / games : 0.0;
+                logger.info("  VS " + dk + ": winRate=" + String.format("%.3f", wr) + " (" + wins + "/" + games + ")");
+            }
+
+            // Final write (ensures report exists even if logEvery is huge)
+            writeBenchmarkLiveReport(
+                    liveReportPath,
+                    totalGames,
+                    totalPlannedGames,
+                    startMs,
+                    started.get(),
+                    totalWins,
+                    matchupWins,
+                    matchupGames,
+                    deckWinsAsRL,
+                    deckGamesAsRL,
+                    deckWinsVsOpp,
+                    deckGamesVsOpp
+            );
         } catch (Exception e) {
             logger.error("Benchmark failed", e);
+        }
+    }
+
+    private static void writeBenchmarkLiveReport(
+            Path path,
+            long done,
+            long planned,
+            long startMs,
+            long started,
+            long winsTotal,
+            ConcurrentHashMap<String, AtomicLong> matchupWins,
+            ConcurrentHashMap<String, AtomicLong> matchupGames,
+            ConcurrentHashMap<String, AtomicLong> deckWinsAsRL,
+            ConcurrentHashMap<String, AtomicLong> deckGamesAsRL,
+            ConcurrentHashMap<String, AtomicLong> deckWinsVsOpp,
+            ConcurrentHashMap<String, AtomicLong> deckGamesVsOpp
+    ) {
+        try {
+            if (path.getParent() != null) {
+                Files.createDirectories(path.getParent());
+            }
+
+            long elapsedMs = Math.max(1, System.currentTimeMillis() - startMs);
+            double gamesPerSec = done / (elapsedMs / 1000.0);
+            long remaining = Math.max(0, planned - done);
+            long etaSec = gamesPerSec > 0 ? (long) (remaining / gamesPerSec) : -1;
+            double overall = done > 0 ? (double) winsTotal / done : 0.0;
+
+            StringBuilder sb = new StringBuilder();
+            sb.append("BENCHMARK LIVE REPORT\n");
+            sb.append("updated_ms=").append(System.currentTimeMillis()).append('\n');
+            sb.append("progress=").append(done).append('/').append(planned)
+                    .append(" started=").append(started)
+                    .append(" done=").append(done)
+                    .append(" wins=").append(winsTotal)
+                    .append(" winrate=").append(String.format("%.4f", overall))
+                    .append(" games_per_s=").append(String.format("%.3f", gamesPerSec))
+                    .append(" eta_s=").append(etaSec)
+                    .append('\n');
+            sb.append('\n');
+
+            // WITH each deck (RL pilots)
+            java.util.List<String> deckKeys = new java.util.ArrayList<>(deckGamesAsRL.keySet());
+            java.util.Collections.sort(deckKeys);
+            sb.append("WITH_DECK\n");
+            for (String dk : deckKeys) {
+                long g = deckGamesAsRL.get(dk) == null ? 0L : deckGamesAsRL.get(dk).get();
+                long w = deckWinsAsRL.get(dk) == null ? 0L : deckWinsAsRL.get(dk).get();
+                double wr = g > 0 ? (double) w / g : 0.0;
+                sb.append(dk).append(",winrate=").append(String.format("%.4f", wr))
+                        .append(",wins=").append(w).append(",games=").append(g).append('\n');
+            }
+            sb.append('\n');
+
+            // VS each deck (opponent deck)
+            java.util.List<String> oppKeys = new java.util.ArrayList<>(deckGamesVsOpp.keySet());
+            java.util.Collections.sort(oppKeys);
+            sb.append("VS_DECK\n");
+            for (String dk : oppKeys) {
+                long g = deckGamesVsOpp.get(dk) == null ? 0L : deckGamesVsOpp.get(dk).get();
+                long w = deckWinsVsOpp.get(dk) == null ? 0L : deckWinsVsOpp.get(dk).get();
+                double wr = g > 0 ? (double) w / g : 0.0;
+                sb.append(dk).append(",winrate=").append(String.format("%.4f", wr))
+                        .append(",wins=").append(w).append(",games=").append(g).append('\n');
+            }
+            sb.append('\n');
+
+            // Per matchup
+            java.util.List<String> matchupKeys = new java.util.ArrayList<>(matchupGames.keySet());
+            java.util.Collections.sort(matchupKeys);
+            sb.append("MATCHUP\n");
+            for (String mk : matchupKeys) {
+                long g = matchupGames.get(mk) == null ? 0L : matchupGames.get(mk).get();
+                long w = matchupWins.get(mk) == null ? 0L : matchupWins.get(mk).get();
+                double wr = g > 0 ? (double) w / g : 0.0;
+                sb.append(mk).append(",winrate=").append(String.format("%.4f", wr))
+                        .append(",wins=").append(w).append(",games=").append(g).append('\n');
+            }
+
+            Files.write(path, sb.toString().getBytes(StandardCharsets.UTF_8),
+                    java.nio.file.StandardOpenOption.CREATE,
+                    java.nio.file.StandardOpenOption.TRUNCATE_EXISTING);
+        } catch (Exception ignored) {
+            // Don't fail benchmark for reporting.
         }
     }
 
@@ -965,11 +1127,21 @@ public class RLTrainer {
         }
         Game game = match.getGames().get(0);
 
+        // Benchmark gamelogs: allow full per-game logging like training/eval.
+        boolean enableGameLogging = "1".equals(System.getenv().getOrDefault("GAME_LOGGING", "0"))
+                || "true".equalsIgnoreCase(System.getenv().getOrDefault("GAME_LOGGING", "0"));
+        GameLogger gameLogger = GameLogger.create(enableGameLogging);
+        threadLocalGameLogger.set(gameLogger);
+        if (gameLogger.isEnabled()) {
+            gameLogger.log("MODE=benchmark");
+            gameLogger.log("MATCHUP: rlDeck=" + rlDeckPath.getFileName() + " vs oppDeck=" + oppDeckPath.getFileName());
+        }
+
         ComputerPlayerRL rlPlayer = new ComputerPlayerRL("RL", RangeOfInfluence.ALL, sharedModel, true);
         rlPlayer.setCurrentEpisode(-1); // -1 indicates benchmark game
         // Use strong opponent for benchmarking
         int benchSkill = EnvConfig.i32("BENCHMARK_OPPONENT_SKILL", 6);
-        Player opponent = new ComputerPlayer7("Benchmark-Skill" + benchSkill, RangeOfInfluence.ALL, benchSkill);
+        Player opponent = new ComputerPlayer7("Benchmark-skill" + benchSkill, RangeOfInfluence.ALL, benchSkill);
 
         Deck rlDeck = d1.copy();
         Deck oppDeck = d2.copy();
@@ -1007,7 +1179,19 @@ public class RLTrainer {
         game.start(rlPlayer.getId());
         watchdog.interrupt();
 
-        return game.getWinner().contains(rlPlayer.getName());
+        boolean win = game.getWinner().contains(rlPlayer.getName());
+        if (gameLogger.isEnabled()) {
+            try {
+                String winner = win ? rlPlayer.getName() : opponent.getName();
+                String loser = win ? opponent.getName() : rlPlayer.getName();
+                int turns = game.getTurnNum();
+                String reason = "Benchmark: " + rlDeckPath.getFileName() + " vs " + oppDeckPath.getFileName();
+                gameLogger.logOutcome(winner, loser, turns, reason);
+            } finally {
+                gameLogger.close();
+            }
+        }
+        return win;
     }
 
     public static List<Path> loadDeckPool() throws IOException {
@@ -1409,11 +1593,11 @@ public class RLTrainer {
     private Player createFixedOpponent(int episodeNum, Random rand) {
         // Legacy fixed schedule, but keep a permanent bot floor by mixing bots even after self-play.
         if (episodeNum < FIXED_WEAK_UNTIL) {
-            return new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 1);
+            return new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 7);
         } else if (episodeNum < FIXED_MEDIUM_UNTIL) {
-            return new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 2);
+            return new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 8);
         } else if (episodeNum < FIXED_STRONG_UNTIL) {
-            return new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 3);
+            return new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 9);
         } else {
             double botFloor = Math.max(0.0, Math.min(1.0, BOT_FLOOR_P));
             if (rand.nextDouble() < botFloor) {
@@ -1595,18 +1779,18 @@ public class RLTrainer {
 
             switch (newLevel) {
                 case WEAK:
-                    opType = "WEAK-CP7(skill=1)";
-                    opponent = new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 1);
+                    opType = "WEAK-CP7(skill=7)";
+                    opponent = new ComputerPlayer7("WeakBot", RangeOfInfluence.ALL, 7);
                     break;
 
                 case MEDIUM:
-                    opType = "MEDIUM-CP7(skill=2)";
-                    opponent = new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 2);
+                    opType = "MEDIUM-CP7(skill=8)";
+                    opponent = new ComputerPlayer7("MediumBot", RangeOfInfluence.ALL, 8);
                     break;
 
                 case STRONG:
-                    opType = "STRONG-CP7(skill=3)";
-                    opponent = new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 3);
+                    opType = "STRONG-CP7(skill=9)";
+                    opponent = new ComputerPlayer7("StrongBot", RangeOfInfluence.ALL, 9);
                     break;
 
                 case SELFPLAY:

@@ -1,0 +1,2594 @@
+================================================================================
+GAME LOG: game_20260201_123916_0054
+Started: 2026-02-01T12:39:16.766638400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Elvish Mystic; Llanowar Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Elvish Mystic; Llanowar Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894913
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000031 - Pass
+     [1] 0.088589 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.636843 - Cast Elvish Mystic
+     [3] 0.274536 - Cast Llanowar Elves
+
+VALUE SCORE: 0.891560
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000031 - Pass
+
+VALUE SCORE: 0.891560
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Priest of Titania; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000021 - Pass
+     [1] 0.019578 - Cast Winding Way
+     [2] 0.034171 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.461971 - Cast Priest of Titania
+     [4] 0.220923 - Cast Elvish Mystic
+     [5] 0.131327 - Cast Llanowar Elves
+     [6] 0.132009 - Cast Quirion Ranger
+
+VALUE SCORE: 0.824782
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000021 - Pass
+
+VALUE SCORE: 0.824782
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.004538 - Cast Winding Way
+     [2] 0.009060 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.063694 - Cast Elvish Mystic
+     [4] 0.029884 - Cast Llanowar Elves
+     [5] 0.028939 - Cast Quirion Ranger
+ >>> [6] 0.863881 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.867192
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000027 - Pass
+     [1] 0.068721 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.480036 - Cast Elvish Mystic
+     [3] 0.229160 - Cast Llanowar Elves
+     [4] 0.222057 - Cast Quirion Ranger
+
+VALUE SCORE: 0.862997
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.862997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.862997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.862997
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.862997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.862997
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.862997
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Llanowar Elves; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000045 - Pass
+     [1] 0.057078 - Cast Winding Way
+     [2] 0.112452 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.380474 - Cast Llanowar Elves
+     [4] 0.367560 - Cast Quirion Ranger
+     [5] 0.082391 - Cast Lead the Stampede
+
+VALUE SCORE: 0.857531
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000074 - Pass
+     [1] 0.091968 - Cast Winding Way
+     [2] 0.179942 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.596475 - Cast Quirion Ranger
+     [4] 0.131542 - Cast Lead the Stampede
+
+VALUE SCORE: 0.852534
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Generous Ent; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000278 - Pass
+     [1] 0.339603 - Cast Winding Way
+ >>> [2] 0.660118 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.847273
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.823876
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Winding Way; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000968 - Pass
+ >>> [1] 0.999030 - Cast Winding Way
+     [2] 0.000002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.820525
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998509 - Pass
+     [1] 0.001491 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.810767
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998508 - Pass
+     [1] 0.001492 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.810820
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998510 - Pass
+     [1] 0.001490 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.810603
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999961 - Pass
+     [1] 0.000039 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.065192
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.066341
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.066614
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Fyndhorn Elves; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves; Quirion Ranger; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999960 - Pass
+     [1] 0.000040 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.066051
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Generous Ent; Generous Ent; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Generous Ent; Generous Ent; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000010 - Pass
+     [1] 0.008848 - Cast Lead the Stampede
+     [2] 0.036285 - Cast Generous Ent
+     [3] 0.011193 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [4] 0.943665 - Cast Fyndhorn Elves
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.773754
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Generous Ent; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Quirion Ranger; Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000487 - Pass
+     [1] 0.440399 - Cast Lead the Stampede
+ >>> [2] 0.559113 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.768499
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Generous Ent; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Lead the Stampede
+     [2] 0.000000 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.999999 - Play Snow-Covered Forest
+     [4] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.768726
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Quirion Ranger; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000495 - Pass
+     [1] 0.439933 - Cast Lead the Stampede
+ >>> [2] 0.559572 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.764984
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.001118 - Pass
+ >>> [1] 0.998881 - Cast Lead the Stampede
+     [2] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.766173
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Snow-Covered Forest; Generous Ent; Timberwatch Elf; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000844 - Pass
+ >>> [1] 0.999155 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.761973
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998925 - Pass
+     [1] 0.001075 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.757003
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998924 - Pass
+     [1] 0.001076 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.757060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998926 - Pass
+     [1] 0.001074 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.756810
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+     [1] 0.000047 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.086367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+
+VALUE SCORE: 0.086367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+
+VALUE SCORE: 0.086367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999953 - Pass
+
+VALUE SCORE: 0.086367
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000021 - Cast Timberwatch Elf
+     [2] 0.000005 - Cast Priest of Titania
+ >>> [3] 0.999974 - Play Snow-Covered Forest
+     [4] 0.000000 - Cast Nyxborn Hydra
+     [5] 0.000000 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.768546
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Fyndhorn Elves; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+ >>> [1] 0.813263 - Cast Timberwatch Elf
+     [2] 0.185745 - Cast Priest of Titania
+     [3] 0.000786 - Cast Nyxborn Hydra
+     [4] 0.000194 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.764954
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+  - [1] Timberwatch Elf (controller=RL)
+[RL], life = 16
+-> Hand: [Priest of Titania; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.764954
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=RL)
+[RL], life = 15
+-> Hand: [Priest of Titania; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.764954
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Priest of Titania; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000051 - Pass
+ >>> [1] 0.994668 - Cast Priest of Titania
+     [2] 0.004311 - Cast Nyxborn Hydra
+     [3] 0.000970 - Cast Nyxborn Hydra using bestow
+
+VALUE SCORE: 0.780532
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+  - [1] Priest of Titania (controller=RL)
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 0.780532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=RL)
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 0.780532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+  - [1] Priest of Titania (controller=RL)
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Fyndhorn Elves; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 0.780532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=RL)
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000051 - Pass
+
+VALUE SCORE: 0.780532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.021155 - Pass
+ >>> [1] 0.978845 - Cast Nyxborn Hydra
+
+VALUE SCORE: 0.717200
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021155 - Pass
+
+VALUE SCORE: 0.717200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021155 - Pass
+
+VALUE SCORE: 0.717200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021155 - Pass
+
+VALUE SCORE: 0.717200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021155 - Pass
+
+VALUE SCORE: 0.717200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021155 - Pass
+
+VALUE SCORE: 0.717200
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.021155 - Pass
+
+VALUE SCORE: 0.717200
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.768468
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+     [1] 0.000948 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999052 - Pass
+
+VALUE SCORE: 0.765742
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.011125 - Pass
+ >>> [1] 0.797191 - Cast Nyxborn Hydra
+     [2] 0.191673 - Cast Nyxborn Hydra using bestow
+     [3] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.766750
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+     [1] 0.000771 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Priest of Titania,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999229 - Pass
+
+VALUE SCORE: 0.736308
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.647545
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+     [1] 0.000396 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Voldaren Epicure,blocking; Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Blood Token; Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Blood Token; Mountain; Mountain,tapped; Sneaky Snacker]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 4 cards
+-> Permanents: [Blood Token; Mountain; Mountain,tapped; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped,attacking; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Nyxborn Hydra,blocking; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped,attacking; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999604 - Pass
+
+VALUE SCORE: 0.644334
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.960578 - Pass
+     [1] 0.038969 - Cast Timberwatch Elf
+     [2] 0.000453 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.666591
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.960578 - Pass
+
+VALUE SCORE: 0.666591
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped,attacking; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Voldaren Epicure,blocking; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.960578 - Pass
+
+VALUE SCORE: 0.666591
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 2 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996934 - Pass
+     [1] 0.003066 - Cast Timberwatch Elf
+
+VALUE SCORE: 0.664367
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996934 - Pass
+
+VALUE SCORE: 0.664367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped,attacking; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996934 - Pass
+
+VALUE SCORE: 0.664367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped,attacking; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996934 - Pass
+
+VALUE SCORE: 0.664367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf,tapped; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996934 - Pass
+
+VALUE SCORE: 0.664367
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Timberwatch Elf; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Elvish Mystic; Llanowar Elves; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Priest of Titania; Snow-Covered Forest; Nyxborn Hydra; Snow-Covered Forest]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.018809 - Pass
+     [1] 0.000894 - Cast Timberwatch Elf
+ >>> [2] 0.753400 - Cast Nyxborn Hydra
+     [3] 0.226887 - Cast Nyxborn Hydra using bestow
+     [4] 0.000011 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.690464
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf; Priest of Titania,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963575 - Pass
+     [1] 0.036017 - Cast Timberwatch Elf
+     [2] 0.000409 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.647447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963575 - Pass
+
+VALUE SCORE: 0.647447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Elvish Mystic,tapped; Llanowar Elves,tapped; Fyndhorn Elves,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Priest of Titania,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 4
+-> Hand: 3 cards
+-> Permanents: [Blood Token; Sneaky Snacker,tapped; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.963575 - Pass
+
+VALUE SCORE: 0.647447
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 11
+Reason: Benchmark: Deck - Elves.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 110
+Ended: 2026-02-01T12:43:47.197086
+================================================================================

@@ -1,0 +1,1271 @@
+================================================================================
+GAME LOG: game_20260201_123427_0029
+Started: 2026-02-01T12:34:27.939786900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Priest of Titania; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Masked Vandal; Priest of Titania; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894679
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Elvish Mystic; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000026 - Pass
+ >>> [1] 0.539994 - Cast Elvish Mystic
+     [2] 0.233106 - Cast Llanowar Elves
+     [3] 0.226874 - Cast Quirion Ranger
+
+VALUE SCORE: 0.891335
+SELECTED: Cast Elvish Mystic
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.891335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.891335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.891335
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.891335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.891335
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.891335
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999988 - Play Snow-Covered Forest
+     [2] 0.000001 - Cast Masked Vandal
+     [3] 0.000007 - Cast Priest of Titania
+     [4] 0.000002 - Cast Llanowar Elves
+     [5] 0.000002 - Cast Quirion Ranger
+
+VALUE SCORE: 0.867606
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Priest of Titania; Llanowar Elves; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000022 - Pass
+     [1] 0.061809 - Cast Masked Vandal
+ >>> [2] 0.614959 - Cast Priest of Titania
+     [3] 0.162790 - Cast Llanowar Elves
+     [4] 0.160419 - Cast Quirion Ranger
+
+VALUE SCORE: 0.864177
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Llanowar Elves; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000070 - Pass
+ >>> [1] 0.502247 - Cast Llanowar Elves
+     [2] 0.497684 - Cast Quirion Ranger
+
+VALUE SCORE: 0.857821
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.857821
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Avenging Hunter; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000015 - Pass
+     [1] 0.032956 - Cast Masked Vandal
+     [2] 0.092858 - Cast Quirion Ranger
+ >>> [3] 0.855143 - Cast Avenging Hunter
+     [4] 0.019029 - Cast Lead the Stampede
+
+VALUE SCORE: 0.832638
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.832638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.832638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000015 - Pass
+
+VALUE SCORE: 0.832638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Lead the Stampede; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000001 - Cast Masked Vandal
+     [2] 0.000002 - Cast Quirion Ranger
+ >>> [3] 0.999998 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.791900
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Quirion Ranger; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000129 - Pass
+     [1] 0.209260 - Cast Masked Vandal
+ >>> [2] 0.670988 - Cast Quirion Ranger
+     [3] 0.119623 - Cast Lead the Stampede
+
+VALUE SCORE: 0.788454
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000623 - Pass
+ >>> [1] 0.999376 - Cast Masked Vandal
+     [2] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.786060
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998770 - Pass
+     [1] 0.001230 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.777901
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998769 - Pass
+     [1] 0.001231 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.777963
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998771 - Pass
+     [1] 0.001229 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.777723
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999951 - Pass
+     [1] 0.000049 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.139736
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999951 - Pass
+     [1] 0.000049 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.138963
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999958 - Pass
+     [1] 0.000042 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.120606
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999957 - Pass
+     [1] 0.000043 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.120883
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999958 - Pass
+     [1] 0.000042 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.120283
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Llanowar Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Llanowar Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000025 - Pass
+     [1] 0.012810 - Cast Lead the Stampede
+ >>> [2] 0.987166 - Cast Timberwatch Elf
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.723082
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania; Llanowar Elves; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002029 - Pass
+ >>> [1] 0.997969 - Cast Lead the Stampede
+     [2] 0.000002 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.710530
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000022 - Pass
+     [1] 0.014484 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.021301 - Cast Masked Vandal
+ >>> [3] 0.964193 - Cast Timberwatch Elf
+     [4] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.721665
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000622 - Pass
+     [1] 0.404011 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.595366 - Cast Masked Vandal
+     [3] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.718247
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=RL)
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999148 - Pass
+     [1] 0.000852 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.711713
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999148 - Pass
+     [1] 0.000852 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.711713
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped,attacking; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999178 - Pass
+     [1] 0.000822 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.706216
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped,attacking; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Sacred Cat,blocking; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999180 - Pass
+     [1] 0.000820 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.705725
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age; Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999184 - Pass
+     [1] 0.000816 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.705075
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999955 - Pass
+     [1] 0.000045 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.131134
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.103150
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.067951
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.068533
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.067148
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Llanowar Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Elvish Mystic; Snow-Covered Forest; Priest of Titania; Llanowar Elves; Avenging Hunter; Snow-Covered Forest; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000613 - Pass
+ >>> [1] 0.776349 - Cast Generous Ent
+     [2] 0.223014 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000023 - Cast Timberwatch Elf
+     [4] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.660067
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal; Generous Ent]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999108 - Pass
+     [1] 0.000541 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000352 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.632138
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000190 - Pass
+     [1] 0.000005 - Cast Timberwatch Elf
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+ >>> [3] 0.999804 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.618603
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal; Timberwatch Elf; Timberwatch Elf; Masked Vandal; Generous Ent]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.969182 - Pass
+     [1] 0.029952 - Cast Timberwatch Elf
+     [2] 0.000525 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [3] 0.000341 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.632204
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped,attacking; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Generous Ent]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999526 - Pass
+     [1] 0.000474 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.611303
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: [Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Elvish Mystic; Snow-Covered Forest,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Masked Vandal,tapped,attacking; Timberwatch Elf,tapped,attacking; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Generous Ent]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island; The Modern Age; Idyllic Beachfront,tapped; Sea Gate,tapped; Sacred Cat,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999527 - Pass
+     [1] 0.000473 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.610773
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 5
+Reason: Benchmark: Deck - Elves.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 53
+Ended: 2026-02-01T12:36:10.643370100
+================================================================================

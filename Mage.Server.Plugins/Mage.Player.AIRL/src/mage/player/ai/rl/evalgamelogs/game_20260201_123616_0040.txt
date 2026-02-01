@@ -1,0 +1,2148 @@
+================================================================================
+GAME LOG: game_20260201_123616_0040
+Started: 2026-02-01T12:36:16.806799300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894670
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000085 - Pass
+     [1] 0.243782 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.756132 - Cast Llanowar Elves
+
+VALUE SCORE: 0.891324
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000085 - Pass
+
+VALUE SCORE: 0.891324
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999991 - Play Snow-Covered Forest
+     [2] 0.000001 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000001 - Cast Masked Vandal
+     [4] 0.000008 - Cast Priest of Titania
+
+VALUE SCORE: 0.893291
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000024 - Pass
+     [1] 0.067703 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.085548 - Cast Masked Vandal
+ >>> [3] 0.846725 - Cast Priest of Titania
+
+VALUE SCORE: 0.890481
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Generous Ent; Masked Vandal; Priest of Titania]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000359 - Pass
+ >>> [1] 0.999641 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.884980
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000359 - Pass
+
+VALUE SCORE: 0.884980
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Snow-Covered Forest; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000001 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000001 - Cast Masked Vandal
+     [3] 0.000007 - Cast Priest of Titania
+ >>> [4] 0.999990 - Play Snow-Covered Forest
+     [5] 0.000002 - Cast Llanowar Elves
+
+VALUE SCORE: 0.848466
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Priest of Titania; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000025 - Pass
+     [1] 0.140628 - Cast Generous Ent
+     [2] 0.044856 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.059112 - Cast Masked Vandal
+ >>> [4] 0.592119 - Cast Priest of Titania
+     [5] 0.163260 - Cast Llanowar Elves
+
+VALUE SCORE: 0.845659
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Priest of Titania (controller=RL)
+[RL], life = 20
+-> Hand: [Generous Ent; Masked Vandal; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000484 - Pass
+ >>> [1] 0.999516 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.855774
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Priest of Titania (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000484 - Pass
+
+VALUE SCORE: 0.855774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Priest of Titania (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000484 - Pass
+
+VALUE SCORE: 0.855774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=RL)
+[RL], life = 20
+-> Hand: [Masked Vandal; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000484 - Pass
+
+VALUE SCORE: 0.855774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000101 - Pass
+     [1] 0.271966 - Cast Masked Vandal
+ >>> [2] 0.727934 - Cast Llanowar Elves
+
+VALUE SCORE: 0.856115
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Masked Vandal; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000407 - Pass
+ >>> [1] 0.999593 - Cast Masked Vandal
+
+VALUE SCORE: 0.843874
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000407 - Pass
+
+VALUE SCORE: 0.843874
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Snow-Covered Forest
+     [2] 0.000002 - Cast Quirion Ranger
+
+VALUE SCORE: 0.793522
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Quirion Ranger]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000210 - Pass
+ >>> [1] 0.999790 - Cast Quirion Ranger
+
+VALUE SCORE: 0.790392
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Quirion Ranger (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000210 - Pass
+
+VALUE SCORE: 0.790392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Quirion Ranger (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000210 - Pass
+
+VALUE SCORE: 0.790392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000210 - Pass
+
+VALUE SCORE: 0.790392
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998543 - Pass
+     [1] 0.001457 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.804247
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Priest of Titania,tapped,attacking; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998691 - Pass
+     [1] 0.001309 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.786628
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Priest of Titania,tapped,attacking; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998691 - Pass
+     [1] 0.001309 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.786628
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Twisted Landscape,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998785 - Pass
+     [1] 0.001215 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.774021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp; Swamp]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999923 - Pass
+     [1] 0.000077 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.191311
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999924 - Pass
+     [1] 0.000076 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.189324
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999924 - Pass
+     [1] 0.000076 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.189381
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999926 - Pass
+     [1] 0.000074 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.187212
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999926 - Pass
+     [1] 0.000074 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.187212
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.831742
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998288 - Pass
+     [1] 0.001712 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.829868
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Priest of Titania,tapped,attacking; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Quirion Ranger,tapped,attacking; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999884 - Pass
+     [1] 0.000116 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.810684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Priest of Titania,tapped,attacking; Priest of Titania,tapped,attacking; Llanowar Elves,tapped,attacking; Snow-Covered Forest; Quirion Ranger,tapped,attacking; Snow-Covered Forest]
+[Benchmark-Skill6], life = 16
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999884 - Pass
+     [1] 0.000116 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.810684
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999893 - Pass
+     [1] 0.000107 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.797041
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999990 - Pass
+     [1] 0.000010 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.175791
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999990 - Pass
+     [1] 0.000010 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.175089
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.159980
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.160050
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest; Llanowar Elves,tapped; Snow-Covered Forest; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest; Quirion Ranger,tapped; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.159907
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.010744 - Pass
+ >>> [1] 0.797559 - Cast Nyxborn Hydra
+     [2] 0.191681 - Cast Nyxborn Hydra using bestow
+     [3] 0.000016 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.802538
+SELECTED: Cast Nyxborn Hydra
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Priest of Titania,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998806 - Pass
+     [1] 0.001194 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.771442
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Priest of Titania,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.757298
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Priest of Titania,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 11
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999915 - Pass
+     [1] 0.000085 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.757298
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Lembas; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999920 - Pass
+     [1] 0.000080 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.746482
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.166825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999991 - Pass
+     [1] 0.000009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.168331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.135811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.135186
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.134222
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.134387
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Priest of Titania,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999993 - Pass
+     [1] 0.000007 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.134000
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Wellwisher]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000636 - Pass
+ >>> [1] 0.999363 - Cast Wellwisher
+     [2] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.757601
+SELECTED: Cast Wellwisher
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra; Wellwisher]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998949 - Pass
+     [1] 0.001052 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.748471
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Wellwisher]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998991 - Pass
+     [1] 0.001009 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.740949
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped,attacking; Wellwisher]
+[Benchmark-Skill6], life = 8
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped; Refurbished Familiar,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999011 - Pass
+     [1] 0.000989 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.737002
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge,tapped; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998953 - Pass
+     [1] 0.001046 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.747520
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp; Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp; Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999931 - Pass
+     [1] 0.000069 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.178129
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp; Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999931 - Pass
+     [1] 0.000069 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.177897
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999943 - Pass
+     [1] 0.000057 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.156537
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+     [1] 0.000058 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.158377
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+     [1] 0.000058 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.158478
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra,tapped; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999942 - Pass
+     [1] 0.000058 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.158276
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Generous Ent]
+-> Permanents: [Snow-Covered Forest; Llanowar Elves; Snow-Covered Forest; Priest of Titania; Priest of Titania; Llanowar Elves; Snow-Covered Forest; Quirion Ranger; Snow-Covered Forest; Nyxborn Hydra; Wellwisher]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000428 - Pass
+ >>> [1] 0.769669 - Cast Generous Ent
+     [2] 0.229903 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.702553
+SELECTED: Cast Generous Ent
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Food token.) (controller=RL)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Priest of Titania,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Generous Ent]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999138 - Pass
+     [1] 0.000640 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000222 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.662607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Priest of Titania,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Generous Ent; Food Token]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000154 - Pass
+     [1] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000000 - {T}: You gain 1 life for each Elf on the battlefield.
+ >>> [3] 0.999846 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.639501
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania; Priest of Titania,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Nyxborn Hydra; Wellwisher; Generous Ent]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999137 - Pass
+     [1] 0.000640 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000222 - {T}: You gain 1 life for each Elf on the battlefield.
+
+VALUE SCORE: 0.662667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Priest of Titania,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Wellwisher,tapped,attacking; Generous Ent]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999962 - Pass
+     [1] 0.000038 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.615514
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 23
+-> Hand: []
+-> Permanents: [Snow-Covered Forest,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped,attacking; Priest of Titania,tapped; Llanowar Elves,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Wellwisher,tapped,attacking; Generous Ent]
+[Benchmark-Skill6], life = 2
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Slagwoods Bridge; Map Token; Swamp,tapped; Refurbished Familiar,blocking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999963 - Pass
+     [1] 0.000037 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.610578
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 8
+Reason: Benchmark: Deck - Elves.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 91
+Ended: 2026-02-01T12:40:08.018881800
+================================================================================

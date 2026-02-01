@@ -1,0 +1,4945 @@
+================================================================================
+GAME LOG: game_20260201_125522_0181
+Started: 2026-02-01T12:55:22.380453
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Jund Wildfire.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Deem Inferior; Brainstorm; Ponder; Thought Scour]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Lorien Revealed; Deem Inferior; Brainstorm; Ponder; Thought Scour]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124983
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Ponder; Thought Scour]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+     [1] 0.162111 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.003082 - Cast Brainstorm
+ >>> [3] 0.799286 - Cast Ponder
+     [4] 0.035514 - Cast Thought Scour
+
+VALUE SCORE: 1.123389
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 1.123389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 1.123389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 1.123389
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 1.123389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 1.123389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 1.123389
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic; Deem Inferior]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic; Deem Inferior]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999897 - Play Island
+     [2] 0.000083 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000002 - Cast Brainstorm
+     [4] 0.000019 - Cast Thought Scour
+
+VALUE SCORE: 1.113715
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic; Deem Inferior]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+ >>> [1] 0.799151 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.016480 - Cast Brainstorm
+     [3] 0.184330 - Cast Thought Scour
+
+VALUE SCORE: 1.111800
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Thought Scour; Murmuring Mystic; Deem Inferior; Island]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.000200 - Pass
+     [1] 0.082370 - Cast Brainstorm
+ >>> [2] 0.917430 - Cast Thought Scour
+
+VALUE SCORE: 1.108483
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000200 - Pass
+
+VALUE SCORE: 1.108483
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Island; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Brainstorm
+ >>> [2] 0.999981 - Play Island
+     [3] 0.000017 - Cast Thought Scour
+
+VALUE SCORE: 1.074760
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000079 - Pass
+ >>> [1] 0.655608 - Cast Deem Inferior
+     [2] 0.030733 - Cast Brainstorm
+     [3] 0.313580 - Cast Thought Scour
+
+VALUE SCORE: 1.072126
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000079 - Pass
+
+VALUE SCORE: 1.072126
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent; Island]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000002 - Cast Brainstorm
+     [2] 0.000034 - Cast Deem Inferior
+     [3] 0.000016 - Cast Thought Scour
+     [4] 0.003187 - Cast Cryptic Serpent
+ >>> [5] 0.996762 - Play Island
+
+VALUE SCORE: 1.038176
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Murmuring Mystic; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000247 - Cast Brainstorm
+ >>> [2] 0.541328 - Cast Murmuring Mystic
+     [3] 0.004723 - Cast Deem Inferior
+     [4] 0.002290 - Cast Thought Scour
+     [5] 0.451411 - Cast Cryptic Serpent
+
+VALUE SCORE: 1.035035
+SELECTED: Cast Murmuring Mystic
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 1.035035
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent; Ponder]
+-> Permanents: [Island; Island; Island; Island; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Cryptic Serpent; Ponder]
+-> Permanents: [Island; Island; Island; Island; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000485 - Cast Brainstorm
+     [2] 0.008602 - Cast Deem Inferior
+     [3] 0.004163 - Cast Thought Scour
+ >>> [4] 0.876118 - Cast Cryptic Serpent
+     [5] 0.110631 - Cast Ponder
+
+VALUE SCORE: 1.003976
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Ponder]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.004245 - Cast Brainstorm
+     [2] 0.035340 - Cast Thought Scour
+ >>> [3] 0.960402 - Cast Ponder
+
+VALUE SCORE: 0.987898
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=RL)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Blood Token; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000012 - Pass
+
+VALUE SCORE: 0.987898
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror; Island]
+-> Permanents: [Island; Island; Island; Island; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Tolarian Terror; Island]
+-> Permanents: [Island; Island; Island; Island; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000032 - Pass
+     [1] 0.010812 - Cast Brainstorm
+     [2] 0.189820 - Cast Deem Inferior
+     [3] 0.092228 - Cast Thought Scour
+ >>> [4] 0.706803 - Cast Tolarian Terror
+     [5] 0.000305 - Play Island
+
+VALUE SCORE: 1.002573
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Thought Scour; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token; Tolarian Terror]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000313 - Pass
+     [1] 0.106970 - Cast Brainstorm
+ >>> [2] 0.892715 - Cast Thought Scour
+     [3] 0.000002 - Play Island
+
+VALUE SCORE: 0.991318
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Brainstorm; Deem Inferior; Island]
+-> Permanents: [Island; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token; Tolarian Terror; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.002876 - Pass
+ >>> [1] 0.997124 - Cast Brainstorm
+
+VALUE SCORE: 0.980913
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=RL)
+  - [1] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002876 - Pass
+
+VALUE SCORE: 0.980913
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=RL)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002876 - Pass
+
+VALUE SCORE: 0.980913
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Cryptic Serpent; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995145 - Pass
+     [1] 0.004855 - Play Island
+
+VALUE SCORE: 0.947354
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Cryptic Serpent,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995145 - Pass
+
+VALUE SCORE: 0.947354
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Cryptic Serpent,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Nyxborn Hydra,blocking; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995145 - Pass
+
+VALUE SCORE: 0.947354
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent,tapped; Bird Illusion Token,tapped; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+     [1] 0.003261 - Play Island
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent,tapped; Bird Illusion Token,tapped; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent,tapped; Bird Illusion Token,tapped; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Ichor Wellspring; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent,tapped; Bird Illusion Token,tapped; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent,tapped; Bird Illusion Token,tapped; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Cryptic Serpent,tapped; Bird Illusion Token,tapped; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Krark-Clan Shaman; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996739 - Pass
+
+VALUE SCORE: 0.888403
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island; Dispel]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Deem Inferior; Island; Thought Scour; Island; Dispel]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Blood Fountain; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000153 - Pass
+ >>> [1] 0.682720 - Cast Deem Inferior
+     [2] 0.001017 - Play Island
+     [3] 0.316110 - Cast Thought Scour
+
+VALUE SCORE: 0.905752
+SELECTED: Cast Deem Inferior
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Thought Scour; Island; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000509 - Pass
+     [1] 0.000002 - Play Island
+ >>> [2] 0.999490 - Cast Thought Scour
+
+VALUE SCORE: 0.886022
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997098 - Pass
+     [1] 0.002902 - Play Island
+
+VALUE SCORE: 0.871261
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997098 - Pass
+
+VALUE SCORE: 0.871261
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 21
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997098 - Pass
+
+VALUE SCORE: 0.871261
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Slagwoods Bridge,tapped; Clue Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998256 - Pass
+     [1] 0.001744 - Play Island
+
+VALUE SCORE: 0.799765
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Clue Token; Drossforge Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Clue Token; Drossforge Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998256 - Pass
+
+VALUE SCORE: 0.799765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998256 - Pass
+
+VALUE SCORE: 0.799765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998256 - Pass
+
+VALUE SCORE: 0.799765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998256 - Pass
+
+VALUE SCORE: 0.799765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998256 - Pass
+
+VALUE SCORE: 0.799765
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Ponder; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+     [1] 0.000110 - Play Island
+ >>> [2] 0.999872 - Cast Ponder
+
+VALUE SCORE: 0.884370
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.147633 - Pass
+ >>> [1] 0.852367 - Play Island
+
+VALUE SCORE: 0.874020
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Bird Illusion Token,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.147633 - Pass
+
+VALUE SCORE: 0.874020
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.767334
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.767334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.767334
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.767334
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Pulse of Murasa (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993728 - Pass
+     [1] 0.006272 - Cast Dispel
+
+VALUE SCORE: 0.161267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993728 - Pass
+
+VALUE SCORE: 0.161267
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you sacrifice another Eldrazi, put a +1/+1 counter on {this}.) (controller=Benchmark-Skill6)
+  - [1] Cast Down (controller=Benchmark-Skill6)
+  - [2] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.994962 - Pass
+     [1] 0.005038 - Cast Dispel
+
+VALUE SCORE: 0.125397
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995036 - Pass
+     [1] 0.004964 - Cast Dispel
+
+VALUE SCORE: 0.123605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995036 - Pass
+
+VALUE SCORE: 0.123605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995036 - Pass
+
+VALUE SCORE: 0.123605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995036 - Pass
+
+VALUE SCORE: 0.123605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped,attacking; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995036 - Pass
+
+VALUE SCORE: 0.123605
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Island]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.995036 - Pass
+
+VALUE SCORE: 0.123605
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Island; Thought Scour]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Island; Thought Scour]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999986 - Play Island
+     [2] 0.000014 - Cast Thought Scour
+
+VALUE SCORE: 0.745812
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Thought Scour]
+-> Permanents: [Island; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.001038 - Pass
+ >>> [1] 0.998962 - Cast Thought Scour
+
+VALUE SCORE: 0.732391
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Map Token; Drossforge Bridge,tapped; Eldrazi Spawn Token; Writhing Chrysalis,tapped; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Drossforge Bridge; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Sacrifice this artifact: Target creature you control explores. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Drossforge Bridge; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Eldrazi Spawn Token; Writhing Chrysalis; Krark-Clan Shaman; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Eldrazi Spawn Token; Writhing Chrysalis; Refurbished Familiar; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token; Bird Illusion Token; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Bird Illusion Token,blocking; Bird Illusion Token,blocking; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Eldrazi Spawn Token,tapped,attacking; Writhing Chrysalis,tapped,attacking; Refurbished Familiar,tapped,attacking; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Island; Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001038 - Pass
+
+VALUE SCORE: 0.732391
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Island; Counterspell; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Island; Counterspell; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.995839 - Play Island
+     [2] 0.004161 - Cast Cryptic Serpent
+
+VALUE SCORE: 0.757152
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Counterspell; Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Cast Cryptic Serpent
+
+VALUE SCORE: 0.743937
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.743937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.743937
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.743937
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Island; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.002579 - Pass
+ >>> [1] 0.997421 - Cast Counterspell
+
+VALUE SCORE: 0.176212
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island; Island,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002579 - Pass
+
+VALUE SCORE: 0.176212
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island; Island,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002579 - Pass
+
+VALUE SCORE: 0.176212
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island; Island,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002579 - Pass
+
+VALUE SCORE: 0.176212
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island; Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.716291
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped,attacking; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped,attacking; Island]
+[Benchmark-Skill6], life = 21
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Twisted Landscape; Slagwoods Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Slagwoods Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Slagwoods Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped,attacking; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.716291
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island; Mental Note]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island; Mental Note]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999990 - Play Island
+     [2] 0.000010 - Cast Mental Note
+
+VALUE SCORE: 0.712554
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Mental Note]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+     [0] 0.002874 - Pass
+ >>> [1] 0.997126 - Cast Mental Note
+
+VALUE SCORE: 0.696607
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Island]
+[Benchmark-Skill6], life = 15
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp; Forest; Vault of Whispers; Drossforge Bridge; Writhing Chrysalis,tapped; Slagwoods Bridge; Swamp,tapped; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Drossforge Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Drossforge Bridge; Slagwoods Bridge; Swamp; Twisted Landscape]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers,tapped; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cleansing Wildfire (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002874 - Pass
+
+VALUE SCORE: 0.696607
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 14 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #150 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Island]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.528151
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #151 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #152 - Turn 14, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #153 - Turn 14, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped,attacking; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Refurbished Familiar,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #154 - Turn 14, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Vault of Whispers,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 14 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #155 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Vault of Whispers; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #156 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fanatical Offering (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp; Map Token; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #157 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cast Down (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Cryptic Serpent,tapped; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #158 - Turn 14, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #159 - Turn 14, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #160 - Turn 14, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 15 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #161 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #162 - Turn 15, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #163 - Turn 15, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.528151
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 15 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #164 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.001293 - Pass
+ >>> [1] 0.998707 - Cast Counterspell
+
+VALUE SCORE: 0.143700
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #165 - Turn 15, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001293 - Pass
+
+VALUE SCORE: 0.143700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #166 - Turn 15, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001293 - Pass
+
+VALUE SCORE: 0.143700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #167 - Turn 15, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001293 - Pass
+
+VALUE SCORE: 0.143700
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 16 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Mental Note]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #168 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Mental Note]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.008975 - Pass
+ >>> [1] 0.991025 - Cast Mental Note
+
+VALUE SCORE: 0.548403
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #169 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008975 - Pass
+
+VALUE SCORE: 0.548403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #170 - Turn 16, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008975 - Pass
+
+VALUE SCORE: 0.548403
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #171 - Turn 16, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.008975 - Pass
+
+VALUE SCORE: 0.548403
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 16 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+--------------------------------------------------------------------------------
+DECISION #172 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+  - [1] Writhing Chrysalis (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.002031 - Pass
+ >>> [1] 0.997969 - Cast Counterspell
+
+VALUE SCORE: -0.045462
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #173 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island,tapped; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002031 - Pass
+
+VALUE SCORE: -0.045462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #174 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island,tapped; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002031 - Pass
+
+VALUE SCORE: -0.045462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #175 - Turn 16, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island,tapped; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002031 - Pass
+
+VALUE SCORE: -0.045462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #176 - Turn 16, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island,tapped; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002031 - Pass
+
+VALUE SCORE: -0.045462
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #177 - Turn 16, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island,tapped; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002031 - Pass
+
+VALUE SCORE: -0.045462
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 17 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+--------------------------------------------------------------------------------
+DECISION #178 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Cryptic Serpent]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000031 - Pass
+ >>> [1] 0.998122 - Cast Cryptic Serpent
+     [2] 0.001847 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.264053
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #179 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.017219 - Pass
+ >>> [1] 0.982781 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.181945
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #180 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island,tapped; Island; Island; Island; Island; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.017529 - Pass
+ >>> [1] 0.982471 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.053538
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #181 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #182 - Turn 17, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #183 - Turn 17, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 17 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token]
+
+--------------------------------------------------------------------------------
+DECISION #184 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lembas (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Slagwoods Bridge; Swamp; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #185 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #186 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #187 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #188 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 0 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #189 - Turn 17, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #190 - Turn 17, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #191 - Turn 17, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.017529 - Pass
+
+VALUE SCORE: 0.053538
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 18 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Ponder]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #192 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Ponder]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Map Token; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Eldrazi Spawn Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000430 - Pass
+ >>> [1] 0.977566 - Cast Ponder
+     [2] 0.022004 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.143424
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #193 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Ponder (controller=RL)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000430 - Pass
+
+VALUE SCORE: 0.143424
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #194 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=RL)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Drossforge Bridge,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Eldrazi Spawn Token,tapped; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000430 - Pass
+
+VALUE SCORE: 0.143424
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #195 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Ponder (controller=RL)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000430 - Pass
+
+VALUE SCORE: 0.143424
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #196 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=RL)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000430 - Pass
+
+VALUE SCORE: 0.143424
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #197 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.011224 - Pass
+ >>> [1] 0.988776 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.260127
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #198 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.010217 - Pass
+ >>> [1] 0.989783 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.140964
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #199 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.010654 - Pass
+ >>> [1] 0.989345 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.065211
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #200 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #201 - Turn 18, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #202 - Turn 18, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking]
+[Benchmark-Skill6], life = 9
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #203 - Turn 18, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 1 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp,tapped; Makeshift Munitions; Map Token; Lembas; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 18 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #204 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, its owner shuffles it into their library.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #205 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 3
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #206 - Turn 18, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #207 - Turn 18, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #208 - Turn 18, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010654 - Pass
+
+VALUE SCORE: 0.065211
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 19 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Brainstorm]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #209 - Turn 19, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Counterspell; Brainstorm]
+-> Permanents: [Island; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.005215 - Pass
+ >>> [1] 0.538163 - Cast Brainstorm
+     [2] 0.456623 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.311431
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #210 - Turn 19, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Tolarian Terror; Deep Analysis]
+-> Permanents: [Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001173 - Pass
+ >>> [1] 0.877227 - Cast Tolarian Terror
+     [2] 0.021495 - Cast Deep Analysis
+     [3] 0.100104 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.272199
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #211 - Turn 19, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island; Island; Island; Island; Island; Island; Island; Cryptic Serpent; Tolarian Terror]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.009631 - Pass
+     [1] 0.167262 - Cast Deep Analysis
+ >>> [2] 0.823107 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.216642
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #212 - Turn 19, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped; Island; Island,tapped; Island,tapped; Island; Island; Island; Island; Island,tapped; Cryptic Serpent; Tolarian Terror]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.009296 - Pass
+     [1] 0.145640 - Cast Deep Analysis
+ >>> [2] 0.845065 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.120331
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #213 - Turn 19, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Tolarian Terror]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009296 - Pass
+
+VALUE SCORE: 0.120331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #214 - Turn 19, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009296 - Pass
+
+VALUE SCORE: 0.120331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #215 - Turn 19, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Deep Analysis]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island,tapped; Island; Island; Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Tolarian Terror]
+[Benchmark-Skill6], life = 6
+-> Hand: 2 cards
+-> Permanents: [Swamp,tapped; Forest,tapped; Swamp; Makeshift Munitions; Map Token; Refurbished Familiar,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.009296 - Pass
+
+VALUE SCORE: 0.120331
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 19
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Jund Wildfire.dek
+Total Decisions Logged: 215
+Ended: 2026-02-01T13:01:05.143240400
+================================================================================

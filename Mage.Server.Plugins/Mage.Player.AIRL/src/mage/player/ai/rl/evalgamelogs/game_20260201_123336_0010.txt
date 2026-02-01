@@ -1,0 +1,1498 @@
+================================================================================
+GAME LOG: game_20260201_123336_0010
+Started: 2026-02-01T12:33:36.050213100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000337 - Pass
+ >>> [1] 0.999663 - Play Sea Gate
+
+VALUE SCORE: 0.178797
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178797
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Brainstorm; Brainstorm; Brainstorm; Sacred Cat; Squadron Hawk]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.064098 - Pass
+ >>> [1] 0.935902 - Cast Brainstorm
+
+VALUE SCORE: 0.153894
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064098 - Pass
+
+VALUE SCORE: 0.153894
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Brainstorm]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Brainstorm]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+     [0] 0.063929 - Pass
+     [1] 0.009294 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.926776 - Cast Brainstorm
+
+VALUE SCORE: 0.134315
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.063929 - Pass
+
+VALUE SCORE: 0.134315
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Brainstorm]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Brainstorm]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.057419 - Pass
+     [1] 0.010210 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.932371 - Cast Brainstorm
+
+VALUE SCORE: 0.134667
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Lorien Revealed; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.057419 - Pass
+
+VALUE SCORE: 0.134667
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain; Island]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain; Island]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000072 - Pass
+     [1] 0.002604 - Cast Preordain
+ >>> [2] 0.997324 - Play Island
+
+VALUE SCORE: 0.078997
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; The Modern Age; Preordain]
+-> Permanents: [Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.011372 - Pass
+ >>> [1] 0.597161 - Cast The Modern Age
+     [2] 0.391467 - Cast Preordain
+
+VALUE SCORE: 0.059437
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island,tapped; Ninja of the Deep Hours; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island,tapped; Ninja of the Deep Hours; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island,tapped; Ninja of the Deep Hours; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate]
+-> Permanents: [Sea Gate,tapped; Island,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Sea Gate; Island; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate; Guardian of the Guildpact]
+-> Permanents: [Sea Gate; Island; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011372 - Pass
+
+VALUE SCORE: 0.059437
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Basilisk Gate; Spell Pierce]
+-> Permanents: [Sea Gate; Island; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.003175 - Pass
+     [1] 0.081044 - Cast Preordain
+ >>> [2] 0.915782 - Play Basilisk Gate
+
+VALUE SCORE: -0.089193
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Preordain; Spell Pierce]
+-> Permanents: [Sea Gate; Island; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.039212 - Pass
+ >>> [1] 0.960788 - Cast Preordain
+
+VALUE SCORE: -0.112532
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Faerie Seer,tapped; Island,tapped; Moon-Circuit Hacker,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped; Ninja of the Deep Hours,tapped; Faerie Seer; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours; Faerie Seer; Island; Faerie Miscreant; Island]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours; Faerie Seer; Island; Faerie Miscreant; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours; Faerie Seer; Island; Faerie Miscreant; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Island; Ninja of the Deep Hours; Faerie Seer; Island,tapped; Faerie Miscreant; Island; Faerie Miscreant; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Journey to Nowhere; Sacred Cat; Squadron Hawk; Counterspell; Spell Pierce; Prismatic Strands]
+-> Permanents: [Sea Gate; Island,tapped; The Modern Age; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 0 cards
+-> Permanents: [Island; Faerie Seer,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island; Ninja of the Deep Hours,tapped,attacking; Faerie Seer,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.039212 - Pass
+
+VALUE SCORE: -0.112532
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 6
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 65
+Ended: 2026-02-01T12:33:54.900857800
+================================================================================

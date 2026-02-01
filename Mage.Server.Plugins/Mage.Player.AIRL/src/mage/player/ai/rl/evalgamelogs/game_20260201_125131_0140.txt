@@ -1,0 +1,2434 @@
+================================================================================
+GAME LOG: game_20260201_125131_0140
+Started: 2026-02-01T12:51:31.251360
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 1.078404
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Goblin Bushwhacker; Voldaren Epicure]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.008161 - Cast Lightning Bolt
+     [2] 0.091095 - Cast Clockwork Percussionist
+ >>> [3] 0.899815 - Cast Goblin Bushwhacker
+     [4] 0.000929 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.073735
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.073735
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure; Goblin Bushwhacker]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.007775 - Cast Lightning Bolt
+     [2] 0.088696 - Cast Clockwork Percussionist
+     [3] 0.001052 - Cast Voldaren Epicure
+ >>> [4] 0.902477 - Cast Goblin Bushwhacker
+
+VALUE SCORE: 1.024007
+SELECTED: Cast Goblin Bushwhacker
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 1.024007
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Clockwork Percussionist; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain; Goblin Bushwhacker]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.080583 - Cast Lightning Bolt
+ >>> [2] 0.909261 - Cast Clockwork Percussionist
+     [3] 0.010152 - Cast Voldaren Epicure
+
+VALUE SCORE: 1.039177
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.039177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.039177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.039177
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.039177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.039177
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.039177
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000340 - Cast Lightning Bolt
+     [2] 0.000045 - Cast Voldaren Epicure
+     [3] 0.003835 - Cast Clockwork Percussionist
+ >>> [4] 0.995780 - Play Great Furnace
+
+VALUE SCORE: 1.021522
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure; Clockwork Percussionist]
+-> Permanents: [Mountain; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.149807 - Cast Rally at the Hornburg
+     [2] 0.068527 - Cast Lightning Bolt
+     [3] 0.009114 - Cast Voldaren Epicure
+ >>> [4] 0.772548 - Cast Clockwork Percussionist
+
+VALUE SCORE: 1.014243
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Lightning Bolt; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000053 - Pass
+ >>> [1] 0.873136 - Cast Lightning Bolt
+     [2] 0.126812 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.990616
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Grab the Prize (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, exile the top card of your library. You may play it until the end of your next turn.) (controller=RL)
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000053 - Pass
+
+VALUE SCORE: 0.990616
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000025 - Pass
+ >>> [1] 0.938567 - Cast Rally at the Hornburg
+     [2] 0.061409 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.955794
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped,attacking; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Human Soldier Token,tapped,attacking; Human Soldier Token,tapped,attacking]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Human Soldier Token,tapped; Human Soldier Token,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000025 - Pass
+
+VALUE SCORE: 0.955794
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Rally at the Hornburg; Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000027 - Pass
+ >>> [1] 0.931506 - Cast Rally at the Hornburg
+     [2] 0.067423 - Cast Voldaren Epicure
+     [3] 0.001044 - Cast Galvanic Blast
+
+VALUE SCORE: 0.819108
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000027 - Pass
+
+VALUE SCORE: 0.819108
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.009405 - Cast Voldaren Epicure
+     [2] 0.000140 - Cast Galvanic Blast
+ >>> [3] 0.990451 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 0.793393
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.793393
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000438 - Pass
+ >>> [1] 0.986679 - Cast Voldaren Epicure
+     [2] 0.012883 - Cast Galvanic Blast
+
+VALUE SCORE: 0.720103
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000438 - Pass
+
+VALUE SCORE: 0.720103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Galvanic Blast]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.001011 - Pass
+ >>> [1] 0.998989 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.633609
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001011 - Pass
+
+VALUE SCORE: 0.633609
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary; Great Furnace]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000086 - Cast Voldaren Epicure
+     [2] 0.006783 - Cast Burning-Tree Emissary
+ >>> [3] 0.993131 - Play Great Furnace
+
+VALUE SCORE: 0.610694
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Voldaren Epicure; Burning-Tree Emissary]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+     [1] 0.012774 - Cast Voldaren Epicure
+ >>> [2] 0.987219 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 0.583989
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 11
+-> Hand: [Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.583989
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000863 - Pass
+ >>> [1] 0.999137 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.463675
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 12
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 2 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Blood Token; Mountain,tapped; Mountain,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Burning-Tree Emissary; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000863 - Pass
+
+VALUE SCORE: 0.463675
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Chain Lightning]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Chain Lightning]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.001198 - Pass
+     [1] 0.200329 - Cast Chain Lightning
+ >>> [2] 0.798473 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.548808
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Rally at the Hornburg]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000056 - Pass
+ >>> [1] 0.999944 - Cast Rally at the Hornburg
+
+VALUE SCORE: 0.564485
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain; Mountain,tapped; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain,tapped; Goblin Bushwhacker; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace,tapped; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000056 - Pass
+
+VALUE SCORE: 0.564485
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.351039
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Guttersnipe; Mountain,tapped; Voldaren Epicure; Blood Token; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain; Voldaren Epicure; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 1 cards
+-> Permanents: [Sneaky Snacker; Mountain,tapped; Voldaren Epicure; Mountain; Mountain; Guttersnipe; Mountain; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [2] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Guttersnipe; Mountain; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Mountain; Goblin Bushwhacker; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Human Soldier Token; Human Soldier Token; Voldaren Epicure; Great Furnace; Burning-Tree Emissary; Voldaren Epicure; Human Soldier Token; Human Soldier Token; Mountain]
+[Benchmark-Skill6], life = 11
+-> Hand: 0 cards
+-> Permanents: [Sneaky Snacker,tapped,attacking; Mountain,tapped; Voldaren Epicure; Guttersnipe; Mountain; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.351039
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 10
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 105
+Ended: 2026-02-01T12:53:36.471519400
+================================================================================

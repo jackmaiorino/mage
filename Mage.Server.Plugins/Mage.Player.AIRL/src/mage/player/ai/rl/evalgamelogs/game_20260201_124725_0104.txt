@@ -1,0 +1,2280 @@
+================================================================================
+GAME LOG: game_20260201_124725_0104
+Started: 2026-02-01T12:47:25.465560900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Twisted Landscape; Cleansing Wildfire; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Twisted Landscape; Cleansing Wildfire; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.023504 - Play Drossforge Bridge
+     [2] 0.256183 - Play Swamp
+ >>> [3] 0.720311 - Play Twisted Landscape
+
+VALUE SCORE: 0.213181
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Nihil Spellbomb; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.017793 - Pass
+ >>> [1] 0.982186 - Cast Nihil Spellbomb
+     [2] 0.000022 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.204736
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.225501 - Pass
+ >>> [1] 0.774499 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.184621
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.225501 - Pass
+
+VALUE SCORE: 0.184621
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman; Slagwoods Bridge]
+-> Permanents: [Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.012342 - Play Drossforge Bridge
+     [2] 0.148081 - Play Swamp
+ >>> [3] 0.839577 - Play Slagwoods Bridge
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.190093
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999070 - Pass
+     [1] 0.000930 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.172353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999069 - Pass
+     [1] 0.000931 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.172402
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999071 - Pass
+     [1] 0.000929 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.172245
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.910578 - Pass
+     [1] 0.089422 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.930760
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.911296 - Pass
+     [1] 0.088704 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.929693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.920202 - Pass
+     [1] 0.079798 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.916157
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.920202 - Pass
+     [1] 0.079798 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.916157
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924108 - Pass
+     [1] 0.075892 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.909579
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman; Lembas]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Swamp; Cleansing Wildfire; Krark-Clan Shaman; Lembas]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.080804 - Play Drossforge Bridge
+ >>> [2] 0.919138 - Play Swamp
+     [3] 0.000009 - Cast Cleansing Wildfire
+     [4] 0.000030 - Cast Krark-Clan Shaman
+     [5] 0.000016 - Cast Lembas
+     [6] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.201577
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Krark-Clan Shaman; Lembas]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.067626 - Pass
+     [1] 0.156551 - Cast Cleansing Wildfire
+ >>> [2] 0.512716 - Cast Krark-Clan Shaman
+     [3] 0.263030 - Cast Lembas
+     [4] 0.000076 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.199299
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Lembas]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Swamp; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.273155 - Pass
+ >>> [1] 0.726579 - Cast Lembas
+     [2] 0.000265 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.178421
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160784
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160464
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999995 - Pass
+     [1] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.160253
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999322 - Pass
+     [1] 0.000678 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.880728
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999411 - Pass
+     [1] 0.000589 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.864070
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999422 - Pass
+     [1] 0.000578 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.861998
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Humbling Elder; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997185 - Pass
+     [1] 0.002815 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.833594
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997226 - Pass
+     [1] 0.002774 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.831859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997226 - Pass
+     [1] 0.002774 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.831859
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997904 - Pass
+     [1] 0.002096 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.798367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997904 - Pass
+     [1] 0.002096 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.798367
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998084 - Pass
+     [1] 0.001916 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.787533
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering; Twisted Landscape]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+     [1] 0.020818 - Play Drossforge Bridge
+     [2] 0.000003 - Cast Cleansing Wildfire
+     [3] 0.000000 - Cast Fanatical Offering
+ >>> [4] 0.979174 - Play Twisted Landscape
+     [5] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [6] 0.000003 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+     [7] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.157845
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Cleansing Wildfire; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Lembas; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.239810 - Pass
+ >>> [1] 0.406115 - Cast Cleansing Wildfire
+     [2] 0.030833 - Cast Fanatical Offering
+     [3] 0.000184 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.323057 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+     [5] 0.000001 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.150963
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Lembas; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.485215 - Pass
+     [1] 0.000319 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [2] 0.514465 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+     [3] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.126269
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=RL)
+[RL], life = 17
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.096946
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.097108
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.097307
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.096770
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ninja of the Deep Hours (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999738 - Pass
+     [1] 0.000262 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.764655
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999743 - Pass
+     [1] 0.000257 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.762460
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999854 - Pass
+     [1] 0.000146 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.680366
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999854 - Pass
+     [1] 0.000146 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.680366
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999877 - Pass
+     [1] 0.000123 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.659704
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Drossforge Bridge; Fanatical Offering; Cast Down; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.000057 - Pass
+ >>> [1] 0.997847 - Play Drossforge Bridge
+     [2] 0.000009 - Cast Fanatical Offering
+     [3] 0.001675 - Cast Cast Down
+     [4] 0.000413 - Cast Krark-Clan Shaman
+     [5] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [6] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.150489
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering; Cast Down; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+     [0] 0.027607 - Pass
+     [1] 0.003701 - Cast Fanatical Offering
+ >>> [2] 0.776990 - Cast Cast Down
+     [3] 0.191684 - Cast Krark-Clan Shaman
+     [4] 0.000019 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [5] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.135730
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering; Krark-Clan Shaman]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.149100 - Pass
+ >>> [1] 0.850812 - Cast Krark-Clan Shaman
+     [2] 0.000087 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.106224
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999488 - Pass
+     [1] 0.000510 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.071088
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped,attacking; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999502 - Pass
+     [1] 0.000498 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.062021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped,attacking; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999502 - Pass
+     [1] 0.000498 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.062021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999510 - Pass
+     [1] 0.000490 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.055175
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984509 - Pass
+     [1] 0.015481 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000010 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.697950
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984694 - Pass
+     [1] 0.015297 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.695981
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991363 - Pass
+     [1] 0.008632 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.611643
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991363 - Pass
+     [1] 0.008632 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.611643
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Drossforge Bridge; Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge,tapped; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape; Drossforge Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island; Faerie Seer,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992243 - Pass
+     [1] 0.007753 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [2] 0.000005 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.595761
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Drossforge Bridge; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island; Faerie Seer,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Drossforge Bridge; Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island; Faerie Seer,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000059 - Pass
+ >>> [1] 0.999932 - Play Drossforge Bridge
+     [2] 0.000009 - Cast Fanatical Offering
+     [3] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.153530
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island; Faerie Seer,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.877919 - Pass
+     [1] 0.121448 - Cast Fanatical Offering
+     [2] 0.000630 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.141489
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island; Faerie Seer,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.877729 - Pass
+     [1] 0.121637 - Cast Fanatical Offering
+     [2] 0.000630 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.141712
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island; Faerie Seer,tapped; Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.878198 - Pass
+     [1] 0.121170 - Cast Fanatical Offering
+     [2] 0.000629 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.141197
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island; Island; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Fanatical Offering; Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.027227 - Pass
+ >>> [1] 0.971962 - Cast Fanatical Offering
+     [2] 0.000802 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.787684
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=RL)
+[RL], life = 12
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Drossforge Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.042371 - Pass
+ >>> [1] 0.956765 - Cast Fanatical Offering
+     [2] 0.000854 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000009 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.737665
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=RL)
+  - [2] Dispel (controller=Benchmark-Skill6)
+  - [3] Fanatical Offering (controller=RL)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999851 - Pass
+     [1] 0.000149 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.686998
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=RL)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999845 - Pass
+     [1] 0.000155 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.692156
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999859 - Pass
+     [1] 0.000141 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.680240
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island; Spellstutter Sprite; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999861 - Pass
+     [1] 0.000139 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.678570
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island; Spellstutter Sprite; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999992 - Pass
+     [1] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.670899
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.588676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.588676
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Slagwoods Bridge; Swamp,tapped; Krark-Clan Shaman,tapped; Twisted Landscape,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999996 - Pass
+     [1] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.572524
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863593 - Pass
+     [1] 0.135767 - Cast Fanatical Offering
+     [2] 0.000636 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.144921
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863391 - Pass
+     [1] 0.135969 - Cast Fanatical Offering
+     [2] 0.000637 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.145154
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.863949 - Pass
+     [1] 0.135413 - Cast Fanatical Offering
+     [2] 0.000635 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000004 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.144582
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island; Island; Spellstutter Sprite; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Fanatical Offering]
+-> Permanents: [Twisted Landscape; Slagwoods Bridge; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 1 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island; Island; Spellstutter Sprite; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.032529 - Pass
+ >>> [1] 0.966643 - Cast Fanatical Offering
+     [2] 0.000820 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [3] 0.000008 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.767347
+SELECTED: Cast Fanatical Offering
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Fanatical Offering (controller=RL)
+  - [2] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island; Spellstutter Sprite; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.984120 - Pass
+     [1] 0.015880 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.701730
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 0 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island; Spellstutter Sprite; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983684 - Pass
+     [1] 0.016316 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.706130
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Faerie Miscreant; Humbling Elder; Island,tapped; Faerie Seer; Island,tapped; Island; Spellstutter Sprite; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.983871 - Pass
+     [1] 0.016129 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.704143
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990910 - Pass
+     [1] 0.009090 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.619158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990910 - Pass
+     [1] 0.009090 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.619158
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape,tapped; Swamp,tapped; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991975 - Pass
+     [1] 0.008025 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.600238
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Twisted Landscape]
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Twisted Landscape]
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.999999 - Play Twisted Landscape
+     [2] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.121913
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman; Twisted Landscape; Krark-Clan Shaman; Twisted Landscape]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999418 - Pass
+     [1] 0.000582 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.106245
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped,attacking; Twisted Landscape; Krark-Clan Shaman,tapped,attacking; Twisted Landscape]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999465 - Pass
+     [1] 0.000535 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.087365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped,attacking; Twisted Landscape; Krark-Clan Shaman,tapped,attacking; Twisted Landscape]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999465 - Pass
+     [1] 0.000535 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.087365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Faerie Miscreant,tapped; Humbling Elder,tapped; Island,tapped; Faerie Seer,tapped; Island,tapped; Island; Spellstutter Sprite,tapped; Harrier Strix,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999491 - Pass
+     [1] 0.000509 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.074119
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island; Island; Spellstutter Sprite; Harrier Strix; Island]
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Faerie Miscreant; Humbling Elder; Island; Faerie Seer; Island; Island; Spellstutter Sprite; Harrier Strix; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.982552 - Pass
+     [1] 0.017448 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.717930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island; Faerie Seer,tapped,attacking; Island; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.990189 - Pass
+     [1] 0.009811 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.630953
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{U}: Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island; Island; Spellstutter Sprite,tapped,attacking; Harrier Strix,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.991831 - Pass
+     [1] 0.008169 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.604370
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.992602 - Pass
+     [1] 0.007398 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.589785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Twisted Landscape; Swamp; Krark-Clan Shaman,tapped; Twisted Landscape; Krark-Clan Shaman,tapped; Twisted Landscape]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.993433 - Pass
+     [1] 0.006568 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.572768
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 94
+Ended: 2026-02-01T12:49:56.062288700
+================================================================================

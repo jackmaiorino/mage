@@ -1,0 +1,1810 @@
+================================================================================
+GAME LOG: game_20260201_125131_0141
+Started: 2026-02-01T12:51:31.518710800
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.988174
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000087 - Pass
+ >>> [1] 0.999913 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.983809
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983809
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983809
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983809
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983809
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983809
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000087 - Pass
+
+VALUE SCORE: 0.983809
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant; Island]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant; Island]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000113 - Cast Faerie Miscreant
+ >>> [2] 0.999887 - Play Island
+
+VALUE SCORE: 0.963717
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Faerie Miscreant]
+-> Permanents: [Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000092 - Pass
+     [1] 0.029761 - Cast Snap
+ >>> [2] 0.970147 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.959199
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000092 - Pass
+
+VALUE SCORE: 0.959199
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000092 - Pass
+
+VALUE SCORE: 0.959199
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000092 - Pass
+
+VALUE SCORE: 0.959199
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000092 - Pass
+
+VALUE SCORE: 0.959199
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000092 - Pass
+
+VALUE SCORE: 0.959199
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Snap; Dispel; Force Spike; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.048281 - Pass
+ >>> [1] 0.951719 - Cast Force Spike
+
+VALUE SCORE: 0.150638
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.048281 - Pass
+
+VALUE SCORE: 0.150638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.048281 - Pass
+
+VALUE SCORE: 0.150638
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.048281 - Pass
+
+VALUE SCORE: 0.150638
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Ninja of the Deep Hours; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Ninja of the Deep Hours; Force Spike; Island]
+-> Permanents: [Island; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000004 - Cast Snap
+ >>> [2] 0.999996 - Play Island
+
+VALUE SCORE: 0.912643
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snap; Dispel; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island; Faerie Miscreant; Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003719 - Pass
+ >>> [1] 0.996281 - Cast Snap
+
+VALUE SCORE: 0.904866
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours; Force Spike; Faerie Miscreant]
+-> Permanents: [Island; Island; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000124 - Pass
+ >>> [1] 0.999876 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.905389
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours; Force Spike]
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000124 - Pass
+
+VALUE SCORE: 0.905389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours; Force Spike; Island]
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000124 - Pass
+
+VALUE SCORE: 0.905389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours; Force Spike; Island]
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000124 - Pass
+
+VALUE SCORE: 0.905389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Ninja of the Deep Hours; Force Spike; Island]
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,tapped,attacking; Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000751 - Pass
+ >>> [1] 0.999249 - Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.884573
+SELECTED: Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000751 - Pass
+
+VALUE SCORE: 0.884573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000751 - Pass
+
+VALUE SCORE: 0.884573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000751 - Pass
+
+VALUE SCORE: 0.884573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000751 - Pass
+
+VALUE SCORE: 0.884573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000751 - Pass
+
+VALUE SCORE: 0.884573
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000751 - Pass
+
+VALUE SCORE: 0.884573
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Island; Faerie Miscreant; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999263 - Play Island
+     [2] 0.000114 - Cast Faerie Miscreant
+     [3] 0.000618 - Cast Saiba Cryptomancer
+     [4] 0.000005 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.835124
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000034 - Pass
+     [1] 0.162548 - Cast Faerie Miscreant
+ >>> [2] 0.829678 - Cast Saiba Cryptomancer
+     [3] 0.007740 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.822258
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.005621 - Pass
+ >>> [1] 0.994379 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.786348
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005621 - Pass
+
+VALUE SCORE: 0.786348
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Seer; Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000128 - Pass
+     [1] 0.405787 - Cast Faerie Miscreant
+ >>> [2] 0.594085 - Cast Faerie Seer
+
+VALUE SCORE: 0.759003
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000128 - Pass
+
+VALUE SCORE: 0.759003
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Faerie Miscreant]
+-> Permanents: [Island; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000343 - Pass
+ >>> [1] 0.999657 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.737708
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant]
+-> Permanents: [Island; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000343 - Pass
+
+VALUE SCORE: 0.737708
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Faerie Miscreant; Counterspell]
+-> Permanents: [Island; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000363 - Pass
+ >>> [1] 0.999637 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.718281
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000363 - Pass
+
+VALUE SCORE: 0.718281
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.702005
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped,attacking; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped,attacking; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Sacred Cat,blocking; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic,tapped,attacking; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic,tapped,attacking; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic,tapped; Treasure Token; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.702005
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Force Spike; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic,tapped; Treasure Token; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Force Spike; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate; Outlaw Medic,tapped; Treasure Token; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007661 - Pass
+ >>> [1] 0.992339 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.736560
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Spellstutter Sprite (controller=RL)
+[RL], life = 19
+-> Hand: [Dispel; Force Spike; Counterspell]
+-> Permanents: [Island; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000193 - Pass
+     [1] 0.000217 - Cast Dispel
+     [2] 0.068321 - Cast Force Spike
+ >>> [3] 0.931269 - Cast Counterspell
+
+VALUE SCORE: 0.698563
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=RL)
+[RL], life = 19
+-> Hand: [Dispel; Force Spike]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.002712 - Pass
+ >>> [1] 0.997288 - Cast Force Spike
+
+VALUE SCORE: 0.679453
+SELECTED: Cast Force Spike
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 13
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 5
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped; Ninja of the Deep Hours,tapped; Island,tapped; Saiba Cryptomancer; Spellstutter Sprite,tapped; Faerie Seer,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002712 - Pass
+
+VALUE SCORE: 0.679453
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Dispel; Counterspell; Humbling Elder]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Dispel; Counterspell; Humbling Elder]
+-> Permanents: [Island; Island; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate; Azorius Guildgate; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000209 - Pass
+ >>> [1] 0.999791 - Cast Humbling Elder
+
+VALUE SCORE: 0.682748
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=Benchmark-Skill6)
+  - [1] Humbling Elder (controller=RL)
+[RL], life = 18
+-> Hand: [Dispel; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000203 - Pass
+     [1] 0.000172 - Cast Dispel
+ >>> [2] 0.999624 - Cast Counterspell
+
+VALUE SCORE: 0.655431
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=RL)
+[RL], life = 18
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.655431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=RL)
+[RL], life = 18
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island; Humbling Elder]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.655431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant; Ninja of the Deep Hours; Island; Saiba Cryptomancer; Spellstutter Sprite; Faerie Seer; Faerie Miscreant; Faerie Miscreant; Island; Humbling Elder]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.655431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island; Saiba Cryptomancer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Humbling Elder]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.655431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Faerie Miscreant,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island; Saiba Cryptomancer,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island; Humbling Elder]
+[Benchmark-Skill6], life = 6
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Basilisk Gate,tapped; Sea Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000203 - Pass
+
+VALUE SCORE: 0.655431
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 79
+Ended: 2026-02-01T12:53:07.022618300
+================================================================================

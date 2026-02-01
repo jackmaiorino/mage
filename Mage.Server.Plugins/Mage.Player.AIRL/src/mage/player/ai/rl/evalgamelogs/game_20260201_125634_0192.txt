@@ -1,0 +1,2765 @@
+================================================================================
+GAME LOG: game_20260201_125634_0192
+Started: 2026-02-01T12:56:34.569982600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Terror.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Dispel; Mental Note; Ponder; Thought Scour]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Dispel; Mental Note; Ponder; Thought Scour]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.124959
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Ponder; Thought Scour]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000008 - Pass
+     [1] 0.055555 - Cast Mental Note
+ >>> [2] 0.904261 - Cast Ponder
+     [3] 0.040176 - Cast Thought Scour
+
+VALUE SCORE: 1.123365
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 1.123365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 1.123365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 1.123365
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 1.123365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 1.123365
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent]
+-> Permanents: [Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000008 - Pass
+
+VALUE SCORE: 1.123365
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent; Island]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999955 - Play Island
+     [2] 0.000026 - Cast Mental Note
+     [3] 0.000019 - Cast Thought Scour
+
+VALUE SCORE: 1.119785
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Mental Note; Thought Scour; Cryptic Serpent; Island]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000087 - Pass
+ >>> [1] 0.578188 - Cast Mental Note
+     [2] 0.421725 - Cast Thought Scour
+
+VALUE SCORE: 1.117939
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Ponder]
+-> Permanents: [Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+     [1] 0.041991 - Cast Thought Scour
+ >>> [2] 0.958000 - Cast Ponder
+
+VALUE SCORE: 1.113429
+SELECTED: Cast Ponder
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour]
+-> Permanents: [Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 1.113429
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour; Thought Scour]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Island; Thought Scour; Thought Scour]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000018 - Cast Thought Scour
+ >>> [2] 0.999982 - Play Island
+
+VALUE SCORE: 1.094693
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Thought Scour; Cryptic Serpent; Thought Scour; Thought Scour]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000225 - Pass
+ >>> [1] 0.999775 - Cast Thought Scour
+
+VALUE SCORE: 1.092433
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Thought Scour; Murmuring Mystic]
+-> Permanents: [Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000228 - Pass
+ >>> [1] 0.999772 - Cast Thought Scour
+
+VALUE SCORE: 1.084414
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000100 - Pass
+     [1] 0.433432 - Cast Thought Scour
+ >>> [2] 0.566468 - Cast Mental Note
+
+VALUE SCORE: 1.080344
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000100 - Pass
+
+VALUE SCORE: 1.080344
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note; Thought Scour]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Cryptic Serpent; Thought Scour; Murmuring Mystic; Mental Note; Thought Scour]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.987310 - Cast Cryptic Serpent
+     [2] 0.005469 - Cast Thought Scour
+     [3] 0.007220 - Cast Mental Note
+
+VALUE SCORE: 1.087497
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Mental Note; Thought Scour]
+-> Permanents: [Island,tapped; Island; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.000099 - Pass
+     [1] 0.433697 - Cast Thought Scour
+ >>> [2] 0.566204 - Cast Mental Note
+
+VALUE SCORE: 1.079705
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000099 - Pass
+
+VALUE SCORE: 1.079705
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent; Sleep of the Dead]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Cryptic Serpent; Sleep of the Dead]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.005239 - Cast Thought Scour
+     [2] 0.000521 - Cast Brainstorm
+ >>> [3] 0.992925 - Cast Cryptic Serpent
+     [4] 0.001314 - Cast Sleep of the Dead
+
+VALUE SCORE: 1.062921
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Thought Scour; Murmuring Mystic; Thought Scour; Brainstorm; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000190 - Pass
+ >>> [1] 0.737986 - Cast Thought Scour
+     [2] 0.074680 - Cast Brainstorm
+     [3] 0.187145 - Cast Sleep of the Dead
+
+VALUE SCORE: 1.053901
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Thought Scour; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 1.027923
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Thought Scour; Brainstorm; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000209 - Pass
+ >>> [1] 0.727154 - Cast Thought Scour
+     [2] 0.079092 - Cast Brainstorm
+     [3] 0.193545 - Cast Sleep of the Dead
+
+VALUE SCORE: 1.023224
+SELECTED: Cast Thought Scour
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Faerie Miscreant,tapped,attacking; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000209 - Pass
+
+VALUE SCORE: 1.023224
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island; Deem Inferior]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Island; Deem Inferior]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.003646 - Cast Murmuring Mystic
+     [2] 0.000002 - Cast Brainstorm
+     [3] 0.000004 - Cast Sleep of the Dead
+ >>> [4] 0.996317 - Play Island
+     [5] 0.000032 - Cast Deem Inferior
+
+VALUE SCORE: 1.018396
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Murmuring Mystic; Brainstorm; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.989782 - Cast Murmuring Mystic
+     [2] 0.000462 - Cast Brainstorm
+     [3] 0.001117 - Cast Sleep of the Dead
+     [4] 0.008637 - Cast Deem Inferior
+
+VALUE SCORE: 1.013917
+SELECTED: Cast Murmuring Mystic
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Sleep of the Dead; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island; Island,tapped; Murmuring Mystic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.000803 - Pass
+     [1] 0.296179 - Cast Brainstorm
+ >>> [2] 0.703018 - Cast Sleep of the Dead
+
+VALUE SCORE: 0.990910
+SELECTED: Cast Sleep of the Dead
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Faerie Miscreant,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000803 - Pass
+
+VALUE SCORE: 0.990910
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+     [1] 0.017591 - Cast Brainstorm
+     [2] 0.344480 - Cast Deem Inferior
+     [3] 0.204075 - Cast Mental Note
+ >>> [4] 0.433807 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 1.033473
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Counterspell; Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Island; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000054 - Pass
+ >>> [1] 0.756032 - Cast Counterspell
+     [2] 0.020363 - Cast Brainstorm
+     [3] 0.223551 - Cast Mental Note
+
+VALUE SCORE: 1.017557
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=RL)
+  - [1] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Spellstutter Sprite,blocking; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.017557
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note; Murmuring Mystic]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note; Murmuring Mystic]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.000461 - Cast Brainstorm
+     [2] 0.008536 - Cast Deem Inferior
+     [3] 0.004855 - Cast Mental Note
+ >>> [4] 0.975578 - Cast Murmuring Mystic
+     [5] 0.010569 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 1.007069
+SELECTED: Cast Murmuring Mystic
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Mental Note]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000250 - Pass
+     [1] 0.093070 - Cast Brainstorm
+ >>> [2] 0.906680 - Cast Mental Note
+
+VALUE SCORE: 0.985224
+SELECTED: Cast Mental Note
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=RL)
+  - [1] Mental Note (controller=RL)
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000250 - Pass
+
+VALUE SCORE: 0.985224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Mental Note (controller=RL)
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000250 - Pass
+
+VALUE SCORE: 0.985224
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior; Island]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.974917
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Dispel; Brainstorm; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.002598 - Pass
+ >>> [1] 0.997402 - Cast Brainstorm
+
+VALUE SCORE: 0.969058
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=RL)
+  - [1] Brainstorm (controller=RL)
+[RL], life = 14
+-> Hand: [Dispel; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=RL)
+[RL], life = 14
+-> Hand: [Dispel; Deem Inferior]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 13
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Faerie Miscreant,blocking; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002598 - Pass
+
+VALUE SCORE: 0.969058
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent; Sleep of the Dead]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Cryptic Serpent; Sleep of the Dead]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.009087 - Cast Deem Inferior
+     [2] 0.033184 - Cast Tolarian Terror
+ >>> [3] 0.945630 - Cast Cryptic Serpent
+     [4] 0.001136 - Cast Sleep of the Dead
+     [5] 0.010963 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.990461
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Tolarian Terror; Sleep of the Dead]
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000023 - Pass
+     [1] 0.170316 - Cast Deem Inferior
+ >>> [2] 0.607582 - Cast Tolarian Terror
+     [3] 0.021272 - Cast Sleep of the Dead
+     [4] 0.200807 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.975812
+SELECTED: Cast Tolarian Terror
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Island; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000060 - Pass
+     [1] 0.437218 - Cast Deem Inferior
+     [2] 0.054572 - Cast Sleep of the Dead
+ >>> [3] 0.508150 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.966125
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=RL)
+  - [1] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,blocking; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Island,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000060 - Pass
+
+VALUE SCORE: 0.966125
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent; Dispel]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Cryptic Serpent; Dispel]
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.008606 - Cast Deem Inferior
+     [2] 0.001097 - Cast Sleep of the Dead
+ >>> [3] 0.980837 - Cast Cryptic Serpent
+     [4] 0.009458 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.927890
+SELECTED: Cast Cryptic Serpent
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Dispel]
+-> Permanents: [Island; Island,tapped; Island,tapped; Cryptic Serpent; Island; Island; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000067 - Pass
+     [1] 0.456348 - Cast Deem Inferior
+     [2] 0.057441 - Cast Sleep of the Dead
+ >>> [3] 0.486144 - Cast Sleep of the Dead with Escape
+
+VALUE SCORE: 0.908789
+SELECTED: Cast Sleep of the Dead with Escape
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=RL)
+  - [1] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000067 - Pass
+
+VALUE SCORE: 0.908789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000067 - Pass
+
+VALUE SCORE: 0.908789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Sleep of the Dead; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.001152 - Pass
+ >>> [1] 0.998848 - Cast Sleep of the Dead
+
+VALUE SCORE: 0.883490
+SELECTED: Cast Sleep of the Dead
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=RL)
+  - [1] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001152 - Pass
+
+VALUE SCORE: 0.883490
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=RL)
+[RL], life = 14
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001152 - Pass
+
+VALUE SCORE: 0.883490
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Island,tapped; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token; Bird Illusion Token; Tolarian Terror; Bird Illusion Token; Bird Illusion Token; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001152 - Pass
+
+VALUE SCORE: 0.883490
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite; Faerie Seer; Humbling Elder,tapped; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001152 - Pass
+
+VALUE SCORE: 0.883490
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Deem Inferior; Dispel]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Island,tapped; Murmuring Mystic,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Tolarian Terror,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Cryptic Serpent; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token; Bird Illusion Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite,blocking; Faerie Seer,blocking; Humbling Elder,tapped; Island,tapped; Faerie Seer,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001152 - Pass
+
+VALUE SCORE: 0.883490
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 10
+Reason: Benchmark: Deck - Mono-Blue Terror.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 120
+Ended: 2026-02-01T12:57:59.632275700
+================================================================================

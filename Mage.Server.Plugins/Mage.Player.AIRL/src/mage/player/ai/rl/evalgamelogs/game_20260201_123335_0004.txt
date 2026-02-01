@@ -1,0 +1,2476 @@
+================================================================================
+GAME LOG: game_20260201_123335_0004
+Started: 2026-02-01T12:33:35.949920700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Azorius Guildgate; Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Azorius Guildgate; Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000002 - Pass
+ >>> [1] 0.946940 - Play Azorius Guildgate
+     [2] 0.046446 - Play Island
+     [3] 0.006612 - Play Sea Gate
+
+VALUE SCORE: 0.178867
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere]
+-> Permanents: [Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000002 - Pass
+
+VALUE SCORE: 0.178867
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+ >>> [1] 0.878686 - Play Island
+     [2] 0.121268 - Play Sea Gate
+
+VALUE SCORE: 0.170205
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Journey to Nowhere; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.092111 - Pass
+ >>> [1] 0.907889 - Cast Journey to Nowhere
+
+VALUE SCORE: 0.167666
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.092111 - Pass
+
+VALUE SCORE: 0.167666
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000414 - Pass
+ >>> [1] 0.999492 - Play Sea Gate
+     [2] 0.000094 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.165207
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824867 - Pass
+     [1] 0.175133 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.160631
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.824730 - Pass
+     [1] 0.175270 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.160737
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.825108 - Pass
+     [1] 0.174892 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.160529
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000150 - Pass
+ >>> [1] 0.870689 - Cast Counterspell
+     [2] 0.129161 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.834682
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.834682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.834682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.834682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000150 - Pass
+
+VALUE SCORE: 0.834682
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed; Island]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed; Island]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+     [1] 0.119308 - Play Sea Gate
+     [2] 0.000011 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.880635 - Play Island
+
+VALUE SCORE: 0.164854
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.818234 - Pass
+     [1] 0.181766 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.162175
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.818127 - Pass
+     [1] 0.181873 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.162265
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.818464 - Pass
+     [1] 0.181536 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.162080
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Lorien Revealed]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.001036 - Pass
+ >>> [1] 0.998964 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.841902
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001036 - Pass
+
+VALUE SCORE: 0.841902
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Sea Gate; Counterspell; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000174 - Pass
+ >>> [1] 0.999826 - Cast Counterspell
+
+VALUE SCORE: 0.813751
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000174 - Pass
+
+VALUE SCORE: 0.813751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000174 - Pass
+
+VALUE SCORE: 0.813751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Sea Gate; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000174 - Pass
+
+VALUE SCORE: 0.813751
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000174 - Pass
+
+VALUE SCORE: 0.813751
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate; Island]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000043 - Pass
+     [1] 0.117690 - Play Sea Gate
+ >>> [2] 0.882267 - Play Island
+
+VALUE SCORE: 0.159459
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest; Masked Vandal; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate; Sea Gate]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000043 - Pass
+
+VALUE SCORE: 0.159459
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate; Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate; Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000219 - Pass
+ >>> [1] 0.999764 - Play Sea Gate
+     [2] 0.000017 - Cast Prismatic Strands
+
+VALUE SCORE: 0.168626
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936188 - Pass
+     [1] 0.063812 - Cast Prismatic Strands
+
+VALUE SCORE: 0.160215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936084 - Pass
+     [1] 0.063916 - Cast Prismatic Strands
+
+VALUE SCORE: 0.160396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.936342 - Pass
+     [1] 0.063658 - Cast Prismatic Strands
+
+VALUE SCORE: 0.160028
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sea Gate; Prismatic Strands]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003474 - Pass
+ >>> [1] 0.996526 - Cast Prismatic Strands
+
+VALUE SCORE: 0.807060
+SELECTED: Cast Prismatic Strands
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Prismatic Strands (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Prismatic Strands (controller=RL)
+  - [1] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sea Gate]
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003474 - Pass
+
+VALUE SCORE: 0.807060
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sea Gate; Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Sea Gate; Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+     [0] 0.000346 - Pass
+ >>> [1] 0.999654 - Play Sea Gate
+
+VALUE SCORE: 0.133312
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest; Wellwisher]
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest; Wellwisher; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 5 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Nyxborn Hydra,tapped,attacking; Snow-Covered Forest; Wellwisher,tapped,attacking; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Snow-Covered Forest; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra,tapped; Snow-Covered Forest; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000346 - Pass
+
+VALUE SCORE: 0.133312
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Spell Pierce; Thraben Charm]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra,tapped; Snow-Covered Forest; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Spell Pierce; Thraben Charm]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra,tapped; Snow-Covered Forest; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.837725 - Pass
+     [1] 0.162275 - Cast Thraben Charm
+
+VALUE SCORE: 0.116432
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Spell Pierce; Thraben Charm]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra,tapped; Snow-Covered Forest; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.837396 - Pass
+     [1] 0.162604 - Cast Thraben Charm
+
+VALUE SCORE: 0.116793
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: [Spell Pierce; Thraben Charm]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra,tapped; Snow-Covered Forest; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.838178 - Pass
+     [1] 0.161822 - Cast Thraben Charm
+
+VALUE SCORE: 0.115994
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Spell Pierce; Thraben Charm]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Spell Pierce; Thraben Charm]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.021057 - Pass
+ >>> [1] 0.978943 - Cast Thraben Charm
+
+VALUE SCORE: 0.783294
+SELECTED: Cast Thraben Charm
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Thraben Charm (controller=RL)
+  - [2] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Spell Pierce]
+-> Permanents: [Azorius Guildgate,tapped; Island; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.015177 - Pass
+ >>> [1] 0.984823 - Cast Spell Pierce
+
+VALUE SCORE: 0.730564
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Thraben Charm (controller=RL)
+  - [2] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 25
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Thraben Charm (controller=RL)
+  - [1] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 30
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 30
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 30
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Snow-Covered Forest,tapped; Wellwisher,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 30
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 30
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 3 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 8
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate,tapped; Island,tapped; Journey to Nowhere; Sea Gate,tapped; Island,tapped; Island,tapped; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Counterspell]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Counterspell]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Counterspell]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Counterspell]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped; Quirion Ranger,tapped; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015177 - Pass
+
+VALUE SCORE: 0.730564
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Counterspell]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 1 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Counterspell]
+-> Permanents: [Azorius Guildgate; Island; Journey to Nowhere; Sea Gate; Island; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 1 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000194 - Pass
+ >>> [1] 0.999806 - Cast Counterspell
+
+VALUE SCORE: 0.752171
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic,tapped; Nyxborn Hydra; Wellwisher; Priest of Titania,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Wellwisher; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Wellwisher; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({T}: You gain 1 life for each Elf on the battlefield.) (controller=Benchmark-Skill6)
+  - [1] Counterspell (controller=RL)
+  - [2] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 36
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Counterspell (controller=RL)
+  - [1] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 43
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Nyxborn Hydra; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 43
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal; Quirion Ranger; Snow-Covered Forest,tapped; Elvish Mystic; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 43
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Azorius Guildgate; Island,tapped; Journey to Nowhere; Sea Gate; Island,tapped; Island; Sea Gate; Sea Gate]
+[Benchmark-Skill6], life = 43
+-> Hand: 2 cards
+-> Permanents: [Masked Vandal,tapped,attacking; Quirion Ranger,tapped,attacking; Snow-Covered Forest,tapped; Elvish Mystic,tapped,attacking; Wellwisher,tapped; Priest of Titania,tapped; Timberwatch Elf,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Timberwatch Elf,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000194 - Pass
+
+VALUE SCORE: 0.752171
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Elves.dek
+Total Decisions Logged: 107
+Ended: 2026-02-01T12:36:36.921690300
+================================================================================

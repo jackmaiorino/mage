@@ -140,7 +140,6 @@ public class MulliganModel {
         }
 
         // Logging is now handled in ComputerPlayerRL.chooseMulligan() and chooseLondonMulliganCards()
-        
         return new MulliganDecision(shouldMulligan, mulliganCount, handCardIds, deckCardIds, qKeep, qMull);
     }
 
@@ -209,7 +208,6 @@ public class MulliganModel {
             }
 
             // Logging is now handled in ComputerPlayerRL.chooseMulligan() and chooseLondonMulliganCards()
-            
             return shouldMulligan;
 
         } catch (Exception e) {
@@ -267,7 +265,6 @@ public class MulliganModel {
     // Logging is now handled entirely in ComputerPlayerRL.java:
     // - chooseMulligan() logs KEEP decisions immediately
     // - chooseLondonMulliganCards() logs MULLIGAN decisions after card selection
-
     /**
      * Fallback heuristic if model fails
      */

@@ -1,0 +1,2056 @@
+================================================================================
+GAME LOG: game_20260201_125149_0143
+Started: 2026-02-01T12:51:49.156719500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite; Humbling Elder]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite; Humbling Elder]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987616
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite; Humbling Elder]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000028 - Pass
+ >>> [1] 0.999972 - Cast Humbling Elder
+
+VALUE SCORE: 0.983312
+SELECTED: Cast Humbling Elder
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000028 - Pass
+
+VALUE SCORE: 0.983312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000028 - Pass
+
+VALUE SCORE: 0.983312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000028 - Pass
+
+VALUE SCORE: 0.983312
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000028 - Pass
+
+VALUE SCORE: 0.983312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000028 - Pass
+
+VALUE SCORE: 0.983312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000028 - Pass
+
+VALUE SCORE: 0.983312
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island; Humbling Elder]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.962642
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Saiba Cryptomancer; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island; Humbling Elder; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+ >>> [1] 0.994173 - Cast Saiba Cryptomancer
+     [2] 0.005817 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.958249
+SELECTED: Cast Saiba Cryptomancer
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Backup 1 <i>(When this creature enters the battlefield, put a +1/+1 counter on target creature. If that's another creature, it gains the following ability until end of turn.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000009 - Pass
+
+VALUE SCORE: 0.958249
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999962 - Play Island
+     [2] 0.000006 - Cast Spellstutter Sprite
+     [3] 0.000033 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.892361
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite; Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+     [0] 0.000409 - Pass
+     [1] 0.149793 - Cast Spellstutter Sprite
+ >>> [2] 0.849798 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.885107
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; The Modern Age]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Heap Gate; Island; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sacred Cat (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000409 - Pass
+
+VALUE SCORE: 0.885107
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite; Island]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite; Island]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000006 - Cast Spellstutter Sprite
+ >>> [2] 0.999994 - Play Island
+
+VALUE SCORE: 0.804149
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Moon-Circuit Hacker; Island]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.005524 - Pass
+ >>> [1] 0.994476 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.795683
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Humbling Elder; Island; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.006616 - Pass
+ >>> [1] 0.993384 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.768196
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped; Sacred Cat,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+  - [1] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 5 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Heap Gate; Island,tapped; The Modern Age; Heap Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006616 - Pass
+
+VALUE SCORE: 0.768196
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Seer]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Faerie Seer]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000271 - Pass
+ >>> [1] 0.999729 - Cast Faerie Seer
+
+VALUE SCORE: 0.694880
+SELECTED: Cast Faerie Seer
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 15
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island; Heap Gate,tapped; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Heap Gate,tapped; Island; Heap Gate,tapped; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000271 - Pass
+
+VALUE SCORE: 0.694880
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Journey to Nowhere (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.016156 - Pass
+ >>> [1] 0.983844 - Cast Counterspell
+
+VALUE SCORE: -0.033336
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.016156 - Pass
+
+VALUE SCORE: -0.033336
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Moon-Circuit Hacker]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.001652 - Pass
+ >>> [1] 0.998348 - Cast Moon-Circuit Hacker
+
+VALUE SCORE: 0.625479
+SELECTED: Cast Moon-Circuit Hacker
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 12
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island,tapped; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.625479
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Ninja of the Deep Hours]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Moon-Circuit Hacker]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+     [0] 0.000191 - Pass
+ >>> [1] 0.999809 - Cast Ninja of the Deep Hours
+
+VALUE SCORE: 0.572355
+SELECTED: Cast Ninja of the Deep Hours
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Moon-Circuit Hacker; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 13
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; Sacred Cat,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate]
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 4 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] The Modern Age (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 9
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Saiba Cryptomancer; Island,tapped; Island,tapped; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000191 - Pass
+
+VALUE SCORE: 0.572355
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.552587
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Island; Humbling Elder; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite; Spellstutter Sprite; Faerie Seer; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: []
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped,attacking; Spellstutter Sprite,tapped,attacking; Faerie Seer,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Island]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 2 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate,tapped; Vector Glider,tapped; Island,tapped; Outlaw Medic,tapped; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island; Heap Gate; Vector Glider; Island; Outlaw Medic; Basilisk Gate; Azorius Guildgate; The Modern Age; Sea Gate]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island; Heap Gate; Vector Glider; Island; Outlaw Medic; Basilisk Gate; Azorius Guildgate; The Modern Age; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate; The Modern Age; Sea Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Tap an untapped Gate you control: Create a Treasure token.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate; Vector Glider; Island,tapped; Outlaw Medic; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Island]
+-> Permanents: [Island; Humbling Elder,tapped; Island; Saiba Cryptomancer; Island; Island; Spellstutter Sprite,tapped; Spellstutter Sprite,tapped; Faerie Seer,tapped; Ninja of the Deep Hours,tapped; Island]
+[Benchmark-Skill6], life = 7
+-> Hand: 3 cards
+-> Permanents: [Heap Gate,tapped; Island,tapped; Heap Gate; Vector Glider,tapped,attacking; Island,tapped; Outlaw Medic,tapped,attacking; Basilisk Gate,tapped; Azorius Guildgate,tapped; The Modern Age; Sea Gate,tapped; Treasure Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.552587
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 90
+Ended: 2026-02-01T12:53:19.004245200
+================================================================================

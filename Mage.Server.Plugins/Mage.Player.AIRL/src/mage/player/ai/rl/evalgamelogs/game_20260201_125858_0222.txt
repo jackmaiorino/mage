@@ -1,0 +1,1547 @@
+================================================================================
+GAME LOG: game_20260201_125858_0222
+Started: 2026-02-01T12:58:58.166717100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Red Burn.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+ >>> [1] 0.999989 - Play Mountain
+
+VALUE SCORE: 0.188125
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure; Voldaren Epicure]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.015490 - Pass
+ >>> [1] 0.984510 - Cast Voldaren Epicure
+
+VALUE SCORE: 0.169071
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.015490 - Pass
+
+VALUE SCORE: 0.169071
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Mountain; Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000018 - Pass
+ >>> [1] 0.998992 - Play Mountain
+     [2] 0.000979 - Cast Voldaren Epicure
+     [3] 0.000011 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.141559
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Voldaren Epicure; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.019779 - Pass
+     [1] 0.000669 - Cast Fireblast
+ >>> [2] 0.969401 - Cast Voldaren Epicure
+     [3] 0.010151 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.128402
+SELECTED: Cast Voldaren Epicure
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Voldaren Epicure]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.709591 - Pass
+     [1] 0.019602 - Cast Fireblast
+     [2] 0.270808 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.109825
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.748099 - Pass
+     [1] 0.017925 - Cast Fireblast
+     [2] 0.233976 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.089021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.748128 - Pass
+     [1] 0.017924 - Cast Fireblast
+     [2] 0.233948 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.089170
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.749077 - Pass
+     [1] 0.017881 - Cast Fireblast
+     [2] 0.233042 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.088706
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Mountain]
+-> Permanents: [Mountain; Voldaren Epicure,tapped; Blood Token; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000242 - Pass
+     [1] 0.037743 - Cast Fireblast
+ >>> [2] 0.962015 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 1.021453
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fireblast; Fiery Temper; Sneaky Snacker; Sneaky Snacker]
+-> Permanents: [Mountain,tapped; Voldaren Epicure,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.006288 - Pass
+ >>> [1] 0.993712 - Cast Fireblast
+
+VALUE SCORE: 1.023418
+SELECTED: Cast Fireblast
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped,attacking; Voldaren Epicure,tapped,attacking; Blood Token]
+[Benchmark-Skill6], life = 12
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper]
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island; Island; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Cryptic Serpent (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure,blocking; Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror; Cryptic Serpent]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent; Island]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deep Analysis (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Voldaren Epicure,tapped; Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent; Island,tapped; Tolarian Terror; Cryptic Serpent; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped,attacking; Island,tapped; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Fiery Temper; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Cryptic Serpent,tapped; Island,tapped; Tolarian Terror,tapped; Cryptic Serpent,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent; Island; Tolarian Terror; Cryptic Serpent; Island]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent; Island; Tolarian Terror; Cryptic Serpent; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent; Island; Tolarian Terror; Cryptic Serpent; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Fiery Temper; Sneaky Snacker; Sneaky Snacker; Masked Meower; Grab the Prize; Grab the Prize; Highway Robbery]
+-> Permanents: [Blood Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Cryptic Serpent,tapped,attacking; Island; Tolarian Terror,tapped,attacking; Cryptic Serpent,tapped,attacking; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006288 - Pass
+
+VALUE SCORE: 1.023418
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 7
+Reason: Benchmark: Deck - Mono-Red Burn.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 66
+Ended: 2026-02-01T12:59:39.187955100
+================================================================================

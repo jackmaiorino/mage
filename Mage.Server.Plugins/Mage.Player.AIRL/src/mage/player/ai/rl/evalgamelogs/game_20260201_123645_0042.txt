@@ -1,0 +1,1818 @@
+================================================================================
+GAME LOG: game_20260201_123645_0042
+Started: 2026-02-01T12:36:45.527420400
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Elves.dek vs oppDeck=Deck - Mono Red Rally.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Fyndhorn Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Fyndhorn Elves]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+
+VALUE SCORE: 0.894608
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Fyndhorn Elves]
+-> Permanents: [Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+ >>> [1] 0.999996 - Cast Fyndhorn Elves
+
+VALUE SCORE: 0.891264
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 0.891264
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Snow-Covered Forest; Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999998 - Play Snow-Covered Forest
+     [2] 0.000000 - Cast Winding Way
+     [3] 0.000001 - Cast Masked Vandal
+     [4] 0.000001 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.891710
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Timberwatch Elf; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+     [1] 0.014468 - Cast Lead the Stampede
+     [2] 0.009577 - Cast Winding Way
+ >>> [3] 0.931432 - Cast Timberwatch Elf
+     [4] 0.024949 - Cast Masked Vandal
+     [5] 0.019567 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.888412
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.888412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.888412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.888412
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.888412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.888412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.888412
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Masked Vandal; Generous Ent; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000101 - Pass
+     [1] 0.211011 - Cast Lead the Stampede
+     [2] 0.139516 - Cast Winding Way
+ >>> [3] 0.364038 - Cast Masked Vandal
+     [4] 0.285333 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [5] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.888647
+SELECTED: Cast Masked Vandal
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Generous Ent; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000369 - Pass
+ >>> [1] 0.999630 - Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.881831
+SELECTED: Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Snow-Covered Forest
+     [2] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.855669
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+     [1] 0.001829 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998171 - Pass
+
+VALUE SCORE: 0.852082
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Lead the Stampede; Winding Way; Avenging Hunter; Avenging Hunter]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Snow-Covered Forest]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000570 - Pass
+ >>> [1] 0.566435 - Cast Lead the Stampede
+     [2] 0.432995 - Cast Winding Way
+     [3] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.795519
+SELECTED: Cast Lead the Stampede
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Quirion Ranger; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal; Snow-Covered Forest,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000077 - Pass
+ >>> [1] 0.497953 - Cast Quirion Ranger
+     [2] 0.008175 - Cast Nyxborn Hydra
+     [3] 0.493794 - Cast Llanowar Elves
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.813743
+SELECTED: Cast Quirion Ranger
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997227 - Pass
+     [1] 0.001475 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.001298 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.808376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998586 - Pass
+     [1] 0.001414 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.801682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998586 - Pass
+     [1] 0.001414 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.801682
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998632 - Pass
+     [1] 0.001368 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.796376
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996796 - Pass
+     [1] 0.003204 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.915114
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.996827 - Pass
+     [1] 0.003174 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.913342
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997524 - Pass
+     [1] 0.002476 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.871813
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997521 - Pass
+     [1] 0.002479 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.872076
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Priest of Titania; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997531 - Pass
+     [1] 0.002470 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.871408
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Nyxborn Hydra; Llanowar Elves; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Priest of Titania; Nyxborn Hydra; Llanowar Elves; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Masked Vandal; Snow-Covered Forest; Quirion Ranger]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000040 - Pass
+     [1] 0.032052 - Cast Winding Way
+ >>> [2] 0.740528 - Cast Priest of Titania
+     [3] 0.003339 - Cast Nyxborn Hydra
+     [4] 0.000755 - Cast Nyxborn Hydra using bestow
+     [5] 0.223285 - Cast Llanowar Elves
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.789576
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves; Priest of Titania]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000041 - Pass
+     [1] 0.031997 - Cast Winding Way
+     [2] 0.003247 - Cast Nyxborn Hydra
+     [3] 0.000749 - Cast Nyxborn Hydra using bestow
+     [4] 0.225256 - Cast Llanowar Elves
+ >>> [5] 0.738710 - Cast Priest of Titania
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.781462
+SELECTED: Cast Priest of Titania
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Masked Vandal; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997826 - Pass
+     [1] 0.001181 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000993 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.772344
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998869 - Pass
+     [1] 0.001131 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.765357
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998869 - Pass
+     [1] 0.001131 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.765357
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998905 - Pass
+     [1] 0.001095 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.760203
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997699 - Pass
+     [1] 0.002301 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.857475
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997549 - Pass
+     [1] 0.002451 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.868649
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997546 - Pass
+     [1] 0.002454 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.868915
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997555 - Pass
+     [1] 0.002445 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.868248
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest; Fyndhorn Elves; Snow-Covered Forest; Timberwatch Elf; Snow-Covered Forest; Quirion Ranger; Priest of Titania; Priest of Titania]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000017 - Pass
+     [1] 0.013731 - Cast Winding Way
+ >>> [2] 0.888668 - Cast Avenging Hunter
+     [3] 0.001458 - Cast Nyxborn Hydra
+     [4] 0.000321 - Cast Nyxborn Hydra using bestow
+     [5] 0.095806 - Cast Llanowar Elves
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.792842
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997789 - Pass
+     [1] 0.001195 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.001017 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.774512
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997789 - Pass
+     [1] 0.001195 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.001017 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.774512
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Snow-Covered Forest,tapped; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997789 - Pass
+     [1] 0.001195 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.001017 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.774512
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Nyxborn Hydra; Llanowar Elves; Snow-Covered Forest]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000000 - Cast Winding Way
+     [2] 0.000013 - Cast Avenging Hunter
+     [3] 0.000000 - Cast Nyxborn Hydra
+     [4] 0.000000 - Cast Nyxborn Hydra using bestow
+     [5] 0.000001 - Cast Llanowar Elves
+ >>> [6] 0.999985 - Play Snow-Covered Forest
+     [7] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [8] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.778793
+SELECTED: Play Snow-Covered Forest
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Avenging Hunter; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000017 - Pass
+     [1] 0.013475 - Cast Winding Way
+ >>> [2] 0.888710 - Cast Avenging Hunter
+     [3] 0.001352 - Cast Nyxborn Hydra
+     [4] 0.000311 - Cast Nyxborn Hydra using bestow
+     [5] 0.096135 - Cast Llanowar Elves
+     [6] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [7] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.775032
+SELECTED: Cast Avenging Hunter
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997857 - Pass
+     [1] 0.001160 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000983 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.769914
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997857 - Pass
+     [1] 0.001160 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000983 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.769914
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=RL)
+[RL], life = 18
+-> Hand: [Winding Way; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.997857 - Pass
+     [1] 0.001160 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000983 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.769914
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Nyxborn Hydra; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000154 - Pass
+     [1] 0.120298 - Cast Winding Way
+     [2] 0.011881 - Cast Nyxborn Hydra
+     [3] 0.002764 - Cast Nyxborn Hydra using bestow
+ >>> [4] 0.864902 - Cast Llanowar Elves
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.769579
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Winding Way; Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.001172 - Pass
+ >>> [1] 0.892267 - Cast Winding Way
+     [2] 0.086143 - Cast Nyxborn Hydra
+     [3] 0.020416 - Cast Nyxborn Hydra using bestow
+     [4] 0.000001 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [5] 0.000001 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.762203
+SELECTED: Cast Winding Way
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf; Fyndhorn Elves; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000009 - Pass
+     [1] 0.000659 - Cast Nyxborn Hydra
+     [2] 0.000159 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.948245 - Cast Fyndhorn Elves
+     [4] 0.050927 - Cast Llanowar Elves
+     [5] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [6] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.755385
+SELECTED: Cast Fyndhorn Elves
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf; Llanowar Elves]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000182 - Pass
+     [1] 0.012645 - Cast Nyxborn Hydra
+ >>> [2] 0.987173 - Cast Llanowar Elves
+     [3] 0.000000 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.752752
+SELECTED: Cast Llanowar Elves
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998131 - Pass
+     [1] 0.001019 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+     [2] 0.000850 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.749318
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999006 - Pass
+     [1] 0.000994 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.745260
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 15
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999006 - Pass
+     [1] 0.000994 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.745260
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Blood Token; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999028 - Pass
+     [1] 0.000972 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.741391
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mountain; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mountain; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998145 - Pass
+     [1] 0.001855 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.815716
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] End the Festivities (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Quirion Ranger; Priest of Titania,tapped; Priest of Titania,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Llanowar Elves; Fyndhorn Elves; Llanowar Elves]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998480 - Pass
+     [1] 0.001520 - Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.
+
+VALUE SCORE: 0.778624
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998480 - Pass
+
+VALUE SCORE: 0.778624
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998480 - Pass
+
+VALUE SCORE: 0.778624
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998480 - Pass
+
+VALUE SCORE: 0.778624
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest; Avenging Hunter]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra; Timberwatch Elf]
+-> Permanents: [Snow-Covered Forest; Snow-Covered Forest; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest; Avenging Hunter]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000012 - Pass
+     [1] 0.000988 - Cast Nyxborn Hydra
+     [2] 0.000225 - Cast Nyxborn Hydra using bestow
+ >>> [3] 0.998775 - Cast Timberwatch Elf
+     [4] 0.000000 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.776112
+SELECTED: Cast Timberwatch Elf
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf; Avenging Hunter; Snow-Covered Forest,tapped; Avenging Hunter; Timberwatch Elf]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999047 - Pass
+     [1] 0.000953 - {T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.
+
+VALUE SCORE: 0.764818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Timberwatch Elf]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure; Voldaren Epicure; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999047 - Pass
+
+VALUE SCORE: 0.764818
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Nyxborn Hydra]
+-> Permanents: [Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Avenging Hunter,tapped,attacking; Timberwatch Elf]
+[Benchmark-Skill6], life = 9
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Voldaren Epicure,blocking; Voldaren Epicure,blocking; Blood Token; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999047 - Pass
+
+VALUE SCORE: 0.764818
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 7
+Reason: Benchmark: Deck - Elves.dek vs Deck - Mono Red Rally.dek
+Total Decisions Logged: 75
+Ended: 2026-02-01T12:40:03.307378300
+================================================================================

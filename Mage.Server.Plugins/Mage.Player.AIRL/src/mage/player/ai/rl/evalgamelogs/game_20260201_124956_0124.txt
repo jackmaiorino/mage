@@ -1,0 +1,2751 @@
+================================================================================
+GAME LOG: game_20260201_124956_0124
+Started: 2026-02-01T12:49:56.088374600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono Red Rally.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Mountain; Reckless Impulse; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.174178 - Play Great Furnace
+ >>> [2] 0.825822 - Play Mountain
+
+VALUE SCORE: 1.078453
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Clockwork Percussionist; Goblin Tomb Raider]
+-> Permanents: [Mountain]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.079246 - Cast Lightning Bolt
+ >>> [2] 0.884600 - Cast Clockwork Percussionist
+     [3] 0.036150 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.073789
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000004 - Pass
+
+VALUE SCORE: 1.073789
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Great Furnace; Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.995534 - Play Great Furnace
+     [2] 0.000350 - Cast Lightning Bolt
+     [3] 0.000160 - Cast Goblin Tomb Raider
+     [4] 0.003956 - Cast Clockwork Percussionist
+
+VALUE SCORE: 1.051269
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider; Clockwork Percussionist]
+-> Permanents: [Mountain; Clockwork Percussionist; Great Furnace]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000004 - Pass
+     [1] 0.000451 - Cast Reckless Impulse
+     [2] 0.078456 - Cast Lightning Bolt
+     [3] 0.035612 - Cast Goblin Tomb Raider
+ >>> [4] 0.885477 - Cast Clockwork Percussionist
+
+VALUE SCORE: 1.046057
+SELECTED: Cast Clockwork Percussionist
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000039 - Pass
+ >>> [1] 0.687877 - Cast Lightning Bolt
+     [2] 0.312084 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 1.024196
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist; Great Furnace,tapped; Clockwork Percussionist]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped,attacking; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking]
+[Benchmark-Skill6], life = 16
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Clockwork Percussionist,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, exile the top card of your library. You may play it until the end of your next turn.) (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000039 - Pass
+
+VALUE SCORE: 1.024196
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider; Burning-Tree Emissary]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000261 - Cast Reckless Impulse
+     [2] 0.046694 - Cast Lightning Bolt
+     [3] 0.020943 - Cast Goblin Tomb Raider
+ >>> [4] 0.932100 - Cast Burning-Tree Emissary
+
+VALUE SCORE: 1.011130
+SELECTED: Cast Burning-Tree Emissary
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, add {R}{G}.) (controller=RL)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 1.011130
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Lightning Bolt; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 14
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000049 - Pass
+     [1] 0.003898 - Cast Reckless Impulse
+ >>> [2] 0.683868 - Cast Lightning Bolt
+     [3] 0.312185 - Cast Goblin Tomb Raider
+
+VALUE SCORE: 0.964778
+SELECTED: Cast Lightning Bolt
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped,attacking; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 11
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist,tapped; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000049 - Pass
+
+VALUE SCORE: 0.964778
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider; Rally at the Hornburg]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider; Rally at the Hornburg]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Burning-Tree Emissary]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000026 - Pass
+     [1] 0.001761 - Cast Reckless Impulse
+     [2] 0.139759 - Cast Goblin Tomb Raider
+ >>> [3] 0.858454 - Cast Rally at the Hornburg
+
+VALUE SCORE: 0.914431
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Burning-Tree Emissary; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Burning-Tree Emissary,tapped,attacking; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Hero Token,blocking; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge; Blood Fountain; Blood Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Reckless Impulse; Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000026 - Pass
+
+VALUE SCORE: 0.914431
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Galvanic Blast]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Goblin Tomb Raider; Galvanic Blast]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000301 - Pass
+ >>> [1] 0.992084 - Cast Goblin Tomb Raider
+     [2] 0.007615 - Cast Galvanic Blast
+
+VALUE SCORE: 0.722179
+SELECTED: Cast Goblin Tomb Raider
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 10
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.043592 - Pass
+ >>> [1] 0.956408 - Cast Galvanic Blast
+
+VALUE SCORE: 0.676575
+SELECTED: Cast Galvanic Blast
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Black Mage's Rod; Mistvault Bridge; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 8
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Black Mage's Rod; Mistvault Bridge; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 8
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.043592 - Pass
+
+VALUE SCORE: 0.676575
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Experimental Synthesizer]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Experimental Synthesizer]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000868 - Pass
+ >>> [1] 0.999132 - Cast Experimental Synthesizer
+
+VALUE SCORE: 0.409607
+SELECTED: Cast Experimental Synthesizer
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Experimental Synthesizer (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Experimental Synthesizer (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Experimental Synthesizer (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or leaves the battlefield, exile the top card of your library. Until end of turn, you may play that card.) (controller=RL)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider,tapped,attacking; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Goblin Tomb Raider,tapped,attacking; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Refurbished Familiar,blocking; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Black Mage's Rod; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 15
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000868 - Pass
+
+VALUE SCORE: 0.409607
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Rally at the Hornburg]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Rally at the Hornburg]
+-> Permanents: [Mountain; Great Furnace; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000123 - Pass
+ >>> [1] 0.999877 - Cast Rally at the Hornburg
+
+VALUE SCORE: 0.381701
+SELECTED: Cast Rally at the Hornburg
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Blood Token; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Vault of Whispers,tapped; Black Mage's Rod; Hero Token; Drossforge Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Clockwork Percussionist; Human Soldier Token; Human Soldier Token; Experimental Synthesizer; Human Soldier Token; Human Soldier Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Black Mage's Rod; Hero Token; Drossforge Bridge,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} dies, exile the top card of your library. You may play it until the end of your next turn.) (controller=RL)
+  - [1] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000123 - Pass
+
+VALUE SCORE: 0.381701
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Great Furnace; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Reckless Impulse]
+-> Permanents: [Mountain; Great Furnace; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.029310 - Pass
+ >>> [1] 0.970690 - Cast Reckless Impulse
+
+VALUE SCORE: 0.500691
+SELECTED: Cast Reckless Impulse
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Mountain
+
+VALUE SCORE: 0.374123
+SELECTED: Play Mountain
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Blood Fountain; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Blood Fountain; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Drossforge Bridge; Refurbished Familiar,tapped; Blood Fountain; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({3}{B}, {T}, Sacrifice {this}: Return up to two target creature cards from your graveyard to your hand.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.374123
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Great Furnace; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain; Great Furnace; Experimental Synthesizer; Mountain]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.000667 - Pass
+     [1] 0.001662 - Play Mountain
+ >>> [2] 0.997670 - {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+VALUE SCORE: 0.330775
+SELECTED: {2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({2}{R}, Sacrifice {this}: Create a 2/2 white Samurai creature token with vigilance. Activate only as a sorcery.) (controller=RL)
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000667 - Pass
+
+VALUE SCORE: 0.330775
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999485 - Pass
+     [1] 0.000515 - Play Mountain
+
+VALUE SCORE: 0.200761
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999485 - Pass
+
+VALUE SCORE: 0.200761
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge,tapped; Mistvault Bridge,tapped; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+     [1] 0.000514 - Play Mountain
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions; Great Furnace; Myr Enforcer; Refurbished Familiar; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions; Great Furnace; Myr Enforcer; Refurbished Familiar; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Drossforge Bridge; Refurbished Familiar; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions; Great Furnace; Myr Enforcer; Refurbished Familiar; Vault of Whispers,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 0 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge; Makeshift Munitions; Great Furnace,tapped; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Silverbluff Bridge; Mistvault Bridge; Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Mistvault Bridge,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped; Samurai Token]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge; Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+[RL], life = 8
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Mountain]
+-> Permanents: [Mountain,tapped; Great Furnace,tapped; Mountain,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 1 cards
+-> Permanents: [Mistvault Bridge,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Blood Token; Black Mage's Rod; Drossforge Bridge,tapped; Makeshift Munitions; Myr Enforcer,tapped,attacking; Refurbished Familiar,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999486 - Pass
+
+VALUE SCORE: 0.200026
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Mono Red Rally.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 121
+Ended: 2026-02-01T12:54:10.635721800
+================================================================================

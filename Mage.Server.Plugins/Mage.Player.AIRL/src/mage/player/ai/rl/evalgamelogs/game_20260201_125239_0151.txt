@@ -1,0 +1,2616 @@
+================================================================================
+GAME LOG: game_20260201_125239_0151
+Started: 2026-02-01T12:52:39.071077300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.987553
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987553
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987553
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.987553
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.959178
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001652 - Pass
+ >>> [1] 0.998348 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.954376
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.954376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.954376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.954376
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Silverbluff Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.954376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.954376
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001652 - Pass
+
+VALUE SCORE: 0.954376
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell; Snap]
+-> Permanents: [Island; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Island; Counterspell; Spellstutter Sprite; Counterspell; Snap]
+-> Permanents: [Island; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 0.999990 - Play Island
+     [2] 0.000006 - Cast Spellstutter Sprite
+     [3] 0.000003 - Cast Snap
+
+VALUE SCORE: 0.952288
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Spellstutter Sprite; Counterspell; Snap]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.001111 - Pass
+ >>> [1] 0.645381 - Cast Spellstutter Sprite
+     [2] 0.353508 - Cast Snap
+
+VALUE SCORE: 0.947021
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped,attacking; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island,tapped; Island; Spellstutter Sprite,tapped; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001111 - Pass
+
+VALUE SCORE: 0.947021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Snap; Ninja of the Deep Hours]
+-> Permanents: [Island; Island; Spellstutter Sprite; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+     [0] 0.003092 - Pass
+ >>> [1] 0.996908 - Cast Snap
+
+VALUE SCORE: 0.947162
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+     [0] 0.001685 - Pass
+ >>> [1] 0.998315 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.947765
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours]
+-> Permanents: [Island; Island,tapped; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 8 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours; Counterspell]
+-> Permanents: [Island; Island; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours; Counterspell]
+-> Permanents: [Island; Island; Island; Spellstutter Sprite]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours; Counterspell]
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001685 - Pass
+
+VALUE SCORE: 0.947765
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Ninja of the Deep Hours; Counterspell]
+-> Permanents: [Island; Island; Island; Spellstutter Sprite,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.000713 - Pass
+ >>> [1] 0.999287 - Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+VALUE SCORE: 0.893044
+SELECTED: Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped,attacking]
+[Benchmark-Skill6], life = 19
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Ichor Wellspring; Vault of Whispers,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Ichor Wellspring; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite; Ninja of the Deep Hours]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Myr Enforcer (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island,tapped; Island,tapped; Island; Ninja of the Deep Hours,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000713 - Pass
+
+VALUE SCORE: 0.893044
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite; Island]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000005 - Cast Spellstutter Sprite
+ >>> [2] 0.999995 - Play Island
+
+VALUE SCORE: 0.783942
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell; Spellstutter Sprite]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.006299 - Pass
+ >>> [1] 0.993701 - Cast Spellstutter Sprite
+
+VALUE SCORE: 0.770970
+SELECTED: Cast Spellstutter Sprite
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006299 - Pass
+
+VALUE SCORE: 0.770970
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006299 - Pass
+
+VALUE SCORE: 0.770970
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006299 - Pass
+
+VALUE SCORE: 0.770970
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+     [0] 0.001101 - Pass
+ >>> [1] 0.998899 - Cast Counterspell
+
+VALUE SCORE: 0.463831
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001101 - Pass
+
+VALUE SCORE: 0.463831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar; Myr Enforcer; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001101 - Pass
+
+VALUE SCORE: 0.463831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001101 - Pass
+
+VALUE SCORE: 0.463831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped; Spellstutter Sprite,blocking]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Myr Enforcer,tapped,attacking; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001101 - Pass
+
+VALUE SCORE: 0.463831
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Myr Enforcer,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001101 - Pass
+
+VALUE SCORE: 0.463831
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Myr Enforcer,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell; Counterspell; Snap]
+-> Permanents: [Island; Island; Island; Ninja of the Deep Hours; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Ichor Wellspring; Vault of Whispers,tapped; Myr Enforcer,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.007873 - Pass
+ >>> [1] 0.992127 - Cast Snap
+
+VALUE SCORE: 0.701087
+SELECTED: Cast Snap
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [2] Snap (controller=RL)
+[RL], life = 16
+-> Hand: [Counterspell; Counterspell]
+-> Permanents: [Island; Island,tapped; Island; Ninja of the Deep Hours; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Vault of Whispers,tapped; Myr Enforcer,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000255 - Pass
+ >>> [1] 0.999745 - Cast Counterspell
+
+VALUE SCORE: 0.677481
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Vault of Whispers,tapped; Myr Enforcer,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [2] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Ninja of the Deep Hours; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer]
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Refurbished Familiar (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Ichor Wellspring; Vault of Whispers,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Counterspell]
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000255 - Pass
+
+VALUE SCORE: 0.677481
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Harrier Strix]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Harrier Strix]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+     [0] 0.059326 - Pass
+ >>> [1] 0.940674 - Cast Harrier Strix
+
+VALUE SCORE: 0.579400
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998885 - Pass
+     [1] 0.001115 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.568222
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998885 - Pass
+     [1] 0.001115 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.568222
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998884 - Pass
+     [1] 0.001116 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.568448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Ichor Wellspring; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998886 - Pass
+     [1] 0.001114 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.568033
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar]
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998924 - Pass
+     [1] 0.001076 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.516312
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 17
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998929 - Pass
+     [1] 0.001071 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.515781
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Makeshift Munitions (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999123 - Pass
+     [1] 0.000877 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.480030
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999130 - Pass
+     [1] 0.000870 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.478897
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999171 - Pass
+     [1] 0.000829 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.472131
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix,blocking]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999175 - Pass
+     [1] 0.000825 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.471447
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999175 - Pass
+
+VALUE SCORE: 0.471447
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions]
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Faerie Miscreant]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+     [0] 0.000885 - Pass
+ >>> [1] 0.999115 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.554798
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer; Vault of Whispers,tapped; Refurbished Familiar; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Faerie Miscreant,blocking]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000885 - Pass
+
+VALUE SCORE: 0.554798
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Harrier Strix]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Harrier Strix]
+-> Permanents: [Island; Island; Island; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+     [0] 0.058779 - Pass
+ >>> [1] 0.941221 - Cast Harrier Strix
+
+VALUE SCORE: 0.511110
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999204 - Pass
+     [1] 0.000796 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.501352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999204 - Pass
+     [1] 0.000796 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.501352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999203 - Pass
+     [1] 0.000797 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.501568
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped; Vault of Whispers,tapped; Refurbished Familiar,tapped; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999205 - Pass
+     [1] 0.000795 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.501238
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer; Vault of Whispers; Refurbished Familiar; Great Furnace; Makeshift Munitions; Drossforge Bridge; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer; Vault of Whispers; Refurbished Familiar; Great Furnace; Makeshift Munitions; Drossforge Bridge; Black Mage's Rod; Hero Token; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998928 - Pass
+     [1] 0.001072 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.540505
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace; Makeshift Munitions; Drossforge Bridge; Black Mage's Rod; Hero Token,tapped,attacking; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999162 - Pass
+     [1] 0.000838 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.482380
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Reckoner's Bargain (controller=Benchmark-Skill6)
+  - [1] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Ichor Wellspring]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999156 - Pass
+     [1] 0.000844 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.496990
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [2] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999212 - Pass
+     [1] 0.000788 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.482239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+  - [1] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [2] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 6
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999296 - Pass
+     [1] 0.000704 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.460127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({1}, Sacrifice an artifact or creature: {this} deals 1 damage to any target.) (controller=Benchmark-Skill6)
+  - [1] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 2
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999289 - Pass
+     [1] 0.000711 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.461802
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999290 - Pass
+     [1] 0.000710 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.461732
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999388 - Pass
+     [1] 0.000612 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.415785
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: []
+-> Permanents: [Island; Island; Island; Island,tapped; Harrier Strix,blocking]
+[Benchmark-Skill6], life = 19
+-> Hand: 5 cards
+-> Permanents: [Silverbluff Bridge,tapped; Silverbluff Bridge,tapped; Myr Enforcer,tapped,attacking; Vault of Whispers,tapped; Refurbished Familiar,tapped,attacking; Great Furnace,tapped; Makeshift Munitions; Drossforge Bridge,tapped; Black Mage's Rod; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999392 - Pass
+     [1] 0.000608 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.414104
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 10
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 113
+Ended: 2026-02-01T12:55:35.320888600
+================================================================================

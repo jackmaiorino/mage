@@ -1,0 +1,4155 @@
+================================================================================
+GAME LOG: game_20260201_123412_0027
+Started: 2026-02-01T12:34:12.014373
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Red Burn.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Heap Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Heap Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000011 - Pass
+     [1] 0.007763 - Play Citadel Gate
+ >>> [2] 0.766661 - Play Heap Gate
+     [3] 0.225566 - Play Island
+
+VALUE SCORE: 0.178409
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.794041 - Pass
+     [1] 0.205959 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.175345
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.793849 - Pass
+     [1] 0.206151 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.175443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.794410 - Pass
+     [1] 0.205590 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.175236
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lightning Bolt (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.751992 - Pass
+     [1] 0.248008 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.144496
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.752579 - Pass
+     [1] 0.247421 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.144234
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.752593 - Pass
+     [1] 0.247407 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.144331
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.753588 - Pass
+     [1] 0.246412 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.144021
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic; Prismatic Strands]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Island; Lorien Revealed; Preordain; Outlaw Medic; Prismatic Strands]
+-> Permanents: [Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000057 - Pass
+     [1] 0.031665 - Play Citadel Gate
+ >>> [2] 0.968266 - Play Island
+     [3] 0.000012 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.163494
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Preordain; Outlaw Medic; Prismatic Strands]
+-> Permanents: [Heap Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.023304 - Pass
+     [1] 0.004910 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.971786 - Cast Preordain
+
+VALUE SCORE: 0.160717
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.849029 - Pass
+     [1] 0.150971 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.150229
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.848942 - Pass
+     [1] 0.151058 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.150328
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.849266 - Pass
+     [1] 0.150734 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.150099
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772813 - Pass
+     [1] 0.227187 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.132586
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.772836 - Pass
+     [1] 0.227164 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.132693
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed]
+-> Permanents: [Heap Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.774058 - Pass
+     [1] 0.225942 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.132303
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Island; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000080 - Pass
+     [1] 0.031653 - Play Citadel Gate
+ >>> [2] 0.965414 - Play Island
+     [3] 0.000013 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.002840 - Cast Preordain
+
+VALUE SCORE: 0.147948
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Outlaw Medic; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.005798 - Pass
+     [1] 0.000928 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.792619 - Cast Outlaw Medic
+     [3] 0.200655 - Cast Preordain
+
+VALUE SCORE: 0.144583
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Mountain; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} dies, draw a card.) (controller=RL)
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005798 - Pass
+
+VALUE SCORE: 0.144583
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Heap Gate; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.000022 - Pass
+     [1] 0.007973 - Play Citadel Gate
+     [2] 0.000003 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000751 - Cast Preordain
+ >>> [4] 0.991250 - Play Heap Gate
+
+VALUE SCORE: 0.142678
+SELECTED: Play Heap Gate
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Preordain; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.029486 - Pass
+     [1] 0.004329 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.001036 - Cast Prismatic Strands
+ >>> [3] 0.965143 - Cast Preordain
+     [4] 0.000006 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.138515
+SELECTED: Cast Preordain
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887462 - Pass
+     [1] 0.112361 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000177 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.128273
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887376 - Pass
+     [1] 0.112446 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000177 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.128406
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887662 - Pass
+     [1] 0.112161 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000177 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.128130
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.857826 - Pass
+     [1] 0.142011 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000163 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.093428
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.883013 - Pass
+     [1] 0.116830 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000158 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.078893
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.886691 - Pass
+     [1] 0.113152 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000157 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.075843
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.886691 - Pass
+     [1] 0.113152 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000157 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.075843
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.888018 - Pass
+     [1] 0.111825 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000156 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.073710
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Citadel Gate; Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.004873 - Pass
+ >>> [1] 0.994513 - Play Citadel Gate
+     [2] 0.000492 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000121 - Cast Prismatic Strands
+     [4] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.099928
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.893831 - Pass
+     [1] 0.084950 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.021078 - Cast Prismatic Strands
+     [3] 0.000142 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.085526
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.893743 - Pass
+     [1] 0.085022 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.021093 - Cast Prismatic Strands
+     [3] 0.000142 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.085804
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.893959 - Pass
+     [1] 0.084845 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.021055 - Cast Prismatic Strands
+     [3] 0.000142 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.085203
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.237540 - Pass
+     [1] 0.031198 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.007607 - Cast Prismatic Strands
+ >>> [3] 0.723613 - Cast Spell Pierce
+     [4] 0.000042 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.075480
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+  - [1] Spell Pierce (controller=RL)
+  - [2] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Spell Pierce; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.249393 - Pass
+     [1] 0.026391 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.724176 - Cast Spell Pierce
+     [3] 0.000041 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.047026
+SELECTED: Cast Spell Pierce
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Spell Pierce (controller=RL)
+  - [1] Faithless Looting (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904366 - Pass
+     [1] 0.095634 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.036889
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.903098 - Pass
+     [1] 0.096902 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.040918
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904193 - Pass
+     [1] 0.095807 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.036626
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped,attacking; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904193 - Pass
+     [1] 0.095807 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.036626
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904725 - Pass
+     [1] 0.095275 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.033009
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate; Prismatic Strands]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Citadel Gate; Prismatic Strands]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.006192 - Pass
+     [1] 0.016628 - Cast Lorien Revealed
+     [2] 0.000535 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.000136 - Cast Prismatic Strands
+ >>> [4] 0.976508 - Play Citadel Gate
+     [5] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.068298
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Lorien Revealed; Prismatic Strands; Lorien Revealed; Prismatic Strands]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.277519 - Pass
+ >>> [1] 0.694323 - Cast Lorien Revealed
+     [2] 0.022352 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.005767 - Cast Prismatic Strands
+     [4] 0.000039 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.048805
+SELECTED: Cast Lorien Revealed
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lava Dart (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.277519 - Pass
+
+VALUE SCORE: 0.048805
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age; Guardian of the Guildpact]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; The Modern Age; Guardian of the Guildpact]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.020455 - Pass
+     [1] 0.000460 - Cast Prismatic Strands
+     [2] 0.056365 - Cast Lorien Revealed
+     [3] 0.001811 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.154861 - Cast Journey to Nowhere
+     [5] 0.002513 - Cast Thraben Charm
+ >>> [6] 0.726859 - Cast The Modern Age
+     [7] 0.036673 - Cast Guardian of the Guildpact
+     [8] 0.000003 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.074809
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Masked Meower,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.822494 - Pass
+     [1] 0.017020 - Cast Prismatic Strands
+     [2] 0.065887 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.094484 - Cast Thraben Charm
+     [4] 0.000115 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.047223
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826759 - Pass
+     [1] 0.016667 - Cast Prismatic Strands
+     [2] 0.063826 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.092634 - Cast Thraben Charm
+     [4] 0.000114 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.039094
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; Guardian of the Guildpact]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826759 - Pass
+     [1] 0.016667 - Cast Prismatic Strands
+     [2] 0.063826 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.092634 - Cast Thraben Charm
+     [4] 0.000114 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.039094
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Journey to Nowhere; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.113910 - Pass
+     [1] 0.002258 - Cast Prismatic Strands
+     [2] 0.008603 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [3] 0.862631 - Cast Journey to Nowhere
+     [4] 0.012583 - Cast Thraben Charm
+     [5] 0.000015 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.032242
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.937570 - Pass
+     [1] 0.062430 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.013703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.937448 - Pass
+     [1] 0.062552 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.012962
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.937744 - Pass
+     [1] 0.062256 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.014692
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904136 - Pass
+     [1] 0.095864 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.015913
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904102 - Pass
+     [1] 0.095898 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.016327
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.904305 - Pass
+     [1] 0.095695 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.015500
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.821072 - Pass
+     [1] 0.017227 - Cast Prismatic Strands
+     [2] 0.066576 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.095006 - Cast Thraben Charm
+     [4] 0.000119 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.053947
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age; Journey to Nowhere]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.002016 - Pass
+     [1] 0.000042 - Cast Prismatic Strands
+     [2] 0.004934 - Cast Lorien Revealed
+     [3] 0.000161 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.000231 - Cast Thraben Charm
+ >>> [5] 0.992617 - Play Sea Gate
+     [6] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.049009
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Lorien Revealed; Prismatic Strands; Thraben Charm; Thraben Charm]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.289339 - Pass
+     [1] 0.005631 - Cast Prismatic Strands
+ >>> [2] 0.652162 - Cast Lorien Revealed
+     [3] 0.021335 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.031496 - Cast Thraben Charm
+     [5] 0.000038 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: 0.023803
+SELECTED: Cast Lorien Revealed
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Highway Robbery (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you draw your third card in a turn, return this card from your graveyard to the battlefield tapped.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; The Modern Age; Journey to Nowhere; Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.289339 - Pass
+
+VALUE SCORE: 0.023803
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age; Basilisk Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age; Journey to Nowhere; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age; Basilisk Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; The Modern Age; Journey to Nowhere; Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.900345 - Pass
+     [1] 0.013920 - Cast Prismatic Strands
+     [2] 0.085651 - Cast Thraben Charm
+     [3] 0.000084 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.158491
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age; Basilisk Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.009326 - Pass
+     [1] 0.000145 - Cast Prismatic Strands
+     [2] 0.000899 - Cast Thraben Charm
+     [3] 0.039363 - Cast Squadron Hawk
+     [4] 0.208200 - Cast The Modern Age
+ >>> [5] 0.742067 - Play Basilisk Gate
+     [6] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.193981
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk; The Modern Age]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.037894 - Pass
+     [1] 0.000595 - Cast Prismatic Strands
+     [2] 0.003714 - Cast Thraben Charm
+     [3] 0.153658 - Cast Squadron Hawk
+ >>> [4] 0.803690 - Cast The Modern Age
+     [5] 0.000004 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [6] 0.000445 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.222614
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Counterspell; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.892998 - Pass
+     [1] 0.014802 - Cast Prismatic Strands
+     [2] 0.092109 - Cast Thraben Charm
+     [3] 0.000091 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.302794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Squadron Hawk; Sea Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.219765 - Pass
+     [1] 0.003702 - Cast Prismatic Strands
+     [2] 0.022905 - Cast Thraben Charm
+ >>> [3] 0.753605 - Cast Squadron Hawk
+     [4] 0.000023 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.314816
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.887829 - Pass
+     [1] 0.016045 - Cast Prismatic Strands
+     [2] 0.096016 - Cast Thraben Charm
+     [3] 0.000110 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.360321
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.222604 - Pass
+     [1] 0.003780 - Cast Prismatic Strands
+     [2] 0.023176 - Cast Thraben Charm
+ >>> [3] 0.750415 - Cast Squadron Hawk
+     [4] 0.000024 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.320710
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.222604 - Pass
+
+VALUE SCORE: -0.320710
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.222604 - Pass
+
+VALUE SCORE: -0.320710
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.222604 - Pass
+
+VALUE SCORE: -0.320710
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Prismatic Strands; Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.222604 - Pass
+
+VALUE SCORE: -0.320710
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker]
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.808712 - Pass
+     [1] 0.191288 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.252242
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.814075 - Pass
+     [1] 0.185925 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.258353
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.872355 - Pass
+     [1] 0.127645 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.345849
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Blood Token; Mountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.872177 - Pass
+     [1] 0.127823 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.345472
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.867955 - Pass
+     [1] 0.132045 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.332832
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Meower (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.891355 - Pass
+     [1] 0.108645 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.365922
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.889768 - Pass
+     [1] 0.110232 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.363242
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Masked Meower]
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.809128 - Pass
+     [1] 0.013437 - Cast Prismatic Strands
+     [2] 0.082552 - Cast Thraben Charm
+     [3] 0.094798 - Flashback tap an untapped white creature you control
+     [4] 0.000085 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.312218
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Island; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.000850 - Pass
+     [1] 0.000014 - Cast Prismatic Strands
+     [2] 0.000087 - Cast Thraben Charm
+     [3] 0.137908 - Play Sea Gate
+     [4] 0.002805 - Cast Squadron Hawk
+ >>> [5] 0.858228 - Play Island
+     [6] 0.000096 - Flashback tap an untapped white creature you control
+     [7] 0.000000 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [8] 0.000011 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.321865
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+     [0] 0.227266 - Pass
+     [1] 0.003954 - Cast Prismatic Strands
+     [2] 0.023878 - Cast Thraben Charm
+ >>> [3] 0.718179 - Cast Squadron Hawk
+     [4] 0.023667 - Flashback tap an untapped white creature you control
+     [5] 0.000026 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [6] 0.003029 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.341872
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Masked Meower]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.819097 - Pass
+     [1] 0.015493 - Cast Prismatic Strands
+     [2] 0.090249 - Cast Thraben Charm
+     [3] 0.075049 - Flashback tap an untapped white creature you control
+     [4] 0.000112 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.379390
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Discard a card, Sacrifice {this}: Draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.820872 - Pass
+     [1] 0.015972 - Cast Prismatic Strands
+     [2] 0.091286 - Cast Thraben Charm
+     [3] 0.071751 - Flashback tap an untapped white creature you control
+     [4] 0.000119 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.391132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Sea Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.820872 - Pass
+     [1] 0.015972 - Cast Prismatic Strands
+     [2] 0.091286 - Cast Thraben Charm
+     [3] 0.071751 - Flashback tap an untapped white creature you control
+     [4] 0.000119 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.391132
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.242936 - Pass
+     [1] 0.004573 - Cast Prismatic Strands
+     [2] 0.026579 - Cast Thraben Charm
+ >>> [3] 0.700466 - Cast Squadron Hawk
+     [4] 0.021896 - Flashback tap an untapped white creature you control
+     [5] 0.000033 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [6] 0.003516 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.379786
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.818489 - Pass
+     [1] 0.016905 - Cast Prismatic Strands
+     [2] 0.094328 - Cast Thraben Charm
+     [3] 0.070147 - Flashback tap an untapped white creature you control
+     [4] 0.000131 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.406777
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.250735 - Pass
+     [1] 0.005063 - Cast Prismatic Strands
+     [2] 0.028541 - Cast Thraben Charm
+ >>> [3] 0.693898 - Cast Squadron Hawk
+     [4] 0.021724 - Flashback tap an untapped white creature you control
+     [5] 0.000039 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.400667
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922090 - Pass
+     [1] 0.077910 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.429656
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.921833 - Pass
+     [1] 0.078167 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.425315
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider,tapped,attacking; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922155 - Pass
+     [1] 0.077845 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.428613
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider,tapped,attacking; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922155 - Pass
+     [1] 0.077845 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.428613
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Prismatic Strands; Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider,tapped; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.922161 - Pass
+     [1] 0.077839 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.431089
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider,tapped; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fiery Temper (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Vector Glider,tapped; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.901816 - Pass
+     [1] 0.098184 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.394707
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Voldaren Epicure (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Mountain,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.908522 - Pass
+     [1] 0.091478 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.406710
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, it deals 1 damage to each opponent. Create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.909649 - Pass
+     [1] 0.090351 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.408412
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.914791 - Pass
+     [1] 0.085209 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.423938
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; The Modern Age; Squadron Hawk; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped,attacking; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.916651 - Pass
+     [1] 0.083349 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.428343
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; The Modern Age; Squadron Hawk,blocking; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Sneaky Snacker,tapped,attacking; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.916867 - Pass
+     [1] 0.083133 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.429057
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; The Modern Age; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.916867 - Pass
+
+VALUE SCORE: -0.429057
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; The Modern Age; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; The Modern Age; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.896632 - Pass
+     [1] 0.103221 - Cast Thraben Charm
+     [2] 0.000146 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.409579
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Vector Glider]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.005856 - Pass
+     [1] 0.000684 - Cast Thraben Charm
+ >>> [2] 0.610366 - Play Sea Gate
+     [3] 0.015489 - Cast Squadron Hawk
+     [4] 0.367508 - Play Citadel Gate
+     [5] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [6] 0.000096 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.417679
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.267229 - Pass
+     [1] 0.032204 - Cast Thraben Charm
+ >>> [2] 0.695911 - Cast Squadron Hawk
+     [3] 0.000050 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [4] 0.004606 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.428903
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Squadron Hawk; Squadron Hawk; Citadel Gate]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828489 - Pass
+     [1] 0.103437 - Cast Thraben Charm
+     [2] 0.067904 - Flashback tap an untapped white creature you control
+     [3] 0.000170 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.441255
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.269477 - Pass
+     [1] 0.033390 - Cast Thraben Charm
+ >>> [2] 0.692222 - Cast Squadron Hawk
+     [3] 0.000054 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [4] 0.004856 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.438513
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.826308 - Pass
+     [1] 0.105740 - Cast Thraben Charm
+     [2] 0.067773 - Flashback tap an untapped white creature you control
+     [3] 0.000180 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.448301
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.272032 - Pass
+     [1] 0.034538 - Cast Thraben Charm
+ >>> [2] 0.693371 - Cast Squadron Hawk
+     [3] 0.000058 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.446129
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+     [1] 0.075934 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Guttersnipe (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Mountain; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Mountain,tapped; Mountain,tapped; Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, {this} deals 2 damage to each opponent.) (controller=Benchmark-Skill6)
+  - [1] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 11
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #135 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+[RL], life = 9
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Vector Glider; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #136 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure; Mountain,tapped; Mountain,tapped; Voldaren Epicure; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #137 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped,attacking; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #138 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped,attacking; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #139 - Turn 11, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.924066 - Pass
+
+VALUE SCORE: -0.456650
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped; Guttersnipe]
+
+--------------------------------------------------------------------------------
+DECISION #140 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Sea Gate; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.005370 - Pass
+     [1] 0.000593 - Cast Thraben Charm
+ >>> [2] 0.595683 - Play Sea Gate
+     [3] 0.344959 - Play Citadel Gate
+     [4] 0.014812 - Cast Squadron Hawk
+     [5] 0.038501 - Cast Journey to Nowhere
+     [6] 0.000001 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [7] 0.000080 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.393453
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #141 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+     [0] 0.092176 - Pass
+     [1] 0.010530 - Cast Thraben Charm
+     [2] 0.247305 - Cast Squadron Hawk
+ >>> [3] 0.648514 - Cast Journey to Nowhere
+     [4] 0.000015 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [5] 0.001459 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.409028
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #142 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Sea Gate; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped; Guttersnipe]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.893600 - Pass
+     [1] 0.106238 - Cast Thraben Charm
+     [2] 0.000163 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.425316
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #143 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate,tapped; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Sea Gate; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.266568 - Pass
+     [1] 0.031565 - Cast Thraben Charm
+ >>> [2] 0.697337 - Cast Squadron Hawk
+     [3] 0.000048 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [4] 0.004482 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.423735
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #144 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Sea Gate; Sea Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.830782 - Pass
+     [1] 0.101703 - Cast Thraben Charm
+     [2] 0.067350 - Flashback tap an untapped white creature you control
+     [3] 0.000165 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.436710
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #145 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island,tapped; Sea Gate; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.270711 - Pass
+     [1] 0.032911 - Cast Thraben Charm
+ >>> [2] 0.696325 - Cast Squadron Hawk
+     [3] 0.000052 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.433827
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #146 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate; Sea Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.828446 - Pass
+     [1] 0.104682 - Cast Thraben Charm
+     [2] 0.066693 - Flashback tap an untapped white creature you control
+     [3] 0.000179 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.447835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #147 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.274153 - Pass
+     [1] 0.034429 - Cast Thraben Charm
+ >>> [2] 0.691360 - Cast Squadron Hawk
+     [3] 0.000058 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.445791
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #148 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+     [1] 0.074326 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #149 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #150 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #151 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain,tapped; Mountain,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 12 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Voldaren Epicure]
+
+--------------------------------------------------------------------------------
+DECISION #152 - Turn 12, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Mountain; Mountain; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #153 - Turn 12, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Mountain; Mountain; Voldaren Epicure,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #154 - Turn 12, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Mountain; Mountain; Voldaren Epicure,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #155 - Turn 12, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate,tapped; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925674 - Pass
+
+VALUE SCORE: -0.454033
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Voldaren Epicure,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #156 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thraben Charm; Thraben Charm; Citadel Gate; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.013645 - Pass
+     [1] 0.001504 - Cast Thraben Charm
+ >>> [2] 0.927272 - Play Citadel Gate
+     [3] 0.039042 - Cast Squadron Hawk
+     [4] 0.018335 - Cast Sacred Cat
+     [5] 0.000002 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [6] 0.000200 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.383872
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #157 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Thraben Charm; Thraben Charm; Squadron Hawk; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Heap Gate; Island; Island; Heap Gate; Citadel Gate; Citadel Gate; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped; Mountain; Mountain; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.191271 - Pass
+     [1] 0.021710 - Cast Thraben Charm
+ >>> [2] 0.527092 - Cast Squadron Hawk
+     [3] 0.256934 - Cast Sacred Cat
+     [4] 0.000030 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [5] 0.002964 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.400995
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #158 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] Fireblast (controller=Benchmark-Skill6)
+  - [1] Squadron Hawk (controller=RL)
+[RL], life = 5
+-> Hand: [Thraben Charm; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Heap Gate; Island,tapped; Island; Heap Gate; Citadel Gate; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.895761 - Pass
+     [1] 0.104090 - Cast Thraben Charm
+     [2] 0.000149 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.412646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #159 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=RL)
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Heap Gate; Island,tapped; Island; Heap Gate; Citadel Gate; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.896193 - Pass
+     [1] 0.103659 - Cast Thraben Charm
+     [2] 0.000148 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.411035
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #160 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Squadron Hawk; Squadron Hawk; Sacred Cat]
+-> Permanents: [Heap Gate; Island,tapped; Island; Heap Gate; Citadel Gate; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.833222 - Pass
+     [1] 0.096519 - Cast Thraben Charm
+     [2] 0.070121 - Flashback tap an untapped white creature you control
+     [3] 0.000138 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.412101
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #161 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island; Heap Gate; Citadel Gate; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.192676 - Pass
+     [1] 0.022105 - Cast Thraben Charm
+     [2] 0.258633 - Cast Sacred Cat
+ >>> [3] 0.523507 - Cast Squadron Hawk
+     [4] 0.000031 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+     [5] 0.003048 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.407137
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #162 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.831644 - Pass
+     [1] 0.099263 - Cast Thraben Charm
+     [2] 0.068942 - Flashback tap an untapped white creature you control
+     [3] 0.000151 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.424635
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #163 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate; Island; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.195373 - Pass
+     [1] 0.023143 - Cast Thraben Charm
+     [2] 0.263752 - Cast Sacred Cat
+ >>> [3] 0.517697 - Cast Squadron Hawk
+     [4] 0.000034 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.420844
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #164 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.829628 - Pass
+     [1] 0.102604 - Cast Thraben Charm
+     [2] 0.067601 - Flashback tap an untapped white creature you control
+     [3] 0.000168 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.439225
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #165 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate; Sea Gate; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.197996 - Pass
+     [1] 0.024352 - Cast Thraben Charm
+     [2] 0.268583 - Cast Sacred Cat
+ >>> [3] 0.509031 - Cast Squadron Hawk
+     [4] 0.000039 - {1}, {T}, Tap an untapped Gate you control: Create a Treasure token.
+
+VALUE SCORE: -0.436548
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #166 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+     [1] 0.074671 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #167 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #168 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #169 - Turn 13, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 0 cards
+-> Permanents: [Voldaren Epicure,tapped; Voldaren Epicure,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 13 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Voldaren Epicure]
+
+--------------------------------------------------------------------------------
+DECISION #170 - Turn 13, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure; Voldaren Epicure]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #171 - Turn 13, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Voldaren Epicure,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #172 - Turn 13, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 1
+-> Hand: [Thraben Charm; Thraben Charm; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Heap Gate,tapped; Island,tapped; Island,tapped; Heap Gate,tapped; Citadel Gate,tapped; Citadel Gate,tapped; Journey to Nowhere; Sea Gate; Basilisk Gate,tapped; Island,tapped; Sea Gate,tapped; Sea Gate,tapped; Journey to Nowhere; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Voldaren Epicure,tapped,attacking; Voldaren Epicure,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.925329 - Pass
+
+VALUE SCORE: -0.447769
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 13
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Red Burn.dek
+Total Decisions Logged: 172
+Ended: 2026-02-01T12:40:52.773784900
+================================================================================

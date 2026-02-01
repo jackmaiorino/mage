@@ -1,0 +1,1462 @@
+================================================================================
+GAME LOG: game_20260201_125159_0145
+Started: 2026-02-01T12:51:59.776741500
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Mono-Blue Faeries.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Faerie Miscreant; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Island]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Faerie Miscreant; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Island]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.943500
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Faerie Miscreant; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000094 - Pass
+ >>> [1] 0.985953 - Cast Faerie Miscreant
+     [2] 0.013953 - Cast Harrier Strix
+
+VALUE SCORE: 0.937171
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger,tapped; Elvish Mystic,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nyxborn Hydra (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant]
+-> Permanents: [Island,tapped; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.937171
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Faerie Miscreant; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.000094 - Pass
+     [1] 0.013868 - Cast Harrier Strix
+ >>> [2] 0.986038 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.932456
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Winding Way (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Snow-Covered Forest,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000094 - Pass
+
+VALUE SCORE: 0.932456
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Faerie Miscreant; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+     [0] 0.000113 - Pass
+     [1] 0.013142 - Cast Harrier Strix
+ >>> [2] 0.986745 - Cast Faerie Miscreant
+
+VALUE SCORE: 0.895774
+SELECTED: Cast Faerie Miscreant
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, if you control another creature named Faerie Miscreant, draw a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000113 - Pass
+
+VALUE SCORE: 0.895774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Island
+
+VALUE SCORE: 0.878380
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Harrier Strix; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+     [0] 0.010077 - Pass
+ >>> [1] 0.989923 - Cast Harrier Strix
+
+VALUE SCORE: 0.867876
+SELECTED: Cast Harrier Strix
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=RL)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 7 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves,tapped; Quirion Ranger; Fyndhorn Elves; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Timberwatch Elf (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, put two +1/+1 counters on target creature. <i>(Forge)</i>) (controller=Benchmark-Skill6)
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant; Island,tapped; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.010077 - Pass
+
+VALUE SCORE: 0.867876
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix; Island]
+-> Permanents: [Island; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island; Harrier Strix]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+     [1] 0.000005 - Cast Spellstutter Sprite
+     [2] 0.000001 - Cast Harrier Strix
+ >>> [3] 0.999994 - Play Island
+
+VALUE SCORE: 0.860893
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Of One Mind; Harrier Strix]
+-> Permanents: [Island; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island; Harrier Strix; Island]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.001025 - Cast Spellstutter Sprite
+ >>> [2] 0.998690 - Cast Of One Mind
+     [3] 0.000282 - Cast Harrier Strix
+     [4] 0.000000 - {2}{U}: Draw a card, then discard a card.
+
+VALUE SCORE: 0.851979
+SELECTED: Cast Of One Mind
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Harrier Strix; Counterspell; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant; Faerie Miscreant; Faerie Miscreant; Island,tapped; Harrier Strix; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Harrier Strix; Counterspell; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Harrier Strix; Counterspell; Humbling Elder]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Faerie Miscreant,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Island,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Of One Mind; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra,tapped; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf,tapped; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Elvish Mystic,tapped; Nyxborn Hydra; Fyndhorn Elves; Quirion Ranger; Fyndhorn Elves; Priest of Titania,tapped; Timberwatch Elf,tapped; Timberwatch Elf; Avenging Hunter; Avenging Hunter; Snow-Covered Forest,tapped; Quirion Ranger; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped,attacking; Quirion Ranger,tapped,attacking; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Avenging Hunter,tapped,attacking; Quirion Ranger; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}: Target creature gets +X/+X until end of turn, where X is the number of Elves on the battlefield.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped,attacking; Quirion Ranger,tapped,attacking; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Avenging Hunter,tapped,attacking; Quirion Ranger; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped,attacking; Quirion Ranger,tapped,attacking; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Avenging Hunter,tapped,attacking; Quirion Ranger; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Spellstutter Sprite; Spellstutter Sprite; Spellstutter Sprite; Harrier Strix; Counterspell; Humbling Elder; Island]
+-> Permanents: [Island,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Faerie Miscreant,tapped; Island,tapped; Harrier Strix,tapped; Island,tapped]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Elvish Mystic,tapped; Nyxborn Hydra,tapped,attacking; Fyndhorn Elves,tapped,attacking; Quirion Ranger,tapped,attacking; Fyndhorn Elves,tapped,attacking; Priest of Titania,tapped; Timberwatch Elf,tapped; Timberwatch Elf,tapped,attacking; Avenging Hunter,tapped,attacking; Avenging Hunter,tapped,attacking; Quirion Ranger; Wellwisher]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000003 - Pass
+
+VALUE SCORE: 0.851979
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Mono-Blue Faeries.dek vs Deck - Elves.dek
+Total Decisions Logged: 65
+Ended: 2026-02-01T12:54:03.057503400
+================================================================================

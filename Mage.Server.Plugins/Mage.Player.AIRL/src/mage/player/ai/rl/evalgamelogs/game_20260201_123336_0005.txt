@@ -1,0 +1,2032 @@
+================================================================================
+GAME LOG: game_20260201_123336_0005
+Started: 2026-02-01T12:33:36.016382700
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Blue Terror.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Sea Gate; Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000337 - Pass
+ >>> [1] 0.999663 - Play Sea Gate
+
+VALUE SCORE: 0.178840
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178840
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178840
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000337 - Pass
+
+VALUE SCORE: 0.178840
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk; Island]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk; Island]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000041 - Pass
+     [1] 0.000012 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.000651 - Cast Brainstorm
+ >>> [3] 0.999296 - Play Island
+
+VALUE SCORE: 0.178586
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Counterspell; Brainstorm; Outlaw Medic; Squadron Hawk]
+-> Permanents: [Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.058458 - Pass
+     [1] 0.016624 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+ >>> [2] 0.924918 - Cast Brainstorm
+
+VALUE SCORE: 0.175827
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.797269 - Pass
+     [1] 0.202731 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.169371
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.797127 - Pass
+     [1] 0.202873 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.169463
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.797604 - Pass
+     [1] 0.202396 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.169253
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Lorien Revealed; Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic]
+-> Permanents: [Sea Gate; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000054 - Pass
+ >>> [1] 0.999946 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 1.097189
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thought Scour (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.097189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.097189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.097189
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000054 - Pass
+
+VALUE SCORE: 1.097189
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island; Azorius Guildgate]
+-> Permanents: [Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island; Azorius Guildgate]
+-> Permanents: [Sea Gate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.045015 - Play Island
+ >>> [2] 0.954984 - Play Azorius Guildgate
+
+VALUE SCORE: 0.169350
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.169350
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Island; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.000017 - Pass
+     [1] 0.000002 - Cast Prismatic Strands
+     [2] 0.005425 - Cast Outlaw Medic
+ >>> [3] 0.959946 - Play Island
+     [4] 0.034609 - Play Citadel Gate
+
+VALUE SCORE: 0.191801
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Outlaw Medic; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island]
+
+
+OPTIONS & SCORES:
+     [0] 0.003252 - Pass
+     [1] 0.000369 - Cast Prismatic Strands
+ >>> [2] 0.996379 - Cast Outlaw Medic
+
+VALUE SCORE: 0.187554
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+  - [1] Outlaw Medic (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Outlaw Medic (controller=RL)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island; Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Brainstorm (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Sleep of the Dead (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003252 - Pass
+
+VALUE SCORE: 0.187554
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.000415 - Pass
+     [1] 0.000045 - Cast Prismatic Strands
+     [2] 0.136864 - Cast Outlaw Medic
+ >>> [3] 0.862677 - Play Citadel Gate
+
+VALUE SCORE: 0.172100
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Outlaw Medic; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.003198 - Pass
+     [1] 0.000291 - Cast Prismatic Strands
+ >>> [2] 0.996512 - Cast Outlaw Medic
+
+VALUE SCORE: 0.156014
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island,tapped; Island; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ponder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island,tapped; Island; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Tolarian Terror (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.003198 - Pass
+
+VALUE SCORE: 0.156014
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.000476 - Pass
+     [1] 0.000052 - Cast Prismatic Strands
+ >>> [2] 0.999472 - Play Citadel Gate
+
+VALUE SCORE: 0.172597
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.916004 - Pass
+     [1] 0.083996 - Cast Prismatic Strands
+
+VALUE SCORE: 0.156770
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.915772 - Pass
+     [1] 0.084228 - Cast Prismatic Strands
+
+VALUE SCORE: 0.157109
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.916313 - Pass
+     [1] 0.083687 - Cast Prismatic Strands
+
+VALUE SCORE: 0.156440
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror; Tolarian Terror; Tolarian Terror]
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.000214 - Pass
+ >>> [1] 0.999786 - Cast Prismatic Strands
+
+VALUE SCORE: 1.007272
+SELECTED: Cast Prismatic Strands
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+     [0] 0.000037 - Pass
+ >>> [1] 0.999962 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.966739
+SELECTED: Flashback tap an untapped white creature you control
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Murmuring Mystic (controller=Benchmark-Skill6)
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.966739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.966739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.966739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 15
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,blocking; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.966739
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000037 - Pass
+
+VALUE SCORE: 0.966739
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Brainstorm]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Brainstorm]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.047790 - Pass
+     [1] 0.002855 - Cast Prismatic Strands
+ >>> [2] 0.949355 - Cast Brainstorm
+
+VALUE SCORE: 0.127011
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island,tapped; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.953742 - Pass
+     [1] 0.046258 - Cast Prismatic Strands
+
+VALUE SCORE: 0.104646
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island,tapped; Outlaw Medic,tapped,attacking; Citadel Gate; Outlaw Medic,tapped,attacking; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.960495 - Pass
+     [1] 0.039505 - Cast Prismatic Strands
+
+VALUE SCORE: 0.083749
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island,tapped; Outlaw Medic,tapped,attacking; Citadel Gate; Outlaw Medic,tapped,attacking; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.961058 - Pass
+     [1] 0.038943 - Cast Prismatic Strands
+
+VALUE SCORE: 0.081620
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.955658 - Pass
+     [1] 0.044342 - Cast Prismatic Strands
+
+VALUE SCORE: 0.091536
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic]
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell; Counterspell]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000057 - Pass
+     [1] 0.220188 - Cast Prismatic Strands
+ >>> [2] 0.779754 - Cast Counterspell
+
+VALUE SCORE: 0.971989
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+     [0] 0.000280 - Pass
+ >>> [1] 0.999720 - Cast Prismatic Strands
+
+VALUE SCORE: 0.956486
+SELECTED: Cast Prismatic Strands
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 4 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Dispel (controller=Benchmark-Skill6)
+  - [2] Prismatic Strands (controller=RL)
+  - [3] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] Dispel (controller=Benchmark-Skill6)
+  - [1] Prismatic Strands (controller=RL)
+  - [2] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Counterspell]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000280 - Pass
+
+VALUE SCORE: 0.956486
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic; Citadel Gate; Outlaw Medic; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.394265 - Pass
+     [1] 0.011485 - Cast Prismatic Strands
+ >>> [2] 0.594250 - Flashback tap an untapped white creature you control
+
+VALUE SCORE: 0.049169
+SELECTED: Flashback tap an untapped white creature you control
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.975617 - Pass
+     [1] 0.024383 - Cast Prismatic Strands
+
+VALUE SCORE: 0.026443
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped,attacking; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976921 - Pass
+     [1] 0.023079 - Cast Prismatic Strands
+
+VALUE SCORE: 0.009993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 2
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped,attacking; Citadel Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.976921 - Pass
+     [1] 0.023079 - Cast Prismatic Strands
+
+VALUE SCORE: 0.009993
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Island,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Tolarian Terror,tapped; Murmuring Mystic,tapped; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.977593 - Pass
+     [1] 0.022408 - Cast Prismatic Strands
+
+VALUE SCORE: -0.003400
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Prismatic Strands; Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island; Azorius Guildgate; Island; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island; Island; Island; Island; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000240 - Pass
+ >>> [1] 0.999760 - Cast Prismatic Strands
+
+VALUE SCORE: 0.980418
+SELECTED: Cast Prismatic Strands
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+  - [1] Deem Inferior (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Counterspell; Spell Pierce]
+-> Permanents: [Sea Gate; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000070 - Pass
+ >>> [1] 0.982028 - Cast Counterspell
+     [2] 0.017902 - Cast Spell Pierce
+
+VALUE SCORE: 0.919133
+SELECTED: Cast Counterspell
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you cast an instant or sorcery spell, create a 1/1 blue Bird Illusion creature token with flying.) (controller=Benchmark-Skill6)
+[RL], life = 3
+-> Hand: [Spell Pierce]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.919133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Spell Pierce]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Tolarian Terror; Tolarian Terror; Tolarian Terror; Murmuring Mystic; Bird Illusion Token; Bird Illusion Token; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.919133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Spell Pierce]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.919133
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 3
+-> Hand: [Spell Pierce]
+-> Permanents: [Sea Gate,tapped; Island,tapped; Azorius Guildgate,tapped; Island,tapped; Outlaw Medic,tapped; Citadel Gate; Outlaw Medic,tapped; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Island; Island,tapped; Island,tapped; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Tolarian Terror,tapped,attacking; Murmuring Mystic,tapped,attacking; Bird Illusion Token,tapped,attacking; Bird Illusion Token,tapped,attacking; Island,tapped; Bird Illusion Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000070 - Pass
+
+VALUE SCORE: 0.919133
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 8
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Blue Terror.dek
+Total Decisions Logged: 87
+Ended: 2026-02-01T12:34:54.818713100
+================================================================================

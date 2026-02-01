@@ -1,0 +1,1810 @@
+================================================================================
+GAME LOG: game_20260201_124008_0060
+Started: 2026-02-01T12:40:08.079951900
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Caw-Gates.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Mistvault Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Mistvault Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.300482 - Play Drossforge Bridge
+     [2] 0.338447 - Play Great Furnace
+ >>> [3] 0.361070 - Play Mistvault Bridge
+
+VALUE SCORE: 0.480839
+SELECTED: Play Mistvault Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480839
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480839
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480839
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480839
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480839
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480839
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar; Blood Fountain]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Great Furnace; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar; Blood Fountain]
+-> Permanents: [Mistvault Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.466448 - Play Drossforge Bridge
+ >>> [2] 0.533468 - Play Great Furnace
+     [3] 0.000081 - Cast Blood Fountain
+
+VALUE SCORE: 0.438537
+SELECTED: Play Great Furnace
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Refurbished Familiar; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Great Furnace]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000084 - Pass
+     [1] 0.022192 - Cast Black Mage's Rod
+     [2] 0.000062 - Cast Galvanic Blast
+ >>> [3] 0.975289 - Cast Refurbished Familiar
+     [4] 0.002373 - Cast Blood Fountain
+
+VALUE SCORE: 0.433276
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 8 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000084 - Pass
+
+VALUE SCORE: 0.433276
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Great Furnace; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Great Furnace; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.000005 - Pass
+ >>> [1] 0.997508 - Play Drossforge Bridge
+     [2] 0.000325 - Cast Thoughtcast
+     [3] 0.001497 - Cast Black Mage's Rod
+     [4] 0.000004 - Cast Galvanic Blast
+     [5] 0.000157 - Cast Blood Fountain
+     [6] 0.000504 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.437447
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Black Mage's Rod; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge; Great Furnace; Refurbished Familiar; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+     [0] 0.002070 - Pass
+     [1] 0.130739 - Cast Thoughtcast
+ >>> [2] 0.602033 - Cast Black Mage's Rod
+     [3] 0.001537 - Cast Galvanic Blast
+     [4] 0.061776 - Cast Blood Fountain
+     [5] 0.201844 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.431639
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Black Mage's Rod]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Refurbished Familiar,tapped,attacking; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Squadron Hawk,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.002070 - Pass
+
+VALUE SCORE: 0.431639
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring; Refurbished Familiar]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.000061 - Pass
+     [1] 0.004779 - Cast Thoughtcast
+     [2] 0.000057 - Cast Galvanic Blast
+     [3] 0.002453 - Cast Blood Fountain
+     [4] 0.007245 - Cast Ichor Wellspring
+ >>> [5] 0.984198 - Cast Refurbished Familiar
+     [6] 0.001207 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.459833
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.520443 - Pass
+     [1] 0.479557 - Cast Galvanic Blast
+
+VALUE SCORE: 0.456360
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Ichor Wellspring]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.005441 - Pass
+     [1] 0.005573 - Cast Galvanic Blast
+     [2] 0.257661 - Cast Blood Fountain
+ >>> [3] 0.731324 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.468685
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Ichor Wellspring (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 19
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 6 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.005441 - Pass
+
+VALUE SCORE: 0.468685
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Black Mage's Rod; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 17
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.001349 - Pass
+     [1] 0.119140 - Cast Thoughtcast
+     [2] 0.001387 - Cast Galvanic Blast
+     [3] 0.063227 - Cast Blood Fountain
+ >>> [4] 0.557557 - Cast Black Mage's Rod
+     [5] 0.227606 - Cast Nihil Spellbomb
+     [6] 0.029735 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.471447
+SELECTED: Cast Black Mage's Rod
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Black Mage's Rod (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.500611 - Pass
+     [1] 0.499389 - Cast Galvanic Blast
+
+VALUE SCORE: 0.462314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Job select <i>(When this Equipment enters, create a 1/1 colorless Hero creature token, then attach this to it.)</i>) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.508119 - Pass
+     [1] 0.491881 - Cast Galvanic Blast
+
+VALUE SCORE: 0.458065
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Nihil Spellbomb]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 16
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.004248 - Pass
+     [1] 0.004445 - Cast Galvanic Blast
+     [2] 0.216849 - Cast Blood Fountain
+ >>> [3] 0.774458 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.464671
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Nihil Spellbomb (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 15
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004248 - Pass
+
+VALUE SCORE: 0.464671
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.004248 - Pass
+
+VALUE SCORE: 0.464671
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Nihil Spellbomb]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+     [0] 0.033243 - Pass
+ >>> [1] 0.966757 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.459929
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 8 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate]
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 8 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 8 cards
+-> Permanents: [Idyllic Beachfront; Basilisk Gate; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Squadron Hawk (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Squadron Hawk]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.033243 - Pass
+
+VALUE SCORE: 0.459929
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Seat of the Synod]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain; Seat of the Synod]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000020 - Pass
+     [1] 0.001806 - Cast Thoughtcast
+     [2] 0.000019 - Cast Galvanic Blast
+     [3] 0.000890 - Cast Blood Fountain
+ >>> [4] 0.996850 - Play Seat of the Synod
+     [5] 0.000416 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.448284
+SELECTED: Play Seat of the Synod
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod]
+[Benchmark-Skill6], life = 10
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.007098 - Pass
+ >>> [1] 0.585738 - Cast Thoughtcast
+     [2] 0.005796 - Cast Galvanic Blast
+     [3] 0.270490 - Cast Blood Fountain
+     [4] 0.130879 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.426175
+SELECTED: Cast Thoughtcast
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Thoughtcast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 9
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.593854 - Pass
+     [1] 0.406146 - Cast Galvanic Blast
+
+VALUE SCORE: 0.392346
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Thoughtcast (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.593856 - Pass
+     [1] 0.406144 - Cast Galvanic Blast
+
+VALUE SCORE: 0.392311
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Blood Fountain; Seat of the Synod; Myr Enforcer]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.003873 - Pass
+     [1] 0.002649 - Cast Galvanic Blast
+     [2] 0.119687 - Cast Blood Fountain
+ >>> [3] 0.813447 - Cast Myr Enforcer
+     [4] 0.060344 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.392003
+SELECTED: Cast Myr Enforcer
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Blood Fountain; Seat of the Synod]
+-> Permanents: [Mistvault Bridge; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 8
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.020896 - Pass
+     [1] 0.014103 - Cast Galvanic Blast
+ >>> [2] 0.643482 - Cast Blood Fountain
+     [3] 0.321519 - Equip {3} <i>({3}: Attach to target creature you control. Equip only as a sorcery.)</i>
+
+VALUE SCORE: 0.386156
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Blood Fountain (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 7
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.600396 - Pass
+     [1] 0.399604 - Cast Galvanic Blast
+
+VALUE SCORE: 0.374755
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.600408 - Pass
+     [1] 0.399592 - Cast Galvanic Blast
+
+VALUE SCORE: 0.374702
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.601462 - Pass
+     [1] 0.398538 - Cast Galvanic Blast
+
+VALUE SCORE: 0.373110
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Seat of the Synod]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.194274 - Pass
+     [1] 0.102387 - Cast Galvanic Blast
+ >>> [2] 0.703339 - {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.317813
+SELECTED: {1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast; Blood Fountain]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain]
+[Benchmark-Skill6], life = 6
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.030761 - Pass
+     [1] 0.019693 - Cast Galvanic Blast
+ >>> [2] 0.949546 - Cast Blood Fountain
+
+VALUE SCORE: 0.357562
+SELECTED: Cast Blood Fountain
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Whenever you cast a noncreature spell, this creature deals 1 damage to each opponent.) (controller=RL)
+  - [1] Blood Fountain (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain]
+[Benchmark-Skill6], life = 5
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.030761 - Pass
+
+VALUE SCORE: 0.357562
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.030761 - Pass
+
+VALUE SCORE: 0.357562
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=RL)
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain; Blood Fountain]
+[Benchmark-Skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.030761 - Pass
+
+VALUE SCORE: 0.357562
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Hero Token; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.030761 - Pass
+
+VALUE SCORE: 0.357562
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.030761 - Pass
+
+VALUE SCORE: 0.357562
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Galvanic Blast]
+-> Permanents: [Mistvault Bridge,tapped; Great Furnace,tapped; Drossforge Bridge,tapped; Black Mage's Rod; Hero Token,tapped,attacking; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Black Mage's Rod; Hero Token,tapped,attacking; Seat of the Synod,tapped; Myr Enforcer; Blood Fountain; Blood Fountain; Blood Token]
+[Benchmark-Skill6], life = 4
+-> Hand: 7 cards
+-> Permanents: [Idyllic Beachfront,tapped; Basilisk Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.030761 - Pass
+
+VALUE SCORE: 0.357562
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 6
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Caw-Gates.dek
+Total Decisions Logged: 78
+Ended: 2026-02-01T12:42:19.040426600
+================================================================================

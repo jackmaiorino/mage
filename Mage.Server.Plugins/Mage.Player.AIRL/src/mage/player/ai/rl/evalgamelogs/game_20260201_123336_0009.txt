@@ -1,0 +1,3049 @@
+================================================================================
+GAME LOG: game_20260201_123336_0009
+Started: 2026-02-01T12:33:36.050213100
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Caw-Gates.dek vs oppDeck=Deck - Mono-Blue Faeries.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Sea Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Sea Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000214 - Pass
+     [1] 0.206128 - Play Basilisk Gate
+     [2] 0.154875 - Play Citadel Gate
+ >>> [3] 0.638783 - Play Sea Gate
+
+VALUE SCORE: 0.179136
+SELECTED: Play Sea Gate
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 7 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat]
+-> Permanents: [Sea Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000214 - Pass
+
+VALUE SCORE: 0.179136
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat; Brainstorm]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Basilisk Gate; Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat; Brainstorm]
+-> Permanents: [Sea Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.000872 - Pass
+ >>> [1] 0.574446 - Play Basilisk Gate
+     [2] 0.411880 - Play Citadel Gate
+     [3] 0.012802 - Cast Brainstorm
+
+VALUE SCORE: 0.157188
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Citadel Gate; Outlaw Medic; Sacred Cat; Sacred Cat; Brainstorm]
+-> Permanents: [Sea Gate; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.064134 - Pass
+ >>> [1] 0.935866 - Cast Brainstorm
+
+VALUE SCORE: 0.153513
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Island,tapped; Humbling Elder; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Harrier Strix; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.064134 - Pass
+
+VALUE SCORE: 0.153513
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Citadel Gate; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+     [0] 0.001829 - Pass
+ >>> [1] 0.998171 - Play Citadel Gate
+
+VALUE SCORE: 0.149719
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Harrier Strix; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Harrier Strix (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, tap target permanent.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.001829 - Pass
+
+VALUE SCORE: 0.149719
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate; Azorius Guildgate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate; Azorius Guildgate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+     [1] 0.000470 - Cast Outlaw Medic
+     [2] 0.000013 - Cast Sacred Cat
+     [3] 0.001269 - Play Citadel Gate
+ >>> [4] 0.998245 - Play Azorius Guildgate
+
+VALUE SCORE: 0.120993
+SELECTED: Play Azorius Guildgate
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Outlaw Medic; Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+     [0] 0.006984 - Pass
+ >>> [1] 0.967817 - Cast Outlaw Medic
+     [2] 0.025199 - Cast Sacred Cat
+
+VALUE SCORE: 0.104103
+SELECTED: Cast Outlaw Medic
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island,tapped; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Harrier Strix]
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Harrier Strix]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Faerie Miscreant; Moon-Circuit Hacker; Island; Harrier Strix; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,blocking]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker; Island; Harrier Strix,tapped,attacking; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.006984 - Pass
+
+VALUE SCORE: 0.104103
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; Citadel Gate; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.002721 - Pass
+     [1] 0.009533 - Cast Sacred Cat
+ >>> [2] 0.860231 - Play Citadel Gate
+     [3] 0.127515 - Cast The Modern Age
+
+VALUE SCORE: 0.111575
+SELECTED: Play Citadel Gate
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.020717 - Pass
+     [1] 0.063506 - Cast Sacred Cat
+ >>> [2] 0.915777 - Cast The Modern Age
+
+VALUE SCORE: 0.094006
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 16
+-> Hand: [Sacred Cat; Sacred Cat; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.020717 - Pass
+
+VALUE SCORE: 0.094006
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Sacred Cat; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.271694 - Pass
+ >>> [1] 0.728306 - Cast Sacred Cat
+
+VALUE SCORE: 0.053310
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Sacred Cat; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.288379 - Pass
+ >>> [1] 0.711622 - Cast Sacred Cat
+
+VALUE SCORE: 0.019441
+SELECTED: Cast Sacred Cat
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Faerie Miscreant,tapped; Moon-Circuit Hacker; Island; Harrier Strix,tapped; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Faerie Miscreant; Moon-Circuit Hacker; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island; Faerie Miscreant,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat,blocking; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat,blocking; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.288379 - Pass
+
+VALUE SCORE: 0.019441
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Island; Brainstorm]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Island; Brainstorm]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.062140 - Pass
+ >>> [1] 0.937860 - Cast Brainstorm
+
+VALUE SCORE: 0.044976
+SELECTED: Cast Brainstorm
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Counterspell]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.062140 - Pass
+
+VALUE SCORE: 0.044976
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000177 - Pass
+     [1] 0.001191 - Cast Squadron Hawk
+ >>> [2] 0.997905 - Play Island
+     [3] 0.000727 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: 0.003773
+SELECTED: Play Island
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Sacred Cat; Island]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.088164 - Pass
+ >>> [1] 0.566925 - Cast Squadron Hawk
+     [2] 0.344911 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.027396
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: []
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.088164 - Pass
+
+VALUE SCORE: -0.027396
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.100580 - Pass
+ >>> [1] 0.574257 - Cast Squadron Hawk
+     [2] 0.325162 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.066299
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.100580 - Pass
+
+VALUE SCORE: -0.066299
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.241570 - Pass
+ >>> [1] 0.758430 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.111339
+SELECTED: Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder,blocking; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped; Spellstutter Sprite,tapped; Humbling Elder; Ninja of the Deep Hours,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Miscreant (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 3 cards
+-> Permanents: [Island; Humbling Elder; Island; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Sacred Cat,blocking; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped,attacking; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; The Modern Age; Island,tapped; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Island; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (III - Exile this Saga, then return it to the battlefield transformed under your control.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; The Modern Age; Island; Squadron Hawk; Sacred Cat]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241570 - Pass
+
+VALUE SCORE: -0.111339
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; Basilisk Gate]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Vector Glider]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.005265 - Pass
+     [1] 0.031893 - Cast Squadron Hawk
+ >>> [2] 0.944721 - Play Basilisk Gate
+     [3] 0.018122 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.036673
+SELECTED: Play Basilisk Gate
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.098226 - Pass
+ >>> [1] 0.569930 - Cast Squadron Hawk
+     [2] 0.330586 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+     [3] 0.001258 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.064920
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.098226 - Pass
+
+VALUE SCORE: -0.064920
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.103507 - Pass
+ >>> [1] 0.556605 - Cast Squadron Hawk
+     [2] 0.339888 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.113055
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.103507 - Pass
+
+VALUE SCORE: -0.113055
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+     [0] 0.107586 - Pass
+ >>> [1] 0.543672 - Cast Squadron Hawk
+     [2] 0.348742 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.152165
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped; Squadron Hawk]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 19
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Spellstutter Sprite]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Vector Glider; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Humbling Elder; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder; Island; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Island; Humbling Elder,tapped,attacking; Island; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {1}{U} <i>({1}{U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Humbling Elder (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, target creature an opponent controls gets -2/-0 until end of turn.) (controller=Benchmark-Skill6)
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped,attacking; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 14
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped,attacking; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.107586 - Pass
+
+VALUE SCORE: -0.152165
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Basilisk Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; The Modern Age; Lorien Revealed]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Basilisk Gate]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.020455 - Pass
+     [1] 0.125993 - Cast Squadron Hawk
+ >>> [2] 0.733742 - Cast The Modern Age
+     [3] 0.046351 - Cast Lorien Revealed
+     [4] 0.001443 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [5] 0.072017 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.030177
+SELECTED: Cast The Modern Age
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (I, II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 9
+-> Hand: [Squadron Hawk; Squadron Hawk; Squadron Hawk; Lorien Revealed]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.941538 - Pass
+     [1] 0.058462 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.095423
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Squadron Hawk; Squadron Hawk; Lorien Revealed; Sacred Cat]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.072969 - Pass
+ >>> [1] 0.397946 - Cast Squadron Hawk
+     [2] 0.141402 - Cast Lorien Revealed
+     [3] 0.004454 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [4] 0.140803 - Cast Sacred Cat
+     [5] 0.242425 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.106418
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 9
+-> Hand: [Squadron Hawk; Lorien Revealed; Sacred Cat]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.945761 - Pass
+     [1] 0.054239 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.161356
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.087513 - Pass
+     [1] 0.005136 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.165379 - Cast Sacred Cat
+ >>> [3] 0.454183 - Cast Squadron Hawk
+     [4] 0.287789 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.138516
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 9
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947071 - Pass
+     [1] 0.052929 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.196263
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+     [0] 0.161704 - Pass
+     [1] 0.009153 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.299488 - Cast Sacred Cat
+ >>> [3] 0.529655 - Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+VALUE SCORE: -0.178930
+SELECTED: Embalm {W} <i>({W}, Exile this card from your graveyard: Create a token that's a copy of it, except it's a white Zombie Cat with no mana cost. Embalm only as a sorcery.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 9
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder,blocking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours,tapped; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours; Humbling Elder]
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Snap (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Spellstutter Sprite; Ninja of the Deep Hours; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Ninja of the Deep Hours; Humbling Elder]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Ninja of the Deep Hours; Humbling Elder; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Ninja of the Deep Hours,tapped,attacking; Humbling Elder,tapped,attacking; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 10
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant; Ninja of the Deep Hours,tapped,attacking; Humbling Elder,tapped,attacking; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Of One Mind (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Faerie Seer (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 2. <i>(Look at the top two cards of your library, then put any number of them on the bottom and the rest on top in any order.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.161704 - Pass
+
+VALUE SCORE: -0.178930
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (II - Draw a card, then discard a card.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.944578 - Pass
+     [1] 0.055422 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.180156
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Journey to Nowhere]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate; Outlaw Medic; Citadel Gate; Island; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.055495 - Pass
+     [1] 0.097524 - Cast Lorien Revealed
+     [2] 0.003225 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [3] 0.106512 - Cast Sacred Cat
+     [4] 0.270690 - Cast Squadron Hawk
+ >>> [5] 0.465850 - Cast Journey to Nowhere
+     [6] 0.000704 - {2}, {T}: Target creature gets +X/+X until end of turn, where X is the number of Gates you control. Activate only as a sorcery.
+
+VALUE SCORE: -0.192679
+SELECTED: Cast Journey to Nowhere
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, exile target creature.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Ninja of the Deep Hours,tapped; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947503 - Pass
+     [1] 0.052497 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.260378
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.131934 - Pass
+     [1] 0.007571 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.250653 - Cast Sacred Cat
+ >>> [3] 0.609842 - Cast Squadron Hawk
+
+VALUE SCORE: -0.228902
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.948072 - Pass
+     [1] 0.051928 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.292959
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #122 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.141708 - Pass
+     [1] 0.007840 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+     [2] 0.255352 - Cast Sacred Cat
+ >>> [3] 0.595100 - Cast Squadron Hawk
+
+VALUE SCORE: -0.275799
+SELECTED: Cast Squadron Hawk
+
+--------------------------------------------------------------------------------
+DECISION #123 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may search your library for up to three cards named Squadron Hawk, reveal them, put them into your hand, then shuffle.) (controller=RL)
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere; Squadron Hawk]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947575 - Pass
+     [1] 0.052424 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.329140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #124 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947744 - Pass
+     [1] 0.052256 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.316856
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #125 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947252 - Pass
+     [1] 0.052748 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.327127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #126 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 4
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped,attacking; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.947252 - Pass
+     [1] 0.052748 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.327127
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #127 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder,tapped; Ninja of the Deep Hours,tapped; Faerie Miscreant; Humbling Elder,tapped; Moon-Circuit Hacker; Island,tapped; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.946735 - Pass
+     [1] 0.053265 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: -0.333742
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Humbling Elder; Moon-Circuit Hacker; Island; Faerie Seer]
+
+--------------------------------------------------------------------------------
+DECISION #128 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Lorien Revealed; Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk]
+-> Permanents: [Sea Gate; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Humbling Elder; Moon-Circuit Hacker; Island; Faerie Seer]
+
+
+OPTIONS & SCORES:
+     [0] 0.011255 - Pass
+ >>> [1] 0.988745 - Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+VALUE SCORE: 0.405141
+SELECTED: Islandcycling {1} <i>({1}, Discard this card: Search your library for an Island card, reveal it, put it into your hand, then shuffle.)</i>
+
+--------------------------------------------------------------------------------
+DECISION #129 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Spellstutter Sprite (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 4 cards
+-> Permanents: [Island,tapped; Island,tapped; Island; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Humbling Elder; Moon-Circuit Hacker; Island; Faerie Seer]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011255 - Pass
+
+VALUE SCORE: 0.405141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #130 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Moon-Circuit Hacker (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Humbling Elder; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Island,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011255 - Pass
+
+VALUE SCORE: 0.405141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #131 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix; Spellstutter Sprite; Humbling Elder; Ninja of the Deep Hours; Faerie Miscreant; Humbling Elder; Moon-Circuit Hacker; Island; Faerie Seer; Spellstutter Sprite; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011255 - Pass
+
+VALUE SCORE: 0.405141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #132 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk; Sacred Cat; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Faerie Miscreant,tapped,attacking; Humbling Elder,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island; Faerie Seer,tapped,attacking; Spellstutter Sprite; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011255 - Pass
+
+VALUE SCORE: 0.405141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #133 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Ninjutsu {U} <i>({U} Return an unblocked attacker you control to hand: Put this card onto the battlefield from your hand tapped and attacking.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 5
+-> Hand: [Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk,blocking; Sacred Cat,blocking; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 3 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Humbling Elder,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite; Island,tapped; Moon-Circuit Hacker]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011255 - Pass
+
+VALUE SCORE: 0.405141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #134 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 5
+-> Hand: [Sacred Cat; Squadron Hawk; Squadron Hawk; Squadron Hawk; Island]
+-> Permanents: [Sea Gate,tapped; Basilisk Gate,tapped; Citadel Gate,tapped; Azorius Guildgate,tapped; Outlaw Medic,tapped; Citadel Gate,tapped; Island,tapped; Squadron Hawk,blocking; Sacred Cat,blocking; Basilisk Gate,tapped; The Modern Age; Sacred Cat; Journey to Nowhere]
+[Benchmark-Skill6], life = 17
+-> Hand: 2 cards
+-> Permanents: [Island,tapped; Island,tapped; Island,tapped; Harrier Strix,tapped,attacking; Spellstutter Sprite,tapped,attacking; Humbling Elder,tapped,attacking; Ninja of the Deep Hours,tapped,attacking; Humbling Elder,tapped,attacking; Moon-Circuit Hacker,tapped,attacking; Island,tapped; Faerie Seer,tapped,attacking; Spellstutter Sprite; Island,tapped; Moon-Circuit Hacker; Moon-Circuit Hacker,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.011255 - Pass
+
+VALUE SCORE: 0.405141
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 9
+Reason: Benchmark: Deck - Caw-Gates.dek vs Deck - Mono-Blue Faeries.dek
+Total Decisions Logged: 134
+Ended: 2026-02-01T12:35:37.494338800
+================================================================================

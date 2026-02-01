@@ -1,0 +1,2542 @@
+================================================================================
+GAME LOG: game_20260201_124031_0062
+Started: 2026-02-01T12:40:31.776063300
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Grixis Affinity.dek vs oppDeck=Deck - Elves.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Silverbluff Bridge; Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+ >>> [1] 0.999999 - Play Silverbluff Bridge
+
+VALUE SCORE: 0.480835
+SELECTED: Play Silverbluff Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Fyndhorn Elves (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman]
+-> Permanents: [Silverbluff Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.480835
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Krark-Clan Shaman; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+     [0] 0.026246 - Pass
+     [1] 0.312064 - Cast Hunter's Blowgun
+ >>> [2] 0.661690 - Cast Krark-Clan Shaman
+
+VALUE SCORE: 0.451062
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.433810
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.433855
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999975 - Pass
+     [1] 0.000025 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.433614
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Forestcycling {1} <i>({1}, Discard this card: Search your library for a Forest card, reveal it, put it into your hand, then shuffle.)</i>) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999530 - Pass
+     [1] 0.000470 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.839433
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Quirion Ranger (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999627 - Pass
+     [1] 0.000373 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.810478
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999629 - Pass
+     [1] 0.000371 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.809857
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999629 - Pass
+     [1] 0.000371 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.809910
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999630 - Pass
+     [1] 0.000370 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.809669
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Hunter's Blowgun; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+     [0] 0.078012 - Pass
+ >>> [1] 0.921986 - Cast Hunter's Blowgun
+     [2] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.444671
+SELECTED: Cast Hunter's Blowgun
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999977 - Pass
+     [1] 0.000023 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.426729
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999977 - Pass
+     [1] 0.000023 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.426761
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999977 - Pass
+     [1] 0.000023 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.426565
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Lead the Stampede (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Snow-Covered Forest,tapped; Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999676 - Pass
+     [1] 0.000324 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.792448
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999624 - Pass
+     [1] 0.000376 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.811875
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999637 - Pass
+     [1] 0.000363 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.808055
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Silverbluff Bridge,tapped; Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999638 - Pass
+     [1] 0.000362 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.807423
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999561 - Pass
+     [1] 0.000439 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.832369
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999561 - Pass
+     [1] 0.000439 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.832416
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999562 - Pass
+     [1] 0.000438 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.832205
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.466547
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.466602
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves,tapped; Snow-Covered Forest,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999970 - Pass
+     [1] 0.000030 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.466372
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999488 - Pass
+     [1] 0.000512 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.850918
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999488 - Pass
+     [1] 0.000512 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.850918
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999497 - Pass
+     [1] 0.000503 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.848794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal,tapped,attacking]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999497 - Pass
+     [1] 0.000503 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.848794
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Llanowar Elves (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999519 - Pass
+     [1] 0.000481 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.843731
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999558 - Pass
+     [1] 0.000442 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.833792
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999560 - Pass
+     [1] 0.000440 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.833239
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999560 - Pass
+     [1] 0.000440 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.833239
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Drossforge Bridge]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Drossforge Bridge]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+     [0] 0.000003 - Pass
+ >>> [1] 0.999997 - Play Drossforge Bridge
+     [2] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.484817
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.481746
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.481762
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999969 - Pass
+     [1] 0.000031 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.481613
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal; Llanowar Elves; Masked Vandal]
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Snow-Covered Forest; Masked Vandal; Llanowar Elves; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999599 - Pass
+     [1] 0.000401 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.821122
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999621 - Pass
+     [1] 0.000379 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.814628
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-Skill6)
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999639 - Pass
+     [1] 0.000361 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.808314
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999648 - Pass
+     [1] 0.000352 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.805295
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped,attacking; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999655 - Pass
+     [1] 0.000345 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.803053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 19
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped,attacking; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999655 - Pass
+     [1] 0.000345 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.803053
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999658 - Pass
+     [1] 0.000342 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.801650
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.487389
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.487419
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Thoughtcast; Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Fyndhorn Elves,tapped; Quirion Ranger; Snow-Covered Forest,tapped; Masked Vandal; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999966 - Pass
+     [1] 0.000034 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.487244
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 18
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999608 - Pass
+     [1] 0.000392 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.818140
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999618 - Pass
+     [1] 0.000382 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.815256
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped,attacking; Llanowar Elves; Masked Vandal,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999632 - Pass
+     [1] 0.000368 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.811014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped,attacking; Llanowar Elves; Masked Vandal,tapped,attacking; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999632 - Pass
+     [1] 0.000368 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.811014
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999638 - Pass
+     [1] 0.000362 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.808722
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Toxin Analysis]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Toxin Analysis]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.183071 - Pass
+ >>> [1] 0.816923 - Cast Toxin Analysis
+     [2] 0.000006 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.487296
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman; Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999974 - Pass
+     [1] 0.000026 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.456215
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman,tapped,attacking; Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves; Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.455350
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 16
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Krark-Clan Shaman,tapped,attacking; Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Fyndhorn Elves,blocking; Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Masked Vandal,tapped; Snow-Covered Forest; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 6 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Priest of Titania (controller=Benchmark-Skill6)
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Masked Vandal; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 17
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+
+VALUE SCORE: 0.455232
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Refurbished Familiar; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge; Clue Token]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+     [0] 0.000065 - Pass
+ >>> [1] 0.999935 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.430585
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Masked Vandal,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger,tapped; Masked Vandal,tapped; Llanowar Elves,tapped; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Elvish Mystic (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest; Snow-Covered Forest,tapped; Priest of Titania]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Avenging Hunter (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you take the initiative.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Whenever you take the initiative and at the beginning of your upkeep, venture into Undercity.) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest,tapped; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When you enter this room, search your library for a basic land card, reveal it, put it into your hand, then shuffle. <i>(Secret Entrance)</i>) (controller=Benchmark-Skill6)
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped,attacking; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 13
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped,attacking; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000065 - Pass
+
+VALUE SCORE: 0.430585
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain; Refurbished Familiar]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain; Refurbished Familiar]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge; Clue Token; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000047 - Pass
+ >>> [1] 0.999953 - Cast Refurbished Familiar
+
+VALUE SCORE: 0.495352
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.495352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.495352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped,attacking; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.495352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped,attacking; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000047 - Pass
+
+VALUE SCORE: 0.495352
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain; Swamp]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.000000 - Pass
+ >>> [1] 1.000000 - Play Swamp
+
+VALUE SCORE: 0.518375
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Snow-Covered Forest,tapped; Priest of Titania,tapped; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (Return a Forest you control to its owner's hand: Untap target creature. Activate only once each turn.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 3 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic; Avenging Hunter; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Masked Vandal (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, you may exile a creature card from your graveyard. If you do, exile target artifact or enchantment an opponent controls.) (controller=Benchmark-Skill6)
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Drossforge Bridge,tapped; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 2 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped,attacking; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 12
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Refurbished Familiar,blocking; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped,attacking; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000000 - Pass
+
+VALUE SCORE: 0.518375
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain; Nihil Spellbomb]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain; Nihil Spellbomb]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar; Swamp]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.004603 - Pass
+ >>> [1] 0.995397 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.531599
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar; Swamp,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+     [0] 0.022902 - Pass
+ >>> [1] 0.977098 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.528404
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar; Swamp,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar; Swamp,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped,attacking; Swamp,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped,attacking; Swamp,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal,tapped; Llanowar Elves; Priest of Titania; Elvish Mystic,tapped; Avenging Hunter,tapped; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Wellwisher (controller=Benchmark-Skill6)
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 1 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Quirion Ranger; Masked Vandal; Llanowar Elves; Priest of Titania; Elvish Mystic; Avenging Hunter; Snow-Covered Forest,tapped; Masked Vandal; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Elvish Mystic,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 7
+-> Hand: [Cryogen Relic; Ichor Wellspring; Reckoner's Bargain; Fanatical Offering; Ichor Wellspring; Black Mage's Rod; Reckoner's Bargain]
+-> Permanents: [Hunter's Blowgun; Clue Token; Refurbished Familiar,tapped; Swamp,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 0 cards
+-> Permanents: [Quirion Ranger,tapped,attacking; Masked Vandal,tapped,attacking; Llanowar Elves,tapped,attacking; Priest of Titania,tapped,attacking; Elvish Mystic,tapped,attacking; Avenging Hunter,tapped,attacking; Snow-Covered Forest,tapped; Masked Vandal,tapped,attacking; Snow-Covered Forest,tapped; Wellwisher; Snow-Covered Forest]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.022902 - Pass
+
+VALUE SCORE: 0.528404
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: Benchmark-Skill6
+Loser: RL
+Turns: 10
+Reason: Benchmark: Deck - Grixis Affinity.dek vs Deck - Elves.dek
+Total Decisions Logged: 109
+Ended: 2026-02-01T12:45:29.581555
+================================================================================

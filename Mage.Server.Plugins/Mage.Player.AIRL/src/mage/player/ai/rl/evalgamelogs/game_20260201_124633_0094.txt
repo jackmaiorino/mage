@@ -1,0 +1,2817 @@
+================================================================================
+GAME LOG: game_20260201_124633_0094
+Started: 2026-02-01T12:46:33.910641600
+================================================================================
+
+MODE=benchmark
+MATCHUP: rlDeck=Deck - Jund Wildfire.dek vs oppDeck=Deck - Grixis Affinity.dek
+
+********************************************************************************
+*** TURN 1 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Slagwoods Bridge; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+--------------------------------------------------------------------------------
+DECISION #1 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Slagwoods Bridge; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: []
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.014314 - Play Drossforge Bridge
+     [2] 0.026851 - Play Forest
+ >>> [3] 0.958834 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.212717
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #2 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #3 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #4 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: []
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 1 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #5 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #6 - Turn 1, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #7 - Turn 1, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #8 - Turn 1, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000001 - Pass
+
+VALUE SCORE: 0.212717
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar; Slagwoods Bridge]
+-> Permanents: [Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped; Nihil Spellbomb]
+
+--------------------------------------------------------------------------------
+DECISION #9 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar; Slagwoods Bridge]
+-> Permanents: [Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.014106 - Play Drossforge Bridge
+     [2] 0.027138 - Play Forest
+     [3] 0.000058 - Cast Nihil Spellbomb
+ >>> [4] 0.958697 - Play Slagwoods Bridge
+
+VALUE SCORE: 0.182411
+SELECTED: Play Slagwoods Bridge
+
+--------------------------------------------------------------------------------
+DECISION #10 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped; Nihil Spellbomb]
+
+
+OPTIONS & SCORES:
+     [0] 0.023376 - Pass
+ >>> [1] 0.976624 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.166078
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #11 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability (When {this} is put into a graveyard from the battlefield, you may pay {B}. If you do, draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [2] Nihil Spellbomb (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023376 - Pass
+
+VALUE SCORE: 0.166078
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #12 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=Benchmark-Skill6)
+  - [1] Nihil Spellbomb (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023376 - Pass
+
+VALUE SCORE: 0.166078
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #13 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Nihil Spellbomb (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.023376 - Pass
+
+VALUE SCORE: 0.166078
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #14 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.275670 - Pass
+ >>> [1] 0.724330 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.159723
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #15 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #16 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #17 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #18 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 2 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+--------------------------------------------------------------------------------
+DECISION #19 - Turn 2, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #20 - Turn 2, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #21 - Turn 2, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.275670 - Pass
+
+VALUE SCORE: 0.159723
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+--------------------------------------------------------------------------------
+DECISION #22 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Forest; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+     [0] 0.000022 - Pass
+     [1] 0.346490 - Play Drossforge Bridge
+ >>> [2] 0.652302 - Play Forest
+     [3] 0.001186 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.197827
+SELECTED: Play Forest
+
+--------------------------------------------------------------------------------
+DECISION #23 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Nihil Spellbomb; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+     [0] 0.020535 - Pass
+ >>> [1] 0.979465 - Cast Nihil Spellbomb
+
+VALUE SCORE: 0.181188
+SELECTED: Cast Nihil Spellbomb
+
+--------------------------------------------------------------------------------
+DECISION #24 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped; Nihil Spellbomb]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+     [0] 0.241529 - Pass
+ >>> [1] 0.758471 - {T}, Sacrifice {this}: Exile target player's graveyard.
+
+VALUE SCORE: 0.174461
+SELECTED: {T}, Sacrifice {this}: Exile target player's graveyard.
+
+--------------------------------------------------------------------------------
+DECISION #25 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability ({T}, Sacrifice {this}: Exile target player's graveyard.) (controller=RL)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #26 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #27 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #28 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 3 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #29 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Galvanic Blast (controller=Benchmark-Skill6)
+[RL], life = 20
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #30 - Turn 3, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #31 - Turn 3, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #32 - Turn 3, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.241529 - Pass
+
+VALUE SCORE: 0.174461
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #33 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Drossforge Bridge; Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000071 - Pass
+ >>> [1] 0.999929 - Play Drossforge Bridge
+
+VALUE SCORE: 0.181141
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #34 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.181141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #35 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.181141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #36 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.181141
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 4 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #37 - Turn 4, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.181141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #38 - Turn 4, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.181141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #39 - Turn 4, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000071 - Pass
+
+VALUE SCORE: 0.181141
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #40 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Refurbished Familiar; Cast Down; Pulse of Murasa; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.000262 - Pass
+ >>> [1] 0.994029 - Cast Refurbished Familiar
+     [2] 0.005709 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.200774
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #41 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000262 - Pass
+
+VALUE SCORE: 0.200774
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #42 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Ichor Wellspring]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.040555 - Pass
+ >>> [1] 0.959445 - Cast Ichor Wellspring
+
+VALUE SCORE: 0.205640
+SELECTED: Cast Ichor Wellspring
+
+--------------------------------------------------------------------------------
+DECISION #43 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters or is put into a graveyard from the battlefield, draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #44 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #45 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #46 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 5 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #47 - Turn 5, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #48 - Turn 5, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #49 - Turn 5, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.040555 - Pass
+
+VALUE SCORE: 0.205640
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas; Twisted Landscape]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #50 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas; Twisted Landscape]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.000001 - Pass
+     [1] 0.005928 - Cast Refurbished Familiar
+     [2] 0.000046 - Cast Cast Down
+     [3] 0.000006 - Cast Lembas
+ >>> [4] 0.993945 - Play Twisted Landscape
+     [5] 0.000073 - Cycling {B}{R}{G} <i>({B}{R}{G}, Discard this card: Draw a card.)</i>
+
+VALUE SCORE: 0.206456
+SELECTED: Play Twisted Landscape
+
+--------------------------------------------------------------------------------
+DECISION #51 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Refurbished Familiar; Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.000253 - Pass
+ >>> [1] 0.990963 - Cast Refurbished Familiar
+     [2] 0.007822 - Cast Cast Down
+     [3] 0.000961 - Cast Lembas
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.197957
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #52 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.998943 - Pass
+     [1] 0.001057 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.193723
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #53 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 18
+-> Hand: [Cast Down; Pulse of Murasa; Lembas]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.190826 - Pass
+ >>> [1] 0.808963 - Cast Lembas
+     [2] 0.000211 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.201414
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #54 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar; Lembas]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.370781 - Pass
+ >>> [1] 0.629219 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.167703
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #55 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=RL)
+  - [1] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 18
+-> Hand: [Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #56 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #57 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #58 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #59 - Turn 6, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 20
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #60 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 6 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #61 - Turn 6, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #62 - Turn 6, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #63 - Turn 6, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.370781 - Pass
+
+VALUE SCORE: 0.167703
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis; Drossforge Bridge]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+--------------------------------------------------------------------------------
+DECISION #64 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis; Drossforge Bridge]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Refurbished Familiar]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.000038 - Pass
+     [1] 0.001319 - Cast Cast Down
+     [2] 0.000022 - Cast Toxin Analysis
+ >>> [3] 0.998620 - Play Drossforge Bridge
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.214775
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #65 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Cast Down; Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Refurbished Familiar; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.027907 - Pass
+ >>> [1] 0.956206 - Cast Cast Down
+     [2] 0.015855 - Cast Toxin Analysis
+     [3] 0.000032 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.208219
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #66 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 21
+-> Hand: [Pulse of Murasa; Toxin Analysis]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+     [0] 0.007742 - Pass
+ >>> [1] 0.992251 - Cast Pulse of Murasa
+     [2] 0.000008 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.183748
+SELECTED: Cast Pulse of Murasa
+
+--------------------------------------------------------------------------------
+DECISION #67 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #68 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #69 - Turn 7, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 18
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #70 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 7 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #71 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #72 - Turn 7, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #73 - Turn 7, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #74 - Turn 7, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.007742 - Pass
+
+VALUE SCORE: 0.183748
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+--------------------------------------------------------------------------------
+DECISION #75 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Refurbished Familiar; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.000304 - Pass
+     [1] 0.000119 - Cast Toxin Analysis
+ >>> [2] 0.998966 - Cast Refurbished Familiar
+     [3] 0.000611 - Cast Cleansing Wildfire
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.172782
+SELECTED: Cast Refurbished Familiar
+
+--------------------------------------------------------------------------------
+DECISION #76 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, each opponent discards a card. For each opponent who can't, you draw a card.) (controller=RL)
+[RL], life = 27
+-> Hand: [Toxin Analysis; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 16
+-> Hand: 5 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.723574 - Pass
+     [1] 0.275799 - Cast Toxin Analysis
+     [2] 0.000627 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.167837
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #77 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Seat of the Synod; Great Furnace,tapped; Krark-Clan Shaman]
+
+
+OPTIONS & SCORES:
+     [0] 0.287770 - Pass
+     [1] 0.119697 - Cast Toxin Analysis
+ >>> [2] 0.592280 - Cast Cleansing Wildfire
+     [3] 0.000253 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.170574
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #78 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.782098 - Pass
+     [1] 0.217351 - Cast Toxin Analysis
+     [2] 0.000551 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.140662
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #79 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.785476 - Pass
+     [1] 0.213981 - Cast Toxin Analysis
+     [2] 0.000542 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.137700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #80 - Turn 8, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 16
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.785476 - Pass
+     [1] 0.213982 - Cast Toxin Analysis
+     [2] 0.000542 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.137700
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #81 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.787935 - Pass
+     [1] 0.211529 - Cast Toxin Analysis
+     [2] 0.000537 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.135471
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 8 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped]
+
+--------------------------------------------------------------------------------
+DECISION #82 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Toxin Analysis; Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.484542 - Pass
+ >>> [1] 0.514991 - Cast Toxin Analysis
+     [2] 0.000466 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.220008
+SELECTED: Cast Toxin Analysis
+
+--------------------------------------------------------------------------------
+DECISION #83 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Writhing Chrysalis]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar; Clue Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.024046 - Pass
+     [1] 0.000017 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+ >>> [2] 0.975937 - {2}, Sacrifice this artifact: Draw a card.
+
+VALUE SCORE: 0.143122
+SELECTED: {2}, Sacrifice this artifact: Draw a card.
+
+--------------------------------------------------------------------------------
+DECISION #84 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Blood Fountain (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024046 - Pass
+
+VALUE SCORE: 0.143122
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #85 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, create a Blood token.) (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024046 - Pass
+
+VALUE SCORE: 0.143122
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #86 - Turn 8, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024046 - Pass
+
+VALUE SCORE: 0.143122
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #87 - Turn 8, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024046 - Pass
+
+VALUE SCORE: 0.143122
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #88 - Turn 8, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.024046 - Pass
+
+VALUE SCORE: 0.143122
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped; Blood Fountain; Blood Token]
+
+--------------------------------------------------------------------------------
+DECISION #89 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Writhing Chrysalis; Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace; Krark-Clan Shaman; Swamp,tapped; Blood Fountain; Blood Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.000112 - Pass
+ >>> [1] 0.998654 - Cast Writhing Chrysalis
+     [2] 0.000975 - Cast Krark-Clan Shaman
+     [3] 0.000258 - Cast Cleansing Wildfire
+     [4] 0.000000 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.179037
+SELECTED: Cast Writhing Chrysalis
+
+--------------------------------------------------------------------------------
+DECISION #90 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 3 items
+  - [0] stack ability ({1}, {T}, Discard a card, Sacrifice this artifact: Draw a card.) (controller=Benchmark-Skill6)
+  - [1] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=RL)
+  - [2] Writhing Chrysalis (controller=RL)
+[RL], life = 27
+-> Hand: [Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 3 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000112 - Pass
+
+VALUE SCORE: 0.179037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #91 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (When you cast this spell, create two 0/1 colorless Eldrazi Spawn creature tokens with "Sacrifice this token: Add {C}.") (controller=RL)
+  - [1] Writhing Chrysalis (controller=RL)
+[RL], life = 27
+-> Hand: [Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000112 - Pass
+
+VALUE SCORE: 0.179037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #92 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Writhing Chrysalis (controller=RL)
+[RL], life = 27
+-> Hand: [Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000112 - Pass
+
+VALUE SCORE: 0.179037
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #93 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Krark-Clan Shaman; Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Great Furnace,tapped; Krark-Clan Shaman; Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+     [0] 0.151041 - Pass
+ >>> [1] 0.667048 - Cast Krark-Clan Shaman
+     [2] 0.181910 - Cast Cleansing Wildfire
+
+VALUE SCORE: 0.086472
+SELECTED: Cast Krark-Clan Shaman
+
+--------------------------------------------------------------------------------
+DECISION #94 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability (Sacrifice an artifact: {this} deals 1 damage to each creature without flying.) (controller=Benchmark-Skill6)
+  - [1] Krark-Clan Shaman (controller=RL)
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Eldrazi Spawn Token; Eldrazi Spawn Token; Writhing Chrysalis]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Krark-Clan Shaman; Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.151041 - Pass
+
+VALUE SCORE: 0.086472
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #95 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Krark-Clan Shaman (controller=RL)
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.151041 - Pass
+
+VALUE SCORE: 0.086472
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #96 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.115811
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #97 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.105654
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #98 - Turn 9, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 14
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000003 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.105654
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #99 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999997 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.098361
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 9 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+--------------------------------------------------------------------------------
+DECISION #100 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] Toxin Analysis (controller=Benchmark-Skill6)
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.036518
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #101 - Turn 9, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.014094
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #102 - Turn 9, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.014530
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #103 - Turn 9, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge,tapped; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Clue Token]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.999998 - Pass
+     [1] 0.000002 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.013566
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Clue Token]
+
+--------------------------------------------------------------------------------
+DECISION #104 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire; Cast Down]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge; Refurbished Familiar; Writhing Chrysalis; Krark-Clan Shaman]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.026512 - Pass
+     [1] 0.059956 - Cast Cleansing Wildfire
+ >>> [2] 0.913508 - Cast Cast Down
+     [3] 0.000024 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+     [4] 0.000000 - Sacrifice an artifact: {this} deals 1 damage to each creature without flying.
+
+VALUE SCORE: 0.177513
+SELECTED: Cast Cast Down
+
+--------------------------------------------------------------------------------
+DECISION #105 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Cleansing Wildfire]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Swamp,tapped; Blood Fountain; Clue Token]
+
+
+OPTIONS & SCORES:
+     [0] 0.339650 - Pass
+ >>> [1] 0.660094 - Cast Cleansing Wildfire
+     [2] 0.000256 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.150811
+SELECTED: Cast Cleansing Wildfire
+
+--------------------------------------------------------------------------------
+DECISION #106 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Drossforge Bridge]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+     [0] 0.000129 - Pass
+ >>> [1] 0.999871 - Play Drossforge Bridge
+
+VALUE SCORE: 0.100232
+SELECTED: Play Drossforge Bridge
+
+--------------------------------------------------------------------------------
+DECISION #107 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #108 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #109 - Turn 10, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 10
+-> Hand: 4 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #110 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 4 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp,tapped]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 10 START - Active Player: Benchmark-Skill6 ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+--------------------------------------------------------------------------------
+DECISION #111 - Turn 10, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #112 - Turn 10, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #113 - Turn 10, Postcombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped; Writhing Chrysalis,tapped; Drossforge Bridge,tapped]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000129 - Pass
+
+VALUE SCORE: 0.100232
+SELECTED: Pass
+
+
+********************************************************************************
+*** TURN 11 START - Active Player: RL ***
+********************************************************************************
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Lembas]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+--------------------------------------------------------------------------------
+DECISION #114 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 27
+-> Hand: [Lembas]
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape; Drossforge Bridge; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+     [0] 0.218933 - Pass
+ >>> [1] 0.780870 - Cast Lembas
+     [2] 0.000196 - {T}, Sacrifice {this}: Search your library for a basic Swamp, Mountain, or Forest card, put it onto the battlefield tapped, then shuffle.
+
+VALUE SCORE: 0.176188
+SELECTED: Cast Lembas
+
+--------------------------------------------------------------------------------
+DECISION #115 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge; Lembas]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+     [0] 0.423779 - Pass
+ >>> [1] 0.576221 - {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+VALUE SCORE: 0.134141
+SELECTED: {2}, {T}, Sacrifice {this}: You gain 3 life.
+
+--------------------------------------------------------------------------------
+DECISION #116 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 2 items
+  - [0] stack ability ({2}, {T}, Sacrifice {this}: You gain 3 life.) (controller=RL)
+  - [1] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 27
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.423779 - Pass
+
+VALUE SCORE: 0.134141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #117 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 1 items
+  - [0] stack ability (When {this} enters, scry 1, then draw a card.) (controller=RL)
+[RL], life = 30
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.423779 - Pass
+
+VALUE SCORE: 0.134141
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #118 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 30
+-> Hand: [Swamp]
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+     [0] 0.000007 - Pass
+ >>> [1] 0.999993 - Play Swamp
+
+VALUE SCORE: 0.111543
+SELECTED: Play Swamp
+
+--------------------------------------------------------------------------------
+DECISION #119 - Turn 11, Precombat Main - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 30
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar; Writhing Chrysalis; Drossforge Bridge; Swamp]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.111543
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #120 - Turn 11, Declare Attackers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 30
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Drossforge Bridge; Swamp]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.111543
+SELECTED: Pass
+
+--------------------------------------------------------------------------------
+DECISION #121 - Turn 11, Declare Blockers - RL
+--------------------------------------------------------------------------------
+
+GAME STATE:
+[Stack]: 0 items
+[RL], life = 30
+-> Hand: []
+-> Permanents: [Slagwoods Bridge,tapped; Slagwoods Bridge; Forest,tapped; Drossforge Bridge; Refurbished Familiar,tapped,attacking; Ichor Wellspring; Twisted Landscape,tapped; Drossforge Bridge,tapped; Refurbished Familiar,tapped,attacking; Writhing Chrysalis,tapped,attacking; Drossforge Bridge; Swamp]
+[Benchmark-Skill6], life = 4
+-> Hand: 5 cards
+-> Permanents: [Blood Fountain; Clue Token; Swamp]
+
+
+OPTIONS & SCORES:
+ >>> [0] 0.000007 - Pass
+
+VALUE SCORE: 0.111543
+SELECTED: Pass
+
+================================================================================
+GAME OUTCOME
+================================================================================
+Winner: RL
+Loser: Benchmark-Skill6
+Turns: 11
+Reason: Benchmark: Deck - Jund Wildfire.dek vs Deck - Grixis Affinity.dek
+Total Decisions Logged: 121
+Ended: 2026-02-01T12:48:07.072797300
+================================================================================

@@ -59,8 +59,16 @@ $env:VALUE_TARGET_DIAG_EVERY=200
 $env:VALUE_GRAD_DIAG_EVERY=200
 $env:SCORE_DIAG_EVERY=2000
 
+$env:PY_BACKEND_MODE="single"
+
+$env:MULLIGAN_DEVICE="cpu"
+
 # League type
-$env:OPPONENT_SAMPLER="adaptive"
+$env:OPPONENT_SAMPLER="league"
+$env:BOT_FLOOR="0"
+$env:SELFPLAY_START_P="1"
+$env:SELFPLAY_END_P="1"
+$env:SNAPSHOT_OPPONENT_PROB="0"
 
 # Run
 .\scripts\rl-train.ps1 -Profile perf -LogLevel INFO -TotalEpisodes 100000 -NumGameRunners 50 `
